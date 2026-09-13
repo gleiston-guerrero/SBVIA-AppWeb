@@ -23,22 +23,50 @@ import java.util.List;
 public class ReglaTransitoController {
     private final ReglaTransitoService reglaService;
 
+    /**
+     * GET /api/reglas-transito — Listar reglas de tránsito.
+     * Devuelve todas las reglas de evaluación configuradas en el sistema.
+     *
+     * @return lista completa de objetos ReglaTransitoDTO
+     */
     @GetMapping
     @Operation(summary = "Listar reglas de tránsito")
     public List<ReglaTransitoDTO> listar() { return reglaService.listar(); }
 
+    /**
+     * POST /api/reglas-transito — Crear nueva regla.
+     * Registra una nueva regla de tránsito en el sistema.
+     *
+     * @param dto el objeto que contiene los datos de la nueva regla
+     * @return una respuesta HTTP con el ReglaTransitoDTO recién creado
+     */
     @PostMapping
     @Operation(summary = "Registrar una regla de tránsito")
     public ResponseEntity<ReglaTransitoDTO> crear(@Valid @RequestBody ReglaTransitoDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(reglaService.crear(dto));
     }
 
+    /**
+     * PUT /api/reglas-transito/{id} — Actualizar regla.
+     * Modifica los parámetros de una regla de tránsito existente.
+     *
+     * @param id el identificador de la regla a actualizar
+     * @param dto los nuevos datos de la regla
+     * @return el objeto ReglaTransitoDTO con los datos actualizados
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una regla de tránsito")
     public ReglaTransitoDTO actualizar(@PathVariable Integer id, @Valid @RequestBody ReglaTransitoDTO dto) {
         return reglaService.actualizar(id, dto);
     }
 
+    /**
+     * DELETE /api/reglas-transito/{id} — Eliminar regla.
+     * Elimina físicamente o lógicamente una regla de tránsito del sistema.
+     *
+     * @param id el identificador de la regla a eliminar
+     * @return una respuesta HTTP sin contenido
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una regla de tránsito")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {

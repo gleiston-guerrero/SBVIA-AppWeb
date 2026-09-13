@@ -33,6 +33,12 @@ public class EscenarioController {
      * GET /api/escenarios — Listar escenarios con paginación y filtros opcionales.
      * Accesible por cualquier usuario autenticado (ROLE_USER, ROLE_ADMIN, ROLE_INSTRUCTOR).
      * Filtros: tipoVia, nivelDificultad, clima (todos opcionales).
+     *
+     * @param tipoVia filtro opcional para buscar por el tipo de vía (urbana, rural, etc.)
+     * @param nivelDificultad filtro opcional para buscar por nivel de dificultad (1, 2, 3...)
+     * @param clima filtro opcional para buscar por condiciones climáticas (despejado, lluvia, etc.)
+     * @param pageable objeto que contiene la configuración de paginación (tamaño, página, ordenamiento)
+     * @return una página de objetos EscenarioDTO que coinciden con los criterios de búsqueda
      */
     @GetMapping
     @Operation(summary = "Listar escenarios", description = "Lista escenarios activos con paginación y filtros opcionales (tipoVia, nivelDificultad, clima)")
@@ -52,6 +58,9 @@ public class EscenarioController {
     /**
      * GET /api/escenarios/{id} — Obtener un escenario específico.
      * Accesible por cualquier usuario autenticado.
+     *
+     * @param id el identificador único del escenario solicitado
+     * @return una respuesta HTTP con el objeto EscenarioDTO correspondiente al ID
      */
     @GetMapping("/{id}")
     @Operation(summary = "Obtener escenario por ID", description = "Devuelve los detalles de un escenario específico")
@@ -68,6 +77,9 @@ public class EscenarioController {
     /**
      * POST /api/escenarios — Crear un nuevo escenario.
      * Solo accesible por administradores.
+     *
+     * @param dto los datos del nuevo escenario a registrar
+     * @return una respuesta HTTP con el objeto EscenarioDTO del escenario recién creado, incluyendo su ID generado
      */
     @PostMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -85,6 +97,10 @@ public class EscenarioController {
     /**
      * PUT /api/escenarios/{id} — Actualizar un escenario.
      * Solo accesible por administradores.
+     *
+     * @param id el identificador único del escenario a modificar
+     * @param dto un objeto con los datos actualizados del escenario
+     * @return una respuesta HTTP con el objeto EscenarioDTO reflejando los cambios
      */
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -104,6 +120,9 @@ public class EscenarioController {
     /**
      * DELETE /api/escenarios/{id} — Eliminar (soft delete) un escenario.
      * Solo accesible por administradores.
+     *
+     * @param id el identificador único del escenario a desactivar/eliminar
+     * @return una respuesta HTTP 204 (Sin contenido) confirmando la eliminación
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")

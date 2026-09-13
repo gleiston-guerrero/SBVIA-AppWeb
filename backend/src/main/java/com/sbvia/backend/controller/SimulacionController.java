@@ -34,6 +34,14 @@ public class SimulacionController {
     private final SimulacionService simulacionService;
     private final RetroalimentacionService retroalimentacionService;
 
+    /**
+     * POST /api/simulaciones/iniciar/{idEscenario} — Iniciar simulación.
+     * Crea una nueva práctica de conducción basada en el escenario especificado.
+     *
+     * @param idEscenario el identificador del escenario a utilizar en la simulación
+     * @param authentication el contexto de seguridad con los datos del usuario actual
+     * @return una respuesta HTTP con el objeto SimulacionDTO que representa la práctica iniciada
+     */
     @PostMapping("/iniciar/{idEscenario}")
     @Operation(summary = "Iniciar simulación", description = "Crea una práctica en progreso para el usuario autenticado")
     public ResponseEntity<SimulacionDTO> iniciar(
@@ -42,6 +50,15 @@ public class SimulacionController {
         return ResponseEntity.ok(simulacionService.iniciarSimulacion(authentication.getName(), idEscenario));
     }
 
+    /**
+     * POST /api/simulaciones/{idSimulacion}/finalizar — Finalizar simulación.
+     * Concluye una práctica en progreso registrando el puntaje final obtenido.
+     *
+     * @param idSimulacion el identificador único de la simulación a finalizar
+     * @param request el objeto con los datos de finalización, como el puntaje final
+     * @param authentication el contexto de seguridad del usuario autenticado
+     * @return una respuesta HTTP con el objeto SimulacionDTO actualizado a estado completado
+     */
     @PostMapping("/{idSimulacion}/finalizar")
     @Operation(summary = "Finalizar simulación", description = "Registra el puntaje y genera el resultado de la práctica")
     public ResponseEntity<SimulacionDTO> finalizar(
@@ -52,6 +69,15 @@ public class SimulacionController {
                 authentication.getName(), idSimulacion, request.puntajeFinal()));
     }
 
+    /**
+     * POST /api/simulaciones/{idSimulacion}/conduccion/finalizar — Finalizar conducción 2D.
+     * Recibe las métricas de la conducción en el simulador y calcula los resultados finales.
+     *
+     * @param idSimulacion el identificador de la simulación correspondiente
+     * @param request las métricas obtenidas durante la conducción (colisiones, tiempo, etc.)
+     * @param authentication el contexto de seguridad del usuario
+     * @return una respuesta HTTP con el ResultadoConduccionDTO que incluye puntajes y penalizaciones
+     */
     @PostMapping("/{idSimulacion}/conduccion/finalizar")
     @Operation(summary = "Finalizar conducción 2D", description = "Registra las métricas del simulador, calcula el puntaje en el servidor y persiste los resultados")
     public ResponseEntity<ResultadoConduccionDTO> finalizarConduccion(
@@ -62,6 +88,14 @@ public class SimulacionController {
                 authentication.getName(), idSimulacion, request));
     }
 
+    /**
+     * GET /api/simulaciones/{idSimulacion}/retroalimentacion — Obtener retroalimentación.
+     * Genera o recupera un informe de desempeño sobre la simulación (usando motor local o IA).
+     *
+     * @param idSimulacion el identificador de la simulación consultada
+     * @param authentication el contexto de seguridad del usuario autenticado
+     * @return una respuesta HTTP con el objeto RetroalimentacionIaResponse que contiene las recomendaciones
+     */
     @GetMapping("/{idSimulacion}/retroalimentacion")
     @Operation(summary = "Obtener retroalimentación", description = "Devuelve el informe de desempeño de una simulación propia (motor local o IA externa)")
     public ResponseEntity<RetroalimentacionIaResponse> retroalimentacion(
@@ -71,6 +105,13 @@ public class SimulacionController {
                 authentication.getName(), idSimulacion));
     }
 
+    /**
+     * GET /api/simulaciones/mis-practicas — Historial de simulaciones.
+     * Retorna todas las prácticas realizadas por el usuario actual.
+     *
+     * @param authentication el contexto de seguridad con la identidad del usuario
+     * @return una respuesta HTTP con una lista de objetos SimulacionDTO pertenecientes al usuario
+     */
     @GetMapping("/mis-practicas")
     @Operation(summary = "Obtener mis prácticas", description = "Devuelve el historial de simulaciones del usuario autenticado")
     public ResponseEntity<List<SimulacionDTO>> obtenerMisPracticas(Authentication authentication) {
@@ -79,6 +120,12 @@ public class SimulacionController {
         return ResponseEntity.ok(practicas);
     }
 
+    /**
+     * GET /api/simulaciones — Listar todas las simulaciones.
+     * Permite a los administradores o instructores revisar todas las prácticas del sistema.
+     *
+     * @return una respuesta HTTP con la lista completa de objetos SimulacionDTO
+     */
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'INSTRUCTOR')")
     @Operation(summary = "Obtener todas las simulaciones", description = "Devuelve todas las simulaciones para supervisión de administradores, instructores y auditores")
@@ -87,6 +134,12 @@ public class SimulacionController {
         return ResponseEntity.ok(practicas);
     }
 
+    /**
+     * GET /api/simulaciones/estadisticas — Obtener estadísticas globales.
+     * Calcula métricas agregadas del uso del simulador a nivel de todo el sistema.
+     *
+     * @return una respuesta HTTP con el objeto EstadisticasDTO que contiene los promedios y totales
+     */
     @GetMapping("/estadisticas")
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     @Operation(summary = "Obtener estadísticas globales", description = "Calcula el total de prácticas y promedios globales de forma eficiente")

@@ -25,16 +25,36 @@ public class RespaldoController {
         this.respaldoService = respaldoService;
     }
 
+    /**
+     * GET /api/respaldos — Listar respaldos.
+     * Retorna un listado de todos los respaldos generados en el sistema (Solo Admin).
+     *
+     * @return una lista de entidades Respaldo
+     */
     @GetMapping
     public List<Respaldo> listar() {
         return respaldoService.obtenerTodos();
     }
 
+    /**
+     * POST /api/respaldos/generar — Generar respaldo manual.
+     * Dispara la creación de un nuevo backup de la base de datos bajo demanda (Solo Admin).
+     *
+     * @param request el objeto con opciones de configuración para el respaldo
+     * @return el registro del Respaldo generado
+     */
     @PostMapping("/generar")
     public Respaldo generar(@RequestBody com.sbvia.backend.dto.RespaldoRequestDTO request) {
         return respaldoService.generarRespaldo(request, "MANUAL");
     }
 
+    /**
+     * GET /api/respaldos/descargar/{id} — Descargar archivo de respaldo.
+     * Permite obtener el archivo físico (.sql, .dump) de un backup existente (Solo Admin).
+     *
+     * @param id el identificador del respaldo a descargar
+     * @return una respuesta HTTP con el archivo como recurso descargable, o 404 si no existe
+     */
     @GetMapping("/descargar/{id}")
     public ResponseEntity<Resource> descargar(@PathVariable Long id) {
         File file = respaldoService.obtenerArchivo(id);
@@ -55,6 +75,13 @@ public class RespaldoController {
                 .body(resource);
     }
 
+    /**
+     * DELETE /api/respaldos/{id} — Eliminar respaldo.
+     * Borra el registro de la base de datos y su archivo físico correspondiente (Solo Admin).
+     *
+     * @param id el identificador del respaldo a eliminar
+     * @return una respuesta HTTP sin contenido
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         respaldoService.eliminarRespaldo(id);

@@ -33,6 +33,9 @@ public class UsuarioController {
 
     /**
      * GET /api/usuarios/me — Devuelve el perfil del usuario autenticado.
+     *
+     * @param authentication el objeto de autenticación actual que contiene las credenciales del usuario
+     * @return una respuesta HTTP que contiene el objeto UsuarioDTO con la información del perfil del usuario
      */
     @GetMapping("/me")
     @Operation(summary = "Perfil del usuario", description = "Devuelve los datos del usuario autenticado")
@@ -48,6 +51,10 @@ public class UsuarioController {
 
     /**
      * PUT /api/usuarios/me — Actualiza el perfil del usuario autenticado.
+     *
+     * @param authentication el objeto de autenticación actual
+     * @param request los datos a actualizar en el perfil del usuario
+     * @return una respuesta HTTP con el objeto UsuarioDTO actualizado
      */
     @PutMapping("/me")
     @Operation(summary = "Actualizar perfil", description = "Actualiza los datos del usuario autenticado")
@@ -65,6 +72,9 @@ public class UsuarioController {
 
     /**
      * GET /api/usuarios — Lista todos los usuarios con paginación (Solo Admin).
+     *
+     * @param pageable objeto que contiene la información de paginación solicitada (página, tamaño)
+     * @return una página (Page) de objetos UsuarioDTO que representan a los usuarios en el sistema
      */
     @GetMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -79,6 +89,10 @@ public class UsuarioController {
 
     /**
      * PUT /api/usuarios/{id}/rol — Cambia el rol de un usuario (Solo Admin).
+     *
+     * @param id el identificador único del usuario al que se le cambiará el rol
+     * @param request el objeto que contiene el nombre del nuevo rol a asignar
+     * @return una respuesta HTTP con el objeto UsuarioDTO reflejando el rol actualizado
      */
     @PutMapping("/{id}/rol")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -96,6 +110,10 @@ public class UsuarioController {
 
     /**
      * PUT /api/usuarios/{id} — Actualiza los datos de un usuario (Solo Admin).
+     *
+     * @param id el identificador único del usuario a modificar
+     * @param request el objeto con los nuevos datos a actualizar (nombres, apellidos, estado)
+     * @return una respuesta HTTP con el objeto UsuarioDTO actualizado
      */
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -114,6 +132,9 @@ public class UsuarioController {
 
     /**
      * DELETE /api/usuarios/{id} — Desactiva un usuario (Solo Admin).
+     *
+     * @param id el identificador único del usuario a desactivar
+     * @return una respuesta HTTP 204 sin contenido si la operación fue exitosa
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
