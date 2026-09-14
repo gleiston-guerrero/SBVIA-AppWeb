@@ -14,7 +14,7 @@ module.exports = async (browser, context) => {
   await page.goto(`${baseUrl}/login`, { waitUntil: 'networkidle2' });
   
   // Esperar a que cargue el formulario
-  await page.waitForSelector('input[name="identificador"]', { timeout: 10000 });
+  await page.waitForSelector('input[type="password"]', { timeout: 30000 });
   
   // Extraer credenciales desde variables de entorno inyectadas por el Makefile
   const email = process.env.TEST_USER_EMAIL;
@@ -25,8 +25,13 @@ module.exports = async (browser, context) => {
   }
   
   console.log(`[Lighthouse Auth] Iniciando sesion como: ${email}`);
-  await page.type('input[name="identificador"]', email);
-  await page.type('input[name="password"]', password);
+  
+  // Encontrar el input de email/identificador (el primer input visible de tipo text o email)
+  const usernameInput = await page.$('input[type="text"], input[type="email"], input[name="identificador"], input[formControlName="correo"]');
+  await usernameInput.type(email);
+  
+  // Escribir contraseña
+  await page.type('input[type="password"]', password);
   
   // Hacer submit
   await page.click('button[type="submit"]');

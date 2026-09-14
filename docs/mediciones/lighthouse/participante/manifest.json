@@ -1,0 +1,14 @@
+[
+  {
+    "url": "http://localhost:4200/dashboard",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\jessi\\OneDrive\\Desktop\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\participante\\localhost-dashboard-2026_09_14_15_25_02.report.html",
+    "jsonPath": "C:\\Users\\jessi\\OneDrive\\Desktop\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\participante\\localhost-dashboard-2026_09_14_15_25_02.report.json",
+    "summary": {
+      "performance": 0.98,
+      "accessibility": 0.91,
+      "best-practices": 1,
+      "seo": 1
+    }
+  }
+]

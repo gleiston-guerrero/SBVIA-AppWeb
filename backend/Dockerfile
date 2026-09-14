@@ -7,8 +7,7 @@ RUN --mount=type=cache,target=/root/.m2 \
     mvn --batch-mode clean package -DskipTests
 
 # Etapa 2: Ejecución
-FROM eclipse-temurin:21-jre-alpine
-RUN apk add --no-cache postgresql-client
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
