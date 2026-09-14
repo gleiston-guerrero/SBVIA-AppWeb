@@ -62,6 +62,10 @@ public class UsernameGeneratorService {
         String[] tokensApellidos = normApellidos.isEmpty() ? new String[0] : normApellidos.split(" ");
 
         String primerNombre = tokensNombres.length > 0 ? tokensNombres[0] : "user";
+        // Si ambos campos estan vacíos, devolver el usuario por defecto del estándar UTEQ
+        if (normNombres.isEmpty() && normApellidos.isEmpty()) {
+            return "user0";
+        }
         String inicialNombre = primerNombre.substring(0, 1);
 
         // Procesar apellidos considerando partículas comunes en español
@@ -90,7 +94,16 @@ public class UsernameGeneratorService {
         String inicialSegundoApellido = "";
 
         if (apellidosLimpios.isEmpty()) {
-            primerApellido = primerNombre.length() >= 3 ? primerNombre : "usuario";
+            // Sin apellido: la base es directamente los primeros 4 caracteres del nombre
+            // Ej: "Justyn" → "just". No se usa la inicial separada porque daría "j" + "justyn" = "jjustyn"
+            String baseNombre = primerNombre.substring(0, Math.min(primerNombre.length(), 4));
+            while (baseNombre.length() < 4) {
+                baseNombre = baseNombre + "0";
+            }
+            if (baseNombre.length() > 50) {
+                baseNombre = baseNombre.substring(0, 50);
+            }
+            return baseNombre;
         } else {
             primerApellido = apellidosLimpios.get(0);
             if (apellidosLimpios.size() > 1) {

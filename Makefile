@@ -28,11 +28,11 @@ bench:
 
 audit:
 	@echo "Ejecutando auditoria Lighthouse para ADMINISTRADOR..."
-	TEST_USER_EMAIL=admin@sbvia.com TEST_USER_PASSWORD='Admin123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/administrador npx --yes @lhci/cli@0.15.1 autorun
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=admin@sbvia.com TEST_USER_PASSWORD='Admin123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/administrador npx --yes @lhci/cli@0.15.1 autorun
 	@echo "Ejecutando auditoria Lighthouse para INSTRUCTOR..."
-	TEST_USER_EMAIL=instructor@sbvia.com TEST_USER_PASSWORD='Instructor123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/instructor npx --yes @lhci/cli@0.15.1 autorun
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=instructor@sbvia.com TEST_USER_PASSWORD='Instructor123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/instructor npx --yes @lhci/cli@0.15.1 autorun
 	@echo "Ejecutando auditoria Lighthouse para PARTICIPANTE..."
-	TEST_USER_EMAIL=participante@sbvia.com TEST_USER_PASSWORD='Participa123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/participante npx --yes @lhci/cli@0.15.1 autorun
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=participante@sbvia.com TEST_USER_PASSWORD='Participa123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/participante npx --yes @lhci/cli@0.15.1 autorun
 
 clean:
 	docker compose down --volumes --remove-orphans

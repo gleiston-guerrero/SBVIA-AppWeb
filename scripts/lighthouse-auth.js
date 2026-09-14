@@ -7,11 +7,14 @@ module.exports = async (browser, context) => {
   // Usar la URL base de lhci o localhost
   const baseUrl = (process.env.LHCI_BASE_URL || 'http://localhost:4200').replace(/\/$/, '');
   
+  console.log(`[Lighthouse Auth] Esperando inicializacion del navegador...`);
+  await new Promise(r => setTimeout(r, 2000));
+  
   console.log(`[Lighthouse Auth] Navegando a login...`);
-  await page.goto(`${baseUrl}/login`);
+  await page.goto(`${baseUrl}/login`, { waitUntil: 'networkidle2' });
   
   // Esperar a que cargue el formulario
-  await page.waitForSelector('input[formControlName="correo"]', { timeout: 10000 });
+  await page.waitForSelector('input[name="identificador"]', { timeout: 10000 });
   
   // Extraer credenciales desde variables de entorno inyectadas por el Makefile
   const email = process.env.TEST_USER_EMAIL;
@@ -22,8 +25,8 @@ module.exports = async (browser, context) => {
   }
   
   console.log(`[Lighthouse Auth] Iniciando sesion como: ${email}`);
-  await page.type('input[formControlName="correo"]', email);
-  await page.type('input[formControlName="password"]', password);
+  await page.type('input[name="identificador"]', email);
+  await page.type('input[name="password"]', password);
   
   // Hacer submit
   await page.click('button[type="submit"]');
