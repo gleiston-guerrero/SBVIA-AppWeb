@@ -1,0 +1,31 @@
+{
+  "title": "Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)",
+  "description": "El sistema Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA) proporciona un entorno interactivo y reproducible de entrenamiento y evaluación para conductores en formación. Esta versión integra autenticación segura con JWT, CRUD optimizado sobre Spring Boot 3 y PostgreSQL 16, caché distribuida con Redis 7 y frontend reactivo en Angular 17+.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Cruz Pérez, Justyn K.",
+      "affiliation": "Universidad Técnica Estatal de Quevedo",
+      "orcid": "0009-0009-0847-0780"
+    },
+    {
+      "name": "Umaginga Arévalo, Jefferson M.",
+      "affiliation": "Universidad Técnica Estatal de Quevedo",
+      "orcid": "0009-0005-9831-0801"
+    },
+    {
+      "name": "Zamora Bumbila, Diego A.",
+      "affiliation": "Universidad Técnica Estatal de Quevedo"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "simulador vial",
+    "inteligencia artificial",
+    "educación vial",
+    "spring boot",
+    "angular",
+    "reproducible research"
+  ]
+}
