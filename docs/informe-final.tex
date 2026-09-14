@@ -210,6 +210,42 @@ El desarrollo riguroso de SBVIA se sustenta en bases conceptuales autoritativas:
     \item \textbf{Estrategias de Persistencia:} Patrones de arquitectura de datos empresariales de Fowler \cite{fowler2002patterns} y Kleppmann \cite{kleppmann2017designing}.
 \end{itemize}
 
+\section{Traffic Simulation Models}
+Modern traffic simulation environments rely on physical models to calculate safe distances and dynamic rules. According to \cite{treiber2013traffic}, simulating realistic traffic conditions is pivotal to training scenarios effectively. SBVIA adapts elements from intelligent driving behavior to construct its evaluation core.
+
+\section{Entity-Relationship Modeling}
+In developing the data persistence layer, structural mapping forms the foundation. As illustrated in Figure~\ref{fig:er-model}, the core entities interact primarily through the Scenario and Simulation tables.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{diagramas/er-model-en.png}
+\caption{Entity-Relationship model of the core SBVIA application. Source: Own elaboration.}
+\label{fig:er-model}
+\end{figure}
+
+\section{Software Architecture and C4 Model}
+The separation of concerns is managed at a structural level using the C4 model \cite{brown2020software} and the MVC pattern \cite{fowler2002patterns}. As depicted in Figure~\ref{fig:c4-level2}, the container level displays the interaction between the Angular client, the Spring Boot API, and the caching/persistence layers.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{diagramas/c4-level2-en.png}
+\caption{C4 Level 2 Container Diagram for SBVIA. Source: Own elaboration.}
+\label{fig:c4-level2}
+\end{figure}
+
+\section{Core Domain Object Structure}
+The system's core object orientation isolates business rules from infrastructure boundaries. As shown in Figure~\ref{fig:uml-classes}, the main abstractions interact securely during a simulation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{diagramas/uml-classes-en.png}
+\caption{UML Class Diagram for core components. Source: Own elaboration.}
+\label{fig:uml-classes}
+\end{figure}
+
+\section{Usability Engineering}
+To ensure educational tools are accessible and intuitive for novice drivers, empirical usability evaluations are essential. The System Usability Scale (SUS) \cite{brooke1996sus} provides a standardized metric to evaluate interactive performance.
+
 % ==========================================
 % B.6 CAPÍTULO 3: TRABAJOS RELACIONADOS
 % ==========================================
