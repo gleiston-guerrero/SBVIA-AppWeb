@@ -2,7 +2,7 @@
 
 [![CI Pipeline](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml/badge.svg)](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI Software](https://img.shields.io/badge/DOI%20Software-pendiente-lightgrey.svg)](#publicacion-y-preservacion)
+[![DOI Software](https://zenodo.org/badge/DOI/10.5281/zenodo.22740480.svg)](https://doi.org/10.5281/zenodo.22740480)
 [![DOI Dataset](https://img.shields.io/badge/DOI%20Dataset-pendiente-lightgrey.svg)](#publicacion-y-preservacion)
 
 ## 📌 Descripción del Proyecto
@@ -31,7 +31,9 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 
 ## Publicación y preservación
 
-Los DOI del software y del dataset se incorporarán únicamente después de publicar ambos artefactos en registros Zenodo separados. La URL pública también se añadirá cuando el despliegue HTTPS responda correctamente y haya sido verificado.
+El **DOI del Software** ya se encuentra registrado y disponible a través de Zenodo en `10.5281/zenodo.22740480`. 
+
+El DOI del dataset se incorporará posteriormente tras su publicación separada. La URL pública de acceso web se añadirá cuando el despliegue HTTPS responda correctamente y haya sido verificado.
 
 ---
 

@@ -16,6 +16,10 @@ authors:
     affiliation: "Universidad Técnica Estatal de Quevedo"
 version: 1.0.0
 date-released: "2026-08-31"
+doi: "10.5281/zenodo.22740480"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22740480"
 license: MIT
 repository-code: "https://github.com/keithdrox/SBVIA-AppWeb"
 keywords:
