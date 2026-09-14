@@ -7,4 +7,4 @@ La distribución de responsabilidades y aportes se rige por la taxonomía [CRedi
 - **Umaginga Arévalo Jefferson M.**
   - Software (Backend, Database), Data Curation, Validation.
 - **Zamora Bumbila Diego A.**
-  - Project administration, Architecture, DevOps, Integration.
+  - *Aclaración sobre participación:* Fue integrante del grupo al inicio del proyecto; sin embargo, no realizó actividades o aportes efectivos dentro del desarrollo del proyecto. Su aparición como contribuidor corresponde únicamente a una invitación inicial al repositorio.
