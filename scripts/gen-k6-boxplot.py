@@ -31,15 +31,15 @@ def latencias(run):
 
 def main():
     runs = [latencias(r) for r in range(1, 6)]
-    labels = [f"Corrida {r}" for r in range(1, 6)]
+    labels = [f"Run {r}" for r in range(1, 6)]
 
     fig, ax = plt.subplots(figsize=(8, 5))
     bp = ax.boxplot(runs, tick_labels=labels, patch_artist=True,
                     boxprops=dict(facecolor="#009E73", color="#333"),
                     medianprops=dict(color="#D55E00", linewidth=2))
-    ax.axhline(200, color="red", linestyle="--", linewidth=1.2, label="Umbral RNF-01 (200 ms)")
-    ax.set_ylabel("Latencia (ms)")
-    ax.set_title("Distribución de latencia GET /api/escenarios (50 VUs, 30 s) — Redis caché caliente")
+    ax.axhline(200, color="red", linestyle="--", linewidth=1.2, label="NFR-01 Threshold (200 ms)")
+    ax.set_ylabel("Latency (ms)")
+    ax.set_title("GET /api/escenarios Latency Distribution (50 VUs, 30 s) — Warm Redis Cache")
     ax.legend()
     ax.set_ylim(0, max(200, max(np.percentile(run, 99) for run in runs)) * 1.2)
     fig.tight_layout()
