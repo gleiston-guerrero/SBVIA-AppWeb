@@ -27,9 +27,12 @@ bench:
 	k6 run scripts/k6/load-test.js
 
 audit:
-	@echo "Ejecutando auditoria Lighthouse y OWASP..."
-	SBVIA_LIGHTHOUSE_PRESET=mobile LHCI_OUTPUT_DIR=.lighthouseci/mobile npx --yes @lhci/cli@0.15.1 autorun
-	SBVIA_LIGHTHOUSE_PRESET=desktop LHCI_OUTPUT_DIR=.lighthouseci/desktop npx --yes @lhci/cli@0.15.1 autorun
+	@echo "Ejecutando auditoria Lighthouse para ADMINISTRADOR..."
+	TEST_USER_EMAIL=admin@sbvia.com TEST_USER_PASSWORD='Admin123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/administrador npx --yes @lhci/cli@0.15.1 autorun
+	@echo "Ejecutando auditoria Lighthouse para INSTRUCTOR..."
+	TEST_USER_EMAIL=instructor@sbvia.com TEST_USER_PASSWORD='Instructor123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/instructor npx --yes @lhci/cli@0.15.1 autorun
+	@echo "Ejecutando auditoria Lighthouse para PARTICIPANTE..."
+	TEST_USER_EMAIL=participante@sbvia.com TEST_USER_PASSWORD='Participa123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/participante npx --yes @lhci/cli@0.15.1 autorun
 
 clean:
 	docker compose down --volumes --remove-orphans

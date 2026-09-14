@@ -4,9 +4,10 @@ const preset = process.env.SBVIA_LIGHTHOUSE_PRESET || 'mobile';
 module.exports = {
   ci: {
     collect: {
-      url: [`${baseUrl}/login`, `${baseUrl}/registro`],
-      numberOfRuns: 3,
-      settings: preset === 'desktop' ? { preset: 'desktop' } : {},
+      url: [`${baseUrl}/dashboard`],
+      puppeteerScript: './scripts/lighthouse-auth.js',
+      numberOfRuns: 1,
+      settings: { preset: 'desktop' },
     },
     assert: {
       assertions: {
