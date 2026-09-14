@@ -33,3 +33,5 @@ frontend/.angular/
 zap-results/
 # Archivos temporales generados durante validaciones locales
 /tmp/
+
+.lighthouseci/
