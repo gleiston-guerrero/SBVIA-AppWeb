@@ -82,7 +82,15 @@ public class UsernameGeneratorService {
                 }
                 if (i + 1 < tokensApellidos.length) {
                     i++;
-                    compuesto.append(tokensApellidos[i]);
+                    String apellidoToken = tokensApellidos[i];
+                    // Evitar letra doble en el límite partícula-apellido
+                    // Ej: "delos"+"santos" → "delosantos" (no "delossantos")
+                    if (compuesto.length() > 0 && !apellidoToken.isEmpty()
+                            && compuesto.charAt(compuesto.length() - 1) == apellidoToken.charAt(0)) {
+                        compuesto.append(apellidoToken.substring(1));
+                    } else {
+                        compuesto.append(apellidoToken);
+                    }
                 }
                 apellidosLimpios.add(compuesto.toString());
             } else if (!token.isBlank()) {
