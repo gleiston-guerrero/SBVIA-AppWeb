@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.8.31)  13 SEP 2026 20:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.8.31)  13 SEP 2026 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -585,7 +585,7 @@ LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 3.
 LaTeX Info: Redefining \% on input line 3.
 
-Overfull \hbox (82.44136pt too wide) in paragraph at lines 14--14
+Overfull \hbox (82.44136pt too wide) in paragraph at lines 17--17
  [][] [][]\OT1/cmr/m/n/10.95 Latency dis-tri-bu-tion of ver-sio-ned k6 runs. So
 ur-ce: Own ela-bo-ra-tion via \OT1/cmtt/m/n/10.95 scripts/gen-k6-boxplot.py\OT1
 /cmr/m/n/10.95 .[] [][]  
@@ -655,11 +655,7 @@ Cap\'{\i }tulo 2.
 LaTeX Warning: Citation `treiber2013traffic' on page 12 undefined on input line
  214.
 
-
-LaTeX Warning: Reference `fig:er-model' on page 12 undefined on input line 217.
-
-
-<diagramas/er-model-en.png, id=440, 1322.9425pt x 742.775pt>
+<diagramas/er-model-en.png, id=473, 1322.9425pt x 742.775pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 221.
@@ -668,20 +664,12 @@ Package pdftex.def Info: diagramas/er-model-en.png  used on input line 221.
 LaTeX Warning: Citation `brown2020software' on page 12 undefined on input line 
 227.
 
-
-LaTeX Warning: Reference `fig:c4-level2' on page 12 undefined on input line 227
-.
-
-<diagramas/c4-level2-en.png, id=442, 722.7pt x 433.62pt>
+<diagramas/c4-level2-en.png, id=476, 722.7pt x 433.62pt>
 File: diagramas/c4-level2-en.png Graphic file (type png)
 <use diagramas/c4-level2-en.png>
 Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 231.
 (pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
-
-LaTeX Warning: Reference `fig:uml-classes' on page 12 undefined on input line 2
-37.
-
-<diagramas/uml-classes-en.png, id=444, 722.7pt x 433.62pt>
+<diagramas/uml-classes-en.png, id=479, 722.7pt x 433.62pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 241.
@@ -861,7 +849,7 @@ ut line 374.
 LaTeX Warning: Citation `walls2022spring' on page 22 undefined on input line 37
 4.
 
-<diagramas/flujo-mvc-springboot.png, id=524, 722.7pt x 433.62pt>
+<diagramas/flujo-mvc-springboot.png, id=551, 722.7pt x 433.62pt>
 File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
 <use diagramas/flujo-mvc-springboot.png>
 Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
@@ -888,7 +876,7 @@ nput line 417.
 [24
 
 ]
-<capturas/dashboard.png, id=570, 722.7pt x 433.62pt>
+<capturas/dashboard.png, id=597, 722.7pt x 433.62pt>
 File: capturas/dashboard.png Graphic file (type png)
 <use capturas/dashboard.png>
 Package pdftex.def Info: capturas/dashboard.png  used on input line 451.
@@ -899,7 +887,7 @@ File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 [25 <./capturas/dashboard.png>] [26]
 Cap\'{\i }tulo 8.
-<mediciones/perf/k6-boxplot.png, id=589, 578.16pt x 361.35pt>
+<mediciones/perf/k6-boxplot.png, id=616, 578.16pt x 361.35pt>
 File: mediciones/perf/k6-boxplot.png Graphic file (type png)
 <use mediciones/perf/k6-boxplot.png>
 Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 501
@@ -914,7 +902,7 @@ ns. Sour-ce: Own ela-bo-ra-tion via
 [27
 
 ]
-<mediciones/sus/sus-distribution.png, id=596, 578.16pt x 361.35pt>
+<mediciones/sus/sus-distribution.png, id=623, 578.16pt x 361.35pt>
 File: mediciones/sus/sus-distribution.png Graphic file (type png)
 <use mediciones/sus/sus-distribution.png>
 Package pdftex.def Info: mediciones/sus/sus-distribution.png  used on input lin
@@ -1069,23 +1057,14 @@ L3 programming layer <2025-12-24>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `informe-final.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `informe-final.out':
-(rerunfilecheck)             Before: 5AE0B3B5532CA5D442C8F2085713A2FE;12944
-(rerunfilecheck)             After:  45F6B588E9C4CC1A61AAA8C3DFDB5D5E;13932.
+Package rerunfilecheck Info: File `informe-final.out' has not changed.
+(rerunfilecheck)             Checksum: 45F6B588E9C4CC1A61AAA8C3DFDB5D5E;13932.
  ) 
 Here is how much of TeX's memory you used:
- 14948 strings out of 467871
- 229064 string characters out of 5418376
- 963719 words of memory out of 5000000
- 43435 multiletter control sequences out of 15000+600000
+ 14953 strings out of 467871
+ 229129 string characters out of 5418376
+ 963008 words of memory out of 5000000
+ 43440 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,824b,1413s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1108,9 +1087,9 @@ type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/jessi/AppData/Local/Programs/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/jessi/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/jessi/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (44 pages, 648414 bytes).
+Output written on informe-final.pdf (44 pages, 653670 bytes).
 PDF statistics:
- 788 PDF objects out of 1000 (max. 8388607)
+ 815 PDF objects out of 1000 (max. 8388607)
  194 named destinations out of 1000 (max. 500000)
- 540 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 580 words of extra memory for PDF output out of 10000 (max. 10000000)
 
