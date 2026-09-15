@@ -29,11 +29,11 @@
 \contentsline {section}{\numberline {4.5}Métricas de Calidad de Requisitos}{18}{section.4.5}%
 \contentsline {chapter}{\numberline {5}Materiales y Métodos}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Enfoque Metodológico (DSR de Peffers)}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Instrumentos de Medición y Protocolo Experimental}{19}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Población, muestra y estrategia de muestreo}{19}{section.5.3}%
+\contentsline {section}{\numberline {5.2}Instrumentos de Medición y Protocolo Experimental}{20}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Población, muestra y estrategia de muestreo}{20}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Preguntas, hipótesis y análisis estadístico}{20}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Variables y criterios de aceptación}{20}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Procedimiento reproducible}{20}{section.5.6}%
+\contentsline {section}{\numberline {5.6}Procedimiento reproducible}{21}{section.5.6}%
 \contentsline {section}{\numberline {5.7}Gestión de evidencia}{21}{section.5.7}%
 \contentsline {chapter}{\numberline {6}Diseño del Sistema y Arquitectura}{22}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Modelo Arquitectónico C4}{22}{section.6.1}%

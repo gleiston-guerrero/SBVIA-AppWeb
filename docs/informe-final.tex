@@ -323,7 +323,31 @@ La matriz registra 12 de 14 requisitos \emph{Must} como verificados ($85.71\%$).
 Se adoptó la metodología Design Science Research \cite{peffers2007design, hevner2004design} estructurada en 6 actividades:
 1) Identificación del problema, 2) Definición de objetivos, 3) Diseño y desarrollo, 4) Demostración, 5) Evaluación empírica y 6) Comunicación.
 
-Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{basili1994gqm}. El diseño de las mediciones siguió principios de experimentación en ingeniería de software \cite{wohlin2012experimentation}; la selección por conveniencia de participantes se declara explícitamente porque este tipo de muestreo limita la generalización \cite{baltes2022sampling}.
+Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{basili1994gqm}, como se detalla en la Tabla \ref{tab:gqm}. El diseño de las mediciones siguió principios de experimentación en ingeniería de software \cite{wohlin2012experimentation}; la selección por conveniencia de participantes se declara explícitamente porque este tipo de muestreo limita la generalización \cite{baltes2022sampling}.
+
+\begin{table}[htbp]
+\centering
+\caption{Aplicación del enfoque Goal-Question-Metric (GQM) en la evaluación de SBVIA}
+\label{tab:gqm}
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.5cm}Xp{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Goal (Objetivo)} & \textbf{Question (Pregunta)} & \textbf{Metric (Métrica)} & \textbf{Source/Tool} \\
+\midrule
+\textbf{G1. Rendimiento:} Evaluar la capacidad de respuesta bajo carga concurrente & ¿El sistema responde de manera oportuna a 50 usuarios simultáneos? & Latencia percentil 95 ($p95 \le 200$ ms) y tasa de error & k6 \\
+\midrule
+\textbf{G2. Usabilidad:} Medir la facilidad de uso percibida del prototipo & ¿Es el sistema considerado usable por los conductores novatos? & Puntuación individual y media SUS (umbral $> 68$) & Cuestionario SUS \\
+\midrule
+\textbf{G3. Seguridad:} Comprobar la resiliencia contra ataques comunes & ¿El backend implementa cabeceras seguras y carece de defectos críticos? & Número de hallazgos por severidad; controles de cabeceras & OWASP ZAP, SpotBugs, \texttt{curl} \\
+\midrule
+\textbf{G4. Calidad Web:} Auditar las mejores prácticas en el frontend & ¿El frontend cumple con estándares de accesibilidad y SEO? & Puntajes de 0 a 100 en Performance, Accessibility, Best Practices, SEO & Lighthouse CI \\
+\midrule
+\textbf{G5. Calidad Interna:} Verificar la suficiencia de las pruebas automatizadas & ¿Qué proporción del código fuente está cubierta por pruebas unitarias? & Porcentaje de cobertura de líneas y de ramas ($\ge 70\%$) & JaCoCo \\
+\midrule
+\textbf{G6. Reproducibilidad:} Garantizar que la evidencia sea auditable & ¿Los datos y procedimientos cumplen lineamientos científicos de apertura? & Cumplimiento de artefactos (proveniencia, datos crudos) & Checklists FAIR y Ralph \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{Instrumentos de Medición y Protocolo Experimental}
 \begin{itemize}
@@ -335,9 +359,11 @@ Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{
 \end{itemize}
 
 \section{Población, muestra y estrategia de muestreo}
-La población objetivo de la evaluación de usabilidad corresponde a conductores en formación capaces de utilizar un navegador web moderno. La muestra disponible comprende 15 participantes, identificados exclusivamente mediante los códigos P01--P15. La selección fue no probabilística por conveniencia: se invitó a personas accesibles para el equipo dentro del contexto académico. Este procedimiento permite una evaluación formativa del prototipo, pero introduce sesgo de selección y no garantiza representatividad por edad, experiencia vial, ubicación geográfica o familiaridad tecnológica \cite{baltes2022sampling}.
+La población objetivo de la evaluación de usabilidad corresponde a conductores en formación capaces de utilizar un navegador web moderno. La unidad de análisis es el individuo (conductor). El contexto de aplicación es un entorno académico controlado donde el usuario interactúa con los módulos del simulador web a través del prototipo desplegado.
 
-En consecuencia, los resultados SUS describen únicamente a la muestra observada. No se extrapolan a la población nacional de conductores ni se interpretan como evidencia de reducción de siniestros. Los archivos públicos no incluyen edad, género, dispositivo ni otros atributos demográficos; por ello, el informe tampoco afirma diversidad sobre variables que no fueron registradas.
+La muestra disponible comprende 15 participantes, identificados exclusivamente mediante los códigos P01--P15. La selección fue no probabilística por conveniencia: se invitó a personas accesibles para el equipo dentro del contexto académico. Este procedimiento permite una evaluación formativa del prototipo, pero introduce sesgo de selección y no garantiza representatividad por edad, experiencia vial, ubicación geográfica o familiaridad tecnológica \cite{baltes2022sampling}.
+
+En consecuencia, los resultados SUS describen únicamente a la muestra observada. No se extrapolan a la población nacional de conductores ni se interpretan como evidencia empírica de reducción de siniestros. Los archivos públicos no incluyen edad, género, dispositivo ni otros atributos demográficos; por ello, el informe tampoco afirma diversidad sobre variables que no fueron estrictamente registradas.
 
 \section{Preguntas, hipótesis y análisis estadístico}
 La evaluación cuantitativa se organiza con un nivel de significación $\alpha=0.05$. Para rendimiento, la hipótesis nula es $H_{0R}$: la latencia $p95$ de lecturas frías no es mayor que la de lecturas calientes bajo el mismo perfil; la alternativa unilateral $H_{1R}$ establece que la latencia fría es mayor. Cuando existan cinco pares homogéneos se aplicará Wilcoxon de rangos con signo, se informará el valor $p$ en notación científica y se acompañará con $A_{12}$ de Vargha--Delaney o delta de Cliff \cite{arcuri2012hitchhiker,vargha2000critique,cliff1993dominance}. No se emitirá una conclusión inferencial mientras falten esos pares.

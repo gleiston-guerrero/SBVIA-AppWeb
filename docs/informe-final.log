@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 14:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 16:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -620,17 +620,17 @@ Cap\'{\i }tulo 1.
 
 ] [10] [11]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=485, 1322.9425pt x 742.775pt>
+<diagramas/er-model-en.png, id=487, 1322.9425pt x 742.775pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 220.
 (pdftex.def)             Requested size: 432.48051pt x 242.81573pt.
-<diagramas/c4-level2-en.png, id=489, 722.7pt x 433.62pt>
+<diagramas/c4-level2-en.png, id=491, 722.7pt x 433.62pt>
 File: diagramas/c4-level2-en.png Graphic file (type png)
 <use diagramas/c4-level2-en.png>
 Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 230.
 (pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
-<diagramas/uml-classes-en.png, id=492, 722.7pt x 433.62pt>
+<diagramas/uml-classes-en.png, id=494, 722.7pt x 433.62pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 240.
@@ -726,15 +726,105 @@ cal-cu-lar el pun-ta-je agre-ga-do del con-duc-tor v^^S^^Pa \OT1/cmtt/m/n/10.95
 
 ] [18]
 Cap\'{\i }tulo 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+[]|\OT1/cmr/bx/n/9 G1. Ren-di-mien-to:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 Eva-luar la ca-pa-ci-dad
+ []
+
+
+Underfull \hbox (badness 1629) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 Latencia per-cen-
+ []
+
+
+Underfull \hbox (badness 4242) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 til 95 ($\OML/cmm/m/it/9 p\OT1/cmr/m/n/9 95 \OMS/cmsy/m/n/9 ^^T
+ []
+
+
+Underfull \hbox (badness 1097) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 Puntuaci^^Son in-di-
+ []
+
+
+Underfull \hbox (badness 4531) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 vi-dual y me-dia
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 SUS (um-bral $\OML/cmm/m/it/9 >
+ []
+
+
+Underfull \hbox (badness 4193) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 N^^Sume-ro de ha-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 OWASP ZAP,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 Puntajes de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 0 a 100 en
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 ces-si-bi-lity, Best
+ []
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 y de ra-mas ($\OMS/cmsy/m/n/9 ^^U
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+[]|\OT1/cmr/bx/n/9 G6. Re-pro-du-ci-bi-li-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 Cumplimiento
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 de ar-te-fac-tos
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--349
+\OT1/cmr/m/n/9 (pro-ve-nien-cia,
+ []
+
+
+Underfull \hbox (badness 3942) in paragraph at lines 349--349
+[]|\OT1/cmr/m/n/9 Checklists FAIR
+ []
+
 [19
 
 ] [20] [21]
 Cap\'{\i }tulo 6.
-<diagramas/flujo-mvc-springboot.png, id=614, 722.7pt x 433.62pt>
+<diagramas/flujo-mvc-springboot.png, id=620, 722.7pt x 433.62pt>
 File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
 <use diagramas/flujo-mvc-springboot.png>
 Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
- 381.
+ 407.
 (pdftex.def)             Requested size: 418.82375pt x 251.29466pt.
 [22
 
@@ -745,28 +835,28 @@ Cap\'{\i }tulo 7.
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 416.
+nput line 442.
  [24
 
 ]
-<capturas/dashboard.png, id=666, 722.7pt x 433.62pt>
+<capturas/dashboard.png, id=671, 722.7pt x 433.62pt>
 File: capturas/dashboard.png Graphic file (type png)
 <use capturas/dashboard.png>
-Package pdftex.def Info: capturas/dashboard.png  used on input line 450.
+Package pdftex.def Info: capturas/dashboard.png  used on input line 476.
 (pdftex.def)             Requested size: 427.93057pt x 256.75989pt.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) [25 <./capturas/dashboard.png>] [26]
 Cap\'{\i }tulo 8.
-<mediciones/perf/k6-boxplot.png, id=685, 578.16pt x 361.35pt>
+<mediciones/perf/k6-boxplot.png, id=690, 578.16pt x 361.35pt>
 File: mediciones/perf/k6-boxplot.png Graphic file (type png)
 <use mediciones/perf/k6-boxplot.png>
-Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 500
+Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 526
 .
 (pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
 
-Underfull \hbox (badness 2469) in paragraph at lines 501--501
+Underfull \hbox (badness 2469) in paragraph at lines 527--527
 []\OT1/cmr/m/n/10.95 Figura 8.1: []Latency dis-tri-bu-tion of ver-sio-ned k6 ru
 ns. Sour-ce: Own ela-bo-ra-tion via
  []
@@ -774,11 +864,11 @@ ns. Sour-ce: Own ela-bo-ra-tion via
 [27
 
 ]
-<mediciones/sus/sus-distribution.png, id=692, 578.16pt x 361.35pt>
+<mediciones/sus/sus-distribution.png, id=697, 578.16pt x 361.35pt>
 File: mediciones/sus/sus-distribution.png Graphic file (type png)
 <use mediciones/sus/sus-distribution.png>
 Package pdftex.def Info: mediciones/sus/sus-distribution.png  used on input lin
-e 514.
+e 540.
 (pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
  [28 <./mediciones/perf/k6-boxplot.png>] [29 <./mediciones/sus/sus-distribution
 .png>]
@@ -810,32 +900,32 @@ Underfull \hbox (badness 1052) in paragraph at lines 8--13
 ] [36]) [37]
 Ap\'{e}ndice A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Reescritura seg^^Sun ISO/IEC/IEEE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Colecci^^Son de 25 pe-ti-cio-nes en
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 639--639
+Underfull \hbox (badness 1968) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Creaci^^Son de tags sem^^Santi-cos v0.7.0 y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Cookies Htt-pOnly, Se-cu-re, Sa-me-Si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Creaci^^Son de DATA-DICTIONARY y
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 639--639
+Underfull \hbox (badness 1502) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
@@ -844,12 +934,12 @@ Underfull \hbox (badness 1502) in paragraph at lines 639--639
 ]
 Ap\'{e}ndice B.
 
-Underfull \hbox (badness 10000) in paragraph at lines 698--698
+Underfull \hbox (badness 10000) in paragraph at lines 724--724
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 698--698
+Underfull \hbox (badness 2326) in paragraph at lines 724--724
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
  []
 
@@ -858,17 +948,17 @@ Underfull \hbox (badness 2326) in paragraph at lines 698--698
 ] [40]
 Ap\'{e}ndice C.
 
-Underfull \hbox (badness 5119) in paragraph at lines 793--793
+Underfull \hbox (badness 5119) in paragraph at lines 819--819
 []|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
  []
 
 
-Underfull \hbox (badness 4205) in paragraph at lines 793--793
+Underfull \hbox (badness 4205) in paragraph at lines 819--819
 []|\OT1/cmr/m/n/10.95 Robo de re-no-va-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 793--793
+Underfull \hbox (badness 10000) in paragraph at lines 819--819
 []|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
@@ -892,13 +982,13 @@ Package rerunfilecheck Info: File `informe-final.out' has not changed.
 (rerunfilecheck)             Checksum: 7A31543F324377F0BC7CEA9DF9A2D190;13846.
  ) 
 Here is how much of TeX's memory you used:
- 15070 strings out of 467501
- 232379 string characters out of 5407579
- 975368 words of memory out of 5000000
- 43894 multiletter control sequences out of 15000+600000
+ 15072 strings out of 467501
+ 232397 string characters out of 5407579
+ 975471 words of memory out of 5000000
+ 43895 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,10n,79p,821b,1464s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,79p,821b,1463s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 tt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type
@@ -909,19 +999,21 @@ ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Keith
 o_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
 Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
 8.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Keitho_/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Keitho_/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Keith
-o_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/
-Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt
-10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (45 pages, 672483 bytes).
+ts/cm/cmmi9.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Keitho_/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Keitho_/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Keitho_/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Keitho
+_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/U
+sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
+.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on informe-final.pdf (45 pages, 698171 bytes).
 PDF statistics:
- 910 PDF objects out of 1000 (max. 8388607)
- 224 named destinations out of 1000 (max. 500000)
+ 923 PDF objects out of 1000 (max. 8388607)
+ 225 named destinations out of 1000 (max. 500000)
  580 words of extra memory for PDF output out of 10000 (max. 10000000)
 
