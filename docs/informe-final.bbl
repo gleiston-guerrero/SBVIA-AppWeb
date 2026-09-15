@@ -1,41 +1,26 @@
 \begin{thebibliography}{10}
 
-\bibitem{ralph2021empirical}
-P.~Ralph, N.~b. Ali, S.~Baltes, D.~Bianculli, J.~Diaz, Y.~Dittrich, N.~Ernst,
-  M.~Felderer, R.~Feldt, A.~Filieri, {\em et~al.}, ``Empirical standards for
-  software engineering research,'' {\em ACM Transactions on Software
-  Engineering and Methodology (TOSEM)}, vol.~30, no.~4, pp.~1--49, 2021.
+\bibitem{who2023roadsafety}
+{World Health Organization}, ``Global status report on road safety 2023,''
+  tech. rep., World Health Organization, Geneva, 2023.
 
-\bibitem{brooke1996sus}
-J.~Brooke, ``Sus: A 'quick and dirty' usability scale,'' {\em Usability
-  Evaluation in Industry}, vol.~189, no.~194, pp.~4--7, 1996.
+\bibitem{martin2019simulator}
+L.~M. Mart{\'i}n-delosReyes, E.~Jim{\'e}nez-Mej{\'i}as, V.~Mart{\'i}nez-Ruiz,
+  E.~Moreno-Rold{\'a}n, D.~Molina-Soberanes, and P.~Lardelli-Claret, ``Efficacy
+  of training with driving simulators in improving safety in young novice or
+  learner drivers: A systematic review,'' {\em Transportation Research Part F:
+  Traffic Psychology and Behaviour}, vol.~62, pp.~58--65, 2019.
 
-\bibitem{basili1994gqm}
-V.~R. Basili, G.~Caldiera, and H.~D. Rombach, ``The goal question metric
-  approach,'' {\em Encyclopedia of Software Engineering}, vol.~1, pp.~528--532,
-  1994.
+\bibitem{alonso2023simulators}
+F.~Alonso, M.~Faus, J.~V. Riera, M.~Fernandez-Marin, and S.~A. Useche,
+  ``Effectiveness of driving simulators for drivers' training: A systematic
+  review,'' {\em Applied Sciences}, vol.~13, no.~9, p.~5266, 2023.
 
-\bibitem{peffers2007design}
-K.~Peffers, T.~Tuunanen, M.~A. Rothenberger, and S.~Chatterjee, ``A design
-  science research methodology for information systems research,'' {\em Journal
-  of Management Information Systems}, vol.~24, no.~3, pp.~45--77, 2007.
-
-\bibitem{pohl2010requirements}
-K.~Pohl, {\em Requirements Engineering: Fundamentals, Principles, and
-  Techniques}.
-\newblock Springer Publishing Company, 2010.
-
-\bibitem{iso29148}
-{ISO/IEC/IEEE}, ``Systems and software engineering -- life cycle processes --
-  requirements engineering,'' tech. rep., ISO/IEC/IEEE 29148:2018, 2018.
-
-\bibitem{incose2023}
-{INCOSE}, ``Incose guide to writing requirements,'' Tech. Rep.
-  INCOSE-TP-2010-006-04, International Council on Systems Engineering, 2023.
-
-\bibitem{brown2023c4}
-S.~Brown, {\em The C4 Model for Visualising Software Architecture}.
-\newblock Leanpub, 2023.
+\bibitem{krasniuk2024simulator}
+S.~Krasniuk, A.~M. Crizzle, {\em et~al.}, ``The effectiveness of driving
+  simulator training on driving skills and safety in young novice drivers: A
+  systematic review of interventions,'' {\em Journal of Safety Research},
+  vol.~91, pp.~20--37, 2024.
 
 \bibitem{iso25010}
 {ISO/IEC}, ``Systems and software engineering -- systems and software quality
@@ -58,6 +43,50 @@ M.~Kleppmann, {\em Designing Data-Intensive Applications: The Big Ideas Behind
   Reliable, Scalable, and Maintainable Systems}.
 \newblock O'Reilly Media, 2017.
 
+\bibitem{peng2011reproducible}
+R.~D. Peng, ``Reproducible research in computational science,'' {\em Science},
+  vol.~334, no.~6060, pp.~1226--1227, 2011.
+
+\bibitem{sandve2013ten}
+G.~K. Sandve, A.~Nekrutenko, J.~Taylor, and E.~Hovig, ``Ten simple rules for
+  reproducible computational research,'' {\em PLoS Computational Biology},
+  vol.~9, no.~10, p.~e1003285, 2013.
+
+\bibitem{wilkinson2016fair}
+M.~D. Wilkinson, M.~Dumontier, I.~J. Aalbersberg, G.~Appleton, M.~Axton,
+  A.~Baak, {\em et~al.}, ``The fair guiding principles for scientific data
+  management and stewardship,'' {\em Scientific Data}, vol.~3, p.~160018, 2016.
+
+\bibitem{pohl2010requirements}
+K.~Pohl, {\em Requirements Engineering: Fundamentals, Principles, and
+  Techniques}.
+\newblock Springer Publishing Company, 2010.
+
+\bibitem{iso29148}
+{ISO/IEC/IEEE}, ``Systems and software engineering -- life cycle processes --
+  requirements engineering,'' tech. rep., ISO/IEC/IEEE 29148:2018, 2018.
+
+\bibitem{incose2023}
+{INCOSE}, ``Incose guide to writing requirements,'' Tech. Rep.
+  INCOSE-TP-2010-006-04, International Council on Systems Engineering, 2023.
+
+\bibitem{brown2023c4}
+S.~Brown, {\em The C4 Model for Visualising Software Architecture}.
+\newblock Leanpub, 2023.
+
+\bibitem{treiber2013traffic}
+M.~Treiber and A.~Kesting, {\em Traffic Flow Dynamics: Data, Models and
+  Simulation}.
+\newblock Springer, 2013.
+
+\bibitem{brown2020software}
+S.~Brown, {\em Software Architecture for Developers}.
+\newblock Leanpub, 2020.
+
+\bibitem{brooke1996sus}
+J.~Brooke, ``Sus: A 'quick and dirty' usability scale,'' {\em Usability
+  Evaluation in Industry}, vol.~189, no.~194, pp.~4--7, 1996.
+
 \bibitem{kitchenham2007guidelines}
 B.~Kitchenham and S.~Charters, ``Guidelines for performing systematic
   literature reviews in software engineering,'' {\em EBSE Technical Report
@@ -68,8 +97,122 @@ M.~J. Page, J.~E. McKenzie, P.~M. Bossuyt, I.~Boutron, T.~C. Hoffmann, C.~D.
   Mulrow, {\em et~al.}, ``The prisma 2020 statement: an updated guideline for
   reporting systematic reviews,'' {\em BMJ}, vol.~372, p.~n71, 2021.
 
+\bibitem{wynne2019validation}
+R.~A. Wynne, V.~Beanland, and P.~M. Salmon, ``Systematic review of driving
+  simulator validation studies,'' {\em Safety Science}, vol.~117, pp.~138--151,
+  2019.
+
+\bibitem{vanleeuwen2015changes}
+P.~M. van Leeuwen, R.~Happee, and J.~C.~F. de~Winter, ``Changes of driving
+  performance and gaze behavior of novice drivers during a 30-min
+  simulator-based training,'' {\em Procedia Manufacturing}, vol.~3,
+  pp.~3325--3332, 2015.
+
+\bibitem{rosenbloom2014workshops}
+T.~Rosenbloom and E.~Eldror, ``Effectiveness evaluation of simulative workshops
+  for newly licensed drivers,'' {\em Accident Analysis \& Prevention}, vol.~63,
+  pp.~30--36, 2014.
+
+\bibitem{mayhew2011validation}
+D.~R. Mayhew, H.~M. Simpson, K.~M. Wood, L.~Lonero, K.~M. Clinton, and A.~G.
+  Johnson, ``On-road and simulated driving: Concurrent and discriminant
+  validation,'' {\em Journal of Safety Research}, vol.~42, no.~4, pp.~267--275,
+  2011.
+
+\bibitem{hulme2021blueprint}
+K.~F. Hulme, R.~S.~A. Lim, M.~Bauer, N.~Hatten, H.~Destro, B.~Switzer, J.-A.
+  Dequesnay, R.~Cashmore, I.~Duncan, A.~Abraham, J.~Deutsch, N.~Bald, G.~A.
+  Fabiano, and K.~E. Lewis, ``Blueprint for a simulation framework to increase
+  driver training safety in north america: Case study,'' {\em Safety}, vol.~7,
+  no.~2, p.~24, 2021.
+
+\bibitem{wiegers2013software}
+K.~E. Wiegers and J.~Beatty, {\em Software Requirements}.
+\newblock Microsoft Press, 3rd~ed., 2013.
+
+\bibitem{cohn2004user}
+M.~Cohn, {\em User Stories Applied: For Agile Software Development}.
+\newblock Addison-Wesley Professional, 2004.
+
+\bibitem{cockburn2001writing}
+A.~Cockburn, {\em Writing Effective Use Cases}.
+\newblock Addison-Wesley Professional, 2001.
+
+\bibitem{peffers2007design}
+K.~Peffers, T.~Tuunanen, M.~A. Rothenberger, and S.~Chatterjee, ``A design
+  science research methodology for information systems research,'' {\em Journal
+  of Management Information Systems}, vol.~24, no.~3, pp.~45--77, 2007.
+
 \bibitem{hevner2004design}
 A.~R. Hevner, S.~T. March, J.~Park, and S.~Ram, ``Design science in information
   systems research,'' {\em MIS Quarterly}, vol.~28, no.~1, pp.~75--105, 2004.
+
+\bibitem{basili1994gqm}
+V.~R. Basili, G.~Caldiera, and H.~D. Rombach, ``The goal question metric
+  approach,'' {\em Encyclopedia of Software Engineering}, vol.~1, pp.~528--532,
+  1994.
+
+\bibitem{wohlin2012experimentation}
+C.~Wohlin, P.~Runeson, M.~H{\"o}st, M.~C. Ohlsson, B.~Regnell, and
+  A.~Wessl{\'e}n, {\em Experimentation in Software Engineering}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem{baltes2022sampling}
+S.~Baltes and P.~Ralph, ``Sampling in software engineering research: A critical
+  review and guidelines,'' {\em Empirical Software Engineering}, vol.~27,
+  no.~4, p.~94, 2022.
+
+\bibitem{arcuri2012hitchhiker}
+A.~Arcuri and L.~Briand, ``A hitchhiker's guide to statistical tests for
+  assessing randomized algorithms in software engineering,'' {\em Software
+  Testing, Verification and Reliability}, vol.~24, no.~3, pp.~219--250, 2014.
+
+\bibitem{vargha2000critique}
+A.~Vargha and H.~D. Delaney, ``A critique and improvement of the cl common
+  language effect size statistics of mcgraw and wong,'' {\em Journal of
+  Educational and Behavioral Statistics}, vol.~25, no.~2, pp.~101--132, 2000.
+
+\bibitem{cliff1993dominance}
+N.~Cliff, ``Dominance statistics: Ordinal analyses to answer ordinal
+  questions,'' {\em Psychological Bulletin}, vol.~114, no.~3, pp.~494--509,
+  1993.
+
+\bibitem{ralph2021empirical}
+P.~Ralph, N.~b. Ali, S.~Baltes, D.~Bianculli, J.~Diaz, Y.~Dittrich, N.~Ernst,
+  M.~Felderer, R.~Feldt, A.~Filieri, {\em et~al.}, ``Empirical standards for
+  software engineering research,'' {\em ACM Transactions on Software
+  Engineering and Methodology (TOSEM)}, vol.~30, no.~4, pp.~1--49, 2021.
+
+\bibitem{fielding2000architectural}
+R.~T. Fielding, ``Architectural styles and the design of network-based software
+  architectures,'' 2000.
+\newblock PhD thesis.
+
+\bibitem{walls2022spring}
+C.~Walls, {\em Spring in Action}.
+\newblock Manning Publications, 6th~ed., 2022.
+
+\bibitem{bass2021software}
+L.~Bass, P.~Clements, and R.~Kazman, {\em Software Architecture in Practice}.
+\newblock Addison-Wesley Professional, 4th~ed., 2021.
+
+\bibitem{richards2020fundamentals}
+M.~Richards and N.~Ford, {\em Fundamentals of Software Architecture: An
+  Engineering Approach}.
+\newblock O'Reilly Media, 2020.
+
+\bibitem{runeson2009guidelines}
+P.~Runeson and M.~H{\"o}st, ``Guidelines for conducting and reporting case
+  study research in software engineering,'' {\em Empirical Software
+  Engineering}, vol.~14, no.~2, pp.~131--164, 2009.
+
+\bibitem{smith2016software}
+A.~M. Smith, D.~S. Katz, K.~E. Niemeyer, and {FORCE11 Software Citation Working
+  Group}, ``Software citation principles,'' {\em PeerJ Computer Science},
+  vol.~2, p.~e86, 2016.
+
+\bibitem{niso2022credit}
+{NISO}, ``Ansi/niso z39.104-2022, credit, contributor roles taxonomy,'' tech.
+  rep., National Information Standards Organization, 2022.
 
 \end{thebibliography}

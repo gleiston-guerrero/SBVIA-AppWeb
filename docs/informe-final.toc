@@ -55,17 +55,17 @@
 \contentsline {chapter}{\numberline {11}Trabajo Futuro}{32}{chapter.11}%
 \contentsline {chapter}{\numberline {12}Conclusiones}{33}{chapter.12}%
 \contentsline {chapter}{Declaraciones Obligatorias}{34}{chapter*.8}%
-\contentsline {chapter}{\numberline {A}Bitácora Acumulativa de Observaciones}{37}{appendix.Alph1}%
-\contentsline {chapter}{\numberline {B}Protocolo de Verificación Técnica Final}{38}{appendix.Alph2}%
-\contentsline {section}{\numberline {B.1}Instalación desde una base vacía}{38}{section.Alph2.1}%
-\contentsline {section}{\numberline {B.2}Actualización de una instalación existente}{38}{section.Alph2.2}%
-\contentsline {section}{\numberline {B.3}Flujo funcional de extremo a extremo}{39}{section.Alph2.3}%
-\contentsline {chapter}{\numberline {C}Modelo de Amenazas y Controles de Seguridad}{40}{appendix.Alph3}%
-\contentsline {section}{\numberline {C.1}Identidad, sesión y autorización}{40}{section.Alph3.1}%
-\contentsline {section}{\numberline {C.2}Persistencia, caché y proveedor de IA}{40}{section.Alph3.2}%
-\contentsline {section}{\numberline {C.3}Alcance de las herramientas}{41}{section.Alph3.3}%
-\contentsline {chapter}{\numberline {D}Operación, Recuperación y Evidencia Reproducible}{42}{appendix.Alph4}%
-\contentsline {section}{\numberline {D.1}Arranque y observabilidad}{42}{section.Alph4.1}%
-\contentsline {section}{\numberline {D.2}Respaldo y restauración}{42}{section.Alph4.2}%
-\contentsline {section}{\numberline {D.3}Trazabilidad de resultados}{42}{section.Alph4.3}%
-\contentsline {section}{\numberline {D.4}Lista de cierre académico}{43}{section.Alph4.4}%
+\contentsline {chapter}{\numberline {A}Bitácora Acumulativa de Observaciones}{38}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Protocolo de Verificación Técnica Final}{39}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Instalación desde una base vacía}{39}{appendix.B.1}%
+\contentsline {section}{\numberline {B.2}Actualización de una instalación existente}{39}{appendix.B.2}%
+\contentsline {section}{\numberline {B.3}Flujo funcional de extremo a extremo}{40}{appendix.B.3}%
+\contentsline {chapter}{\numberline {C}Modelo de Amenazas y Controles de Seguridad}{41}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Identidad, sesión y autorización}{41}{appendix.C.1}%
+\contentsline {section}{\numberline {C.2}Persistencia, caché y proveedor de IA}{41}{appendix.C.2}%
+\contentsline {section}{\numberline {C.3}Alcance de las herramientas}{42}{appendix.C.3}%
+\contentsline {chapter}{\numberline {D}Operación, Recuperación y Evidencia Reproducible}{43}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Arranque y observabilidad}{43}{appendix.D.1}%
+\contentsline {section}{\numberline {D.2}Respaldo y restauración}{43}{appendix.D.2}%
+\contentsline {section}{\numberline {D.3}Trazabilidad de resultados}{43}{appendix.D.3}%
+\contentsline {section}{\numberline {D.4}Lista de cierre académico}{44}{appendix.D.4}%
