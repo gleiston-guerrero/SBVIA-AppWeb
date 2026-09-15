@@ -1,3 +1,4 @@
+-include .env
 .PHONY: all verify backend-verify frontend-build build up down bench audit pdf clean
 
 MAVEN_IMAGE ?= maven:3.9.11-eclipse-temurin-21-alpine
@@ -28,11 +29,11 @@ bench:
 
 audit:
 	@echo "Ejecutando auditoria Lighthouse para ADMINISTRADOR..."
-	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=admin@sbvia.com TEST_USER_PASSWORD='Admin123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/administrador npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=admin@sbvia.com TEST_USER_PASSWORD='$(TEST_ADMIN_PASSWORD)' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/administrador npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
 	@echo "Ejecutando auditoria Lighthouse para INSTRUCTOR..."
-	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=instructor@sbvia.com TEST_USER_PASSWORD='Instructor123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/instructor npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=instructor@sbvia.com TEST_USER_PASSWORD='$(TEST_INSTRUCTOR_PASSWORD)' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/instructor npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
 	@echo "Ejecutando auditoria Lighthouse para PARTICIPANTE..."
-	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=participante@sbvia.com TEST_USER_PASSWORD='Participa123!' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/participante npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
+	npx --yes cross-env CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" TEST_USER_EMAIL=participante@sbvia.com TEST_USER_PASSWORD='$(TEST_PARTICIPANT_PASSWORD)' LHCI_OUTPUT_DIR=docs/mediciones/lighthouse/participante npx --yes @lhci/cli@0.15.1 autorun --config=lighthouserc-auth.js
 
 clean:
 	docker compose down --volumes --remove-orphans
