@@ -25,7 +25,7 @@ down:
 
 bench:
 	@echo "Ejecutando pruebas de carga k6..."
-	k6 run scripts/k6/load-test.js
+	k6 run -e K6_USERNAME='$(K6_USERNAME)' -e K6_PASSWORD='$(K6_PASSWORD)' scripts/k6/load-test.js
 
 audit:
 	@echo "Ejecutando auditoria Lighthouse para ADMINISTRADOR..."

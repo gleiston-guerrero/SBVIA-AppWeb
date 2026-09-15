@@ -4,9 +4,13 @@ import { sleep, check } from 'k6';
 // API_URL se puede sobreescribir con: k6 run -e API_URL=http://host.docker.internal:8080
 const API_URL = __ENV.API_URL || 'http://localhost:8080';
 
-// Credenciales de la cuenta demo (role USER, ver V5__datos_prueba.sql / docs)
-const EMAIL = __ENV.EMAIL || 'conductor@sbvia.com';
-const PASSWORD = __ENV.PASSWORD || 'password123';
+// Credenciales inyectadas por variables de entorno
+const EMAIL = __ENV.K6_USERNAME;
+const PASSWORD = __ENV.K6_PASSWORD;
+
+if (!EMAIL || !PASSWORD) {
+    throw new Error('Faltan las credenciales K6_USERNAME y K6_PASSWORD en el entorno.');
+}
 
 export let options = {
     vus: 50,
