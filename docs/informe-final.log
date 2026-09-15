@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 14:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 14:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -540,12 +540,12 @@ Package hyperref Info: Link coloring OFF on input line 43.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package babel Info: Main language set to 'spanish'.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 73.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
 
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -558,12 +558,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.97 \chapter
+l.96 \chapter
              *{Abstract} [1
 
 ]
-LaTeX Info: Redefining \. on input line 104.
-LaTeX Info: Redefining \% on input line 104.
+LaTeX Info: Redefining \. on input line 103.
+LaTeX Info: Redefining \% on input line 103.
  [2
 
 ] (informe-final.toc
@@ -620,20 +620,20 @@ Cap\'{\i }tulo 1.
 
 ] [10] [11]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=486, 1322.9425pt x 742.775pt>
+<diagramas/er-model-en.png, id=485, 1322.9425pt x 742.775pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
-Package pdftex.def Info: diagramas/er-model-en.png  used on input line 221.
+Package pdftex.def Info: diagramas/er-model-en.png  used on input line 220.
 (pdftex.def)             Requested size: 432.48051pt x 242.81573pt.
-<diagramas/c4-level2-en.png, id=490, 722.7pt x 433.62pt>
+<diagramas/c4-level2-en.png, id=489, 722.7pt x 433.62pt>
 File: diagramas/c4-level2-en.png Graphic file (type png)
 <use diagramas/c4-level2-en.png>
-Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 231.
+Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 230.
 (pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
-<diagramas/uml-classes-en.png, id=493, 722.7pt x 433.62pt>
+<diagramas/uml-classes-en.png, id=492, 722.7pt x 433.62pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
-Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 241.
+Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 240.
 (pdftex.def)             Requested size: 318.66948pt x 191.20361pt.
 [12
 
@@ -641,67 +641,67 @@ Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 241.
 [14 <./diagramas/uml-classes-en.png>]
 Cap\'{\i }tulo 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--274
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Mart^^S^^Pn-delosReyes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--274
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Revisi^^Son sis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--274
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Revisi^^Son sis-
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 274--274
+Underfull \hbox (badness 1565) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Revisi^^Son de in-
  []
 
 
-Underfull \hbox (badness 2245) in paragraph at lines 274--274
+Underfull \hbox (badness 2245) in paragraph at lines 273--273
 \OT1/cmr/m/n/9 tre-zas si-mu-la-das, sin cer-te-za so-bre
  []
 
 
-Underfull \hbox (badness 1533) in paragraph at lines 274--274
+Underfull \hbox (badness 1533) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Rosenbloom y El-
  []
 
 
-Underfull \hbox (badness 3199) in paragraph at lines 274--274
+Underfull \hbox (badness 3199) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Estudio com-pa-
  []
 
 
-Underfull \hbox (badness 6204) in paragraph at lines 274--274
+Underfull \hbox (badness 6204) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Validaci^^Son con-
  []
 
 
-Underfull \hbox (badness 6412) in paragraph at lines 274--274
+Underfull \hbox (badness 6412) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Formaci^^Son ju-
  []
 
 
-Underfull \hbox (badness 1127) in paragraph at lines 274--274
+Underfull \hbox (badness 1127) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Propone eva-lua-ci^^Son mul-tim^^Setri-ca de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--274
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/bx/n/9 Caso
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--274
+Underfull \hbox (badness 10000) in paragraph at lines 273--273
 \OT1/cmr/bx/n/9 acad^^Semi-
  []
 
 
-Underfull \hbox (badness 7379) in paragraph at lines 274--274
+Underfull \hbox (badness 7379) in paragraph at lines 273--273
 []|\OT1/cmr/bx/n/9 Integra es-ce-na-rios, eva-lua-ci^^Son,
  []
 
@@ -710,13 +710,13 @@ Underfull \hbox (badness 7379) in paragraph at lines 274--274
 ] [16]
 Cap\'{\i }tulo 4.
 
-Overfull \hbox (20.77312pt too wide) in paragraph at lines 292--293
+Overfull \hbox (20.77312pt too wide) in paragraph at lines 291--292
 []\OT1/cmr/m/n/10.95 Los re-qui-si-tos se re-dac-ta-ron seg^^Sun la plan-ti-lla
  sint^^Sacti-ca nor-ma-ti-va de ISO/IEC/IEEE 29148:2018: 
  []
 
 
-Overfull \hbox (114.93459pt too wide) in paragraph at lines 297--298
+Overfull \hbox (114.93459pt too wide) in paragraph at lines 296--297
 []\OT1/cmr/bx/n/10.95 RF-04 (Must): \OT1/cmr/m/n/10.95 El sis-te-ma de-ber^^Sa 
 cal-cu-lar el pun-ta-je agre-ga-do del con-duc-tor v^^S^^Pa \OT1/cmtt/m/n/10.95
  sp[]calcular[]promedio[]usuario\OT1/cmr/m/n/10.95 . 
@@ -730,11 +730,11 @@ Cap\'{\i }tulo 5.
 
 ] [20] [21]
 Cap\'{\i }tulo 6.
-<diagramas/flujo-mvc-springboot.png, id=615, 722.7pt x 433.62pt>
+<diagramas/flujo-mvc-springboot.png, id=614, 722.7pt x 433.62pt>
 File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
 <use diagramas/flujo-mvc-springboot.png>
 Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
- 382.
+ 381.
 (pdftex.def)             Requested size: 418.82375pt x 251.29466pt.
 [22
 
@@ -745,28 +745,28 @@ Cap\'{\i }tulo 7.
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 417.
+nput line 416.
  [24
 
 ]
-<capturas/dashboard.png, id=667, 722.7pt x 433.62pt>
+<capturas/dashboard.png, id=666, 722.7pt x 433.62pt>
 File: capturas/dashboard.png Graphic file (type png)
 <use capturas/dashboard.png>
-Package pdftex.def Info: capturas/dashboard.png  used on input line 451.
+Package pdftex.def Info: capturas/dashboard.png  used on input line 450.
 (pdftex.def)             Requested size: 427.93057pt x 256.75989pt.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) [25 <./capturas/dashboard.png>] [26]
 Cap\'{\i }tulo 8.
-<mediciones/perf/k6-boxplot.png, id=686, 578.16pt x 361.35pt>
+<mediciones/perf/k6-boxplot.png, id=685, 578.16pt x 361.35pt>
 File: mediciones/perf/k6-boxplot.png Graphic file (type png)
 <use mediciones/perf/k6-boxplot.png>
-Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 501
+Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 500
 .
 (pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
 
-Underfull \hbox (badness 2469) in paragraph at lines 502--502
+Underfull \hbox (badness 2469) in paragraph at lines 501--501
 []\OT1/cmr/m/n/10.95 Figura 8.1: []Latency dis-tri-bu-tion of ver-sio-ned k6 ru
 ns. Sour-ce: Own ela-bo-ra-tion via
  []
@@ -774,11 +774,11 @@ ns. Sour-ce: Own ela-bo-ra-tion via
 [27
 
 ]
-<mediciones/sus/sus-distribution.png, id=693, 578.16pt x 361.35pt>
+<mediciones/sus/sus-distribution.png, id=692, 578.16pt x 361.35pt>
 File: mediciones/sus/sus-distribution.png Graphic file (type png)
 <use mediciones/sus/sus-distribution.png>
 Package pdftex.def Info: mediciones/sus/sus-distribution.png  used on input lin
-e 515.
+e 514.
 (pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
  [28 <./mediciones/perf/k6-boxplot.png>] [29 <./mediciones/sus/sus-distribution
 .png>]
@@ -810,32 +810,32 @@ Underfull \hbox (badness 1052) in paragraph at lines 8--13
 ] [36]) [37]
 Ap\'{e}ndice A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Reescritura seg^^Sun ISO/IEC/IEEE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Colecci^^Son de 25 pe-ti-cio-nes en
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 640--640
+Underfull \hbox (badness 1968) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Creaci^^Son de tags sem^^Santi-cos v0.7.0 y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Cookies Htt-pOnly, Se-cu-re, Sa-me-Si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 640--640
+Underfull \hbox (badness 10000) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Creaci^^Son de DATA-DICTIONARY y
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 640--640
+Underfull \hbox (badness 1502) in paragraph at lines 639--639
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
@@ -844,12 +844,12 @@ Underfull \hbox (badness 1502) in paragraph at lines 640--640
 ]
 Ap\'{e}ndice B.
 
-Underfull \hbox (badness 10000) in paragraph at lines 699--699
+Underfull \hbox (badness 10000) in paragraph at lines 698--698
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 699--699
+Underfull \hbox (badness 2326) in paragraph at lines 698--698
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
  []
 
@@ -858,17 +858,17 @@ Underfull \hbox (badness 2326) in paragraph at lines 699--699
 ] [40]
 Ap\'{e}ndice C.
 
-Underfull \hbox (badness 5119) in paragraph at lines 794--794
+Underfull \hbox (badness 5119) in paragraph at lines 793--793
 []|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
  []
 
 
-Underfull \hbox (badness 4205) in paragraph at lines 794--794
+Underfull \hbox (badness 4205) in paragraph at lines 793--793
 []|\OT1/cmr/m/n/10.95 Robo de re-no-va-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 794--794
+Underfull \hbox (badness 10000) in paragraph at lines 793--793
 []|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
@@ -919,9 +919,9 @@ o_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/
 Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt
 10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (45 pages, 672742 bytes).
+Output written on informe-final.pdf (45 pages, 672483 bytes).
 PDF statistics:
- 911 PDF objects out of 1000 (max. 8388607)
+ 910 PDF objects out of 1000 (max. 8388607)
  224 named destinations out of 1000 (max. 500000)
  580 words of extra memory for PDF output out of 10000 (max. 10000000)
 
