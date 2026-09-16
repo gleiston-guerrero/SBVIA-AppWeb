@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 19:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 21:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -582,13 +582,6 @@ LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 3.
 LaTeX Info: Redefining \% on input line 3.
-
-Overfull \hbox (82.44136pt too wide) in paragraph at lines 17--17
- [][] [][]\OT1/cmr/m/n/10.95 Latency dis-tri-bu-tion of ver-sio-ned k6 runs. So
-ur-ce: Own ela-bo-ra-tion via \OT1/cmtt/m/n/10.95 scripts/gen-k6-boxplot.py\OT1
-/cmr/m/n/10.95 .[] [][]  
- []
-
 )
 \tf@lof=\write5
 \openout5 = `informe-final.lof'.
@@ -620,25 +613,25 @@ Cap\'{\i }tulo 1.
 
 ] [10] [11]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=488, 1322.9425pt x 742.775pt>
+<diagramas/er-model-en.png, id=494, 5215.485pt x 7554.2225pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 220.
-(pdftex.def)             Requested size: 432.48051pt x 242.81573pt.
-<diagramas/c4-level2-en.png, id=492, 722.7pt x 433.62pt>
+(pdftex.def)             Requested size: 432.48051pt x 626.36635pt.
+<diagramas/c4-level2-en.png, id=499, 722.7pt x 433.62pt>
 File: diagramas/c4-level2-en.png Graphic file (type png)
 <use diagramas/c4-level2-en.png>
 Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 230.
 (pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
 [12
 
-] [13 <./diagramas/er-model-en.png (PNG copy)> <./diagramas/c4-level2-en.png>]
-<diagramas/uml-classes-en.png, id=511, 722.7pt x 433.62pt>
+] [13 <./diagramas/er-model-en.png>]
+<diagramas/uml-classes-en.png, id=517, 722.7pt x 433.62pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 240.
 (pdftex.def)             Requested size: 318.66948pt x 191.20361pt.
- [14 <./diagramas/uml-classes-en.png>]
+ [14 <./diagramas/c4-level2-en.png> <./diagramas/uml-classes-en.png>] [15]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 273--273
@@ -705,9 +698,9 @@ Underfull \hbox (badness 7379) in paragraph at lines 273--273
 []|\OT1/cmr/bx/n/9 Integra es-ce-na-rios, eva-lua-ci^^Son,
  []
 
-[15
+[16
 
-] [16]
+] [17]
 Cap\'{\i }tulo 4.
 
 Overfull \hbox (20.77312pt too wide) in paragraph at lines 291--292
@@ -722,9 +715,9 @@ cal-cu-lar el pun-ta-je agre-ga-do del con-duc-tor v^^S^^Pa \OT1/cmtt/m/n/10.95
  sp[]calcular[]promedio[]usuario\OT1/cmr/m/n/10.95 . 
  []
 
-[17
+[18
 
-] [18]
+] [19]
 Cap\'{\i }tulo 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 349--349
@@ -816,19 +809,19 @@ Underfull \hbox (badness 3942) in paragraph at lines 349--349
 []|\OT1/cmr/m/n/9 Checklists FAIR
  []
 
-[19
+[20
 
-] [20] [21]
+] [21] [22]
 Cap\'{\i }tulo 6.
-<diagramas/flujo-mvc-springboot.png, id=621, 722.7pt x 433.62pt>
+<diagramas/flujo-mvc-springboot.png, id=632, 722.7pt x 433.62pt>
 File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
 <use diagramas/flujo-mvc-springboot.png>
 Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
  407.
 (pdftex.def)             Requested size: 418.82375pt x 251.29466pt.
-[22
+[23
 
-] [23 <./diagramas/flujo-mvc-springboot.png>]
+] [24 <./diagramas/flujo-mvc-springboot.png>]
 Cap\'{\i }tulo 7.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
@@ -836,58 +829,80 @@ File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 442.
- [24
+ [25
 
 ]
-<capturas/dashboard.png, id=672, 722.7pt x 433.62pt>
-File: capturas/dashboard.png Graphic file (type png)
-<use capturas/dashboard.png>
-Package pdftex.def Info: capturas/dashboard.png  used on input line 476.
-(pdftex.def)             Requested size: 427.93057pt x 256.75989pt.
+<diagramas/Pantalla 1 - Inicio de Sesión Registro.png, id=682, 1203.7472pt x 5
+79.66562pt>
+File: diagramas/Pantalla 1 - Inicio de Sesión Registro.png Graphic file (type 
+png)
+<use diagramas/Pantalla 1 - Inicio de Sesión Registro.png>
+Package pdftex.def Info: diagramas/Pantalla 1 - Inicio de Sesión Registro.png 
+ used on input line 476.
+(pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
+<diagramas/Pantalla 2 - Dashboard Principal.png, id=683, 1203.7472pt x 575.1487
+4pt>
+File: diagramas/Pantalla 2 - Dashboard Principal.png Graphic file (type png)
+<use diagramas/Pantalla 2 - Dashboard Principal.png>
+Package pdftex.def Info: diagramas/Pantalla 2 - Dashboard Principal.png  used o
+n input line 483.
+(pdftex.def)             Requested size: 427.93057pt x 204.46445pt.
+<diagramas/Pantalla 3 - Selección de Escenario (Core).png, id=684, 1203.7472pt
+ x 579.66562pt>
+File: diagramas/Pantalla 3 - Selección de Escenario (Core).png Graphic file (t
+ype png)
+<use diagramas/Pantalla 3 - Selección de Escenario (Core).png>
+Package pdftex.def Info: diagramas/Pantalla 3 - Selección de Escenario (Core).
+png  used on input line 490.
+(pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
+<diagramas/Pantalla 4 - Reporte de Retroalimentación.png, id=685, 1203.7472pt 
+x 579.66562pt>
+File: diagramas/Pantalla 4 - Reporte de Retroalimentación.png Graphic file (ty
+pe png)
+<use diagramas/Pantalla 4 - Reporte de Retroalimentación.png>
+Package pdftex.def Info: diagramas/Pantalla 4 - Reporte de Retroalimentación.p
+ng  used on input line 497.
+(pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
-) [25 <./capturas/dashboard.png>] [26]
+) [26 <./diagramas/Pantalla 1 - Inicio de Sesión Registro.png>] [27 <./diagram
+as/Pantalla 2 - Dashboard Principal.png> <./diagramas/Pantalla 3 - Selección d
+e Escenario (Core).png>] [28 <./diagramas/Pantalla 4 - Reporte de Retroalimenta
+ción.png>]
 Cap\'{\i }tulo 8.
-<mediciones/perf/k6-boxplot.png, id=691, 578.16pt x 361.35pt>
-File: mediciones/perf/k6-boxplot.png Graphic file (type png)
-<use mediciones/perf/k6-boxplot.png>
-Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 526
-.
-(pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
-
-Underfull \hbox (badness 2469) in paragraph at lines 527--527
-[]\OT1/cmr/m/n/10.95 Figura 8.1: []Latency dis-tri-bu-tion of ver-sio-ned k6 ru
-ns. Sour-ce: Own ela-bo-ra-tion via
- []
-
-[27
+<diagramas/k6-latencia-comparativa.png, id=711, 462.528pt x 269.92845pt>
+File: diagramas/k6-latencia-comparativa.png Graphic file (type png)
+<use diagramas/k6-latencia-comparativa.png>
+Package pdftex.def Info: diagramas/k6-latencia-comparativa.png  used on input l
+ine 547.
+(pdftex.def)             Requested size: 400.61703pt x 233.81027pt.
+[29
 
 ]
-<mediciones/sus/sus-distribution.png, id=698, 578.16pt x 361.35pt>
-File: mediciones/sus/sus-distribution.png Graphic file (type png)
-<use mediciones/sus/sus-distribution.png>
-Package pdftex.def Info: mediciones/sus/sus-distribution.png  used on input lin
-e 540.
-(pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
- [28 <./mediciones/perf/k6-boxplot.png>] [29 <./mediciones/sus/sus-distribution
-.png>]
+<diagramas/sus-boxplot.png, id=718, 462.528pt x 231.264pt>
+File: diagramas/sus-boxplot.png Graphic file (type png)
+<use diagramas/sus-boxplot.png>
+Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 561.
+(pdftex.def)             Requested size: 437.0374pt x 218.52798pt.
+ [30 <./diagramas/k6-latencia-comparativa.png>] [31 <./diagramas/sus-boxplot.pn
+g>]
 Cap\'{\i }tulo 9.
-[30
-
-]
-Cap\'{\i }tulo 10.
-[31
-
-]
-Cap\'{\i }tulo 11.
 [32
 
 ]
-Cap\'{\i }tulo 12.
+Cap\'{\i }tulo 10.
 [33
 
-] (informe-final.bbl [34
+]
+Cap\'{\i }tulo 11.
+[34
+
+]
+Cap\'{\i }tulo 12.
+[35
+
+] (informe-final.bbl [36
 
 ]
 Underfull \hbox (badness 1052) in paragraph at lines 8--13
@@ -895,80 +910,80 @@ Underfull \hbox (badness 1052) in paragraph at lines 8--13
 . Mart^^S^^Pnez-Ruiz, E. Moreno-Rold^^San,
  []
 
-[35
+[37
 
-] [36]) [37]
+] [38]) [39]
 Ap\'{e}ndice A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Reescritura seg^^Sun ISO/IEC/IEEE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Colecci^^Son de 25 pe-ti-cio-nes en
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 665--665
+Underfull \hbox (badness 1968) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Creaci^^Son de tags sem^^Santi-cos v0.7.0 y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Cookies Htt-pOnly, Se-cu-re, Sa-me-Si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 665--665
+Underfull \hbox (badness 10000) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Creaci^^Son de DATA-DICTIONARY y
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 665--665
+Underfull \hbox (badness 1502) in paragraph at lines 686--686
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
-[38
+[40
 
 ]
 Ap\'{e}ndice B.
 
-Underfull \hbox (badness 10000) in paragraph at lines 724--724
+Underfull \hbox (badness 10000) in paragraph at lines 745--745
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 724--724
+Underfull \hbox (badness 2326) in paragraph at lines 745--745
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
- []
-
-[39
-
-] [40]
-Ap\'{e}ndice C.
-
-Underfull \hbox (badness 5119) in paragraph at lines 819--819
-[]|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
- []
-
-
-Underfull \hbox (badness 4205) in paragraph at lines 819--819
-[]|\OT1/cmr/m/n/10.95 Robo de re-no-va-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 819--819
-[]|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
 [41
 
 ] [42]
-Ap\'{e}ndice D.
+Ap\'{e}ndice C.
+
+Underfull \hbox (badness 5119) in paragraph at lines 840--840
+[]|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
+ []
+
+
+Underfull \hbox (badness 4205) in paragraph at lines 840--840
+[]|\OT1/cmr/m/n/10.95 Robo de re-no-va-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 840--840
+[]|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
+ []
+
 [43
 
-] [44] (informe-final.aux
+] [44]
+Ap\'{e}ndice D.
+[45
+
+] [46] (informe-final.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 13.
@@ -982,13 +997,13 @@ Package rerunfilecheck Info: File `informe-final.out' has not changed.
 (rerunfilecheck)             Checksum: 320099F3DDD59E59F8DE064EA0A38F87;13986.
  ) 
 Here is how much of TeX's memory you used:
- 15072 strings out of 467501
- 232397 string characters out of 5407579
- 975576 words of memory out of 5000000
- 43895 multiletter control sequences out of 15000+600000
+ 15101 strings out of 467501
+ 233939 string characters out of 5407579
+ 977033 words of memory out of 5000000
+ 43919 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,11n,79p,832b,1463s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,79p,832b,2151s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 tt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type
@@ -1011,9 +1026,9 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (45 pages, 698456 bytes).
+Output written on informe-final.pdf (47 pages, 3580160 bytes).
 PDF statistics:
- 924 PDF objects out of 1000 (max. 8388607)
- 225 named destinations out of 1000 (max. 500000)
- 580 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 945 PDF objects out of 1000 (max. 8388607)
+ 230 named destinations out of 1000 (max. 500000)
+ 595 words of extra memory for PDF output out of 10000 (max. 10000000)
 
