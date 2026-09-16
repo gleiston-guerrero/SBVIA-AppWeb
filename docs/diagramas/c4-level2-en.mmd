@@ -1,0 +1,18 @@
+C4Container
+    title Level 2: Containers for SBVIA
+
+    Person(student, "Driver", "Main user")
+    System_Ext(ai_api, "External AI API", "Inference system")
+
+    System_Boundary(sbvia, "SBVIA") {
+        Container(frontend, "Frontend SPA", "Angular 17", "Graphical interface for users.")
+        Container(backend, "Backend API", "Spring Boot 3.2", "Core logic, REST endpoints and local evaluation (Fallback).")
+        ContainerDb(db, "Database", "PostgreSQL 16", "Stores scenarios, users and metrics.")
+        ContainerDb(cache, "Cache", "Redis 7", "Manages JWT blacklist and response times.")
+    }
+
+    Rel(student, frontend, "Visits", "HTTPS")
+    Rel(frontend, backend, "Consumes API", "JSON/HTTPS")
+    Rel(backend, db, "Reads/Writes", "JDBC, JPA and Procedures")
+    Rel(backend, cache, "Queries/Invalidates", "Redis Protocol")
+    Rel(backend, ai_api, "Requests inference (Main)", "JSON/HTTPS")

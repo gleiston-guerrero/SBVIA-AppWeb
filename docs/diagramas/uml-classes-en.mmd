@@ -1,0 +1,151 @@
+classDiagram
+    %% ==========================================
+    %% CORE ENTITIES (Domain Models / JPA)
+    %% ==========================================
+    class User {
+        -Long idUser
+        -String firstNames
+        -String lastNames
+        -String email
+        -String username
+        -String passwordHash
+        -String phone
+        -LocalDate birthDate
+        -LocalDateTime registrationDate
+        -LocalDateTime lastAccess
+        -Integer failedAttempts
+        -Boolean accountLocked
+        +getRole() Role
+        +getStatus() UserStatus
+    }
+
+    class Role {
+        -Integer idRole
+        -String name
+        -String description
+        -Boolean active
+    }
+
+    class TrainingSession {
+        -Long idSession
+        -LocalDateTime startDate
+        -LocalDateTime endDate
+        -String status
+        -String objective
+        +getUser() User
+        +getSimulations() List~Simulation~
+    }
+
+    class Scenario {
+        -Long idScenario
+        -String name
+        -String description
+        -Boolean active
+        +getDifficultyLevel() DifficultyLevel
+        +getWeatherType() WeatherType
+        +getRoadType() RoadType
+    }
+
+    class Vehicle {
+        -Long idVehicle
+        -String name
+        -String brand
+        -String model
+        -Integer year
+        -String transmission
+        -BigDecimal maxSpeedKmh
+        -BigDecimal powerHp
+        -Boolean active
+    }
+
+    class Simulation {
+        -Long idSimulation
+        -Integer attemptNumber
+        -LocalDateTime startDate
+        -LocalDateTime endDate
+        -BigDecimal progressPercentage
+        -BigDecimal finalScore
+        -Integer durationSeconds
+        -Boolean completed
+        +getSession() TrainingSession
+        +getUser() User
+        +getScenario() Scenario
+        +getVehicle() Vehicle
+        +calculateFinalScore() BigDecimal
+    }
+
+    class RoadBehavior {
+        -Long idBehavior
+        -BigDecimal avgAcceleration
+        -BigDecimal maxBraking
+        -Integer sharpTurns
+        -Integer speedExcesses
+        -LocalDateTime recordDate
+        +getSimulation() Simulation
+    }
+
+    class Infraction {
+        -Long idInfraction
+        -LocalDateTime infractionTime
+        -BigDecimal penaltyPoints
+        -String details
+        +getSimulation() Simulation
+        +getTrafficRule() TrafficRule
+        +getSeverityLevel() SeverityLevel
+    }
+
+    %% ==========================================
+    %% SERVICES AND PATTERNS (Business Logic)
+    %% ==========================================
+    class AiFeedbackResponse {
+        -String source
+        -String riskLevel
+        -List~String~ recommendations
+        -BigDecimal calculatedScore
+        +getRecommendations() List~String~
+    }
+
+    class FeedbackProvider {
+        <<interface>>
+        +generate(DrivingData data): AiFeedbackResponse
+        +source(): String
+    }
+
+    class ExternalAiFeedbackService {
+        -RestTemplate restTemplate
+        -String aiApiUrl
+        +generate(DrivingData data): AiFeedbackResponse
+    }
+
+    class LocalFeedbackService {
+        -HeuristicRulesEngine engine
+        +generate(DrivingData data): AiFeedbackResponse
+    }
+
+    class SimulationService {
+        -SimulationRepository simulationRepo
+        -FeedbackProvider externalAi
+        -FeedbackProvider localAi
+        +startSimulation(Long idSession)
+        +evaluateBehavior(DrivingData data)
+        +endSimulation(Long idSimulation)
+    }
+
+    %% ==========================================
+    %% RELATIONS (Associations, Compositions, Implementations)
+    %% ==========================================
+    User "1" --> "*" TrainingSession : starts
+    User "*" --> "1" Role : has
+    TrainingSession "1" *-- "*" Simulation : contains
+    Simulation "*" --> "1" Scenario : takes place in
+    Simulation "*" --> "1" Vehicle : uses
+    Simulation "1" *-- "*" RoadBehavior : generates
+    Simulation "1" *-- "*" Infraction : registers
+    
+    %% Strategy / Fallback Pattern
+    FeedbackProvider <|.. ExternalAiFeedbackService : implements
+    FeedbackProvider <|.. LocalFeedbackService : implements
+    
+    %% Dependencies
+    SimulationService ..> FeedbackProvider : uses for evaluation (Fallback)
+    SimulationService ..> AiFeedbackResponse : returns
