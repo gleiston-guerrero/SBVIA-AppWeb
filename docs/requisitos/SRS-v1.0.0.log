@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 22:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 22:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -339,7 +339,12 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 23.
 dftex.def
 File: l3backend-pdftex.def 2026-07-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count310
-) (SRS-v1.0.0.aux)
+) (SRS-v1.0.0.aux
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
+Package babel Info: 'spanish' activates 'spanish' shorthands.
+(babel)             Reported on input line 11.
+)
 \openout1 = `SRS-v1.0.0.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -362,8 +367,6 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
-Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported on input line 25.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -424,7 +427,10 @@ Package babel Info: Main language set to 'spanish'.
  [1
 
 {C:/Users/Keitho_/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (SRS-v1.0.
-0.toc)
+0.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 \tf@toc=\write4
 \openout4 = `SRS-v1.0.0.toc'.
 
@@ -433,41 +439,51 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.56 \newpage
-              [1] [2] [3] [4]
-Overfull \hbox (2.515pt too wide) in paragraph at lines 191--191
+l.70 \newpage
+              [1]
+Underfull \hbox (badness 10000) in paragraph at lines 98--98
+[]|\OT1/cmr/m/n/10.95 Docente-
+ []
+
+
+Overfull \hbox (12.39145pt too wide) in paragraph at lines 98--98
+[]|\OT1/cmr/m/n/10.95 Representante
+ []
+
+[2] [3] [4]
+Overfull \hbox (2.515pt too wide) in paragraph at lines 205--205
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Si-mu-la-cion-Ser-vi
 -ce-Test.java  \OT1/cmr/bx/n/10.95 SQL: \OT1/cmr/m/n/10.95 db/procs/sp[]calcula
 r[]promedio[]usuario.sql| 
  []
 
 
-Overfull \hbox (1.42pt too wide) in paragraph at lines 205--205
+Overfull \hbox (1.42pt too wide) in paragraph at lines 219--219
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Auth-Con-tro-ller-Te
 st.java  \OT1/cmr/bx/n/10.95 SQL: \OT1/cmr/m/n/10.95 db/procs/sp[]actualizar[]u
 suarios[]inactivos.sql| 
  []
 
 [5]
-Overfull \hbox (1.54166pt too wide) in paragraph at lines 219--219
+Overfull \hbox (1.54166pt too wide) in paragraph at lines 233--233
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Si-mu-la-cion-Ser-vi
 -ce-Test.java  \OT1/cmr/bx/n/10.95 SQL: \OT1/cmr/m/n/10.95 db/procs/sp[]generar
 []codigo[]certificado.sql| 
  []
 
 [6] [7] [8] [9] [10]
-Overfull \hbox (114.48631pt too wide) in paragraph at lines 351--352
+Overfull \hbox (114.48631pt too wide) in paragraph at lines 365--366
 []\OT1/cmr/m/n/10.95 Cada re-qui-si-to se vin-cu-la con m^^Sodu-lo, prue-ba, ti
 -po de ac-ce-so a da-tos y evi-den-cia en \OT1/cmtt/m/n/10.95 docs/trazabilidad
 /matriz.csv\OT1/cmr/m/n/10.95 .
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 386--386
+Underfull \hbox (badness 10000) in paragraph at lines 400--400
 []|\OT1/cmr/m/n/10.95 docs/mediciones/sus/sus-
  []
 
-[12] [13] (SRS-v1.0.0.aux
+[12] [13] [14] [15] (SRS-v1.0.0.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -475,24 +491,17 @@ LaTeX Info: Redefining \% on input line 11.
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-07-20>
  ***********
-
-
-Package rerunfilecheck Warning: File `SRS-v1.0.0.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `SRS-v1.0.0.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  EDAAFDB06938A6D5AFFA12C4924FC5BB;3813.
+Package rerunfilecheck Info: File `SRS-v1.0.0.out' has not changed.
+(rerunfilecheck)             Checksum: EDAAFDB06938A6D5AFFA12C4924FC5BB;3813.
  ) 
 Here is how much of TeX's memory you used:
- 11509 strings out of 467501
- 182623 string characters out of 5407579
- 650315 words of memory out of 5000000
- 40608 multiletter control sequences out of 15000+600000
- 634050 words of font info for 61 fonts, out of 8000000 for 9000
+ 11546 strings out of 467501
+ 183167 string characters out of 5407579
+ 650335 words of memory out of 5000000
+ 40643 multiletter control sequences out of 15000+600000
+ 634656 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,11n,79p,329b,500s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,12n,79p,501b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/t
@@ -501,9 +510,9 @@ eX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Keitho_/AppData/Local/Pro
 grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Keitho_/AppDat
 a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Kei
 tho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on SRS-v1.0.0.pdf (14 pages, 146562 bytes).
+Output written on SRS-v1.0.0.pdf (16 pages, 179232 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 39 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 254 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
+ 217 words of extra memory for PDF output out of 10000 (max. 10000000)
 
