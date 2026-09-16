@@ -4,21 +4,21 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Modelo Entidad-Relación de la aplicación SBVIA. Fuente: Elaboración propia.}}{13}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}}{14}{figure.2.2}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagrama C4 de Contenedores. Fuente: Elaboración propia.}}{14}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de Clases UML para los componentes principales. Fuente: Elaboración propia.}}{14}{figure.2.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}}{24}{figure.6.1}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}}{23}{figure.6.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Pantalla de inicio de sesión y registro de usuarios en el sistema.}}{26}{figure.7.1}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Dashboard principal con acceso a escenarios, prácticas e historial.}}{27}{figure.7.2}%
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Pantalla core para la selección y configuración de escenarios de conducción.}}{27}{figure.7.3}%
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}}{28}{figure.7.4}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Pantalla de inicio de sesión y registro de usuarios en el sistema.}}{25}{figure.7.1}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Dashboard principal con acceso a escenarios, prácticas e historial.}}{26}{figure.7.2}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Pantalla core para la selección y configuración de escenarios de conducción.}}{26}{figure.7.3}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}}{27}{figure.7.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribución de latencia comparativa de las ejecuciones de k6. Fuente: Elaboración propia.}}{30}{figure.8.1}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia.}}{31}{figure.8.2}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribución de latencia comparativa de las ejecuciones de k6. Fuente: Elaboración propia.}}{29}{figure.8.1}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia.}}{30}{figure.8.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
