@@ -1,8 +1,7 @@
 # Formulario de Consentimiento Informado
 
 **Proyecto:** Simulador de Comportamiento Vial con IA (SBVIA)
-**Investigadores:** Cruz Pérez Justyn K., Umaginga Arévalo Jefferson M., Zamora Bumbila Diego A.
-
+**Investigadores:** Cruz Pérez Justyn K., Umaginga Arévalo Jefferson M.
 Estimado/a participante:
 
 Le invitamos a formar parte de las pruebas de evaluación de usabilidad (System Usability Scale - SUS) para el proyecto SBVIA.

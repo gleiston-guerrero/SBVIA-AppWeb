@@ -1,7 +1,6 @@
 # Informe Técnico Final (SBVIA)
 **Grupo: SBVIA (Simulador de Comportamiento Vial con IA)**
-**Integrantes:** Cruz Pérez Justyn K. | Umaginga Arévalo Jefferson M. | Zamora Bumbila Diego A.
-
+**Integrantes:** Cruz Pérez Justyn K. | Umaginga Arévalo Jefferson M.
 Este informe consolida la evidencia de la implementación del simulador SBVIA y sirve como índice para la navegación de los evaluadores, garantizando que se cumplan al 100% los requisitos de la rúbrica de evaluación.
 
 ## Resumen Ejecutivo
@@ -10,7 +9,7 @@ El sistema SBVIA ha sido diseñado como una aplicación distribuida (Angular 17,
 ## Bloque A: Calidad y Madurez
 * **A.1 Documentación OpenAPI:** Disponible en Swagger UI (vía `http://localhost:8080/v3/api-docs`). Se anotaron todos los endpoints en los controladores (`AuthController`, `EscenarioController`, etc.) con respuestas exhaustivas (ver commits `docs(api)`).
 * **A.2 Seguridad:** Implementada autenticación JWT sin estado, mitigando vulnerabilidades con `HttpOnly` cookies. Los CORS se han restringido a `localhost:4200`. Se ha manejado excepciones con `ProblemDetails (RFC 7807)`. (ver commits `feat(security)`).
-* **A.3 Arquitectura:** Diagramas C4 (Context, Container, Component) en Mermaid (`docs/arquitectura/diagramas-c4.md`) y DSL. Registros de decisión en `docs/adr` (ADR-001 a ADR-006).
+* **A.3 Arquitectura:** Diagramas C4 (Context, Container, Component) en Mermaid (`docs/arquitectura/diagramas-c4.md`) y DSL. Registros de decisión en `docs/adr` (ADR-001 a ADR-006). Se implementó el patrón *Fallback* para la evaluación mediante IA (Externa + Local).
 
 ## Bloque B: Reproducibilidad
 * **B.1 Makefile:** `Makefile` ubicado en la raíz del proyecto para simplificar `up`, `down`, `test` y `bench`.

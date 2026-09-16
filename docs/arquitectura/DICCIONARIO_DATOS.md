@@ -31,6 +31,21 @@ Registra la ejecución de un escenario por parte de un usuario.
 - `id_Usuario` (FK, Integer): Usuario que conduce.
 - `id_Escenario` (FK, Integer): Entorno cargado.
 
+## Tabla: Decision (IA)
+Registra el veredicto en tiempo real devuelto por la IA externa o el motor heurístico local.
+- `id_Decision` (PK, Integer): Identificador único.
+- `origen` (Varchar): IA_EXTERNA, IA_LOCAL.
+- `nivel_riesgo` (Varchar): BAJO, MEDIO, ALTO.
+- `recomendacion` (Varchar): Retroalimentación de texto generada.
+- `id_Simulacion` (FK, Integer): Simulación a la que pertenece.
+
+## Tabla: ComportamientoVial
+Almacena métricas y eventos granulares de la telemetría del conductor.
+- `id_Comportamiento` (PK, Integer): Identificador.
+- `aceleracion_promedio` (Decimal): Medición física.
+- `frenados_bruscos` (Integer): Conteo de frenados fuera del umbral.
+- `id_Simulacion` (FK, Integer): Simulación asociada.
+
 ## Tabla: Infraccion
 Eventos negativos detectados por la IA o las reglas del motor.
 - `id_Infraccion` (PK, Integer): Identificador.
@@ -39,4 +54,4 @@ Eventos negativos detectados por la IA o las reglas del motor.
 - `penalizacion` (Decimal): Puntos a descontar.
 - `id_Simulacion` (FK, Integer): Simulación donde ocurrió.
 
-*(Nota: Para el detalle de todas las entidades menores como `Decision`, `EventoVial`, `Rol`, revisar `docs/arquitectura/diagramas-c4.md` o el DDL directo en la carpeta `db/migration`)*
+*(Nota: Para el detalle de todas las demás entidades menores como `EventoVial`, `Rol`, `ProgresoSimulacion`, revisar `docs/arquitectura/diagramas-c4.md` o el DDL directo en la carpeta `db/migration`)*

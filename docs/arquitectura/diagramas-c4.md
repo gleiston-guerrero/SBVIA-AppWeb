@@ -31,7 +31,7 @@ C4Container
 
     System_Boundary(sbvia, "SBVIA") {
         Container(frontend, "Frontend SPA", "Angular 17", "Interfaz gráfica para usuarios.")
-        Container(backend, "Backend API", "Spring Boot 3.2", "Lógica central y endpoints REST.")
+        Container(backend, "Backend API", "Spring Boot 3.2", "Lógica central, endpoints REST y evaluación local (Fallback).")
         ContainerDb(db, "Base de Datos", "PostgreSQL 16", "Almacena escenarios, usuarios y métricas.")
         ContainerDb(cache, "Caché", "Redis 7", "Gestiona la blacklist JWT y tiempos de respuesta.")
     }
@@ -40,7 +40,7 @@ C4Container
     Rel(frontend, backend, "Consume API", "JSON/HTTPS")
     Rel(backend, db, "Lee/Escribe", "JDBC, JPA y Procedures")
     Rel(backend, cache, "Consulta/Invalida", "Redis Protocol")
-    Rel(backend, ai_api, "Solicita inferencia", "JSON/HTTPS")
+    Rel(backend, ai_api, "Solicita inferencia (Principal)", "JSON/HTTPS")
 ```
 
 ## Nivel 3: Componentes (Components - Backend)
@@ -56,23 +56,30 @@ C4Component
         Component(simCtrl, "Simulación Controller", "REST", "API de simulación")
         
         Component(jwtSvc, "JWT Service", "Service", "Genera y valida firmas")
-        Component(simSvc, "Simulación Service", "Service", "Lógica de negocio de simulación")
+        Component(simSvc, "Simulación Service", "Service", "Gestión de estado de simulación")
+        
+        Component(iaExternaSvc, "Retroalimentación IA Externa", "Service", "Consulta API de IA")
+        Component(iaLocalSvc, "Retroalimentación Local", "Service", "Fallback local basado en reglas heurísticas")
         
         Component(jpaRepo, "JPA Repositories", "Spring Data", "CRUD elemental")
         Component(procRepo, "Stored Procedure Invoker", "Spring Data @Procedure", "Consultas y transacciones complejas")
     }
     
     ContainerDb(db, "PostgreSQL", "Relacional", "DB")
+    System_Ext(ai_api, "API de IA Externa", "Sistema de inferencia")
     
     Rel(frontend, authFilter, "Request")
     Rel(authFilter, authCtrl, "Ruta")
     Rel(authFilter, simCtrl, "Ruta")
     
     Rel(authCtrl, jwtSvc, "Usa")
-    Rel(simCtrl, simSvc, "Delega lógica")
+    Rel(simCtrl, simSvc, "Inicia/Finaliza")
+    Rel(simCtrl, iaExternaSvc, "Evalúa acciones")
+    Rel(iaExternaSvc, ai_api, "Envía telemetría", "HTTPS")
+    Rel(simCtrl, iaLocalSvc, "Fallback si falla IA Externa")
     
     Rel(simSvc, jpaRepo, "Guarda entidades")
-    Rel(simSvc, procRepo, "Llama SP")
+    Rel(iaLocalSvc, procRepo, "Llama SP (opcional)")
     
     Rel(jpaRepo, db, "CRUD")
     Rel(procRepo, db, "EXECUTE")
