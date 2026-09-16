@@ -230,12 +230,12 @@ class AuthControllerTest {
     @Test
     @DisplayName("Acceso sin token retorna Problem Details 401")
     void accesoSinToken() throws Exception {
-        mockMvc.perform(get("/api/usuarios/me"))
+        mockMvc.perform(get("/api/users/me"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.title").value("No autenticado"))
                 .andExpect(jsonPath("$.status").value(401))
                 .andExpect(jsonPath("$.detail").exists())
-                .andExpect(jsonPath("$.instance").value("/api/usuarios/me"));
+                .andExpect(jsonPath("$.instance").value("/api/users/me"));
     }
 
     @Test
@@ -253,7 +253,7 @@ class AuthControllerTest {
         String response = result.getResponse().getContentAsString();
         String token = objectMapper.readTree(response).get("accessToken").asText();
 
-        mockMvc.perform(get("/api/usuarios/me")
+        mockMvc.perform(get("/api/users/me")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("test@example.com"));
@@ -273,11 +273,11 @@ class AuthControllerTest {
         String token = objectMapper.readTree(login.getResponse().getContentAsString())
                 .get("accessToken").asText();
 
-        mockMvc.perform(get("/api/usuarios")
+        mockMvc.perform(get("/api/users")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.title").value("Forbidden"))
                 .andExpect(jsonPath("$.status").value(403))
-                .andExpect(jsonPath("$.instance").value("/api/usuarios"));
+                .andExpect(jsonPath("$.instance").value("/api/users"));
     }
 }
