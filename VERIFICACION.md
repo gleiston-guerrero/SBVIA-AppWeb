@@ -73,3 +73,34 @@ all: verify build up pdf
 verify: backend-verify frontend-build
 ```
 - **Ruta del archivo que la respalda:** `Makefile`
+
+### EV-2 — make verify completo (backend + frontend)
+- **Orden exacta:** `make verify`
+- **Salida:**
+```
+docker run --rm -v "E:/SBVIA-AppWeb/backend:/app" -w /app maven:3.9.11-eclipse-temurin-21-alpine mvn -B clean verify
+... (descarga de dependencias de Maven omitida) ...
+[INFO] Done SpotBugs Analysis....
+[INFO] <<< spotbugs:4.8.6.6:check (security-analysis) < :spotbugs @ sbvia-backend <<<
+[INFO] --- spotbugs:4.8.6.6:check (security-analysis) @ sbvia-backend ---
+[INFO] BugInstance size is 0
+[INFO] Error size is 0
+[INFO] No errors/warnings found
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  05:59 min
+[INFO] Finished at: 2026-09-16T06:08:52Z
+[INFO] ------------------------------------------------------------------------
+docker run --rm -v "E:/SBVIA-AppWeb/frontend:/app" -w /app node:20-alpine sh -c "npm ci && npm run build -- --configuration production"
+... (descarga de dependencias de NPM omitida) ...
+added 887 packages, and audited 888 packages in 5m
+...
+> frontend@0.0.0 build
+> ng build --configuration production
+- Building...
+... (generación de chunks omitida) ...
+Output location: /app/dist/frontend
+Application bundle generation complete. [30.212 seconds]
+```
+- **Ruta del archivo que la respalda:** `Makefile` (Ejecución real con código de salida `0`)
