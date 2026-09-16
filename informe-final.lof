@@ -1,0 +1,26 @@
+\babel@toc {spanish}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {spanish}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Entity-Relationship model of the core SBVIA application. Source: Own elaboration.}}{12}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces C4 Level 2 Container Diagram for SBVIA. Source: Own elaboration.}}{13}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces UML Class Diagram for core components. Source: Own elaboration.}}{14}{figure.2.3}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}}{23}{figure.6.1}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces SBVIA main dashboard with access to scenarios, practices, and profile. Source: Own capture of the running system.}}{27}{figure.7.1}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Latency distribution of versioned k6 runs. Source: Own elaboration via \texttt {scripts/gen-k6-boxplot.py}.}}{29}{figure.8.1}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia mediante \texttt {scripts/sus-analysis.ipynb}.}}{30}{figure.8.2}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 19:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  15 SEP 2026 18:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./informe-final.tex
-(informe-final.tex
+**./docs/informe-final.tex
+(docs/informe-final.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-07-20>
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
@@ -437,19 +437,8 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 dftex.def
 File: l3backend-pdftex.def 2026-07-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count328
-) (informe-final.aux
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
-Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported on input line 11.
-
-(C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\bab
-el-english.tex)
-Package babel Info: Importing data for 'english'
-(babel)             from babel-en.ini. Reported on input line 12.
-LaTeX Info: Redefining \. on input line 13.
-LaTeX Info: Redefining \% on input line 13.
 )
+No file informe-final.aux.
 \openout1 = `informe-final.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -472,6 +461,8 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
 LaTeX Info: Redefining \. on input line 43.
 LaTeX Info: Redefining \% on input line 43.
+Package babel Info: 'spanish' activates 'spanish' shorthands.
+(babel)             Reported on input line 43.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
 mkii
@@ -499,7 +490,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring OFF on input line 43.
- (informe-final.out) (informe-final.out)
 \@outlinefile=\write3
 \openout3 = `informe-final.out'.
 
@@ -554,6 +544,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {C:/Users/Keitho_/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\bab
+el-english.tex)
+Package babel Info: Importing data for 'english'
+(babel)             from babel-en.ini. Reported on input line 95.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
@@ -566,80 +561,210 @@ LaTeX Info: Redefining \. on input line 103.
 LaTeX Info: Redefining \% on input line 103.
  [2
 
-] (informe-final.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-LaTeX Info: Redefining \. on input line 3.
-LaTeX Info: Redefining \% on input line 3.
- [3
-
-])
+]
+No file informe-final.toc.
 \tf@toc=\write4
 \openout4 = `informe-final.toc'.
 
- [4] (informe-final.lof
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-LaTeX Info: Redefining \. on input line 3.
-LaTeX Info: Redefining \% on input line 3.
+[3
 
-Overfull \hbox (82.44136pt too wide) in paragraph at lines 17--17
- [][] [][]\OT1/cmr/m/n/10.95 Latency dis-tri-bu-tion of ver-sio-ned k6 runs. So
-ur-ce: Own ela-bo-ra-tion via \OT1/cmtt/m/n/10.95 scripts/gen-k6-boxplot.py\OT1
-/cmr/m/n/10.95 .[] [][]  
- []
-
-)
+]
+No file informe-final.lof.
 \tf@lof=\write5
 \openout5 = `informe-final.lof'.
 
- [5
+[4
 
-] (informe-final.lot
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-LaTeX Info: Redefining \. on input line 3.
-LaTeX Info: Redefining \% on input line 3.
-)
+]
+No file informe-final.lot.
 \tf@lot=\write6
 \openout6 = `informe-final.lot'.
 
- [6
+[5
 
-] (informe-final.lol)
+]
+No file informe-final.lol.
 \tf@lol=\write7
 \openout7 = `informe-final.lol'.
 
- [7
+[6
 
-] [8
+] [7
 
 ]
 Cap\'{\i }tulo 1.
-[9
 
-] [10] [11]
+LaTeX Warning: Citation `who2023roadsafety' on page 8 undefined on input line 1
+45.
+
+
+LaTeX Warning: Citation `martin2019simulator' on page 8 undefined on input line
+ 147.
+
+
+LaTeX Warning: Citation `alonso2023simulators' on page 8 undefined on input lin
+e 147.
+
+
+LaTeX Warning: Citation `krasniuk2024simulator' on page 8 undefined on input li
+ne 147.
+
+
+LaTeX Warning: Citation `iso25010' on page 8 undefined on input line 158.
+
+[8
+
+]
+
+LaTeX Warning: Citation `rfc7519' on page 9 undefined on input line 163.
+
+
+LaTeX Warning: Citation `owasp2021' on page 9 undefined on input line 165.
+
+
+LaTeX Warning: Citation `fowler2002patterns' on page 9 undefined on input line 
+168.
+
+
+LaTeX Warning: Citation `kleppmann2017designing' on page 9 undefined on input l
+ine 168.
+
+
+LaTeX Warning: Citation `peng2011reproducible' on page 9 undefined on input lin
+e 173.
+
+
+LaTeX Warning: Citation `sandve2013ten' on page 9 undefined on input line 173.
+
+
+LaTeX Warning: Citation `wilkinson2016fair' on page 9 undefined on input line 1
+75.
+
+[9] [10]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=488, 1322.9425pt x 742.775pt>
-File: diagramas/er-model-en.png Graphic file (type png)
-<use diagramas/er-model-en.png>
-Package pdftex.def Info: diagramas/er-model-en.png  used on input line 220.
-(pdftex.def)             Requested size: 432.48051pt x 242.81573pt.
-<diagramas/c4-level2-en.png, id=492, 722.7pt x 433.62pt>
-File: diagramas/c4-level2-en.png Graphic file (type png)
-<use diagramas/c4-level2-en.png>
-Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 230.
-(pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
-[12
 
-] [13 <./diagramas/er-model-en.png (PNG copy)> <./diagramas/c4-level2-en.png>]
-<diagramas/uml-classes-en.png, id=511, 722.7pt x 433.62pt>
-File: diagramas/uml-classes-en.png Graphic file (type png)
-<use diagramas/uml-classes-en.png>
-Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 240.
-(pdftex.def)             Requested size: 318.66948pt x 191.20361pt.
- [14 <./diagramas/uml-classes-en.png>]
+LaTeX Warning: Citation `pohl2010requirements' on page 11 undefined on input li
+ne 206.
+
+
+LaTeX Warning: Citation `iso29148' on page 11 undefined on input line 206.
+
+
+LaTeX Warning: Citation `incose2023' on page 11 undefined on input line 206.
+
+
+LaTeX Warning: Citation `brown2023c4' on page 11 undefined on input line 207.
+
+
+LaTeX Warning: Citation `iso25010' on page 11 undefined on input line 207.
+
+
+LaTeX Warning: Citation `rfc7519' on page 11 undefined on input line 208.
+
+
+LaTeX Warning: Citation `owasp2021' on page 11 undefined on input line 208.
+
+
+LaTeX Warning: Citation `fowler2002patterns' on page 11 undefined on input line
+ 209.
+
+
+LaTeX Warning: Citation `kleppmann2017designing' on page 11 undefined on input 
+line 209.
+
+
+LaTeX Warning: Citation `treiber2013traffic' on page 11 undefined on input line
+ 213.
+
+
+LaTeX Warning: Reference `fig:er-model' on page 11 undefined on input line 216.
+
+
+
+LaTeX Warning: File `diagramas/er-model-en.png' not found on input line 220.
+
+
+! Package pdftex.def Error: File `diagramas/er-model-en.png' not found: using d
+raft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.220 ....95\textwidth]{diagramas/er-model-en.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Citation `brown2020software' on page 11 undefined on input line 
+226.
+
+
+LaTeX Warning: Citation `fowler2002patterns' on page 11 undefined on input line
+ 226.
+
+
+LaTeX Warning: Reference `fig:c4-level2' on page 11 undefined on input line 226
+.
+
+
+LaTeX Warning: File `diagramas/c4-level2-en.png' not found on input line 230.
+
+
+! Package pdftex.def Error: File `diagramas/c4-level2-en.png' not found: using 
+draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.230 ...95\textwidth]{diagramas/c4-level2-en.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Reference `fig:uml-classes' on page 11 undefined on input line 2
+36.
+
+
+LaTeX Warning: File `diagramas/uml-classes-en.png' not found on input line 240.
+
+
+
+! Package pdftex.def Error: File `diagramas/uml-classes-en.png' not found: usin
+g draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.240 ...\textwidth]{diagramas/uml-classes-en.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Citation `brooke1996sus' on page 11 undefined on input line 246.
+
+
+[11
+
+] [12] [13] [14]
 Cap\'{\i }tulo 3.
+
+LaTeX Warning: Citation `kitchenham2007guidelines' on page 15 undefined on inpu
+t line 252.
+
+
+LaTeX Warning: Citation `page2021prisma' on page 15 undefined on input line 252
+.
+
+
+LaTeX Warning: Citation `martin2019simulator' on page 15 undefined on input lin
+e 273.
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Mart^^S^^Pn-delosReyes
@@ -651,9 +776,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 273--273
  []
 
 
+LaTeX Warning: Citation `wynne2019validation' on page 15 undefined on input lin
+e 273.
+
+
+LaTeX Warning: Citation `alonso2023simulators' on page 15 undefined on input li
+ne 273.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Revisi^^Son sis-
  []
+
+
+LaTeX Warning: Citation `krasniuk2024simulator' on page 15 undefined on input l
+ine 273.
 
 
 Underfull \hbox (badness 1565) in paragraph at lines 273--273
@@ -666,6 +803,14 @@ Underfull \hbox (badness 2245) in paragraph at lines 273--273
  []
 
 
+LaTeX Warning: Citation `vanleeuwen2015changes' on page 15 undefined on input l
+ine 273.
+
+
+LaTeX Warning: Citation `rosenbloom2014workshops' on page 15 undefined on input
+ line 273.
+
+
 Underfull \hbox (badness 1533) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Rosenbloom y El-
  []
@@ -676,9 +821,17 @@ Underfull \hbox (badness 3199) in paragraph at lines 273--273
  []
 
 
+LaTeX Warning: Citation `mayhew2011validation' on page 15 undefined on input li
+ne 273.
+
+
 Underfull \hbox (badness 6204) in paragraph at lines 273--273
 []|\OT1/cmr/m/n/9 Validaci^^Son con-
  []
+
+
+LaTeX Warning: Citation `hulme2021blueprint' on page 15 undefined on input line
+ 273.
 
 
 Underfull \hbox (badness 6412) in paragraph at lines 273--273
@@ -710,6 +863,20 @@ Underfull \hbox (badness 7379) in paragraph at lines 273--273
 ] [16]
 Cap\'{\i }tulo 4.
 
+LaTeX Warning: Citation `iso29148' on page 17 undefined on input line 288.
+
+
+LaTeX Warning: Citation `wiegers2013software' on page 17 undefined on input lin
+e 288.
+
+
+LaTeX Warning: Citation `cohn2004user' on page 17 undefined on input line 288.
+
+
+LaTeX Warning: Citation `cockburn2001writing' on page 17 undefined on input lin
+e 288.
+
+
 Overfull \hbox (20.77312pt too wide) in paragraph at lines 291--292
 []\OT1/cmr/m/n/10.95 Los re-qui-si-tos se re-dac-ta-ron seg^^Sun la plan-ti-lla
  sint^^Sacti-ca nor-ma-ti-va de ISO/IEC/IEEE 29148:2018: 
@@ -726,6 +893,29 @@ cal-cu-lar el pun-ta-je agre-ga-do del con-duc-tor v^^S^^Pa \OT1/cmtt/m/n/10.95
 
 ] [18]
 Cap\'{\i }tulo 5.
+
+LaTeX Warning: Citation `peffers2007design' on page 19 undefined on input line 
+323.
+
+
+LaTeX Warning: Citation `hevner2004design' on page 19 undefined on input line 3
+23.
+
+
+LaTeX Warning: Citation `basili1994gqm' on page 19 undefined on input line 326.
+
+
+
+LaTeX Warning: Reference `tab:gqm' on page 19 undefined on input line 326.
+
+
+LaTeX Warning: Citation `wohlin2012experimentation' on page 19 undefined on inp
+ut line 326.
+
+
+LaTeX Warning: Citation `baltes2022sampling' on page 19 undefined on input line
+ 326.
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 349--349
 []|\OT1/cmr/bx/n/9 G1. Ren-di-mien-to:
@@ -818,86 +1008,204 @@ Underfull \hbox (badness 3942) in paragraph at lines 349--349
 
 [19
 
-] [20] [21]
+]
+
+LaTeX Warning: Citation `brooke1996sus' on page 20 undefined on input line 355.
+
+
+
+LaTeX Warning: Citation `baltes2022sampling' on page 20 undefined on input line
+ 364.
+
+
+LaTeX Warning: Citation `arcuri2012hitchhiker' on page 20 undefined on input li
+ne 369.
+
+
+LaTeX Warning: Citation `vargha2000critique' on page 20 undefined on input line
+ 369.
+
+
+LaTeX Warning: Citation `cliff1993dominance' on page 20 undefined on input line
+ 369.
+
+[20]
+
+LaTeX Warning: Citation `sandve2013ten' on page 21 undefined on input line 388.
+
+
+
+LaTeX Warning: Citation `ralph2021empirical' on page 21 undefined on input line
+ 388.
+
+[21]
 Cap\'{\i }tulo 6.
-<diagramas/flujo-mvc-springboot.png, id=621, 722.7pt x 433.62pt>
-File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
-<use diagramas/flujo-mvc-springboot.png>
-Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
- 407.
-(pdftex.def)             Requested size: 418.82375pt x 251.29466pt.
+
+LaTeX Warning: Citation `fielding2000architectural' on page 22 undefined on inp
+ut line 399.
+
+
+LaTeX Warning: Citation `walls2022spring' on page 22 undefined on input line 39
+9.
+
+
+LaTeX Warning: Reference `fig:flujo-mvc' on page 22 undefined on input line 403
+.
+
+
+LaTeX Warning: File `diagramas/flujo-mvc-springboot.png' not found on input lin
+e 407.
+
+
+! Package pdftex.def Error: File `diagramas/flujo-mvc-springboot.png' not found
+: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.407 ...idth]{diagramas/flujo-mvc-springboot.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Citation `bass2021software' on page 22 undefined on input line 4
+13.
+
+
+LaTeX Warning: Citation `richards2020fundamentals' on page 22 undefined on inpu
+t line 413.
+
 [22
 
-] [23 <./diagramas/flujo-mvc-springboot.png>]
+] [23] [24]
 Cap\'{\i }tulo 7.
+
+LaTeX Warning: Citation `owasp2021' on page 25 undefined on input line 436.
+
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 442.
- [24
+ [25
 
 ]
-<capturas/dashboard.png, id=672, 722.7pt x 433.62pt>
-File: capturas/dashboard.png Graphic file (type png)
-<use capturas/dashboard.png>
-Package pdftex.def Info: capturas/dashboard.png  used on input line 476.
-(pdftex.def)             Requested size: 427.93057pt x 256.75989pt.
+
+LaTeX Warning: Reference `fig:dashboard' on page 26 undefined on input line 472
+.
+
+
+LaTeX Warning: File `capturas/dashboard.png' not found on input line 476.
+
+
+! Package pdftex.def Error: File `capturas/dashboard.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.476 ...h=0.94\textwidth]{capturas/dashboard.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
-) [25 <./capturas/dashboard.png>] [26]
+) [26] [27]
 Cap\'{\i }tulo 8.
-<mediciones/perf/k6-boxplot.png, id=691, 578.16pt x 361.35pt>
-File: mediciones/perf/k6-boxplot.png Graphic file (type png)
-<use mediciones/perf/k6-boxplot.png>
-Package pdftex.def Info: mediciones/perf/k6-boxplot.png  used on input line 526
-.
-(pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
+
+LaTeX Warning: Reference `fig:k6-boxplot' on page 28 undefined on input line 52
+2.
+
+
+LaTeX Warning: File `mediciones/perf/k6-boxplot.png' not found on input line 52
+6.
+
+
+! Package pdftex.def Error: File `mediciones/perf/k6-boxplot.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.526 ...extwidth]{mediciones/perf/k6-boxplot.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 
 Underfull \hbox (badness 2469) in paragraph at lines 527--527
 []\OT1/cmr/m/n/10.95 Figura 8.1: []Latency dis-tri-bu-tion of ver-sio-ned k6 ru
 ns. Sour-ce: Own ela-bo-ra-tion via
  []
 
-[27
 
-]
-<mediciones/sus/sus-distribution.png, id=698, 578.16pt x 361.35pt>
-File: mediciones/sus/sus-distribution.png Graphic file (type png)
-<use mediciones/sus/sus-distribution.png>
-Package pdftex.def Info: mediciones/sus/sus-distribution.png  used on input lin
-e 540.
-(pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
- [28 <./mediciones/perf/k6-boxplot.png>] [29 <./mediciones/sus/sus-distribution
-.png>]
+LaTeX Warning: Citation `brooke1996sus' on page 28 undefined on input line 534.
+
+
+
+LaTeX Warning: Reference `fig:sus-distribution' on page 28 undefined on input l
+ine 536.
+
+[28
+
+] [29]
+
+LaTeX Warning: File `mediciones/sus/sus-distribution.png' not found on input li
+ne 540.
+
+
+! Package pdftex.def Error: File `mediciones/sus/sus-distribution.png' not foun
+d: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.540 ...dth]{mediciones/sus/sus-distribution.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[30] [31]
 Cap\'{\i }tulo 9.
-[30
-
-]
-Cap\'{\i }tulo 10.
-[31
-
-]
-Cap\'{\i }tulo 11.
 [32
 
 ]
-Cap\'{\i }tulo 12.
+Cap\'{\i }tulo 10.
+
+LaTeX Warning: Citation `runeson2009guidelines' on page 33 undefined on input l
+ine 583.
+
 [33
 
-] (informe-final.bbl [34
+]
+Cap\'{\i }tulo 11.
+[34
 
 ]
-Underfull \hbox (badness 1052) in paragraph at lines 8--13
-[]\OT1/cmr/m/n/10.95 L. M. Mart^^S^^Pn-delosReyes, E. Jim^^Senez-Mej^^S^^Pas, V
-. Mart^^S^^Pnez-Ruiz, E. Moreno-Rold^^San,
- []
-
+Cap\'{\i }tulo 12.
 [35
 
-] [36]) [37]
+]
+
+LaTeX Warning: Citation `smith2016software' on page 36 undefined on input line 
+611.
+
+
+LaTeX Warning: Citation `niso2022credit' on page 36 undefined on input line 619
+.
+
+No file informe-final.bbl.
+[36
+
+]
 Ap\'{e}ndice A.
 
 Underfull \hbox (badness 10000) in paragraph at lines 665--665
@@ -929,10 +1237,22 @@ Underfull \hbox (badness 1502) in paragraph at lines 665--665
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
-[38
+[37
 
 ]
 Ap\'{e}ndice B.
+
+LaTeX Warning: Citation `peng2011reproducible' on page 38 undefined on input li
+ne 675.
+
+
+LaTeX Warning: Citation `sandve2013ten' on page 38 undefined on input line 675.
+
+
+
+LaTeX Warning: Citation `kleppmann2017designing' on page 38 undefined on input 
+line 709.
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 724--724
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
@@ -943,10 +1263,21 @@ Underfull \hbox (badness 2326) in paragraph at lines 724--724
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
  []
 
-[39
+[38
 
-] [40]
+]
+
+LaTeX Warning: Citation `fielding2000architectural' on page 39 undefined on inp
+ut line 741.
+
+[39]
 Ap\'{e}ndice C.
+
+LaTeX Warning: Citation `owasp2021' on page 40 undefined on input line 770.
+
+
+LaTeX Warning: Citation `rfc7519' on page 40 undefined on input line 775.
+
 
 Underfull \hbox (badness 5119) in paragraph at lines 819--819
 []|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
@@ -962,13 +1293,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 819--819
 []|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
-[41
+[40
 
-] [42]
+] [41]
 Ap\'{e}ndice D.
-[43
 
-] [44] (informe-final.aux
+LaTeX Warning: Reference `anexo:verificacion-final' on page 42 undefined on inp
+ut line 847.
+
+
+LaTeX Warning: Citation `bass2021software' on page 42 undefined on input line 8
+50.
+
+
+LaTeX Warning: Citation `richards2020fundamentals' on page 42 undefined on inpu
+t line 850.
+
+
+LaTeX Warning: Citation `wilkinson2016fair' on page 42 undefined on input line 
+875.
+
+[42
+
+]
+
+LaTeX Warning: Citation `smith2016software' on page 43 undefined on input line 
+883.
+
+[43] (informe-final.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 13.
@@ -978,17 +1330,30 @@ LaTeX Info: Redefining \% on input line 13.
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-07-20>
  ***********
-Package rerunfilecheck Info: File `informe-final.out' has not changed.
-(rerunfilecheck)             Checksum: 320099F3DDD59E59F8DE064EA0A38F87;13986.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `informe-final.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `informe-final.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  7A31543F324377F0BC7CEA9DF9A2D190;13846.
  ) 
 Here is how much of TeX's memory you used:
- 15072 strings out of 467501
- 232397 string characters out of 5407579
- 975576 words of memory out of 5000000
- 43895 multiletter control sequences out of 15000+600000
+ 15061 strings out of 467501
+ 235712 string characters out of 5407579
+ 970646 words of memory out of 5000000
+ 43946 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,11n,79p,832b,1463s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,79p,829b,1463s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 tt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type
@@ -1011,9 +1376,9 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (45 pages, 698456 bytes).
+Output written on informe-final.pdf (44 pages, 403914 bytes).
 PDF statistics:
- 924 PDF objects out of 1000 (max. 8388607)
- 225 named destinations out of 1000 (max. 500000)
- 580 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 461 PDF objects out of 1000 (max. 8388607)
+ 178 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
