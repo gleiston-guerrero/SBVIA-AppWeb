@@ -1,9 +1,9 @@
 package com.sbvia.backend.service;
 
-import com.sbvia.backend.entity.BitacoraAuditoria;
+import com.sbvia.backend.entity.AuditLog;
 import com.sbvia.backend.model.Respaldo;
-import com.sbvia.backend.dto.RespaldoRequestDTO;
-import com.sbvia.backend.repository.BitacoraAuditoriaRepository;
+import com.sbvia.backend.dto.BackupRequestDTO;
+import com.sbvia.backend.repository.AuditLogRepository;
 import com.sbvia.backend.repository.RespaldoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class RespaldoService {
     private static final Logger logger = LoggerFactory.getLogger(RespaldoService.class);
 
     private final RespaldoRepository respaldoRepository;
-    private final BitacoraAuditoriaRepository auditoriaRepository;
+    private final AuditLogRepository auditoriaRepository;
     private final TaskScheduler taskScheduler;
 
     @Value("${spring.datasource.username}")
@@ -46,7 +46,7 @@ public class RespaldoService {
     private final String backupDir = "/app/backups";
 
     public RespaldoService(RespaldoRepository respaldoRepository, 
-                           BitacoraAuditoriaRepository auditoriaRepository,
+                           AuditLogRepository auditoriaRepository,
                            TaskScheduler taskScheduler) {
         this.respaldoRepository = respaldoRepository;
         this.auditoriaRepository = auditoriaRepository;
@@ -62,7 +62,7 @@ public class RespaldoService {
         return respaldoRepository.findAllByOrderByFechaInicioDesc();
     }
 
-    public Respaldo generarRespaldo(RespaldoRequestDTO request, String tipo) {
+    public Respaldo generarRespaldo(BackupRequestDTO request, String tipo) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String filename = "sbvia_backup_" + timestamp + ".backup";
 
@@ -101,12 +101,12 @@ public class RespaldoService {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String currentUser = auth != null ? auth.getName() : "SISTEMA";
 
-            BitacoraAuditoria auditoria = new BitacoraAuditoria();
-            auditoria.setNombreTabla("respaldo");
-            auditoria.setOperacion("BACKUP");
-            auditoria.setUsuarioDb(dbUser);
-            auditoria.setUsuarioApp(currentUser);
-            auditoria.setDatosNuevos("{\"archivo\": \"" + respaldo.getNombreArchivo() + "\", \"modalidad\": \"" + respaldo.getModalidad() + "\", \"tipo\": \"" + respaldo.getTipo() + "\"}");
+            AuditLog auditoria = new AuditLog();
+            auditoria.setTableName("respaldo");
+            auditoria.setOperation("BACKUP");
+            auditoria.setDbUser(dbUser);
+            auditoria.setAppUser(currentUser);
+            auditoria.setNewData("{\"archivo\": \"" + respaldo.getNombreArchivo() + "\", \"modalidad\": \"" + respaldo.getModalidad() + "\", \"tipo\": \"" + respaldo.getTipo() + "\"}");
             
             auditoriaRepository.save(auditoria);
         } catch (Exception e) {
@@ -155,7 +155,7 @@ public class RespaldoService {
             Process process = processBuilder.start();
             int exitCode = process.waitFor();
 
-            respaldo.setFechaFin(LocalDateTime.now());
+            respaldo.setEndDate(LocalDateTime.now());
 
             if (exitCode == 0) {
                 File file = new File(outputPath);
@@ -175,7 +175,7 @@ public class RespaldoService {
 
         } catch (IOException | InterruptedException e) {
             respaldo.setEstado("FALLIDO");
-            respaldo.setFechaFin(LocalDateTime.now());
+            respaldo.setEndDate(LocalDateTime.now());
             respaldo.setDetalles("Excepción: " + e.getMessage());
             logger.error("Excepción durante respaldo", e);
             if (e instanceof InterruptedException) {
@@ -203,7 +203,7 @@ public class RespaldoService {
     @Scheduled(cron = "0 0 2 * * ?")
     public void respaldoProgramado() {
         logger.info("Ejecutando respaldo automático programado...");
-        RespaldoRequestDTO dto = new RespaldoRequestDTO();
+        BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("COMPLETO");
         dto.setComentario("Respaldo diario automático");
         generarRespaldo(dto, "PROGRAMADO");

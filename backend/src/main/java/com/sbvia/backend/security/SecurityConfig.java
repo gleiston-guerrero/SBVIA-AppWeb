@@ -88,12 +88,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/docs/**", "/api/swagger-ui/**",
                                 "/api/swagger-ui.html", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
-                        // CRUD de escenarios: GET es público para usuarios autenticados,
+                        // CRUD de scenarios: GET es público para users autenticados,
                         // POST/PUT/DELETE requiere ADMIN
-                        .requestMatchers(HttpMethod.GET, "/api/escenarios/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/escenarios/**").hasAuthority("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.PUT, "/api/escenarios/**").hasAuthority("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/escenarios/**").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.GET, "/api/scenarios/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
                         // Todo lo demás requiere autenticación
                         .anyRequest().authenticated()
                 )

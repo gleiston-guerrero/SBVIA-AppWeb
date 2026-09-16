@@ -1,0 +1,281 @@
+package com.sbvia.backend.service;
+
+import com.sbvia.backend.dto.DrivingMetricsRequest;
+import com.sbvia.backend.dto.DrivingResultDTO;
+import com.sbvia.backend.dto.FeedbackIaResponse;
+import com.sbvia.backend.dto.SimulationDTO;
+import com.sbvia.backend.entity.Scenario;
+import com.sbvia.backend.entity.SimulationState;
+import com.sbvia.backend.entity.Infraction;
+import com.sbvia.backend.entity.PerformanceMetric;
+import com.sbvia.backend.entity.SeverityLevel;
+import com.sbvia.backend.entity.TrafficRule;
+import com.sbvia.backend.entity.TrainingSession;
+import com.sbvia.backend.entity.Simulation;
+import com.sbvia.backend.entity.MetricType;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.entity.Vehicle;
+import com.sbvia.backend.exception.ResourceNotFoundException;
+import com.sbvia.backend.repository.ScenarioRepository;
+import com.sbvia.backend.repository.SimulationStateRepository;
+import com.sbvia.backend.repository.InfractionRepository;
+import com.sbvia.backend.repository.PerformanceMetricRepository;
+import com.sbvia.backend.repository.SeverityLevelRepository;
+import com.sbvia.backend.repository.TrafficRuleRepository;
+import com.sbvia.backend.repository.TrainingSessionRepository;
+import com.sbvia.backend.repository.SimulationRepository;
+import com.sbvia.backend.repository.MetricTypeRepository;
+import com.sbvia.backend.repository.UserRepository;
+import com.sbvia.backend.repository.VehicleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class SimulationService {
+
+    /**
+     * Códigos de reglas del catálogo con correspondencia exacta en el simulador 2D.
+     * Las penalizaciones de estos dos tipos se leen de `regla_transito.penalizacion_base`
+     * (fuente única); colisión, salida y distancia usan constantes porque el catálogo
+     * aún no tiene reglas equivalentes (propuesta: RT-006 a RT-008 en una migración futura).
+     */
+    public static final String REGLA_EXCESO = "RT-002";
+    public static final String REGLA_SEMAFORO = "RT-001";
+
+    /** Descuentos fijos por episodio para tipos sin regla de catálogo. */
+    public static final BigDecimal PENAL_COLISION = new BigDecimal("20");
+    public static final BigDecimal PENAL_SALIDA = new BigDecimal("10");
+    public static final BigDecimal PENAL_DISTANCIA = new BigDecimal("8");
+
+    private final SimulationRepository simulacionRepository;
+    private final UserRepository usuarioRepository;
+    private final ScenarioRepository escenarioRepository;
+    private final PerformanceMetricRepository metricaDesempenoRepository;
+    private final InfractionRepository infraccionRepository;
+    private final SimulationStateRepository estadoSimulacionRepository;
+    private final MetricTypeRepository tipoMetricaRepository;
+    private final TrafficRuleRepository reglaTransitoRepository;
+    private final SeverityLevelRepository nivelGravedadRepository;
+    private final TrainingSessionRepository sesionEntrenamientoRepository;
+    private final VehicleRepository vehiculoRepository;
+    private final FeedbackService retroalimentacionService;
+
+    public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
+        User user = usuarioRepository.findByCorreo(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User no encontrado"));
+        Scenario scenario = escenarioRepository.findById(scenarioId)
+                .filter(Scenario::isActivo)
+                .orElseThrow(() -> new ResourceNotFoundException("Scenario activo no encontrado"));
+        SimulationState enProgreso = estadoSimulacionRepository.findByNombre("EN_PROGRESO")
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el estado EN_PROGRESO"));
+        Vehicle vehicle = vehiculoRepository.findFirstByActivoTrueOrderByIdVehiculoAsc()
+                .orElseThrow(() -> new IllegalStateException("No existe un vehículo activo para iniciar la simulación"));
+
+        // El trigger trg_validar_usuario_sesion exige una sesión válida cuyo
+        // user coincida con el de la simulación.
+        TrainingSession sesion = sesionEntrenamientoRepository.save(TrainingSession.builder()
+                .user(user)
+                .estado("ABIERTA")
+                .objetivo("Práctica de conducción")
+                .build());
+
+        Simulation simulation = Simulation.builder()
+                .fechaInicio(LocalDate.now())
+                .finalScore(BigDecimal.ZERO)
+                .user(user)
+                .scenario(scenario)
+                .vehicle(vehicle)
+                .simulationState(enProgreso)
+                .trainingSession(sesion)
+                .build();
+        return mapToDTO(simulacionRepository.save(simulation));
+    }
+
+    public SimulationDTO finalizarSimulacion(String email, Integer simulationId, BigDecimal finalScore) {
+        Simulation simulation = simulacionRepository.findById(simulationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Simulación no encontrada"));
+        if (!simulation.getUser().getEmail().equalsIgnoreCase(email)) {
+            throw new AccessDeniedException("La simulación pertenece a otro user");
+        }
+        if (simulation.isCompleted()) {
+            throw new IllegalArgumentException("La simulación ya fue finalizada");
+        }
+
+        simulation.setEndDate(LocalDate.now());
+        simulation.setFinalScore(finalScore);
+        simulation.setCompleted(true);
+        return mapToDTO(simulacionRepository.save(simulation));
+    }
+
+    /**
+     * Finaliza una conducción del simulador 2D con las métricas reportadas por el frontend.
+     * El puntaje se calcula en el servidor (el cliente nunca lo impone) y las métricas
+     * se persisten en `metrica_desempeno` e `infraction` dentro de la misma transacción.
+     */
+    public DrivingResultDTO finalizarConduccion(String email, Integer simulationId, DrivingMetricsRequest metricas) {
+        Simulation simulation = simulacionRepository.findById(simulationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Simulación no encontrada"));
+        if (!simulation.getUser().getEmail().equalsIgnoreCase(email)) {
+            throw new AccessDeniedException("La simulación pertenece a otro user");
+        }
+        if (simulation.isCompleted()) {
+            throw new IllegalArgumentException("La simulación ya fue finalizada");
+        }
+        if (metricas.velocidadMaxima().compareTo(metricas.velocidadPromedio()) < 0) {
+            throw new IllegalArgumentException("La velocidad máxima no puede ser menor que la promedio");
+        }
+
+        TrafficRule reglaExceso = reglaTransitoRepository.findByCodigo(REGLA_EXCESO)
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta la regla " + REGLA_EXCESO));
+        TrafficRule reglaSemaforo = reglaTransitoRepository.findByCodigo(REGLA_SEMAFORO)
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta la regla " + REGLA_SEMAFORO));
+        SeverityLevel moderada = nivelGravedadRepository.findByNombre("MODERADA")
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el nivel MODERADA"));
+        SeverityLevel grave = nivelGravedadRepository.findByNombre("GRAVE")
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el nivel GRAVE"));
+        SimulationState completed = estadoSimulacionRepository.findByNombre("COMPLETADA")
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el estado COMPLETADA"));
+
+        int totalInfracciones = metricas.excesosVelocidad() + metricas.colisiones()
+                + metricas.salidasCarril() + metricas.semaforosIgnorados() + metricas.distanciaInsegura();
+
+        BigDecimal descuento = reglaExceso.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.excesosVelocidad()))
+                .add(reglaSemaforo.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.semaforosIgnorados())))
+                .add(PENAL_COLISION.multiply(BigDecimal.valueOf(metricas.colisiones())))
+                .add(PENAL_SALIDA.multiply(BigDecimal.valueOf(metricas.salidasCarril())))
+                .add(PENAL_DISTANCIA.multiply(BigDecimal.valueOf(metricas.distanciaInsegura())));
+        BigDecimal puntaje = BigDecimal.valueOf(100).subtract(descuento).max(BigDecimal.ZERO)
+                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal cumplimiento = BigDecimal.valueOf(100 - Math.min(100, totalInfracciones * 10));
+
+        guardarMetrica(simulation, "VELOCIDAD_PROMEDIO", metricas.velocidadPromedio(), "Promedio del simulador 2D");
+        guardarMetrica(simulation, "TOTAL_INFRACCIONES", BigDecimal.valueOf(totalInfracciones), "Conteo del simulador 2D");
+        guardarMetrica(simulation, "PUNTAJE_SEGURIDAD", puntaje, "Calculado en el servidor");
+        guardarMetrica(simulation, "PORCENTAJE_CUMPLIMIENTO", cumplimiento, "Calculado en el servidor");
+
+        if (metricas.excesosVelocidad() > 0) {
+            guardarInfraccion(simulation, null, reglaExceso, moderada,
+                    metricas.excesosVelocidad() + " exceso(s) de velocidad en el simulador 2D",
+                    reglaExceso.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.excesosVelocidad())));
+        }
+        if (metricas.semaforosIgnorados() > 0) {
+            guardarInfraccion(simulation, null, reglaSemaforo, grave,
+                    metricas.semaforosIgnorados() + " semáforo(s) en rojo ignorado(s) en el simulador 2D",
+                    reglaSemaforo.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.semaforosIgnorados())));
+        }
+
+        // Este guardado va DESPUÉS de las infractions a propósito: el trigger
+        // trg_recalcular_puntaje_infraccion recalcula puntaje_final con una fórmula
+        // parcial (solo suma penalizacion_aplicada de las filas persistidas, y el
+        // catálogo aún no tiene reglas para colisión/salida/distancia). El value
+        // calculado por el servidor (5 tipos) es la fuente de verdad y debe quedar
+        // último. Propuesta: reglas RT-006 a RT-008 + persistir los 5 tipos.
+        simulation.setEndDate(LocalDate.now());
+        simulation.setFinalScore(puntaje);
+        simulation.setDurationSeconds(metricas.durationSeconds());
+        simulation.setCompleted(true);
+        simulation.setSimulationState(completed);
+        simulation.setObservations("{\"origen\":\"SIMULADOR_2D\",\"velocidadMaxima\":"
+                + metricas.velocidadMaxima() + ",\"durationSeconds\":" + metricas.durationSeconds()
+                + ",\"excesos\":" + metricas.excesosVelocidad() + ",\"colisiones\":" + metricas.colisiones()
+                + ",\"salidas\":" + metricas.salidasCarril() + ",\"semaforos\":" + metricas.semaforosIgnorados()
+                + ",\"distancia\":" + metricas.distanciaInsegura()
+                + ",\"respetados\":" + metricas.respetados() + "}");
+        simulacionRepository.save(simulation);
+
+        FeedbackIaResponse informe =
+                retroalimentacionService.generarYGuardar(email, simulation.getSimulationId());
+
+        return DrivingResultDTO.builder()
+                .simulation(mapToDTO(simulation))
+                .feedback(informe)
+                .build();
+    }
+
+    public List<SimulationDTO> obtenerMisPracticas(String email) {
+        User user = usuarioRepository.findByCorreo(email)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
+
+        List<Simulation> simulations = simulacionRepository
+                .findByUsuario_IdUsuarioOrderByIdSimulacionDesc(user.getUserId());
+
+        return simulations.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<SimulationDTO> obtenerTodas() {
+        return simulacionRepository.findAllByOrderByIdSimulacionDesc().stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public com.sbvia.backend.dto.StatisticsDTO obtenerEstadisticasGlobales() {
+        Object[] result = simulacionRepository.getGlobalStats();
+        if (result == null || result[0] == null || result.length == 0 || ((Object[]) result[0])[0] == null) {
+            return new com.sbvia.backend.dto.StatisticsDTO(0, 0, 0);
+        }
+        Object[] row = (Object[]) result[0];
+        long total = row[0] != null ? ((Number) row[0]).longValue() : 0;
+        int promedio = row[1] != null ? (int) Math.round(((Number) row[1]).doubleValue()) : 0;
+        long aprobadas = row[2] != null ? ((Number) row[2]).longValue() : 0;
+        
+        int tasaAprobacion = total > 0 ? (int) Math.round((double) aprobadas * 100 / total) : 0;
+
+        return com.sbvia.backend.dto.StatisticsDTO.builder()
+                .totalPracticas(total)
+                .promedioGlobal(promedio)
+                .tasaAprobacionGlobal(tasaAprobacion)
+                .build();
+    }
+
+    private void guardarMetrica(Simulation simulation, String tipo, BigDecimal value, String observacion) {
+        MetricType metricType = tipoMetricaRepository.findByNombre(tipo)
+                .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el tipo " + tipo));
+        metricaDesempenoRepository.save(PerformanceMetric.builder()
+                .value(value)
+                .observacion(observacion)
+                .simulation(simulation)
+                .metricType(metricType)
+                .build());
+    }
+
+    private void guardarInfraccion(Simulation simulation, com.sbvia.backend.entity.Decision decision,
+            TrafficRule regla, SeverityLevel gravedad, String description, BigDecimal penalizacion) {
+        infraccionRepository.save(Infraction.builder()
+                .description(description)
+                .penalizacionAplicada(penalizacion)
+                .simulation(simulation)
+                .decision(decision)
+                .trafficRule(regla)
+                .severityLevel(gravedad)
+                .build());
+    }
+
+    private SimulationDTO mapToDTO(Simulation simulation) {
+        return SimulationDTO.builder()
+                .simulationId(simulation.getSimulationId())
+                .fechaInicio(simulation.getFechaInicio())
+                .endDate(simulation.getEndDate())
+                .finalScore(simulation.getFinalScore())
+                .completed(simulation.isCompleted())
+                .scenarioId(simulation.getScenario() != null ? simulation.getScenario().getScenarioId() : null)
+                .nombreEscenario(simulation.getScenario() != null ? simulation.getScenario().getName() : "N/A")
+                .userId(simulation.getUser() != null ? simulation.getUser().getUserId() : null)
+                .username(simulation.getUser() != null
+                        ? simulation.getUser().getFirstName() + " " + simulation.getUser().getLastName()
+                        : "N/A")
+                .correoUsuario(simulation.getUser() != null ? simulation.getUser().getEmail() : null)
+                .build();
+    }
+}

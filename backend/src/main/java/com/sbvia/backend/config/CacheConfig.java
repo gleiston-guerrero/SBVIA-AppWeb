@@ -19,7 +19,7 @@ import java.util.Map;
  * - Se usa RedisCacheManager para que @Cacheable/@CacheEvict usen Redis como backend.
  * - Serialización JSON (GenericJackson2JsonRedisSerializer) en lugar de Java nativa
  *   para evitar ClassCastException entre versiones y poder inspeccionar claves en redis-cli.
- * - TTL global: 10 minutos. TTL específico para "escenarios": 5 minutos (datos semi-estáticos).
+ * - TTL global: 10 minutos. TTL específico para "scenarios": 5 minutos (datos semi-estáticos).
  */
 @Configuration
 @EnableCaching
@@ -40,14 +40,14 @@ public class CacheConfig {
                         )
                 );
 
-        // Configuración específica para la caché de escenarios: TTL 5 min
+        // Configuración específica para la caché de scenarios: TTL 5 min
         RedisCacheConfiguration escenariosConfig = defaultConfig
                 .entryTtl(ESCENARIOS_TTL);
 
         return RedisCacheManager.builder(connectionFactory)
                 .cacheDefaults(defaultConfig)
                 .withInitialCacheConfigurations(Map.of(
-                        "escenarios", escenariosConfig
+                        "scenarios", escenariosConfig
                 ))
                 .build();
     }

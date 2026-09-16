@@ -25,7 +25,7 @@ public class Respaldo {
     private LocalDateTime fechaInicio;
 
     @Column(name = "fecha_fin")
-    private LocalDateTime fechaFin;
+    private LocalDateTime endDate;
 
     @Column(name = "tamanio_bytes")
     private Long tamanioBytes;
@@ -83,12 +83,12 @@ public class Respaldo {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDateTime getFechaFin() {
-        return fechaFin;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setFechaFin(LocalDateTime fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public Long getTamanioBytes() {

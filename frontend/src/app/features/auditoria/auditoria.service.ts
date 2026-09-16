@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-export interface BitacoraAuditoria {
+export interface AuditLog {
   idAuditoria: number;
   nombreTabla: string;
   operacion: string;
@@ -20,22 +20,22 @@ export class AuditoriaService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerAuditoria(filtros: any): Observable<BitacoraAuditoria[]> {
+  obtenerAuditoria(filtros: any): Observable<AuditLog[]> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
     if (filtros.operacion) params = params.set('operacion', filtros.operacion);
-    if (filtros.usuario) params = params.set('usuario', filtros.usuario);
+    if (filtros.user) params = params.set('user', filtros.user);
     if (filtros.fechaInicio) params = params.set('fechaInicio', filtros.fechaInicio);
     if (filtros.fechaFin) params = params.set('fechaFin', filtros.fechaFin);
 
-    return this.http.get<BitacoraAuditoria[]>(this.apiUrl, { params });
+    return this.http.get<AuditLog[]>(this.apiUrl, { params });
   }
 
   descargarReportePdf(filtros: any): Observable<Blob> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
     if (filtros.operacion) params = params.set('operacion', filtros.operacion);
-    if (filtros.usuario) params = params.set('usuario', filtros.usuario);
+    if (filtros.user) params = params.set('user', filtros.user);
     if (filtros.fechaInicio) params = params.set('fechaInicio', filtros.fechaInicio);
     if (filtros.fechaFin) params = params.set('fechaFin', filtros.fechaFin);
 

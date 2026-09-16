@@ -9,9 +9,9 @@
         <span class="nav-icon">◈</span>
         <span class="nav-label" *ngIf="sidebarAbierto">Panel</span>
       </a>
-      <a routerLink="/escenarios" routerLinkActive="active" class="nav-item">
+      <a routerLink="/scenarios" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">◉</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Escenarios</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">Scenarios</span>
       </a>
       <a routerLink="/practicas" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">▣</span>
@@ -21,14 +21,14 @@
         <span class="nav-icon">▶</span>
         <span class="nav-label" *ngIf="sidebarAbierto">Simulador</span>
       </a>
-      <a *ngIf="usuario?.rol === 'ADMINISTRADOR'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/users" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">★</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Usuarios</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">Users</span>
       </a>
-      <a *ngIf="usuario?.rol === 'ADMINISTRADOR'" routerLink="/reglas-transito" routerLinkActive="active" class="nav-item"><span class="nav-icon">⚑</span><span class="nav-label" *ngIf="sidebarAbierto">Reglas de tránsito</span></a>
-      <a *ngIf="usuario?.rol === 'INSTRUCTOR' || usuario?.rol === 'ADMINISTRADOR'" routerLink="/instructor" routerLinkActive="active" class="nav-item"><span class="nav-icon">♙</span><span class="nav-label" *ngIf="sidebarAbierto">Instructor</span></a>
-      <a *ngIf="usuario?.rol === 'ADMINISTRADOR'" routerLink="/auditoria" routerLinkActive="active" class="nav-item"><span class="nav-icon">◎</span><span class="nav-label" *ngIf="sidebarAbierto">Auditoría</span></a>
-      <a *ngIf="usuario?.rol === 'ADMINISTRADOR'" routerLink="/respaldos" routerLinkActive="active" class="nav-item"><span class="nav-icon">🗄️</span><span class="nav-label" *ngIf="sidebarAbierto">Respaldos</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/reglas-transito" routerLinkActive="active" class="nav-item"><span class="nav-icon">⚑</span><span class="nav-label" *ngIf="sidebarAbierto">Reglas de tránsito</span></a>
+      <a *ngIf="user?.role === 'INSTRUCTOR' || user?.role === 'ADMINISTRADOR'" routerLink="/instructor" routerLinkActive="active" class="nav-item"><span class="nav-icon">♙</span><span class="nav-label" *ngIf="sidebarAbierto">Instructor</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/auditoria" routerLinkActive="active" class="nav-item"><span class="nav-icon">◎</span><span class="nav-label" *ngIf="sidebarAbierto">Auditoría</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/respaldos" routerLinkActive="active" class="nav-item"><span class="nav-icon">🗄️</span><span class="nav-label" *ngIf="sidebarAbierto">Respaldos</span></a>
     </nav>
   </aside>
   <div class="main-area">
@@ -40,10 +40,10 @@
       <div class="account-container">
         <div class="account" (click)="toggleMenu()">
           <div class="account-info">
-            <strong>{{ usuario?.nombres }}</strong>
-            <small>{{ usuario?.rol === 'ADMINISTRADOR' ? 'Administrador' : usuario?.rol === 'INSTRUCTOR' ? 'Instructor' : 'Conductor' }}</small>
+            <strong>{{ user?.firstName }}</strong>
+            <small>{{ user?.role === 'ADMINISTRADOR' ? 'Administrador' : user?.role === 'INSTRUCTOR' ? 'Instructor' : 'Conductor' }}</small>
           </div>
-          <span class="avatar">{{ usuario?.nombres?.charAt(0) || 'U' }}</span>
+          <span class="avatar">{{ user?.firstName?.charAt(0) || 'U' }}</span>
         </div>
 
         <!-- Menú desplegable -->
@@ -73,24 +73,24 @@
     <form [formGroup]="perfilForm" (ngSubmit)="guardarPerfil()">
       <div class="modal-body">
         <div class="form-group">
-          <label for="nombres">Nombres</label>
-          <input id="nombres" type="text" formControlName="nombres" placeholder="Ingresa tus nombres" />
-          <small class="error-msg" *ngIf="perfilForm.get('nombres')?.invalid && perfilForm.get('nombres')?.touched">
-            Los nombres son obligatorios.
+          <label for="firstName">Nombres</label>
+          <input id="firstName" type="text" formControlName="firstName" placeholder="Ingresa tus firstName" />
+          <small class="error-msg" *ngIf="perfilForm.get('firstName')?.invalid && perfilForm.get('firstName')?.touched">
+            Los firstName son obligatorios.
           </small>
         </div>
         
         <div class="form-group">
-          <label for="apellidos">Apellidos</label>
-          <input id="apellidos" type="text" formControlName="apellidos" placeholder="Ingresa tus apellidos" />
-          <small class="error-msg" *ngIf="perfilForm.get('apellidos')?.invalid && perfilForm.get('apellidos')?.touched">
-            Los apellidos son obligatorios.
+          <label for="lastName">Apellidos</label>
+          <input id="lastName" type="text" formControlName="lastName" placeholder="Ingresa tus lastName" />
+          <small class="error-msg" *ngIf="perfilForm.get('lastName')?.invalid && perfilForm.get('lastName')?.touched">
+            Los lastName son obligatorios.
           </small>
         </div>
         
         <div class="form-group">
-          <label for="telefono">Teléfono</label>
-          <input id="telefono" type="text" formControlName="telefono" placeholder="Ingresa tu teléfono (Opcional)" />
+          <label for="phone">Teléfono</label>
+          <input id="phone" type="text" formControlName="phone" placeholder="Ingresa tu teléfono (Opcional)" />
         </div>
       </div>
       <div class="modal-footer">

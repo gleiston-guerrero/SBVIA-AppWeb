@@ -21,5 +21,5 @@ public class AuthResponse {
     private String refreshToken;
     private long expiresIn;
     private String tokenType;
-    private UsuarioDTO usuario;
+    private UserDTO user;
 }

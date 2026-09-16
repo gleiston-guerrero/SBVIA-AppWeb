@@ -1,13 +1,13 @@
 package com.sbvia.backend.service;
 
 import com.sbvia.backend.dto.*;
-import com.sbvia.backend.entity.EstadoUsuario;
-import com.sbvia.backend.entity.Rol;
-import com.sbvia.backend.entity.Usuario;
+import com.sbvia.backend.entity.UserState;
+import com.sbvia.backend.entity.Role;
+import com.sbvia.backend.entity.User;
 import com.sbvia.backend.exception.DuplicateEmailException;
-import com.sbvia.backend.repository.EstadoUsuarioRepository;
-import com.sbvia.backend.repository.UsuarioRepository;
-import com.sbvia.backend.repository.RolRepository;
+import com.sbvia.backend.repository.UserStateRepository;
+import com.sbvia.backend.repository.UserRepository;
+import com.sbvia.backend.repository.RoleRepository;
 import com.sbvia.backend.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +27,9 @@ import java.util.List;
 @Slf4j
 public class AuthService {
 
-    private final UsuarioRepository usuarioRepository;
-    private final RolRepository rolRepository;
-    private final EstadoUsuarioRepository estadoUsuarioRepository;
+    private final UserRepository usuarioRepository;
+    private final RoleRepository rolRepository;
+    private final UserStateRepository estadoUsuarioRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -38,50 +38,50 @@ public class AuthService {
 
     @Transactional
     public AuthResponse registro(RegisterRequest request) {
-        if (usuarioRepository.existsByCorreo(request.getCorreo())) {
+        if (usuarioRepository.existsByCorreo(request.getEmail())) {
             throw new DuplicateEmailException(
-                    "Ya existe un usuario registrado con el correo: " + request.getCorreo());
+                    "Ya existe un user registrado con el email: " + request.getEmail());
         }
 
-        Rol rolPorDefecto = rolRepository.findByNombre("PARTICIPANTE")
+        Role rolPorDefecto = rolRepository.findByNombre("PARTICIPANTE")
                 .orElseGet(() -> rolRepository.findAll().stream()
-                        .filter(r -> r.getNombre().contains("PARTICIPANTE") || r.getNombre().contains("USER"))
+                        .filter(r -> r.getName().contains("PARTICIPANTE") || r.getName().contains("USER"))
                         .findFirst()
-                        .orElseThrow(() -> new IllegalStateException("No se encontró el rol PARTICIPANTE")));
+                        .orElseThrow(() -> new IllegalStateException("No se encontró el role PARTICIPANTE")));
 
         // id_estado_usuario es NOT NULL: toda cuenta nueva nace en estado ACTIVO.
-        EstadoUsuario estadoActivo = estadoUsuarioRepository.findByNombre("ACTIVO")
+        UserState estadoActivo = estadoUsuarioRepository.findByNombre("ACTIVO")
                 .orElseThrow(() -> new IllegalStateException("No se encontró el estado ACTIVO"));
 
         // Generación de nombre_usuario automático estilo SGA UTEQ
-        String base = usernameGeneratorService.generarBase(request.getNombres(), request.getApellidos());
+        String base = usernameGeneratorService.generarBase(request.getFirstName(), request.getLastName());
         List<String> existentes = new ArrayList<>(usuarioRepository.findNombresUsuarioSimilares(base));
         String nombreUsuarioGenerado = usernameGeneratorService.generarSiguienteDisponible(base, existentes);
 
-        Usuario usuario = Usuario.builder()
-                .nombres(request.getNombres().trim())
-                .apellidos(request.getApellidos().trim())
-                .nombreUsuario(nombreUsuarioGenerado)
-                .correo(request.getCorreo().trim())
-                .telefono(request.getTelefono())
-                .contrasenaHash(passwordEncoder.encode(request.getPassword()))
-                .rol(rolPorDefecto)
-                .estadoUsuario(estadoActivo)
+        User user = User.builder()
+                .firstName(request.getFirstName().trim())
+                .lastName(request.getLastName().trim())
+                .username(nombreUsuarioGenerado)
+                .email(request.getEmail().trim())
+                .phone(request.getPhone())
+                .passwordHash(passwordEncoder.encode(request.getPassword()))
+                .role(rolPorDefecto)
+                .userState(estadoActivo)
                 .build();
 
-        usuario = usuarioRepository.save(usuario);
+        user = usuarioRepository.save(user);
 
-        UserDetails userDetails = buildUserDetails(usuario);
-        String rolNombre = usuario.getRol().getNombre();
-        String accessToken = jwtService.generateAccessToken(userDetails, usuario.getIdUsuario().longValue(), rolNombre);
-        String refreshToken = jwtService.generateRefreshToken(userDetails, usuario.getIdUsuario().longValue());
+        UserDetails userDetails = buildUserDetails(user);
+        String rolNombre = user.getRole().getName();
+        String accessToken = jwtService.generateAccessToken(userDetails, user.getUserId().longValue(), rolNombre);
+        String refreshToken = jwtService.generateRefreshToken(userDetails, user.getUserId().longValue());
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .expiresIn(jwtService.getAccessExpirationMs() / 1000)
                 .tokenType("Bearer")
-                .usuario(mapToDTO(usuario))
+                .user(mapToDTO(user))
                 .build();
     }
 
@@ -95,19 +95,19 @@ public class AuthService {
         );
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Usuario usuario = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con identificador: " + identificador));
+        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado con identificador: " + identificador));
 
-        String rolNombre = usuario.getRol().getNombre();
-        String accessToken = jwtService.generateAccessToken(userDetails, usuario.getIdUsuario().longValue(), rolNombre);
-        String refreshToken = jwtService.generateRefreshToken(userDetails, usuario.getIdUsuario().longValue());
+        String rolNombre = user.getRole().getName();
+        String accessToken = jwtService.generateAccessToken(userDetails, user.getUserId().longValue(), rolNombre);
+        String refreshToken = jwtService.generateRefreshToken(userDetails, user.getUserId().longValue());
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .expiresIn(jwtService.getAccessExpirationMs() / 1000)
                 .tokenType("Bearer")
-                .usuario(mapToDTO(usuario))
+                .user(mapToDTO(user))
                 .build();
     }
 
@@ -131,109 +131,109 @@ public class AuthService {
         }
 
         String subject = jwtService.extractSubject(refreshToken);
-        Usuario usuario = usuarioRepository.findById(Integer.parseInt(subject))
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+        User user = usuarioRepository.findById(Integer.parseInt(subject))
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
-        UserDetails userDetails = buildUserDetails(usuario);
-        String rolNombre = usuario.getRol().getNombre();
-        String newAccessToken = jwtService.generateAccessToken(userDetails, usuario.getIdUsuario().longValue(), rolNombre);
+        UserDetails userDetails = buildUserDetails(user);
+        String rolNombre = user.getRole().getName();
+        String newAccessToken = jwtService.generateAccessToken(userDetails, user.getUserId().longValue(), rolNombre);
 
         return AuthResponse.builder()
                 .accessToken(newAccessToken)
                 .refreshToken(refreshToken)
                 .expiresIn(jwtService.getAccessExpirationMs() / 1000)
                 .tokenType("Bearer")
-                .usuario(mapToDTO(usuario))
+                .user(mapToDTO(user))
                 .build();
     }
 
-    public UsuarioDTO getUsuarioActual(String identificador) {
-        Usuario usuario = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
-        return mapToDTO(usuario);
+    public UserDTO getUsuarioActual(String identificador) {
+        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
+        return mapToDTO(user);
     }
 
-    public org.springframework.data.domain.Page<UsuarioDTO> listarUsuarios(org.springframework.data.domain.Pageable pageable) {
+    public org.springframework.data.domain.Page<UserDTO> listarUsuarios(org.springframework.data.domain.Pageable pageable) {
         return usuarioRepository.findAll(pageable).map(this::mapToDTO);
     }
 
     @Transactional
-    public UsuarioDTO cambiarRol(Integer id, String nombreRol) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
+    public UserDTO cambiarRol(Integer id, String nombreRol) {
+        User user = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
-        Rol nuevoRol = rolRepository.findByNombre(nombreRol)
-                .orElseThrow(() -> new IllegalArgumentException("Rol no encontrado: " + nombreRol));
+        Role nuevoRol = rolRepository.findByNombre(nombreRol)
+                .orElseThrow(() -> new IllegalArgumentException("Role no encontrado: " + nombreRol));
 
-        usuario.setRol(nuevoRol);
-        usuario = usuarioRepository.save(usuario);
-        return mapToDTO(usuario);
+        user.setRole(nuevoRol);
+        user = usuarioRepository.save(user);
+        return mapToDTO(user);
     }
 
     @Transactional
-    public UsuarioDTO actualizarUsuario(Integer id, ActualizarUsuarioRequest request) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
+    public UserDTO actualizarUsuario(Integer id, UpdateUserRequest request) {
+        User user = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
-        if (!usuario.getCorreo().equalsIgnoreCase(request.getCorreo())) {
-            if (usuarioRepository.existsByCorreo(request.getCorreo())) {
-                throw new DuplicateEmailException("Ya existe un usuario registrado con el correo: " + request.getCorreo());
+        if (!user.getEmail().equalsIgnoreCase(request.getEmail())) {
+            if (usuarioRepository.existsByCorreo(request.getEmail())) {
+                throw new DuplicateEmailException("Ya existe un user registrado con el email: " + request.getEmail());
             }
-            usuario.setCorreo(request.getCorreo());
+            user.setEmail(request.getEmail());
         }
 
-        usuario.setNombres(request.getNombres());
-        usuario.setApellidos(request.getApellidos());
-        usuario.setTelefono(request.getTelefono());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setPhone(request.getPhone());
 
-        usuario = usuarioRepository.save(usuario);
-        return mapToDTO(usuario);
+        user = usuarioRepository.save(user);
+        return mapToDTO(user);
     }
 
     @Transactional
-    public UsuarioDTO actualizarPerfilActual(String identificador, ActualizarPerfilRequest request) {
-        Usuario usuario = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+    public UserDTO actualizarPerfilActual(String identificador, UpdateProfileRequest request) {
+        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
-        usuario.setNombres(request.getNombres());
-        usuario.setApellidos(request.getApellidos());
-        usuario.setTelefono(request.getTelefono());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setPhone(request.getPhone());
 
-        usuario = usuarioRepository.save(usuario);
-        return mapToDTO(usuario);
+        user = usuarioRepository.save(user);
+        return mapToDTO(user);
     }
 
     @Transactional
     public void eliminarUsuario(Integer id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
-        usuario.setCuentaBloqueada(true);
-        usuarioRepository.save(usuario);
+        User user = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
+        user.setAccountLocked(true);
+        usuarioRepository.save(user);
     }
 
     public long getRefreshExpirationSeconds() {
         return jwtService.getRefreshExpirationMs() / 1000;
     }
 
-    private UserDetails buildUserDetails(Usuario usuario) {
+    private UserDetails buildUserDetails(User user) {
         return new org.springframework.security.core.userdetails.User(
-                usuario.getCorreo(),
-                usuario.getContrasenaHash(),
+                user.getEmail(),
+                user.getPasswordHash(),
                 java.util.List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority(
-                        usuario.getRol().getNombre()))
+                        user.getRole().getName()))
         );
     }
 
-    private UsuarioDTO mapToDTO(Usuario usuario) {
-        return UsuarioDTO.builder()
-                .id(usuario.getIdUsuario())
-                .nombres(usuario.getNombres())
-                .apellidos(usuario.getApellidos())
-                .nombreUsuario(usuario.getNombreUsuario())
-                .correo(usuario.getCorreo())
-                .rol(usuario.getRol().getNombre())
-                .telefono(usuario.getTelefono())
-                .cuentaBloqueada(usuario.isCuentaBloqueada())
+    private UserDTO mapToDTO(User user) {
+        return UserDTO.builder()
+                .id(user.getUserId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole().getName())
+                .phone(user.getPhone())
+                .accountLocked(user.isAccountLocked())
                 .build();
     }
 }

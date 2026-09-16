@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 /**
  * Controlador REST para autenticación: registro, login, logout y refresh token.
  * Endpoints públicos: /api/auth/registro, /api/auth/login
- * Endpoints protegidos: /api/auth/logout, /api/auth/refresh, /api/usuarios/me
+ * Endpoints protegidos: /api/auth/logout, /api/auth/refresh, /api/users/me
  */
 @RestController
 @RequestMapping("/api/auth")
@@ -43,17 +43,17 @@ public class AuthController {
     private boolean cookieSecure;
 
     /**
-     * POST /api/auth/registro — Registrar nuevo usuario.
-     * Devuelve el usuario creado (sin hash) y el access token.
+     * POST /api/auth/registro — Registrar nuevo user.
+     * Devuelve el user creado (sin hash) y el access token.
      * El refresh token se entrega exclusivamente en una cookie HttpOnly.
      *
-     * @param request los datos del usuario a registrar (correo, nombres, apellidos, etc.)
-     * @return una respuesta de autenticación (AuthResponse) que contiene el access token y la información del usuario creado
+     * @param request los datos del user a registrar (email, firstName, lastName, etc.)
+     * @return una respuesta de autenticación (AuthResponse) que contiene el access token y la información del user creado
      */
     @PostMapping("/registro")
-    @Operation(summary = "Registrar nuevo usuario", description = "Crea una cuenta y devuelve tokens JWT")
+    @Operation(summary = "Registrar nuevo user", description = "Crea una cuenta y devuelve tokens JWT")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente"),
+        @ApiResponse(responseCode = "201", description = "User creado exitosamente"),
         @ApiResponse(responseCode = "400", description = "Datos inválidos o email ya registrado")
     })
     public ResponseEntity<AuthResponse> registro(@Valid @RequestBody RegisterRequest request) {
@@ -82,12 +82,12 @@ public class AuthController {
     }
 
     /**
-     * POST /api/auth/login — Autenticar usuario.
+     * POST /api/auth/login — Autenticar user.
      * Devuelve el access token; el refresh token permanece en cookie HttpOnly.
      *
-     * @param request los datos de inicio de sesión, que incluyen el identificador (correo/usuario) y contraseña
+     * @param request los datos de inicio de sesión, que incluyen el identificador (email/user) y contraseña
      * @param httpRequest la petición HTTP actual, utilizada para obtener la IP del cliente y limitar intentos fallidos
-     * @return una respuesta de autenticación con el access token y los detalles del usuario, estableciendo el refresh token en una cookie
+     * @return una respuesta de autenticación con el access token y los detalles del user, estableciendo el refresh token en una cookie
      */
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Autentica, devuelve el access token y establece el refresh token en cookie HttpOnly")

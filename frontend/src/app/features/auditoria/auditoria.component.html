@@ -19,17 +19,17 @@
   <section class="panel">
     <div class="filters">
       <label>
-        <span>Usuario App</span>
-        <input [(ngModel)]="filtros.usuario" (change)="cargarAuditoria()" placeholder="Correo del usuario">
+        <span>User App</span>
+        <input [(ngModel)]="filtros.user" (change)="cargarAuditoria()" placeholder="Correo del user">
       </label>
       <label>
         <span>Tabla</span>
         <select [(ngModel)]="filtros.tabla" (change)="cargarAuditoria()">
           <option value="">Todas</option>
-          <option value="usuario">usuario</option>
+          <option value="user">user</option>
           <option value="regla_transito">regla_transito</option>
-          <option value="escenario">escenario</option>
-          <option value="vehiculo">vehiculo</option>
+          <option value="scenario">scenario</option>
+          <option value="vehicle">vehicle</option>
           <option value="modelo_ia">modelo_ia</option>
           <option value="respaldo">respaldo</option>
         </select>
@@ -52,7 +52,7 @@
         <span>Hasta</span>
         <input type="date" [(ngModel)]="filtros.fechaFin" (change)="cargarAuditoria()">
       </label>
-      <button class="btn btn-secondary" (click)="filtros={tabla:'', operacion:'', usuario:'', fechaInicio:'', fechaFin:''}; cargarAuditoria()">Limpiar</button>
+      <button class="btn btn-secondary" (click)="filtros={tabla:'', operacion:'', user:'', fechaInicio:'', fechaFin:''}; cargarAuditoria()">Limpiar</button>
     </div>
 
     <div *ngIf="cargando" class="message">Cargando registros de auditoría...</div>
@@ -63,7 +63,7 @@
         <thead>
           <tr>
             <th>Fecha</th>
-            <th>Usuario</th>
+            <th>User</th>
             <th>Tabla</th>
             <th>Operación</th>
             <th>Acción</th>
@@ -106,8 +106,8 @@
         <div><strong>Fecha:</strong> {{ registroSeleccionado?.fechaHora | date:'dd/MM/yyyy HH:mm:ss' }}</div>
         <div><strong>Tabla:</strong> <span class="code-badge">{{ registroSeleccionado?.nombreTabla }}</span></div>
         <div><strong>Operación:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operacion?.toLowerCase() || ''">{{ registroSeleccionado?.operacion }}</span></div>
-        <div><strong>Usuario App:</strong> {{ registroSeleccionado?.usuarioApp || 'N/A' }}</div>
-        <div><strong>Usuario DB:</strong> {{ registroSeleccionado?.usuarioDb }}</div>
+        <div><strong>User App:</strong> {{ registroSeleccionado?.usuarioApp || 'N/A' }}</div>
+        <div><strong>User DB:</strong> {{ registroSeleccionado?.usuarioDb }}</div>
       </div>
       
       <div class="diff-view">

@@ -8,13 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Servicio encargado de generar nombres de usuario deterministas, normalizados y únicos,
+ * Servicio encargado de generar firstName de user deterministas, normalizados y únicos,
  * inspirados en el estándar SGA (Sistema de Gestión Académica) de la UTEQ:
- * inicial del primer nombre + primer apellido + inicial del segundo apellido (ej: jcruzp).
+ * inicial del primer name + primer apellido + inicial del segundo apellido (ej: jcruzp).
  *
  * Cumple con las restricciones de la base de datos:
  * - longitud mínima >= 4 (chk_usuario_nombre_usuario)
- * - longitud máxima <= 60 (VARCHAR(60) en usuario.nombre_usuario)
+ * - longitud máxima <= 60 (VARCHAR(60) en user.nombre_usuario)
  * - caracteres alfanuméricos seguros para login
  */
 @Service
@@ -43,9 +43,9 @@ public class UsernameGeneratorService {
     }
 
     /**
-     * Genera la base del nombre de usuario a partir de nombres y apellidos.
+     * Genera la base del name de user a partir de firstName y lastName.
      * Formato UTEQ/SGA:
-     * - Letra inicial del primer nombre
+     * - Letra inicial del primer name
      * - Primer apellido (ignorando partículas como 'de', 'la', etc. o integrándolas si es necesario)
      * - Letra inicial del segundo apellido (si existe)
      *
@@ -54,21 +54,21 @@ public class UsernameGeneratorService {
      * "Ana", "Li"                  -> "anli" (expandido a >= 4 caracteres)
      * "José Ángel", "Muñoz"        -> "jmunoz"
      */
-    public String generarBase(String nombres, String apellidos) {
-        String normNombres = normalizar(nombres);
-        String normApellidos = normalizar(apellidos);
+    public String generarBase(String firstName, String lastName) {
+        String normNombres = normalizar(firstName);
+        String normApellidos = normalizar(lastName);
 
         String[] tokensNombres = normNombres.isEmpty() ? new String[0] : normNombres.split(" ");
         String[] tokensApellidos = normApellidos.isEmpty() ? new String[0] : normApellidos.split(" ");
 
         String primerNombre = tokensNombres.length > 0 ? tokensNombres[0] : "user";
-        // Si ambos campos estan vacíos, devolver el usuario por defecto del estándar UTEQ
+        // Si ambos campos estan vacíos, devolver el user por defecto del estándar UTEQ
         if (normNombres.isEmpty() && normApellidos.isEmpty()) {
             return "user0";
         }
         String inicialNombre = primerNombre.substring(0, 1);
 
-        // Procesar apellidos considerando partículas comunes en español
+        // Procesar lastName considerando partículas comunes en español
         List<String> apellidosLimpios = new ArrayList<>();
         for (int i = 0; i < tokensApellidos.length; i++) {
             String token = tokensApellidos[i];
@@ -102,7 +102,7 @@ public class UsernameGeneratorService {
         String inicialSegundoApellido = "";
 
         if (apellidosLimpios.isEmpty()) {
-            // Sin apellido: la base es directamente los primeros 4 caracteres del nombre
+            // Sin apellido: la base es directamente los primeros 4 caracteres del name
             // Ej: "Justyn" → "just". No se usa la inicial separada porque daría "j" + "justyn" = "jjustyn"
             String baseNombre = primerNombre.substring(0, Math.min(primerNombre.length(), 4));
             while (baseNombre.length() < 4) {
@@ -126,14 +126,14 @@ public class UsernameGeneratorService {
 
         // Garantizar restricción de base de datos: longitud mínima >= 4 caracteres
         if (base.length() < 4) {
-            // Intentar tomar más caracteres del primer nombre
+            // Intentar tomar más caracteres del primer name
             if (primerNombre.length() > 1) {
                 int letrasFaltantes = 4 - base.length();
                 int endIndex = Math.min(primerNombre.length(), 1 + letrasFaltantes);
                 String prefijoExtendido = primerNombre.substring(0, endIndex);
                 base = prefijoExtendido + primerApellido + inicialSegundoApellido;
             }
-            // Si aún es menor a 4 (ej. nombre "A", apellido "Li"), rellenar de forma segura
+            // Si aún es menor a 4 (ej. name "A", apellido "Li"), rellenar de forma segura
             while (base.length() < 4) {
                 base = base + "0";
             }
@@ -149,7 +149,7 @@ public class UsernameGeneratorService {
     }
 
     /**
-     * Determina el siguiente nombre de usuario disponible dada una lista de existentes.
+     * Determina el siguiente name de user disponible dada una lista de existentes.
      * Si 'base' no existe, retorna 'base'.
      * Si ya existe 'base', genera 'base1', 'base2', etc.
      */

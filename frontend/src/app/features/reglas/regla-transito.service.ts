@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface ReglaTransito {
+export interface TrafficRule {
   id?: number;
   codigo: string;
   nombre: string;
-  descripcion?: string;
+  description?: string;
   categoria: string;
   penalizacionBase: number;
   activa?: boolean;
@@ -16,8 +16,8 @@ export interface ReglaTransito {
 export class ReglaTransitoService {
   private readonly url = '/api/reglas-transito';
   constructor(private http: HttpClient) {}
-  listar(): Observable<ReglaTransito[]> { return this.http.get<ReglaTransito[]>(this.url); }
-  crear(regla: ReglaTransito): Observable<ReglaTransito> { return this.http.post<ReglaTransito>(this.url, regla); }
-  actualizar(id: number, regla: ReglaTransito): Observable<ReglaTransito> { return this.http.put<ReglaTransito>(`${this.url}/${id}`, regla); }
+  listar(): Observable<TrafficRule[]> { return this.http.get<TrafficRule[]>(this.url); }
+  crear(regla: TrafficRule): Observable<TrafficRule> { return this.http.post<TrafficRule>(this.url, regla); }
+  actualizar(id: number, regla: TrafficRule): Observable<TrafficRule> { return this.http.put<TrafficRule>(`${this.url}/${id}`, regla); }
   eliminar(id: number): Observable<void> { return this.http.delete<void>(`${this.url}/${id}`); }
 }

@@ -13,16 +13,16 @@ import { AuthService } from './auth.service';
 })
 export class RegisterComponent {
   data = {
-    nombres: '',
-    apellidos: '',
-    correo: '',
+    firstName: '',
+    lastName: '',
+    email: '',
     password: '',
-    telefono: ''
+    phone: ''
   };
   errorMessage = '';
   loading = false;
 
-  // Estado para mostrar confirmación de registro exitoso con el nombre de usuario generado
+  // Estado para mostrar confirmación de registro exitoso con el nombre de user generado
   registered = false;
   registeredUsername = '';
   registeredEmail = '';
@@ -30,7 +30,7 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    if (!this.data.nombres || !this.data.apellidos || !this.data.correo || !this.data.password) {
+    if (!this.data.firstName || !this.data.lastName || !this.data.email || !this.data.password) {
       this.errorMessage = 'Todos los campos son obligatorios';
       return;
     }
@@ -42,13 +42,13 @@ export class RegisterComponent {
       next: (res: any) => {
         this.loading = false;
         this.registered = true;
-        this.registeredUsername = res?.usuario?.nombreUsuario || '';
-        this.registeredEmail = res?.usuario?.correo || this.data.correo;
+        this.registeredUsername = res?.user?.username || '';
+        this.registeredEmail = res?.user?.email || this.data.email;
       },
       error: (err) => {
         this.loading = false;
         if (err.status === 409) {
-          this.errorMessage = 'El correo ya está registrado';
+          this.errorMessage = 'El email ya está registrado';
         } else if (err.status === 400) {
           this.errorMessage = 'Datos inválidos. Verifique el formato.';
         } else {

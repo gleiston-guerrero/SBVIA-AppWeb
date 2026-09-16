@@ -5,14 +5,14 @@ import lombok.Data;
 
 /**
  * DTO para la petición de inicio de sesión.
- * Permite autenticarse mediante 'identificador' (que puede ser el nombre de usuario o el correo electrónico).
- * Mantiene compatibilidad total con peticiones existentes que envían 'correo'.
+ * Permite autenticarse mediante 'identificador' (que puede ser el name de user o el email electrónico).
+ * Mantiene compatibilidad total con peticiones existentes que envían 'email'.
  */
 @Data
 public class LoginRequest {
 
     private String identificador;
-    private String correo;
+    private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
@@ -21,8 +21,8 @@ public class LoginRequest {
         if (identificador != null && !identificador.isBlank()) {
             return identificador.trim();
         }
-        if (correo != null && !correo.isBlank()) {
-            return correo.trim();
+        if (email != null && !email.isBlank()) {
+            return email.trim();
         }
         return "";
     }
@@ -31,14 +31,14 @@ public class LoginRequest {
         this.identificador = identificador;
     }
 
-    public String getCorreo() {
+    public String getEmail() {
         return getIdentificador();
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
         if (this.identificador == null || this.identificador.isBlank()) {
-            this.identificador = correo;
+            this.identificador = email;
         }
     }
 }

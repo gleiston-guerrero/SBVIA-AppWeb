@@ -11,8 +11,8 @@ export const roleGuard: CanActivateFn = route => {
   return authService.waitForSessionAndCheck().pipe(
     map(autenticado => {
       if (!autenticado) return router.createUrlTree(['/login']);
-      const rol = authService.currentUser()?.rol;
-      return rolesPermitidos.includes(rol) ? true : router.createUrlTree(['/dashboard']);
+      const role = authService.currentUser()?.role;
+      return rolesPermitidos.includes(role) ? true : router.createUrlTree(['/dashboard']);
     })
   );
 };

@@ -6,16 +6,16 @@
 
   <section class="iniciar-panel">
     <div class="pasos">
-      <span class="paso activo">1</span><div><strong>Elige un escenario</strong><small>Selecciona el entorno y su dificultad</small></div>
+      <span class="paso activo">1</span><div><strong>Elige un scenario</strong><small>Selecciona el entorno y su dificultad</small></div>
       <span class="separador"></span><span class="paso">2</span><div><strong>Realiza la práctica</strong><small>Registra las decisiones del recorrido</small></div>
       <span class="separador"></span><span class="paso">3</span><div><strong>Consulta el resultado</strong><small>Recibe puntaje y retroalimentación</small></div>
     </div>
     <div class="selector-practica">
-      <label>Escenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un escenario</option><option *ngFor="let escenario of escenarios" [ngValue]="escenario.id">{{ escenario.nombre }}</option></select></label>
-      <div class="detalle" *ngIf="escenarioSeleccionado as escenario"><span>{{ escenario.tipoVia }}</span><span>Nivel {{ escenario.nivelDificultad }}</span><span>{{ escenario.clima }}</span><span>Tráfico {{ escenario.densidadTrafico }}</span><p>{{ escenario.descripcion }}</p></div>
-      <a class="btn-iniciar" [class.disabled]="!idEscenarioSeleccionado" [attr.aria-disabled]="!idEscenarioSeleccionado" [routerLink]="idEscenarioSeleccionado ? ['/simulacion', idEscenarioSeleccionado] : null"><span>▶</span> Iniciar práctica ahora</a>
+      <label>Scenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un scenario</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.nombre }}</option></select></label>
+      <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ scenario.roadType }}</span><span>Nivel {{ scenario.difficultyLevel }}</span><span>{{ scenario.clima }}</span><span>Tráfico {{ scenario.trafficDensity }}</span><p>{{ scenario.description }}</p></div>
+      <a class="btn-iniciar" [class.disabled]="!idEscenarioSeleccionado" [attr.aria-disabled]="!idEscenarioSeleccionado" [routerLink]="idEscenarioSeleccionado ? ['/simulation', idEscenarioSeleccionado] : null"><span>▶</span> Iniciar práctica ahora</a>
     </div>
-    <p class="sin-escenarios" *ngIf="!cargandoEscenarios && escenarios.length === 0">No existen escenarios activos para comenzar una práctica.</p>
+    <p class="sin-scenarios" *ngIf="!cargandoEscenarios && scenarios.length === 0">No existen scenarios activos para comenzar una práctica.</p>
   </section>
 
   <div *ngIf="loading" class="loading">Cargando...</div>
@@ -23,7 +23,7 @@
 
   <section class="como-funciona" aria-label="Cómo usar el módulo de prácticas">
     <strong>¿Qué puedes hacer aquí?</strong>
-    <p>Cada recorrido queda guardado como una práctica. Al finalizar, el servidor calcula tu puntaje y genera recomendaciones según tus infracciones.</p>
+    <p>Cada recorrido queda guardado como una práctica. Al finalizar, el servidor calcula tu puntaje y genera recomendaciones según tus infractions.</p>
   </section>
 
   <div class="historial-encabezado">
@@ -46,7 +46,7 @@
       <thead>
         <tr>
           <th>Fecha de Inicio</th>
-          <th>Escenario</th>
+          <th>Scenario</th>
           <th>Estado</th>
           <th>Puntaje</th>
           <th>Acciones</th>
@@ -59,8 +59,8 @@
           <td><span class="estado" [class.aprobada]="(practica.completada || practica.fechaFin) && practica.puntajeFinal >= 70" [class.reprobada]="(practica.completada || practica.fechaFin) && practica.puntajeFinal < 70">{{ (practica.completada || practica.fechaFin) ? (practica.puntajeFinal >= 70 ? 'Aprobada' : 'Reprobada') : 'En progreso' }}</span></td>
           <td><strong>{{ (practica.completada || practica.fechaFin) ? (practica.puntajeFinal + '/100') : '—' }}</strong></td>
           <td class="acciones">
-            <button type="button" class="btn-informe" *ngIf="practica.completada || practica.fechaFin" (click)="verInforme(practica)">{{ practicaSeleccionada?.idSimulacion === practica.idSimulacion ? 'Cerrar informe' : 'Ver informe IA' }}</button>
-            <a *ngIf="practica.idEscenario" [routerLink]="['/simulacion', practica.idEscenario]">Repetir escenario</a>
+            <button type="button" class="btn-informe" *ngIf="practica.completada || practica.fechaFin" (click)="verInforme(practica)">{{ practicaSeleccionada?.simulationId === practica.simulationId ? 'Cerrar informe' : 'Ver informe IA' }}</button>
+            <a *ngIf="practica.scenarioId" [routerLink]="['/simulation', practica.scenarioId]">Repetir scenario</a>
           </td>
         </tr>
       </tbody>
@@ -68,7 +68,7 @@
     
     <ng-template #noPracticas>
       <div class="no-data">
-        <p>{{ practicas.length ? 'No hay prácticas que coincidan con este filtro.' : 'Todavía no tienes prácticas. Selecciona un escenario arriba para comenzar.' }}</p>
+        <p>{{ practicas.length ? 'No hay prácticas que coincidan con este filtro.' : 'Todavía no tienes prácticas. Selecciona un scenario arriba para comenzar.' }}</p>
       </div>
     </ng-template>
   </div>

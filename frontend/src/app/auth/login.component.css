@@ -324,7 +324,7 @@
    ============================ */
 
 /* El panel de formulario del registro es un poco más ancho para acomodar
-   la fila de dos campos (nombres + apellidos) sin que queden apretados. */
+   la fila de dos campos (firstName + lastName) sin que queden apretados. */
 .register-form-side {
   flex: 0 0 480px;
 }

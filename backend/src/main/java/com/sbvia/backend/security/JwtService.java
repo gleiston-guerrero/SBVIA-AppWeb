@@ -39,11 +39,11 @@ public class JwtService {
     /**
      * Genera un access token JWT con claims personalizados.
      */
-    public String generateAccessToken(UserDetails userDetails, Long userId, String rol) {
+    public String generateAccessToken(UserDetails userDetails, Long userId, String role) {
         return buildToken(
                 Map.of(
                         "email", userDetails.getUsername(),
-                        "rol", rol,
+                        "role", role,
                         "type", "access"
                 ),
                 String.valueOf(userId),
@@ -83,7 +83,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae el subject (ID del usuario) del token.
+     * Extrae el subject (ID del user) del token.
      */
     public String extractSubject(String token) {
         return extractClaim(token, Claims::getSubject);

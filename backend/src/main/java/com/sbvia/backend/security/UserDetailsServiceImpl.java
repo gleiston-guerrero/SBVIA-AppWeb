@@ -1,10 +1,9 @@
 package com.sbvia.backend.security;
 
-import com.sbvia.backend.entity.Usuario;
-import com.sbvia.backend.repository.UsuarioRepository;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,26 +15,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String identificador) throws UsernameNotFoundException {
         if (identificador == null || identificador.isBlank()) {
-            throw new UsernameNotFoundException("Identificador de usuario no proporcionado");
+            throw new UsernameNotFoundException("Identificador de user no proporcionado");
         }
 
-        Usuario usuario = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador.trim(), identificador.trim())
+        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador.trim(), identificador.trim())
                 .orElseThrow(() -> new UsernameNotFoundException(
-                        "Usuario no encontrado con identificador: " + identificador));
+                        "User no encontrado con identificador: " + identificador));
 
-        if (usuario.isCuentaBloqueada()) {
-            throw new UsernameNotFoundException("La cuenta del usuario está bloqueada");
+        if (user.isAccountLocked()) {
+            throw new UsernameNotFoundException("La cuenta del user está bloqueada");
         }
 
-        return new User(
-                usuario.getCorreo(),
-                usuario.getContrasenaHash(),
-                List.of(new SimpleGrantedAuthority(usuario.getRol().getNombre()))
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPasswordHash(),
+                List.of(new SimpleGrantedAuthority(user.getRole().getName()))
         );
     }
 }

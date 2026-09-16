@@ -12,7 +12,7 @@ import { AuthService } from '../../../auth/auth.service';
   styleUrl: './shell.component.css'
 })
 export class ShellComponent implements OnInit {
-  usuario: any = null;
+  user: any = null;
   sidebarAbierto = true;
   menuAbierto = false;
   modalPerfilAbierto = false;
@@ -25,14 +25,14 @@ export class ShellComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.perfilForm = this.fb.group({
-      nombres: ['', [Validators.required, Validators.maxLength(255)]],
-      apellidos: ['', [Validators.required, Validators.maxLength(255)]],
-      telefono: ['', [Validators.maxLength(20)]]
+      firstName: ['', [Validators.required, Validators.maxLength(255)]],
+      lastName: ['', [Validators.required, Validators.maxLength(255)]],
+      phone: ['', [Validators.maxLength(20)]]
     });
 
-    // Actualizar usuario reactivamente si cambia en el AuthService
+    // Actualizar user reactivamente si cambia en el AuthService
     effect(() => {
-      this.usuario = this.authService.currentUser();
+      this.user = this.authService.currentUser();
     });
   }
 
@@ -50,11 +50,11 @@ export class ShellComponent implements OnInit {
 
   abrirModalPerfil(): void {
     this.menuAbierto = false; // Cerrar el menú
-    if (this.usuario) {
+    if (this.user) {
       this.perfilForm.patchValue({
-        nombres: this.usuario.nombres,
-        apellidos: this.usuario.apellidos,
-        telefono: this.usuario.telefono
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        phone: this.user.phone
       });
     }
     this.modalPerfilAbierto = true;

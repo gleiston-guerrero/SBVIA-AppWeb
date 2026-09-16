@@ -8,13 +8,13 @@ import { routes } from './app.routes';
 /**
  * Smoke tests de integración de rutas — SBVIA Frontend
  *
- * Cubre las Historias de Usuario US-01 a US-06 referenciadas
+ * Cubre las Historias de User US-01 a US-06 referenciadas
  * en la matriz de trazabilidad (docs/trazabilidad/matriz.csv).
  *
  * US-01: Registro autónomo de conductor         → ruta /registro
  * US-02: Inicio de sesión seguro                → ruta /login
- * US-03: Exploración de escenarios viales       → ruta /escenarios (authGuard)
- * US-04: Ejecución de simulación                → ruta /escenarios (lazy) + SP sp_reporte_simulacion
+ * US-03: Exploración de scenarios viales       → ruta /scenarios (authGuard)
+ * US-04: Ejecución de simulación                → ruta /scenarios (lazy) + SP sp_reporte_simulacion
  * US-05: Visualización de métricas en dashboard → ruta /dashboard (authGuard)
  * US-06: Descarga de certificado                → ruta /practicas (lazy)
  */
@@ -66,10 +66,10 @@ describe('AppComponent — Smoke Tests de Rutas (US-01 a US-06)', () => {
     expect(rootRoute?.redirectTo).toBe('/login');
   });
 
-  // ─── US-03: Exploración de escenarios viales ──────────────────────────────
+  // ─── US-03: Exploración de scenarios viales ──────────────────────────────
 
-  it('US-03 — ruta /escenarios está declarada y protegida con authGuard', () => {
-    const escenariosRoute = routes.find(r => r.path === 'escenarios');
+  it('US-03 — ruta /scenarios está declarada y protegida con authGuard', () => {
+    const escenariosRoute = routes.find(r => r.path === 'scenarios');
     expect(escenariosRoute).toBeDefined();
     expect(escenariosRoute?.canActivate).toBeTruthy();
     expect(escenariosRoute?.canActivate?.length).toBeGreaterThan(0);
@@ -77,8 +77,8 @@ describe('AppComponent — Smoke Tests de Rutas (US-01 a US-06)', () => {
 
   // ─── US-04: Ejecución de simulación ──────────────────────────────────────
 
-  it('US-04 — ruta /escenarios/nuevo para nueva simulación está declarada', () => {
-    const nuevoRoute = routes.find(r => r.path === 'escenarios/nuevo');
+  it('US-04 — ruta /scenarios/nuevo para nueva simulación está declarada', () => {
+    const nuevoRoute = routes.find(r => r.path === 'scenarios/nuevo');
     expect(nuevoRoute).toBeDefined();
     expect(nuevoRoute?.loadComponent).toBeTruthy();
   });
@@ -103,7 +103,7 @@ describe('AppComponent — Smoke Tests de Rutas (US-01 a US-06)', () => {
   // ─── Cobertura total de rutas ─────────────────────────────────────────────
 
   it('todas las rutas protegidas usan authGuard', () => {
-    const protectedPaths = ['dashboard', 'escenarios', 'escenarios/nuevo', 'escenarios/editar/:id', 'usuarios', 'practicas'];
+    const protectedPaths = ['dashboard', 'scenarios', 'scenarios/nuevo', 'scenarios/editar/:id', 'users', 'practicas'];
     protectedPaths.forEach(path => {
       const route = routes.find(r => r.path === path);
       expect(route?.canActivate ?? route?.loadComponent).toBeTruthy();

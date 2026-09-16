@@ -7,7 +7,7 @@ import { map } from 'rxjs';
  * Guard de autenticación asíncrono.
  *
  * Espera a que APP_INITIALIZER termine de intentar restaurar la sesión
- * (sessionReady$) antes de evaluar si el usuario está autenticado.
+ * (sessionReady$) antes de evaluar si el user está autenticado.
  * Esto evita la race condition donde el guard redirige al login
  * antes de que el refresh del token haya completado.
  */

@@ -2,12 +2,12 @@ package com.sbvia.backend.controller;
 
 import com.sbvia.backend.dto.LoginRequest;
 import com.sbvia.backend.dto.RegisterRequest;
-import com.sbvia.backend.entity.EstadoUsuario;
-import com.sbvia.backend.entity.Rol;
-import com.sbvia.backend.entity.Usuario;
-import com.sbvia.backend.repository.EstadoUsuarioRepository;
-import com.sbvia.backend.repository.RolRepository;
-import com.sbvia.backend.repository.UsuarioRepository;
+import com.sbvia.backend.entity.UserState;
+import com.sbvia.backend.entity.Role;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.repository.UserStateRepository;
+import com.sbvia.backend.repository.RoleRepository;
+import com.sbvia.backend.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,13 +40,13 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @Autowired
-    private RolRepository rolRepository;
+    private RoleRepository rolRepository;
 
     @Autowired
-    private EstadoUsuarioRepository estadoUsuarioRepository;
+    private UserStateRepository estadoUsuarioRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -60,24 +60,24 @@ class AuthControllerTest {
     @MockitoBean
     private com.sbvia.backend.service.TokenBlacklistService tokenBlacklistService;
 
-    private Usuario testUser;
+    private User testUser;
 
     @BeforeEach
     void setUp() {
         usuarioRepository.deleteAll();
         rolRepository.deleteAll();
-        Rol rolTest = Rol.builder()
-                .nombre("ROLE_USER")
+        Role rolTest = Role.builder()
+                .name("ROLE_USER")
                 .descripcion("Alumno o conductor en práctica")
                 .build();
         rolTest = rolRepository.save(rolTest);
 
-        EstadoUsuario estadoActivo = estadoUsuarioRepository.save(EstadoUsuario.builder()
-                .nombre("ACTIVO")
+        UserState estadoActivo = estadoUsuarioRepository.save(UserState.builder()
+                .name("ACTIVO")
                 .descripcion("Cuenta habilitada")
                 .permiteAcceso(true)
                 .build());
-        testUser = Usuario.builder()
+        testUser = User.builder()
                 .nombres("Test")
                 .apellidos("User")
                 .nombreUsuario("testuser")
@@ -85,7 +85,7 @@ class AuthControllerTest {
                 .contrasenaHash(passwordEncoder.encode("password123"))
                 .rol(rolTest)
                 .estadoUsuario(estadoActivo)
-                .cuentaBloqueada(false)
+                .accountLocked(false)
                 .build();
         usuarioRepository.save(testUser);
     }
@@ -260,7 +260,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @DisplayName("Usuario autenticado sin rol administrativo recibe Problem Details 403")
+    @DisplayName("User autenticado sin rol administrativo recibe Problem Details 403")
     void accesoSinRolAdministrativo() throws Exception {
         LoginRequest loginReq = new LoginRequest();
         loginReq.setCorreo("test@example.com");

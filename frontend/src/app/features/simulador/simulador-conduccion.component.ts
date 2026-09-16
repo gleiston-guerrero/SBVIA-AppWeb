@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { EscenarioService } from '../escenarios/escenario.service';
-import { InformeIA, MetricasConduccion, SimulacionService } from '../practicas/simulacion.service';
+import { EscenarioService } from '../scenarios/scenario.service';
+import { InformeIA, MetricasConduccion, SimulacionService } from '../practicas/simulation.service';
 
 type EstadoJuego = 'listo' | 'corriendo' | 'pausado' | 'finalizado';
 
@@ -49,7 +49,7 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   segundos = 0;
   distanciaKm = 0;
 
-  // Infracciones detectadas (Etapa 3)
+  // Infractions detectadas (Etapa 3)
   colisiones = 0;
   salidasCarril = 0;
   excesosVelocidad = 0;
@@ -58,7 +58,7 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   semaforosRespetados = 0;
 
   // Integración con el backend (Etapa 3)
-  idEscenario: number | null = null;
+  scenarioId: number | null = null;
   nombreEscenario = 'Conducción libre';
   idSimulacionBackend: number | null = null;
   modoLocal = false;
@@ -97,9 +97,9 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   ) {}
 
   ngOnInit(): void {
-    const param = Number(this.route.snapshot.queryParamMap.get('escenario'));
+    const param = Number(this.route.snapshot.queryParamMap.get('scenario'));
     if (Number.isInteger(param) && param > 0) {
-      this.idEscenario = param;
+      this.scenarioId = param;
       this.escenarioService.buscarPorId(param).subscribe({
         next: (e) => { this.nombreEscenario = e.nombre; },
         error: () => { /* se mantiene el nombre genérico */ }
@@ -109,11 +109,11 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
         next: (resp) => {
           const primero = resp?.content?.[0];
           if (primero?.id) {
-            this.idEscenario = primero.id;
+            this.scenarioId = primero.id;
             this.nombreEscenario = primero.nombre ?? this.nombreEscenario;
           }
         },
-        error: () => { /* modo libre sin escenario */ }
+        error: () => { /* modo libre sin scenario */ }
       });
     }
   }
@@ -142,16 +142,16 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   // ─── Controles de la simulación ───
   iniciar(): void {
     if (this.estado === 'finalizado') this.reiniciar();
-    if (this.idSimulacionBackend === null && this.idEscenario !== null && !this.modoLocal) {
-      this.simulacionService.iniciar(this.idEscenario).subscribe({
-        next: (s) => { this.idSimulacionBackend = s.idSimulacion; },
+    if (this.idSimulacionBackend === null && this.scenarioId !== null && !this.modoLocal) {
+      this.simulacionService.iniciar(this.scenarioId).subscribe({
+        next: (s) => { this.idSimulacionBackend = s.simulationId; },
         error: () => {
           this.modoLocal = true;
           this.aviso = 'Sin conexión con el servidor: se juega en modo local y no se guardará el resultado.';
         }
       });
     }
-    if (this.idEscenario === null) this.modoLocal = true;
+    if (this.scenarioId === null) this.modoLocal = true;
     this.estado = 'corriendo';
     this.ultimaMarca = performance.now();
   }
@@ -182,8 +182,8 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
     this.puntajeServidor = null;
     this.informe = null;
     this.idSimulacionBackend = null;
-    this.modoLocal = this.idEscenario === null;
-    this.aviso = this.modoLocal ? 'Sin escenario disponible: modo local.' : '';
+    this.modoLocal = this.scenarioId === null;
+    this.aviso = this.modoLocal ? 'Sin scenario disponible: modo local.' : '';
     this.guardando = false;
     this.xAuto = this.centroCarril(1);
     this.desplazamiento = 0;
@@ -208,8 +208,8 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
       this.guardando = true;
       this.simulacionService.finalizarConduccion(this.idSimulacionBackend, this.metricas()).subscribe({
         next: (r) => {
-          this.puntajeServidor = Number(r.simulacion.puntajeFinal);
-          this.informe = r.retroalimentacion;
+          this.puntajeServidor = Number(r.simulation.puntajeFinal);
+          this.informe = r.feedback;
           this.guardando = false;
         },
         error: () => {

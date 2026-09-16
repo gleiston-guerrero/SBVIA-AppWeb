@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuditoriaService, BitacoraAuditoria } from './auditoria.service';
+import { AuditoriaService, AuditLog } from './auditoria.service';
 
 @Component({
   selector: 'app-auditoria',
@@ -11,20 +11,20 @@ import { AuditoriaService, BitacoraAuditoria } from './auditoria.service';
   styleUrls: ['./auditoria.component.css']
 })
 export class AuditoriaComponent implements OnInit {
-  registros: BitacoraAuditoria[] = [];
+  registros: AuditLog[] = [];
   cargando = false;
   error = '';
 
   filtros = {
     tabla: '',
     operacion: '',
-    usuario: '',
+    user: '',
     fechaInicio: '',
     fechaFin: ''
   };
 
   modalAbierto = false;
-  registroSeleccionado: BitacoraAuditoria | null = null;
+  registroSeleccionado: AuditLog | null = null;
   datosAntiguosObj: any = null;
   datosNuevosObj: any = null;
 
@@ -79,7 +79,7 @@ export class AuditoriaComponent implements OnInit {
     });
   }
 
-  verDetalle(registro: BitacoraAuditoria): void {
+  verDetalle(registro: AuditLog): void {
     this.registroSeleccionado = registro;
     try {
       this.datosAntiguosObj = registro.datosAnteriores ? JSON.parse(registro.datosAnteriores) : null;

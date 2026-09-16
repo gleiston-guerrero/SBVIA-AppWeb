@@ -1,9 +1,9 @@
 package com.sbvia.backend.service;
 
-import com.sbvia.backend.dto.RespaldoRequestDTO;
-import com.sbvia.backend.entity.BitacoraAuditoria;
+import com.sbvia.backend.dto.BackupRequestDTO;
+import com.sbvia.backend.entity.AuditLog;
 import com.sbvia.backend.model.Respaldo;
-import com.sbvia.backend.repository.BitacoraAuditoriaRepository;
+import com.sbvia.backend.repository.AuditLogRepository;
 import com.sbvia.backend.repository.RespaldoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ public class RespaldoServiceTest {
     private RespaldoRepository respaldoRepository;
 
     @Mock
-    private BitacoraAuditoriaRepository auditoriaRepository;
+    private AuditLogRepository auditoriaRepository;
 
     @Mock
     private TaskScheduler taskScheduler;
@@ -69,7 +69,7 @@ public class RespaldoServiceTest {
 
     @Test
     void testGenerarRespaldoInmediato() {
-        RespaldoRequestDTO dto = new RespaldoRequestDTO();
+        BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("COMPLETO");
         dto.setComentario("Test comment");
 
@@ -90,12 +90,12 @@ public class RespaldoServiceTest {
         assertEquals("COMPLETO", result.getModalidad());
         assertEquals("MANUAL", result.getTipo());
         verify(spyService).ejecutarPgDump(result);
-        verify(auditoriaRepository).save(any(BitacoraAuditoria.class));
+        verify(auditoriaRepository).save(any(AuditLog.class));
     }
 
     @Test
     void testGenerarRespaldoProgramado() {
-        RespaldoRequestDTO dto = new RespaldoRequestDTO();
+        BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("SOLO_ESTRUCTURA");
         dto.setFechaProgramada(LocalDateTime.now().plusDays(1));
 
@@ -138,11 +138,11 @@ public class RespaldoServiceTest {
     @Test
     void testRespaldoProgramadoCron() {
         RespaldoService spyService = spy(respaldoService);
-        doReturn(new Respaldo()).when(spyService).generarRespaldo(any(RespaldoRequestDTO.class), eq("PROGRAMADO"));
+        doReturn(new Respaldo()).when(spyService).generarRespaldo(any(BackupRequestDTO.class), eq("PROGRAMADO"));
 
         spyService.respaldoProgramado();
 
-        ArgumentCaptor<RespaldoRequestDTO> captor = ArgumentCaptor.forClass(RespaldoRequestDTO.class);
+        ArgumentCaptor<BackupRequestDTO> captor = ArgumentCaptor.forClass(BackupRequestDTO.class);
         verify(spyService).generarRespaldo(captor.capture(), eq("PROGRAMADO"));
         assertEquals("COMPLETO", captor.getValue().getModalidad());
     }

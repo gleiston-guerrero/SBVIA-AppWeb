@@ -1,8 +1,8 @@
 package com.sbvia.backend.security;
 
-import com.sbvia.backend.entity.Rol;
-import com.sbvia.backend.entity.Usuario;
-import com.sbvia.backend.repository.UsuarioRepository;
+import com.sbvia.backend.entity.Role;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,14 +20,14 @@ import static org.mockito.Mockito.when;
 class UserDetailsServiceImplTest {
 
     @Mock
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @InjectMocks
     private UserDetailsServiceImpl userDetailsService;
 
     @Test
     void cargaUsuarioActivoPorCorreo() {
-        Usuario usuario = usuario(false);
+        User usuario = usuario(false);
         when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getCorreo(), usuario.getCorreo()))
                 .thenReturn(Optional.of(usuario));
 
@@ -41,7 +41,7 @@ class UserDetailsServiceImplTest {
 
     @Test
     void cargaUsuarioActivoPorNombreUsuario() {
-        Usuario usuario = usuario(false);
+        User usuario = usuario(false);
         when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getNombreUsuario(), usuario.getNombreUsuario()))
                 .thenReturn(Optional.of(usuario));
 
@@ -55,7 +55,7 @@ class UserDetailsServiceImplTest {
 
     @Test
     void rechazaUsuarioInactivo() {
-        Usuario usuario = usuario(true);
+        User usuario = usuario(true);
         when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getCorreo(), usuario.getCorreo()))
                 .thenReturn(Optional.of(usuario));
 
@@ -74,15 +74,15 @@ class UserDetailsServiceImplTest {
                 .hasMessageContaining("ausente@sbvia.test");
     }
 
-    private Usuario usuario(boolean cuentaBloqueada) {
-        return Usuario.builder()
+    private User usuario(boolean accountLocked) {
+        return User.builder()
                 .nombres("Conductor")
                 .apellidos("Demo")
                 .nombreUsuario("cdemop")
                 .correo("conductor@sbvia.test")
                 .contrasenaHash("hash-seguro")
-                .cuentaBloqueada(cuentaBloqueada)
-                .rol(Rol.builder().nombre("ROLE_USER").build())
+                .accountLocked(accountLocked)
+                .rol(Role.builder().name("ROLE_USER").build())
                 .build();
     }
 }

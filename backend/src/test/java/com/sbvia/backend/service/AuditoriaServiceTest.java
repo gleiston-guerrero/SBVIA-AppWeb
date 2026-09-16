@@ -1,8 +1,8 @@
 package com.sbvia.backend.service;
 
 import com.lowagie.text.pdf.PdfReader;
-import com.sbvia.backend.entity.BitacoraAuditoria;
-import com.sbvia.backend.repository.BitacoraAuditoriaRepository;
+import com.sbvia.backend.entity.AuditLog;
+import com.sbvia.backend.repository.AuditLogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,44 +26,44 @@ import static org.mockito.Mockito.when;
 public class AuditoriaServiceTest {
 
     @Mock
-    private BitacoraAuditoriaRepository repository;
+    private AuditLogRepository repository;
 
     @InjectMocks
     private AuditoriaService auditoriaService;
 
-    private BitacoraAuditoria log1;
-    private BitacoraAuditoria log2;
+    private AuditLog log1;
+    private AuditLog log2;
 
     @BeforeEach
     void setUp() {
-        log1 = new BitacoraAuditoria();
+        log1 = new AuditLog();
         log1.setIdAuditoria(1L);
-        log1.setNombreTabla("usuario");
-        log1.setOperacion("INSERT");
-        log1.setUsuarioApp("keith");
+        log1.setTableName("usuario");
+        log1.setOperation("INSERT");
+        log1.setAppUser("keith");
         log1.setFechaHora(LocalDateTime.now());
-        log1.setDatosNuevos("{\"id\":1}");
+        log1.setNewData("{\"id\":1}");
 
-        log2 = new BitacoraAuditoria();
+        log2 = new AuditLog();
         log2.setIdAuditoria(2L);
-        log2.setNombreTabla("respaldo");
-        log2.setOperacion("BACKUP");
-        log2.setUsuarioDb("postgres");
+        log2.setTableName("respaldo");
+        log2.setOperation("BACKUP");
+        log2.setDbUser("postgres");
         log2.setFechaHora(LocalDateTime.now().minusDays(1));
         log2.setDatosAnteriores(new String(new char[250]).replace("\0", "a")); // Largo para probar el truncamiento
     }
 
     @Test
     void testObtenerAuditoriaConFiltros() {
-        List<BitacoraAuditoria> expected = List.of(log1);
+        List<AuditLog> expected = List.of(log1);
         
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
-        List<BitacoraAuditoria> result = auditoriaService.obtenerAuditoria("usuario", "INSERT", "keith", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
+        List<AuditLog> result = auditoriaService.obtenerAuditoria("usuario", "INSERT", "keith", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("usuario", result.get(0).getNombreTabla());
+        assertEquals("usuario", result.get(0).getTableName());
     }
 
     @Test
@@ -78,11 +78,11 @@ public class AuditoriaServiceTest {
 
     @Test
     void testObtenerAuditoriaSinFiltros() {
-        List<BitacoraAuditoria> expected = List.of(log1, log2);
+        List<AuditLog> expected = List.of(log1, log2);
         
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
-        List<BitacoraAuditoria> result = auditoriaService.obtenerAuditoria(null, null, null, null, null);
+        List<AuditLog> result = auditoriaService.obtenerAuditoria(null, null, null, null, null);
 
         assertNotNull(result);
         assertEquals(2, result.size());
@@ -90,7 +90,7 @@ public class AuditoriaServiceTest {
 
     @Test
     void testGenerarReportePdf() throws Exception {
-        List<BitacoraAuditoria> expected = List.of(log1, log2);
+        List<AuditLog> expected = List.of(log1, log2);
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
         byte[] pdfBytes = auditoriaService.generarReportePdf("usuario", "INSERT", "keith", null, null);

@@ -1,14 +1,14 @@
 package com.sbvia.backend.service;
 
-import com.sbvia.backend.dto.EscenarioDTO;
-import com.sbvia.backend.entity.Escenario;
-import com.sbvia.backend.entity.TipoVia;
-import com.sbvia.backend.entity.NivelDificultad;
-import com.sbvia.backend.entity.TipoClima;
-import com.sbvia.backend.repository.EscenarioRepository;
-import com.sbvia.backend.repository.NivelDificultadRepository;
-import com.sbvia.backend.repository.TipoClimaRepository;
-import com.sbvia.backend.repository.TipoViaRepository;
+import com.sbvia.backend.dto.ScenarioDTO;
+import com.sbvia.backend.entity.Scenario;
+import com.sbvia.backend.entity.RoadType;
+import com.sbvia.backend.entity.DifficultyLevel;
+import com.sbvia.backend.entity.WeatherType;
+import com.sbvia.backend.repository.ScenarioRepository;
+import com.sbvia.backend.repository.DifficultyLevelRepository;
+import com.sbvia.backend.repository.WeatherTypeRepository;
+import com.sbvia.backend.repository.RoadTypeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,40 +31,40 @@ import static org.mockito.Mockito.*;
 class EscenarioServiceTest {
 
     @Mock
-    private EscenarioRepository escenarioRepository;
+    private ScenarioRepository escenarioRepository;
 
     @Mock
-    private TipoViaRepository tipoViaRepository;
+    private RoadTypeRepository tipoViaRepository;
 
     @Mock
-    private NivelDificultadRepository nivelDificultadRepository;
+    private DifficultyLevelRepository nivelDificultadRepository;
 
     @Mock
-    private TipoClimaRepository tipoClimaRepository;
+    private WeatherTypeRepository tipoClimaRepository;
 
     @InjectMocks
-    private EscenarioService escenarioService;
+    private ScenarioService escenarioService;
 
-    private TipoVia buildTipoVia(String nombre) {
-        return TipoVia.builder().idTipoVia(1).nombre(nombre).build();
+    private RoadType buildTipoVia(String name) {
+        return RoadType.builder().idTipoVia(1).name(name).build();
     }
 
-    private NivelDificultad buildNivelDificultad(Integer valor) {
-        return NivelDificultad.builder().idNivelDificultad(1).nombre("Nivel " + valor).valor(valor).build();
+    private DifficultyLevel buildNivelDificultad(Integer value) {
+        return DifficultyLevel.builder().idNivelDificultad(1).name("Nivel " + value).value(value).build();
     }
 
-    private TipoClima buildTipoClima(String nombre) {
-        return TipoClima.builder().idTipoClima(1).nombre(nombre).build();
+    private WeatherType buildTipoClima(String name) {
+        return WeatherType.builder().idTipoClima(1).name(name).build();
     }
 
-    private Escenario buildEscenario(Integer id, String nombre) {
-        return Escenario.builder()
+    private Scenario buildEscenario(Integer id, String name) {
+        return Scenario.builder()
                 .idEscenario(id)
-                .nombre(nombre)
-                .descripcion("Descripción de " + nombre)
-                .tipoVia(buildTipoVia("Urbana"))
-                .nivelDificultad(buildNivelDificultad(2))
-                .tipoClima(buildTipoClima("Soleado"))
+                .name(name)
+                .descripcion("Descripción de " + name)
+                .roadType(buildTipoVia("Urbana"))
+                .difficultyLevel(buildNivelDificultad(2))
+                .weatherType(buildTipoClima("Soleado"))
                 .densidadTrafico("Media")
                 .activo(true)
                 .build();
@@ -74,33 +74,33 @@ class EscenarioServiceTest {
     @DisplayName("listarActivos: delega paginación al repositorio y mapea resultado correctamente")
     void listarActivos_mapea_paginacion() {
         Pageable pageable = PageRequest.of(0, 10);
-        List<Escenario> escenarios = List.of(
+        List<Scenario> escenarios = List.of(
                 buildEscenario(1, "Autopista Norte"),
                 buildEscenario(2, "Centro Histórico")
         );
-        Page<Escenario> pageResult = new PageImpl<>(escenarios, pageable, 2);
+        Page<Scenario> pageResult = new PageImpl<>(escenarios, pageable, 2);
 
         when(escenarioRepository.findByActivoTrue(pageable)).thenReturn(pageResult);
 
-        Page<EscenarioDTO> result = escenarioService.listarActivos(pageable);
+        Page<ScenarioDTO> result = escenarioService.listarActivos(pageable);
 
         assertThat(result.getTotalElements()).isEqualTo(2);
-        assertThat(result.getContent().get(0).getNombre()).isEqualTo("Autopista Norte");
-        assertThat(result.getContent().get(1).getNombre()).isEqualTo("Centro Histórico");
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Autopista Norte");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("Centro Histórico");
         verify(escenarioRepository, times(1)).findByActivoTrue(pageable);
     }
 
     @Test
     @DisplayName("buscarPorId: retorna DTO cuando el escenario existe")
     void buscarPorId_existente() {
-        Escenario escenario = buildEscenario(1, "Zona Industrial");
+        Scenario escenario = buildEscenario(1, "Zona Industrial");
         when(escenarioRepository.findById(1)).thenReturn(Optional.of(escenario));
 
-        EscenarioDTO dto = escenarioService.buscarPorId(1);
+        ScenarioDTO dto = escenarioService.buscarPorId(1);
 
         assertThat(dto.getId()).isEqualTo(1);
-        assertThat(dto.getNombre()).isEqualTo("Zona Industrial");
-        assertThat(dto.getTipoVia()).isEqualTo("Urbana");
+        assertThat(dto.getName()).isEqualTo("Zona Industrial");
+        assertThat(dto.getRoadType()).isEqualTo("Urbana");
     }
 
     @Test
@@ -116,35 +116,35 @@ class EscenarioServiceTest {
     @Test
     @DisplayName("crear: persiste entidad y retorna DTO con ID asignado")
     void crear_persiste_escenario() {
-        EscenarioDTO dto = EscenarioDTO.builder()
-                .nombre("Redonda del Sur")
+        ScenarioDTO dto = ScenarioDTO.builder()
+                .name("Redonda del Sur")
                 .descripcion("Intersección compleja")
-                .tipoVia("Urbana")
-                .nivelDificultad("Intermedio")
-                .tipoClima("Lluvia")
+                .roadType("Urbana")
+                .difficultyLevel("Intermedio")
+                .weatherType("Lluvia")
                 .densidadTrafico("Alta")
                 .build();
 
-        Escenario saved = buildEscenario(5, "Redonda del Sur");
+        Scenario saved = buildEscenario(5, "Redonda del Sur");
         when(tipoViaRepository.findByNombre("Urbana")).thenReturn(Optional.of(buildTipoVia("Urbana")));
         when(nivelDificultadRepository.findByNombre("Intermedio"))
-                .thenReturn(Optional.of(NivelDificultad.builder().idNivelDificultad(2).nombre("Intermedio").valor(2).build()));
+                .thenReturn(Optional.of(DifficultyLevel.builder().idNivelDificultad(2).name("Intermedio").value(2).build()));
         when(tipoClimaRepository.findByNombre("Lluvia")).thenReturn(Optional.of(buildTipoClima("Lluvia")));
-        when(escenarioRepository.save(any(Escenario.class))).thenReturn(saved);
+        when(escenarioRepository.save(any(Scenario.class))).thenReturn(saved);
 
-        EscenarioDTO result = escenarioService.crear(dto);
+        ScenarioDTO result = escenarioService.crear(dto);
 
         assertThat(result.getId()).isEqualTo(5);
-        assertThat(result.getNombre()).isEqualTo("Redonda del Sur");
-        verify(escenarioRepository, times(1)).save(any(Escenario.class));
+        assertThat(result.getName()).isEqualTo("Redonda del Sur");
+        verify(escenarioRepository, times(1)).save(any(Scenario.class));
     }
 
     @Test
     @DisplayName("eliminar: hace soft-delete (activo=false) sin borrar el registro")
     void eliminar_softDelete() {
-        Escenario escenario = buildEscenario(3, "Escenario A borrar");
+        Scenario escenario = buildEscenario(3, "Scenario A borrar");
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
-        when(escenarioRepository.save(any(Escenario.class))).thenReturn(escenario);
+        when(escenarioRepository.save(any(Scenario.class))).thenReturn(escenario);
 
         escenarioService.eliminar(3);
 

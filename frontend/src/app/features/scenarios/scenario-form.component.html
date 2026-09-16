@@ -1,0 +1,93 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>{{ isEditMode ? 'Editar Scenario' : 'Nuevo Scenario' }}</h2>
+      <a routerLink="/scenarios" class="btn-close">&times;</a>
+    </div>
+
+    <form [formGroup]="escenarioForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="nombre">Nombre del Scenario</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          formControlName="nombre" 
+          placeholder="Ej: Curva Peligrosa en Lluvia"
+          [class.invalid]="escenarioForm.get('nombre')?.invalid && escenarioForm.get('nombre')?.touched">
+        <div class="error-msg" *ngIf="escenarioForm.get('nombre')?.invalid && escenarioForm.get('nombre')?.touched">
+          El nombre es requerido y debe ser menor a 100 caracteres.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea 
+          id="description" 
+          formControlName="description" 
+          rows="3"
+          placeholder="Detalles sobre el scenario y sus desafíos..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="roadType">Tipo de Vía</label>
+          <select id="roadType" formControlName="roadType" [class.invalid]="escenarioForm.get('roadType')?.invalid && escenarioForm.get('roadType')?.touched">
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="URBANA">Urbana</option>
+            <option value="RURAL">Rural</option>
+            <option value="AUTOPISTA">Autopista</option>
+            <option value="INTERSECCION">Intersección</option>
+          </select>
+        </div>
+
+        <div class="form-group half-width">
+          <label for="difficultyLevel">Nivel de Dificultad</label>
+          <select id="difficultyLevel" formControlName="difficultyLevel">
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="BASICO">Básico</option>
+            <option value="INTERMEDIO">Intermedio</option>
+            <option value="AVANZADO">Avanzado</option>
+            <option value="EXPERTO">Experto</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="clima">Condición Climática</label>
+          <select id="clima" formControlName="clima" [class.invalid]="escenarioForm.get('clima')?.invalid && escenarioForm.get('clima')?.touched">
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="DESPEJADO">Despejado</option>
+            <option value="LLUVIA">Lluvia</option>
+            <option value="NIEBLA">Niebla</option>
+            <option value="TORMENTA">Tormenta</option>
+          </select>
+        </div>
+
+        <div class="form-group half-width">
+          <label for="trafficDensity">Densidad de Tráfico</label>
+          <select id="trafficDensity" formControlName="trafficDensity" [class.invalid]="escenarioForm.get('trafficDensity')?.invalid && escenarioForm.get('trafficDensity')?.touched">
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="BAJA">Baja</option>
+            <option value="MEDIA">Media</option>
+            <option value="ALTA">Alta</option>
+            <option value="MUY_ALTA">Muy alta</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-banner">
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" routerLink="/scenarios">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="loading || escenarioForm.invalid">
+          {{ loading ? 'Guardando...' : 'Guardar Scenario' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

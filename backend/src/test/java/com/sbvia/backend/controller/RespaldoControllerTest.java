@@ -1,6 +1,6 @@
 package com.sbvia.backend.controller;
 
-import com.sbvia.backend.dto.RespaldoRequestDTO;
+import com.sbvia.backend.dto.BackupRequestDTO;
 import com.sbvia.backend.model.Respaldo;
 import com.sbvia.backend.service.RespaldoService;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class RespaldoControllerTest {
     @Test
     void testGenerar() {
         when(respaldoService.generarRespaldo(any(), any())).thenReturn(new Respaldo());
-        Respaldo res = controller.generar(new RespaldoRequestDTO());
+        Respaldo res = controller.generar(new BackupRequestDTO());
         assertNotNull(res);
     }
 

@@ -1,15 +1,15 @@
 package com.sbvia.backend.repository;
 
-import com.sbvia.backend.entity.Escenario;
-import com.sbvia.backend.entity.EstadoUsuario;
-import com.sbvia.backend.entity.Rol;
-import com.sbvia.backend.entity.Simulacion;
-import com.sbvia.backend.entity.TipoVia;
-import com.sbvia.backend.entity.NivelDificultad;
-import com.sbvia.backend.entity.TipoClima;
-import com.sbvia.backend.entity.Usuario;
-import com.sbvia.backend.entity.TipoVehiculo;
-import com.sbvia.backend.entity.Vehiculo;
+import com.sbvia.backend.entity.Scenario;
+import com.sbvia.backend.entity.UserState;
+import com.sbvia.backend.entity.Role;
+import com.sbvia.backend.entity.Simulation;
+import com.sbvia.backend.entity.RoadType;
+import com.sbvia.backend.entity.DifficultyLevel;
+import com.sbvia.backend.entity.WeatherType;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.entity.VehicleType;
+import com.sbvia.backend.entity.Vehicle;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,37 +32,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RepositoryIntegrationTest {
 
     @Autowired
-    private EscenarioRepository escenarioRepository;
+    private ScenarioRepository escenarioRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @Autowired
-    private RolRepository rolRepository;
+    private RoleRepository rolRepository;
 
     @Autowired
-    private SimulacionRepository simulacionRepository;
+    private SimulationRepository simulacionRepository;
 
     @Autowired
     private EntityManager entityManager;
 
-    private Rol rolUsuario;
-    private EstadoUsuario estadoActivo;
+    private Role rolUsuario;
+    private UserState estadoActivo;
 
-    private TipoVia persistTipoVia(String nombre) {
-        TipoVia tv = TipoVia.builder().nombre(nombre).build();
+    private RoadType persistTipoVia(String name) {
+        RoadType tv = RoadType.builder().name(name).build();
         entityManager.persist(tv);
         return tv;
     }
 
-    private NivelDificultad persistNivelDificultad(Integer valor) {
-        NivelDificultad nd = NivelDificultad.builder().nombre("Nivel " + valor).valor(valor).build();
+    private DifficultyLevel persistNivelDificultad(Integer value) {
+        DifficultyLevel nd = DifficultyLevel.builder().name("Nivel " + value).value(value).build();
         entityManager.persist(nd);
         return nd;
     }
 
-    private TipoClima persistTipoClima(String nombre) {
-        TipoClima tc = TipoClima.builder().nombre(nombre).build();
+    private WeatherType persistTipoClima(String name) {
+        WeatherType tc = WeatherType.builder().name(name).build();
         entityManager.persist(tc);
         return tc;
     }
@@ -70,66 +70,66 @@ class RepositoryIntegrationTest {
     @BeforeEach
     void setUp() {
         rolUsuario = rolRepository.save(
-                Rol.builder().nombre("ROLE_USER").descripcion("Usuario estándar").build()
+                Role.builder().name("ROLE_USER").descripcion("User estándar").build()
         );
-        estadoActivo = entityManager.merge(EstadoUsuario.builder()
-                .nombre("ACTIVO").descripcion("Cuenta habilitada").permiteAcceso(true).build());
+        estadoActivo = entityManager.merge(UserState.builder()
+                .name("ACTIVO").descripcion("Cuenta habilitada").permiteAcceso(true).build());
     }
 
     @Test
     @DisplayName("findByActivoTrue devuelve solo escenarios activos")
     void findByActivoTrue_devuelveSoloEscenariosActivos() {
-        TipoVia tv = persistTipoVia("AVENIDA");
-        NivelDificultad nd = persistNivelDificultad(1);
-        TipoClima tc = persistTipoClima("Soleado");
+        RoadType tv = persistTipoVia("AVENIDA");
+        DifficultyLevel nd = persistNivelDificultad(1);
+        WeatherType tc = persistTipoClima("Soleado");
 
-        escenarioRepository.save(Escenario.builder()
-                .nombre("Av. Amazonas")
-                .tipoVia(tv)
-                .nivelDificultad(nd)
-                .tipoClima(tc)
+        escenarioRepository.save(Scenario.builder()
+                .name("Av. Amazonas")
+                .roadType(tv)
+                .difficultyLevel(nd)
+                .weatherType(tc)
                 .densidadTrafico("Baja")
                 .activo(true)
                 .build());
-        escenarioRepository.save(Escenario.builder()
-                .nombre("Carretera Panamericana")
-                .tipoVia(tv)
-                .nivelDificultad(nd)
-                .tipoClima(tc)
+        escenarioRepository.save(Scenario.builder()
+                .name("Carretera Panamericana")
+                .roadType(tv)
+                .difficultyLevel(nd)
+                .weatherType(tc)
                 .densidadTrafico("Media")
                 .activo(true)
                 .build());
-        escenarioRepository.save(Escenario.builder()
-                .nombre("Escenario desactivado")
-                .tipoVia(tv)
-                .nivelDificultad(nd)
-                .tipoClima(tc)
+        escenarioRepository.save(Scenario.builder()
+                .name("Scenario desactivado")
+                .roadType(tv)
+                .difficultyLevel(nd)
+                .weatherType(tc)
                 .densidadTrafico("Baja")
                 .activo(false)
                 .build());
 
-        Page<Escenario> resultado = escenarioRepository.findByActivoTrue(PageRequest.of(0, 10));
+        Page<Scenario> resultado = escenarioRepository.findByActivoTrue(PageRequest.of(0, 10));
 
         assertThat(resultado.getContent()).hasSize(2);
         assertThat(resultado.getContent())
-                .extracting(Escenario::getNombre)
+                .extracting(Scenario::getName)
                 .containsExactlyInAnyOrder("Av. Amazonas", "Carretera Panamericana");
     }
 
     @Test
     @DisplayName("findByCorreo y existsByCorreo resuelven la autenticación")
     void findByCorreo_y_existsByCorreo_resuelvenAutenticacion() {
-        Usuario usuario = usuarioRepository.save(Usuario.builder()
+        User usuario = usuarioRepository.save(User.builder()
                 .nombres("Jefferson")
                 .apellidos("Umaginga")
                 .correo("jumagingaa@uteq.edu.ec")
                 .contrasenaHash("$2a$10$hashdemo")
-                .cuentaBloqueada(false)
+                .accountLocked(false)
                 .rol(rolUsuario)
                 .estadoUsuario(estadoActivo)
                 .build());
 
-        Optional<Usuario> encontrado = usuarioRepository.findByCorreo("jumagingaa@uteq.edu.ec");
+        Optional<User> encontrado = usuarioRepository.findByCorreo("jumagingaa@uteq.edu.ec");
 
         assertThat(encontrado).isPresent();
         assertThat(encontrado.get().getIdUsuario()).isEqualTo(usuario.getIdUsuario());
@@ -140,60 +140,60 @@ class RepositoryIntegrationTest {
     @Test
     @DisplayName("findByUsuario_IdUsuario lista las simulaciones de un usuario")
     void findByUsuario_IdUsuario_listaSimulacionesDeUsuario() {
-        Usuario usuario = usuarioRepository.save(Usuario.builder()
+        User usuario = usuarioRepository.save(User.builder()
                 .nombres("Ana")
                 .apellidos("Perez")
                 .correo("ana.perez@sbvia.test")
                 .contrasenaHash("$2a$10$hashdemo")
-                .cuentaBloqueada(false)
+                .accountLocked(false)
                 .rol(rolUsuario)
                 .estadoUsuario(estadoActivo)
                 .build());
 
-        TipoVia tv = persistTipoVia("CICLOVÍA");
-        NivelDificultad nd = persistNivelDificultad(1);
-        TipoClima tc = persistTipoClima("Soleado");
+        RoadType tv = persistTipoVia("CICLOVÍA");
+        DifficultyLevel nd = persistNivelDificultad(1);
+        WeatherType tc = persistTipoClima("Soleado");
 
-        Escenario escenario = escenarioRepository.save(Escenario.builder()
-                .nombre("Ciclovía Centro")
-                .tipoVia(tv)
-                .nivelDificultad(nd)
-                .tipoClima(tc)
+        Scenario escenario = escenarioRepository.save(Scenario.builder()
+                .name("Ciclovía Centro")
+                .roadType(tv)
+                .difficultyLevel(nd)
+                .weatherType(tc)
                 .densidadTrafico("Baja")
                 .activo(true)
                 .build());
-        TipoVehiculo tipoVehiculo = TipoVehiculo.builder()
-                .nombre("AUTOMOVIL").licenciaRequerida("B").build();
+        VehicleType tipoVehiculo = VehicleType.builder()
+                .name("AUTOMOVIL").licenciaRequerida("B").build();
         entityManager.persist(tipoVehiculo);
-        Vehiculo vehiculo = Vehiculo.builder()
-                .nombre("Vehículo de prueba").transmision("MANUAL")
+        Vehicle vehiculo = Vehicle.builder()
+                .name("Vehículo de prueba").transmision("MANUAL")
                 .tipoVehiculo(tipoVehiculo).build();
         entityManager.persist(vehiculo);
 
-        simulacionRepository.save(Simulacion.builder()
+        simulacionRepository.save(Simulation.builder()
                 .fechaInicio(LocalDate.now())
-                .fechaFin(LocalDate.now())
-                .completada(true)
-                .puntajeFinal(new BigDecimal("8.5"))
+                .endDate(LocalDate.now())
+                .completed(true)
+                .finalScore(new BigDecimal("8.5"))
                 .usuario(usuario)
                 .escenario(escenario)
                 .vehiculo(vehiculo)
                 .build());
-        simulacionRepository.save(Simulacion.builder()
+        simulacionRepository.save(Simulation.builder()
                 .fechaInicio(LocalDate.now())
-                .completada(false)
-                .puntajeFinal(new BigDecimal("0.0"))
+                .completed(false)
+                .finalScore(new BigDecimal("0.0"))
                 .usuario(usuario)
                 .escenario(escenario)
                 .vehiculo(vehiculo)
                 .build());
 
-        List<Simulacion> simulaciones = simulacionRepository
+        List<Simulation> simulaciones = simulacionRepository
                 .findByUsuario_IdUsuarioOrderByIdSimulacionDesc(usuario.getIdUsuario());
 
         assertThat(simulaciones).hasSize(2);
         assertThat(simulaciones)
-                .extracting(Simulacion::isCompletada)
+                .extracting(Simulation::isCompleted)
                 .containsExactlyInAnyOrder(true, false);
     }
 }

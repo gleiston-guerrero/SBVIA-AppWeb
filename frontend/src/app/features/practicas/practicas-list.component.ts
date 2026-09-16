@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InformeIA, SimulacionService } from './simulacion.service';
-import { Simulacion } from './simulacion.model';
+import { InformeIA, SimulacionService } from './simulation.service';
+import { Simulation } from './simulation.model';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Escenario, EscenarioService } from '../escenarios/escenario.service';
+import { Scenario, EscenarioService } from '../scenarios/scenario.service';
 
 @Component({
   selector: 'app-practicas-list',
@@ -14,14 +14,14 @@ import { Escenario, EscenarioService } from '../escenarios/escenario.service';
   styleUrl: './practicas-list.component.css'
 })
 export class PracticasListComponent implements OnInit {
-  practicas: Simulacion[] = [];
+  practicas: Simulation[] = [];
   loading = true;
   error = '';
-  escenarios: Escenario[] = [];
+  scenarios: Scenario[] = [];
   idEscenarioSeleccionado: number | null = null;
   cargandoEscenarios = true;
   filtro: 'todas' | 'finalizadas' | 'pendientes' = 'todas';
-  practicaSeleccionada: Simulacion | null = null;
+  practicaSeleccionada: Simulation | null = null;
   informeSeleccionado: InformeIA | null = null;
   cargandoInforme = false;
   errorInforme = '';
@@ -32,8 +32,8 @@ export class PracticasListComponent implements OnInit {
     this.cargarPracticas();
     this.escenarioService.listar(0, 100).subscribe({
       next: respuesta => {
-        this.escenarios = respuesta.content;
-        this.idEscenarioSeleccionado = this.escenarios[0]?.id ?? null;
+        this.scenarios = respuesta.content;
+        this.idEscenarioSeleccionado = this.scenarios[0]?.id ?? null;
         this.cargandoEscenarios = false;
       },
       error: () => this.cargandoEscenarios = false
@@ -54,7 +54,7 @@ export class PracticasListComponent implements OnInit {
     });
   }
 
-  get finalizadas(): Simulacion[] {
+  get finalizadas(): Simulation[] {
     return this.practicas.filter(practica => practica.completada || !!practica.fechaFin);
   }
 
@@ -68,11 +68,11 @@ export class PracticasListComponent implements OnInit {
     return this.finalizadas.filter(practica => Number(practica.puntajeFinal) >= 70).length;
   }
 
-  get escenarioSeleccionado(): Escenario | undefined {
-    return this.escenarios.find(escenario => escenario.id === this.idEscenarioSeleccionado);
+  get escenarioSeleccionado(): Scenario | undefined {
+    return this.scenarios.find(scenario => scenario.id === this.idEscenarioSeleccionado);
   }
 
-  get practicasFiltradas(): Simulacion[] {
+  get practicasFiltradas(): Simulation[] {
     if (this.filtro === 'finalizadas') return this.finalizadas;
     if (this.filtro === 'pendientes') return this.practicas.filter(practica => !practica.completada && !practica.fechaFin);
     return this.practicas;
@@ -82,9 +82,9 @@ export class PracticasListComponent implements OnInit {
     return this.practicas.length - this.finalizadas.length;
   }
 
-  verInforme(practica: Simulacion): void {
+  verInforme(practica: Simulation): void {
     if (!practica.completada && !practica.fechaFin) return;
-    if (this.practicaSeleccionada?.idSimulacion === practica.idSimulacion) {
+    if (this.practicaSeleccionada?.simulationId === practica.simulationId) {
       this.cerrarInforme();
       return;
     }
@@ -92,7 +92,7 @@ export class PracticasListComponent implements OnInit {
     this.informeSeleccionado = null;
     this.errorInforme = '';
     this.cargandoInforme = true;
-    this.simulacionService.getRetroalimentacion(practica.idSimulacion).subscribe({
+    this.simulacionService.getRetroalimentacion(practica.simulationId).subscribe({
       next: informe => {
         this.informeSeleccionado = informe;
         this.cargandoInforme = false;

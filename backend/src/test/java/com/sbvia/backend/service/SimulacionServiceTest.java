@@ -1,31 +1,31 @@
 package com.sbvia.backend.service;
 
-import com.sbvia.backend.dto.MetricasConduccionRequest;
-import com.sbvia.backend.dto.ResultadoConduccionDTO;
-import com.sbvia.backend.dto.RetroalimentacionIaResponse;
-import com.sbvia.backend.dto.SimulacionDTO;
-import com.sbvia.backend.entity.Escenario;
-import com.sbvia.backend.entity.EstadoSimulacion;
-import com.sbvia.backend.entity.SesionEntrenamiento;
-import com.sbvia.backend.entity.Infraccion;
-import com.sbvia.backend.entity.MetricaDesempeno;
-import com.sbvia.backend.entity.NivelGravedad;
-import com.sbvia.backend.entity.ReglaTransito;
-import com.sbvia.backend.entity.Simulacion;
-import com.sbvia.backend.entity.TipoMetrica;
-import com.sbvia.backend.entity.Usuario;
-import com.sbvia.backend.entity.Vehiculo;
-import com.sbvia.backend.repository.EstadoSimulacionRepository;
-import com.sbvia.backend.repository.InfraccionRepository;
-import com.sbvia.backend.repository.MetricaDesempenoRepository;
-import com.sbvia.backend.repository.NivelGravedadRepository;
-import com.sbvia.backend.repository.ReglaTransitoRepository;
-import com.sbvia.backend.repository.SesionEntrenamientoRepository;
-import com.sbvia.backend.repository.SimulacionRepository;
-import com.sbvia.backend.repository.EscenarioRepository;
-import com.sbvia.backend.repository.TipoMetricaRepository;
-import com.sbvia.backend.repository.UsuarioRepository;
-import com.sbvia.backend.repository.VehiculoRepository;
+import com.sbvia.backend.dto.DrivingMetricsRequest;
+import com.sbvia.backend.dto.DrivingResultDTO;
+import com.sbvia.backend.dto.FeedbackIaResponse;
+import com.sbvia.backend.dto.SimulationDTO;
+import com.sbvia.backend.entity.Scenario;
+import com.sbvia.backend.entity.SimulationState;
+import com.sbvia.backend.entity.TrainingSession;
+import com.sbvia.backend.entity.Infraction;
+import com.sbvia.backend.entity.PerformanceMetric;
+import com.sbvia.backend.entity.SeverityLevel;
+import com.sbvia.backend.entity.TrafficRule;
+import com.sbvia.backend.entity.Simulation;
+import com.sbvia.backend.entity.MetricType;
+import com.sbvia.backend.entity.User;
+import com.sbvia.backend.entity.Vehicle;
+import com.sbvia.backend.repository.SimulationStateRepository;
+import com.sbvia.backend.repository.InfractionRepository;
+import com.sbvia.backend.repository.PerformanceMetricRepository;
+import com.sbvia.backend.repository.SeverityLevelRepository;
+import com.sbvia.backend.repository.TrafficRuleRepository;
+import com.sbvia.backend.repository.TrainingSessionRepository;
+import com.sbvia.backend.repository.SimulationRepository;
+import com.sbvia.backend.repository.ScenarioRepository;
+import com.sbvia.backend.repository.MetricTypeRepository;
+import com.sbvia.backend.repository.UserRepository;
+import com.sbvia.backend.repository.VehicleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,105 +46,105 @@ import static org.mockito.ArgumentMatchers.any;
 class SimulacionServiceTest {
 
     @Mock
-    private SimulacionRepository simulacionRepository;
+    private SimulationRepository simulacionRepository;
 
     @Mock
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @Mock
-    private EscenarioRepository escenarioRepository;
+    private ScenarioRepository escenarioRepository;
 
     @Mock
-    private MetricaDesempenoRepository metricaDesempenoRepository;
+    private PerformanceMetricRepository metricaDesempenoRepository;
 
     @Mock
-    private InfraccionRepository infraccionRepository;
+    private InfractionRepository infraccionRepository;
 
     @Mock
-    private EstadoSimulacionRepository estadoSimulacionRepository;
+    private SimulationStateRepository estadoSimulacionRepository;
 
     @Mock
-    private TipoMetricaRepository tipoMetricaRepository;
+    private MetricTypeRepository tipoMetricaRepository;
 
     @Mock
-    private ReglaTransitoRepository reglaTransitoRepository;
+    private TrafficRuleRepository reglaTransitoRepository;
 
     @Mock
-    private NivelGravedadRepository nivelGravedadRepository;
+    private SeverityLevelRepository nivelGravedadRepository;
 
     @Mock
-    private SesionEntrenamientoRepository sesionEntrenamientoRepository;
+    private TrainingSessionRepository sesionEntrenamientoRepository;
 
     @Mock
-    private VehiculoRepository vehiculoRepository;
+    private VehicleRepository vehiculoRepository;
 
     @Mock
-    private RetroalimentacionService retroalimentacionService;
+    private FeedbackService retroalimentacionService;
 
     @InjectMocks
-    private SimulacionService simulacionService;
+    private SimulationService simulacionService;
 
     @Test
     void iniciaUnaSimulacionParaElUsuarioAutenticado() {
-        Usuario usuario = Usuario.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Escenario escenario = Escenario.builder().idEscenario(3).nombre("Intersección urbana").activo(true).build();
-        EstadoSimulacion enProgreso = EstadoSimulacion.builder()
-                .idEstadoSimulacion(2).nombre("EN_PROGRESO").build();
-        Vehiculo vehiculo = Vehiculo.builder().idVehiculo(1).nombre("Vehículo de práctica").activo(true).build();
+        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
+        Scenario escenario = Scenario.builder().idEscenario(3).name("Intersección urbana").activo(true).build();
+        SimulationState enProgreso = SimulationState.builder()
+                .idEstadoSimulacion(2).name("EN_PROGRESO").build();
+        Vehicle vehiculo = Vehicle.builder().idVehiculo(1).name("Vehículo de práctica").activo(true).build();
         when(usuarioRepository.findByCorreo(usuario.getCorreo())).thenReturn(Optional.of(usuario));
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
         when(estadoSimulacionRepository.findByNombre("EN_PROGRESO")).thenReturn(Optional.of(enProgreso));
         when(vehiculoRepository.findFirstByActivoTrueOrderByIdVehiculoAsc()).thenReturn(Optional.of(vehiculo));
-        when(sesionEntrenamientoRepository.save(any(SesionEntrenamiento.class)))
+        when(sesionEntrenamientoRepository.save(any(TrainingSession.class)))
                 .thenAnswer(invocacion -> invocacion.getArgument(0));
-        when(simulacionRepository.save(any(Simulacion.class))).thenAnswer(invocacion -> {
-            Simulacion guardada = invocacion.getArgument(0);
+        when(simulacionRepository.save(any(Simulation.class))).thenAnswer(invocacion -> {
+            Simulation guardada = invocacion.getArgument(0);
             guardada.setIdSimulacion(21);
             return guardada;
         });
 
-        SimulacionDTO resultado = simulacionService.iniciarSimulacion(usuario.getCorreo(), 3);
+        SimulationDTO resultado = simulacionService.iniciarSimulacion(usuario.getCorreo(), 3);
 
         assertThat(resultado.getIdSimulacion()).isEqualTo(21);
-        assertThat(resultado.getPuntajeFinal()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(resultado.getFinalScore()).isEqualByComparingTo(BigDecimal.ZERO);
         assertThat(resultado.getFechaInicio()).isEqualTo(LocalDate.now());
         assertThat(resultado.getIdEscenario()).isEqualTo(3);
         org.mockito.Mockito.verify(simulacionRepository).save(org.mockito.ArgumentMatchers.argThat(simulacion ->
-                simulacion.getEstadoSimulacion() == enProgreso && simulacion.getVehiculo() == vehiculo));
+                simulacion.getSimulationState() == enProgreso && simulacion.getVehiculo() == vehiculo));
     }
 
     @Test
     void rechazaIniciarUnaSimulacionConEscenarioInactivo() {
-        Usuario usuario = Usuario.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Escenario escenario = Escenario.builder().idEscenario(3).activo(false).build();
+        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
+        Scenario escenario = Scenario.builder().idEscenario(3).activo(false).build();
         when(usuarioRepository.findByCorreo(usuario.getCorreo())).thenReturn(Optional.of(usuario));
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
 
         assertThatThrownBy(() -> simulacionService.iniciarSimulacion(usuario.getCorreo(), 3))
                 .isInstanceOf(com.sbvia.backend.exception.ResourceNotFoundException.class)
-                .hasMessage("Escenario activo no encontrado");
+                .hasMessage("Scenario activo no encontrado");
     }
 
     @Test
     void finalizaLaSimulacionYApruebaConSetentaPuntos() {
-        Usuario usuario = Usuario.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
+        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
                 .idSimulacion(21).usuario(usuario)
-                .puntajeFinal(BigDecimal.ZERO).build();
+                .finalScore(BigDecimal.ZERO).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
         when(simulacionRepository.save(simulacion)).thenReturn(simulacion);
 
-        SimulacionDTO resultado = simulacionService.finalizarSimulacion(
+        SimulationDTO resultado = simulacionService.finalizarSimulacion(
                 usuario.getCorreo(), 21, new BigDecimal("70"));
 
-        assertThat(resultado.getPuntajeFinal()).isEqualByComparingTo("70");
-        assertThat(resultado.getFechaFin()).isEqualTo(LocalDate.now());
+        assertThat(resultado.getFinalScore()).isEqualByComparingTo("70");
+        assertThat(resultado.getEndDate()).isEqualTo(LocalDate.now());
     }
 
     @Test
     void impideFinalizarLaPracticaDeOtroUsuario() {
-        Usuario propietario = Usuario.builder().correo("propietario@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
+        User propietario = User.builder().correo("propietario@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
                 .idSimulacion(21).usuario(propietario).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
 
@@ -155,9 +155,9 @@ class SimulacionServiceTest {
 
     @Test
     void impideFinalizarDosVecesLaMismaPractica() {
-        Usuario usuario = Usuario.builder().correo("conductor@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
-                .idSimulacion(21).usuario(usuario).completada(true).build();
+        User usuario = User.builder().correo("conductor@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
+                .idSimulacion(21).usuario(usuario).completed(true).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
 
         assertThatThrownBy(() -> simulacionService.finalizarSimulacion(
@@ -168,26 +168,26 @@ class SimulacionServiceTest {
 
     @Test
     void obtieneLasPracticasDelUsuarioConSuEscenario() {
-        Usuario usuario = Usuario.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Escenario escenario = Escenario.builder().idEscenario(3).nombre("Intersección urbana").build();
-        Simulacion simulacion = Simulacion.builder()
+        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
+        Scenario escenario = Scenario.builder().idEscenario(3).name("Intersección urbana").build();
+        Simulation simulacion = Simulation.builder()
                 .idSimulacion(11)
                 .usuario(usuario)
                 .escenario(escenario)
-                .completada(true)
-                .puntajeFinal(new BigDecimal("92.50"))
+                .completed(true)
+                .finalScore(new BigDecimal("92.50"))
                 .build();
 
         when(usuarioRepository.findByCorreo(usuario.getCorreo())).thenReturn(Optional.of(usuario));
         when(simulacionRepository.findByUsuario_IdUsuarioOrderByIdSimulacionDesc(7)).thenReturn(List.of(simulacion));
 
-        List<SimulacionDTO> resultado = simulacionService.obtenerMisPracticas(usuario.getCorreo());
+        List<SimulationDTO> resultado = simulacionService.obtenerMisPracticas(usuario.getCorreo());
 
         assertThat(resultado).singleElement().satisfies(dto -> {
             assertThat(dto.getIdSimulacion()).isEqualTo(11);
             assertThat(dto.getIdEscenario()).isEqualTo(3);
             assertThat(dto.getNombreEscenario()).isEqualTo("Intersección urbana");
-            assertThat(dto.getPuntajeFinal()).isEqualByComparingTo("92.50");
+            assertThat(dto.getFinalScore()).isEqualByComparingTo("92.50");
             assertThat(dto.getIdUsuario()).isEqualTo(7);
             assertThat(dto.getCorreoUsuario()).isEqualTo("conductor@sbvia.test");
         });
@@ -199,59 +199,59 @@ class SimulacionServiceTest {
 
         assertThatThrownBy(() -> simulacionService.obtenerMisPracticas("desconocido@sbvia.test"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Usuario no encontrado");
+                .hasMessage("User no encontrado");
     }
 
     @Test
     void finalizaConduccionCalculandoElPuntajeEnElServidor() {
-        Usuario usuario = Usuario.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Escenario escenario = Escenario.builder().idEscenario(3).nombre("Centro urbano").build();
-        Simulacion simulacion = Simulacion.builder()
-                .idSimulacion(21).usuario(usuario).escenario(escenario).completada(false).build();
+        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
+        Scenario escenario = Scenario.builder().idEscenario(3).name("Centro urbano").build();
+        Simulation simulacion = Simulation.builder()
+                .idSimulacion(21).usuario(usuario).escenario(escenario).completed(false).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
         when(reglaTransitoRepository.findByCodigo("RT-002")).thenReturn(Optional.of(
-                ReglaTransito.builder().idReglaTransito(2).codigo("RT-002").penalizacionBase(new BigDecimal("15.00")).build()));
+                TrafficRule.builder().idReglaTransito(2).codigo("RT-002").penalizacionBase(new BigDecimal("15.00")).build()));
         when(reglaTransitoRepository.findByCodigo("RT-001")).thenReturn(Optional.of(
-                ReglaTransito.builder().idReglaTransito(1).codigo("RT-001").penalizacionBase(new BigDecimal("20.00")).build()));
+                TrafficRule.builder().idReglaTransito(1).codigo("RT-001").penalizacionBase(new BigDecimal("20.00")).build()));
         when(nivelGravedadRepository.findByNombre("MODERADA")).thenReturn(Optional.of(
-                NivelGravedad.builder().idNivelGravedad(2).nombre("MODERADA").build()));
+                SeverityLevel.builder().idNivelGravedad(2).name("MODERADA").build()));
         when(nivelGravedadRepository.findByNombre("GRAVE")).thenReturn(Optional.of(
-                NivelGravedad.builder().idNivelGravedad(3).nombre("GRAVE").build()));
+                SeverityLevel.builder().idNivelGravedad(3).name("GRAVE").build()));
         when(estadoSimulacionRepository.findByNombre("COMPLETADA")).thenReturn(Optional.of(
-                EstadoSimulacion.builder().idEstadoSimulacion(4).nombre("COMPLETADA").build()));
+                SimulationState.builder().idEstadoSimulacion(4).name("COMPLETADA").build()));
         when(tipoMetricaRepository.findByNombre(any(String.class))).thenAnswer(invocacion ->
-                Optional.of(TipoMetrica.builder().nombre(invocacion.getArgument(0)).build()));
-        when(simulacionRepository.save(any(Simulacion.class))).thenAnswer(invocacion -> invocacion.getArgument(0));
-        when(metricaDesempenoRepository.save(any(MetricaDesempeno.class)))
+                Optional.of(MetricType.builder().name(invocacion.getArgument(0)).build()));
+        when(simulacionRepository.save(any(Simulation.class))).thenAnswer(invocacion -> invocacion.getArgument(0));
+        when(metricaDesempenoRepository.save(any(PerformanceMetric.class)))
                 .thenAnswer(invocacion -> invocacion.getArgument(0));
-        when(infraccionRepository.save(any(Infraccion.class))).thenAnswer(invocacion -> invocacion.getArgument(0));
+        when(infraccionRepository.save(any(Infraction.class))).thenAnswer(invocacion -> invocacion.getArgument(0));
 
-        MetricasConduccionRequest metricas = new MetricasConduccionRequest(
+        DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 120, new BigDecimal("45.50"), new BigDecimal("72.00"), 2, 1, 1, 1, 1, 0);
         when(retroalimentacionService.generarYGuardar(usuario.getCorreo(), 21)).thenReturn(
-                RetroalimentacionIaResponse.builder().puntaje(new BigDecimal("12.00")).origen("IA_LOCAL").build());
-        ResultadoConduccionDTO resultado = simulacionService.finalizarConduccion(usuario.getCorreo(), 21, metricas);
+                FeedbackIaResponse.builder().puntaje(new BigDecimal("12.00")).origen("IA_LOCAL").build());
+        DrivingResultDTO resultado = simulacionService.finalizarConduccion(usuario.getCorreo(), 21, metricas);
 
         // 100 - (2*15 + 1*20 + 1*20 + 1*10 + 1*8) = 100 - 88 = 12
-        assertThat(resultado.getSimulacion().getPuntajeFinal()).isEqualByComparingTo("12.00");
-        assertThat(resultado.getSimulacion().getFechaFin()).isEqualTo(LocalDate.now());
-        assertThat(resultado.getRetroalimentacion().getOrigen()).isEqualTo("IA_LOCAL");
-        assertThat(simulacion.getDuracionSegundos()).isEqualTo(120);
-        assertThat(simulacion.isCompletada()).isTrue();
+        assertThat(resultado.getSimulacion().getFinalScore()).isEqualByComparingTo("12.00");
+        assertThat(resultado.getSimulacion().getEndDate()).isEqualTo(LocalDate.now());
+        assertThat(resultado.getFeedback().getOrigen()).isEqualTo("IA_LOCAL");
+        assertThat(simulacion.getDurationSeconds()).isEqualTo(120);
+        assertThat(simulacion.isCompleted()).isTrue();
         org.mockito.Mockito.verify(metricaDesempenoRepository, org.mockito.Mockito.times(4))
-                .save(any(MetricaDesempeno.class));
+                .save(any(PerformanceMetric.class));
         org.mockito.Mockito.verify(infraccionRepository, org.mockito.Mockito.times(2))
-                .save(any(Infraccion.class));
+                .save(any(Infraction.class));
     }
 
     @Test
     void impideFinalizarConduccionDeOtroUsuario() {
-        Usuario propietario = Usuario.builder().correo("propietario@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
-                .idSimulacion(21).usuario(propietario).completada(false).build();
+        User propietario = User.builder().correo("propietario@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
+                .idSimulacion(21).usuario(propietario).completed(false).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
 
-        MetricasConduccionRequest metricas = new MetricasConduccionRequest(
+        DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("40.00"), new BigDecimal("55.00"), 0, 0, 0, 0, 0, 0);
 
         assertThatThrownBy(() -> simulacionService.finalizarConduccion("otro@sbvia.test", 21, metricas))
@@ -260,12 +260,12 @@ class SimulacionServiceTest {
 
     @Test
     void impideFinalizarDosVecesLaConduccion() {
-        Usuario usuario = Usuario.builder().correo("conductor@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
-                .idSimulacion(21).usuario(usuario).completada(true).build();
+        User usuario = User.builder().correo("conductor@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
+                .idSimulacion(21).usuario(usuario).completed(true).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
 
-        MetricasConduccionRequest metricas = new MetricasConduccionRequest(
+        DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("40.00"), new BigDecimal("55.00"), 0, 0, 0, 0, 0, 0);
 
         assertThatThrownBy(() -> simulacionService.finalizarConduccion(usuario.getCorreo(), 21, metricas))
@@ -275,12 +275,12 @@ class SimulacionServiceTest {
 
     @Test
     void rechazaMetricasConMaximaMenorQueElPromedio() {
-        Usuario usuario = Usuario.builder().correo("conductor@sbvia.test").build();
-        Simulacion simulacion = Simulacion.builder()
-                .idSimulacion(21).usuario(usuario).completada(false).build();
+        User usuario = User.builder().correo("conductor@sbvia.test").build();
+        Simulation simulacion = Simulation.builder()
+                .idSimulacion(21).usuario(usuario).completed(false).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
 
-        MetricasConduccionRequest metricas = new MetricasConduccionRequest(
+        DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("50.00"), new BigDecimal("40.00"), 0, 0, 0, 0, 0, 0);
 
         assertThatThrownBy(() -> simulacionService.finalizarConduccion(usuario.getCorreo(), 21, metricas))
@@ -290,12 +290,12 @@ class SimulacionServiceTest {
 
     @Test
     void listaTodasLasPracticasAunqueNoTenganEscenario() {
-        Simulacion simulacion = Simulacion.builder()
+        Simulation simulacion = Simulation.builder()
                 .idSimulacion(15)
                 .build();
         when(simulacionRepository.findAllByOrderByIdSimulacionDesc()).thenReturn(List.of(simulacion));
 
-        List<SimulacionDTO> resultado = simulacionService.obtenerTodas();
+        List<SimulationDTO> resultado = simulacionService.obtenerTodas();
 
         assertThat(resultado).singleElement().satisfies(dto -> {
             assertThat(dto.getIdEscenario()).isNull();

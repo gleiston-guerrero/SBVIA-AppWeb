@@ -2,10 +2,10 @@
   <section class="hero">
     <div>
       <span class="eyebrow">Panel de control</span>
-      <h1>Hola, {{ usuario?.nombres }} 👋</h1>
+      <h1>Hola, {{ user?.firstName }} 👋</h1>
       <p>Entrena, analiza tu desempeño y mejora tus decisiones al conducir.</p>
     </div>
-    <button type="button" (click)="navigate('/escenarios')">Iniciar nueva práctica <span>→</span></button>
+    <button type="button" (click)="navigate('/scenarios')">Iniciar nueva práctica <span>→</span></button>
   </section>
   <section class="stats" [class.loading]="cargandoMetricas">
     <article>
@@ -22,7 +22,7 @@
     </article>
     <article>
       <span class="stat-icon orange">◇</span>
-      <div><small>Escenarios disponibles</small><strong>{{ totalEscenarios }}</strong></div>
+      <div><small>Scenarios disponibles</small><strong>{{ totalEscenarios }}</strong></div>
     </article>
   </section>
   <section class="dashboard-grid">
@@ -44,15 +44,15 @@
     <article class="panel insight">
       <div class="insight-heading"><span>✦</span><div><small>Recomendación personalizada</small><h2>Tu siguiente paso</h2></div></div>
       <p>{{ recomendacion }}</p>
-      <a routerLink="/escenarios">Explorar escenarios →</a>
+      <a routerLink="/scenarios">Explorar scenarios →</a>
     </article>
   </section>
   <section class="modules">
     <div class="section-title"><span class="eyebrow">Accesos rápidos</span><h2>Continúa tu entrenamiento</h2></div>
     <div class="module-grid">
-      <button type="button" (click)="navigate('/escenarios')">
+      <button type="button" (click)="navigate('/scenarios')">
         <span class="module-icon blue">▣</span>
-        <div><strong>Escenarios viales</strong><small>Selecciona una situación y comienza a practicar.</small></div>
+        <div><strong>Scenarios viales</strong><small>Selecciona una situación y comienza a practicar.</small></div>
         <b>→</b>
       </button>
       <button type="button" (click)="navigate('/practicas')">
@@ -60,9 +60,9 @@
         <div><strong>Mi progreso</strong><small>Consulta resultados, promedios y prácticas.</small></div>
         <b>→</b>
       </button>
-      <button *ngIf="usuario?.rol === 'ADMINISTRADOR'" type="button" (click)="navigate('/usuarios')">
+      <button *ngIf="user?.role === 'ADMINISTRADOR'" type="button" (click)="navigate('/users')">
         <span class="module-icon green">♙</span>
-        <div><strong>Administrar usuarios</strong><small>Gestiona cuentas, accesos y roles.</small></div>
+        <div><strong>Administrar users</strong><small>Gestiona cuentas, accesos y roles.</small></div>
         <b>→</b>
       </button>
     </div>

@@ -8,21 +8,21 @@ import lombok.Data;
 @Data
 public class RegisterRequest {
 
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotBlank(message = "El name es obligatorio")
     @Size(max = 100)
-    private String nombres;
+    private String firstName;
 
     @NotBlank(message = "El apellido es obligatorio")
     @Size(max = 100)
-    private String apellidos;
+    private String lastName;
 
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El formato del email no es válido")
-    private String correo;
+    private String email;
 
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 6, max = 100)
     private String password;
 
-    private String telefono;
+    private String phone;
 }

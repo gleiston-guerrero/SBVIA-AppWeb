@@ -1,0 +1,55 @@
+<div class="scenarios-page">
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">Gestión</span>
+      <h1>Scenarios viales</h1>
+      <p>Selecciona un scenario para practicar o administra los existentes.</p>
+    </div>
+    <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">+ Nuevo scenario</a>
+  </div>
+  <div class="filters" *ngIf="scenarios.length > 0">
+    <button class="filter-chip active" (click)="cambiarPagina(0)">Todos</button>
+  </div>
+  <div class="card-grid">
+    <article class="scenario-card" *ngFor="let esc of scenarios">
+      <div class="card-header">
+        <span class="card-badge">{{ esc.roadType }}</span>
+        <div class="card-dificultad">{{ esc.difficultyLevel }}</div>
+      </div>
+      <h3>{{ esc.nombre }}</h3>
+      <div class="card-meta">
+        <span>{{ esc.clima }}</span>
+        <span>{{ esc.trafficDensity }}</span>
+      </div>
+      <div class="card-actions">
+        <a class="btn-practicar" [routerLink]="['/simulation', esc.id]">Iniciar práctica →</a>
+        <div class="admin-actions" *ngIf="isAdmin">
+          <a class="btn-icon" title="Editar" [routerLink]="['/scenarios/editar', esc.id]">✏️</a>
+          <button class="btn-icon" title="Eliminar" (click)="solicitarEliminacion(esc)">🗑️</button>
+        </div>
+      </div>
+    </article>
+    <div class="empty-state" *ngIf="scenarios.length === 0">
+      <span class="empty-icon">◈</span>
+      <p>No hay scenarios registrados aún.</p>
+      <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">Crear primer scenario</a>
+    </div>
+  </div>
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button [disabled]="page === 0" (click)="cambiarPagina(page - 1)">← Anterior</button>
+    <span>Página {{ page + 1 }} de {{ totalPages }}</span>
+    <button [disabled]="page === totalPages - 1" (click)="cambiarPagina(page + 1)">Siguiente →</button>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="escenarioAEliminar" (click)="cancelarEliminacion()">
+    <section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="titulo-confirmacion" (click)="$event.stopPropagation()">
+      <div class="warning-icon">!</div>
+      <h2 id="titulo-confirmacion">Eliminar scenario</h2>
+      <p>¿Deseas eliminar <strong>{{ escenarioAEliminar.nombre }}</strong>? Dejará de aparecer para los conductores, pero su historial se conservará.</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn-cancel" (click)="cancelarEliminacion()" [disabled]="eliminando">Cancelar</button>
+        <button type="button" class="btn-delete" (click)="confirmarEliminacion()" [disabled]="eliminando">{{ eliminando ? 'Eliminando...' : 'Sí, eliminar' }}</button>
+      </div>
+    </section>
+  </div>
+</div>

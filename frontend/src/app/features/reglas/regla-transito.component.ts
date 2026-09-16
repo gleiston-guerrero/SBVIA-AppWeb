@@ -2,19 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/components/toast/toast.service';
-import { ReglaTransito, ReglaTransitoService } from './regla-transito.service';
+import { TrafficRule, ReglaTransitoService } from './regla-transito.service';
 
 @Component({
   selector: 'app-regla-transito', standalone: true, imports: [CommonModule, FormsModule],
   templateUrl: './regla-transito.component.html', styleUrl: './regla-transito.component.css'
 })
 export class ReglaTransitoComponent implements OnInit {
-  reglas: ReglaTransito[] = [];
+  reglas: TrafficRule[] = [];
   filtro = '';
   cargando = true;
   guardando = false;
-  confirmarEliminacion?: ReglaTransito;
-  formulario: ReglaTransito = this.vacio();
+  confirmarEliminacion?: TrafficRule;
+  formulario: TrafficRule = this.vacio();
 
   constructor(private reglasService: ReglaTransitoService,
               private toast: ToastService) {}
@@ -23,7 +23,7 @@ export class ReglaTransitoComponent implements OnInit {
     this.cargar();
   }
 
-  get filtradas(): ReglaTransito[] {
+  get filtradas(): TrafficRule[] {
     const texto = this.filtro.trim().toLowerCase();
     return this.reglas.filter(r => !texto || [r.codigo, r.nombre, r.categoria]
       .some(valor => valor?.toLowerCase().includes(texto)));
@@ -36,7 +36,7 @@ export class ReglaTransitoComponent implements OnInit {
     });
   }
 
-  editar(regla: ReglaTransito): void { this.formulario = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  editar(regla: TrafficRule): void { this.formulario = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
   cancelar(): void { this.formulario = this.vacio(); }
 
   guardar(): void {
@@ -61,7 +61,7 @@ export class ReglaTransitoComponent implements OnInit {
     });
   }
 
-  private vacio(): ReglaTransito {
-    return { codigo: '', nombre: '', descripcion: '', categoria: '', penalizacionBase: 0, activa: true };
+  private vacio(): TrafficRule {
+    return { codigo: '', nombre: '', description: '', categoria: '', penalizacionBase: 0, activa: true };
   }
 }

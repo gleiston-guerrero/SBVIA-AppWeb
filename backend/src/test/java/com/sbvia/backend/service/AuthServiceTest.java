@@ -1,12 +1,12 @@
 package com.sbvia.backend.service;
 
 import com.sbvia.backend.dto.RegisterRequest;
-import com.sbvia.backend.entity.EstadoUsuario;
-import com.sbvia.backend.entity.Rol;
-import com.sbvia.backend.entity.Usuario;
+import com.sbvia.backend.entity.UserState;
+import com.sbvia.backend.entity.Role;
+import com.sbvia.backend.entity.User;
 import com.sbvia.backend.exception.DuplicateEmailException;
-import com.sbvia.backend.repository.RolRepository;
-import com.sbvia.backend.repository.UsuarioRepository;
+import com.sbvia.backend.repository.RoleRepository;
+import com.sbvia.backend.repository.UserRepository;
 import com.sbvia.backend.security.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,9 +30,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
 
-    @Mock UsuarioRepository usuarioRepository;
-    @Mock RolRepository rolRepository;
-    @Mock com.sbvia.backend.repository.EstadoUsuarioRepository estadoUsuarioRepository;
+    @Mock UserRepository usuarioRepository;
+    @Mock RoleRepository rolRepository;
+    @Mock com.sbvia.backend.repository.UserStateRepository estadoUsuarioRepository;
     @Mock PasswordEncoder passwordEncoder;
     @Mock JwtService jwtService;
     @Mock AuthenticationManager authenticationManager;
@@ -40,13 +40,13 @@ class AuthServiceTest {
     @Mock UsernameGeneratorService usernameGeneratorService;
     @InjectMocks AuthService authService;
 
-    private Rol rol;
-    private Usuario usuario;
+    private Role rol;
+    private User usuario;
 
     @BeforeEach
     void prepararUsuario() {
-        rol = Rol.builder().idRol(1).nombre("ROLE_USER").build();
-        usuario = Usuario.builder()
+        rol = Role.builder().roleId(1).name("ROLE_USER").build();
+        usuario = User.builder()
                 .idUsuario(9)
                 .nombres("Ana")
                 .apellidos("Pérez")
@@ -54,7 +54,7 @@ class AuthServiceTest {
                 .correo("ana@sbvia.test")
                 .contrasenaHash("hash")
                 .rol(rol)
-                .cuentaBloqueada(false)
+                .accountLocked(false)
                 .build();
     }
 
@@ -85,12 +85,12 @@ class AuthServiceTest {
         RegisterRequest request = registro();
         when(usuarioRepository.existsByCorreo(request.getCorreo())).thenReturn(false);
         when(rolRepository.findByNombre("PARTICIPANTE")).thenReturn(Optional.of(rol));
-        when(estadoUsuarioRepository.findByNombre("ACTIVO")).thenReturn(Optional.of(new EstadoUsuario()));
+        when(estadoUsuarioRepository.findByNombre("ACTIVO")).thenReturn(Optional.of(new UserState()));
         when(usernameGeneratorService.generarBase(request.getNombres(), request.getApellidos())).thenReturn("aperez");
         when(usuarioRepository.findNombresUsuarioSimilares("aperez")).thenReturn(List.of());
         when(usernameGeneratorService.generarSiguienteDisponible("aperez", List.of())).thenReturn("aperez");
         when(passwordEncoder.encode(request.getPassword())).thenReturn("hashed-pwd");
-        when(usuarioRepository.save(any(Usuario.class))).thenReturn(usuario);
+        when(usuarioRepository.save(any(User.class))).thenReturn(usuario);
         when(jwtService.generateAccessToken(any(), any(), any())).thenReturn("access-token");
         when(jwtService.generateRefreshToken(any(), any())).thenReturn("refresh-token");
         when(jwtService.getAccessExpirationMs()).thenReturn(3600000L);
@@ -152,7 +152,7 @@ class AuthServiceTest {
 
     @Test
     void cambiaElRolDelUsuario() {
-        Rol administrador = Rol.builder().idRol(2).nombre("ROLE_ADMIN").build();
+        Role administrador = Role.builder().roleId(2).name("ROLE_ADMIN").build();
         when(usuarioRepository.findById(9)).thenReturn(Optional.of(usuario));
         when(rolRepository.findByNombre("ROLE_ADMIN")).thenReturn(Optional.of(administrador));
         when(usuarioRepository.save(usuario)).thenReturn(usuario);
@@ -166,7 +166,7 @@ class AuthServiceTest {
 
         authService.eliminarUsuario(9);
 
-        assertThat(usuario.isCuentaBloqueada()).isTrue();
+        assertThat(usuario.isAccountLocked()).isTrue();
         verify(usuarioRepository).save(usuario);
     }
 

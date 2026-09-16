@@ -13,7 +13,7 @@ export class AuthService {
   // El token de acceso se almacena en memoria, no en localStorage (Regla de seguridad Entrega 1B)
   private accessToken = signal<string | null>(null);
 
-  // Perfil del usuario autenticado
+  // Perfil del user autenticado
   public currentUser = signal<any>(null);
 
   /**
@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/login`, credentials, { withCredentials: true }).pipe(
       tap((response: any) => {
         this.accessToken.set(response.accessToken);
-        this.currentUser.set(response.usuario);
+        this.currentUser.set(response.user);
         localStorage.setItem(this.SESSION_MARKER, 'true');
         // Tras un login manual también marcamos la sesión como lista
         this.sessionReadySubject.next(true);
@@ -39,9 +39,9 @@ export class AuthService {
   }
 
   actualizarPerfil(data: any): Observable<any> {
-    return this.http.put(`/api/usuarios/me`, data, { withCredentials: true }).pipe(
+    return this.http.put(`/api/users/me`, data, { withCredentials: true }).pipe(
       tap((response: any) => {
-        // Actualizar la señal del usuario actual
+        // Actualizar la señal del user actual
         this.currentUser.set(response);
       })
     );
@@ -51,7 +51,7 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/registro`, data, { withCredentials: true }).pipe(
       tap((response: any) => {
         this.accessToken.set(response.accessToken);
-        this.currentUser.set(response.usuario);
+        this.currentUser.set(response.user);
         localStorage.setItem(this.SESSION_MARKER, 'true');
         this.sessionReadySubject.next(true);
       })
@@ -80,11 +80,11 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/refresh`, {}, { withCredentials: true }).pipe(
       tap((response: any) => {
         this.accessToken.set(response.accessToken);
-        this.currentUser.set(response.usuario);
+        this.currentUser.set(response.user);
       }),
       map(() => true),
       catchError(() => {
-        // No hay cookie válida: el usuario no estaba logueado. Es normal.
+        // No hay cookie válida: el user no estaba logueado. Es normal.
         this.accessToken.set(null);
         this.currentUser.set(null);
         localStorage.removeItem(this.SESSION_MARKER);
@@ -133,7 +133,7 @@ export class AuthService {
   }
 
   /**
-   * Espera a que la sesión esté resuelta y luego devuelve si el usuario
+   * Espera a que la sesión esté resuelta y luego devuelve si el user
    * está autenticado. Usado por el authGuard para evitar race conditions.
    */
   waitForSessionAndCheck(): Observable<boolean> {

@@ -24,7 +24,7 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-                HttpStatus.FORBIDDEN, "El usuario no tiene permisos para realizar esta operación");
+                HttpStatus.FORBIDDEN, "El user no tiene permisos para realizar esta operación");
         problem.setTitle("Acceso denegado");
         problem.setType(URI.create("https://sbvia.app/problems/forbidden"));
         problem.setInstance(URI.create(request.getRequestURI()));

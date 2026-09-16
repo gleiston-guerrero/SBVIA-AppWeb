@@ -42,9 +42,9 @@ public class Decision {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_simulacion", nullable = false)
-    private Simulacion simulacion;
+    private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento_vial")
-    private EventoVial eventoVial;
+    private RoadEvent roadEvent;
 }

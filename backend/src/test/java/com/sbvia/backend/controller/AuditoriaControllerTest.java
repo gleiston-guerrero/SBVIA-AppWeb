@@ -1,6 +1,6 @@
 package com.sbvia.backend.controller;
 
-import com.sbvia.backend.entity.BitacoraAuditoria;
+import com.sbvia.backend.entity.AuditLog;
 import com.sbvia.backend.service.AuditoriaService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,8 +28,8 @@ public class AuditoriaControllerTest {
 
     @Test
     void testObtenerAuditoria() {
-        when(auditoriaService.obtenerAuditoria(any(), any(), any(), any(), any())).thenReturn(List.of(new BitacoraAuditoria()));
-        ResponseEntity<List<BitacoraAuditoria>> res = controller.obtenerAuditoria(null, null, null, null, null);
+        when(auditoriaService.obtenerAuditoria(any(), any(), any(), any(), any())).thenReturn(List.of(new AuditLog()));
+        ResponseEntity<List<AuditLog>> res = controller.obtenerAuditoria(null, null, null, null, null);
         assertEquals(200, res.getStatusCode().value());
         assertFalse(res.getBody().isEmpty());
     }
