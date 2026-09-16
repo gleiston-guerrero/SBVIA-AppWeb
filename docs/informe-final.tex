@@ -226,7 +226,7 @@ La separación de responsabilidades se gestiona a nivel estructural mediante el 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{diagramas/c4-level2-en.png}
+\includegraphics[width=0.95\textwidth]{diagramas/C4 Level 2.png}
 \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
 \label{fig:c4-level2}
 \end{figure}
@@ -393,7 +393,23 @@ Los archivos crudos no se reemplazan por capturas aisladas. Los JSON de k6 y Lig
 \section{Modelo Arquitectónico C4}
 El sistema se modeló en niveles 1 (Contexto), 2 (Contenedores) y 3 (Componentes) utilizando Structurizr DSL. El backend en Spring Boot desacopla las responsabilidades en capas de Controlador, Servicio, Repositorio y Seguridad.
 
-En el nivel de contexto, el conductor y el administrador acceden mediante navegador, mientras los servicios de persistencia permanecen aislados de Internet. En el nivel de contenedores, Angular entrega la interfaz, Spring Boot expone la API, PostgreSQL conserva el estado durable y Redis almacena datos temporales. Docker Compose define red, dependencias y verificaciones de salud. En el nivel de componentes, los controladores traducen HTTP, los servicios aplican reglas, los repositorios abstraen persistencia y la configuración de seguridad forma la frontera de confianza.
+En el nivel de contexto (ver Figura~\ref{fig:c4-level1}), el conductor y el administrador acceden mediante navegador, mientras los servicios de persistencia permanecen aislados de Internet. En el nivel de contenedores, Angular entrega la interfaz, Spring Boot expone la API, PostgreSQL conserva el estado durable y Redis almacena datos temporales. Docker Compose define red, dependencias y verificaciones de salud. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 1.png}
+    \caption{Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}
+    \label{fig:c4-level1}
+\end{figure}
+
+En el nivel de componentes (ver Figura~\ref{fig:c4-level3}), los controladores traducen HTTP, los servicios aplican reglas, los repositorios abstraen persistencia y la configuración de seguridad forma la frontera de confianza.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 3.png}
+    \caption{Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}
+    \label{fig:c4-level3}
+\end{figure}
 
 La API adopta las restricciones de interfaz uniforme y comunicación sin estado asociadas al estilo REST \cite{fielding2000architectural}. Spring Boot proporciona la composición de componentes, configuración y acceso HTTP usados por el backend \cite{walls2022spring}; estas tecnologías se documentan como decisiones de implementación y no como evidencia de calidad por sí mismas.
 
