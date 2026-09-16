@@ -209,41 +209,41 @@ El desarrollo riguroso de SBVIA se sustenta en bases conceptuales autoritativas:
     \item \textbf{Estrategias de Persistencia:} Patrones de arquitectura de datos empresariales de Fowler \cite{fowler2002patterns} y Kleppmann \cite{kleppmann2017designing}.
 \end{itemize}
 
-\section{Traffic Simulation Models}
-Modern traffic simulation environments rely on physical models to calculate safe distances and dynamic rules. According to \cite{treiber2013traffic}, simulating realistic traffic conditions is pivotal to training scenarios effectively. SBVIA adapts elements from intelligent driving behavior to construct its evaluation core.
+\section{Modelos de Simulación de Tráfico}
+Los entornos modernos de simulación de tráfico utilizan modelos físicos para calcular distancias seguras y reglas dinámicas de conducción. Según \cite{treiber2013traffic}, reproducir condiciones de tráfico realistas es fundamental para construir escenarios de entrenamiento efectivos. SBVIA adapta elementos del comportamiento inteligente de conducción para conformar su núcleo de evaluación.
 
-\section{Entity-Relationship Modeling}
-In developing the data persistence layer, structural mapping forms the foundation. As illustrated in Figure~\ref{fig:er-model}, the core entities interact primarily through the Scenario and Simulation tables.
+\section{Modelado Entidad-Relación}
+En el desarrollo de la capa de persistencia de datos, el mapeo estructural constituye la base del diseño. Como se ilustra en la Figura~\ref{fig:er-model}, las entidades principales interactúan fundamentalmente a través de las tablas Escenario y Simulación.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{diagramas/er-model-en.png}
-\caption{Entity-Relationship model of the core SBVIA application. Source: Own elaboration.}
+\caption{Modelo Entidad-Relación de la aplicación SBVIA. Fuente: Elaboración propia.}
 \label{fig:er-model}
 \end{figure}
 
-\section{Software Architecture and C4 Model}
-The separation of concerns is managed at a structural level using the C4 model \cite{brown2020software} and the MVC pattern \cite{fowler2002patterns}. As depicted in Figure~\ref{fig:c4-level2}, the container level displays the interaction between the Angular client, the Spring Boot API, and the caching/persistence layers.
+\section{Arquitectura de Software y Modelo C4}
+La separación de responsabilidades se gestiona a nivel estructural mediante el modelo C4 \cite{brown2020software} y el patrón MVC \cite{fowler2002patterns}. Como se muestra en la Figura~\ref{fig:c4-level2}, el nivel de contenedores describe la interacción entre el cliente Angular, la API Spring Boot y las capas de caché y persistencia.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{diagramas/c4-level2-en.png}
-\caption{C4 Level 2 Container Diagram for SBVIA. Source: Own elaboration.}
+\caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
 \label{fig:c4-level2}
 \end{figure}
 
-\section{Core Domain Object Structure}
-The system's core object orientation isolates business rules from infrastructure boundaries. As shown in Figure~\ref{fig:uml-classes}, the main abstractions interact securely during a simulation.
+\section{Estructura de Objetos del Dominio Central}
+La orientación a objetos del núcleo del sistema aísla las reglas de negocio de los límites de infraestructura. Como se aprecia en la Figura~\ref{fig:uml-classes}, las abstracciones principales interactúan de forma segura durante una simulación.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{diagramas/uml-classes-en.png}
-\caption{UML Class Diagram for core components. Source: Own elaboration.}
+\caption{Diagrama de Clases UML para los componentes principales. Fuente: Elaboración propia.}
 \label{fig:uml-classes}
 \end{figure}
 
-\section{Usability Engineering}
-To ensure educational tools are accessible and intuitive for novice drivers, empirical usability evaluations are essential. The System Usability Scale (SUS) \cite{brooke1996sus} provides a standardized metric to evaluate interactive performance.
+\section{Ingeniería de Usabilidad}
+Para garantizar que las herramientas educativas sean accesibles e intuitivas para conductores novatos, las evaluaciones empíricas de usabilidad son imprescindibles. El Cuestionario de Usabilidad del Sistema (SUS) \cite{brooke1996sus} proporciona una métrica estandarizada para evaluar el desempeño interactivo.
 
 % ==========================================
 % B.6 CAPÍTULO 3: TRABAJOS RELACIONADOS
