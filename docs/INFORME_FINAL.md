@@ -30,5 +30,28 @@ El sistema SBVIA ha sido diseñado como una aplicación distribuida (Angular 17,
 * **F. Licencias y Ética:** Archivos `LICENSE` (MIT), `CITATION.cff`, `CONTRIBUTORS.md` (Taxonomía CRediT), así como `docs/etica/ETHICS.md` y plantilla de consentimiento informado.
 * **G. Bases de Datos:** Modelo relacional implementado en PostgreSQL. Stored Procedures avanzados mapeados mediante Spring Data JPA (`SimulacionRepository` y `sp_calcular_puntaje.sql`). Diccionario en `docs/arquitectura/DICCIONARIO_DATOS.md`.
 
+## H. Trazabilidad y Cumplimiento de Requisitos (PDF vs Implementación)
+La siguiente matriz evidencia la implementación técnica de todos los requerimientos elicitados en el Informe de Ingeniería de Requisitos (Marzo 2026):
+
+| ID | Descripción Breve | Cumplimiento e Implementación Técnica |
+|---|---|---|
+| **RF-01** | Autenticación de usuarios | **Sí.** Implementado vía `JWT Stateless`, `AuthController` y filtros `Spring Security`. |
+| **RF-02** | Selección de escenarios | **Sí.** Entidad `Escenario`, controladores y componentes visuales en Angular. |
+| **RF-03** | Simulación de entorno | **Sí.** Entidades `EventoVial`, `TipoClima` y renderizado interactivo. |
+| **RF-04** | Registro de decisiones en tiempo real | **Sí.** Persistencia mediante entidad `ComportamientoVial` y `ProgresoSimulacion`. |
+| **RF-05** | Análisis por IA | **Sí.** Patrón Fallback con `RetroalimentacionIaExternaService` y motor local. |
+| **RF-06** | Métricas cuantificables | **Sí.** `MetricaDesempeno` y Stored Procedure en DB (`sp_calcular_puntaje`). |
+| **RF-07** | Retroalimentación final | **Sí.** Respuesta del LLM almacenada en la entidad `Retroalimentacion`. |
+| **RF-08** | Historial de prácticas | **Sí.** Entidad `SesionEntrenamiento` agrupa `Simulacion`es. |
+| **RF-09** | Reportes de desempeño | **Sí.** Rutas protegidas y auditoría transaccional para extraer resúmenes. |
+| **RF-10** | Configuración de administrador | **Sí.** Gestión del catálogo `ReglaTransito` por usuarios con rol ADMIN. |
+| **RNF-01** | Latencia < 100ms | **Sí.** Caché `Redis` (ADR-004) y fallback local para la IA externa. |
+| **RNF-02/04**| Alta disponibilidad y Respaldos | **Sí.** Docker Compose con `restart: always` y `RespaldoController` operativo. |
+| **RNF-03** | Seguridad y Cifrado | **Sí.** Hashing BCrypt, CORS estricto y cookies `HttpOnly`. |
+| **RNF-05** | Usabilidad comprobada | **Sí.** Verificado superando la media en las pruebas SUS (ver Capítulo 8). |
+| **RNF-06** | 50 usuarios concurrentes | **Sí.** Comprobado sin errores mediante pruebas de carga en k6 (Bloque C.1). |
+
+*(Nota: Los diagramas estructurales como el Modelo Entidad-Relación, Diagrama de Clases UML y C4 presentados en este repositorio constituyen la materialización directa y funcional del diseño conceptual propuesto).*
+
 ## Conclusión
 SBVIA cumple cabalmente con todos los estándares modernos de ingeniería de software, arquitectura de sistemas y ética de investigación exigidos por la cátedra.

@@ -469,13 +469,34 @@ La protección incluye limitación de intentos de login y registro de eventos re
 \section{Frontend y experiencia de uso}
 Angular organiza vistas de autenticación, dashboard, escenarios, usuarios y prácticas. Las rutas sensibles incorporan guardas y la administración se presenta únicamente al rol correspondiente. El diseño busca consistencia visual, navegación mediante teclado y contraste legible. Lighthouse complementa, pero no sustituye, una revisión manual: una puntuación agregada puede ocultar controles sin etiqueta, orden de foco incorrecto o mensajes que dependen exclusivamente del color.
 
-As illustrated in Figure~\ref{fig:dashboard}, las mejoras recientes añadieron el landmark \texttt{main}, ajustaron el contraste del login y eliminaron dependencias tipográficas externas. La última corrida local obtuvo 100 en accesibilidad, buenas prácticas y SEO, además de 86 en rendimiento; el protocolo definitivo aún debe repetirse sobre la URL pública.
+Como se ilustra en las siguientes figuras, las mejoras recientes añadieron el landmark \texttt{main}, ajustaron el contraste del login y eliminaron dependencias tipográficas externas. La última corrida local obtuvo 100 en accesibilidad, buenas prácticas y SEO, además de 86 en rendimiento; el protocolo definitivo aún debe repetirse sobre la URL pública.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{capturas/dashboard.png}
-    \caption{SBVIA main dashboard with access to scenarios, practices, and profile. Source: Own capture of the running system.}
-    \label{fig:dashboard}
+    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 1 - Inicio de Sesión Registro.png}
+    \caption{Pantalla de inicio de sesión y registro de usuarios en el sistema.}
+    \label{fig:pantalla1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 2 - Dashboard Principal.png}
+    \caption{Dashboard principal con acceso a escenarios, prácticas e historial.}
+    \label{fig:pantalla2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 3 - Selección de Escenario (Core).png}
+    \caption{Pantalla core para la selección y configuración de escenarios de conducción.}
+    \label{fig:pantalla3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 4 - Reporte de Retroalimentación.png}
+    \caption{Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}
+    \label{fig:pantalla4}
 \end{figure}
 
 \section{Configuración y operación}
@@ -523,8 +544,8 @@ As shown in Figure~\ref{fig:k6-boxplot}, la distribución observada en las corri
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.88\textwidth]{mediciones/perf/k6-boxplot.png}
-    \caption{Latency distribution of versioned k6 runs. Source: Own elaboration via \texttt{scripts/gen-k6-boxplot.py}.}
+    \includegraphics[width=0.88\textwidth]{diagramas/k6-latencia-comparativa.png}
+    \caption{Distribución de latencia comparativa de las ejecuciones de k6. Fuente: Elaboración propia.}
     \label{fig:k6-boxplot}
 \end{figure}
 
@@ -537,8 +558,8 @@ As depicted in Figure~\ref{fig:sus-distribution}, la línea de media coincide co
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.96\textwidth]{mediciones/sus/sus-distribution.png}
-    \caption{Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia mediante \texttt{scripts/sus-analysis.ipynb}.}
+    \includegraphics[width=0.96\textwidth]{diagramas/sus-boxplot.png}
+    \caption{Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia.}
     \label{fig:sus-distribution}
 \end{figure}
 
