@@ -1,24 +1,24 @@
 \babel@toc {spanish}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{\numberline {1}Introducción}{9}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Contexto y motivación}{9}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Preguntas de investigación}{9}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Calidad del producto de software}{9}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Autenticación, autorización y gestión de sesión}{10}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Persistencia, caché y consistencia}{10}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Reproducibilidad y datos FAIR}{10}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Objetivos}{11}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}Objetivo General}{11}{subsection.1.7.1}%
-\contentsline {subsection}{\numberline {1.7.2}Objetivos Específicos}{11}{subsection.1.7.2}%
-\contentsline {section}{\numberline {1.8}Contribuciones}{11}{section.1.8}%
-\contentsline {section}{\numberline {1.9}Organización del documento}{11}{section.1.9}%
-\contentsline {chapter}{\numberline {2}Marco Teórico}{12}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Modelos de Simulación de Tráfico}{12}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Modelado Entidad-Relación}{12}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Arquitectura de Software y Modelo C4}{12}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Estructura de Objetos del Dominio Central}{14}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Ingeniería de Usabilidad}{14}{section.2.5}%
+\contentsline {chapter}{\numberline {1}Introducción}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contexto y motivación}{8}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Preguntas de investigación}{8}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Calidad del producto de software}{8}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Autenticación, autorización y gestión de sesión}{9}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Persistencia, caché y consistencia}{9}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Reproducibilidad y datos FAIR}{9}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Objetivos}{10}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Objetivo General}{10}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Objetivos Específicos}{10}{subsection.1.7.2}%
+\contentsline {section}{\numberline {1.8}Contribuciones}{10}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Organización del documento}{10}{section.1.9}%
+\contentsline {chapter}{\numberline {2}Marco Teórico}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Modelos de Simulación de Tráfico}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Modelado Entidad-Relación}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Arquitectura de Software y Modelo C4}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Estructura de Objetos del Dominio Central}{13}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Ingeniería de Usabilidad}{13}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Trabajos Relacionados}{15}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Brecha Identificada (Research Gap)}{16}{section.3.1}%
 \contentsline {chapter}{\numberline {4}Ingeniería de Requisitos}{17}{chapter.4}%

@@ -8,13 +8,14 @@ Evaluación del paquete de datos, software y metadatos de SBVIA según las direc
 
 - [ ] **F1. Metadatos y datos asignados con un identificador global único y persistente:**
   - Software: pendiente de publicación y asignación de DOI en Zenodo.
-  - Dataset de mediciones: pendiente de publicación separada y asignación de un DOI independiente.
+  - Dataset de mediciones: publicado separadamente con DOI `10.5281/zenodo.22785358`.
 - [x] **F2. Los datos se describen con metadatos enriquecidos:**
   - Definidos en `CITATION.cff` (v1.2.0), `CONTRIBUTORS.md` (CRediT) y `DATA-DICTIONARY.md`.
 - [ ] **F3. Los metadatos incluyen explícitamente el identificador de los datos que describen:**
-  - Pendiente de incorporar los DOI reales después de crear los registros Zenodo.
+  - DOI del Software: `10.5281/zenodo.22740480`
+  - DOI del Dataset: `10.5281/zenodo.22785358`
 - [ ] **F4. Los metadatos y datos son indexables y buscables:**
-  - Pendiente de publicación e indexación en Zenodo, DataCite y OpenAIRE.
+  - Publicados e indexados en Zenodo.
 
 ---
 
