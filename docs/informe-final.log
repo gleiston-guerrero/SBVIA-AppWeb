@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  16 SEP 2026 02:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  16 SEP 2026 11:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -883,20 +883,20 @@ as/Pantalla 2 - Dashboard Principal.png> <./diagramas/Pantalla 3 - Selección d
 e Escenario (Core).png>] [30 <./diagramas/Pantalla 4 - Reporte de Retroalimenta
 ción.png>]
 Cap\'{\i }tulo 8.
-<diagramas/k6-latencia-comparativa.png, id=732, 462.528pt x 269.92845pt>
+<diagramas/k6-latencia-comparativa.png, id=732, 578.16pt x 361.35pt>
 File: diagramas/k6-latencia-comparativa.png Graphic file (type png)
 <use diagramas/k6-latencia-comparativa.png>
 Package pdftex.def Info: diagramas/k6-latencia-comparativa.png  used on input l
 ine 562.
-(pdftex.def)             Requested size: 400.61703pt x 233.81027pt.
+(pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
 [31
 
 ]
-<diagramas/sus-boxplot.png, id=739, 462.528pt x 231.264pt>
+<diagramas/sus-boxplot.png, id=739, 578.16pt x 361.35pt>
 File: diagramas/sus-boxplot.png Graphic file (type png)
 <use diagramas/sus-boxplot.png>
 Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 576.
-(pdftex.def)             Requested size: 437.0374pt x 218.52798pt.
+(pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
  [32 <./diagramas/k6-latencia-comparativa.png>] [33 <./diagramas/sus-boxplot.pn
 g>]
 Cap\'{\i }tulo 9.
@@ -1038,7 +1038,7 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (49 pages, 10862707 bytes).
+Output written on informe-final.pdf (49 pages, 10843229 bytes).
 PDF statistics:
  966 PDF objects out of 1000 (max. 8388607)
  234 named destinations out of 1000 (max. 500000)
