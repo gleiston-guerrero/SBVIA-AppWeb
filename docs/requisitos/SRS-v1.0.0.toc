@@ -1,28 +1,16 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {section}{Control del documento}{2}{Doc-Start}%
-\contentsline {section}{Aprobación}{2}{Doc-Start}%
 \contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Propósito}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Alcance}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Audiencia}{3}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Definiciones}{3}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Descripción general}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Perspectiva del producto}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Clases de usuario}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {2}Descripción general}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Perspectiva del producto}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Clases de usuario}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Restricciones}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Suposiciones y dependencias}{4}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Requisitos funcionales}{5}{section.3}%
-\contentsline {section}{\numberline {4}Requisitos no funcionales}{7}{section.4}%
-\contentsline {section}{\numberline {5}Historias de usuario verificables}{9}{section.5}%
-\contentsline {section}{\numberline {6}Interfaces externas}{11}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Interfaz de usuario}{11}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}API}{11}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Persistencia}{11}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Comunicaciones}{11}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Datos, seguridad y calidad}{11}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Datos}{11}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Seguridad}{11}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Rendimiento}{11}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}Verificabilidad}{11}{subsection.7.4}%
-\contentsline {section}{\numberline {8}Matriz resumida de trazabilidad}{12}{section.8}%
-\contentsline {section}{\numberline {9}Criterios de aceptación de la versión}{12}{section.9}%
+\contentsline {section}{\numberline {4}Requisitos no funcionales}{8}{section.4}%
+\contentsline {section}{\numberline {5}Historias de usuario (Casos de Uso)}{11}{section.5}%
+\contentsline {section}{\numberline {6}Criterios de aceptación de la versión}{13}{section.6}%
