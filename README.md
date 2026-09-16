@@ -3,7 +3,7 @@
 [![CI Pipeline](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml/badge.svg)](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI Software](https://zenodo.org/badge/DOI/10.5281/zenodo.22740480.svg)](https://doi.org/10.5281/zenodo.22740480)
-[![DOI Dataset](https://img.shields.io/badge/DOI%20Dataset-pendiente-lightgrey.svg)](#publicacion-y-preservacion)
+[![DOI Dataset](https://zenodo.org/badge/DOI/10.5281/zenodo.22785358.svg)](https://doi.org/10.5281/zenodo.22785358)
 
 ## 📌 Descripción del Proyecto
 El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)** proporciona un entorno interactivo y reproducible de entrenamiento y evaluación para conductores en formación. Esta versión final (`v1.0.0`) integra autenticación segura con JWT en cookies `HttpOnly + Secure + SameSite=Strict`, CRUD optimizado sobre Spring Boot 3.2.x y PostgreSQL 16, estrategia híbrida de acceso a datos con Procedimientos Almacenados, caché distribuida con Redis 7 y frontend reactivo en Angular 17+.
@@ -33,7 +33,7 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 
 El **DOI del Software** ya se encuentra registrado y disponible a través de Zenodo en `10.5281/zenodo.22740480`. 
 
-El DOI del dataset se incorporará posteriormente tras su publicación separada. La URL pública de acceso web se añadirá cuando el despliegue HTTPS responda correctamente y haya sido verificado.
+El **DOI del Dataset** de validación empírica se encuentra publicado independientemente en Zenodo bajo el DOI `10.5281/zenodo.22785358`. La URL pública de acceso web se añadirá cuando el despliegue HTTPS responda correctamente y haya sido verificado.
 
 ---
 
