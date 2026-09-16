@@ -1,71 +1,71 @@
 \babel@toc {spanish}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {spanish}{}\relax 
-\contentsline {chapter}{\numberline {1}Introducción}{8}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Contexto y motivación}{8}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Preguntas de investigación}{8}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Calidad del producto de software}{8}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Autenticación, autorización y gestión de sesión}{9}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Persistencia, caché y consistencia}{9}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Reproducibilidad y datos FAIR}{9}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Objetivos}{10}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}Objetivo General}{10}{subsection.1.7.1}%
-\contentsline {subsection}{\numberline {1.7.2}Objetivos Específicos}{10}{subsection.1.7.2}%
-\contentsline {section}{\numberline {1.8}Contribuciones}{10}{section.1.8}%
-\contentsline {section}{\numberline {1.9}Organización del documento}{10}{section.1.9}%
-\contentsline {chapter}{\numberline {2}Marco Teórico}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Modelos de Simulación de Tráfico}{11}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Modelado Entidad-Relación}{11}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Arquitectura de Software y Modelo C4}{11}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Estructura de Objetos del Dominio Central}{13}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Ingeniería de Usabilidad}{13}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Trabajos Relacionados}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Brecha Identificada (Research Gap)}{16}{section.3.1}%
-\contentsline {chapter}{\numberline {4}Ingeniería de Requisitos}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Interesados y Elicitación}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Requisitos Funcionales y No Funcionales}{17}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Alcance y exclusiones}{18}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Trazabilidad y control de cambios}{18}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Métricas de Calidad de Requisitos}{18}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Materiales y Métodos}{19}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Enfoque Metodológico (DSR de Peffers)}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Instrumentos de Medición y Protocolo Experimental}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Población, muestra y estrategia de muestreo}{20}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Preguntas, hipótesis y análisis estadístico}{20}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Variables y criterios de aceptación}{20}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Procedimiento reproducible}{21}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Gestión de evidencia}{21}{section.5.7}%
-\contentsline {chapter}{\numberline {6}Diseño del Sistema y Arquitectura}{22}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Modelo Arquitectónico C4}{22}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Atributos arquitectónicos}{22}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Registros de Decisión Arquitectónica (ADRs)}{23}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Implementación}{24}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Estrategia Híbrida de Acceso a Datos}{24}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Flujo de autenticación}{24}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Frontend y experiencia de uso}{25}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Configuración y operación}{25}{section.7.4}%
-\contentsline {chapter}{\numberline {8}Evaluación Empírica y Resultados}{28}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Rendimiento y Carga (k6)}{28}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Usabilidad del Sistema (SUS)}{28}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Cobertura de Código (JaCoCo)}{29}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Seguridad y Auditoría Web}{29}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Síntesis de cumplimiento}{30}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Discusión}{31}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Amenazas a la Validez}{32}{chapter.10}%
-\contentsline {chapter}{\numberline {11}Trabajo Futuro}{33}{chapter.11}%
-\contentsline {chapter}{\numberline {12}Conclusiones}{34}{chapter.12}%
-\contentsline {chapter}{Declaraciones Obligatorias}{35}{chapter*.8}%
-\contentsline {chapter}{\numberline {A}Bitácora Acumulativa de Observaciones}{39}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Protocolo de Verificación Técnica Final}{40}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Instalación desde una base vacía}{40}{appendix.B.1}%
-\contentsline {section}{\numberline {B.2}Actualización de una instalación existente}{40}{appendix.B.2}%
-\contentsline {section}{\numberline {B.3}Flujo funcional de extremo a extremo}{41}{appendix.B.3}%
-\contentsline {chapter}{\numberline {C}Modelo de Amenazas y Controles de Seguridad}{42}{appendix.C}%
-\contentsline {section}{\numberline {C.1}Identidad, sesión y autorización}{42}{appendix.C.1}%
-\contentsline {section}{\numberline {C.2}Persistencia, caché y proveedor de IA}{42}{appendix.C.2}%
-\contentsline {section}{\numberline {C.3}Alcance de las herramientas}{43}{appendix.C.3}%
-\contentsline {chapter}{\numberline {D}Operación, Recuperación y Evidencia Reproducible}{44}{appendix.D}%
-\contentsline {section}{\numberline {D.1}Arranque y observabilidad}{44}{appendix.D.1}%
-\contentsline {section}{\numberline {D.2}Respaldo y restauración}{44}{appendix.D.2}%
-\contentsline {section}{\numberline {D.3}Trazabilidad de resultados}{44}{appendix.D.3}%
-\contentsline {section}{\numberline {D.4}Lista de cierre académico}{45}{appendix.D.4}%
+\contentsline {chapter}{\numberline {1}Introducción}{9}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contexto y motivación}{9}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Preguntas de investigación}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Calidad del producto de software}{9}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Autenticación, autorización y gestión de sesión}{10}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Persistencia, caché y consistencia}{10}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Reproducibilidad y datos FAIR}{10}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Objetivos}{11}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Objetivo General}{11}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Objetivos Específicos}{11}{subsection.1.7.2}%
+\contentsline {section}{\numberline {1.8}Contribuciones}{11}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Organización del documento}{11}{section.1.9}%
+\contentsline {chapter}{\numberline {2}Marco Teórico}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Modelos de Simulación de Tráfico}{12}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Modelado Entidad-Relación}{12}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Arquitectura de Software y Modelo C4}{12}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Estructura de Objetos del Dominio Central}{14}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Ingeniería de Usabilidad}{14}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Trabajos Relacionados}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Brecha Identificada (Research Gap)}{17}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Ingeniería de Requisitos}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Interesados y Elicitación}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Requisitos Funcionales y No Funcionales}{18}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Alcance y exclusiones}{19}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Trazabilidad y control de cambios}{19}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Métricas de Calidad de Requisitos}{19}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Materiales y Métodos}{20}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Enfoque Metodológico (DSR de Peffers)}{20}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Instrumentos de Medición y Protocolo Experimental}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Población, muestra y estrategia de muestreo}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Preguntas, hipótesis y análisis estadístico}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Variables y criterios de aceptación}{21}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Procedimiento reproducible}{22}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Gestión de evidencia}{22}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Diseño del Sistema y Arquitectura}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Modelo Arquitectónico C4}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Atributos arquitectónicos}{23}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Registros de Decisión Arquitectónica (ADRs)}{24}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Implementación}{25}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Estrategia Híbrida de Acceso a Datos}{25}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Flujo de autenticación}{25}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Frontend y experiencia de uso}{26}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Configuración y operación}{26}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Evaluación Empírica y Resultados}{29}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Rendimiento y Carga (k6)}{29}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Usabilidad del Sistema (SUS)}{29}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Cobertura de Código (JaCoCo)}{30}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Seguridad y Auditoría Web}{30}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Síntesis de cumplimiento}{31}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Discusión}{32}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Amenazas a la Validez}{33}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Trabajo Futuro}{34}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Conclusiones}{35}{chapter.12}%
+\contentsline {chapter}{Declaraciones Obligatorias}{36}{chapter*.8}%
+\contentsline {chapter}{\numberline {A}Bitácora Acumulativa de Observaciones}{40}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Protocolo de Verificación Técnica Final}{41}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Instalación desde una base vacía}{41}{appendix.B.1}%
+\contentsline {section}{\numberline {B.2}Actualización de una instalación existente}{41}{appendix.B.2}%
+\contentsline {section}{\numberline {B.3}Flujo funcional de extremo a extremo}{42}{appendix.B.3}%
+\contentsline {chapter}{\numberline {C}Modelo de Amenazas y Controles de Seguridad}{43}{appendix.C}%
+\contentsline {section}{\numberline {C.1}Identidad, sesión y autorización}{43}{appendix.C.1}%
+\contentsline {section}{\numberline {C.2}Persistencia, caché y proveedor de IA}{43}{appendix.C.2}%
+\contentsline {section}{\numberline {C.3}Alcance de las herramientas}{44}{appendix.C.3}%
+\contentsline {chapter}{\numberline {D}Operación, Recuperación y Evidencia Reproducible}{45}{appendix.D}%
+\contentsline {section}{\numberline {D.1}Arranque y observabilidad}{45}{appendix.D.1}%
+\contentsline {section}{\numberline {D.2}Respaldo y restauración}{45}{appendix.D.2}%
+\contentsline {section}{\numberline {D.3}Trazabilidad de resultados}{45}{appendix.D.3}%
+\contentsline {section}{\numberline {D.4}Lista de cierre académico}{46}{appendix.D.4}%
