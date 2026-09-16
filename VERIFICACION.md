@@ -104,3 +104,28 @@ Output location: /app/dist/frontend
 Application bundle generation complete. [30.212 seconds]
 ```
 - **Ruta del archivo que la respalda:** `Makefile` (Ejecución real con código de salida `0`)
+
+### EV-2 — Auditoría de Seguridad con OWASP ZAP
+- **Orden exacta:** Escaneo Baseline con OWASP ZAP sobre la API.
+- **Salida / Resumen (Extraído del reporte):**
+`
+Target: https://api.sbvia.uteq-software.edu.ec
+Estado General: PASSED (0 High / 0 Medium Findings)
+Vulnerabilidades Altas (SQLi/RCE): 0
+Vulnerabilidades Medias (XSS/CSRF): 0
+`
+- **Ruta del archivo que la respalda:** docs/mediciones/sec/zap/zap-report.html
+
+### EV-2 — Análisis de Código Estático con SpotBugs
+- **Orden exacta:** mvn spotbugs:check (integrado en make verify).
+- **Salida:**
+`	ext
+[INFO] Done SpotBugs Analysis....
+[INFO] <<< spotbugs:4.8.6.6:check (security-analysis) < :spotbugs @ sbvia-backend <<<
+[INFO] --- spotbugs:4.8.6.6:check (security-analysis) @ sbvia-backend ---
+[INFO] BugInstance size is 0
+[INFO] Error size is 0
+[INFO] No errors/warnings found
+[INFO] BUILD SUCCESS
+`
+- **Ruta del archivo que la respalda:** Makefile y pom.xml
