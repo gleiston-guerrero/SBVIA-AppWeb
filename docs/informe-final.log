@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  16 SEP 2026 00:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  16 SEP 2026 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -618,20 +618,24 @@ File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 219.
 (pdftex.def)             Requested size: 432.48051pt x 626.36635pt.
-<diagramas/c4-level2-en.png, id=500, 722.7pt x 433.62pt>
+<diagramas/c4-level2-en.png, id=500, 786.94pt x 1368.11125pt>
 File: diagramas/c4-level2-en.png Graphic file (type png)
 <use diagramas/c4-level2-en.png>
 Package pdftex.def Info: diagramas/c4-level2-en.png  used on input line 229.
-(pdftex.def)             Requested size: 432.48051pt x 259.48589pt.
+(pdftex.def)             Requested size: 432.48051pt x 751.85814pt.
+
+LaTeX Warning: Float too large for page by 75.41255pt on input line 232.
+
 [12
 
-] [13 <./diagramas/er-model-en.png>]
-<diagramas/uml-classes-en.png, id=518, 722.7pt x 433.62pt>
+] [13 <./diagramas/er-model-en.png>] [14 <./diagramas/c4-level2-en.png (PNG cop
+y)>]
+<diagramas/uml-classes-en.png, id=522, 786.94pt x 530.98375pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 239.
-(pdftex.def)             Requested size: 318.66948pt x 191.20361pt.
- [14 <./diagramas/c4-level2-en.png> <./diagramas/uml-classes-en.png>] [15]
+(pdftex.def)             Requested size: 318.66948pt x 215.01482pt.
+ [15 <./diagramas/uml-classes-en.png (PNG copy)>]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 272--272
@@ -813,7 +817,7 @@ Underfull \hbox (badness 3942) in paragraph at lines 348--348
 
 ] [21] [22]
 Cap\'{\i }tulo 6.
-<diagramas/flujo-mvc-springboot.png, id=633, 722.7pt x 433.62pt>
+<diagramas/flujo-mvc-springboot.png, id=631, 722.7pt x 433.62pt>
 File: diagramas/flujo-mvc-springboot.png Graphic file (type png)
 <use diagramas/flujo-mvc-springboot.png>
 Package pdftex.def Info: diagramas/flujo-mvc-springboot.png  used on input line
@@ -832,7 +836,7 @@ nput line 441.
  [25
 
 ]
-<diagramas/Pantalla 1 - Inicio de Sesión Registro.png, id=683, 1203.7472pt x 5
+<diagramas/Pantalla 1 - Inicio de Sesión Registro.png, id=681, 1203.7472pt x 5
 79.66562pt>
 File: diagramas/Pantalla 1 - Inicio de Sesión Registro.png Graphic file (type 
 png)
@@ -840,14 +844,14 @@ png)
 Package pdftex.def Info: diagramas/Pantalla 1 - Inicio de Sesión Registro.png 
  used on input line 475.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/Pantalla 2 - Dashboard Principal.png, id=684, 1203.7472pt x 575.1487
+<diagramas/Pantalla 2 - Dashboard Principal.png, id=682, 1203.7472pt x 575.1487
 4pt>
 File: diagramas/Pantalla 2 - Dashboard Principal.png Graphic file (type png)
 <use diagramas/Pantalla 2 - Dashboard Principal.png>
 Package pdftex.def Info: diagramas/Pantalla 2 - Dashboard Principal.png  used o
 n input line 482.
 (pdftex.def)             Requested size: 427.93057pt x 204.46445pt.
-<diagramas/Pantalla 3 - Selección de Escenario (Core).png, id=685, 1203.7472pt
+<diagramas/Pantalla 3 - Selección de Escenario (Core).png, id=683, 1203.7472pt
  x 579.66562pt>
 File: diagramas/Pantalla 3 - Selección de Escenario (Core).png Graphic file (t
 ype png)
@@ -855,7 +859,7 @@ ype png)
 Package pdftex.def Info: diagramas/Pantalla 3 - Selección de Escenario (Core).
 png  used on input line 489.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/Pantalla 4 - Reporte de Retroalimentación.png, id=686, 1203.7472pt 
+<diagramas/Pantalla 4 - Reporte de Retroalimentación.png, id=684, 1203.7472pt 
 x 579.66562pt>
 File: diagramas/Pantalla 4 - Reporte de Retroalimentación.png Graphic file (ty
 pe png)
@@ -871,7 +875,7 @@ as/Pantalla 2 - Dashboard Principal.png> <./diagramas/Pantalla 3 - Selección d
 e Escenario (Core).png>] [28 <./diagramas/Pantalla 4 - Reporte de Retroalimenta
 ción.png>]
 Cap\'{\i }tulo 8.
-<diagramas/k6-latencia-comparativa.png, id=712, 462.528pt x 269.92845pt>
+<diagramas/k6-latencia-comparativa.png, id=710, 462.528pt x 269.92845pt>
 File: diagramas/k6-latencia-comparativa.png Graphic file (type png)
 <use diagramas/k6-latencia-comparativa.png>
 Package pdftex.def Info: diagramas/k6-latencia-comparativa.png  used on input l
@@ -880,7 +884,7 @@ ine 546.
 [29
 
 ]
-<diagramas/sus-boxplot.png, id=719, 462.528pt x 231.264pt>
+<diagramas/sus-boxplot.png, id=717, 462.528pt x 231.264pt>
 File: diagramas/sus-boxplot.png Graphic file (type png)
 <use diagramas/sus-boxplot.png>
 Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 560.
@@ -999,7 +1003,7 @@ Package rerunfilecheck Info: File `informe-final.out' has not changed.
 Here is how much of TeX's memory you used:
  15101 strings out of 467501
  233939 string characters out of 5407579
- 977033 words of memory out of 5000000
+ 977042 words of memory out of 5000000
  43919 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1026,9 +1030,9 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (47 pages, 3580299 bytes).
+Output written on informe-final.pdf (47 pages, 3629548 bytes).
 PDF statistics:
- 946 PDF objects out of 1000 (max. 8388607)
+ 944 PDF objects out of 1000 (max. 8388607)
  230 named destinations out of 1000 (max. 500000)
  595 words of extra memory for PDF output out of 10000 (max. 10000000)
 
