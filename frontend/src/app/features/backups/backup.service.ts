@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Respaldo } from './respaldo.model';
+import { Respaldo } from './backup.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RespaldoService {
+export class BackupService {
   private apiUrl = '/api/respaldos';
 
   constructor(private http: HttpClient) {}

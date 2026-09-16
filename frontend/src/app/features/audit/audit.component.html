@@ -36,7 +36,7 @@
       </label>
       <label>
         <span>Operación</span>
-        <select [(ngModel)]="filtros.operacion" (change)="cargarAuditoria()">
+        <select [(ngModel)]="filtros.operation" (change)="cargarAuditoria()">
           <option value="">Todas</option>
           <option value="INSERT">INSERT</option>
           <option value="UPDATE">UPDATE</option>
@@ -46,13 +46,13 @@
       </label>
       <label>
         <span>Desde</span>
-        <input type="date" [(ngModel)]="filtros.fechaInicio" (change)="cargarAuditoria()">
+        <input type="date" [(ngModel)]="filtros.startDate" (change)="cargarAuditoria()">
       </label>
       <label>
         <span>Hasta</span>
-        <input type="date" [(ngModel)]="filtros.fechaFin" (change)="cargarAuditoria()">
+        <input type="date" [(ngModel)]="filtros.endDate" (change)="cargarAuditoria()">
       </label>
-      <button class="btn btn-secondary" (click)="filtros={tabla:'', operacion:'', user:'', fechaInicio:'', fechaFin:''}; cargarAuditoria()">Limpiar</button>
+      <button class="btn btn-secondary" (click)="filtros={tabla:'', operation:'', user:'', startDate:'', endDate:''}; cargarAuditoria()">Limpiar</button>
     </div>
 
     <div *ngIf="cargando" class="message">Cargando registros de auditoría...</div>
@@ -71,14 +71,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let reg of registros">
-            <td>{{ reg.fechaHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td>{{ reg.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>
-              <strong>{{ reg.usuarioApp || 'N/A' }}</strong>
-              <small>DB: {{ reg.usuarioDb }}</small>
+              <strong>{{ reg.appUser || 'N/A' }}</strong>
+              <small>DB: {{ reg.dbUser }}</small>
             </td>
-            <td><span class="code-badge">{{ reg.nombreTabla }}</span></td>
+            <td><span class="code-badge">{{ reg.tableName }}</span></td>
             <td>
-              <span class="op-badge" [ngClass]="reg.operacion.toLowerCase()">{{ reg.operacion }}</span>
+              <span class="op-badge" [ngClass]="reg.operation.toLowerCase()">{{ reg.operation }}</span>
             </td>
             <td class="actions">
               <button class="btn btn-sm" (click)="verDetalle(reg)">Ver Detalles</button>
@@ -103,19 +103,19 @@
     <div class="modal-body">
       <div class="info-grid">
         <div><strong>ID Auditoría:</strong> {{ registroSeleccionado?.idAuditoria }}</div>
-        <div><strong>Fecha:</strong> {{ registroSeleccionado?.fechaHora | date:'dd/MM/yyyy HH:mm:ss' }}</div>
-        <div><strong>Tabla:</strong> <span class="code-badge">{{ registroSeleccionado?.nombreTabla }}</span></div>
-        <div><strong>Operación:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operacion?.toLowerCase() || ''">{{ registroSeleccionado?.operacion }}</span></div>
-        <div><strong>User App:</strong> {{ registroSeleccionado?.usuarioApp || 'N/A' }}</div>
-        <div><strong>User DB:</strong> {{ registroSeleccionado?.usuarioDb }}</div>
+        <div><strong>Fecha:</strong> {{ registroSeleccionado?.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+        <div><strong>Tabla:</strong> <span class="code-badge">{{ registroSeleccionado?.tableName }}</span></div>
+        <div><strong>Operación:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operation?.toLowerCase() || ''">{{ registroSeleccionado?.operation }}</span></div>
+        <div><strong>User App:</strong> {{ registroSeleccionado?.appUser || 'N/A' }}</div>
+        <div><strong>User DB:</strong> {{ registroSeleccionado?.dbUser }}</div>
       </div>
       
       <div class="diff-view">
-        <div class="diff-panel before" *ngIf="registroSeleccionado?.operacion !== 'INSERT'">
+        <div class="diff-panel before" *ngIf="registroSeleccionado?.operation !== 'INSERT'">
           <h3>Datos Anteriores</h3>
           <pre>{{ datosAntiguosObj | json }}</pre>
         </div>
-        <div class="diff-panel after" *ngIf="registroSeleccionado?.operacion !== 'DELETE'">
+        <div class="diff-panel after" *ngIf="registroSeleccionado?.operation !== 'DELETE'">
           <h3>Datos Nuevos</h3>
           <pre>{{ datosNuevosObj | json }}</pre>
         </div>

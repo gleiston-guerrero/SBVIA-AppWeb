@@ -13,7 +13,7 @@ export interface TrafficRule {
 }
 
 @Injectable({ providedIn: 'root' })
-export class ReglaTransitoService {
+export class TrafficRuleService {
   private readonly url = '/api/reglas-transito';
   constructor(private http: HttpClient) {}
   listar(): Observable<TrafficRule[]> { return this.http.get<TrafficRule[]>(this.url); }

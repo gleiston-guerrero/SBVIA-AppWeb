@@ -45,7 +45,7 @@ public class UserController {
     })
     public ResponseEntity<UserDTO> getPerfilActual(Authentication authentication) {
         String email = authentication.getName();
-        UserDTO user = authService.getUsuarioActual(email);
+        UserDTO user = authService.getCurrentUser(email);
         return ResponseEntity.ok(user);
     }
 

@@ -38,7 +38,7 @@ public class AuditoriaServiceTest {
     void setUp() {
         log1 = new AuditLog();
         log1.setIdAuditoria(1L);
-        log1.setTableName("usuario");
+        log1.setTableName("user");
         log1.setOperation("INSERT");
         log1.setAppUser("keith");
         log1.setFechaHora(LocalDateTime.now());
@@ -50,7 +50,7 @@ public class AuditoriaServiceTest {
         log2.setOperation("BACKUP");
         log2.setDbUser("postgres");
         log2.setFechaHora(LocalDateTime.now().minusDays(1));
-        log2.setDatosAnteriores(new String(new char[250]).replace("\0", "a")); // Largo para probar el truncamiento
+        log2.setPreviousData(new String(new char[250]).replace("\0", "a")); // Largo para probar el truncamiento
     }
 
     @Test
@@ -59,11 +59,11 @@ public class AuditoriaServiceTest {
         
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
-        List<AuditLog> result = auditoriaService.obtenerAuditoria("usuario", "INSERT", "keith", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
+        List<AuditLog> result = auditoriaService.obtenerAuditoria("user", "INSERT", "keith", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("usuario", result.get(0).getTableName());
+        assertEquals("user", result.get(0).getTableName());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class AuditoriaServiceTest {
         List<AuditLog> expected = List.of(log1, log2);
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
-        byte[] pdfBytes = auditoriaService.generarReportePdf("usuario", "INSERT", "keith", null, null);
+        byte[] pdfBytes = auditoriaService.generarReportePdf("user", "INSERT", "keith", null, null);
 
         assertNotNull(pdfBytes);
         assertTrue(pdfBytes.length > 0);

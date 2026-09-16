@@ -54,13 +54,13 @@ public class ScenarioService {
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
     public ScenarioDTO crear(ScenarioDTO dto) {
-        RoadType roadType = tipoViaRepository.findByNombre(dto.getRoadType())
+        RoadType roadType = tipoViaRepository.findByName(dto.getRoadType())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Tipo de vía no encontrado: " + dto.getRoadType()));
-        DifficultyLevel nivel = nivelDificultadRepository.findByNombre(dto.getDifficultyLevel())
+        DifficultyLevel nivel = nivelDificultadRepository.findByName(dto.getDifficultyLevel())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Nivel de dificultad no encontrado: " + dto.getDifficultyLevel()));
-        WeatherType clima = tipoClimaRepository.findByNombre(dto.getWeatherType())
+        WeatherType clima = tipoClimaRepository.findByName(dto.getWeatherType())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Tipo de clima no encontrado: " + dto.getWeatherType()));
 

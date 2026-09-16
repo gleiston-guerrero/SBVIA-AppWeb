@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface WeatherTypeRepository extends JpaRepository<WeatherType, Integer> {
 
-    Optional<WeatherType> findByNombre(String name);
+    Optional<WeatherType> findByName(String name);
 }

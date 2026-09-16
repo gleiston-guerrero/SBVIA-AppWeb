@@ -38,19 +38,19 @@ public class AuthService {
 
     @Transactional
     public AuthResponse registro(RegisterRequest request) {
-        if (usuarioRepository.existsByCorreo(request.getEmail())) {
+        if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException(
                     "Ya existe un user registrado con el email: " + request.getEmail());
         }
 
-        Role rolPorDefecto = rolRepository.findByNombre("PARTICIPANTE")
+        Role rolPorDefecto = rolRepository.findByName("PARTICIPANTE")
                 .orElseGet(() -> rolRepository.findAll().stream()
                         .filter(r -> r.getName().contains("PARTICIPANTE") || r.getName().contains("USER"))
                         .findFirst()
                         .orElseThrow(() -> new IllegalStateException("No se encontró el role PARTICIPANTE")));
 
         // id_estado_usuario es NOT NULL: toda cuenta nueva nace en estado ACTIVO.
-        UserState estadoActivo = estadoUsuarioRepository.findByNombre("ACTIVO")
+        UserState estadoActivo = estadoUsuarioRepository.findByName("ACTIVO")
                 .orElseThrow(() -> new IllegalStateException("No se encontró el estado ACTIVO"));
 
         // Generación de nombre_usuario automático estilo SGA UTEQ
@@ -95,7 +95,7 @@ public class AuthService {
         );
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+        User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con identificador: " + identificador));
 
         String rolNombre = user.getRole().getName();
@@ -147,8 +147,8 @@ public class AuthService {
                 .build();
     }
 
-    public UserDTO getUsuarioActual(String identificador) {
-        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+    public UserDTO getCurrentUser(String identificador) {
+        User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
         return mapToDTO(user);
     }
@@ -162,7 +162,7 @@ public class AuthService {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
-        Role nuevoRol = rolRepository.findByNombre(nombreRol)
+        Role nuevoRol = rolRepository.findByName(nombreRol)
                 .orElseThrow(() -> new IllegalArgumentException("Role no encontrado: " + nombreRol));
 
         user.setRole(nuevoRol);
@@ -176,7 +176,7 @@ public class AuthService {
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
         if (!user.getEmail().equalsIgnoreCase(request.getEmail())) {
-            if (usuarioRepository.existsByCorreo(request.getEmail())) {
+            if (usuarioRepository.existsByEmail(request.getEmail())) {
                 throw new DuplicateEmailException("Ya existe un user registrado con el email: " + request.getEmail());
             }
             user.setEmail(request.getEmail());
@@ -192,7 +192,7 @@ public class AuthService {
 
     @Transactional
     public UserDTO actualizarPerfilActual(String identificador, UpdateProfileRequest request) {
-        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador, identificador)
+        User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
         user.setFirstName(request.getFirstName());

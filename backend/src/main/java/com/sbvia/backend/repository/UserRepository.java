@@ -12,13 +12,13 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> findByCorreo(String email);
+    Optional<User> findByEmail(String email);
 
-    boolean existsByCorreo(String email);
+    boolean existsByEmail(String email);
 
-    Optional<User> findByNombreUsuario(String username);
+    Optional<User> findByUsername(String username);
 
-    Optional<User> findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(String email, String username);
+    Optional<User> findByEmailIgnoreCaseOrUsernameIgnoreCase(String email, String username);
 
     @Query("SELECT u.username FROM User u WHERE LOWER(u.username) = LOWER(:base) OR LOWER(u.username) LIKE LOWER(CONCAT(:base, '%'))")
     List<String> findNombresUsuarioSimilares(@Param("base") String base);

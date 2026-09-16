@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EscenarioService } from '../scenarios/scenario.service';
-import { InformeIA, MetricasConduccion, SimulacionService } from '../practicas/simulation.service';
+import { InformeIA, MetricasConduccion, SimulationService } from '../practices/simulation.service';
 
 type EstadoJuego = 'listo' | 'corriendo' | 'pausado' | 'finalizado';
 
@@ -21,13 +21,13 @@ interface SemaforoEvento {
 }
 
 @Component({
-  selector: 'app-simulador-conduccion',
+  selector: 'app-driving-simulator',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './simulador-conduccion.component.html',
-  styleUrl: './simulador-conduccion.component.css'
+  templateUrl: './driving-simulator.component.html',
+  styleUrl: './driving-simulator.component.css'
 })
-export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('lienzo', { static: true }) lienzo!: ElementRef<HTMLCanvasElement>;
 
   // Configuración de la pista (unidades lógicas) y puntajes (Etapa 3)
@@ -93,7 +93,7 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   constructor(
     private route: ActivatedRoute,
     private escenarioService: EscenarioService,
-    private simulacionService: SimulacionService
+    private simulationService: SimulationService
   ) {}
 
   ngOnInit(): void {
@@ -143,8 +143,8 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
   iniciar(): void {
     if (this.estado === 'finalizado') this.reiniciar();
     if (this.idSimulacionBackend === null && this.scenarioId !== null && !this.modoLocal) {
-      this.simulacionService.iniciar(this.scenarioId).subscribe({
-        next: (s) => { this.idSimulacionBackend = s.simulationId; },
+      this.simulationService.iniciar(this.scenarioId).subscribe({
+        next: (s: any) => { this.idSimulacionBackend = s.simulationId; },
         error: () => {
           this.modoLocal = true;
           this.aviso = 'Sin conexión con el servidor: se juega en modo local y no se guardará el resultado.';
@@ -206,9 +206,9 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
     this.velocidadKmh = 0;
     if (this.idSimulacionBackend !== null && !this.modoLocal) {
       this.guardando = true;
-      this.simulacionService.finalizarConduccion(this.idSimulacionBackend, this.metricas()).subscribe({
-        next: (r) => {
-          this.puntajeServidor = Number(r.simulation.puntajeFinal);
+      this.simulationService.finalizarConduccion(this.idSimulacionBackend, this.metricas()).subscribe({
+        next: (r: any) => {
+          this.puntajeServidor = Number(r.simulation.finalScore);
           this.informe = r.feedback;
           this.guardando = false;
         },
@@ -246,7 +246,7 @@ export class SimuladorConduccionComponent implements OnInit, AfterViewInit, OnDe
 
   private metricas(): MetricasConduccion {
     return {
-      duracionSegundos: Math.max(1, Math.floor(this.segundos)),
+      durationSeconds: Math.max(1, Math.floor(this.segundos)),
       velocidadPromedio: Math.round(this.velocidadPromedio * 100) / 100,
       velocidadMaxima: Math.round(this.velocidadMax * 100) / 100,
       excesosVelocidad: this.excesosVelocidad,

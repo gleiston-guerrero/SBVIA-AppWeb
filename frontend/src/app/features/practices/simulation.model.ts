@@ -1,9 +1,9 @@
 export interface Simulation {
   simulationId: number;
-  fechaInicio: string;
-  fechaFin: string | null;
-  puntajeFinal: number;
-  completada: boolean;
+  startDate: string;
+  endDate: string | null;
+  finalScore: number;
+  completed: boolean;
   scenarioId?: number;
   nombreEscenario: string;
   userId?: number;

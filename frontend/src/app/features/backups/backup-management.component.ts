@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RespaldoService } from './respaldo.service';
-import { Respaldo } from './respaldo.model';
+import { BackupService } from './backup.service';
+import { Respaldo } from './backup.model';
 
 @Component({
-  selector: 'app-gestion-respaldos',
+  selector: 'app-backup-management',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './gestion-respaldos.component.html',
-  styleUrls: ['./gestion-respaldos.component.css']
+  templateUrl: './backup-management.component.html',
+  styleUrls: ['./backup-management.component.css']
 })
-export class GestionRespaldosComponent implements OnInit, OnDestroy {
+export class BackupManagementComponent implements OnInit, OnDestroy {
   respaldos: Respaldo[] = [];
   cargando = true;
   generando = false;
@@ -22,7 +22,7 @@ export class GestionRespaldosComponent implements OnInit, OnDestroy {
   
   private autoRefreshInterval: any;
 
-  constructor(private respaldoService: RespaldoService, private fb: FormBuilder) {
+  constructor(private respaldoService: BackupService, private fb: FormBuilder) {
     this.respaldoForm = this.fb.group({
       modalidad: ['COMPLETO', Validators.required],
       fechaProgramada: [''],
@@ -46,7 +46,7 @@ export class GestionRespaldosComponent implements OnInit, OnDestroy {
   cargarRespaldos(): void {
     this.cargando = true;
     this.respaldoService.listar().subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.respaldos = data;
         this.cargando = false;
       },

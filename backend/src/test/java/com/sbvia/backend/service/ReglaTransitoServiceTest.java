@@ -32,7 +32,7 @@ class ReglaTransitoServiceTest {
     void listaReglas() {
         when(reglaRepository.findAll()).thenReturn(List.of(
                 TrafficRule.builder().idReglaTransito(8).codigo("RT-001").name("Límite 30 km/h")
-                        .descripcion("Reducir velocidad").categoria("Velocidad")
+                        .description("Reducir velocidad").categoria("Velocidad")
                         .penalizacionBase(new BigDecimal("5.00")).activa(true).build()));
 
         List<TrafficRuleDTO> resultado = service.listar();
@@ -47,7 +47,7 @@ class ReglaTransitoServiceTest {
     @Test
     void creaRegla() {
         TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-002").name("  Pare  ")
-                .descripcion(" Detención total ").categoria(" Señalización ")
+                .description(" Detención total ").categoria(" Señalización ")
                 .penalizacionBase(new BigDecimal("10.00")).build();
         when(reglaRepository.save(any())).thenAnswer(invocacion -> {
             TrafficRule regla = invocacion.getArgument(0);
@@ -67,12 +67,12 @@ class ReglaTransitoServiceTest {
         TrafficRule existente = TrafficRule.builder().idReglaTransito(4).codigo("RT-003")
                 .name("Velocidad").categoria("Velocidad").penalizacionBase(BigDecimal.ZERO).build();
         TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-003").name("Ceda el paso")
-                .descripcion(null).categoria("Prioridad").penalizacionBase(new BigDecimal("8.00")).build();
+                .description(null).categoria("Prioridad").penalizacionBase(new BigDecimal("8.00")).build();
         when(reglaRepository.findById(4)).thenReturn(Optional.of(existente));
         when(reglaRepository.save(existente)).thenReturn(existente);
 
         assertThat(service.actualizar(4, entrada).getName()).isEqualTo("Ceda el paso");
-        assertThat(existente.getDescripcion()).isNull();
+        assertThat(existente.getDescription()).isNull();
     }
 
     @Test

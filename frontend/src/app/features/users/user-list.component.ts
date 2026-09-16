@@ -12,7 +12,7 @@ import { ToastService } from '../../shared/components/toast/toast.service';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UsuarioListComponent implements OnInit {
+export class UserListComponent implements OnInit {
   users: User[] = [];
   page = 0;
   size = 10;
@@ -20,7 +20,7 @@ export class UsuarioListComponent implements OnInit {
   rolesDisponibles = ['PARTICIPANTE', 'INSTRUCTOR', 'ADMINISTRADOR'];
 
   get usuariosActivos(): number {
-    return this.users.filter(user => !user.cuentaBloqueada).length;
+    return this.users.filter(user => !user.accountLocked).length;
   }
 
   // Modal de edición
@@ -44,11 +44,11 @@ export class UsuarioListComponent implements OnInit {
 
   cargarUsuarios(): void {
     this.usuarioService.listar(this.page, this.size).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.users = data.content;
         this.totalPages = data.totalPages;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al cargar users', err);
       }
     });
@@ -71,7 +71,7 @@ export class UsuarioListComponent implements OnInit {
               this.toastService.showSuccess('Role actualizado exitosamente');
               this.cargarUsuarios();
             },
-            error: (err) => {
+            error: (err: any) => {
               console.error('Error actualizando role', err);
               const errMsg = err.error?.detail || err.error?.message || 'No se pudo actualizar el role';
               this.toastService.showError(errMsg);
@@ -96,7 +96,7 @@ export class UsuarioListComponent implements OnInit {
               this.toastService.showSuccess('User desactivado exitosamente');
               this.cargarUsuarios();
             },
-            error: (err) => {
+            error: (err: any) => {
               console.error('Error al desactivar user', err);
               const errMsg = err.error?.detail || err.error?.message || 'No se pudo desactivar al user';
               this.toastService.showError(errMsg);
@@ -129,7 +129,7 @@ export class UsuarioListComponent implements OnInit {
         this.cerrarModal();
         this.cargarUsuarios();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al actualizar user', err);
         const errMsg = err.error?.detail || err.error?.message || 'Error desconocido al actualizar';
         this.toastService.showError(errMsg);

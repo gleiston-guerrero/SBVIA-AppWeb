@@ -11,7 +11,7 @@ import { EscenarioService, Scenario } from './scenario.service';
   templateUrl: './scenario-form.component.html',
   styleUrl: './scenario-form.component.css'
 })
-export class EscenarioFormComponent implements OnInit {
+export class ScenarioFormComponent implements OnInit {
   escenarioForm: FormGroup;
   isEditMode = false;
   escenarioId: number | null = null;
@@ -57,7 +57,7 @@ export class EscenarioFormComponent implements OnInit {
         });
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         this.errorMessage = err.error?.detail ?? 'Error al cargar los datos del scenario.';
         console.error(err);
         this.loading = false;
@@ -80,7 +80,7 @@ export class EscenarioFormComponent implements OnInit {
         next: () => {
           this.router.navigate(['/scenarios']);
         },
-        error: (err) => {
+        error: (err: any) => {
           this.errorMessage = this.obtenerMensajeError(err, 'Error al actualizar el scenario.');
           console.error(err);
           this.loading = false;
@@ -91,7 +91,7 @@ export class EscenarioFormComponent implements OnInit {
         next: () => {
           this.router.navigate(['/scenarios']);
         },
-        error: (err) => {
+        error: (err: any) => {
           this.errorMessage = this.obtenerMensajeError(err, 'Error al crear el scenario.');
           console.error(err);
           this.loading = false;

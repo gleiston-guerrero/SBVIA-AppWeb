@@ -3,8 +3,8 @@ export interface Respaldo {
   nombreArchivo: string;
   tipo: string;
   estado: string;
-  fechaInicio: string;
-  fechaFin?: string;
+  startDate: string;
+  endDate?: string;
   tamanioBytes?: number;
   detalles?: string;
   modalidad?: string;

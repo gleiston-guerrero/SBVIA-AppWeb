@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Simulation } from './simulation.model';
-import { SimulacionService } from './simulation.service';
+import { SimulationService } from './simulation.service';
 
 interface Infraction {
   nombre: string;
@@ -17,7 +17,7 @@ interface Infraction {
   templateUrl: './simulation.component.html',
   styleUrl: './simulation.component.css'
 })
-export class SimulacionComponent implements OnInit, OnDestroy {
+export class SimulationComponent implements OnInit, OnDestroy {
   practica?: Simulation;
   resultado?: Simulation;
   segundos = 0;
@@ -33,7 +33,7 @@ export class SimulacionComponent implements OnInit, OnDestroy {
     { nombre: 'Frenado brusco', penalizacion: 5, cantidad: 0 }
   ];
 
-  constructor(private route: ActivatedRoute, private simulacionService: SimulacionService) {}
+  constructor(private route: ActivatedRoute, private simulationService: SimulationService) {}
 
   ngOnInit(): void {
     const scenarioId = Number(this.route.snapshot.paramMap.get('scenarioId'));
@@ -42,13 +42,13 @@ export class SimulacionComponent implements OnInit, OnDestroy {
       this.cargando = false;
       return;
     }
-    this.simulacionService.iniciar(scenarioId).subscribe({
-      next: practica => {
+    this.simulationService.iniciar(scenarioId).subscribe({
+      next: (practica: any) => {
         this.practica = practica;
         this.cargando = false;
         this.temporizador = setInterval(() => this.segundos++, 1000);
       },
-      error: err => {
+      error: (err: any) => {
         this.error = err.error?.detail ?? 'No se pudo iniciar la práctica.';
         this.cargando = false;
       }
@@ -78,13 +78,13 @@ export class SimulacionComponent implements OnInit, OnDestroy {
   finalizar(): void {
     if (!this.practica || this.finalizando) return;
     this.finalizando = true;
-    this.simulacionService.finalizar(this.practica.simulationId, this.puntaje).subscribe({
+    this.simulationService.finalizar(this.practica.simulationId, this.puntaje).subscribe({
       next: resultado => {
         this.resultado = resultado;
         this.finalizando = false;
         if (this.temporizador) clearInterval(this.temporizador);
       },
-      error: err => {
+      error: (err: any) => {
         this.error = err.error?.detail ?? 'No se pudo finalizar la práctica.';
         this.finalizando = false;
       }

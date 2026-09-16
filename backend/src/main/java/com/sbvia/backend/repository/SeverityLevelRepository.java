@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface SeverityLevelRepository extends JpaRepository<SeverityLevel, Integer> {
 
-    Optional<SeverityLevel> findByNombre(String name);
+    Optional<SeverityLevel> findByName(String name);
 }

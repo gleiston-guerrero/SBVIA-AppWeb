@@ -18,7 +18,7 @@ public class Simulation {
     private Integer simulationId;
 
     @Column(name = "fecha_inicio")
-    private java.time.LocalDate fechaInicio;
+    private java.time.LocalDate startDate;
 
     @Column(name = "fecha_fin")
     private java.time.LocalDate endDate;

@@ -45,7 +45,7 @@ export class RegisterComponent {
         this.registeredUsername = res?.user?.username || '';
         this.registeredEmail = res?.user?.email || this.data.email;
       },
-      error: (err) => {
+      error: (err: any) => {
         this.loading = false;
         if (err.status === 409) {
           this.errorMessage = 'El email ya está registrado';

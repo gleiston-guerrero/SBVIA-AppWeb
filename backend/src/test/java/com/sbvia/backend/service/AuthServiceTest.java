@@ -41,19 +41,19 @@ class AuthServiceTest {
     @InjectMocks AuthService authService;
 
     private Role rol;
-    private User usuario;
+    private User user;
 
     @BeforeEach
     void prepararUsuario() {
         rol = Role.builder().roleId(1).name("ROLE_USER").build();
-        usuario = User.builder()
-                .idUsuario(9)
-                .nombres("Ana")
-                .apellidos("Pérez")
-                .nombreUsuario("aperez")
-                .correo("ana@sbvia.test")
-                .contrasenaHash("hash")
-                .rol(rol)
+        user = User.builder()
+                .userId(9)
+                .firstName("Ana")
+                .lastName("Pérez")
+                .username("aperez")
+                .email("ana@sbvia.test")
+                .passwordHash("hash")
+                .role(rol)
                 .accountLocked(false)
                 .build();
     }
@@ -61,19 +61,19 @@ class AuthServiceTest {
     @Test
     void rechazaUnRegistroConCorreoDuplicado() {
         RegisterRequest request = registro();
-        when(usuarioRepository.existsByCorreo(request.getCorreo())).thenReturn(true);
+        when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(true);
 
         assertThatThrownBy(() -> authService.registro(request))
                 .isInstanceOf(DuplicateEmailException.class)
-                .hasMessageContaining(request.getCorreo());
+                .hasMessageContaining(request.getEmail());
         verify(usuarioRepository, never()).save(any());
     }
 
     @Test
     void rechazaUnRegistroSiFaltaElRolPredeterminado() {
         RegisterRequest request = registro();
-        when(usuarioRepository.existsByCorreo(request.getCorreo())).thenReturn(false);
-        when(rolRepository.findByNombre("PARTICIPANTE")).thenReturn(Optional.empty());
+        when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
+        when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> authService.registro(request))
                 .isInstanceOf(IllegalStateException.class)
@@ -83,14 +83,14 @@ class AuthServiceTest {
     @Test
     void registraUsuarioConNombreUsuarioGeneradoExitosamente() {
         RegisterRequest request = registro();
-        when(usuarioRepository.existsByCorreo(request.getCorreo())).thenReturn(false);
-        when(rolRepository.findByNombre("PARTICIPANTE")).thenReturn(Optional.of(rol));
-        when(estadoUsuarioRepository.findByNombre("ACTIVO")).thenReturn(Optional.of(new UserState()));
-        when(usernameGeneratorService.generarBase(request.getNombres(), request.getApellidos())).thenReturn("aperez");
+        when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
+        when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.of(rol));
+        when(estadoUsuarioRepository.findByName("ACTIVO")).thenReturn(Optional.of(new UserState()));
+        when(usernameGeneratorService.generarBase(request.getFirstName(), request.getLastName())).thenReturn("aperez");
         when(usuarioRepository.findNombresUsuarioSimilares("aperez")).thenReturn(List.of());
         when(usernameGeneratorService.generarSiguienteDisponible("aperez", List.of())).thenReturn("aperez");
         when(passwordEncoder.encode(request.getPassword())).thenReturn("hashed-pwd");
-        when(usuarioRepository.save(any(User.class))).thenReturn(usuario);
+        when(usuarioRepository.save(any(User.class))).thenReturn(user);
         when(jwtService.generateAccessToken(any(), any(), any())).thenReturn("access-token");
         when(jwtService.generateRefreshToken(any(), any())).thenReturn("refresh-token");
         when(jwtService.getAccessExpirationMs()).thenReturn(3600000L);
@@ -99,7 +99,7 @@ class AuthServiceTest {
 
         assertThat(response).isNotNull();
         assertThat(response.getAccessToken()).isEqualTo("access-token");
-        assertThat(response.getUsuario().getNombreUsuario()).isEqualTo("aperez");
+        assertThat(response.getUser().getUsername()).isEqualTo("aperez");
     }
 
     @Test
@@ -144,37 +144,37 @@ class AuthServiceTest {
 
     @Test
     void obtieneElUsuarioActualPorIdentificador() {
-        when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getCorreo(), usuario.getCorreo()))
-                .thenReturn(Optional.of(usuario));
+        when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
+                .thenReturn(Optional.of(user));
 
-        assertThat(authService.getUsuarioActual(usuario.getCorreo()).getRol()).isEqualTo("ROLE_USER");
+        assertThat(authService.getCurrentUser(user.getEmail()).getRole()).isEqualTo("ROLE_USER");
     }
 
     @Test
     void cambiaElRolDelUsuario() {
         Role administrador = Role.builder().roleId(2).name("ROLE_ADMIN").build();
-        when(usuarioRepository.findById(9)).thenReturn(Optional.of(usuario));
-        when(rolRepository.findByNombre("ROLE_ADMIN")).thenReturn(Optional.of(administrador));
-        when(usuarioRepository.save(usuario)).thenReturn(usuario);
+        when(usuarioRepository.findById(9)).thenReturn(Optional.of(user));
+        when(rolRepository.findByName("ROLE_ADMIN")).thenReturn(Optional.of(administrador));
+        when(usuarioRepository.save(user)).thenReturn(user);
 
-        assertThat(authService.cambiarRol(9, "ROLE_ADMIN").getRol()).isEqualTo("ROLE_ADMIN");
+        assertThat(authService.cambiarRol(9, "ROLE_ADMIN").getRole()).isEqualTo("ROLE_ADMIN");
     }
 
     @Test
     void haceEliminacionLogicaDelUsuario() {
-        when(usuarioRepository.findById(9)).thenReturn(Optional.of(usuario));
+        when(usuarioRepository.findById(9)).thenReturn(Optional.of(user));
 
         authService.eliminarUsuario(9);
 
-        assertThat(usuario.isAccountLocked()).isTrue();
-        verify(usuarioRepository).save(usuario);
+        assertThat(user.isAccountLocked()).isTrue();
+        verify(usuarioRepository).save(user);
     }
 
     private RegisterRequest registro() {
         RegisterRequest request = new RegisterRequest();
-        request.setNombres("Ana");
-        request.setApellidos("Pérez");
-        request.setCorreo("ana@sbvia.test");
+        request.setFirstName("Ana");
+        request.setLastName("Pérez");
+        request.setEmail("ana@sbvia.test");
         request.setPassword("Password123!");
         return request;
     }

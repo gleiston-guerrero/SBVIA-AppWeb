@@ -27,13 +27,13 @@ class UserDetailsServiceImplTest {
 
     @Test
     void cargaUsuarioActivoPorCorreo() {
-        User usuario = usuario(false);
-        when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getCorreo(), usuario.getCorreo()))
-                .thenReturn(Optional.of(usuario));
+        User user = user(false);
+        when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
+                .thenReturn(Optional.of(user));
 
-        var resultado = userDetailsService.loadUserByUsername(usuario.getCorreo());
+        var resultado = userDetailsService.loadUserByUsername(user.getEmail());
 
-        assertThat(resultado.getUsername()).isEqualTo(usuario.getCorreo());
+        assertThat(resultado.getUsername()).isEqualTo(user.getEmail());
         assertThat(resultado.getAuthorities())
                 .extracting(Object::toString)
                 .containsExactly("ROLE_USER");
@@ -41,13 +41,13 @@ class UserDetailsServiceImplTest {
 
     @Test
     void cargaUsuarioActivoPorNombreUsuario() {
-        User usuario = usuario(false);
-        when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getNombreUsuario(), usuario.getNombreUsuario()))
-                .thenReturn(Optional.of(usuario));
+        User user = user(false);
+        when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getUsername(), user.getUsername()))
+                .thenReturn(Optional.of(user));
 
-        var resultado = userDetailsService.loadUserByUsername(usuario.getNombreUsuario());
+        var resultado = userDetailsService.loadUserByUsername(user.getUsername());
 
-        assertThat(resultado.getUsername()).isEqualTo(usuario.getCorreo());
+        assertThat(resultado.getUsername()).isEqualTo(user.getEmail());
         assertThat(resultado.getAuthorities())
                 .extracting(Object::toString)
                 .containsExactly("ROLE_USER");
@@ -55,18 +55,18 @@ class UserDetailsServiceImplTest {
 
     @Test
     void rechazaUsuarioInactivo() {
-        User usuario = usuario(true);
-        when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(usuario.getCorreo(), usuario.getCorreo()))
-                .thenReturn(Optional.of(usuario));
+        User user = user(true);
+        when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
+                .thenReturn(Optional.of(user));
 
-        assertThatThrownBy(() -> userDetailsService.loadUserByUsername(usuario.getCorreo()))
+        assertThatThrownBy(() -> userDetailsService.loadUserByUsername(user.getEmail()))
                 .isInstanceOf(UsernameNotFoundException.class)
                 .hasMessageContaining("bloqueada");
     }
 
     @Test
     void rechazaIdentificadorNoRegistrado() {
-        when(usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase("ausente@sbvia.test", "ausente@sbvia.test"))
+        when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase("ausente@sbvia.test", "ausente@sbvia.test"))
                 .thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userDetailsService.loadUserByUsername("ausente@sbvia.test"))
@@ -74,15 +74,15 @@ class UserDetailsServiceImplTest {
                 .hasMessageContaining("ausente@sbvia.test");
     }
 
-    private User usuario(boolean accountLocked) {
+    private User user(boolean accountLocked) {
         return User.builder()
-                .nombres("Conductor")
-                .apellidos("Demo")
-                .nombreUsuario("cdemop")
-                .correo("conductor@sbvia.test")
-                .contrasenaHash("hash-seguro")
+                .firstName("Conductor")
+                .lastName("Demo")
+                .username("cdemop")
+                .email("conductor@sbvia.test")
+                .passwordHash("hash-seguro")
                 .accountLocked(accountLocked)
-                .rol(Role.builder().name("ROLE_USER").build())
+                .role(Role.builder().name("ROLE_USER").build())
                 .build();
     }
 }

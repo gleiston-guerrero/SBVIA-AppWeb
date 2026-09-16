@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Simulation } from './simulation.model';
 
 export interface MetricasConduccion {
-  duracionSegundos: number;
+  durationSeconds: number;
   velocidadPromedio: number;
   velocidadMaxima: number;
   excesosVelocidad: number;
@@ -35,7 +35,7 @@ export interface ResultadoConduccion {
 @Injectable({
   providedIn: 'root'
 })
-export class SimulacionService {
+export class SimulationService {
   private apiUrl = '/api/simulations';
 
   constructor(private http: HttpClient) {}
@@ -56,8 +56,8 @@ export class SimulacionService {
     return this.http.post<Simulation>(`${this.apiUrl}/iniciar/${scenarioId}`, {});
   }
 
-  finalizar(simulationId: number, puntajeFinal: number): Observable<Simulation> {
-    return this.http.post<Simulation>(`${this.apiUrl}/${simulationId}/finalizar`, { puntajeFinal });
+  finalizar(simulationId: number, finalScore: number): Observable<Simulation> {
+    return this.http.post<Simulation>(`${this.apiUrl}/${simulationId}/finalizar`, { finalScore });
   }
 
   finalizarConduccion(simulationId: number, metricas: MetricasConduccion): Observable<ResultadoConduccion> {

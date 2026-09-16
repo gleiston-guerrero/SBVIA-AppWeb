@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DifficultyLevelRepository extends JpaRepository<DifficultyLevel, Integer> {
 
-    Optional<DifficultyLevel> findByNombre(String name);
+    Optional<DifficultyLevel> findByName(String name);
 }

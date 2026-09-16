@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface MetricTypeRepository extends JpaRepository<MetricType, Integer> {
 
-    Optional<MetricType> findByNombre(String name);
+    Optional<MetricType> findByName(String name);
 }

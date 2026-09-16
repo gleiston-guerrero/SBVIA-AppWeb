@@ -71,12 +71,12 @@ public class SimulationService {
     private final FeedbackService retroalimentacionService;
 
     public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
-        User user = usuarioRepository.findByCorreo(email)
+        User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User no encontrado"));
         Scenario scenario = escenarioRepository.findById(scenarioId)
                 .filter(Scenario::isActivo)
                 .orElseThrow(() -> new ResourceNotFoundException("Scenario activo no encontrado"));
-        SimulationState enProgreso = estadoSimulacionRepository.findByNombre("EN_PROGRESO")
+        SimulationState enProgreso = estadoSimulacionRepository.findByName("EN_PROGRESO")
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el estado EN_PROGRESO"));
         Vehicle vehicle = vehiculoRepository.findFirstByActivoTrueOrderByIdVehiculoAsc()
                 .orElseThrow(() -> new IllegalStateException("No existe un vehículo activo para iniciar la simulación"));
@@ -90,7 +90,7 @@ public class SimulationService {
                 .build());
 
         Simulation simulation = Simulation.builder()
-                .fechaInicio(LocalDate.now())
+                .startDate(LocalDate.now())
                 .finalScore(BigDecimal.ZERO)
                 .user(user)
                 .scenario(scenario)
@@ -139,11 +139,11 @@ public class SimulationService {
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta la regla " + REGLA_EXCESO));
         TrafficRule reglaSemaforo = reglaTransitoRepository.findByCodigo(REGLA_SEMAFORO)
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta la regla " + REGLA_SEMAFORO));
-        SeverityLevel moderada = nivelGravedadRepository.findByNombre("MODERADA")
+        SeverityLevel moderada = nivelGravedadRepository.findByName("MODERADA")
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el nivel MODERADA"));
-        SeverityLevel grave = nivelGravedadRepository.findByNombre("GRAVE")
+        SeverityLevel grave = nivelGravedadRepository.findByName("GRAVE")
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el nivel GRAVE"));
-        SimulationState completed = estadoSimulacionRepository.findByNombre("COMPLETADA")
+        SimulationState completed = estadoSimulacionRepository.findByName("COMPLETADA")
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el estado COMPLETADA"));
 
         int totalInfracciones = metricas.excesosVelocidad() + metricas.colisiones()
@@ -203,11 +203,11 @@ public class SimulationService {
     }
 
     public List<SimulationDTO> obtenerMisPracticas(String email) {
-        User user = usuarioRepository.findByCorreo(email)
+        User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
         List<Simulation> simulations = simulacionRepository
-                .findByUsuario_IdUsuarioOrderByIdSimulacionDesc(user.getUserId());
+                .findByUser_UserIdOrderBySimulationIdDesc(user.getUserId());
 
         return simulations.stream()
                 .map(this::mapToDTO)
@@ -215,7 +215,7 @@ public class SimulationService {
     }
 
     public List<SimulationDTO> obtenerTodas() {
-        return simulacionRepository.findAllByOrderByIdSimulacionDesc().stream()
+        return simulacionRepository.findAllByOrderBySimulationIdDesc().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
@@ -240,7 +240,7 @@ public class SimulationService {
     }
 
     private void guardarMetrica(Simulation simulation, String tipo, BigDecimal value, String observacion) {
-        MetricType metricType = tipoMetricaRepository.findByNombre(tipo)
+        MetricType metricType = tipoMetricaRepository.findByName(tipo)
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el tipo " + tipo));
         metricaDesempenoRepository.save(PerformanceMetric.builder()
                 .value(value)
@@ -265,17 +265,17 @@ public class SimulationService {
     private SimulationDTO mapToDTO(Simulation simulation) {
         return SimulationDTO.builder()
                 .simulationId(simulation.getSimulationId())
-                .fechaInicio(simulation.getFechaInicio())
+                .startDate(simulation.getStartDate())
                 .endDate(simulation.getEndDate())
                 .finalScore(simulation.getFinalScore())
                 .completed(simulation.isCompleted())
                 .scenarioId(simulation.getScenario() != null ? simulation.getScenario().getScenarioId() : null)
-                .nombreEscenario(simulation.getScenario() != null ? simulation.getScenario().getName() : "N/A")
+                .scenarioName(simulation.getScenario() != null ? simulation.getScenario().getName() : "N/A")
                 .userId(simulation.getUser() != null ? simulation.getUser().getUserId() : null)
                 .username(simulation.getUser() != null
                         ? simulation.getUser().getFirstName() + " " + simulation.getUser().getLastName()
                         : "N/A")
-                .correoUsuario(simulation.getUser() != null ? simulation.getUser().getEmail() : null)
+                .userEmail(simulation.getUser() != null ? simulation.getUser().getEmail() : null)
                 .build();
     }
 }

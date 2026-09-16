@@ -154,7 +154,7 @@ Para guiar el diseño y evaluación del sistema SBVIA, se formularon tres pregun
 \end{itemize}
 
 \section{Calidad del producto de software}
-La calidad de SBVIA se analiza como un conjunto de propiedades observables y no como una afirmación general. ISO/IEC 25010 distingue características como adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad \cite{iso25010}. En este proyecto, la adecuación funcional se contrasta mediante pruebas de servicios y controladores; la eficiencia se mide con percentiles de latencia; la usabilidad se observa con SUS y Lighthouse; la seguridad se revisa mediante controles de autenticación, autorización, cabeceras y análisis automatizado; y la portabilidad se apoya en contenedores Docker.
+La calidad de SBVIA se analiza como un conjunto de propiedades observables y no como una afirmación general. ISO/IEC 25010 distingue característicasí como adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad \cite{iso25010}. En este proyecto, la adecuación funcional se contrasta mediante pruebas de servicios y controladores; la eficiencia se mide con percentiles de latencia; la usabilidad se observa con SUS y Lighthouse; la seguridad se revisa mediante controles de autenticación, autorización, cabeceras y análisis automatizado; y la portabilidad se apoya en contenedores Docker.
 
 Esta descomposición evita confundir una compilación exitosa con un producto terminado. Un sistema puede arrancar y, aun así, incumplir un requisito de autorización, carecer de cobertura sobre ramas críticas o no disponer de evidencia reproducible. Por ese motivo, cada requisito no funcional se asocia a una métrica, un umbral y un artefacto de verificación. El criterio de aceptación solo se considera satisfecho cuando los tres elementos son coherentes entre sí.
 
@@ -166,7 +166,7 @@ La autenticación responde quién es el usuario; la autorización determina qué
 \section{Persistencia, caché y consistencia}
 La arquitectura de datos combina operaciones CRUD mediante ORM con procedimientos almacenados para consultas o transformaciones delimitadas. El uso de ORM favorece mantenibilidad en operaciones transaccionales comunes, mientras que los procedimientos permiten encapsular lógica SQL estable y auditable. Esta separación sigue el principio de utilizar cada mecanismo donde aporta valor y evita trasladar indiscriminadamente toda la lógica al motor de base de datos \cite{fowler2002patterns, kleppmann2017designing}.
 
-Redis actúa como caché de lecturas frecuentes de escenarios. Una caché introduce la necesidad de definir clave, tiempo de vida, serialización e invalidación. El beneficio esperado es reducir trabajo repetido y latencia, pero su evaluación debe comparar condiciones equivalentes y conservar datos crudos. Por ello, el informe diferencia las corridas concurrentes de caché caliente del ensayo secuencial frío/caliente; combinarlas como si fueran una misma muestra produciría una inferencia inválida.
+Redis actúa como caché de lecturas frecuentes de escenarios. Una caché introduce la necesidad de definir clave, tiempo de vida, serialización e invalidación. El beneficio esperado es reducir trabajo repetido y latencia, pero su evaluación debe comparar condiciones equivalentes y conservar datos crudos. Por ello, el informe diferencia las corridas concurrentes de caché caliente del ensayo secuencial frío/caliente; combinarlasí como si fueran una misma muestra produciría una inferencia inválida.
 
 \section{Reproducibilidad y datos FAIR}
 La reproducibilidad computacional requiere conservar código, configuración, versiones, datos de entrada y comandos de ejecución. Peng plantea que la evidencia científica computacional debe permitir reconstruir los resultados, y Sandve et al. recomiendan registrar cada transformación y evitar operaciones manuales no documentadas \cite{peng2011reproducible, sandve2013ten}. SBVIA organiza scripts, mediciones crudas, resúmenes y procedencia dentro del repositorio para reducir la distancia entre afirmación y evidencia.
@@ -226,7 +226,11 @@ La separación de responsabilidades se gestiona a nivel estructural mediante el 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{diagramas/C4 Level 2.png}
+
+El \textbf{Diagrama de Contenedores (Nivel 2)} detalla la arquitectura interna del sistema, mostrando cómo la aplicación web (Angular) se comunica con la API de Spring Boot, la cual a su vez interactúa con PostgreSQL y Redis.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 2.png}
 \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
 \label{fig:c4-level2}
 \end{figure}
@@ -300,7 +304,7 @@ Los requisitos se redactaron según la plantilla sintáctica normativa de ISO/IE
 \section{Alcance y exclusiones}
 La versión evaluada cubre autenticación, roles, gestión de escenarios, registro de simulaciones, consulta de métricas y operaciones administrativas. El término ``simulador'' describe un flujo web de decisiones sobre escenarios viales; no representa un gemelo físico del vehículo ni reproduce fuerzas, campo visual o dinámica vehicular con fidelidad certificada. Tampoco realiza diagnóstico médico, evaluación legal de aptitud para conducir ni emisión de licencias.
 
-Las capacidades de inteligencia artificial adaptativa, gráficos tridimensionales avanzados, integración con volante y telemetría en tiempo real se mantienen fuera del alcance de v1.0.0. Declarar estas exclusiones previene que funcionalidades futuras sean contabilizadas como resultados presentes y permite evaluar el artefacto contra un límite funcional concreto.
+Las capacidades de inteligencia artificial adaptativa, gráficos tridimensionales avanzados, integración con volante y telemetría en tiempo real se mantienen fuera del alcance de v1.0.0. Declarar estas exclusiones previene que funcionalidades futuras sean contabilizadasí como resultados presentes y permite evaluar el artefacto contra un límite funcional concreto.
 
 \section{Trazabilidad y control de cambios}
 La matriz ubicada en \texttt{docs/trazabilidad/matriz.csv} enlaza cada identificador con módulo, prueba, estado y tipo de acceso a datos. Los estados \texttt{VERIFIED}, \texttt{TESTED} y \texttt{PARTIAL} tienen significados distintos: verificado implica evidencia suficiente frente al criterio; probado indica que existe una comprobación automatizada del comportamiento referido; parcial señala que la evidencia o la implementación todavía no cubre el criterio completo.
@@ -397,6 +401,10 @@ En el nivel de contexto (ver Figura~\ref{fig:c4-level1}), el conductor y el admi
 
 \begin{figure}[htbp]
     \centering
+    
+El \textbf{Diagrama de Contexto (Nivel 1)} proporciona una visión general de las interacciones entre los usuarios (Estudiante, Instructor, Administrador) y el Sistema SBVIA, así como las dependencias externas.
+\begin{figure}[H]
+    \centering
     \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 1.png}
     \caption{Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}
     \label{fig:c4-level1}
@@ -405,6 +413,10 @@ En el nivel de contexto (ver Figura~\ref{fig:c4-level1}), el conductor y el admi
 En el nivel de componentes (ver Figura~\ref{fig:c4-level3}), los controladores traducen HTTP, los servicios aplican reglas, los repositorios abstraen persistencia y la configuración de seguridad forma la frontera de confianza.
 
 \begin{figure}[htbp]
+    \centering
+    
+El \textbf{Diagrama de Componentes (Nivel 3)} se enfoca en el backend de Spring Boot, ilustrando los controladores, servicios y repositorios clave que manejan la lógica de negocio (Simulaciones, Autenticación, Reportes).
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 3.png}
     \caption{Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}
@@ -419,7 +431,16 @@ As shown in Figure~\ref{fig:flujo-mvc}, la separación mostrada permite ubicar l
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{diagramas/mvc-flow-springboot-en.png}
+    
+\subsection{Flujo de Interacción MVC}
+El patrón Modelo-Vista-Controlador (MVC) dicta cómo fluye la informacin a través de la aplicación. La Figura~\ref{fig:mvc-flow} ilustra este flujo en el entorno Spring Boot: las peticiones HTTP del cliente son recibidas por el Controlador, el cual delega la lógica al Servicio. El Servicio manipula el Modelo y los DTOs interactuando con la base de datos a través de los Repositorios. Finalmente, la respuesta viaja de vuelta al cliente.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{diagramas/mvc-flow-springboot-en.png}
+    \caption{Diagrama de Flujo MVC en Spring Boot. Fuente: Elaboración propia.}
+    \label{fig:mvc-flow}
+\end{figure}
+
     \caption{MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}
     \label{fig:flujo-mvc}
 \end{figure}

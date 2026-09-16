@@ -68,33 +68,33 @@ class AuthControllerTest {
         rolRepository.deleteAll();
         Role rolTest = Role.builder()
                 .name("ROLE_USER")
-                .descripcion("Alumno o conductor en práctica")
+                .description("Alumno o conductor en práctica")
                 .build();
         rolTest = rolRepository.save(rolTest);
 
         UserState estadoActivo = estadoUsuarioRepository.save(UserState.builder()
                 .name("ACTIVO")
-                .descripcion("Cuenta habilitada")
+                .description("Cuenta habilitada")
                 .permiteAcceso(true)
                 .build());
         testUser = User.builder()
-                .nombres("Test")
-                .apellidos("User")
-                .nombreUsuario("testuser")
-                .correo("test@example.com")
-                .contrasenaHash(passwordEncoder.encode("password123"))
-                .rol(rolTest)
-                .estadoUsuario(estadoActivo)
+                .firstName("Test")
+                .lastName("User")
+                .username("testuser")
+                .email("test@example.com")
+                .passwordHash(passwordEncoder.encode("password123"))
+                .role(rolTest)
+                .userState(estadoActivo)
                 .accountLocked(false)
                 .build();
         usuarioRepository.save(testUser);
     }
 
     @Test
-    @DisplayName("Login exitoso con correo retorna access token y oculta refresh token")
+    @DisplayName("Login exitoso con email retorna access token y oculta refresh token")
     void loginExitoso() throws Exception {
         LoginRequest request = new LoginRequest();
-        request.setCorreo("test@example.com");
+        request.setEmail("test@example.com");
         request.setPassword("password123");
 
         MvcResult result = mockMvc.perform(post("/api/auth/login")
@@ -135,7 +135,7 @@ class AuthControllerTest {
     @DisplayName("Login: cookie accessToken tiene HttpOnly y SameSite=Strict")
     void loginCookieTieneHttpOnlyYSameSite() throws Exception {
         LoginRequest request = new LoginRequest();
-        request.setCorreo("test@example.com");
+        request.setEmail("test@example.com");
         request.setPassword("password123");
 
         MvcResult result = mockMvc.perform(post("/api/auth/login")
@@ -170,11 +170,11 @@ class AuthControllerTest {
         usuarioRepository.deleteAll();
 
         RegisterRequest request = new RegisterRequest();
-        request.setNombres("Nuevo");
-        request.setApellidos("Conductor");
-        request.setCorreo("nuevo@sbvia.com");
+        request.setFirstName("Nuevo");
+        request.setLastName("Conductor");
+        request.setEmail("nuevo@sbvia.com");
         request.setPassword("password123");
-        request.setTelefono("0999999999");
+        request.setPhone("0999999999");
 
         MvcResult result = mockMvc.perform(post("/api/auth/registro")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -202,7 +202,7 @@ class AuthControllerTest {
     @DisplayName("Login con clave incorrecta retorna 401")
     void loginClaveIncorrecta() throws Exception {
         LoginRequest request = new LoginRequest();
-        request.setCorreo("test@example.com");
+        request.setEmail("test@example.com");
         request.setPassword("wrongpassword");
 
         mockMvc.perform(post("/api/auth/login")
@@ -215,11 +215,11 @@ class AuthControllerTest {
     @DisplayName("Registro con email duplicado retorna 409 Conflict")
     void registroEmailDuplicado() throws Exception {
         RegisterRequest request = new RegisterRequest();
-        request.setNombres("Nuevo");
-        request.setApellidos("User");
-        request.setCorreo("test@example.com");
+        request.setFirstName("Nuevo");
+        request.setLastName("User");
+        request.setEmail("test@example.com");
         request.setPassword("password123");
-        request.setTelefono("0999999999");
+        request.setPhone("0999999999");
 
         mockMvc.perform(post("/api/auth/registro")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -239,10 +239,10 @@ class AuthControllerTest {
     }
 
     @Test
-    @DisplayName("Acceso con token válido retorna datos del usuario")
+    @DisplayName("Acceso con token válido retorna datos del user")
     void accesoConTokenValido() throws Exception {
         LoginRequest loginReq = new LoginRequest();
-        loginReq.setCorreo("test@example.com");
+        loginReq.setEmail("test@example.com");
         loginReq.setPassword("password123");
 
         MvcResult result = mockMvc.perform(post("/api/auth/login")
@@ -256,14 +256,14 @@ class AuthControllerTest {
         mockMvc.perform(get("/api/usuarios/me")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.correo").value("test@example.com"));
+                .andExpect(jsonPath("$.email").value("test@example.com"));
     }
 
     @Test
     @DisplayName("User autenticado sin rol administrativo recibe Problem Details 403")
     void accesoSinRolAdministrativo() throws Exception {
         LoginRequest loginReq = new LoginRequest();
-        loginReq.setCorreo("test@example.com");
+        loginReq.setEmail("test@example.com");
         loginReq.setPassword("password123");
 
         MvcResult login = mockMvc.perform(post("/api/auth/login")

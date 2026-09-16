@@ -77,7 +77,7 @@ public class SimulacionControllerTest {
         when(auth.getName()).thenReturn("user");
         when(retroalimentacionService.generarInforme("user", 1)).thenReturn(new FeedbackIaResponse());
 
-        ResponseEntity<FeedbackIaResponse> res = controller.retroalimentacion(1, auth);
+        ResponseEntity<FeedbackIaResponse> res = controller.feedback(1, auth);
         assertEquals(200, res.getStatusCode().value());
     }
 

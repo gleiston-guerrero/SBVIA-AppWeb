@@ -53,14 +53,14 @@ class SimulacionConduccionIntegracionTest {
 
     @Test
     void finalizaConduccionYPersisteMetricasEInfracciones() {
-        Role rol = Role.builder().name("PARTICIPANTE").descripcion("Conductor").build();
+        Role rol = Role.builder().name("PARTICIPANTE").description("Conductor").build();
         entityManager.persist(rol);
-        UserState activo = UserState.builder().name("ACTIVO").descripcion("Habilitada").build();
+        UserState activo = UserState.builder().name("ACTIVO").description("Habilitada").build();
         entityManager.persist(activo);
-        User usuario = User.builder()
-                .nombres("Test").apellidos("Conductor").correo("conductor.it@sbvia.test")
-                .contrasenaHash("hash").rol(rol).estadoUsuario(activo).build();
-        entityManager.persist(usuario);
+        User user = User.builder()
+                .firstName("Test").lastName("Conductor").email("conductor.it@sbvia.test")
+                .passwordHash("hash").role(rol).userState(activo).build();
+        entityManager.persist(user);
         RoadType via = RoadType.builder().name("Urbana").build();
         entityManager.persist(via);
         DifficultyLevel nivel = DifficultyLevel.builder().name("Intermedio").value(2).build();
@@ -68,20 +68,20 @@ class SimulacionConduccionIntegracionTest {
         WeatherType clima = WeatherType.builder().name("Despejado").build();
         entityManager.persist(clima);
         Scenario escenario = Scenario.builder()
-                .name("Pista IT").densidadTrafico("MEDIA")
+                .name("Pista IT").trafficDensity("MEDIA")
                 .roadType(via).difficultyLevel(nivel).weatherType(clima).build();
         entityManager.persist(escenario);
-        VehicleType tipoVehiculo = VehicleType.builder()
+        VehicleType vehicleType = VehicleType.builder()
                 .name("AUTOMOVIL").licenciaRequerida("B").build();
-        entityManager.persist(tipoVehiculo);
-        Vehicle vehiculo = Vehicle.builder()
+        entityManager.persist(vehicleType);
+        Vehicle vehicle = Vehicle.builder()
                 .name("Vehículo IT").transmision("MANUAL")
-                .tipoVehiculo(tipoVehiculo).build();
-        entityManager.persist(vehiculo);
-        Simulation simulacion = Simulation.builder()
-                .usuario(usuario).escenario(escenario).vehiculo(vehiculo)
+                .vehicleType(vehicleType).build();
+        entityManager.persist(vehicle);
+        Simulation simulation = Simulation.builder()
+                .user(user).scenario(escenario).vehicle(vehicle)
                 .finalScore(BigDecimal.ZERO).build();
-        entityManager.persist(simulacion);
+        entityManager.persist(simulation);
         entityManager.persist(SimulationState.builder().name("COMPLETADA").build());
         entityManager.persist(MetricType.builder().name("VELOCIDAD_PROMEDIO").build());
         entityManager.persist(MetricType.builder().name("TOTAL_INFRACCIONES").build());
@@ -98,20 +98,20 @@ class SimulacionConduccionIntegracionTest {
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 120, new BigDecimal("45.50"), new BigDecimal("72.00"), 2, 1, 1, 1, 1, 0);
         DrivingResultDTO resultado = simulacionService.finalizarConduccion(
-                "conductor.it@sbvia.test", simulacion.getIdSimulacion(), metricas);
+                "conductor.it@sbvia.test", simulation.getSimulationId(), metricas);
 
         // 100 - (2*15 + 1*20 + 1*20 + 1*10 + 1*8) = 12
-        assertThat(resultado.getSimulacion().getFinalScore()).isEqualByComparingTo("12.00");
+        assertThat(resultado.getSimulation().getFinalScore()).isEqualByComparingTo("12.00");
         assertThat(resultado.getFeedback().getNivelRiesgo()).isEqualTo("ALTO");
         assertThat(resultado.getFeedback().getRecomendaciones()).hasSize(3);
         assertThat(resultado.getFeedback().getOrigen()).isEqualTo("IA_LOCAL");
-        assertThat(metricaDesempenoRepository.findBySimulation_SimulationId(simulacion.getIdSimulacion()))
+        assertThat(metricaDesempenoRepository.findBySimulation_SimulationId(simulation.getSimulationId()))
                 .hasSize(4);
-        assertThat(infraccionRepository.findBySimulation_SimulationId(simulacion.getIdSimulacion()))
+        assertThat(infraccionRepository.findBySimulation_SimulationId(simulation.getSimulationId()))
                 .hasSize(2);
         entityManager.flush();
         entityManager.clear();
-        Simulation recargada = entityManager.find(Simulation.class, simulacion.getIdSimulacion());
+        Simulation recargada = entityManager.find(Simulation.class, simulation.getSimulationId());
         assertThat(recargada.isCompleted()).isTrue();
         assertThat(recargada.getDurationSeconds()).isEqualTo(120);
         assertThat(recargada.getSimulationState().getName()).isEqualTo("COMPLETADA");

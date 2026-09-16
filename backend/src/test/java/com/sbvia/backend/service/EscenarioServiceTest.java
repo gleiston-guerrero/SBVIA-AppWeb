@@ -59,13 +59,13 @@ class EscenarioServiceTest {
 
     private Scenario buildEscenario(Integer id, String name) {
         return Scenario.builder()
-                .idEscenario(id)
+                .scenarioId(id)
                 .name(name)
-                .descripcion("Descripción de " + name)
+                .description("Descripción de " + name)
                 .roadType(buildTipoVia("Urbana"))
                 .difficultyLevel(buildNivelDificultad(2))
                 .weatherType(buildTipoClima("Soleado"))
-                .densidadTrafico("Media")
+                .trafficDensity("Media")
                 .activo(true)
                 .build();
     }
@@ -115,21 +115,21 @@ class EscenarioServiceTest {
 
     @Test
     @DisplayName("crear: persiste entidad y retorna DTO con ID asignado")
-    void crear_persiste_escenario() {
+    void crear_persiste_scenario() {
         ScenarioDTO dto = ScenarioDTO.builder()
                 .name("Redonda del Sur")
-                .descripcion("Intersección compleja")
+                .description("Intersección compleja")
                 .roadType("Urbana")
                 .difficultyLevel("Intermedio")
                 .weatherType("Lluvia")
-                .densidadTrafico("Alta")
+                .trafficDensity("Alta")
                 .build();
 
         Scenario saved = buildEscenario(5, "Redonda del Sur");
-        when(tipoViaRepository.findByNombre("Urbana")).thenReturn(Optional.of(buildTipoVia("Urbana")));
-        when(nivelDificultadRepository.findByNombre("Intermedio"))
+        when(tipoViaRepository.findByName("Urbana")).thenReturn(Optional.of(buildTipoVia("Urbana")));
+        when(nivelDificultadRepository.findByName("Intermedio"))
                 .thenReturn(Optional.of(DifficultyLevel.builder().idNivelDificultad(2).name("Intermedio").value(2).build()));
-        when(tipoClimaRepository.findByNombre("Lluvia")).thenReturn(Optional.of(buildTipoClima("Lluvia")));
+        when(tipoClimaRepository.findByName("Lluvia")).thenReturn(Optional.of(buildTipoClima("Lluvia")));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(saved);
 
         ScenarioDTO result = escenarioService.crear(dto);

@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Identificador de user no proporcionado");
         }
 
-        User user = usuarioRepository.findByCorreoIgnoreCaseOrNombreUsuarioIgnoreCase(identificador.trim(), identificador.trim())
+        User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador.trim(), identificador.trim())
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "User no encontrado con identificador: " + identificador));
 

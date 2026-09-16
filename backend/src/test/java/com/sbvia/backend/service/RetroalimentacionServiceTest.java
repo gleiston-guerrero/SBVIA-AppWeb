@@ -57,9 +57,9 @@ class FeedbackServiceTest {
     }
 
     private Simulation simulacionPropia() {
-        User usuario = User.builder().idUsuario(7).correo("conductor@sbvia.test").build();
-        Scenario escenario = Scenario.builder().idEscenario(3).name("Centro urbano").build();
-        return Simulation.builder().idSimulacion(21).usuario(usuario).escenario(escenario)
+        User user = User.builder().userId(7).email("conductor@sbvia.test").build();
+        Scenario escenario = Scenario.builder().scenarioId(3).name("Centro urbano").build();
+        return Simulation.builder().simulationId(21).user(user).scenario(escenario)
                 .finalScore(new BigDecimal("88.00")).durationSeconds(100)
                 .observations("{\"velocidadMaxima\":70,\"excesos\":1,\"colisiones\":0,"
                         + "\"salidas\":0,\"semaforos\":0,\"distancia\":0,\"respetados\":1}")
@@ -70,7 +70,7 @@ class FeedbackServiceTest {
     void usaElMotorLocalCuandoElExternoNoEstaHabilitado() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
-        when(simulacionRepository.findByUsuario_IdUsuarioOrderByIdSimulacionDesc(7)).thenReturn(List.of());
+        when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.habilitado()).thenReturn(false);
         FeedbackIaResponse local = FeedbackIaResponse.builder()
                 .origen("IA_LOCAL").nivelRiesgo("MEDIO").build();
@@ -86,7 +86,7 @@ class FeedbackServiceTest {
     void usaElMotorLocalCuandoElExternoFalla() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
-        when(simulacionRepository.findByUsuario_IdUsuarioOrderByIdSimulacionDesc(7)).thenReturn(List.of());
+        when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.habilitado()).thenReturn(true);
         when(proveedorExterno.generar(any(DatosConduccion.class)))
                 .thenThrow(new IaNoDisponibleException("timeout"));
@@ -103,7 +103,7 @@ class FeedbackServiceTest {
     void guardaLaFeedbackAlGenerarYGuardar() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
-        when(simulacionRepository.findByUsuario_IdUsuarioOrderByIdSimulacionDesc(7)).thenReturn(List.of());
+        when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.habilitado()).thenReturn(false);
         when(motorLocal.generar(any(DatosConduccion.class))).thenReturn(
                 FeedbackIaResponse.builder().resumen("Bien")
@@ -118,9 +118,9 @@ class FeedbackServiceTest {
 
     @Test
     void impideVerElInformeDeOtroUsuario() {
-        User otro = User.builder().correo("otro@sbvia.test").build();
-        Simulation simulacion = Simulation.builder().idSimulacion(21).usuario(otro).build();
-        when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacion));
+        User otro = User.builder().email("otro@sbvia.test").build();
+        Simulation simulation = Simulation.builder().simulationId(21).user(otro).build();
+        when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
 
         org.assertj.core.api.Assertions.assertThatThrownBy(
                         () -> servicioReal().generarInforme("conductor@sbvia.test", 21))

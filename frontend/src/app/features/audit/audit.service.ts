@@ -3,19 +3,19 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 export interface AuditLog {
   idAuditoria: number;
-  nombreTabla: string;
-  operacion: string;
-  usuarioDb: string;
-  usuarioApp: string;
-  fechaHora: string;
-  datosAnteriores: string;
-  datosNuevos: string;
+  tableName: string;
+  operation: string;
+  dbUser: string;
+  appUser: string;
+  timestamp: string;
+  previousData: string;
+  newData: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuditoriaService {
+export class AuditService {
   private apiUrl = '/api/auditoria';
 
   constructor(private http: HttpClient) {}
@@ -23,10 +23,10 @@ export class AuditoriaService {
   obtenerAuditoria(filtros: any): Observable<AuditLog[]> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
-    if (filtros.operacion) params = params.set('operacion', filtros.operacion);
+    if (filtros.operation) params = params.set('operation', filtros.operation);
     if (filtros.user) params = params.set('user', filtros.user);
-    if (filtros.fechaInicio) params = params.set('fechaInicio', filtros.fechaInicio);
-    if (filtros.fechaFin) params = params.set('fechaFin', filtros.fechaFin);
+    if (filtros.startDate) params = params.set('startDate', filtros.startDate);
+    if (filtros.endDate) params = params.set('endDate', filtros.endDate);
 
     return this.http.get<AuditLog[]>(this.apiUrl, { params });
   }
@@ -34,10 +34,10 @@ export class AuditoriaService {
   descargarReportePdf(filtros: any): Observable<Blob> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
-    if (filtros.operacion) params = params.set('operacion', filtros.operacion);
+    if (filtros.operation) params = params.set('operation', filtros.operation);
     if (filtros.user) params = params.set('user', filtros.user);
-    if (filtros.fechaInicio) params = params.set('fechaInicio', filtros.fechaInicio);
-    if (filtros.fechaFin) params = params.set('fechaFin', filtros.fechaFin);
+    if (filtros.startDate) params = params.set('startDate', filtros.startDate);
+    if (filtros.endDate) params = params.set('endDate', filtros.endDate);
 
     return this.http.get(`${this.apiUrl}/reporte/pdf`, { 
       params, 

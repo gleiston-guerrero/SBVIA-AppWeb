@@ -70,10 +70,10 @@ class RepositoryIntegrationTest {
     @BeforeEach
     void setUp() {
         rolUsuario = rolRepository.save(
-                Role.builder().name("ROLE_USER").descripcion("User estándar").build()
+                Role.builder().name("ROLE_USER").description("User estándar").build()
         );
         estadoActivo = entityManager.merge(UserState.builder()
-                .name("ACTIVO").descripcion("Cuenta habilitada").permiteAcceso(true).build());
+                .name("ACTIVO").description("Cuenta habilitada").permiteAcceso(true).build());
     }
 
     @Test
@@ -88,7 +88,7 @@ class RepositoryIntegrationTest {
                 .roadType(tv)
                 .difficultyLevel(nd)
                 .weatherType(tc)
-                .densidadTrafico("Baja")
+                .trafficDensity("Baja")
                 .activo(true)
                 .build());
         escenarioRepository.save(Scenario.builder()
@@ -96,7 +96,7 @@ class RepositoryIntegrationTest {
                 .roadType(tv)
                 .difficultyLevel(nd)
                 .weatherType(tc)
-                .densidadTrafico("Media")
+                .trafficDensity("Media")
                 .activo(true)
                 .build());
         escenarioRepository.save(Scenario.builder()
@@ -104,7 +104,7 @@ class RepositoryIntegrationTest {
                 .roadType(tv)
                 .difficultyLevel(nd)
                 .weatherType(tc)
-                .densidadTrafico("Baja")
+                .trafficDensity("Baja")
                 .activo(false)
                 .build());
 
@@ -119,35 +119,35 @@ class RepositoryIntegrationTest {
     @Test
     @DisplayName("findByCorreo y existsByCorreo resuelven la autenticación")
     void findByCorreo_y_existsByCorreo_resuelvenAutenticacion() {
-        User usuario = usuarioRepository.save(User.builder()
-                .nombres("Jefferson")
-                .apellidos("Umaginga")
-                .correo("jumagingaa@uteq.edu.ec")
-                .contrasenaHash("$2a$10$hashdemo")
+        User user = usuarioRepository.save(User.builder()
+                .firstName("Jefferson")
+                .lastName("Umaginga")
+                .email("jumagingaa@uteq.edu.ec")
+                .passwordHash("$2a$10$hashdemo")
                 .accountLocked(false)
-                .rol(rolUsuario)
-                .estadoUsuario(estadoActivo)
+                .role(rolUsuario)
+                .userState(estadoActivo)
                 .build());
 
-        Optional<User> encontrado = usuarioRepository.findByCorreo("jumagingaa@uteq.edu.ec");
+        Optional<User> encontrado = usuarioRepository.findByEmail("jumagingaa@uteq.edu.ec");
 
         assertThat(encontrado).isPresent();
-        assertThat(encontrado.get().getIdUsuario()).isEqualTo(usuario.getIdUsuario());
-        assertThat(usuarioRepository.existsByCorreo("jumagingaa@uteq.edu.ec")).isTrue();
-        assertThat(usuarioRepository.existsByCorreo("noexiste@sbvia.test")).isFalse();
+        assertThat(encontrado.get().getUserId()).isEqualTo(user.getUserId());
+        assertThat(usuarioRepository.existsByEmail("jumagingaa@uteq.edu.ec")).isTrue();
+        assertThat(usuarioRepository.existsByEmail("noexiste@sbvia.test")).isFalse();
     }
 
     @Test
-    @DisplayName("findByUsuario_IdUsuario lista las simulaciones de un usuario")
+    @DisplayName("findByUsuario_IdUsuario lista las simulaciones de un user")
     void findByUsuario_IdUsuario_listaSimulacionesDeUsuario() {
-        User usuario = usuarioRepository.save(User.builder()
-                .nombres("Ana")
-                .apellidos("Perez")
-                .correo("ana.perez@sbvia.test")
-                .contrasenaHash("$2a$10$hashdemo")
+        User user = usuarioRepository.save(User.builder()
+                .firstName("Ana")
+                .lastName("Perez")
+                .email("ana.perez@sbvia.test")
+                .passwordHash("$2a$10$hashdemo")
                 .accountLocked(false)
-                .rol(rolUsuario)
-                .estadoUsuario(estadoActivo)
+                .role(rolUsuario)
+                .userState(estadoActivo)
                 .build());
 
         RoadType tv = persistTipoVia("CICLOVÍA");
@@ -159,37 +159,37 @@ class RepositoryIntegrationTest {
                 .roadType(tv)
                 .difficultyLevel(nd)
                 .weatherType(tc)
-                .densidadTrafico("Baja")
+                .trafficDensity("Baja")
                 .activo(true)
                 .build());
-        VehicleType tipoVehiculo = VehicleType.builder()
+        VehicleType vehicleType = VehicleType.builder()
                 .name("AUTOMOVIL").licenciaRequerida("B").build();
-        entityManager.persist(tipoVehiculo);
-        Vehicle vehiculo = Vehicle.builder()
+        entityManager.persist(vehicleType);
+        Vehicle vehicle = Vehicle.builder()
                 .name("Vehículo de prueba").transmision("MANUAL")
-                .tipoVehiculo(tipoVehiculo).build();
-        entityManager.persist(vehiculo);
+                .vehicleType(vehicleType).build();
+        entityManager.persist(vehicle);
 
         simulacionRepository.save(Simulation.builder()
-                .fechaInicio(LocalDate.now())
+                .startDate(LocalDate.now())
                 .endDate(LocalDate.now())
                 .completed(true)
                 .finalScore(new BigDecimal("8.5"))
-                .usuario(usuario)
-                .escenario(escenario)
-                .vehiculo(vehiculo)
+                .user(user)
+                .scenario(escenario)
+                .vehicle(vehicle)
                 .build());
         simulacionRepository.save(Simulation.builder()
-                .fechaInicio(LocalDate.now())
+                .startDate(LocalDate.now())
                 .completed(false)
                 .finalScore(new BigDecimal("0.0"))
-                .usuario(usuario)
-                .escenario(escenario)
-                .vehiculo(vehiculo)
+                .user(user)
+                .scenario(escenario)
+                .vehicle(vehicle)
                 .build());
 
         List<Simulation> simulaciones = simulacionRepository
-                .findByUsuario_IdUsuarioOrderByIdSimulacionDesc(usuario.getIdUsuario());
+                .findByUser_UserIdOrderBySimulationIdDesc(user.getUserId());
 
         assertThat(simulaciones).hasSize(2);
         assertThat(simulaciones)

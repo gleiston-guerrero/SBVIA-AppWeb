@@ -61,7 +61,7 @@
                  res.estado === 'COMPLETADO' ? '✅ Completado' : '❌ Fallido' }}
             </span>
           </td>
-          <td class="whitespace-nowrap">{{ res.fechaInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td class="whitespace-nowrap">{{ res.startDate | date:'dd/MM/yyyy HH:mm' }}</td>
           <td class="whitespace-nowrap">{{ res.fechaProgramada ? (res.fechaProgramada | date:'dd/MM/yyyy HH:mm') : '-' }}</td>
           <td class="whitespace-nowrap">{{ res.estado === 'COMPLETADO' ? formatearBytes(res.tamanioBytes) : '-' }}</td>
           <td class="text-sm">

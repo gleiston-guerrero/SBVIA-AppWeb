@@ -12,7 +12,7 @@ import { ToastService } from '../../shared/components/toast/toast.service';
   templateUrl: './scenario-list.component.html',
   styleUrl: './scenario-list.component.css'
 })
-export class EscenarioListComponent implements OnInit {
+export class ScenarioListComponent implements OnInit {
   scenarios: Scenario[] = [];
   page = 0;
   totalPages = 0;
@@ -34,11 +34,11 @@ export class EscenarioListComponent implements OnInit {
 
   cargarEscenarios(): void {
     this.escenarioService.listar(this.page).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.scenarios = data.content;
         this.totalPages = data.totalPages;
       },
-      error: (err) => console.error('Error cargando scenarios', err)
+      error: (err: any) => console.error('Error cargando scenarios', err)
     });
   }
 
@@ -68,7 +68,7 @@ export class EscenarioListComponent implements OnInit {
         this.eliminando = false;
         this.cargarEscenarios();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al eliminar scenario', err);
         this.toastService.showError(err.error?.detail ?? 'No se pudo eliminar el scenario');
         this.eliminando = false;

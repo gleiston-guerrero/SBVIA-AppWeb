@@ -73,7 +73,7 @@ export class ShellComponent implements OnInit {
         this.guardandoPerfil = false;
         this.cerrarModalPerfil();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al actualizar perfil', err);
         this.guardandoPerfil = false;
         alert('Ocurrió un error al guardar el perfil.');

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuditoriaService, AuditLog } from './auditoria.service';
+import { AuditService, AuditLog } from './audit.service';
 
 @Component({
-  selector: 'app-auditoria',
+  selector: 'app-audit',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './auditoria.component.html',
-  styleUrls: ['./auditoria.component.css']
+  templateUrl: './audit.component.html',
+  styleUrls: ['./audit.component.css']
 })
-export class AuditoriaComponent implements OnInit {
+export class AuditComponent implements OnInit {
   registros: AuditLog[] = [];
   cargando = false;
   error = '';
 
   filtros = {
     tabla: '',
-    operacion: '',
+    operation: '',
     user: '',
-    fechaInicio: '',
-    fechaFin: ''
+    startDate: '',
+    endDate: ''
   };
 
   modalAbierto = false;
@@ -28,7 +28,7 @@ export class AuditoriaComponent implements OnInit {
   datosAntiguosObj: any = null;
   datosNuevosObj: any = null;
 
-  constructor(private auditoriaService: AuditoriaService) {}
+  constructor(private auditoriaService: AuditService) {}
 
   ngOnInit(): void {
     this.cargarAuditoria();
@@ -40,15 +40,15 @@ export class AuditoriaComponent implements OnInit {
     
     // Preparar fechas si están seleccionadas (añadir horas)
     const params = { ...this.filtros };
-    if (params.fechaInicio) params.fechaInicio += 'T00:00:00';
-    if (params.fechaFin) params.fechaFin += 'T23:59:59';
+    if (params.startDate) params.startDate += 'T00:00:00';
+    if (params.endDate) params.endDate += 'T23:59:59';
 
     this.auditoriaService.obtenerAuditoria(params).subscribe({
-      next: (data) => {
+      next: (data: any) => {
         this.registros = data;
         this.cargando = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         this.error = 'No se pudo cargar el historial de auditoría.';
         this.cargando = false;
         console.error(err);
@@ -58,8 +58,8 @@ export class AuditoriaComponent implements OnInit {
 
   descargarReporte(): void {
     const params = { ...this.filtros };
-    if (params.fechaInicio) params.fechaInicio += 'T00:00:00';
-    if (params.fechaFin) params.fechaFin += 'T23:59:59';
+    if (params.startDate) params.startDate += 'T00:00:00';
+    if (params.endDate) params.endDate += 'T23:59:59';
 
     this.auditoriaService.descargarReportePdf(params).subscribe({
       next: (blob) => {
@@ -72,7 +72,7 @@ export class AuditoriaComponent implements OnInit {
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.error = 'Error al generar el PDF.';
         console.error(err);
       }
@@ -82,12 +82,12 @@ export class AuditoriaComponent implements OnInit {
   verDetalle(registro: AuditLog): void {
     this.registroSeleccionado = registro;
     try {
-      this.datosAntiguosObj = registro.datosAnteriores ? JSON.parse(registro.datosAnteriores) : null;
-    } catch { this.datosAntiguosObj = registro.datosAnteriores; }
+      this.datosAntiguosObj = registro.previousData ? JSON.parse(registro.previousData) : null;
+    } catch { this.datosAntiguosObj = registro.previousData; }
     
     try {
-      this.datosNuevosObj = registro.datosNuevos ? JSON.parse(registro.datosNuevos) : null;
-    } catch { this.datosNuevosObj = registro.datosNuevos; }
+      this.datosNuevosObj = registro.newData ? JSON.parse(registro.newData) : null;
+    } catch { this.datosNuevosObj = registro.newData; }
 
     this.modalAbierto = true;
   }

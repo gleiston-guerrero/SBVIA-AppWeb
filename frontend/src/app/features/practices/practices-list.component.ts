@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InformeIA, SimulacionService } from './simulation.service';
+import { InformeIA, SimulationService } from './simulation.service';
 import { Simulation } from './simulation.model';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Scenario, EscenarioService } from '../scenarios/scenario.service';
 
 @Component({
-  selector: 'app-practicas-list',
+  selector: 'app-practices-list',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './practicas-list.component.html',
-  styleUrl: './practicas-list.component.css'
+  templateUrl: './practices-list.component.html',
+  styleUrl: './practices-list.component.css'
 })
-export class PracticasListComponent implements OnInit {
+export class PracticesListComponent implements OnInit {
   practicas: Simulation[] = [];
   loading = true;
   error = '';
@@ -26,7 +26,7 @@ export class PracticasListComponent implements OnInit {
   cargandoInforme = false;
   errorInforme = '';
 
-  constructor(private simulacionService: SimulacionService, private escenarioService: EscenarioService) {}
+  constructor(private simulationService: SimulationService, private escenarioService: EscenarioService) {}
 
   ngOnInit(): void {
     this.cargarPracticas();
@@ -41,12 +41,12 @@ export class PracticasListComponent implements OnInit {
   }
 
   cargarPracticas(): void {
-    this.simulacionService.getMisPracticas().subscribe({
-      next: (data) => {
+    this.simulationService.getMisPracticas().subscribe({
+      next: (data: any) => {
         this.practicas = data;
         this.loading = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         this.error = 'No se pudieron cargar las prácticas.';
         this.loading = false;
         console.error(err);
@@ -55,17 +55,17 @@ export class PracticasListComponent implements OnInit {
   }
 
   get finalizadas(): Simulation[] {
-    return this.practicas.filter(practica => practica.completada || !!practica.fechaFin);
+    return this.practicas.filter(practica => practica.completed || !!practica.endDate);
   }
 
   get promedio(): number {
     if (this.finalizadas.length === 0) return 0;
-    const total = this.finalizadas.reduce((suma, practica) => suma + Number(practica.puntajeFinal), 0);
+    const total = this.finalizadas.reduce((suma, practica) => suma + Number(practica.finalScore), 0);
     return Math.round((total / this.finalizadas.length) * 10) / 10;
   }
 
   get aprobadas(): number {
-    return this.finalizadas.filter(practica => Number(practica.puntajeFinal) >= 70).length;
+    return this.finalizadas.filter(practica => Number(practica.finalScore) >= 70).length;
   }
 
   get escenarioSeleccionado(): Scenario | undefined {
@@ -74,7 +74,7 @@ export class PracticasListComponent implements OnInit {
 
   get practicasFiltradas(): Simulation[] {
     if (this.filtro === 'finalizadas') return this.finalizadas;
-    if (this.filtro === 'pendientes') return this.practicas.filter(practica => !practica.completada && !practica.fechaFin);
+    if (this.filtro === 'pendientes') return this.practicas.filter(practica => !practica.completed && !practica.endDate);
     return this.practicas;
   }
 
@@ -83,7 +83,7 @@ export class PracticasListComponent implements OnInit {
   }
 
   verInforme(practica: Simulation): void {
-    if (!practica.completada && !practica.fechaFin) return;
+    if (!practica.completed && !practica.endDate) return;
     if (this.practicaSeleccionada?.simulationId === practica.simulationId) {
       this.cerrarInforme();
       return;
@@ -92,8 +92,8 @@ export class PracticasListComponent implements OnInit {
     this.informeSeleccionado = null;
     this.errorInforme = '';
     this.cargandoInforme = true;
-    this.simulacionService.getRetroalimentacion(practica.simulationId).subscribe({
-      next: informe => {
+    this.simulationService.getRetroalimentacion(practica.simulationId).subscribe({
+      next: (informe: any) => {
         this.informeSeleccionado = informe;
         this.cargandoInforme = false;
       },

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { EscenarioService } from '../scenarios/scenario.service';
-import { SimulacionService } from '../practicas/simulation.service';
+import { SimulationService } from '../practices/simulation.service';
 import { UsuarioService } from '../users/user.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private escenarioService: EscenarioService,
-    private simulacionService: SimulacionService,
+    private simulationService: SimulationService,
     private usuarioService: UsuarioService
   ) {}
 
@@ -41,8 +41,8 @@ export class DashboardComponent implements OnInit {
     });
     
     if (this.user?.role === 'ADMINISTRADOR') {
-      this.simulacionService.getEstadisticasGlobales().subscribe({
-        next: stats => {
+      this.simulationService.getEstadisticasGlobales().subscribe({
+        next: (stats: any) => {
           this.totalPracticas = stats.totalPracticas;
           this.promedio = stats.promedioGlobal;
           this.tasaAprobacion = stats.tasaAprobacionGlobal;
@@ -55,15 +55,15 @@ export class DashboardComponent implements OnInit {
         next: pagina => this.totalUsuarios = pagina.totalElements ?? pagina.content?.length ?? 0
       });
     } else {
-      this.simulacionService.getMisPracticas().subscribe({
-        next: practicas => {
+      this.simulationService.getMisPracticas().subscribe({
+        next: (practicas: any) => {
           this.totalPracticas = practicas.length;
-          const finalizadas = practicas.filter(p => p.completada || p.fechaFin);
+          const finalizadas = practicas.filter((p: any) => p.completed || p.endDate);
           this.promedio = finalizadas.length
-            ? Math.round(finalizadas.reduce((total, p) => total + Number(p.puntajeFinal), 0) / finalizadas.length)
+            ? Math.round(finalizadas.reduce((total: any, p: any) => total + Number(p.finalScore), 0) / finalizadas.length)
             : 0;
           this.tasaAprobacion = finalizadas.length
-            ? Math.round(finalizadas.filter(p => Number(p.puntajeFinal) >= 70).length * 100 / finalizadas.length)
+            ? Math.round(finalizadas.filter((p: any) => Number(p.finalScore) >= 70).length * 100 / finalizadas.length)
             : 0;
           this.cargandoMetricas = false;
         },

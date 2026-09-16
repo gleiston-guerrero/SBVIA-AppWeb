@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface SimulationStateRepository extends JpaRepository<SimulationState, Integer> {
 
-    Optional<SimulationState> findByNombre(String name);
+    Optional<SimulationState> findByName(String name);
 }

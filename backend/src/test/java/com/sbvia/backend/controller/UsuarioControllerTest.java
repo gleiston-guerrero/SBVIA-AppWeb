@@ -35,7 +35,7 @@ public class UsuarioControllerTest {
     void testGetPerfilActual() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("test@test.com");
-        when(authService.getUsuarioActual("test@test.com")).thenReturn(new UserDTO());
+        when(authService.getCurrentUser("test@test.com")).thenReturn(new UserDTO());
 
         ResponseEntity<UserDTO> res = controller.getPerfilActual(auth);
         assertEquals(200, res.getStatusCode().value());

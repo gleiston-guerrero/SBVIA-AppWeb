@@ -54,12 +54,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let practica of practicasFiltradas">
-          <td>{{ practica.fechaInicio | date:'dd/MM/yyyy' }}</td>
+          <td>{{ practica.startDate | date:'dd/MM/yyyy' }}</td>
           <td>{{ practica.nombreEscenario }}</td>
-          <td><span class="estado" [class.aprobada]="(practica.completada || practica.fechaFin) && practica.puntajeFinal >= 70" [class.reprobada]="(practica.completada || practica.fechaFin) && practica.puntajeFinal < 70">{{ (practica.completada || practica.fechaFin) ? (practica.puntajeFinal >= 70 ? 'Aprobada' : 'Reprobada') : 'En progreso' }}</span></td>
-          <td><strong>{{ (practica.completada || practica.fechaFin) ? (practica.puntajeFinal + '/100') : '—' }}</strong></td>
+          <td><span class="estado" [class.aprobada]="(practica.completed || practica.endDate) && practica.finalScore >= 70" [class.reprobada]="(practica.completed || practica.endDate) && practica.finalScore < 70">{{ (practica.completed || practica.endDate) ? (practica.finalScore >= 70 ? 'Aprobada' : 'Reprobada') : 'En progreso' }}</span></td>
+          <td><strong>{{ (practica.completed || practica.endDate) ? (practica.finalScore + '/100') : '—' }}</strong></td>
           <td class="acciones">
-            <button type="button" class="btn-informe" *ngIf="practica.completada || practica.fechaFin" (click)="verInforme(practica)">{{ practicaSeleccionada?.simulationId === practica.simulationId ? 'Cerrar informe' : 'Ver informe IA' }}</button>
+            <button type="button" class="btn-informe" *ngIf="practica.completed || practica.endDate" (click)="verInforme(practica)">{{ practicaSeleccionada?.simulationId === practica.simulationId ? 'Cerrar informe' : 'Ver informe IA' }}</button>
             <a *ngIf="practica.scenarioId" [routerLink]="['/simulation', practica.scenarioId]">Repetir scenario</a>
           </td>
         </tr>

@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/components/toast/toast.service';
-import { TrafficRule, ReglaTransitoService } from './regla-transito.service';
+import { TrafficRule, TrafficRuleService } from './traffic-rule.service';
 
 @Component({
-  selector: 'app-regla-transito', standalone: true, imports: [CommonModule, FormsModule],
-  templateUrl: './regla-transito.component.html', styleUrl: './regla-transito.component.css'
+  selector: 'app-traffic-rule', standalone: true, imports: [CommonModule, FormsModule],
+  templateUrl: './traffic-rule.component.html', styleUrl: './traffic-rule.component.css'
 })
-export class ReglaTransitoComponent implements OnInit {
+export class TrafficRuleComponent implements OnInit {
   reglas: TrafficRule[] = [];
   filtro = '';
   cargando = true;
@@ -16,7 +16,7 @@ export class ReglaTransitoComponent implements OnInit {
   confirmarEliminacion?: TrafficRule;
   formulario: TrafficRule = this.vacio();
 
-  constructor(private reglasService: ReglaTransitoService,
+  constructor(private reglasService: TrafficRuleService,
               private toast: ToastService) {}
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class ReglaTransitoComponent implements OnInit {
   get filtradas(): TrafficRule[] {
     const texto = this.filtro.trim().toLowerCase();
     return this.reglas.filter(r => !texto || [r.codigo, r.nombre, r.categoria]
-      .some(valor => valor?.toLowerCase().includes(texto)));
+      .some(value => value?.toLowerCase().includes(texto)));
   }
 
   cargar(): void {
@@ -43,12 +43,12 @@ export class ReglaTransitoComponent implements OnInit {
     if (!this.formulario.codigo.trim() || !this.formulario.nombre.trim()
       || !this.formulario.categoria.trim() || this.formulario.penalizacionBase < 0) return;
     this.guardando = true;
-    const operacion = this.formulario.id
+    const operation = this.formulario.id
       ? this.reglasService.actualizar(this.formulario.id, this.formulario)
       : this.reglasService.crear(this.formulario);
-    operacion.subscribe({
+    operation.subscribe({
       next: () => { this.toast.showSuccess(this.formulario.id ? 'Regla actualizada correctamente' : 'Regla creada correctamente'); this.cancelar(); this.cargar(); this.guardando = false; },
-      error: error => { this.toast.showError(error.error?.detail ?? 'No se pudo guardar la regla'); this.guardando = false; }
+      error: (error: any) => { this.toast.showError(error.error?.detail ?? 'No se pudo guardar la regla'); this.guardando = false; }
     });
   }
 
@@ -57,7 +57,7 @@ export class ReglaTransitoComponent implements OnInit {
     if (!regla?.id) return;
     this.reglasService.eliminar(regla.id).subscribe({
       next: () => { this.toast.showSuccess('Regla eliminada correctamente'); this.confirmarEliminacion = undefined; this.cargar(); },
-      error: error => this.toast.showError(error.error?.detail ?? 'No se pudo eliminar la regla')
+      error: (error: any) => this.toast.showError(error.error?.detail ?? 'No se pudo eliminar la regla')
     });
   }
 

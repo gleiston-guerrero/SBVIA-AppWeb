@@ -43,7 +43,7 @@
             <strong>{{ user?.firstName }}</strong>
             <small>{{ user?.role === 'ADMINISTRADOR' ? 'Administrador' : user?.role === 'INSTRUCTOR' ? 'Instructor' : 'Conductor' }}</small>
           </div>
-          <span class="avatar">{{ user?.firstName?.charAt(0) || 'U' }}</span>
+          <span class="avatar">{{ user?.firstName.charAt(0) || 'U' }}</span>
         </div>
 
         <!-- Menú desplegable -->

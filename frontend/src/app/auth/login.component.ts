@@ -31,7 +31,7 @@ export class LoginComponent {
       next: () => {
         this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
+      error: (err: any) => {
         this.loading = false;
         if (err.status === 401) {
           this.errorMessage = 'Credenciales inválidas';

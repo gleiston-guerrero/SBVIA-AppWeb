@@ -15,9 +15,9 @@
   <div class="card-grid">
     <article class="user-card" *ngFor="let u of users">
       <div class="card-top">
-        <div class="avatar-lg" [class.inactive]="u.cuentaBloqueada">{{ u.firstName?.charAt(0) || '?' }}</div>
+        <div class="avatar-lg" [class.inactive]="u.accountLocked">{{ u.firstName.charAt(0) || '?' }}</div>
         <div class="card-status">
-          <span class="badge" [ngClass]="u.cuentaBloqueada ? 'badge-inactive' : 'badge-active'">{{ u.cuentaBloqueada ? 'Bloqueado' : 'Activo' }}</span>
+          <span class="badge" [ngClass]="u.accountLocked ? 'badge-inactive' : 'badge-active'">{{ u.accountLocked ? 'Bloqueado' : 'Activo' }}</span>
         </div>
       </div>
       <h3>{{ u.firstName }} {{ u.lastName }}</h3>
@@ -27,13 +27,13 @@
         <span *ngIf="u.phone">📞 {{ u.phone }}</span>
       </div>
       <div class="card-role">
-        <select [ngModel]="u.role" (ngModelChange)="cambiarRol(u, $event)" class="role-select" [disabled]="u.cuentaBloqueada">
+        <select [ngModel]="u.role" (ngModelChange)="cambiarRol(u, $event)" class="role-select" [disabled]="u.accountLocked">
           <option *ngFor="let role of rolesDisponibles" [value]="role">{{ role }}</option>
         </select>
       </div>
       <div class="card-actions">
-        <button class="btn-edit" title="Editar" (click)="abrirModalEditar(u)" [disabled]="u.cuentaBloqueada">✏️ Editar</button>
-        <button class="btn-delete" title="Desactivar" (click)="desactivarUsuario(u.id, u.firstName)" [disabled]="u.cuentaBloqueada">🚫 Desactivar</button>
+        <button class="btn-edit" title="Editar" (click)="abrirModalEditar(u)" [disabled]="u.accountLocked">✏️ Editar</button>
+        <button class="btn-delete" title="Desactivar" (click)="desactivarUsuario(u.id, u.firstName)" [disabled]="u.accountLocked">🚫 Desactivar</button>
       </div>
     </article>
 

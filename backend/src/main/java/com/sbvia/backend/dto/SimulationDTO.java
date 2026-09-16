@@ -15,13 +15,13 @@ import lombok.AllArgsConstructor;
 public class SimulationDTO {
 
     private Integer simulationId;
-    private LocalDate fechaInicio;
+    private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal finalScore;
     private boolean completed;
     private Integer scenarioId;
-    private String nombreEscenario;
+    private String scenarioName;
     private Integer userId;
     private String username;
-    private String correoUsuario;
+    private String userEmail;
 }

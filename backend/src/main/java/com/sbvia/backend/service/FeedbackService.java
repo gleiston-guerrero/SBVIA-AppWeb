@@ -114,7 +114,7 @@ public class FeedbackService {
         User user = simulation.getUser();
         List<BigDecimal> previos = new ArrayList<>();
         for (Simulation s : simulacionRepository
-                .findByUsuario_IdUsuarioOrderByIdSimulacionDesc(user.getUserId())) {
+                .findByUser_UserIdOrderBySimulationIdDesc(user.getUserId())) {
             if (s.isCompleted() && !s.getSimulationId().equals(simulation.getSimulationId())
                     && s.getFinalScore() != null) {
                 previos.add(s.getFinalScore());
