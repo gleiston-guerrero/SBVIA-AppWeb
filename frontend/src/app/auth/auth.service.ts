@@ -38,7 +38,7 @@ export class AuthService {
     );
   }
 
-  actualizarPerfil(data: any): Observable<any> {
+  updateProfile(data: any): Observable<any> {
     return this.http.put(`/api/users/me`, data, { withCredentials: true }).pipe(
       tap((response: any) => {
         // Actualizar la señal del user actual

@@ -16,8 +16,8 @@ export interface TrafficRule {
 export class TrafficRuleService {
   private readonly url = '/api/reglas-transito';
   constructor(private http: HttpClient) {}
-  listar(): Observable<TrafficRule[]> { return this.http.get<TrafficRule[]>(this.url); }
-  crear(regla: TrafficRule): Observable<TrafficRule> { return this.http.post<TrafficRule>(this.url, regla); }
-  actualizar(id: number, regla: TrafficRule): Observable<TrafficRule> { return this.http.put<TrafficRule>(`${this.url}/${id}`, regla); }
-  eliminar(id: number): Observable<void> { return this.http.delete<void>(`${this.url}/${id}`); }
+  list(): Observable<TrafficRule[]> { return this.http.get<TrafficRule[]>(this.url); }
+  create(regla: TrafficRule): Observable<TrafficRule> { return this.http.post<TrafficRule>(this.url, regla); }
+  update(id: number, regla: TrafficRule): Observable<TrafficRule> { return this.http.put<TrafficRule>(`${this.url}/${id}`, regla); }
+  delete(id: number): Observable<void> { return this.http.delete<void>(`${this.url}/${id}`); }
 }

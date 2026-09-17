@@ -54,8 +54,8 @@
         {{ estado === 'pausado' ? '⏵ Reanudar' : '⏸ Pausar' }}
       </button>
       <button type="button" class="btn" (click)="reiniciar()">↺ Reiniciar</button>
-      <button type="button" class="btn exito" (click)="finalizar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado' || guardando">
-        {{ guardando ? 'Guardando...' : '■ Finalizar' }}
+      <button type="button" class="btn exito" (click)="finalizar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado' || isSaving">
+        {{ isSaving ? 'Guardando...' : '■ Finalizar' }}
       </button>
     </div>
   </section>

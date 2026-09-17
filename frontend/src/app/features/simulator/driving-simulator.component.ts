@@ -63,7 +63,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   idSimulacionBackend: number | null = null;
   modoLocal = false;
   aviso = '';
-  guardando = false;
+  isSaving = false;
   puntajeServidor: number | null = null;
   informe: InformeIA | null = null;
 
@@ -92,7 +92,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
 
   constructor(
     private route: ActivatedRoute,
-    private escenarioService: EscenarioService,
+    private scenarioService: EscenarioService,
     private simulationService: SimulationService
   ) {}
 
@@ -100,12 +100,12 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     const param = Number(this.route.snapshot.queryParamMap.get('scenario'));
     if (Number.isInteger(param) && param > 0) {
       this.scenarioId = param;
-      this.escenarioService.buscarPorId(param).subscribe({
+      this.scenarioService.findById(param).subscribe({
         next: (e) => { this.nombreEscenario = e.name; },
         error: () => { /* se mantiene el nombre genérico */ }
       });
     } else {
-      this.escenarioService.listar(0, 1).subscribe({
+      this.scenarioService.list(0, 1).subscribe({
         next: (resp) => {
           const primero = resp?.content?.[0];
           if (primero?.id) {
@@ -184,7 +184,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.idSimulacionBackend = null;
     this.modoLocal = this.scenarioId === null;
     this.aviso = this.modoLocal ? 'Sin escenario disponible: modo local.' : '';
-    this.guardando = false;
+    this.isSaving = false;
     this.xAuto = this.centroCarril(1);
     this.desplazamiento = 0;
     this.npcs = [];
@@ -205,16 +205,16 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.estado = 'finalizado';
     this.velocidadKmh = 0;
     if (this.idSimulacionBackend !== null && !this.modoLocal) {
-      this.guardando = true;
-      this.simulationService.finalizarConduccion(this.idSimulacionBackend, this.metricas()).subscribe({
+      this.isSaving = true;
+      this.simulationService.endDriving(this.idSimulacionBackend, this.metricas()).subscribe({
         next: (r: any) => {
           this.puntajeServidor = Number(r.simulation.finalScore);
           this.informe = r.feedback;
-          this.guardando = false;
+          this.isSaving = false;
         },
         error: () => {
-          this.guardando = false;
-          this.aviso = 'No se pudo guardar en el servidor; se conserva el resumen local.';
+          this.isSaving = false;
+          this.aviso = 'No se pudo save en el servidor; se conserva el resumen local.';
         }
       });
     }
@@ -277,12 +277,12 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   private bucle(marca: number): void {
     const dt = Math.min((marca - this.ultimaMarca) / 1000, 0.1);
     this.ultimaMarca = marca;
-    if (this.estado === 'corriendo') this.actualizar(dt);
+    if (this.estado === 'corriendo') this.update(dt);
     this.dibujar();
     this.raf = requestAnimationFrame((m) => this.bucle(m));
   }
 
-  private actualizar(dt: number): void {
+  private update(dt: number): void {
     const arriba = this.teclas.has('arrowup') || this.teclas.has('w');
     const abajo = this.teclas.has('arrowdown') || this.teclas.has('s');
     const izq = this.teclas.has('arrowleft') || this.teclas.has('a');

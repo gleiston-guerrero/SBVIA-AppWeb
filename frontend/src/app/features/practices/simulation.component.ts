@@ -21,7 +21,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
   practica?: Simulation;
   resultado?: Simulation;
   segundos = 0;
-  cargando = true;
+  isLoading = true;
   finalizando = false;
   error = '';
   private temporizador?: ReturnType<typeof setInterval>;
@@ -39,18 +39,18 @@ export class SimulationComponent implements OnInit, OnDestroy {
     const scenarioId = Number(this.route.snapshot.paramMap.get('scenarioId'));
     if (!Number.isInteger(scenarioId) || scenarioId <= 0) {
       this.error = 'El escenario seleccionado no es válido.';
-      this.cargando = false;
+      this.isLoading = false;
       return;
     }
     this.simulationService.iniciar(scenarioId).subscribe({
       next: (practica: any) => {
         this.practica = practica;
-        this.cargando = false;
+        this.isLoading = false;
         this.temporizador = setInterval(() => this.segundos++, 1000);
       },
       error: (err: any) => {
         this.error = err.error?.detail ?? 'No se pudo iniciar la práctica.';
-        this.cargando = false;
+        this.isLoading = false;
       }
     });
   }

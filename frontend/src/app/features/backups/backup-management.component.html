@@ -1,4 +1,4 @@
-<div class="respaldos-container">
+<div class="backups-container">
   <div class="header-section">
     <div>
       <h1>Gestión de Respaldos</h1>
@@ -10,18 +10,18 @@
     </button>
   </div>
 
-  <div *ngIf="cargando" class="loading-state">
+  <div *ngIf="isLoading" class="loading-state">
     <div class="spinner"></div>
-    <p>Cargando historial de respaldos...</p>
+    <p>Cargando historial de backups...</p>
   </div>
 
-  <div *ngIf="!cargando && respaldos.length === 0" class="empty-state">
+  <div *ngIf="!isLoading && backups.length === 0" class="empty-state">
     <span class="icon-large">🗄️</span>
-    <h3>No hay respaldos disponibles</h3>
+    <h3>No hay backups disponibles</h3>
     <p>Genere un nuevo respaldo manual o espere a que se ejecute la programación automática.</p>
   </div>
 
-  <div *ngIf="!cargando && respaldos.length > 0" class="table-card">
+  <div *ngIf="!isLoading && backups.length > 0" class="table-card">
     <table class="modern-table">
       <thead>
         <tr>
@@ -37,7 +37,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let res of respaldos">
+        <tr *ngFor="let res of backups">
           <td class="font-mono">
             <div class="truncate-text" [title]="res.nombreArchivo">{{ res.nombreArchivo }}</div>
           </td>
@@ -70,7 +70,7 @@
           <td class="actions">
             <button class="btn-icon btn-download" 
                     [disabled]="res.estado !== 'COMPLETADO'" 
-                    (click)="descargar(res.idRespaldo)" 
+                    (click)="download(res.idRespaldo)" 
                     title="Descargar">
               ⬇️
             </button>
@@ -93,7 +93,7 @@
       <h2>Opciones de Respaldo</h2>
       <button class="close-btn" (click)="cerrarModal()">×</button>
     </div>
-    <form [formGroup]="respaldoForm" (ngSubmit)="generarRespaldo()">
+    <form [formGroup]="respaldoForm" (ngSubmit)="generateBackup()">
       <div class="modal-body">
         
         <div class="form-group">
@@ -128,18 +128,18 @@
 </div>
 
 <!-- Modal para Confirmar Eliminación -->
-<div class="modal-overlay" *ngIf="respaldoAEliminar !== null">
+<div class="modal-overlay" *ngIf="backupToDelete !== null">
   <div class="modal-content">
     <div class="modal-header">
       <h2>Eliminar respaldo</h2>
       <button class="close-btn" (click)="cancelarEliminacion()">×</button>
     </div>
     <div class="modal-body">
-      <p>¿Está seguro de eliminar este respaldo permanentemente?</p>
+      <p>¿Está seguro de delete este respaldo permanentemente?</p>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn-cancel" (click)="cancelarEliminacion()">Cancelar</button>
-      <button type="button" class="btn-delete solid" style="background-color: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;" (click)="eliminar()">Eliminar</button>
+      <button type="button" class="btn-delete solid" style="background-color: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;" (click)="delete()">Eliminar</button>
     </div>
   </div>
 </div>

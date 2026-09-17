@@ -11,16 +11,16 @@ import { TrafficRule, TrafficRuleService } from './traffic-rule.service';
 export class TrafficRuleComponent implements OnInit {
   reglas: TrafficRule[] = [];
   filtro = '';
-  cargando = true;
-  guardando = false;
-  confirmarEliminacion?: TrafficRule;
-  formulario: TrafficRule = this.vacio();
+  isLoading = true;
+  isSaving = false;
+  confirmDeletion?: TrafficRule;
+  form: TrafficRule = this.vacio();
 
   constructor(private reglasService: TrafficRuleService,
               private toast: ToastService) {}
 
   ngOnInit(): void {
-    this.cargar();
+    this.load();
   }
 
   get filtradas(): TrafficRule[] {
@@ -29,35 +29,35 @@ export class TrafficRuleComponent implements OnInit {
       .some(value => value?.toLowerCase().includes(texto)));
   }
 
-  cargar(): void {
-    this.reglasService.listar().subscribe({
-      next: reglas => { this.reglas = reglas; this.cargando = false; },
-      error: () => { this.toast.showError('No se pudieron cargar las reglas'); this.cargando = false; }
+  load(): void {
+    this.reglasService.list().subscribe({
+      next: reglas => { this.reglas = reglas; this.isLoading = false; },
+      error: () => { this.toast.showError('No se pudieron load las reglas'); this.isLoading = false; }
     });
   }
 
-  editar(regla: TrafficRule): void { this.formulario = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  cancelar(): void { this.formulario = this.vacio(); }
+  editar(regla: TrafficRule): void { this.form = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  cancel(): void { this.form = this.vacio(); }
 
-  guardar(): void {
-    if (!this.formulario.codigo.trim() || !this.formulario.nombre.trim()
-      || !this.formulario.categoria.trim() || this.formulario.penalizacionBase < 0) return;
-    this.guardando = true;
-    const operation = this.formulario.id
-      ? this.reglasService.actualizar(this.formulario.id, this.formulario)
-      : this.reglasService.crear(this.formulario);
+  save(): void {
+    if (!this.form.codigo.trim() || !this.form.nombre.trim()
+      || !this.form.categoria.trim() || this.form.penalizacionBase < 0) return;
+    this.isSaving = true;
+    const operation = this.form.id
+      ? this.reglasService.update(this.form.id, this.form)
+      : this.reglasService.create(this.form);
     operation.subscribe({
-      next: () => { this.toast.showSuccess(this.formulario.id ? 'Regla actualizada correctamente' : 'Regla creada correctamente'); this.cancelar(); this.cargar(); this.guardando = false; },
-      error: (error: any) => { this.toast.showError(error.error?.detail ?? 'No se pudo guardar la regla'); this.guardando = false; }
+      next: () => { this.toast.showSuccess(this.form.id ? 'Regla actualizada correctamente' : 'Regla creada correctamente'); this.cancel(); this.load(); this.isSaving = false; },
+      error: (error: any) => { this.toast.showError(error.error?.detail ?? 'No se pudo save la regla'); this.isSaving = false; }
     });
   }
 
-  eliminar(): void {
-    const regla = this.confirmarEliminacion;
+  delete(): void {
+    const regla = this.confirmDeletion;
     if (!regla?.id) return;
-    this.reglasService.eliminar(regla.id).subscribe({
-      next: () => { this.toast.showSuccess('Regla eliminada correctamente'); this.confirmarEliminacion = undefined; this.cargar(); },
-      error: (error: any) => this.toast.showError(error.error?.detail ?? 'No se pudo eliminar la regla')
+    this.reglasService.delete(regla.id).subscribe({
+      next: () => { this.toast.showSuccess('Regla eliminada correctamente'); this.confirmDeletion = undefined; this.load(); },
+      error: (error: any) => this.toast.showError(error.error?.detail ?? 'No se pudo delete la regla')
     });
   }
 

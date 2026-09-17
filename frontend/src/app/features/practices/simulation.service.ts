@@ -60,7 +60,7 @@ export class SimulationService {
     return this.http.post<Simulation>(`${this.apiUrl}/${simulationId}/finalizar`, { finalScore });
   }
 
-  finalizarConduccion(simulationId: number, metricas: MetricasConduccion): Observable<ResultadoConduccion> {
+  endDriving(simulationId: number, metricas: MetricasConduccion): Observable<ResultadoConduccion> {
     return this.http.post<ResultadoConduccion>(`${this.apiUrl}/${simulationId}/conduccion/finalizar`, metricas);
   }
 

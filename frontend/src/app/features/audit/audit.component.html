@@ -6,7 +6,7 @@
       <p>Supervisa las operaciones a nivel de base de datos en las tablas maestras y de configuración.</p>
     </div>
     <div class="actions">
-      <button class="btn btn-primary" (click)="descargarReporte()">
+      <button class="btn btn-primary" (click)="downloadReport()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
@@ -20,11 +20,11 @@
     <div class="filters">
       <label>
         <span>User App</span>
-        <input [(ngModel)]="filtros.user" (change)="cargarAuditoria()" placeholder="Correo del user">
+        <input [(ngModel)]="filtros.user" (change)="loadAuditLogs()" placeholder="Correo del user">
       </label>
       <label>
         <span>Tabla</span>
-        <select [(ngModel)]="filtros.tabla" (change)="cargarAuditoria()">
+        <select [(ngModel)]="filtros.tabla" (change)="loadAuditLogs()">
           <option value="">Todas</option>
           <option value="user">user</option>
           <option value="regla_transito">regla_transito</option>
@@ -36,7 +36,7 @@
       </label>
       <label>
         <span>Operación</span>
-        <select [(ngModel)]="filtros.operation" (change)="cargarAuditoria()">
+        <select [(ngModel)]="filtros.operation" (change)="loadAuditLogs()">
           <option value="">Todas</option>
           <option value="INSERT">INSERT</option>
           <option value="UPDATE">UPDATE</option>
@@ -46,19 +46,19 @@
       </label>
       <label>
         <span>Desde</span>
-        <input type="date" [(ngModel)]="filtros.startDate" (change)="cargarAuditoria()">
+        <input type="date" [(ngModel)]="filtros.startDate" (change)="loadAuditLogs()">
       </label>
       <label>
         <span>Hasta</span>
-        <input type="date" [(ngModel)]="filtros.endDate" (change)="cargarAuditoria()">
+        <input type="date" [(ngModel)]="filtros.endDate" (change)="loadAuditLogs()">
       </label>
-      <button class="btn btn-secondary" (click)="filtros={tabla:'', operation:'', user:'', startDate:'', endDate:''}; cargarAuditoria()">Limpiar</button>
+      <button class="btn btn-secondary" (click)="filtros={tabla:'', operation:'', user:'', startDate:'', endDate:''}; loadAuditLogs()">Limpiar</button>
     </div>
 
-    <div *ngIf="cargando" class="message">Cargando registros de auditoría...</div>
+    <div *ngIf="isLoading" class="message">Cargando registros de auditoría...</div>
     <div *ngIf="error" class="message error">{{ error }}</div>
 
-    <div class="table-wrap" *ngIf="!cargando && !error">
+    <div class="table-wrap" *ngIf="!isLoading && !error">
       <table>
         <thead>
           <tr>

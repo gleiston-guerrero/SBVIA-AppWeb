@@ -20,7 +20,7 @@ export class AuditService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerAuditoria(filtros: any): Observable<AuditLog[]> {
+  getAuditLogs(filtros: any): Observable<AuditLog[]> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
     if (filtros.operation) params = params.set('operation', filtros.operation);
@@ -31,7 +31,7 @@ export class AuditService {
     return this.http.get<AuditLog[]>(this.apiUrl, { params });
   }
 
-  descargarReportePdf(filtros: any): Observable<Blob> {
+  downloadPdfReport(filtros: any): Observable<Blob> {
     let params = new HttpParams();
     if (filtros.tabla) params = params.set('tabla', filtros.tabla);
     if (filtros.operation) params = params.set('operation', filtros.operation);

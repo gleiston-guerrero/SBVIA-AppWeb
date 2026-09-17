@@ -24,39 +24,39 @@ export class UserListComponent implements OnInit {
   }
 
   // Modal de edición
-  mostrarModal = false;
-  usuarioEditando: Partial<User> = {};
-  guardando = false;
+  showModal = false;
+  editingUser: Partial<User> = {};
+  isSaving = false;
 
   // Modal de Confirmación
-  mostrarConfirmacion = false;
+  showConfirmation = false;
   mensajeConfirmacion = '';
   accionConfirmacion: () => void = () => {};
 
   constructor(
-    private usuarioService: UsuarioService,
+    private userService: UsuarioService,
     private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
-    this.cargarUsuarios();
+    this.loadUsers();
   }
 
-  cargarUsuarios(): void {
-    this.usuarioService.listar(this.page, this.size).subscribe({
+  loadUsers(): void {
+    this.userService.list(this.page, this.size).subscribe({
       next: (data: any) => {
         this.users = data.content;
         this.totalPages = data.totalPages;
       },
       error: (err: any) => {
-        console.error('Error al cargar users', err);
+        console.error('Error al load users', err);
       }
     });
   }
 
   cambiarPagina(newPage: number): void {
     this.page = newPage;
-    this.cargarUsuarios();
+    this.loadUsers();
   }
 
   cambiarRol(user: User, nuevoRol: string): void {
@@ -66,22 +66,22 @@ export class UserListComponent implements OnInit {
       `¿Estás seguro de cambiar el role de ${user.firstName} a ${nuevoRol}?`,
       () => {
         if (user.id !== undefined) {
-          this.usuarioService.cambiarRol(user.id, nuevoRol).subscribe({
+          this.userService.cambiarRol(user.id, nuevoRol).subscribe({
             next: () => {
               this.toastService.showSuccess('Role actualizado exitosamente');
-              this.cargarUsuarios();
+              this.loadUsers();
             },
             error: (err: any) => {
               console.error('Error actualizando role', err);
-              const errMsg = err.error?.detail || err.error?.message || 'No se pudo actualizar el role';
+              const errMsg = err.error?.detail || err.error?.message || 'No se pudo update el role';
               this.toastService.showError(errMsg);
-              this.cargarUsuarios();
+              this.loadUsers();
             }
           });
         }
       },
       () => {
-        this.cargarUsuarios(); // revert select visual state if cancelled
+        this.loadUsers(); // revert select visual state if cancelled
       }
     );
   }
@@ -91,10 +91,10 @@ export class UserListComponent implements OnInit {
       this.abrirConfirmacion(
         `¿Estás seguro de desactivar la cuenta de ${nombre}?`,
         () => {
-          this.usuarioService.eliminar(id).subscribe({
+          this.userService.delete(id).subscribe({
             next: () => {
               this.toastService.showSuccess('User desactivado exitosamente');
-              this.cargarUsuarios();
+              this.loadUsers();
             },
             error: (err: any) => {
               console.error('Error al desactivar user', err);
@@ -109,31 +109,31 @@ export class UserListComponent implements OnInit {
 
   // Lógica del Modal
   abrirModalEditar(user: User): void {
-    this.usuarioEditando = { ...user };
-    this.mostrarModal = true;
+    this.editingUser = { ...user };
+    this.showModal = true;
   }
 
   cerrarModal(): void {
-    this.mostrarModal = false;
-    this.usuarioEditando = {};
+    this.showModal = false;
+    this.editingUser = {};
   }
 
-  guardarCambiosUsuario(): void {
-    if (!this.usuarioEditando.id) return;
+  saveUserChanges(): void {
+    if (!this.editingUser.id) return;
     
-    this.guardando = true;
-    this.usuarioService.actualizarUsuario(this.usuarioEditando.id, this.usuarioEditando).subscribe({
+    this.isSaving = true;
+    this.userService.updateUser(this.editingUser.id, this.editingUser).subscribe({
       next: () => {
         this.toastService.showSuccess('User actualizado exitosamente');
-        this.guardando = false;
+        this.isSaving = false;
         this.cerrarModal();
-        this.cargarUsuarios();
+        this.loadUsers();
       },
       error: (err: any) => {
-        console.error('Error al actualizar user', err);
-        const errMsg = err.error?.detail || err.error?.message || 'Error desconocido al actualizar';
+        console.error('Error al update user', err);
+        const errMsg = err.error?.detail || err.error?.message || 'Error desconocido al update';
         this.toastService.showError(errMsg);
-        this.guardando = false;
+        this.isSaving = false;
       }
     });
   }
@@ -145,9 +145,9 @@ export class UserListComponent implements OnInit {
       accion();
       this.cerrarConfirmacion();
     };
-    this.mostrarConfirmacion = true;
+    this.showConfirmation = true;
     
-    // Si queremos ejecutar algo al cancelar, lo guardamos o lo ejecutamos directo.
+    // Si queremos ejecutar algo al cancel, lo guardamos o lo ejecutamos directo.
     // Por simplicidad, ejecutaremos accionCancelar() si el user cierra el modal.
     this.cancelarCallback = accionCancelar;
   }
@@ -155,7 +155,7 @@ export class UserListComponent implements OnInit {
   cancelarCallback: () => void = () => {};
 
   cerrarConfirmacion(): void {
-    this.mostrarConfirmacion = false;
+    this.showConfirmation = false;
     this.mensajeConfirmacion = '';
     this.accionConfirmacion = () => {};
     this.cancelarCallback();

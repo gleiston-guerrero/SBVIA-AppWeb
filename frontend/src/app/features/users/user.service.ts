@@ -21,7 +21,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  listar(page: number = 0, size: number = 10): Observable<any> {
+  list(page: number = 0, size: number = 10): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString())
@@ -33,11 +33,11 @@ export class UsuarioService {
     return this.http.put<User>(`${this.API_URL}/${id}/role`, { nombreRol });
   }
 
-  eliminar(id: number): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 
-  actualizarUsuario(id: number, data: Partial<User>): Observable<User> {
+  updateUser(id: number, data: Partial<User>): Observable<User> {
     return this.http.put<User>(`${this.API_URL}/${id}`, data);
   }
 }

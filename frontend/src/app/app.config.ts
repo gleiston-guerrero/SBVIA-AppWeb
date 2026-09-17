@@ -9,7 +9,7 @@ import { AuthService } from './auth/auth.service';
  * Factory para APP_INITIALIZER.
  * Devuelve una función que retorna el observable de refreshSession().
  * Angular espera a que el observable complete antes de montar el router
- * y ejecutar los guards — eliminando la race condition en F5.
+ * y ejecutar los guards — isDeleting la race condition en F5.
  */
 function initializeApp(authService: AuthService) {
   return () => authService.initializeSession();

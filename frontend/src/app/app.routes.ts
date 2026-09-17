@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: 'simulation/:scenarioId', loadComponent: () => import('./features/practices/simulation.component').then(m => m.SimulationComponent) },
       { path: 'instructor', loadComponent: () => import('./features/supervision/supervision.component').then(m => m.SupervisionComponent), canActivate: [roleGuard], data: { roles: ['INSTRUCTOR', 'ADMINISTRADOR'] } },
       { path: 'auditoria', loadComponent: () => import('./features/audit/audit.component').then(m => m.AuditComponent), canActivate: [roleGuard], data: { roles: ['ADMINISTRADOR'] } },
-      { path: 'respaldos', loadComponent: () => import('./features/backups/backup-management.component').then(m => m.BackupManagementComponent), canActivate: [roleGuard], data: { roles: ['ADMINISTRADOR'] } },
+      { path: 'backups', loadComponent: () => import('./features/backups/backup-management.component').then(m => m.BackupManagementComponent), canActivate: [roleGuard], data: { roles: ['ADMINISTRADOR'] } },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
     ]
   },

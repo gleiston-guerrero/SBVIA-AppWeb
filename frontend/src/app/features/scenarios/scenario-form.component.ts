@@ -20,7 +20,7 @@ export class ScenarioFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private escenarioService: EscenarioService,
+    private scenarioService: EscenarioService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -45,7 +45,7 @@ export class ScenarioFormComponent implements OnInit {
 
   loadEscenarioData(id: number): void {
     this.loading = true;
-    this.escenarioService.buscarPorId(id).subscribe({
+    this.scenarioService.findById(id).subscribe({
       next: (scenario) => {
         this.escenarioForm.patchValue({
           name: scenario.name,
@@ -58,7 +58,7 @@ export class ScenarioFormComponent implements OnInit {
         this.loading = false;
       },
       error: (err: any) => {
-        this.errorMessage = err.error?.detail ?? 'Error al cargar los datos del scenario.';
+        this.errorMessage = err.error?.detail ?? 'Error al load los datos del scenario.';
         console.error(err);
         this.loading = false;
       }
@@ -76,23 +76,23 @@ export class ScenarioFormComponent implements OnInit {
     const escenarioData: Scenario = this.escenarioForm.value;
 
     if (this.isEditMode && this.escenarioId) {
-      this.escenarioService.actualizar(this.escenarioId, escenarioData).subscribe({
+      this.scenarioService.update(this.escenarioId, escenarioData).subscribe({
         next: () => {
           this.router.navigate(['/scenarios']);
         },
         error: (err: any) => {
-          this.errorMessage = this.obtenerMensajeError(err, 'Error al actualizar el scenario.');
+          this.errorMessage = this.getErrorMessage(err, 'Error al update el scenario.');
           console.error(err);
           this.loading = false;
         }
       });
     } else {
-      this.escenarioService.crear(escenarioData).subscribe({
+      this.scenarioService.create(escenarioData).subscribe({
         next: () => {
           this.router.navigate(['/scenarios']);
         },
         error: (err: any) => {
-          this.errorMessage = this.obtenerMensajeError(err, 'Error al crear el scenario.');
+          this.errorMessage = this.getErrorMessage(err, 'Error al create el scenario.');
           console.error(err);
           this.loading = false;
         }
@@ -100,11 +100,11 @@ export class ScenarioFormComponent implements OnInit {
     }
   }
 
-  private obtenerMensajeError(error: any, mensajePredeterminado: string): string {
+  private getErrorMessage(error: any, defaultMessage: string): string {
     const errores = error.error?.errores;
     if (errores && typeof errores === 'object') {
       return Object.values(errores).join(' ');
     }
-    return error.error?.detail ?? mensajePredeterminado;
+    return error.error?.detail ?? defaultMessage;
   }
 }

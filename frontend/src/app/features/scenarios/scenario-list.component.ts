@@ -17,11 +17,11 @@ export class ScenarioListComponent implements OnInit {
   page = 0;
   totalPages = 0;
   isAdmin = false;
-  escenarioAEliminar?: Scenario;
-  eliminando = false;
+  scenarioToDelete?: Scenario;
+  isDeleting = false;
 
   constructor(
-    private escenarioService: EscenarioService,
+    private scenarioService: EscenarioService,
     private authService: AuthService,
     private toastService: ToastService
   ) {}
@@ -29,49 +29,49 @@ export class ScenarioListComponent implements OnInit {
   ngOnInit(): void {
     const user = this.authService.currentUser();
     this.isAdmin = user?.role === 'ADMINISTRADOR';
-    this.cargarEscenarios();
+    this.loadScenarios();
   }
 
-  cargarEscenarios(): void {
-    this.escenarioService.listar(this.page).subscribe({
+  loadScenarios(): void {
+    this.scenarioService.list(this.page).subscribe({
       next: (data: any) => {
         this.scenarios = data.content;
         this.totalPages = data.totalPages;
       },
-      error: (err: any) => console.error('Error cargando scenarios', err)
+      error: (err: any) => console.error('Error isLoading scenarios', err)
     });
   }
 
   cambiarPagina(nuevaPagina: number): void {
     if (nuevaPagina >= 0 && nuevaPagina < this.totalPages) {
       this.page = nuevaPagina;
-      this.cargarEscenarios();
+      this.loadScenarios();
     }
   }
 
   solicitarEliminacion(scenario: Scenario): void {
-    this.escenarioAEliminar = scenario;
+    this.scenarioToDelete = scenario;
   }
 
   cancelarEliminacion(): void {
-    if (!this.eliminando) this.escenarioAEliminar = undefined;
+    if (!this.isDeleting) this.scenarioToDelete = undefined;
   }
 
-  confirmarEliminacion(): void {
-    const id = this.escenarioAEliminar?.id;
-    if (id === undefined || this.eliminando) return;
-    this.eliminando = true;
-    this.escenarioService.eliminar(id).subscribe({
+  confirmDeletion(): void {
+    const id = this.scenarioToDelete?.id;
+    if (id === undefined || this.isDeleting) return;
+    this.isDeleting = true;
+    this.scenarioService.delete(id).subscribe({
       next: () => {
         this.toastService.showSuccess('Scenario eliminado correctamente');
-        this.escenarioAEliminar = undefined;
-        this.eliminando = false;
-        this.cargarEscenarios();
+        this.scenarioToDelete = undefined;
+        this.isDeleting = false;
+        this.loadScenarios();
       },
       error: (err: any) => {
-        console.error('Error al eliminar scenario', err);
-        this.toastService.showError(err.error?.detail ?? 'No se pudo eliminar el scenario');
-        this.eliminando = false;
+        console.error('Error al delete scenario', err);
+        this.toastService.showError(err.error?.detail ?? 'No se pudo delete el scenario');
+        this.isDeleting = false;
       }
     });
   }

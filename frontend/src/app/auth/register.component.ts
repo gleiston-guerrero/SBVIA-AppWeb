@@ -22,7 +22,7 @@ export class RegisterComponent {
   errorMessage = '';
   loading = false;
 
-  // Estado para mostrar confirmación de registro exitoso con el nombre de user generado
+  // Estado para show confirmación de registro exitoso con el nombre de user generado
   registered = false;
   registeredUsername = '';
   registeredEmail = '';

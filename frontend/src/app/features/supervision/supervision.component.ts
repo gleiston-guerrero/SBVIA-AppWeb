@@ -17,7 +17,7 @@ export class SupervisionComponent implements OnInit {
   practicas: Simulation[] = [];
   filtro = '';
   estado = '';
-  cargando = true;
+  isLoading = true;
   error = '';
   esAuditor = false;
   esAdmin = false;
@@ -30,8 +30,8 @@ export class SupervisionComponent implements OnInit {
     this.esAuditor = false;
     this.esAdmin = role === 'ADMINISTRADOR';
     this.simulationService.getTodas().subscribe({
-      next: (practicas: any) => { this.practicas = practicas; this.cargando = false; },
-      error: (error: any) => { this.error = error.error?.detail ?? 'No se pudo cargar la supervisión.'; this.cargando = false; }
+      next: (practicas: any) => { this.practicas = practicas; this.isLoading = false; },
+      error: (error: any) => { this.error = error.error?.detail ?? 'No se pudo load la supervisión.'; this.isLoading = false; }
     });
   }
 

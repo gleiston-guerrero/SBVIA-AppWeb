@@ -7,23 +7,23 @@ import { Respaldo } from './backup.model';
   providedIn: 'root'
 })
 export class BackupService {
-  private apiUrl = '/api/respaldos';
+  private apiUrl = '/api/backups';
 
   constructor(private http: HttpClient) {}
 
-  listar(): Observable<Respaldo[]> {
+  list(): Observable<Respaldo[]> {
     return this.http.get<Respaldo[]>(this.apiUrl);
   }
 
-  generar(payload: any): Observable<Respaldo> {
-    return this.http.post<Respaldo>(`${this.apiUrl}/generar`, payload);
+  generate(payload: any): Observable<Respaldo> {
+    return this.http.post<Respaldo>(`${this.apiUrl}/generate`, payload);
   }
 
-  eliminar(id: number): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  descargar(id: number): void {
-    window.location.href = `${this.apiUrl}/descargar/${id}`;
+  download(id: number): void {
+    window.location.href = `${this.apiUrl}/download/${id}`;
   }
 }

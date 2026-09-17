@@ -26,11 +26,11 @@ export class PracticesListComponent implements OnInit {
   cargandoInforme = false;
   errorInforme = '';
 
-  constructor(private simulationService: SimulationService, private escenarioService: EscenarioService) {}
+  constructor(private simulationService: SimulationService, private scenarioService: EscenarioService) {}
 
   ngOnInit(): void {
-    this.cargarPracticas();
-    this.escenarioService.listar(0, 100).subscribe({
+    this.loadPractices();
+    this.scenarioService.list(0, 100).subscribe({
       next: respuesta => {
         this.scenarios = respuesta.content;
         this.idEscenarioSeleccionado = this.scenarios[0]?.id ?? null;
@@ -40,14 +40,14 @@ export class PracticesListComponent implements OnInit {
     });
   }
 
-  cargarPracticas(): void {
+  loadPractices(): void {
     this.simulationService.getMisPracticas().subscribe({
       next: (data: any) => {
         this.practicas = data;
         this.loading = false;
       },
       error: (err: any) => {
-        this.error = 'No se pudieron cargar las prácticas.';
+        this.error = 'No se pudieron load las prácticas.';
         this.loading = false;
         console.error(err);
       }

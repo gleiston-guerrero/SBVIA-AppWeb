@@ -12,7 +12,7 @@ import { AuditService, AuditLog } from './audit.service';
 })
 export class AuditComponent implements OnInit {
   registros: AuditLog[] = [];
-  cargando = false;
+  isLoading = false;
   error = '';
 
   filtros = {
@@ -31,11 +31,11 @@ export class AuditComponent implements OnInit {
   constructor(private auditoriaService: AuditService) {}
 
   ngOnInit(): void {
-    this.cargarAuditoria();
+    this.loadAuditLogs();
   }
 
-  cargarAuditoria(): void {
-    this.cargando = true;
+  loadAuditLogs(): void {
+    this.isLoading = true;
     this.error = '';
     
     // Preparar fechas si están seleccionadas (añadir horas)
@@ -43,25 +43,25 @@ export class AuditComponent implements OnInit {
     if (params.startDate) params.startDate += 'T00:00:00';
     if (params.endDate) params.endDate += 'T23:59:59';
 
-    this.auditoriaService.obtenerAuditoria(params).subscribe({
+    this.auditoriaService.getAuditLogs(params).subscribe({
       next: (data: any) => {
         this.registros = data;
-        this.cargando = false;
+        this.isLoading = false;
       },
       error: (err: any) => {
-        this.error = 'No se pudo cargar el historial de auditoría.';
-        this.cargando = false;
+        this.error = 'No se pudo load el historial de auditoría.';
+        this.isLoading = false;
         console.error(err);
       }
     });
   }
 
-  descargarReporte(): void {
+  downloadReport(): void {
     const params = { ...this.filtros };
     if (params.startDate) params.startDate += 'T00:00:00';
     if (params.endDate) params.endDate += 'T23:59:59';
 
-    this.auditoriaService.descargarReportePdf(params).subscribe({
+    this.auditoriaService.downloadPdfReport(params).subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -73,7 +73,7 @@ export class AuditComponent implements OnInit {
         document.body.removeChild(a);
       },
       error: (err: any) => {
-        this.error = 'Error al generar el PDF.';
+        this.error = 'Error al generate el PDF.';
         console.error(err);
       }
     });

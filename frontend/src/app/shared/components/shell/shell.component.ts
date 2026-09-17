@@ -16,16 +16,16 @@ export class ShellComponent implements OnInit {
   sidebarAbierto = true;
   menuAbierto = false;
   modalPerfilAbierto = false;
-  perfilForm: FormGroup;
+  profileForm: FormGroup;
   guardandoPerfil = false;
-  errorPerfil = '';
+  profileError = '';
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.perfilForm = this.fb.group({
+    this.profileForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(255)]],
       lastName: ['', [Validators.required, Validators.maxLength(255)]],
       phone: ['', [Validators.maxLength(20)]]
@@ -52,13 +52,13 @@ export class ShellComponent implements OnInit {
   abrirModalPerfil(): void {
     this.menuAbierto = false; // Cerrar el menú
     if (this.user) {
-      this.perfilForm.patchValue({
+      this.profileForm.patchValue({
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         phone: this.user.phone
       });
     }
-    this.errorPerfil = '';
+    this.profileError = '';
     this.modalPerfilAbierto = true;
   }
 
@@ -66,19 +66,19 @@ export class ShellComponent implements OnInit {
     this.modalPerfilAbierto = false;
   }
 
-  guardarPerfil(): void {
-    if (this.perfilForm.invalid) return;
+  saveProfile(): void {
+    if (this.profileForm.invalid) return;
 
     this.guardandoPerfil = true;
-    this.authService.actualizarPerfil(this.perfilForm.value).subscribe({
+    this.authService.updateProfile(this.profileForm.value).subscribe({
       next: () => {
         this.guardandoPerfil = false;
         this.cerrarModalPerfil();
       },
       error: (err: any) => {
-        console.error('Error al actualizar perfil', err);
+        console.error('Error al update perfil', err);
         this.guardandoPerfil = false;
-        this.errorPerfil = 'Ocurrió un error al guardar el perfil.';
+        this.profileError = 'Ocurrió un error al save el perfil.';
       }
     });
   }

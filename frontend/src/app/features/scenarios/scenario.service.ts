@@ -23,7 +23,7 @@ export class EscenarioService {
 
   constructor(private http: HttpClient) { }
 
-  listar(page: number = 0, size: number = 10): Observable<any> {
+  list(page: number = 0, size: number = 10): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString())
@@ -31,19 +31,19 @@ export class EscenarioService {
     return this.http.get(this.API_URL, { params });
   }
 
-  buscarPorId(id: number): Observable<Scenario> {
+  findById(id: number): Observable<Scenario> {
     return this.http.get<Scenario>(`${this.API_URL}/${id}`);
   }
 
-  crear(scenario: Scenario): Observable<Scenario> {
+  create(scenario: Scenario): Observable<Scenario> {
     return this.http.post<Scenario>(this.API_URL, scenario);
   }
 
-  actualizar(id: number, scenario: Scenario): Observable<Scenario> {
+  update(id: number, scenario: Scenario): Observable<Scenario> {
     return this.http.put<Scenario>(`${this.API_URL}/${id}`, scenario);
   }
 
-  eliminar(id: number): Observable<void> {
+  delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 }

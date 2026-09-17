@@ -1,5 +1,5 @@
 <main class="simulation-container">
-  <div *ngIf="cargando" class="panel estado">Preparando la práctica...</div>
+  <div *ngIf="isLoading" class="panel estado">Preparando la práctica...</div>
   <div *ngIf="error" class="panel error">{{ error }} <a routerLink="/scenarios">Volver</a></div>
 
   <section *ngIf="practica && !resultado" class="panel">

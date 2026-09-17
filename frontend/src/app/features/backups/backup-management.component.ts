@@ -12,18 +12,18 @@ import { Respaldo } from './backup.model';
   styleUrls: ['./backup-management.component.css']
 })
 export class BackupManagementComponent implements OnInit, OnDestroy {
-  respaldos: Respaldo[] = [];
-  cargando = true;
+  backups: Respaldo[] = [];
+  isLoading = true;
   modalAbierto = false;
   generando = false;
-  respaldoAEliminar: number | null = null;
+  backupToDelete: number | null = null;
   
   // Modal state
   respaldoForm: FormGroup;
   
   private autoRefreshInterval: any;
 
-  constructor(private respaldoService: BackupService, private fb: FormBuilder) {
+  constructor(private backupService: BackupService, private fb: FormBuilder) {
     this.respaldoForm = this.fb.group({
       modalidad: ['COMPLETO', Validators.required],
       fechaProgramada: [''],
@@ -32,9 +32,9 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cargarRespaldos();
+    this.loadBackups();
     this.autoRefreshInterval = setInterval(() => {
-      this.cargarRespaldosSilencioso();
+      this.loadBackupsSilently();
     }, 5000);
   }
 
@@ -44,21 +44,21 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     }
   }
 
-  cargarRespaldos(): void {
-    this.cargando = true;
-    this.respaldoService.listar().subscribe({
+  loadBackups(): void {
+    this.isLoading = true;
+    this.backupService.list().subscribe({
       next: (data: any) => {
-        this.respaldos = data;
-        this.cargando = false;
+        this.backups = data;
+        this.isLoading = false;
       },
-      error: () => this.cargando = false
+      error: () => this.isLoading = false
     });
   }
 
-  cargarRespaldosSilencioso(): void {
-    const hayEnProgreso = this.respaldos.some(r => r.estado === 'EN_PROGRESO' || r.estado === 'PROGRAMADO');
+  loadBackupsSilently(): void {
+    const hayEnProgreso = this.backups.some(r => r.estado === 'EN_PROGRESO' || r.estado === 'PROGRAMADO');
     if (hayEnProgreso) {
-      this.respaldoService.listar().subscribe(data => this.respaldos = data);
+      this.backupService.list().subscribe(data => this.backups = data);
     }
   }
 
@@ -71,15 +71,15 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     this.modalAbierto = false;
   }
 
-  generarRespaldo(): void {
+  generateBackup(): void {
     if (this.respaldoForm.invalid) return;
     
     this.generando = true;
     const payload = this.respaldoForm.value;
     
-    this.respaldoService.generar(payload).subscribe({
+    this.backupService.generate(payload).subscribe({
       next: (nuevoRespaldo) => {
-        this.respaldos.unshift(nuevoRespaldo);
+        this.backups.unshift(nuevoRespaldo);
         this.generando = false;
         this.cerrarModal();
       },
@@ -90,23 +90,23 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  descargar(id: number): void {
-    this.respaldoService.descargar(id);
+  download(id: number): void {
+    this.backupService.download(id);
   }
 
   solicitarEliminacion(id: number): void {
-    this.respaldoAEliminar = id;
+    this.backupToDelete = id;
   }
 
   cancelarEliminacion(): void {
-    this.respaldoAEliminar = null;
+    this.backupToDelete = null;
   }
 
-  eliminar(): void {
-    if (this.respaldoAEliminar) {
-      this.respaldoService.eliminar(this.respaldoAEliminar).subscribe(() => {
-        this.respaldos = this.respaldos.filter(r => r.idRespaldo !== this.respaldoAEliminar);
-        this.respaldoAEliminar = null;
+  delete(): void {
+    if (this.backupToDelete) {
+      this.backupService.delete(this.backupToDelete).subscribe(() => {
+        this.backups = this.backups.filter(r => r.idRespaldo !== this.backupToDelete);
+        this.backupToDelete = null;
       });
     }
   }

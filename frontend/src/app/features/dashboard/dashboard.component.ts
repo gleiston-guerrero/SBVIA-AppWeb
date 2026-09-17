@@ -25,18 +25,18 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private escenarioService: EscenarioService,
+    private scenarioService: EscenarioService,
     private simulationService: SimulationService,
-    private usuarioService: UsuarioService
+    private userService: UsuarioService
   ) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUser();
-    this.cargarMetricas();
+    this.loadMetrics();
   }
 
-  private cargarMetricas(): void {
-    this.escenarioService.listar(0, 1).subscribe({
+  private loadMetrics(): void {
+    this.scenarioService.list(0, 1).subscribe({
       next: pagina => this.totalEscenarios = pagina.totalElements ?? pagina.content?.length ?? 0
     });
     
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
         error: () => this.cargandoMetricas = false
       });
       
-      this.usuarioService.listar(0, 1).subscribe({
+      this.userService.list(0, 1).subscribe({
         next: pagina => this.totalUsuarios = pagina.totalElements ?? pagina.content?.length ?? 0
       });
     } else {
