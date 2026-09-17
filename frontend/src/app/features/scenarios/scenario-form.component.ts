@@ -25,11 +25,11 @@ export class ScenarioFormComponent implements OnInit {
     private router: Router
   ) {
     this.escenarioForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.maxLength(500)]],
       roadType: ['', Validators.required],
       difficultyLevel: ['', Validators.required],
-      clima: ['', Validators.required],
+      weatherType: ['', Validators.required],
       trafficDensity: ['', Validators.required]
     });
   }
@@ -48,11 +48,11 @@ export class ScenarioFormComponent implements OnInit {
     this.escenarioService.buscarPorId(id).subscribe({
       next: (scenario) => {
         this.escenarioForm.patchValue({
-          nombre: scenario.nombre,
+          name: scenario.name,
           description: scenario.description,
           roadType: scenario.roadType,
           difficultyLevel: scenario.difficultyLevel,
-          clima: scenario.clima,
+          weatherType: scenario.weatherType,
           trafficDensity: scenario.trafficDensity
         });
         this.loading = false;

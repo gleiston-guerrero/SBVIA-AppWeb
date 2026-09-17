@@ -11,8 +11,8 @@
       <span class="separador"></span><span class="paso">3</span><div><strong>Consulta el resultado</strong><small>Recibe puntaje y retroalimentación</small></div>
     </div>
     <div class="selector-practica">
-      <label>Escenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un escenario</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.nombre }}</option></select></label>
-      <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ scenario.roadType }}</span><span>Nivel {{ scenario.difficultyLevel }}</span><span>{{ scenario.clima }}</span><span>Tráfico {{ scenario.trafficDensity }}</span><p>{{ scenario.description }}</p></div>
+      <label>Escenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un escenario</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.name }}</option></select></label>
+      <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ scenario.roadType }}</span><span>Nivel {{ scenario.difficultyLevel }}</span><span>{{ scenario.weatherType }}</span><span>Tráfico {{ scenario.trafficDensity }}</span><p>{{ scenario.description }}</p></div>
       <a class="btn-iniciar" [class.disabled]="!idEscenarioSeleccionado" [attr.aria-disabled]="!idEscenarioSeleccionado" [routerLink]="idEscenarioSeleccionado ? ['/simulation', idEscenarioSeleccionado] : null"><span>▶</span> Iniciar práctica ahora</a>
     </div>
     <p class="sin-scenarios" *ngIf="!cargandoEscenarios && scenarios.length === 0">No existen escenarios activos para comenzar una práctica.</p>

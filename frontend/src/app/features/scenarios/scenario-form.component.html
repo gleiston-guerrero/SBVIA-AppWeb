@@ -8,14 +8,14 @@
     <form [formGroup]="escenarioForm" (ngSubmit)="onSubmit()">
       
       <div class="form-group">
-        <label for="nombre">Nombre del Scenario</label>
+        <label for="name">Nombre del Escenario</label>
         <input 
           type="text" 
-          id="nombre" 
-          formControlName="nombre" 
+          id="name" 
+          formControlName="name" 
           placeholder="Ej: Curva Peligrosa en Lluvia"
-          [class.invalid]="escenarioForm.get('nombre')?.invalid && escenarioForm.get('nombre')?.touched">
-        <div class="error-msg" *ngIf="escenarioForm.get('nombre')?.invalid && escenarioForm.get('nombre')?.touched">
+          [class.invalid]="escenarioForm.get('name')?.invalid && escenarioForm.get('name')?.touched">
+        <div class="error-msg" *ngIf="escenarioForm.get('name')?.invalid && escenarioForm.get('name')?.touched">
           El nombre es requerido y debe ser menor a 100 caracteres.
         </div>
       </div>
@@ -55,8 +55,8 @@
 
       <div class="form-row">
         <div class="form-group half-width">
-          <label for="clima">Condición Climática</label>
-          <select id="clima" formControlName="clima" [class.invalid]="escenarioForm.get('clima')?.invalid && escenarioForm.get('clima')?.touched">
+          <label for="weatherType">Condición Climática</label>
+          <select id="weatherType" formControlName="weatherType" [class.invalid]="escenarioForm.get('weatherType')?.invalid && escenarioForm.get('weatherType')?.touched">
             <option value="" disabled selected>Seleccione...</option>
             <option value="DESPEJADO">Despejado</option>
             <option value="LLUVIA">Lluvia</option>
@@ -84,7 +84,7 @@
       <div class="form-actions">
         <button type="button" class="btn-cancel" routerLink="/scenarios">Cancelar</button>
         <button type="submit" class="btn-primary" [disabled]="loading || escenarioForm.invalid">
-          {{ loading ? 'Guardando...' : 'Guardar Scenario' }}
+          {{ loading ? 'Guardando...' : 'Guardar escenario' }}
         </button>
       </div>
 

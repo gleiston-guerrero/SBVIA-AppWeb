@@ -101,7 +101,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     if (Number.isInteger(param) && param > 0) {
       this.scenarioId = param;
       this.escenarioService.buscarPorId(param).subscribe({
-        next: (e) => { this.nombreEscenario = e.nombre; },
+        next: (e) => { this.nombreEscenario = e.name; },
         error: () => { /* se mantiene el nombre genérico */ }
       });
     } else {
@@ -110,7 +110,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
           const primero = resp?.content?.[0];
           if (primero?.id) {
             this.scenarioId = primero.id;
-            this.nombreEscenario = primero.nombre ?? this.nombreEscenario;
+            this.nombreEscenario = primero.name ?? this.nombreEscenario;
           }
         },
         error: () => { /* modo libre sin escenario */ }

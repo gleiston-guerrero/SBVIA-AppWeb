@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 
 export interface Scenario {
   id?: number;
-  nombre: string;
+  name: string;
   description: string;
   lengthKm?: number;
   estimatedTimeMinutes?: number;
   roadType: string;
   difficultyLevel: string;
-  clima: string;
+  weatherType: string;
   trafficDensity: string;
   activo?: boolean;
 }

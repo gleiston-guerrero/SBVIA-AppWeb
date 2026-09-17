@@ -16,9 +16,9 @@
         <span class="card-badge">{{ esc.roadType }}</span>
         <div class="card-dificultad">{{ esc.difficultyLevel }}</div>
       </div>
-      <h3>{{ esc.nombre }}</h3>
+      <h3>{{ esc.name }}</h3>
       <div class="card-meta">
-        <span>{{ esc.clima }}</span>
+        <span>{{ esc.weatherType }}</span>
         <span>{{ esc.trafficDensity }}</span>
       </div>
       <div class="card-actions">
@@ -45,7 +45,7 @@
     <section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="titulo-confirmacion" (click)="$event.stopPropagation()">
       <div class="warning-icon">!</div>
       <h2 id="titulo-confirmacion">Eliminar scenario</h2>
-      <p>¿Deseas eliminar <strong>{{ escenarioAEliminar.nombre }}</strong>? Dejará de aparecer para los conductores, pero su historial se conservará.</p>
+      <p>¿Deseas eliminar <strong>{{ escenarioAEliminar.name }}</strong>? Dejará de aparecer para los conductores, pero su historial se conservará.</p>
       <div class="dialog-actions">
         <button type="button" class="btn-cancel" (click)="cancelarEliminacion()" [disabled]="eliminando">Cancelar</button>
         <button type="button" class="btn-delete" (click)="confirmarEliminacion()" [disabled]="eliminando">{{ eliminando ? 'Eliminando...' : 'Sí, eliminar' }}</button>
