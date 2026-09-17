@@ -26,13 +26,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SimulacionControllerTest {
+public class SimulationControllerTest {
 
     @Mock
-    private SimulationService simulacionService;
+    private SimulationService simulationService;
 
     @Mock
-    private FeedbackService retroalimentacionService;
+    private FeedbackService feedbackService;
 
     @InjectMocks
     private SimulationController controller;
@@ -41,7 +41,7 @@ public class SimulacionControllerTest {
     void testIniciar() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulacionService.iniciarSimulacion("user", 1)).thenReturn(new SimulationDTO());
+        when(simulationService.iniciarSimulacion("user", 1)).thenReturn(new SimulationDTO());
 
         ResponseEntity<SimulationDTO> res = controller.iniciar(1, auth);
         assertEquals(200, res.getStatusCode().value());
@@ -51,7 +51,7 @@ public class SimulacionControllerTest {
     void testFinalizar() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulacionService.finalizarSimulacion(eq("user"), eq(1), any(BigDecimal.class))).thenReturn(new SimulationDTO());
+        when(simulationService.finalizarSimulacion(eq("user"), eq(1), any(BigDecimal.class))).thenReturn(new SimulationDTO());
 
         ResponseEntity<SimulationDTO> res = controller.finalizar(1, new EndSimulationRequest(BigDecimal.valueOf(100)), auth);
         assertEquals(200, res.getStatusCode().value());
@@ -61,7 +61,7 @@ public class SimulacionControllerTest {
     void testFinalizarConduccion() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulacionService.finalizarConduccion(eq("user"), eq(1), any(DrivingMetricsRequest.class))).thenReturn(new DrivingResultDTO());
+        when(simulationService.finalizarConduccion(eq("user"), eq(1), any(DrivingMetricsRequest.class))).thenReturn(new DrivingResultDTO());
 
         DrivingMetricsRequest request = new DrivingMetricsRequest(
             0, BigDecimal.ZERO, BigDecimal.ZERO, 0, 0, 0, 0, 0, 0
@@ -75,7 +75,7 @@ public class SimulacionControllerTest {
     void testFeedback() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(retroalimentacionService.generarInforme("user", 1)).thenReturn(new FeedbackIaResponse());
+        when(feedbackService.generateReport("user", 1)).thenReturn(new FeedbackIaResponse());
 
         ResponseEntity<FeedbackIaResponse> res = controller.feedback(1, auth);
         assertEquals(200, res.getStatusCode().value());
@@ -85,23 +85,23 @@ public class SimulacionControllerTest {
     void testObtenerMisPracticas() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulacionService.obtenerMisPracticas("user")).thenReturn(List.of(new SimulationDTO()));
+        when(simulationService.getMyPractices("user")).thenReturn(List.of(new SimulationDTO()));
 
-        ResponseEntity<List<SimulationDTO>> res = controller.obtenerMisPracticas(auth);
+        ResponseEntity<List<SimulationDTO>> res = controller.getMyPractices(auth);
         assertEquals(200, res.getStatusCode().value());
     }
 
     @Test
     void testObtenerTodas() {
-        when(simulacionService.obtenerTodas()).thenReturn(List.of(new SimulationDTO()));
-        ResponseEntity<List<SimulationDTO>> res = controller.obtenerTodas();
+        when(simulationService.getAll()).thenReturn(List.of(new SimulationDTO()));
+        ResponseEntity<List<SimulationDTO>> res = controller.getAll();
         assertEquals(200, res.getStatusCode().value());
     }
 
     @Test
     void testObtenerEstadisticasGlobales() {
-        when(simulacionService.obtenerEstadisticasGlobales()).thenReturn(new StatisticsDTO(1, 100, 50));
-        ResponseEntity<StatisticsDTO> res = controller.obtenerEstadisticasGlobales();
+        when(simulationService.getGlobalStatistics()).thenReturn(new StatisticsDTO(1, 100, 50));
+        ResponseEntity<StatisticsDTO> res = controller.getGlobalStatistics();
         assertEquals(200, res.getStatusCode().value());
     }
 }

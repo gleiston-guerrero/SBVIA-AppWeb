@@ -11,10 +11,10 @@ import com.sbvia.backend.repository.PerformanceMetricRepository;
 import com.sbvia.backend.repository.FeedbackRepository;
 import com.sbvia.backend.repository.SimulationRepository;
 import com.sbvia.backend.repository.UserRepository;
-import com.sbvia.backend.service.feedback.DatosConduccion;
-import com.sbvia.backend.service.feedback.IaNoDisponibleException;
-import com.sbvia.backend.service.feedback.FeedbackIaExternaService;
-import com.sbvia.backend.service.feedback.FeedbackLocalService;
+import com.sbvia.backend.service.feedback.DrivingData;
+import com.sbvia.backend.service.feedback.AiUnavailableException;
+import com.sbvia.backend.service.feedback.ExternalAiFeedbackService;
+import com.sbvia.backend.service.feedback.LocalFeedbackService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -44,9 +44,9 @@ class FeedbackServiceTest {
     @Mock
     private FeedbackRepository retroalimentacionRepository;
     @Mock
-    private FeedbackLocalService motorLocal;
+    private LocalFeedbackService motorLocal;
     @Mock
-    private FeedbackIaExternaService proveedorExterno;
+    private ExternalAiFeedbackService proveedorExterno;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -71,15 +71,15 @@ class FeedbackServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
-        when(proveedorExterno.habilitado()).thenReturn(false);
+        when(proveedorExterno.isEnabled()).thenReturn(false);
         FeedbackIaResponse local = FeedbackIaResponse.builder()
                 .origen("IA_LOCAL").nivelRiesgo("MEDIO").build();
-        when(motorLocal.generar(any(DatosConduccion.class))).thenReturn(local);
+        when(motorLocal.generate(any(DrivingData.class))).thenReturn(local);
 
-        FeedbackIaResponse informe = servicioReal().generarInforme("conductor@sbvia.test", 21);
+        FeedbackIaResponse informe = servicioReal().generateReport("conductor@sbvia.test", 21);
 
         assertThat(informe.getOrigen()).isEqualTo("IA_LOCAL");
-        verify(proveedorExterno, never()).generar(any());
+        verify(proveedorExterno, never()).generate(any());
     }
 
     @Test
@@ -87,14 +87,14 @@ class FeedbackServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
-        when(proveedorExterno.habilitado()).thenReturn(true);
-        when(proveedorExterno.generar(any(DatosConduccion.class)))
-                .thenThrow(new IaNoDisponibleException("timeout"));
+        when(proveedorExterno.isEnabled()).thenReturn(true);
+        when(proveedorExterno.generate(any(DrivingData.class)))
+                .thenThrow(new AiUnavailableException("timeout"));
         FeedbackIaResponse local = FeedbackIaResponse.builder()
                 .origen("IA_LOCAL").nivelRiesgo("MEDIO").build();
-        when(motorLocal.generar(any(DatosConduccion.class))).thenReturn(local);
+        when(motorLocal.generate(any(DrivingData.class))).thenReturn(local);
 
-        FeedbackIaResponse informe = servicioReal().generarInforme("conductor@sbvia.test", 21);
+        FeedbackIaResponse informe = servicioReal().generateReport("conductor@sbvia.test", 21);
 
         assertThat(informe.getOrigen()).isEqualTo("IA_LOCAL");
     }
@@ -104,14 +104,14 @@ class FeedbackServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
-        when(proveedorExterno.habilitado()).thenReturn(false);
-        when(motorLocal.generar(any(DatosConduccion.class))).thenReturn(
+        when(proveedorExterno.isEnabled()).thenReturn(false);
+        when(motorLocal.generate(any(DrivingData.class))).thenReturn(
                 FeedbackIaResponse.builder().resumen("Bien")
                         .recomendaciones(List.of("A", "B", "C")).origen("IA_LOCAL").build());
         when(retroalimentacionRepository.save(any(Feedback.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
 
-        servicioReal().generarYGuardar("conductor@sbvia.test", 21);
+        servicioReal().generateAndSave("conductor@sbvia.test", 21);
 
         verify(retroalimentacionRepository).save(any(Feedback.class));
     }
@@ -123,7 +123,7 @@ class FeedbackServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
 
         org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> servicioReal().generarInforme("conductor@sbvia.test", 21))
+                        () -> servicioReal().generateReport("conductor@sbvia.test", 21))
                 .isInstanceOf(org.springframework.security.access.AccessDeniedException.class);
     }
 }

@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class EscenarioServiceTest {
+class ScenarioServiceTest {
 
     @Mock
     private ScenarioRepository escenarioRepository;
@@ -43,7 +43,7 @@ class EscenarioServiceTest {
     private WeatherTypeRepository tipoClimaRepository;
 
     @InjectMocks
-    private ScenarioService escenarioService;
+    private ScenarioService scenarioService;
 
     private RoadType buildTipoVia(String name) {
         return RoadType.builder().idTipoVia(1).name(name).build();
@@ -82,7 +82,7 @@ class EscenarioServiceTest {
 
         when(escenarioRepository.findByActivoTrue(pageable)).thenReturn(pageResult);
 
-        Page<ScenarioDTO> result = escenarioService.listarActivos(pageable);
+        Page<ScenarioDTO> result = scenarioService.listarActivos(pageable);
 
         assertThat(result.getTotalElements()).isEqualTo(2);
         assertThat(result.getContent().get(0).getName()).isEqualTo("Autopista Norte");
@@ -91,12 +91,12 @@ class EscenarioServiceTest {
     }
 
     @Test
-    @DisplayName("buscarPorId: retorna DTO cuando el escenario existe")
+    @DisplayName("findById: retorna DTO cuando el escenario existe")
     void buscarPorId_existente() {
         Scenario escenario = buildEscenario(1, "Zona Industrial");
         when(escenarioRepository.findById(1)).thenReturn(Optional.of(escenario));
 
-        ScenarioDTO dto = escenarioService.buscarPorId(1);
+        ScenarioDTO dto = scenarioService.findById(1);
 
         assertThat(dto.getId()).isEqualTo(1);
         assertThat(dto.getName()).isEqualTo("Zona Industrial");
@@ -104,17 +104,17 @@ class EscenarioServiceTest {
     }
 
     @Test
-    @DisplayName("buscarPorId: lanza ResourceNotFoundException cuando no existe")
+    @DisplayName("findById: lanza ResourceNotFoundException cuando no existe")
     void buscarPorId_noExistente_lanzaExcepcion() {
         when(escenarioRepository.findById(99)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> escenarioService.buscarPorId(99))
+        assertThatThrownBy(() -> scenarioService.findById(99))
                 .isInstanceOf(com.sbvia.backend.exception.ResourceNotFoundException.class)
                 .hasMessageContaining("99");
     }
 
     @Test
-    @DisplayName("crear: persiste entidad y retorna DTO con ID asignado")
+    @DisplayName("create: persiste entidad y retorna DTO con ID asignado")
     void crear_persiste_scenario() {
         ScenarioDTO dto = ScenarioDTO.builder()
                 .name("Redonda del Sur")
@@ -132,7 +132,7 @@ class EscenarioServiceTest {
         when(tipoClimaRepository.findByName("Lluvia")).thenReturn(Optional.of(buildTipoClima("Lluvia")));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(saved);
 
-        ScenarioDTO result = escenarioService.crear(dto);
+        ScenarioDTO result = scenarioService.create(dto);
 
         assertThat(result.getId()).isEqualTo(5);
         assertThat(result.getName()).isEqualTo("Redonda del Sur");
@@ -140,13 +140,13 @@ class EscenarioServiceTest {
     }
 
     @Test
-    @DisplayName("eliminar: hace soft-delete (activo=false) sin borrar el registro")
+    @DisplayName("delete: hace soft-delete (activo=false) sin borrar el registro")
     void eliminar_softDelete() {
         Scenario escenario = buildEscenario(3, "Scenario A borrar");
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(escenario);
 
-        escenarioService.eliminar(3);
+        scenarioService.delete(3);
 
         assertThat(escenario.isActivo()).isFalse();
         verify(escenarioRepository, times(1)).save(escenario);

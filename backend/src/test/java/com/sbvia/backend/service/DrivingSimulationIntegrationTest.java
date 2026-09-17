@@ -37,10 +37,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class SimulacionConduccionIntegracionTest {
+class DrivingSimulationIntegrationTest {
 
     @Autowired
-    private SimulationService simulacionService;
+    private SimulationService simulationService;
 
     @Autowired
     private PerformanceMetricRepository metricaDesempenoRepository;
@@ -97,7 +97,7 @@ class SimulacionConduccionIntegracionTest {
 
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 120, new BigDecimal("45.50"), new BigDecimal("72.00"), 2, 1, 1, 1, 1, 0);
-        DrivingResultDTO resultado = simulacionService.finalizarConduccion(
+        DrivingResultDTO resultado = simulationService.finalizarConduccion(
                 "conductor.it@sbvia.test", simulation.getSimulationId(), metricas);
 
         // 100 - (2*15 + 1*20 + 1*20 + 1*10 + 1*8) = 12

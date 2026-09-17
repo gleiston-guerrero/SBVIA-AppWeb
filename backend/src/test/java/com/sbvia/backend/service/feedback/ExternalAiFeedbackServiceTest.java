@@ -26,14 +26,14 @@ class FeedbackIaExternaServiceTest {
         }
     }
 
-    private DatosConduccion datos() {
-        return new DatosConduccion(100, new BigDecimal("45.00"), new BigDecimal("70.00"),
+    private DrivingData datos() {
+        return new DrivingData(100, new BigDecimal("45.00"), new BigDecimal("70.00"),
                 1, 0, 0, 0, 1, 0, new BigDecimal("95.00"), "Centro urbano", 0,
                 BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
-    private FeedbackIaExternaService servicio(String url) {
-        return new FeedbackIaExternaService(new ObjectMapper(), "openai", url,
+    private ExternalAiFeedbackService servicio(String url) {
+        return new ExternalAiFeedbackService(new ObjectMapper(), "openai", url,
                 "clave-de-prueba", "modelo-test", 5);
     }
 
@@ -65,7 +65,7 @@ class FeedbackIaExternaServiceTest {
                 + "\\\"mensajeMotivador\\\":\\\"Sigue así\\\"}\\n```\"}}]}",
                 "application/json");
 
-        FeedbackIaResponse informe = servicio(url()).generar(datos());
+        FeedbackIaResponse informe = servicio(url()).generate(datos());
 
         assertThat(informe.getOrigen()).isEqualTo("IA_EXTERNA");
         assertThat(informe.getResumen()).isEqualTo("Buen manejo");
@@ -79,17 +79,17 @@ class FeedbackIaExternaServiceTest {
     void lanzaExcepcionCuandoLaRespuestaEsInvalida() throws Exception {
         responder("{\"choices\":[]}", "application/json");
 
-        assertThatThrownBy(() -> servicio(url()).generar(datos()))
-                .isInstanceOf(IaNoDisponibleException.class);
+        assertThatThrownBy(() -> servicio(url()).generate(datos()))
+                .isInstanceOf(AiUnavailableException.class);
     }
 
     @Test
     void lanzaExcepcionCuandoNoEstaConfigurado() {
-        FeedbackIaExternaService sinClave = new FeedbackIaExternaService(
+        ExternalAiFeedbackService sinClave = new ExternalAiFeedbackService(
                 new ObjectMapper(), "local", "", "", "modelo-test", 5);
 
-        assertThat(sinClave.habilitado()).isFalse();
-        assertThatThrownBy(() -> sinClave.generar(datos()))
-                .isInstanceOf(IaNoDisponibleException.class);
+        assertThat(sinClave.isEnabled()).isFalse();
+        assertThatThrownBy(() -> sinClave.generate(datos()))
+                .isInstanceOf(AiUnavailableException.class);
     }
 }

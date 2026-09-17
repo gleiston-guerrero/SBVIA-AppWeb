@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ReglaTransitoServiceTest {
+class TrafficRuleServiceTest {
     @Mock private TrafficRuleRepository reglaRepository;
     private TrafficRuleService service;
 
@@ -35,7 +35,7 @@ class ReglaTransitoServiceTest {
                         .description("Reducir velocidad").categoria("Velocidad")
                         .penalizacionBase(new BigDecimal("5.00")).activa(true).build()));
 
-        List<TrafficRuleDTO> resultado = service.listar();
+        List<TrafficRuleDTO> resultado = service.list();
 
         assertThat(resultado).singleElement().satisfies(regla -> {
             assertThat(regla.getId()).isEqualTo(8);
@@ -55,7 +55,7 @@ class ReglaTransitoServiceTest {
             return regla;
         });
 
-        TrafficRuleDTO creada = service.crear(entrada);
+        TrafficRuleDTO creada = service.create(entrada);
 
         assertThat(creada.getId()).isEqualTo(10);
         assertThat(creada.getName()).isEqualTo("Pare");
@@ -71,7 +71,7 @@ class ReglaTransitoServiceTest {
         when(reglaRepository.findById(4)).thenReturn(Optional.of(existente));
         when(reglaRepository.save(existente)).thenReturn(existente);
 
-        assertThat(service.actualizar(4, entrada).getName()).isEqualTo("Ceda el paso");
+        assertThat(service.update(4, entrada).getName()).isEqualTo("Ceda el paso");
         assertThat(existente.getDescription()).isNull();
     }
 
@@ -79,7 +79,7 @@ class ReglaTransitoServiceTest {
     void rechazaReglaInexistente() {
         when(reglaRepository.findById(99)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> service.actualizar(99, TrafficRuleDTO.builder().codigo("X").name("X").categoria("X").penalizacionBase(BigDecimal.ZERO).build()))
+        assertThatThrownBy(() -> service.update(99, TrafficRuleDTO.builder().codigo("X").name("X").categoria("X").penalizacionBase(BigDecimal.ZERO).build()))
                 .isInstanceOf(ResourceNotFoundException.class);
         verify(reglaRepository, never()).save(any());
     }
@@ -89,7 +89,7 @@ class ReglaTransitoServiceTest {
         TrafficRule existente = TrafficRule.builder().idReglaTransito(4).build();
         when(reglaRepository.findById(4)).thenReturn(Optional.of(existente));
 
-        service.eliminar(4);
+        service.delete(4);
 
         verify(reglaRepository).delete(existente);
     }

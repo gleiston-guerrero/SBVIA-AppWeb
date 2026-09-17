@@ -1,7 +1,7 @@
 package com.sbvia.backend.controller;
 
 import com.sbvia.backend.entity.AuditLog;
-import com.sbvia.backend.service.AuditoriaService;
+import com.sbvia.backend.service.AuditService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,26 +18,26 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AuditoriaControllerTest {
+public class AuditControllerTest {
 
     @Mock
-    private AuditoriaService auditoriaService;
+    private AuditService auditService;
 
     @InjectMocks
-    private AuditoriaController controller;
+    private AuditController controller;
 
     @Test
     void testObtenerAuditoria() {
-        when(auditoriaService.obtenerAuditoria(any(), any(), any(), any(), any())).thenReturn(List.of(new AuditLog()));
-        ResponseEntity<List<AuditLog>> res = controller.obtenerAuditoria(null, null, null, null, null);
+        when(auditService.getAuditLogs(any(), any(), any(), any(), any())).thenReturn(List.of(new AuditLog()));
+        ResponseEntity<List<AuditLog>> res = controller.getAuditLogs(null, null, null, null, null);
         assertEquals(200, res.getStatusCode().value());
         assertFalse(res.getBody().isEmpty());
     }
 
     @Test
     void testDescargarReportePdf() {
-        when(auditoriaService.generarReportePdf(any(), any(), any(), any(), any())).thenReturn(new byte[]{1, 2, 3});
-        ResponseEntity<byte[]> res = controller.descargarReportePdf(null, null, null, null, null);
+        when(auditService.generatePdfReport(any(), any(), any(), any(), any())).thenReturn(new byte[]{1, 2, 3});
+        ResponseEntity<byte[]> res = controller.downloadPdfReport(null, null, null, null, null);
         assertEquals(200, res.getStatusCode().value());
         assertEquals("application/pdf", res.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE));
         assertNotNull(res.getBody());

@@ -2,9 +2,9 @@ package com.sbvia.backend.service;
 
 import com.sbvia.backend.dto.BackupRequestDTO;
 import com.sbvia.backend.entity.AuditLog;
-import com.sbvia.backend.model.Respaldo;
+import com.sbvia.backend.model.Backup;
 import com.sbvia.backend.repository.AuditLogRepository;
-import com.sbvia.backend.repository.RespaldoRepository;
+import com.sbvia.backend.repository.BackupRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,10 +30,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class RespaldoServiceTest {
+public class BackupServiceTest {
 
     @Mock
-    private RespaldoRepository respaldoRepository;
+    private BackupRepository respaldoRepository;
 
     @Mock
     private AuditLogRepository auditoriaRepository;
@@ -42,13 +42,13 @@ public class RespaldoServiceTest {
     private TaskScheduler taskScheduler;
 
     @InjectMocks
-    private RespaldoService respaldoService;
+    private BackupService backupService;
 
     @BeforeEach
     void setUp() {
-        ReflectionTestUtils.setField(respaldoService, "dbUser", "postgres");
-        ReflectionTestUtils.setField(respaldoService, "dbPassword", "pass");
-        ReflectionTestUtils.setField(respaldoService, "dbUrl", "jdbc:postgresql://postgres:5432/sbvia_db");
+        ReflectionTestUtils.setField(backupService, "dbUser", "postgres");
+        ReflectionTestUtils.setField(backupService, "dbPassword", "pass");
+        ReflectionTestUtils.setField(backupService, "dbUrl", "jdbc:postgresql://postgres:5432/sbvia_db");
 
         SecurityContext securityContext = Mockito.mock(SecurityContext.class);
         Authentication authentication = Mockito.mock(Authentication.class);
@@ -59,11 +59,11 @@ public class RespaldoServiceTest {
 
     @Test
     void testObtenerTodos() {
-        Respaldo r = new Respaldo();
-        r.setIdRespaldo(1L);
-        when(respaldoRepository.findAllByOrderByFechaInicioDesc()).thenReturn(List.of(r));
+        Backup r = new Backup();
+        r.setId(1L);
+        when(respaldoRepository.findAllByOrderByStartDateDesc()).thenReturn(List.of(r));
 
-        List<Respaldo> result = respaldoService.obtenerTodos();
+        List<Backup> result = backupService.getAll();
         assertEquals(1, result.size());
     }
 
@@ -73,23 +73,23 @@ public class RespaldoServiceTest {
         dto.setModalidad("COMPLETO");
         dto.setComentario("Test comment");
 
-        when(respaldoRepository.save(any(Respaldo.class))).thenAnswer(inv -> {
-            Respaldo r = inv.getArgument(0);
-            if (r.getIdRespaldo() == null) r.setIdRespaldo(1L);
+        when(respaldoRepository.save(any(Backup.class))).thenAnswer(inv -> {
+            Backup r = inv.getArgument(0);
+            if (r.getId() == null) r.setId(1L);
             return r;
         });
 
         // Mock ProcessBuilder (to avoid real execution in test)
-        RespaldoService spyService = spy(respaldoService);
-        doNothing().when(spyService).ejecutarPgDump(any(Respaldo.class));
+        BackupService spyService = spy(backupService);
+        doNothing().when(spyService).executePgDump(any(Backup.class));
 
-        Respaldo result = spyService.generarRespaldo(dto, "MANUAL");
+        Backup result = spyService.generateBackup(dto, "MANUAL");
 
         assertNotNull(result);
-        assertEquals("EN_PROGRESO", result.getEstado());
-        assertEquals("COMPLETO", result.getModalidad());
-        assertEquals("MANUAL", result.getTipo());
-        verify(spyService).ejecutarPgDump(result);
+        assertEquals("EN_PROGRESO", result.getStatus());
+        assertEquals("COMPLETO", result.getMode());
+        assertEquals("MANUAL", result.getType());
+        verify(spyService).executePgDump(result);
         verify(auditoriaRepository).save(any(AuditLog.class));
     }
 
@@ -99,78 +99,78 @@ public class RespaldoServiceTest {
         dto.setModalidad("SOLO_ESTRUCTURA");
         dto.setFechaProgramada(LocalDateTime.now().plusDays(1));
 
-        when(respaldoRepository.save(any(Respaldo.class))).thenAnswer(inv -> {
-            Respaldo r = inv.getArgument(0);
-            if (r.getIdRespaldo() == null) r.setIdRespaldo(1L);
+        when(respaldoRepository.save(any(Backup.class))).thenAnswer(inv -> {
+            Backup r = inv.getArgument(0);
+            if (r.getId() == null) r.setId(1L);
             return r;
         });
 
-        Respaldo result = respaldoService.generarRespaldo(dto, "MANUAL");
+        Backup result = backupService.generateBackup(dto, "MANUAL");
 
-        assertEquals("PROGRAMADO", result.getEstado());
-        assertNotNull(result.getFechaProgramada());
+        assertEquals("PROGRAMADO", result.getStatus());
+        assertNotNull(result.getScheduledDate());
         verify(taskScheduler).schedule(any(Runnable.class), any(Date.class));
     }
 
     @Test
     void testObtenerArchivo() {
-        Respaldo r = new Respaldo();
-        r.setIdRespaldo(1L);
-        r.setNombreArchivo("test.backup");
+        Backup r = new Backup();
+        r.setId(1L);
+        r.setFileName("test.backup");
         when(respaldoRepository.findById(1L)).thenReturn(Optional.of(r));
 
-        File file = respaldoService.obtenerArchivo(1L);
+        File file = backupService.getFile(1L);
         assertNotNull(file);
         assertEquals("test.backup", file.getName());
     }
 
     @Test
     void testEliminarRespaldo() {
-        Respaldo r = new Respaldo();
-        r.setIdRespaldo(1L);
-        r.setNombreArchivo("dummy.backup");
+        Backup r = new Backup();
+        r.setId(1L);
+        r.setFileName("dummy.backup");
         when(respaldoRepository.findById(1L)).thenReturn(Optional.of(r));
 
-        respaldoService.eliminarRespaldo(1L);
+        backupService.deleteBackup(1L);
         verify(respaldoRepository).delete(r);
     }
 
     @Test
     void testRespaldoProgramadoCron() {
-        RespaldoService spyService = spy(respaldoService);
-        doReturn(new Respaldo()).when(spyService).generarRespaldo(any(BackupRequestDTO.class), eq("PROGRAMADO"));
+        BackupService spyService = spy(backupService);
+        doReturn(new Backup()).when(spyService).generateBackup(any(BackupRequestDTO.class), eq("PROGRAMADO"));
 
-        spyService.respaldoProgramado();
+        spyService.scheduledBackup();
 
         ArgumentCaptor<BackupRequestDTO> captor = ArgumentCaptor.forClass(BackupRequestDTO.class);
-        verify(spyService).generarRespaldo(captor.capture(), eq("PROGRAMADO"));
+        verify(spyService).generateBackup(captor.capture(), eq("PROGRAMADO"));
         assertEquals("COMPLETO", captor.getValue().getModalidad());
     }
 
     @Test
     void testGenerarRespaldoNullRequest() {
-        when(respaldoRepository.save(any(Respaldo.class))).thenAnswer(inv -> inv.getArgument(0));
-        RespaldoService spyService = spy(respaldoService);
-        doNothing().when(spyService).ejecutarPgDump(any(Respaldo.class));
+        when(respaldoRepository.save(any(Backup.class))).thenAnswer(inv -> inv.getArgument(0));
+        BackupService spyService = spy(backupService);
+        doNothing().when(spyService).executePgDump(any(Backup.class));
 
-        Respaldo result = spyService.generarRespaldo(null, "AUTOMATICO");
+        Backup result = spyService.generateBackup(null, "AUTOMATICO");
 
         assertNotNull(result);
-        assertEquals("COMPLETO", result.getModalidad());
-        assertEquals("AUTOMATICO", result.getTipo());
+        assertEquals("COMPLETO", result.getMode());
+        assertEquals("AUTOMATICO", result.getType());
     }
 
     @Test
     void testEjecutarPgDump() throws Exception {
-        Respaldo respaldo = new Respaldo();
-        respaldo.setNombreArchivo("test_dump.backup");
-        respaldo.setModalidad("SOLO_ESTRUCTURA");
-        try { respaldoService.ejecutarPgDump(respaldo); } catch (Exception e) {}
+        Backup respaldo = new Backup();
+        respaldo.setFileName("test_dump.backup");
+        respaldo.setMode("SOLO_ESTRUCTURA");
+        try { backupService.executePgDump(respaldo); } catch (Exception e) {}
         
-        respaldo.setModalidad("SOLO_DATOS");
-        try { respaldoService.ejecutarPgDump(respaldo); } catch (Exception e) {}
+        respaldo.setMode("SOLO_DATOS");
+        try { backupService.executePgDump(respaldo); } catch (Exception e) {}
         
-        respaldo.setModalidad("COMPLETO");
-        try { respaldoService.ejecutarPgDump(respaldo); } catch (Exception e) {}
+        respaldo.setMode("COMPLETO");
+        try { backupService.executePgDump(respaldo); } catch (Exception e) {}
     }
 }

@@ -86,9 +86,9 @@ class AuthServiceTest {
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.of(rol));
         when(estadoUsuarioRepository.findByName("ACTIVO")).thenReturn(Optional.of(new UserState()));
-        when(usernameGeneratorService.generarBase(request.getFirstName(), request.getLastName())).thenReturn("aperez");
+        when(usernameGeneratorService.generateBase(request.getFirstName(), request.getLastName())).thenReturn("aperez");
         when(usuarioRepository.findNombresUsuarioSimilares("aperez")).thenReturn(List.of());
-        when(usernameGeneratorService.generarSiguienteDisponible("aperez", List.of())).thenReturn("aperez");
+        when(usernameGeneratorService.generateNextAvailable("aperez", List.of())).thenReturn("aperez");
         when(passwordEncoder.encode(request.getPassword())).thenReturn("hashed-pwd");
         when(usuarioRepository.save(any(User.class))).thenReturn(user);
         when(jwtService.generateAccessToken(any(), any(), any())).thenReturn("access-token");
@@ -164,7 +164,7 @@ class AuthServiceTest {
     void haceEliminacionLogicaDelUsuario() {
         when(usuarioRepository.findById(9)).thenReturn(Optional.of(user));
 
-        authService.eliminarUsuario(9);
+        authService.deleteUser(9);
 
         assertThat(user.isAccountLocked()).isTrue();
         verify(usuarioRepository).save(user);

@@ -22,28 +22,28 @@ public class UsernameGeneratorServiceTest {
     @Test
     void testGenerarBase() {
         // Base normal
-        assertEquals("jcruzp", service.generarBase("Justyn Keith", "Cruz Perez"));
+        assertEquals("jcruzp", service.generateBase("Justyn Keith", "Cruz Perez"));
         // Base muy corta
-        assertEquals("anli", service.generarBase("Ana", "Li"));
+        assertEquals("anli", service.generateBase("Ana", "Li"));
         // Base sin apellidos
-        assertEquals("just", service.generarBase("Justyn", ""));
-        assertEquals("user0", service.generarBase("", ""));
+        assertEquals("just", service.generateBase("Justyn", ""));
+        assertEquals("user0", service.generateBase("", ""));
         // Particulas
-        assertEquals("jdelacruzp", service.generarBase("Juan", "de la Cruz Perez"));
-        assertEquals("mdelosantosp", service.generarBase("Maria", "de los Santos Perez"));
+        assertEquals("jdelacruzp", service.generateBase("Juan", "de la Cruz Perez"));
+        assertEquals("mdelosantosp", service.generateBase("Maria", "de los Santos Perez"));
         // Base muy larga truncada
         String largoNombre = "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        String largoBase = service.generarBase(largoNombre, largoNombre);
+        String largoBase = service.generateBase(largoNombre, largoNombre);
         assertEquals(50, largoBase.length());
     }
 
     @Test
     void testGenerarSiguienteDisponible() {
-        assertEquals("jcruzp", service.generarSiguienteDisponible("jcruzp", null));
-        assertEquals("jcruzp", service.generarSiguienteDisponible("jcruzp", List.of()));
-        assertEquals("jcruzp1", service.generarSiguienteDisponible("jcruzp", List.of("jcruzp")));
-        assertEquals("jcruzp2", service.generarSiguienteDisponible("jcruzp", List.of("jcruzp", "jcruzp1")));
-        assertEquals("jcruzp", service.generarSiguienteDisponible("jcruzp", List.of("otro")));
-        assertEquals("jcruzp3", service.generarSiguienteDisponible("jcruzp", List.of("jcruzp", "jcruzp2")));
+        assertEquals("jcruzp", service.generateNextAvailable("jcruzp", null));
+        assertEquals("jcruzp", service.generateNextAvailable("jcruzp", List.of()));
+        assertEquals("jcruzp1", service.generateNextAvailable("jcruzp", List.of("jcruzp")));
+        assertEquals("jcruzp2", service.generateNextAvailable("jcruzp", List.of("jcruzp", "jcruzp1")));
+        assertEquals("jcruzp", service.generateNextAvailable("jcruzp", List.of("otro")));
+        assertEquals("jcruzp3", service.generateNextAvailable("jcruzp", List.of("jcruzp", "jcruzp2")));
     }
 }

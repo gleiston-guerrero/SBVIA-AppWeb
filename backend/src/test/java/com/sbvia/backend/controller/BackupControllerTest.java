@@ -1,8 +1,8 @@
 package com.sbvia.backend.controller;
 
 import com.sbvia.backend.dto.BackupRequestDTO;
-import com.sbvia.backend.model.Respaldo;
-import com.sbvia.backend.service.RespaldoService;
+import com.sbvia.backend.model.Backup;
+import com.sbvia.backend.service.BackupService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,25 +20,25 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class RespaldoControllerTest {
+public class BackupControllerTest {
 
     @Mock
-    private RespaldoService respaldoService;
+    private BackupService backupService;
 
     @InjectMocks
-    private RespaldoController controller;
+    private BackupController controller;
 
     @Test
     void testListar() {
-        when(respaldoService.obtenerTodos()).thenReturn(List.of(new Respaldo()));
-        List<Respaldo> res = controller.listar();
+        when(backupService.getAll()).thenReturn(List.of(new Backup()));
+        List<Backup> res = controller.list();
         assertFalse(res.isEmpty());
     }
 
     @Test
     void testGenerar() {
-        when(respaldoService.generarRespaldo(any(), any())).thenReturn(new Respaldo());
-        Respaldo res = controller.generar(new BackupRequestDTO());
+        when(backupService.generateBackup(any(), any())).thenReturn(new Backup());
+        Backup res = controller.generate(new BackupRequestDTO());
         assertNotNull(res);
     }
 
@@ -46,9 +46,9 @@ public class RespaldoControllerTest {
     void testDescargar() throws IOException {
         File tempFile = File.createTempFile("test", ".backup");
         tempFile.deleteOnExit();
-        when(respaldoService.obtenerArchivo(1L)).thenReturn(tempFile);
+        when(backupService.getFile(1L)).thenReturn(tempFile);
         
-        ResponseEntity<Resource> res = controller.descargar(1L);
+        ResponseEntity<Resource> res = controller.download(1L);
         assertEquals(200, res.getStatusCode().value());
         assertNotNull(res.getBody());
     }
@@ -56,16 +56,16 @@ public class RespaldoControllerTest {
     @Test
     void testDescargarNotFound() {
         File nonExistentFile = new File("doesnotexist12345.backup");
-        when(respaldoService.obtenerArchivo(1L)).thenReturn(nonExistentFile);
+        when(backupService.getFile(1L)).thenReturn(nonExistentFile);
         
-        ResponseEntity<Resource> res = controller.descargar(1L);
+        ResponseEntity<Resource> res = controller.download(1L);
         assertEquals(404, res.getStatusCode().value());
     }
 
     @Test
     void testEliminar() {
-        doNothing().when(respaldoService).eliminarRespaldo(1L);
-        ResponseEntity<Void> res = controller.eliminar(1L);
+        doNothing().when(backupService).deleteBackup(1L);
+        ResponseEntity<Void> res = controller.delete(1L);
         assertEquals(204, res.getStatusCode().value());
     }
 }

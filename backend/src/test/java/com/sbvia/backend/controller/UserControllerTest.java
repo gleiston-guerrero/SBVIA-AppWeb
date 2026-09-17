@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UsuarioControllerTest {
+public class UserControllerTest {
 
     @Mock
     private AuthService authService;
@@ -44,9 +44,9 @@ public class UsuarioControllerTest {
     @Test
     void testListarUsuarios() {
         Page<UserDTO> page = new PageImpl<>(List.of(new UserDTO()));
-        when(authService.listarUsuarios(any(Pageable.class))).thenReturn(page);
+        when(authService.listUsers(any(Pageable.class))).thenReturn(page);
 
-        ResponseEntity<Page<UserDTO>> res = controller.listarUsuarios(Pageable.unpaged());
+        ResponseEntity<Page<UserDTO>> res = controller.listUsers(Pageable.unpaged());
         assertEquals(200, res.getStatusCode().value());
         assertFalse(res.getBody().isEmpty());
     }
@@ -63,15 +63,15 @@ public class UsuarioControllerTest {
 
     @Test
     void testActualizarUsuario() {
-        when(authService.actualizarUsuario(eq(1), any())).thenReturn(new UserDTO());
-        ResponseEntity<UserDTO> res = controller.actualizarUsuario(1, new UpdateUserRequest());
+        when(authService.updateUser(eq(1), any())).thenReturn(new UserDTO());
+        ResponseEntity<UserDTO> res = controller.updateUser(1, new UpdateUserRequest());
         assertEquals(200, res.getStatusCode().value());
     }
 
     @Test
     void testEliminarUsuario() {
-        doNothing().when(authService).eliminarUsuario(1);
-        ResponseEntity<Void> res = controller.eliminarUsuario(1);
+        doNothing().when(authService).deleteUser(1);
+        ResponseEntity<Void> res = controller.deleteUser(1);
         assertEquals(204, res.getStatusCode().value());
     }
 }
