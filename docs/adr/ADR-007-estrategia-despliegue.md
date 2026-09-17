@@ -10,16 +10,17 @@ Para la defensa final y la evaluación externa, el sistema SBVIA requiere una in
 3. Cloud Providers con capa gratuita (Oracle Cloud Free Tier / AWS EC2).
 
 ## Decisión
-Se adopta una arquitectura híbrida de contenedores orquestados mediante **Docker Compose** detrás de un Proxy Inverso Nginx con terminación SSL/TLS automatizada por Certbot / Let's Encrypt:
-1. **Frontend:** Servido a través de Nginx optimizado para SPA Angular con compresión Gzip/Brotli y cabeceras de seguridad.
-2. **Backend:** Contenedor Java 21 Spring Boot ejecutándose en red interna aislada.
-3. **Persistencia & Caché:** PostgreSQL 16 y Redis 7 con volúmenes persistentes independientes.
-4. **Despliegue secundario / Fallback:** Despliegue del frontend en Vercel y backend en Render con variables de entorno de producción sin valores sensibles expuestos.
+Se adopta una arquitectura de servicios gestionados (PaaS) orquestados mediante la plataforma **Render**, garantizando alta disponibilidad, aprovisionamiento automático de certificados TLS (Let's Encrypt) y configuración de proxies internos:
+1. **Frontend (Static Site):** Servido a través de la infraestructura CDN estática de Render para SPA Angular 17. Se configura un Rewrite Proxy (`/api/*`) apuntando al Web Service backend, eliminando cualquier conflicto de CORS y asegurando la integridad de las cookies seguras.
+2. **Backend (Web Service):** Contenedor Java 21 Spring Boot 3.2 ejecutándose en Render Web Services con despliegue automático desde GitHub.
+3. **Persistencia & Caché:** PostgreSQL 16 y Redis (Valkey) aprovisionados como servicios nativos dentro de la red privada de Render, inaccesibles desde el exterior.
+4. **Despliegue secundario / Entorno Local:** Despliegue 100% reproducible en local mediante `docker-compose.yml`.
 
 ## Consecuencias
 - **Positivas:**
-  - Despliegue 100% reproducible tanto en local como en producción mediante los mismos archivos de definición.
-  - Certificado SSL/TLS válido sin advertencias de seguridad en navegadores.
+  - Despliegue en la nube automatizado y 100% verificado (CI/CD mediante GitHub).
+  - Proxy Inverso sin código: CORS resuelto nativamente a través del enrutador de Render.
+  - Certificado SSL/TLS válido automático sin necesidad de scripts Certbot manuales.
   - Endpoint `/actuator/health` público y verificable por el tribunal en tiempo real.
 - **Negativas / Compromisos:**
-  - Requiere gestión de secretos mediante variables de entorno en el servidor (`.env`).
+  - Requiere configuración manual de variables de entorno (secretos) en el panel web del proveedor de nube.

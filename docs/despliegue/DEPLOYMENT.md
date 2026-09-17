@@ -13,21 +13,21 @@ Este documento describe la topología, los recursos computacionales, las variabl
                     Certificado Let's Encrypt
                            ▼
                  ┌───────────────────┐
-                 │   Nginx Ingress   │ (Proxy Inverso & TLS Termination)
-                 │  Reverse Proxy    │
+                 │   Render Proxy    │ (Proxy Inverso & TLS Termination)
+                 │                   │
                  └─────────┬─────────┘
           ┌────────────────┴────────────────┐
           ▼                                 ▼
 ┌───────────────────┐             ┌───────────────────┐
 │   sbvia-frontend  │             │   sbvia-backend   │
-│   (Angular SPA)   │             │ (Spring Boot 3.2) │
+│   (Static Site)   │             │ (Web Service Java)│
 └───────────────────┘             └─────────┬─────────┘
                                             │
                        ┌────────────────────┴────────────────────┐
                        ▼                                         ▼
              ┌───────────────────┐                     ┌───────────────────┐
              │  sbvia-postgres   │                     │    sbvia-redis    │
-             │  (PostgreSQL 16)  │                     │     (Redis 7)     │
+             │  (PostgreSQL 16)  │                     │   (Valkey/Redis 8)│
              └───────────────────┘                     └───────────────────┘
 ```
 
@@ -48,50 +48,41 @@ Este documento describe la topología, los recursos computacionales, las variabl
 ## 3. Variables de Entorno de Producción (Sin Secretos)
 
 ```bash
-# Entorno de Base de Datos
-DB_USER=sbvia_prod_user
+# Configuración de Base de Datos y Caché provista por Render
+DB_URL=jdbc:postgresql://<internal_render_host>/sbvia_db
+DB_USER=sbvia_db_user
 DB_PASSWORD=<PROD_SECRET_PASSWORD>
-DB_URL=jdbc:postgresql://postgres:5432/sbvia_db
+REDIS_HOST=<internal_redis_host>
 
 # Configuración JWT y Seguridad
 JWT_SECRET=<SECRETO_CRIPTO_64_CHARS_RANDOM>
-JWT_ISSUER=https://api.sbvia.uteq-software.edu.ec
-JWT_AUDIENCE=https://sbvia.uteq-software.edu.ec
 COOKIE_SECURE=true
-
-# Caché Redis
-REDIS_HOST=redis
-REDIS_PORT=6379
+CORS_ALLOWED_ORIGINS=https://sbvia-frontend.onrender.com
 ```
 
 ---
 
 ## 4. Procedimiento de Despliegue Paso a Paso
 
-1. **Aprovisionar el Host (VPS / Cloud VM):**
-   - Instalar Docker Engine 24+ y Docker Compose v2+.
-   - Asegurar apertura de puertos `80` (HTTP) y `443` (HTTPS) en el firewall.
+1. **Aprovisionar Bases de Datos (Render):**
+   - Crear servicio PostgreSQL (versión 16).
+   - Crear servicio Redis (Valkey).
+   - Obtener credenciales y conexiones internas (Internal URL).
 
-2. **Clonar Repositorio en el Servidor:**
-   ```bash
-   git clone https://github.com/keithdrox/SBVIA-AppWeb.git /opt/sbvia
-   cd /opt/sbvia
-   ```
+2. **Despliegue del Backend (Web Service):**
+   - Crear un **Web Service** conectado al repositorio.
+   - Definir `Root Directory`: `backend`.
+   - Definir `Environment Variables` usando las credenciales obtenidas de BD, `JWT_SECRET`, y `COOKIE_SECURE=true`.
 
-3. **Configurar el Entorno Seguro:**
-   ```bash
-   cp .env.example .env
-   # Configurar valores reales y forzar COOKIE_SECURE=true
-   nano .env
-   ```
+3. **Despliegue del Frontend (Static Site):**
+   - Crear un **Static Site** conectado al repositorio.
+   - `Root Directory`: `frontend`.
+   - `Build Command`: `npm install && npm run build`.
+   - `Publish Directory`: `dist/frontend/browser`.
+   - **Reglas de Reescritura (Rewrites):**
+     1. Source: `/api/*` -> Destination: `https://sbvia-appweb.onrender.com/api/*` (Rewrite)
+     2. Source: `/*` -> Destination: `/index.html` (Rewrite)
 
-4. **Levantar Servicios:**
-   ```bash
-   docker compose up -d --build
-   ```
-
-5. **Verificación de Salud:**
-   ```bash
-   curl -I https://sbvia.uteq-software.edu.ec
-   curl -s https://api.sbvia.uteq-software.edu.ec/actuator/health | jq .
-   ```
+4. **Verificación de Salud:**
+   - Navegar a la URL del Frontend para validar acceso seguro y redirecciones.
+   - Verificar endpoint Actuator: `https://sbvia-appweb.onrender.com/actuator/health`.

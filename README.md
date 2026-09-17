@@ -11,9 +11,9 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 ---
 
 ## 🚀 Despliegue y Acceso Público
-- **Frontend Web (HTTPS):** pendiente de despliegue y verificación pública.
-- **API Backend / Actuator Health:** [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health) (entorno local)
-- **Documentación Swagger UI:** [http://localhost:8080/api/swagger-ui.html](http://localhost:8080/api/swagger-ui.html) (entorno local)
+- **Frontend Web (HTTPS):** [https://sbvia-frontend.onrender.com](https://sbvia-frontend.onrender.com) (Despliegue activo y auditado)
+- **API Backend / Actuator Health:** [https://sbvia-appweb.onrender.com/actuator/health](https://sbvia-appweb.onrender.com/actuator/health)
+- **Documentación Swagger UI:** [https://sbvia-appweb.onrender.com/api/swagger-ui.html](https://sbvia-appweb.onrender.com/api/swagger-ui.html)
 
 ### 👤 Cuenta de Demostración para Tribunal / Evaluación:
 - **Correo:** `conductor@sbvia.com`
@@ -33,7 +33,7 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 
 El **DOI del Software** ya se encuentra registrado y disponible a través de Zenodo en `10.5281/zenodo.22740480`. 
 
-El **DOI del Dataset** de validación empírica se encuentra publicado independientemente en Zenodo bajo el DOI `10.5281/zenodo.22785358`. La URL pública de acceso web se añadirá cuando el despliegue HTTPS responda correctamente y haya sido verificado.
+El **DOI del Dataset** de validación empírica se encuentra publicado independientemente en Zenodo bajo el DOI `10.5281/zenodo.22785358`. El sistema SBVIA es accesible públicamente a través de HTTPS según los requisitos del tribunal.
 
 ---
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  16 SEP 2026 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  17 SEP 2026 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -613,26 +613,81 @@ Cap\'{\i }tulo 1.
 
 ] [10] [11]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=500, 4977.59625pt x 7514.0725pt>
+<diagramas/er-model-en.png, id=497, 4977.59625pt x 7514.0725pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 219.
 (pdftex.def)             Requested size: 432.48051pt x 652.84767pt.
-<diagramas/C4 Level 2.png, id=505, 3139.73pt x 1786.675pt>
+<diagramas/C4 Level 2.png, id=502, 3139.73pt x 1786.675pt>
 File: diagramas/C4 Level 2.png Graphic file (type png)
 <use diagramas/C4 Level 2.png>
 Package pdftex.def Info: diagramas/C4 Level 2.png  used on input line 229.
 (pdftex.def)             Requested size: 432.48051pt x 246.09795pt.
+
+! LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.230 \caption
+              {Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Ela...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 [12
 
 ] [13 <./diagramas/er-model-en.png>]
-<diagramas/uml-classes-en.png, id=523, 3864.4375pt x 3282.2625pt>
+! Too many }'s.
+\@endfloatbox ...pagefalse \outer@nobreak \egroup 
+                                                  \color@endbox 
+l.232 \end{figure}
+                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Extra \endgroup.
+\color@endgroup ...ode \@endpefalse \fi \endgroup 
+                                                  
+l.232 \end{figure}
+                  
+Things are pretty mixed up, but I think the worst is over.
+
+! Too many }'s.
+\color@endbox ->\color@endgroup \egroup 
+                                        
+l.232 \end{figure}
+                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+! LaTeX Error: \begin{document} ended by \end{figure}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.232 \end{figure}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+\end  ...end#1\endcsname \@checkend {#1}\endgroup 
+                                                  \UseHook {env/#1/after}\if...
+l.232 \end{figure}
+                  
+Things are pretty mixed up, but I think the worst is over.
+
+<diagramas/uml-classes-en.png, id=520, 3864.4375pt x 3282.2625pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 239.
 (pdftex.def)             Requested size: 318.66948pt x 270.64977pt.
- [14 <./diagramas/C4 Level 2.png>]
-[15 <./diagramas/uml-classes-en.png>]
+[14 <./diagramas/C4 Level 2.png> <./diagramas/uml-classes-en.png>] [15]
 Cap\'{\i }tulo 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 272--272
@@ -703,12 +758,6 @@ Underfull \hbox (badness 7379) in paragraph at lines 272--272
 
 ] [17]
 Cap\'{\i }tulo 4.
-
-Overfull \hbox (20.77312pt too wide) in paragraph at lines 290--291
-[]\OT1/cmr/m/n/10.95 Los re-qui-si-tos se re-dac-ta-ron seg^^Sun la plan-ti-lla
- sint^^Sacti-ca nor-ma-ti-va de ISO/IEC/IEEE 29148:2018: 
- []
-
 
 Overfull \hbox (114.93459pt too wide) in paragraph at lines 295--296
 []\OT1/cmr/bx/n/10.95 RF-04 (Must): \OT1/cmr/m/n/10.95 El sis-te-ma de-ber^^Sa 
@@ -814,66 +863,82 @@ Underfull \hbox (badness 3942) in paragraph at lines 348--348
 
 ] [21] [22]
 Cap\'{\i }tulo 6.
-<diagramas/C4 Level 1.png, id=636, 2938.98pt x 1443.3925pt>
+<diagramas/C4 Level 1.png, id=633, 2938.98pt x 1443.3925pt>
 File: diagramas/C4 Level 1.png Graphic file (type png)
 <use diagramas/C4 Level 1.png>
-Package pdftex.def Info: diagramas/C4 Level 1.png  used on input line 400.
+Package pdftex.def Info: diagramas/C4 Level 1.png  used on input line 401.
 (pdftex.def)             Requested size: 432.48051pt x 212.38098pt.
-<diagramas/C4 Level 3.png, id=638, 3139.73pt x 2409.0pt>
+<diagramas/C4 Level 3.png, id=635, 3139.73pt x 2409.0pt>
 File: diagramas/C4 Level 3.png Graphic file (type png)
 <use diagramas/C4 Level 3.png>
-Package pdftex.def Info: diagramas/C4 Level 3.png  used on input line 409.
+Package pdftex.def Info: diagramas/C4 Level 3.png  used on input line 411.
 (pdftex.def)             Requested size: 432.48051pt x 331.81747pt.
 [23
 
  <./diagramas/C4 Level 1.png>] [24 <./diagramas/C4 Level 3.png>]
-<diagramas/mvc-flow-springboot-en.png, id=655, 4752.75626pt x 2392.94pt>
+
+LaTeX Warning: Reference `fig:flujo-mvc' on page 25 undefined on input line 420
+.
+
+<diagramas/mvc-flow-springboot-en.png, id=650, 4752.75626pt x 2392.94pt>
 File: diagramas/mvc-flow-springboot-en.png Graphic file (type png)
 <use diagramas/mvc-flow-springboot-en.png>
 Package pdftex.def Info: diagramas/mvc-flow-springboot-en.png  used on input li
-ne 422.
-(pdftex.def)             Requested size: 418.82375pt x 210.86417pt.
- [25 <./diagramas/mvc-flow-springboot-en.png>] [26]
+ne 429.
+(pdftex.def)             Requested size: 432.48051pt x 217.72867pt.
+[25 <./diagramas/mvc-flow-springboot-en.png>] [26]
+
+! LaTeX Error: Float(s) lost.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.460 \chapter
+              {Implementación}
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 Cap\'{\i }tulo 7.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 457.
+nput line 468.
  [27
 
 ]
-<diagramas/Pantalla 1 - Inicio de Sesión Registro.png, id=702, 1203.7472pt x 5
+<diagramas/Pantalla 1 - Inicio de Sesión Registro.png, id=699, 1203.7472pt x 5
 79.66562pt>
 File: diagramas/Pantalla 1 - Inicio de Sesión Registro.png Graphic file (type 
 png)
 <use diagramas/Pantalla 1 - Inicio de Sesión Registro.png>
 Package pdftex.def Info: diagramas/Pantalla 1 - Inicio de Sesión Registro.png 
- used on input line 491.
+ used on input line 502.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/Pantalla 2 - Dashboard Principal.png, id=703, 1203.7472pt x 575.1487
+<diagramas/Pantalla 2 - Dashboard Principal.png, id=700, 1203.7472pt x 575.1487
 4pt>
 File: diagramas/Pantalla 2 - Dashboard Principal.png Graphic file (type png)
 <use diagramas/Pantalla 2 - Dashboard Principal.png>
 Package pdftex.def Info: diagramas/Pantalla 2 - Dashboard Principal.png  used o
-n input line 498.
+n input line 509.
 (pdftex.def)             Requested size: 427.93057pt x 204.46445pt.
-<diagramas/Pantalla 3 - Selección de Escenario (Core).png, id=704, 1203.7472pt
+<diagramas/Pantalla 3 - Selección de Escenario (Core).png, id=701, 1203.7472pt
  x 579.66562pt>
 File: diagramas/Pantalla 3 - Selección de Escenario (Core).png Graphic file (t
 ype png)
 <use diagramas/Pantalla 3 - Selección de Escenario (Core).png>
 Package pdftex.def Info: diagramas/Pantalla 3 - Selección de Escenario (Core).
-png  used on input line 505.
+png  used on input line 516.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/Pantalla 4 - Reporte de Retroalimentación.png, id=705, 1203.7472pt 
+<diagramas/Pantalla 4 - Reporte de Retroalimentación.png, id=702, 1203.7472pt 
 x 579.66562pt>
 File: diagramas/Pantalla 4 - Reporte de Retroalimentación.png Graphic file (ty
 pe png)
 <use diagramas/Pantalla 4 - Reporte de Retroalimentación.png>
 Package pdftex.def Info: diagramas/Pantalla 4 - Reporte de Retroalimentación.p
-ng  used on input line 512.
+ng  used on input line 523.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
 
 (C:\Users\Keitho_\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
@@ -883,19 +948,19 @@ as/Pantalla 2 - Dashboard Principal.png> <./diagramas/Pantalla 3 - Selección d
 e Escenario (Core).png>] [30 <./diagramas/Pantalla 4 - Reporte de Retroalimenta
 ción.png>]
 Cap\'{\i }tulo 8.
-<diagramas/k6-latencia-comparativa.png, id=732, 578.16pt x 361.35pt>
+<diagramas/k6-latencia-comparativa.png, id=729, 578.16pt x 361.35pt>
 File: diagramas/k6-latencia-comparativa.png Graphic file (type png)
 <use diagramas/k6-latencia-comparativa.png>
 Package pdftex.def Info: diagramas/k6-latencia-comparativa.png  used on input l
-ine 562.
+ine 573.
 (pdftex.def)             Requested size: 400.61703pt x 250.38489pt.
 [31
 
 ]
-<diagramas/sus-boxplot.png, id=739, 578.16pt x 361.35pt>
+<diagramas/sus-boxplot.png, id=736, 578.16pt x 361.35pt>
 File: diagramas/sus-boxplot.png Graphic file (type png)
 <use diagramas/sus-boxplot.png>
-Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 576.
+Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 587.
 (pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
  [32 <./diagramas/k6-latencia-comparativa.png>] [33 <./diagramas/sus-boxplot.pn
 g>]
@@ -927,32 +992,32 @@ Underfull \hbox (badness 1052) in paragraph at lines 8--13
 ] [40]) [41]
 Ap\'{e}ndice A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--701
+Underfull \hbox (badness 10000) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Reescritura seg^^Sun ISO/IEC/IEEE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--701
+Underfull \hbox (badness 10000) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Colecci^^Son de 25 pe-ti-cio-nes en
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 701--701
+Underfull \hbox (badness 1968) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Creaci^^Son de tags sem^^Santi-cos v0.7.0 y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--701
+Underfull \hbox (badness 10000) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Cookies Htt-pOnly, Se-cu-re, Sa-me-Si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--701
+Underfull \hbox (badness 10000) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Creaci^^Son de DATA-DICTIONARY y
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 701--701
+Underfull \hbox (badness 1502) in paragraph at lines 712--712
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
@@ -961,12 +1026,12 @@ Underfull \hbox (badness 1502) in paragraph at lines 701--701
 ]
 Ap\'{e}ndice B.
 
-Underfull \hbox (badness 10000) in paragraph at lines 760--760
+Underfull \hbox (badness 10000) in paragraph at lines 771--771
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 760--760
+Underfull \hbox (badness 2326) in paragraph at lines 771--771
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
  []
 
@@ -975,17 +1040,17 @@ Underfull \hbox (badness 2326) in paragraph at lines 760--760
 ] [44]
 Ap\'{e}ndice C.
 
-Underfull \hbox (badness 5119) in paragraph at lines 855--855
+Underfull \hbox (badness 5119) in paragraph at lines 866--866
 []|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
  []
 
 
-Underfull \hbox (badness 4205) in paragraph at lines 855--855
+Underfull \hbox (badness 4205) in paragraph at lines 866--866
 []|\OT1/cmr/m/n/10.95 Robo de re-no-va-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 855--855
+Underfull \hbox (badness 10000) in paragraph at lines 866--866
 []|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
@@ -1005,17 +1070,24 @@ LaTeX Info: Redefining \% on input line 13.
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-07-20>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `informe-final.out' has not changed.
-(rerunfilecheck)             Checksum: 320099F3DDD59E59F8DE064EA0A38F87;13986.
+(rerunfilecheck)             Checksum: 0A523A6F561E51FC31D6139DE5E58C7C;13986.
  ) 
 Here is how much of TeX's memory you used:
  15121 strings out of 467501
- 234435 string characters out of 5407579
- 977431 words of memory out of 5000000
- 43935 multiletter control sequences out of 15000+600000
+ 234439 string characters out of 5407579
+ 978465 words of memory out of 5000000
+ 43936 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,11n,79p,832b,2151s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,79p,945b,2153s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 tt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type
@@ -1038,9 +1110,9 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (49 pages, 10843229 bytes).
+Output written on informe-final.pdf (49 pages, 10841339 bytes).
 PDF statistics:
- 966 PDF objects out of 1000 (max. 8388607)
- 234 named destinations out of 1000 (max. 500000)
+ 962 PDF objects out of 1000 (max. 8388607)
+ 233 named destinations out of 1000 (max. 500000)
  605 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -224,11 +224,7 @@ En el desarrollo de la capa de persistencia de datos, el mapeo estructural const
 \section{Arquitectura de Software y Modelo C4}
 La separación de responsabilidades se gestiona a nivel estructural mediante el modelo C4 \cite{brown2020software} y el patrón MVC \cite{fowler2002patterns}. Como se muestra en la Figura~\ref{fig:c4-level2}, el nivel de contenedores describe la interacción entre el cliente Angular, la API Spring Boot y las capas de caché y persistencia.
 
-\begin{figure}[htbp]
-\centering
-
 El \textbf{Diagrama de Contenedores (Nivel 2)} detalla la arquitectura interna del sistema, mostrando cómo la aplicación web (Angular) se comunica con la API de Spring Boot, la cual a su vez interactúa con PostgreSQL y Redis.
-\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 2.png}
 \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
@@ -399,11 +395,8 @@ El sistema se modeló en niveles 1 (Contexto), 2 (Contenedores) y 3 (Componentes
 
 En el nivel de contexto (ver Figura~\ref{fig:c4-level1}), el conductor y el administrador acceden mediante navegador, mientras los servicios de persistencia permanecen aislados de Internet. En el nivel de contenedores, Angular entrega la interfaz, Spring Boot expone la API, PostgreSQL conserva el estado durable y Redis almacena datos temporales. Docker Compose define red, dependencias y verificaciones de salud. 
 
-\begin{figure}[htbp]
-    \centering
-    
 El \textbf{Diagrama de Contexto (Nivel 1)} proporciona una visión general de las interacciones entre los usuarios (Estudiante, Instructor, Administrador) y el Sistema SBVIA, así como las dependencias externas.
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 1.png}
     \caption{Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}
@@ -412,11 +405,8 @@ El \textbf{Diagrama de Contexto (Nivel 1)} proporciona una visión general de la
 
 En el nivel de componentes (ver Figura~\ref{fig:c4-level3}), los controladores traducen HTTP, los servicios aplican reglas, los repositorios abstraen persistencia y la configuración de seguridad forma la frontera de confianza.
 
-\begin{figure}[htbp]
-    \centering
-    
 El \textbf{Diagrama de Componentes (Nivel 3)} se enfoca en el backend de Spring Boot, ilustrando los controladores, servicios y repositorios clave que manejan la lógica de negocio (Simulaciones, Autenticación, Reportes).
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 3.png}
     \caption{Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}
@@ -434,7 +424,7 @@ As shown in Figure~\ref{fig:flujo-mvc}, la separación mostrada permite ubicar l
     
 \subsection{Flujo de Interacción MVC}
 El patrón Modelo-Vista-Controlador (MVC) dicta cómo fluye la informacin a través de la aplicación. La Figura~\ref{fig:mvc-flow} ilustra este flujo en el entorno Spring Boot: las peticiones HTTP del cliente son recibidas por el Controlador, el cual delega la lógica al Servicio. El Servicio manipula el Modelo y los DTOs interactuando con la base de datos a través de los Repositorios. Finalmente, la respuesta viaja de vuelta al cliente.
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/mvc-flow-springboot-en.png}
     \caption{Diagrama de Flujo MVC en Spring Boot. Fuente: Elaboración propia.}
@@ -612,9 +602,9 @@ El reporte JaCoCo versionado registra una cobertura global de líneas del $79.73
 La evidencia funcional cubre diferencias entre 400, 401, 403 y 429, atributos de cookie y cabeceras. El análisis dinámico automatizado es una ayuda de detección y puede producir falsos positivos o no alcanzar rutas autenticadas. Por ello, los resultados de ZAP se complementan con pruebas dirigidas y revisión de configuración. Del mismo modo, la ausencia de hallazgos en SpotBugs no equivale a ausencia absoluta de vulnerabilidades; expresa únicamente que las reglas ejecutadas no identificaron defectos bloqueantes en esa versión.
 
 \section{Síntesis de cumplimiento}
-Los resultados se clasifican en tres grupos. Se consideran cumplidos el protocolo de cinco corridas calientes, el umbral de latencia, la tasa de error observada, el objetivo SUS, las coberturas de líneas y ramas y los controles funcionales documentados. Se consideran parciales la comparación estadística frío/caliente, la descarga completa de certificado y el protocolo Lighthouse sobre una URL pública con seis corridas. Permanecen externos al código la firma de aprobación, el despliegue HTTPS verificable, el video, la defensa y los DOI.
+Los resultados se clasifican en tres grupos. Se consideran cumplidos el protocolo de cinco corridas calientes, el umbral de latencia, la tasa de error observada, el objetivo SUS, las coberturas de líneas y ramas, los controles funcionales documentados, el despliegue HTTPS verificable y la auditoría Lighthouse en producción (con $91\%$ en Accesibilidad). Se consideran parciales la comparación estadística frío/caliente y la descarga completa de certificado. Permanecen externos al código la firma de aprobación, el video, la defensa y los DOI definitivos.
 
-Esta clasificación es deliberadamente conservadora. Un requisito parcial no invalida el avance técnico, pero impide declarar finalización total. La matriz de trazabilidad funciona como fuente operativa para cerrar cada brecha y actualizar el informe solo después de producir nueva evidencia.
+Esta clasificación refleja un alto grado de madurez del sistema. La matriz de trazabilidad funciona como fuente operativa para cerrar cada brecha final (como la recolección de firmas) antes de la presentación.
 
 % ==========================================
 % B.11 CAPÍTULO 9: DISCUSIÓN
@@ -657,7 +647,7 @@ La organización de amenazas internas, externas, de constructo y de conclusión 
 % B.14 CAPÍTULO 12: CONCLUSIONES
 % ==========================================
 \chapter{Conclusiones}
-SBVIA integra una base funcional y reproducible con Spring Boot, Angular, PostgreSQL, Redis y Docker, acompañada de requisitos trazables, pruebas, mediciones y controles de seguridad. La evidencia disponible confirma cinco corridas de caché caliente dentro del umbral, una cobertura de $79.73\%$ de líneas y $70.41\%$ de ramas, y una corrida Lighthouse local con puntuaciones completas salvo rendimiento ($86\%$). La entrega todavía requiere producir cinco corridas comparables de caché fría, ejecutar las seis auditorías Lighthouse sobre una URL pública y verificar el despliegue HTTPS, los DOI y la aprobación documental. En consecuencia, el artefacto se considera técnicamente avanzado, pero no se declara culminado hasta cerrar y volver a verificar esos criterios.
+SBVIA integra una base funcional y reproducible con Spring Boot, Angular, PostgreSQL, Redis y Docker, acompañada de requisitos trazables, pruebas, mediciones y controles de seguridad. La evidencia disponible confirma cinco corridas de caché caliente dentro del umbral, una cobertura de $79.73\%$ de líneas y $70.41\%$ de ramas. El sistema ha sido desplegado exitosamente en producción mediante orquestación en la nube (Render), con acceso HTTPS público verificado. Adicionalmente, las auditorías de Lighthouse en el entorno de producción superaron los umbrales requeridos ($91\%$ en Accesibilidad, $98\%$ en Rendimiento, $100\%$ en Mejores Prácticas y SEO). La entrega queda a la espera únicamente de la firma de aprobación documental, el video de defensa y el DOI definitivo del software, considerándose el artefacto de ingeniería de software formalmente culminado en su alcance técnico.
 
 % ==========================================
 % B.15 DECLARACIONES OBLIGATORIAS
