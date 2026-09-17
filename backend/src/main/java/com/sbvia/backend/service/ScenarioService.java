@@ -37,14 +37,14 @@ public class ScenarioService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ScenarioDTO> buscarFiltrado(String roadType, Integer difficultyLevel, String clima, Pageable pageable) {
+    public Page<ScenarioDTO> findFiltered(String roadType, Integer difficultyLevel, String clima, Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
         return new CacheablePage<>(page);
     }
 
     @Transactional(readOnly = true)
-    public ScenarioDTO buscarPorId(Integer id) {
+    public ScenarioDTO findById(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Scenario no encontrado con ID: " + id));
@@ -53,7 +53,7 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    public ScenarioDTO crear(ScenarioDTO dto) {
+    public ScenarioDTO create(ScenarioDTO dto) {
         RoadType roadType = tipoViaRepository.findByName(dto.getRoadType())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Tipo de vía no encontrado: " + dto.getRoadType()));
@@ -80,7 +80,7 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    public ScenarioDTO actualizar(Integer id, ScenarioDTO dto) {
+    public ScenarioDTO update(Integer id, ScenarioDTO dto) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Scenario no encontrado con ID: " + id));
@@ -93,7 +93,7 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    public void eliminar(Integer id) {
+    public void delete(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Scenario no encontrado con ID: " + id));

@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TrafficRuleService {
-    private final TrafficRuleRepository reglaRepository;
+    private final TrafficRuleRepository trafficRuleRepository;
 
     @Transactional(readOnly = true)
-    public List<TrafficRuleDTO> listar() {
-        return reglaRepository.findAll().stream().map(this::toDTO).toList();
+    public List<TrafficRuleDTO> list() {
+        return trafficRuleRepository.findAll().stream().map(this::toDTO).toList();
     }
 
     @Transactional
-    public TrafficRuleDTO crear(TrafficRuleDTO dto) {
+    public TrafficRuleDTO create(TrafficRuleDTO dto) {
         TrafficRule regla = TrafficRule.builder()
                 .codigo(dto.getCodigo().trim())
                 .name(dto.getName().trim())
@@ -30,26 +30,26 @@ public class TrafficRuleService {
                 .penalizacionBase(dto.getPenalizacionBase())
                 .activa(true)
                 .build();
-        return toDTO(reglaRepository.save(regla));
+        return toDTO(trafficRuleRepository.save(regla));
     }
 
     @Transactional
-    public TrafficRuleDTO actualizar(Integer id, TrafficRuleDTO dto) {
-        TrafficRule regla = reglaRepository.findById(id)
+    public TrafficRuleDTO update(Integer id, TrafficRuleDTO dto) {
+        TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));
         regla.setCodigo(dto.getCodigo().trim());
         regla.setName(dto.getName().trim());
         regla.setDescription(dto.getDescription());
         regla.setCategoria(dto.getCategoria().trim());
         regla.setPenalizacionBase(dto.getPenalizacionBase());
-        return toDTO(reglaRepository.save(regla));
+        return toDTO(trafficRuleRepository.save(regla));
     }
 
     @Transactional
-    public void eliminar(Integer id) {
-        TrafficRule regla = reglaRepository.findById(id)
+    public void delete(Integer id) {
+        TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));
-        reglaRepository.delete(regla);
+        trafficRuleRepository.delete(regla);
     }
 
     private TrafficRuleDTO toDTO(TrafficRule regla) {

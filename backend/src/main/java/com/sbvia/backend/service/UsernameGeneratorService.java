@@ -54,7 +54,7 @@ public class UsernameGeneratorService {
      * "Ana", "Li"                  -> "anli" (expandido a >= 4 caracteres)
      * "José Ángel", "Muñoz"        -> "jmunoz"
      */
-    public String generarBase(String firstName, String lastName) {
+    public String generateBase(String firstName, String lastName) {
         String normNombres = normalizar(firstName);
         String normApellidos = normalizar(lastName);
 
@@ -153,7 +153,7 @@ public class UsernameGeneratorService {
      * Si 'base' no existe, retorna 'base'.
      * Si ya existe 'base', genera 'base1', 'base2', etc.
      */
-    public String generarSiguienteDisponible(String base, Collection<String> existentes) {
+    public String generateNextAvailable(String base, Collection<String> existentes) {
         if (existentes == null || existentes.isEmpty()) {
             return base;
         }

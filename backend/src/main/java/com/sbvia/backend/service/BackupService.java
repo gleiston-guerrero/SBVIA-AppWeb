@@ -1,10 +1,10 @@
 package com.sbvia.backend.service;
 
 import com.sbvia.backend.entity.AuditLog;
-import com.sbvia.backend.model.Respaldo;
+import com.sbvia.backend.model.Backup;
 import com.sbvia.backend.dto.BackupRequestDTO;
 import com.sbvia.backend.repository.AuditLogRepository;
-import com.sbvia.backend.repository.RespaldoRepository;
+import com.sbvia.backend.repository.BackupRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,12 +26,12 @@ import java.util.Map;
 import java.util.ArrayList;
 
 @Service
-public class RespaldoService {
+public class BackupService {
 
-    private static final Logger logger = LoggerFactory.getLogger(RespaldoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BackupService.class);
 
-    private final RespaldoRepository respaldoRepository;
-    private final AuditLogRepository auditoriaRepository;
+    private final BackupRepository backupRepository;
+    private final AuditLogRepository auditLogRepository;
     private final TaskScheduler taskScheduler;
 
     @Value("${spring.datasource.username}")
@@ -45,11 +45,11 @@ public class RespaldoService {
 
     private final String backupDir = "/app/backups";
 
-    public RespaldoService(RespaldoRepository respaldoRepository, 
-                           AuditLogRepository auditoriaRepository,
+    public BackupService(BackupRepository backupRepository, 
+                           AuditLogRepository auditLogRepository,
                            TaskScheduler taskScheduler) {
-        this.respaldoRepository = respaldoRepository;
-        this.auditoriaRepository = auditoriaRepository;
+        this.backupRepository = backupRepository;
+        this.auditLogRepository = auditLogRepository;
         this.taskScheduler = taskScheduler;
         
         File dir = new File(backupDir);
@@ -58,65 +58,65 @@ public class RespaldoService {
         }
     }
 
-    public List<Respaldo> obtenerTodos() {
-        return respaldoRepository.findAllByOrderByFechaInicioDesc();
+    public List<Backup> getAll() {
+        return backupRepository.findAllByOrderByStartDateDesc();
     }
 
-    public Respaldo generarRespaldo(BackupRequestDTO request, String tipo) {
+    public Backup generateBackup(BackupRequestDTO request, String type) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String filename = "sbvia_backup_" + timestamp + ".backup";
 
-        Respaldo respaldo = new Respaldo();
-        respaldo.setNombreArchivo(filename);
-        respaldo.setTipo(tipo);
-        respaldo.setModalidad(request != null && request.getModalidad() != null ? request.getModalidad() : "COMPLETO");
-        respaldo.setComentario(request != null ? request.getComentario() : "");
-        respaldo.setFechaInicio(LocalDateTime.now());
+        Backup backup = new Backup();
+        backup.setFileName(filename);
+        backup.setType(type);
+        backup.setMode(request != null && request.getModalidad() != null ? request.getModalidad() : "COMPLETO");
+        backup.setComment(request != null ? request.getComentario() : "");
+        backup.setStartDate(LocalDateTime.now());
         
         if (request != null && request.getFechaProgramada() != null && request.getFechaProgramada().isAfter(LocalDateTime.now())) {
-            respaldo.setEstado("PROGRAMADO");
-            respaldo.setFechaProgramada(request.getFechaProgramada());
-            respaldo = respaldoRepository.save(respaldo);
+            backup.setStatus("PROGRAMADO");
+            backup.setScheduledDate(request.getFechaProgramada());
+            backup = backupRepository.save(backup);
             
-            final Respaldo resFinal = respaldo;
+            final Backup finalBackup = backup;
             taskScheduler.schedule(() -> {
-                resFinal.setEstado("EN_PROGRESO");
-                respaldoRepository.save(resFinal);
-                ejecutarPgDump(resFinal);
+                finalBackup.setStatus("EN_PROGRESO");
+                backupRepository.save(finalBackup);
+                executePgDump(finalBackup);
             }, Date.from(request.getFechaProgramada().atZone(ZoneId.systemDefault()).toInstant()));
         } else {
-            respaldo.setEstado("EN_PROGRESO");
-            respaldo = respaldoRepository.save(respaldo);
-            ejecutarPgDump(respaldo);
+            backup.setStatus("EN_PROGRESO");
+            backup = backupRepository.save(backup);
+            executePgDump(backup);
         }
 
         // Registrar en Auditoría
-        registrarAuditoria(respaldo);
+        registerAuditLog(backup);
 
-        return respaldo;
+        return backup;
     }
 
-    private void registrarAuditoria(Respaldo respaldo) {
+    private void registerAuditLog(Backup backup) {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             String currentUser = auth != null ? auth.getName() : "SISTEMA";
 
-            AuditLog auditoria = new AuditLog();
-            auditoria.setTableName("respaldo");
-            auditoria.setOperation("BACKUP");
-            auditoria.setDbUser(dbUser);
-            auditoria.setAppUser(currentUser);
-            auditoria.setNewData("{\"archivo\": \"" + respaldo.getNombreArchivo() + "\", \"modalidad\": \"" + respaldo.getModalidad() + "\", \"tipo\": \"" + respaldo.getTipo() + "\"}");
+            AuditLog auditLog = new AuditLog();
+            auditLog.setTableName("backup");
+            auditLog.setOperation("BACKUP");
+            auditLog.setDbUser(dbUser);
+            auditLog.setAppUser(currentUser);
+            auditLog.setNewData("{\"archivo\": \"" + backup.getFileName() + "\", \"modalidad\": \"" + backup.getMode() + "\", \"tipo\": \"" + backup.getType() + "\"}");
             
-            auditoriaRepository.save(auditoria);
+            auditLogRepository.save(auditLog);
         } catch (Exception e) {
             logger.error("Error al registrar auditoría de respaldo", e);
         }
     }
 
     @Async
-    protected void ejecutarPgDump(Respaldo respaldo) {
-        String outputPath = backupDir + "/" + respaldo.getNombreArchivo();
+    protected void executePgDump(Backup backup) {
+        String outputPath = backupDir + "/" + backup.getFileName();
         
         String host = "postgres"; 
         String dbName = "sbvia_db";
@@ -139,9 +139,9 @@ public class RespaldoService {
             "-f", outputPath
         ));
 
-        if ("SOLO_ESTRUCTURA".equals(respaldo.getModalidad())) {
+        if ("SOLO_ESTRUCTURA".equals(backup.getMode())) {
             command.add("-s");
-        } else if ("SOLO_DATOS".equals(respaldo.getModalidad())) {
+        } else if ("SOLO_DATOS".equals(backup.getMode())) {
             command.add("-a");
         }
 
@@ -155,57 +155,57 @@ public class RespaldoService {
             Process process = processBuilder.start();
             int exitCode = process.waitFor();
 
-            respaldo.setEndDate(LocalDateTime.now());
+            backup.setEndDate(LocalDateTime.now());
 
             if (exitCode == 0) {
                 File file = new File(outputPath);
                 if (file.exists()) {
-                    respaldo.setTamanioBytes(file.length());
-                    respaldo.setEstado("COMPLETADO");
-                    respaldo.setDetalles("Respaldo completado exitosamente.");
+                    backup.setSizeBytes(file.length());
+                    backup.setStatus("COMPLETADO");
+                    backup.setDetails("Respaldo completado exitosamente.");
                     logger.info("Respaldo completado: {}", outputPath);
                 } else {
-                    respaldo.setEstado("FALLIDO");
-                    respaldo.setDetalles("Archivo no encontrado tras finalizar pg_dump.");
+                    backup.setStatus("FALLIDO");
+                    backup.setDetails("Archivo no encontrado tras finalizar pg_dump.");
                 }
             } else {
-                respaldo.setEstado("FALLIDO");
-                respaldo.setDetalles("pg_dump devolvió código de error: " + exitCode);
+                backup.setStatus("FALLIDO");
+                backup.setDetails("pg_dump devolvió código de error: " + exitCode);
             }
 
         } catch (IOException | InterruptedException e) {
-            respaldo.setEstado("FALLIDO");
-            respaldo.setEndDate(LocalDateTime.now());
-            respaldo.setDetalles("Excepción: " + e.getMessage());
+            backup.setStatus("FALLIDO");
+            backup.setEndDate(LocalDateTime.now());
+            backup.setDetails("Excepción: " + e.getMessage());
             logger.error("Excepción durante respaldo", e);
             if (e instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
             }
         }
 
-        respaldoRepository.save(respaldo);
+        backupRepository.save(backup);
     }
 
-    public File obtenerArchivo(Long id) {
-        Respaldo respaldo = respaldoRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
-        return new File(backupDir + "/" + respaldo.getNombreArchivo());
+    public File getFile(Long id) {
+        Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
+        return new File(backupDir + "/" + backup.getFileName());
     }
 
-    public void eliminarRespaldo(Long id) {
-        Respaldo respaldo = respaldoRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
-        File file = new File(backupDir + "/" + respaldo.getNombreArchivo());
+    public void deleteBackup(Long id) {
+        Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
+        File file = new File(backupDir + "/" + backup.getFileName());
         if (file.exists()) {
             file.delete();
         }
-        respaldoRepository.delete(respaldo);
+        backupRepository.delete(backup);
     }
 
     @Scheduled(cron = "0 0 2 * * ?")
-    public void respaldoProgramado() {
+    public void scheduledBackup() {
         logger.info("Ejecutando respaldo automático programado...");
         BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("COMPLETO");
         dto.setComentario("Respaldo diario automático");
-        generarRespaldo(dto, "PROGRAMADO");
+        generateBackup(dto, "PROGRAMADO");
     }
 }

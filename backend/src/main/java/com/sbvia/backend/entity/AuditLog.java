@@ -9,36 +9,36 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bitacora_auditoria")
+@Table(name = "audit_log")
 @Getter
 @Setter
 public class AuditLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_auditoria")
-    private Long idAuditoria;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "nombre_tabla", nullable = false)
+    @Column(name = "table_name", nullable = false)
     private String tableName;
 
-    @Column(name = "operacion", nullable = false)
+    @Column(name = "operation", nullable = false)
     private String operation;
 
-    @Column(name = "usuario_db", nullable = false)
+    @Column(name = "db_user", nullable = false)
     private String dbUser;
 
-    @Column(name = "usuario_app")
+    @Column(name = "app_user")
     private String appUser;
 
-    @Column(name = "fecha_hora", nullable = false, insertable = false, updatable = false)
-    private LocalDateTime fechaHora;
+    @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "datos_anteriores", columnDefinition = "jsonb")
+    @Column(name = "previous_data", columnDefinition = "jsonb")
     private String previousData;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "datos_nuevos", columnDefinition = "jsonb")
+    @Column(name = "new_data", columnDefinition = "jsonb")
     private String newData;
 }

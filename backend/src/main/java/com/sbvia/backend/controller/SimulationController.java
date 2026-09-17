@@ -31,7 +31,7 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 public class SimulationController {
 
-    private final SimulationService simulacionService;
+    private final SimulationService simulationService;
     private final FeedbackService retroalimentacionService;
 
     /**
@@ -47,7 +47,7 @@ public class SimulationController {
     public ResponseEntity<SimulationDTO> iniciar(
             @PathVariable Integer scenarioId,
             Authentication authentication) {
-        return ResponseEntity.ok(simulacionService.iniciarSimulacion(authentication.getName(), scenarioId));
+        return ResponseEntity.ok(simulationService.iniciarSimulacion(authentication.getName(), scenarioId));
     }
 
     /**
@@ -65,7 +65,7 @@ public class SimulationController {
             @PathVariable Integer simulationId,
             @Valid @RequestBody EndSimulationRequest request,
             Authentication authentication) {
-        return ResponseEntity.ok(simulacionService.finalizarSimulacion(
+        return ResponseEntity.ok(simulationService.finalizarSimulacion(
                 authentication.getName(), simulationId, request.finalScore()));
     }
 
@@ -84,7 +84,7 @@ public class SimulationController {
             @PathVariable Integer simulationId,
             @Valid @RequestBody DrivingMetricsRequest request,
             Authentication authentication) {
-        return ResponseEntity.ok(simulacionService.finalizarConduccion(
+        return ResponseEntity.ok(simulationService.finalizarConduccion(
                 authentication.getName(), simulationId, request));
     }
 
@@ -101,7 +101,7 @@ public class SimulationController {
     public ResponseEntity<FeedbackIaResponse> feedback(
             @PathVariable Integer simulationId,
             Authentication authentication) {
-        return ResponseEntity.ok(retroalimentacionService.generarInforme(
+        return ResponseEntity.ok(retroalimentacionService.generateReport(
                 authentication.getName(), simulationId));
     }
 
@@ -114,9 +114,9 @@ public class SimulationController {
      */
     @GetMapping("/mis-practicas")
     @Operation(summary = "Obtener mis prácticas", description = "Devuelve el historial de simulations del user autenticado")
-    public ResponseEntity<List<SimulationDTO>> obtenerMisPracticas(Authentication authentication) {
+    public ResponseEntity<List<SimulationDTO>> getMyPractices(Authentication authentication) {
         String email = authentication.getName();
-        List<SimulationDTO> practicas = simulacionService.obtenerMisPracticas(email);
+        List<SimulationDTO> practicas = simulationService.getMyPractices(email);
         return ResponseEntity.ok(practicas);
     }
 
@@ -129,8 +129,8 @@ public class SimulationController {
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'INSTRUCTOR')")
     @Operation(summary = "Obtener todas las simulations", description = "Devuelve todas las simulations para supervisión de administradores, instructores y auditores")
-    public ResponseEntity<List<SimulationDTO>> obtenerTodas() {
-        List<SimulationDTO> practicas = simulacionService.obtenerTodas();
+    public ResponseEntity<List<SimulationDTO>> getAll() {
+        List<SimulationDTO> practicas = simulationService.getAll();
         return ResponseEntity.ok(practicas);
     }
 
@@ -143,7 +143,7 @@ public class SimulationController {
     @GetMapping("/estadisticas")
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")
     @Operation(summary = "Obtener estadísticas globales", description = "Calcula el total de prácticas y promedios globales de forma eficiente")
-    public ResponseEntity<com.sbvia.backend.dto.StatisticsDTO> obtenerEstadisticasGlobales() {
-        return ResponseEntity.ok(simulacionService.obtenerEstadisticasGlobales());
+    public ResponseEntity<com.sbvia.backend.dto.StatisticsDTO> getGlobalStatistics() {
+        return ResponseEntity.ok(simulationService.getGlobalStatistics());
     }
 }

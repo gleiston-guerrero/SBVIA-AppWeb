@@ -14,62 +14,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Proveedor de retroalimentación con un modelo externo compatible con la API
- * de chat completions de OpenAI. La clave viaja solo en variables de entorno
- * del backend y nunca llega al frontend ni al repositorio.
- * Cualquier fallo (sin clave, timeout, respuesta inválida) lanza
- * IaNoDisponibleException para que el orquestador use el motor local.
- */
 @Service
-public class FeedbackIaExternaService implements ProveedorFeedback {
+public class ExternalAiFeedbackService implements FeedbackProvider {
 
-    public static final String ORIGEN = "IA_EXTERNA";
+    public static final String ORIGIN = "IA_EXTERNA";
 
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
-    private final String proveedor;
+    private final String provider;
     private final String apiUrl;
     private final String apiKey;
-    private final String modelo;
+    private final String model;
 
-    public FeedbackIaExternaService(
+    public ExternalAiFeedbackService(
             ObjectMapper objectMapper,
-            @Value("${ia.proveedor:local}") String proveedor,
+            @Value("${ia.proveedor:local}") String provider,
             @Value("${ia.api-url:}") String apiUrl,
             @Value("${ia.api-key:}") String apiKey,
-            @Value("${ia.modelo:gpt-4o-mini}") String modelo,
-            @Value("${ia.timeout-segundos:15}") int timeoutSegundos) {
+            @Value("${ia.modelo:gpt-4o-mini}") String model,
+            @Value("${ia.timeout-segundos:15}") int timeoutSeconds) {
         this.objectMapper = objectMapper;
-        this.proveedor = proveedor;
+        this.provider = provider;
         this.apiUrl = apiUrl;
         this.apiKey = apiKey;
-        this.modelo = modelo;
+        this.model = model;
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(timeoutSegundos * 1000);
-        factory.setReadTimeout(timeoutSegundos * 1000);
+        factory.setConnectTimeout(timeoutSeconds * 1000);
+        factory.setReadTimeout(timeoutSeconds * 1000);
         this.restClient = RestClient.builder().requestFactory(factory).build();
     }
 
     @Override
-    public String origen() {
-        return ORIGEN;
+    public String origin() {
+        return ORIGIN;
     }
 
-    public boolean habilitado() {
-        return "openai".equalsIgnoreCase(proveedor) && apiKey != null && !apiKey.isBlank()
+    public boolean isEnabled() {
+        return "openai".equalsIgnoreCase(provider) && apiKey != null && !apiKey.isBlank()
                 && apiUrl != null && !apiUrl.isBlank();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public FeedbackIaResponse generar(DatosConduccion datos) {
-        if (!habilitado()) {
-            throw new IaNoDisponibleException("Proveedor externo no configurado (ia.proveedor=openai + AI_API_KEY + AI_API_URL)");
+    public FeedbackIaResponse generate(DrivingData data) {
+        if (!isEnabled()) {
+            throw new AiUnavailableException("Proveedor externo no configurado (ia.proveedor=openai + AI_API_KEY + AI_API_URL)");
         }
         try {
-            Map<String, Object> cuerpo = Map.of(
-                    "model", modelo,
+            Map<String, Object> body = Map.of(
+                    "model", model,
                     "temperature", 0.3,
                     "max_tokens", 600,
                     "messages", List.of(
@@ -78,80 +71,80 @@ public class FeedbackIaExternaService implements ProveedorFeedback {
                                             + "resumen (string), aciertos (array de strings), errores (array de strings), "
                                             + "nivelRiesgo (BAJO, MEDIO o ALTO), recomendaciones (array de exactamente 3 strings), "
                                             + "mensajeMotivador (string). Sin texto fuera del JSON."),
-                            Map.of("role", "user", "content", promptUsuario(datos))));
-            Map<?, ?> respuesta = restClient.post()
+                            Map.of("role", "user", "content", userPrompt(data))));
+            Map<?, ?> response = restClient.post()
                     .uri(apiUrl)
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(cuerpo)
+                    .body(body)
                     .retrieve()
                     .body(Map.class);
-            return mapear(respuesta, datos);
-        } catch (IaNoDisponibleException e) {
+            return mapResponse(response, data);
+        } catch (AiUnavailableException e) {
             throw e;
         } catch (Exception e) {
-            throw new IaNoDisponibleException("Fallo la llamada al proveedor externo", e);
+            throw new AiUnavailableException("Fallo la llamada al proveedor externo", e);
         }
     }
 
-    private String promptUsuario(DatosConduccion d) {
+    private String userPrompt(DrivingData d) {
         return "Evalúa esta práctica de simulación (métricas agregadas, sin datos personales): "
-                + "scenario=" + d.nombreEscenario()
+                + "scenario=" + d.scenarioName()
                 + ", durationSeconds=" + d.durationSeconds()
-                + ", velocidadPromedio=" + d.velocidadPromedio()
-                + ", velocidadMaxima=" + d.velocidadMaxima()
-                + ", excesos=" + d.excesosVelocidad()
-                + ", colisiones=" + d.colisiones()
-                + ", salidas=" + d.salidasCarril()
-                + ", semaforosIgnorados=" + d.semaforosIgnorados()
-                + ", semaforosRespetados=" + d.semaforosRespetados()
-                + ", distanciaInsegura=" + d.distanciaInsegura()
-                + ", puntaje=" + d.puntaje()
-                + ", practicasPrevias=" + d.practicasPrevias();
+                + ", velocidadPromedio=" + d.averageSpeed()
+                + ", velocidadMaxima=" + d.maxSpeed()
+                + ", excesos=" + d.speedingIncidents()
+                + ", colisiones=" + d.collisions()
+                + ", salidas=" + d.laneDepartures()
+                + ", semaforosIgnorados=" + d.ignoredRedLights()
+                + ", semaforosRespetados=" + d.respectedRedLights()
+                + ", distanciaInsegura=" + d.unsafeDistanceIncidents()
+                + ", puntaje=" + d.score()
+                + ", practicasPrevias=" + d.previousPractices();
     }
 
     @SuppressWarnings("unchecked")
-    private FeedbackIaResponse mapear(Map<?, ?> respuesta, DatosConduccion datos) {
+    private FeedbackIaResponse mapResponse(Map<?, ?> response, DrivingData data) {
         try {
-            List<?> choices = (List<?>) respuesta.get("choices");
+            List<?> choices = (List<?>) response.get("choices");
             Map<?, ?> message = (Map<?, ?>) ((Map<?, ?>) choices.get(0)).get("message");
-            String contenido = String.valueOf(message.get("content")).trim()
+            String content = String.valueOf(message.get("content")).trim()
                     .replaceAll("(?s)^```json\\s*", "").replaceAll("(?s)```\\s*$", "").trim();
-            Map<?, ?> json = objectMapper.readValue(contenido, Map.class);
+            Map<?, ?> json = objectMapper.readValue(content, Map.class);
             return FeedbackIaResponse.builder()
-                    .resumen(texto(json.get("resumen"), "Práctica analizada por el modelo externo."))
-                    .aciertos(lista(json.get("aciertos")))
-                    .errores(lista(json.get("errores")))
-                    .nivelRiesgo(nivel(json.get("nivelRiesgo")))
-                    .recomendaciones(recs(json.get("recomendaciones")))
-                    .puntaje(datos.puntaje())
-                    .mensajeMotivador(texto(json.get("mensajeMotivador"), "Sigue practicando con constancia."))
+                    .resumen(getText(json.get("resumen"), "Práctica analizada por el modelo externo."))
+                    .aciertos(getList(json.get("aciertos")))
+                    .errores(getList(json.get("errores")))
+                    .nivelRiesgo(getLevel(json.get("nivelRiesgo")))
+                    .recomendaciones(getRecs(json.get("recomendaciones")))
+                    .puntaje(data.score())
+                    .mensajeMotivador(getText(json.get("mensajeMotivador"), "Sigue practicando con constancia."))
                     .comparacion(null)
-                    .origen(ORIGEN)
+                    .origen(ORIGIN)
                     .build();
         } catch (Exception e) {
-            throw new IaNoDisponibleException("Respuesta del proveedor externo inválida", e);
+            throw new AiUnavailableException("Respuesta del proveedor externo inválida", e);
         }
     }
 
-    private String texto(Object value, String defecto) {
-        return value instanceof String s && !s.isBlank() ? s : defecto;
+    private String getText(Object value, String defaultValue) {
+        return value instanceof String s && !s.isBlank() ? s : defaultValue;
     }
 
-    private List<String> lista(Object value) {
+    private List<String> getList(Object value) {
         if (value instanceof List<?> l) {
             return l.stream().map(String::valueOf).toList();
         }
         return List.of();
     }
 
-    private List<String> recs(Object value) {
-        List<String> base = new ArrayList<>(lista(value));
+    private List<String> getRecs(Object value) {
+        List<String> base = new ArrayList<>(getList(value));
         while (base.size() < 3) base.add("Mantener la atención plena durante todo el recorrido");
         return base.subList(0, 3);
     }
 
-    private String nivel(Object value) {
+    private String getLevel(Object value) {
         String n = value instanceof String s ? s.toUpperCase() : "";
         return "BAJO".equals(n) || "MEDIO".equals(n) || "ALTO".equals(n) ? n : "MEDIO";
     }

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "bearerAuth")
 public class ScenarioController {
 
-    private final ScenarioService escenarioService;
+    private final ScenarioService scenarioService;
 
     /**
      * GET /api/scenarios — Listar scenarios con paginación y filtros opcionales.
@@ -51,7 +51,7 @@ public class ScenarioController {
             @RequestParam(required = false) Integer difficultyLevel,
             @RequestParam(required = false) String clima,
             Pageable pageable) {
-        Page<ScenarioDTO> page = escenarioService.buscarFiltrado(roadType, difficultyLevel, clima, pageable);
+        Page<ScenarioDTO> page = scenarioService.findFiltered(roadType, difficultyLevel, clima, pageable);
         return ResponseEntity.ok(page);
     }
 
@@ -69,8 +69,8 @@ public class ScenarioController {
         @ApiResponse(responseCode = "404", description = "Scenario no encontrado"),
         @ApiResponse(responseCode = "401", description = "No autorizado")
     })
-    public ResponseEntity<ScenarioDTO> buscarPorId(@PathVariable Integer id) {
-        ScenarioDTO dto = escenarioService.buscarPorId(id);
+    public ResponseEntity<ScenarioDTO> findById(@PathVariable Integer id) {
+        ScenarioDTO dto = scenarioService.findById(id);
         return ResponseEntity.ok(dto);
     }
 
@@ -89,8 +89,8 @@ public class ScenarioController {
         @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado (requiere ROLE_ADMIN)")
     })
-    public ResponseEntity<ScenarioDTO> crear(@Valid @RequestBody ScenarioDTO dto) {
-        ScenarioDTO creado = escenarioService.crear(dto);
+    public ResponseEntity<ScenarioDTO> create(@Valid @RequestBody ScenarioDTO dto) {
+        ScenarioDTO creado = scenarioService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
@@ -110,10 +110,10 @@ public class ScenarioController {
         @ApiResponse(responseCode = "404", description = "Scenario no encontrado"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
-    public ResponseEntity<ScenarioDTO> actualizar(
+    public ResponseEntity<ScenarioDTO> update(
             @PathVariable Integer id,
             @Valid @RequestBody ScenarioDTO dto) {
-        ScenarioDTO actualizado = escenarioService.actualizar(id, dto);
+        ScenarioDTO actualizado = scenarioService.update(id, dto);
         return ResponseEntity.ok(actualizado);
     }
 
@@ -132,8 +132,8 @@ public class ScenarioController {
         @ApiResponse(responseCode = "404", description = "Scenario no encontrado"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        escenarioService.eliminar(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        scenarioService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

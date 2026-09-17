@@ -1,7 +1,7 @@
 package com.sbvia.backend.controller;
 
 import com.sbvia.backend.entity.AuditLog;
-import com.sbvia.backend.service.AuditoriaService;
+import com.sbvia.backend.service.AuditService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
@@ -17,9 +17,9 @@ import java.util.List;
 @RequestMapping("/api/auditoria")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class AuditoriaController {
+public class AuditController {
 
-    private final AuditoriaService auditoriaService;
+    private final AuditService auditService;
 
     /**
      * GET /api/auditoria — Listar registros de auditoría.
@@ -34,14 +34,14 @@ public class AuditoriaController {
      */
     @GetMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    public ResponseEntity<List<AuditLog>> obtenerAuditoria(
+    public ResponseEntity<List<AuditLog>> getAuditLogs(
             @RequestParam(required = false) String tabla,
             @RequestParam(required = false) String operation,
             @RequestParam(required = false) String user,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         
-        List<AuditLog> registros = auditoriaService.obtenerAuditoria(tabla, operation, user, fechaInicio, endDate);
+        List<AuditLog> registros = auditService.getAuditLogs(tabla, operation, user, fechaInicio, endDate);
         return ResponseEntity.ok(registros);
     }
 
@@ -58,14 +58,14 @@ public class AuditoriaController {
      */
     @GetMapping("/reporte/pdf")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-    public ResponseEntity<byte[]> descargarReportePdf(
+    public ResponseEntity<byte[]> downloadPdfReport(
             @RequestParam(required = false) String tabla,
             @RequestParam(required = false) String operation,
             @RequestParam(required = false) String user,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         
-        byte[] pdfBytes = auditoriaService.generarReportePdf(tabla, operation, user, fechaInicio, endDate);
+        byte[] pdfBytes = auditService.generatePdfReport(tabla, operation, user, fechaInicio, endDate);
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);

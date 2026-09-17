@@ -62,11 +62,11 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Perfil actualizado exitosamente"),
         @ApiResponse(responseCode = "401", description = "No autorizado o token expirado")
     })
-    public ResponseEntity<UserDTO> actualizarPerfilActual(
+    public ResponseEntity<UserDTO> updateCurrentUserProfile(
             Authentication authentication,
             @Valid @RequestBody com.sbvia.backend.dto.UpdateProfileRequest request) {
         String email = authentication.getName();
-        UserDTO actualizado = authService.actualizarPerfilActual(email, request);
+        UserDTO actualizado = authService.updateCurrentUserProfile(email, request);
         return ResponseEntity.ok(actualizado);
     }
 
@@ -83,8 +83,8 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Lista devuelta exitosamente"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
-    public ResponseEntity<Page<UserDTO>> listarUsuarios(Pageable pageable) {
-        return ResponseEntity.ok(authService.listarUsuarios(pageable));
+    public ResponseEntity<Page<UserDTO>> listUsers(Pageable pageable) {
+        return ResponseEntity.ok(authService.listUsers(pageable));
     }
 
     /**
@@ -123,10 +123,10 @@ public class UserController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado"),
         @ApiResponse(responseCode = "409", description = "Email ya registrado")
     })
-    public ResponseEntity<UserDTO> actualizarUsuario(
+    public ResponseEntity<UserDTO> updateUser(
             @PathVariable Integer id,
             @Valid @RequestBody UpdateUserRequest request) {
-        UserDTO actualizado = authService.actualizarUsuario(id, request);
+        UserDTO actualizado = authService.updateUser(id, request);
         return ResponseEntity.ok(actualizado);
     }
 
@@ -143,8 +143,8 @@ public class UserController {
         @ApiResponse(responseCode = "204", description = "User desactivado"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Integer id) {
-        authService.eliminarUsuario(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        authService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 }

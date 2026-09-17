@@ -191,10 +191,10 @@ public class SimulationService {
                 + ",\"salidas\":" + metricas.salidasCarril() + ",\"semaforos\":" + metricas.semaforosIgnorados()
                 + ",\"distancia\":" + metricas.distanciaInsegura()
                 + ",\"respetados\":" + metricas.respetados() + "}");
-        simulacionRepository.save(simulation);
+        Simulation simulacionFinalizada = simulacionRepository.save(simulation);
 
         FeedbackIaResponse informe =
-                retroalimentacionService.generarYGuardar(email, simulation.getSimulationId());
+                retroalimentacionService.generateAndSave(email, simulacionFinalizada.getSimulationId());
 
         return DrivingResultDTO.builder()
                 .simulation(mapToDTO(simulation))
@@ -202,7 +202,7 @@ public class SimulationService {
                 .build();
     }
 
-    public List<SimulationDTO> obtenerMisPracticas(String email) {
+    public List<SimulationDTO> getMyPractices(String email) {
         User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
@@ -214,13 +214,13 @@ public class SimulationService {
                 .collect(Collectors.toList());
     }
 
-    public List<SimulationDTO> obtenerTodas() {
+    public List<SimulationDTO> getAll() {
         return simulacionRepository.findAllByOrderBySimulationIdDesc().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
-    public com.sbvia.backend.dto.StatisticsDTO obtenerEstadisticasGlobales() {
+    public com.sbvia.backend.dto.StatisticsDTO getGlobalStatistics() {
         Object[] result = simulacionRepository.getGlobalStats();
         if (result == null || result[0] == null || result.length == 0 || ((Object[]) result[0])[0] == null) {
             return new com.sbvia.backend.dto.StatisticsDTO(0, 0, 0);

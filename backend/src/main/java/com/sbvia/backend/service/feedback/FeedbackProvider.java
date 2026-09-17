@@ -2,9 +2,9 @@ package com.sbvia.backend.service.feedback;
 
 import com.sbvia.backend.dto.FeedbackIaResponse;
 
-public interface ProveedorFeedback {
+public interface FeedbackProvider {
 
-    FeedbackIaResponse generar(DatosConduccion datos);
+    FeedbackIaResponse generate(DrivingData data);
 
-    String origen();
+    String origin();
 }

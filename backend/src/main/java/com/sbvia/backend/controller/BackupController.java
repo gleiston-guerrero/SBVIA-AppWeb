@@ -1,7 +1,7 @@
 package com.sbvia.backend.controller;
 
-import com.sbvia.backend.model.Respaldo;
-import com.sbvia.backend.service.RespaldoService;
+import com.sbvia.backend.model.Backup;
+import com.sbvia.backend.service.BackupService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -17,23 +17,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/respaldos")
 @PreAuthorize("hasAuthority('ADMINISTRADOR')")
-public class RespaldoController {
+public class BackupController {
 
-    private final RespaldoService respaldoService;
+    private final BackupService backupService;
 
-    public RespaldoController(RespaldoService respaldoService) {
-        this.respaldoService = respaldoService;
+    public BackupController(BackupService backupService) {
+        this.backupService = backupService;
     }
 
     /**
      * GET /api/respaldos — Listar respaldos.
      * Retorna un listado de todos los respaldos generados en el sistema (Solo Admin).
      *
-     * @return una lista de entidades Respaldo
+     * @return una lista de entidades Backup
      */
     @GetMapping
-    public List<Respaldo> listar() {
-        return respaldoService.obtenerTodos();
+    public List<Backup> list() {
+        return backupService.getAll();
     }
 
     /**
@@ -41,11 +41,11 @@ public class RespaldoController {
      * Dispara la creación de un nuevo backup de la base de datos bajo demanda (Solo Admin).
      *
      * @param request el objeto con opciones de configuración para el respaldo
-     * @return el registro del Respaldo generado
+     * @return el registro del Backup generado
      */
     @PostMapping("/generar")
-    public Respaldo generar(@RequestBody com.sbvia.backend.dto.BackupRequestDTO request) {
-        return respaldoService.generarRespaldo(request, "MANUAL");
+    public Backup generate(@RequestBody com.sbvia.backend.dto.BackupRequestDTO request) {
+        return backupService.generateBackup(request, "MANUAL");
     }
 
     /**
@@ -56,8 +56,8 @@ public class RespaldoController {
      * @return una respuesta HTTP con el archivo como recurso descargable, o 404 si no existe
      */
     @GetMapping("/descargar/{id}")
-    public ResponseEntity<Resource> descargar(@PathVariable Long id) {
-        File file = respaldoService.obtenerArchivo(id);
+    public ResponseEntity<Resource> download(@PathVariable Long id) {
+        File file = backupService.getFile(id);
         
         if (!file.exists()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -83,8 +83,8 @@ public class RespaldoController {
      * @return una respuesta HTTP sin contenido
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        respaldoService.eliminarRespaldo(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        backupService.deleteBackup(id);
         return ResponseEntity.noContent().build();
     }
 }

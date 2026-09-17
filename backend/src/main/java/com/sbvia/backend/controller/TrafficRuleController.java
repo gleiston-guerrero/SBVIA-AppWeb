@@ -21,7 +21,7 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 @PreAuthorize("hasAuthority('ADMINISTRADOR')")
 public class TrafficRuleController {
-    private final TrafficRuleService reglaService;
+    private final TrafficRuleService trafficRuleService;
 
     /**
      * GET /api/reglas-transito — Listar reglas de tránsito.
@@ -31,7 +31,7 @@ public class TrafficRuleController {
      */
     @GetMapping
     @Operation(summary = "Listar reglas de tránsito")
-    public List<TrafficRuleDTO> listar() { return reglaService.listar(); }
+    public List<TrafficRuleDTO> list() { return trafficRuleService.list(); }
 
     /**
      * POST /api/reglas-transito — Crear nueva regla.
@@ -42,8 +42,8 @@ public class TrafficRuleController {
      */
     @PostMapping
     @Operation(summary = "Registrar una regla de tránsito")
-    public ResponseEntity<TrafficRuleDTO> crear(@Valid @RequestBody TrafficRuleDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(reglaService.crear(dto));
+    public ResponseEntity<TrafficRuleDTO> create(@Valid @RequestBody TrafficRuleDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(trafficRuleService.create(dto));
     }
 
     /**
@@ -56,8 +56,8 @@ public class TrafficRuleController {
      */
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una regla de tránsito")
-    public TrafficRuleDTO actualizar(@PathVariable Integer id, @Valid @RequestBody TrafficRuleDTO dto) {
-        return reglaService.actualizar(id, dto);
+    public TrafficRuleDTO update(@PathVariable Integer id, @Valid @RequestBody TrafficRuleDTO dto) {
+        return trafficRuleService.update(id, dto);
     }
 
     /**
@@ -69,8 +69,8 @@ public class TrafficRuleController {
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una regla de tránsito")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        reglaService.eliminar(id);
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        trafficRuleService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

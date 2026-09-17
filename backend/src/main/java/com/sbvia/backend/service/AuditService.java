@@ -20,15 +20,15 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuditoriaService {
+public class AuditService {
 
     private final AuditLogRepository repository;
 
-    public List<AuditLog> obtenerAuditoria(String tabla, String operation, String user, LocalDateTime fechaInicio, LocalDateTime endDate) {
+    public List<AuditLog> getAuditLogs(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         Specification<AuditLog> spec = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (tabla != null && !tabla.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("tableName"), tabla));
+            if (table != null && !table.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("tableName"), table));
             }
             if (operation != null && !operation.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("operation"), operation));
@@ -36,20 +36,20 @@ public class AuditoriaService {
             if (user != null && !user.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("appUser")), "%" + user.toLowerCase() + "%"));
             }
-            if (fechaInicio != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("fechaHora"), fechaInicio));
+            if (startDate != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("createdAt"), startDate));
             }
             if (endDate != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("fechaHora"), endDate));
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("createdAt"), endDate));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 
-        return repository.findAll(spec, Sort.by(Sort.Direction.DESC, "fechaHora"));
+        return repository.findAll(spec, Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
-    public byte[] generarReportePdf(String tabla, String operation, String user, LocalDateTime fechaInicio, LocalDateTime endDate) {
-        List<AuditLog> registros = obtenerAuditoria(tabla, operation, user, fechaInicio, endDate);
+    public byte[] generatePdfReport(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
+        List<AuditLog> records = getAuditLogs(table, operation, user, startDate, endDate);
         
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             Document document = new Document(PageSize.A4.rotate(), 36, 36, 36, 36);
@@ -66,7 +66,7 @@ public class AuditoriaService {
             // Subtítulo con filtros
             Font fontSub = FontFactory.getFont(FontFactory.HELVETICA, 10);
             document.add(new Paragraph("Filtros aplicados:", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10)));
-            document.add(new Paragraph("Tabla: " + (tabla != null ? tabla : "Todas") + 
+            document.add(new Paragraph("Tabla: " + (table != null ? table : "Todas") + 
                                        " | Operación: " + (operation != null ? operation : "Todas") + 
                                        " | User: " + (user != null ? user : "Todos"), fontSub));
             document.add(new Paragraph("Generado el: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), fontSub));
@@ -90,8 +90,8 @@ public class AuditoriaService {
             Font rowFont = FontFactory.getFont(FontFactory.HELVETICA, 8);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-            for (AuditLog log : registros) {
-                pdfTable.addCell(new Phrase(log.getFechaHora() != null ? log.getFechaHora().format(dtf) : "", rowFont));
+            for (AuditLog log : records) {
+                pdfTable.addCell(new Phrase(log.getCreatedAt() != null ? log.getCreatedAt().format(dtf) : "", rowFont));
                 pdfTable.addCell(new Phrase(log.getTableName() != null ? log.getTableName() : "", rowFont));
                 pdfTable.addCell(new Phrase(log.getOperation() != null ? log.getOperation() : "", rowFont));
                 pdfTable.addCell(new Phrase(log.getAppUser() != null ? log.getAppUser() : (log.getDbUser() != null ? log.getDbUser() : ""), rowFont));

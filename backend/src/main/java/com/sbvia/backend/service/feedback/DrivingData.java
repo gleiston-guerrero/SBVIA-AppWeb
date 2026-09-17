@@ -2,19 +2,19 @@ package com.sbvia.backend.service.feedback;
 
 import java.math.BigDecimal;
 
-public record DatosConduccion(
+public record DrivingData(
         int durationSeconds,
-        BigDecimal velocidadPromedio,
-        BigDecimal velocidadMaxima,
-        int excesosVelocidad,
-        int colisiones,
-        int salidasCarril,
-        int semaforosIgnorados,
-        int semaforosRespetados,
-        int distanciaInsegura,
-        BigDecimal puntaje,
-        String nombreEscenario,
-        int practicasPrevias,
-        BigDecimal promedioPrevio,
-        BigDecimal mejorPrevio) {
+        BigDecimal averageSpeed,
+        BigDecimal maxSpeed,
+        int speedingIncidents,
+        int collisions,
+        int laneDepartures,
+        int ignoredRedLights,
+        int respectedRedLights,
+        int unsafeDistanceIncidents,
+        BigDecimal score,
+        String scenarioName,
+        int previousPractices,
+        BigDecimal previousAverage,
+        BigDecimal previousBest) {
 }

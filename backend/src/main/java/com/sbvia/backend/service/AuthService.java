@@ -54,9 +54,9 @@ public class AuthService {
                 .orElseThrow(() -> new IllegalStateException("No se encontró el estado ACTIVO"));
 
         // Generación de nombre_usuario automático estilo SGA UTEQ
-        String base = usernameGeneratorService.generarBase(request.getFirstName(), request.getLastName());
+        String base = usernameGeneratorService.generateBase(request.getFirstName(), request.getLastName());
         List<String> existentes = new ArrayList<>(usuarioRepository.findNombresUsuarioSimilares(base));
-        String nombreUsuarioGenerado = usernameGeneratorService.generarSiguienteDisponible(base, existentes);
+        String nombreUsuarioGenerado = usernameGeneratorService.generateNextAvailable(base, existentes);
 
         User user = User.builder()
                 .firstName(request.getFirstName().trim())
@@ -153,7 +153,7 @@ public class AuthService {
         return mapToDTO(user);
     }
 
-    public org.springframework.data.domain.Page<UserDTO> listarUsuarios(org.springframework.data.domain.Pageable pageable) {
+    public org.springframework.data.domain.Page<UserDTO> listUsers(org.springframework.data.domain.Pageable pageable) {
         return usuarioRepository.findAll(pageable).map(this::mapToDTO);
     }
 
@@ -171,7 +171,7 @@ public class AuthService {
     }
 
     @Transactional
-    public UserDTO actualizarUsuario(Integer id, UpdateUserRequest request) {
+    public UserDTO updateUser(Integer id, UpdateUserRequest request) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
@@ -191,7 +191,7 @@ public class AuthService {
     }
 
     @Transactional
-    public UserDTO actualizarPerfilActual(String identificador, UpdateProfileRequest request) {
+    public UserDTO updateCurrentUserProfile(String identificador, UpdateProfileRequest request) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
 
@@ -204,7 +204,7 @@ public class AuthService {
     }
 
     @Transactional
-    public void eliminarUsuario(Integer id) {
+    public void deleteUser(Integer id) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
         user.setAccountLocked(true);
