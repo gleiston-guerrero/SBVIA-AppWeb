@@ -18,6 +18,7 @@ export class ShellComponent implements OnInit {
   modalPerfilAbierto = false;
   perfilForm: FormGroup;
   guardandoPerfil = false;
+  errorPerfil = '';
 
   constructor(
     private authService: AuthService,
@@ -57,6 +58,7 @@ export class ShellComponent implements OnInit {
         phone: this.user.phone
       });
     }
+    this.errorPerfil = '';
     this.modalPerfilAbierto = true;
   }
 
@@ -76,7 +78,7 @@ export class ShellComponent implements OnInit {
       error: (err: any) => {
         console.error('Error al actualizar perfil', err);
         this.guardandoPerfil = false;
-        alert('Ocurrió un error al guardar el perfil.');
+        this.errorPerfil = 'Ocurrió un error al guardar el perfil.';
       }
     });
   }

@@ -14,10 +14,11 @@ import { Respaldo } from './backup.model';
 export class BackupManagementComponent implements OnInit, OnDestroy {
   respaldos: Respaldo[] = [];
   cargando = true;
+  modalAbierto = false;
   generando = false;
+  respaldoAEliminar: number | null = null;
   
   // Modal state
-  modalAbierto = false;
   respaldoForm: FormGroup;
   
   private autoRefreshInterval: any;
@@ -93,10 +94,19 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     this.respaldoService.descargar(id);
   }
 
-  eliminar(id: number): void {
-    if (confirm('¿Está seguro de eliminar este respaldo permanentemente?')) {
-      this.respaldoService.eliminar(id).subscribe(() => {
-        this.respaldos = this.respaldos.filter(r => r.idRespaldo !== id);
+  solicitarEliminacion(id: number): void {
+    this.respaldoAEliminar = id;
+  }
+
+  cancelarEliminacion(): void {
+    this.respaldoAEliminar = null;
+  }
+
+  eliminar(): void {
+    if (this.respaldoAEliminar) {
+      this.respaldoService.eliminar(this.respaldoAEliminar).subscribe(() => {
+        this.respaldos = this.respaldos.filter(r => r.idRespaldo !== this.respaldoAEliminar);
+        this.respaldoAEliminar = null;
       });
     }
   }
