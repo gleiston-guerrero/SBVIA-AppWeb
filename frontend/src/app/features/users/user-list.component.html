@@ -2,13 +2,13 @@
   <div class="page-header">
     <div>
       <span class="eyebrow">Administración</span>
-      <h1>Users</h1>
+      <h1>Usuarios</h1>
       <p>Gestiona cuentas, roles y accesos del sistema.</p>
     </div>
   </div>
 
   <div class="stats-row">
-    <article class="stat-mini"><span class="stat-dot green"></span><div><small>Total users</small><strong>{{ users.length }}</strong></div></article>
+    <article class="stat-mini"><span class="stat-dot green"></span><div><small>Total usuarios</small><strong>{{ users.length }}</strong></div></article>
     <article class="stat-mini"><span class="stat-dot blue"></span><div><small>Activos</small><strong>{{ usuariosActivos }}</strong></div></article>
   </div>
 
@@ -39,7 +39,7 @@
 
     <div class="empty-state" *ngIf="users.length === 0">
       <span class="empty-icon">★</span>
-      <p>No hay users registrados.</p>
+      <p>No hay usuarios registrados.</p>
     </div>
   </div>
 

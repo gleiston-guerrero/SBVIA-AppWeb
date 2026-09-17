@@ -113,7 +113,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
             this.nombreEscenario = primero.nombre ?? this.nombreEscenario;
           }
         },
-        error: () => { /* modo libre sin scenario */ }
+        error: () => { /* modo libre sin escenario */ }
       });
     }
   }
@@ -183,7 +183,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.informe = null;
     this.idSimulacionBackend = null;
     this.modoLocal = this.scenarioId === null;
-    this.aviso = this.modoLocal ? 'Sin scenario disponible: modo local.' : '';
+    this.aviso = this.modoLocal ? 'Sin escenario disponible: modo local.' : '';
     this.guardando = false;
     this.xAuto = this.centroCarril(1);
     this.desplazamiento = 0;

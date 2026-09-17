@@ -2,10 +2,10 @@
   <div class="page-header">
     <div>
       <span class="eyebrow">Gestión</span>
-      <h1>Scenarios viales</h1>
-      <p>Selecciona un scenario para practicar o administra los existentes.</p>
+      <h1>Escenarios viales</h1>
+      <p>Selecciona un escenario para practicar o administra los existentes.</p>
     </div>
-    <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">+ Nuevo scenario</a>
+    <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">+ Nuevo escenario</a>
   </div>
   <div class="filters" *ngIf="scenarios.length > 0">
     <button class="filter-chip active" (click)="cambiarPagina(0)">Todos</button>
@@ -31,8 +31,8 @@
     </article>
     <div class="empty-state" *ngIf="scenarios.length === 0">
       <span class="empty-icon">◈</span>
-      <p>No hay scenarios registrados aún.</p>
-      <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">Crear primer scenario</a>
+      <p>No hay escenarios registrados aún.</p>
+      <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">Crear primer escenario</a>
     </div>
   </div>
   <div class="pagination" *ngIf="totalPages > 1">

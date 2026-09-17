@@ -38,7 +38,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const scenarioId = Number(this.route.snapshot.paramMap.get('scenarioId'));
     if (!Number.isInteger(scenarioId) || scenarioId <= 0) {
-      this.error = 'El scenario seleccionado no es válido.';
+      this.error = 'El escenario seleccionado no es válido.';
       this.cargando = false;
       return;
     }

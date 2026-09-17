@@ -73,10 +73,10 @@ export class DashboardComponent implements OnInit {
   }
 
   get recomendacion(): string {
-    if (this.totalPracticas === 0) return 'Empieza con un scenario de dificultad baja para establecer tu primera referencia.';
-    if (this.promedio < 70) return 'Repite los scenarios practicados y concéntrate en reducir las infractions de mayor penalización.';
-    if (this.promedio < 90) return 'Vas por buen camino. Prueba scenarios de mayor dificultad para fortalecer tu anticipación.';
-    return 'Tu rendimiento es sobresaliente. Mantén la constancia con scenarios y condiciones variadas.';
+    if (this.totalPracticas === 0) return 'Empieza con un escenario de dificultad baja para establecer tu primera referencia.';
+    if (this.promedio < 70) return 'Repite los escenarios practicados y concéntrate en reducir las infracciones de mayor penalización.';
+    if (this.promedio < 90) return 'Vas por buen camino. Prueba escenarios de mayor dificultad para fortalecer tu anticipación.';
+    return 'Tu rendimiento es sobresaliente. Mantén la constancia con escenarios y condiciones variadas.';
   }
 
   navigate(path: string): void {

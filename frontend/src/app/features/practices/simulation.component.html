@@ -33,10 +33,10 @@
     <div class="nota" [class.aprobada]="resultado.finalScore >= 70">{{ resultado.finalScore }}</div>
     <h2>{{ resultado.finalScore >= 70 ? 'Aprobada' : 'Reprobada' }}</h2>
     <p *ngIf="resultado.finalScore >= 70">Buen trabajo. Continúa practicando para mantener una conducción segura.</p>
-    <p *ngIf="resultado.finalScore < 70">Revisa las infractions registradas y vuelve a practicar este scenario.</p>
+    <p *ngIf="resultado.finalScore < 70">Revisa las infracciones registradas y vuelve a practicar este escenario.</p>
     <div class="acciones">
       <a routerLink="/practicas">Ver historial</a>
-      <a routerLink="/scenarios">Elegir otro scenario</a>
+      <a routerLink="/scenarios">Elegir otro escenario</a>
     </div>
   </section>
 </main>

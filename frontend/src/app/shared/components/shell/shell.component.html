@@ -11,7 +11,7 @@
       </a>
       <a routerLink="/scenarios" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">◉</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Scenarios</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">Escenarios</span>
       </a>
       <a routerLink="/practicas" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">▣</span>
@@ -23,7 +23,7 @@
       </a>
       <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/users" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">★</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Users</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">Usuarios</span>
       </a>
       <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/reglas-transito" routerLinkActive="active" class="nav-item"><span class="nav-icon">⚑</span><span class="nav-label" *ngIf="sidebarAbierto">Reglas de tránsito</span></a>
       <a *ngIf="user?.role === 'INSTRUCTOR' || user?.role === 'ADMINISTRADOR'" routerLink="/instructor" routerLinkActive="active" class="nav-item"><span class="nav-icon">♙</span><span class="nav-label" *ngIf="sidebarAbierto">Instructor</span></a>

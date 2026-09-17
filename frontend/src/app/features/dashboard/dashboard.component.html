@@ -52,7 +52,7 @@
     <div class="module-grid">
       <button type="button" (click)="navigate('/scenarios')">
         <span class="module-icon blue">▣</span>
-        <div><strong>Scenarios viales</strong><small>Selecciona una situación y comienza a practicar.</small></div>
+        <div><strong>Escenarios viales</strong><small>Selecciona una situación y comienza a practicar.</small></div>
         <b>→</b>
       </button>
       <button type="button" (click)="navigate('/practicas')">
@@ -62,7 +62,7 @@
       </button>
       <button *ngIf="user?.role === 'ADMINISTRADOR'" type="button" (click)="navigate('/users')">
         <span class="module-icon green">♙</span>
-        <div><strong>Administrar users</strong><small>Gestiona cuentas, accesos y roles.</small></div>
+        <div><strong>Administrar usuarios</strong><small>Gestiona cuentas, accesos y roles.</small></div>
         <b>→</b>
       </button>
     </div>

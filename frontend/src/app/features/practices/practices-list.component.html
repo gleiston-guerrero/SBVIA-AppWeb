@@ -6,16 +6,16 @@
 
   <section class="iniciar-panel">
     <div class="pasos">
-      <span class="paso activo">1</span><div><strong>Elige un scenario</strong><small>Selecciona el entorno y su dificultad</small></div>
+      <span class="paso activo">1</span><div><strong>Elige un escenario</strong><small>Selecciona el entorno y su dificultad</small></div>
       <span class="separador"></span><span class="paso">2</span><div><strong>Realiza la práctica</strong><small>Registra las decisiones del recorrido</small></div>
       <span class="separador"></span><span class="paso">3</span><div><strong>Consulta el resultado</strong><small>Recibe puntaje y retroalimentación</small></div>
     </div>
     <div class="selector-practica">
-      <label>Scenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un scenario</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.nombre }}</option></select></label>
+      <label>Escenario disponible<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">Selecciona un escenario</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.nombre }}</option></select></label>
       <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ scenario.roadType }}</span><span>Nivel {{ scenario.difficultyLevel }}</span><span>{{ scenario.clima }}</span><span>Tráfico {{ scenario.trafficDensity }}</span><p>{{ scenario.description }}</p></div>
       <a class="btn-iniciar" [class.disabled]="!idEscenarioSeleccionado" [attr.aria-disabled]="!idEscenarioSeleccionado" [routerLink]="idEscenarioSeleccionado ? ['/simulation', idEscenarioSeleccionado] : null"><span>▶</span> Iniciar práctica ahora</a>
     </div>
-    <p class="sin-scenarios" *ngIf="!cargandoEscenarios && scenarios.length === 0">No existen scenarios activos para comenzar una práctica.</p>
+    <p class="sin-scenarios" *ngIf="!cargandoEscenarios && scenarios.length === 0">No existen escenarios activos para comenzar una práctica.</p>
   </section>
 
   <div *ngIf="loading" class="loading">Cargando...</div>
@@ -23,7 +23,7 @@
 
   <section class="como-funciona" aria-label="Cómo usar el módulo de prácticas">
     <strong>¿Qué puedes hacer aquí?</strong>
-    <p>Cada recorrido queda guardado como una práctica. Al finalizar, el servidor calcula tu puntaje y genera recomendaciones según tus infractions.</p>
+    <p>Cada recorrido queda guardado como una práctica. Al finalizar, el servidor calcula tu puntaje y genera recomendaciones según tus infracciones.</p>
   </section>
 
   <div class="historial-encabezado">
@@ -68,7 +68,7 @@
     
     <ng-template #noPracticas>
       <div class="no-data">
-        <p>{{ practicas.length ? 'No hay prácticas que coincidan con este filtro.' : 'Todavía no tienes prácticas. Selecciona un scenario arriba para comenzar.' }}</p>
+        <p>{{ practicas.length ? 'No hay prácticas que coincidan con este filtro.' : 'Todavía no tienes prácticas. Selecciona un escenario arriba para comenzar.' }}</p>
       </div>
     </ng-template>
   </div>
