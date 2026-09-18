@@ -1,6 +1,6 @@
 # Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)
 
-[![CI Pipeline](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml/badge.svg)](https://github.com/keithdrox/SBVIA-AppWeb/actions/workflows/main.yml)
+[![CI Pipeline](https://github.com/gleiston-guerrero/SBVIA-AppWeb/actions/workflows/main.yml/badge.svg)](https://github.com/gleiston-guerrero/SBVIA-AppWeb/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI Software](https://zenodo.org/badge/DOI/10.5281/zenodo.22740480.svg)](https://doi.org/10.5281/zenodo.22740480)
 [![DOI Dataset](https://zenodo.org/badge/DOI/10.5281/zenodo.22785358.svg)](https://doi.org/10.5281/zenodo.22785358)
@@ -23,11 +23,11 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 ---
 
 ## 🐳 Artefactos Docker
-- **Imagen Docker Backend:** `ghcr.io/keithdrox/sbvia-backend:v1.0.0`
-- **Imagen Docker Frontend:** `ghcr.io/keithdrox/sbvia-frontend:v1.0.0`
+- **Imagen Docker Backend:** `ghcr.io/gleiston-guerrero/sbvia-backend:v1.0.0`
+- **Imagen Docker Frontend:** `ghcr.io/gleiston-guerrero/sbvia-frontend:v1.0.0`
 
 > Los digests SHA-256 exactos se obtienen al publicar las imágenes con `docker buildx build --push`.
-> Consultar el registro: [GitHub Container Registry](https://github.com/keithdrox/SBVIA-AppWeb/pkgs/container/sbvia-backend)
+> Consultar el registro: [GitHub Container Registry](https://github.com/gleiston-guerrero/SBVIA-AppWeb/pkgs/container/sbvia-backend)
 
 ## Publicación y preservación
 
@@ -43,7 +43,7 @@ El sistema completo está orquestado mediante Docker Compose. Sigue estos pasos 
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/keithdrox/SBVIA-AppWeb.git
+git clone https://github.com/gleiston-guerrero/SBVIA-AppWeb.git
 cd SBVIA-AppWeb
 
 # 2. Configurar variables de entorno

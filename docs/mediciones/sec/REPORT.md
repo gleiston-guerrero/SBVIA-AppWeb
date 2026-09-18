@@ -23,7 +23,7 @@ evidencia de código, pruebas automatizadas y ejecuciones reales ya realizadas.
 ## Fecha y commit
 
 - Fecha de las pruebas y evidencia: **2026-09-02**
-- Rama base: `main` (repositorio `keithdrox/SBVIA-AppWeb`)
+- Rama base: `main` (repositorio `gleiston-guerrero/SBVIA-AppWeb`)
 - Evidencia cruda original: `docs/mediciones/sec/raw/`
 - Reporte de logs de auditoría: `docs/mediciones/sec/raw/owasp-a09-logs.txt`
 
