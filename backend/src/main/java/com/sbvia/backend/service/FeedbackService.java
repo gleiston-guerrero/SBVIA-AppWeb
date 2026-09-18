@@ -71,7 +71,8 @@ public class FeedbackService {
                 }
                 return external;
             } catch (AiUnavailableException e) {
-                log.warn("Proveedor externo de IA no disponible, se usa el motor local: {}", e.getMessage());
+                log.warn("Proveedor externo de IA no disponible, se usa el motor local: {} - Causa: {}", 
+                         e.getMessage(), e.getCause() != null ? e.getCause().getMessage() : "N/A");
             }
         }
         return localMotor.generate(data);

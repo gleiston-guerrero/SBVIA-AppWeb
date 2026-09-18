@@ -73,19 +73,21 @@
     </ng-template>
   </div>
 
-  <section class="informe-panel" *ngIf="practicaSeleccionada">
-    <header><div><span class="eyebrow">Resultado guardado</span><h3>Informe IA · {{ practicaSeleccionada.nombreEscenario }}</h3></div><button type="button" (click)="cerrarInforme()" aria-label="Cerrar informe">×</button></header>
-    <p *ngIf="cargandoInforme" class="loading-informe">Cargando informe...</p>
-    <p *ngIf="errorInforme" class="error-msg">{{ errorInforme }}</p>
-    <ng-container *ngIf="informeSeleccionado as informe">
-      <div class="informe-resumen"><strong>{{ informe.puntaje }}/100</strong><span>Riesgo {{ informe.nivelRiesgo }}</span><small>{{ informe.origen === 'IA_LOCAL' ? 'IA local' : informe.origen }}</small></div>
-      <p>{{ informe.resumen }}</p>
-      <div class="informe-columnas">
-        <div><h4>Aciertos</h4><ul><li *ngFor="let acierto of informe.aciertos">{{ acierto }}</li></ul></div>
-        <div><h4>Aspectos por mejorar</h4><ul><li *ngFor="let error of informe.errores">{{ error }}</li><li *ngIf="!informe.errores.length">Sin errores registrados.</li></ul></div>
-        <div><h4>Próximos pasos</h4><ol><li *ngFor="let recomendacion of informe.recomendaciones">{{ recomendacion }}</li></ol></div>
-      </div>
-      <p class="mensaje">{{ informe.mensajeMotivador }}</p>
-    </ng-container>
-  </section>
+  <div class="modal-overlay" *ngIf="practicaSeleccionada" (click)="cerrarInforme()">
+    <section class="informe-panel modal-content" (click)="$event.stopPropagation()">
+      <header><div><span class="eyebrow">Resultado guardado</span><h3>Informe IA · {{ practicaSeleccionada.nombreEscenario }}</h3></div><button type="button" class="btn-close-modal" (click)="cerrarInforme()" aria-label="Cerrar informe">×</button></header>
+      <p *ngIf="cargandoInforme" class="loading-informe">Cargando informe...</p>
+      <p *ngIf="errorInforme" class="error-msg">{{ errorInforme }}</p>
+      <ng-container *ngIf="informeSeleccionado as informe">
+        <div class="informe-resumen"><strong>{{ informe.puntaje }}/100</strong><span>Riesgo {{ informe.nivelRiesgo }}</span><small>{{ informe.origen === 'IA_LOCAL' ? 'IA local' : informe.origen }}</small></div>
+        <p>{{ informe.resumen }}</p>
+        <div class="informe-columnas">
+          <div><h4>Aciertos</h4><ul><li *ngFor="let acierto of informe.aciertos">{{ acierto }}</li></ul></div>
+          <div><h4>Aspectos por mejorar</h4><ul><li *ngFor="let error of informe.errores">{{ error }}</li><li *ngIf="!informe.errores.length">Sin errores registrados.</li></ul></div>
+          <div><h4>Próximos pasos</h4><ol><li *ngFor="let recomendacion of informe.recomendaciones">{{ recomendacion }}</li></ol></div>
+        </div>
+        <p class="mensaje">{{ informe.mensajeMotivador }}</p>
+      </ng-container>
+    </section>
+  </div>
 </div>

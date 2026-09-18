@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class ExternalAiFeedbackService implements FeedbackProvider {
 
-    public static final String ORIGIN = "IA_EXTERNA";
+    public static final String ORIGIN = "OPENAI";
 
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
@@ -64,7 +64,7 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
             Map<String, Object> body = Map.of(
                     "model", model,
                     "temperature", 0.3,
-                    "max_tokens", 600,
+                    "max_tokens", 2048,
                     "messages", List.of(
                             Map.of("role", "system", "content",
                                     "Eres un instructor de conducción. Responde SOLO con un JSON válido con las claves: "
@@ -75,6 +75,7 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
             Map<?, ?> response = restClient.post()
                     .uri(apiUrl)
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
+                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(body)
                     .retrieve()
@@ -108,9 +109,20 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
         try {
             List<?> choices = (List<?>) response.get("choices");
             Map<?, ?> message = (Map<?, ?>) ((Map<?, ?>) choices.get(0)).get("message");
-            String content = String.valueOf(message.get("content")).trim()
-                    .replaceAll("(?s)^```json\\s*", "").replaceAll("(?s)```\\s*$", "").trim();
-            Map<?, ?> json = objectMapper.readValue(content, Map.class);
+            String content = String.valueOf(message.get("content"));
+            int start = content.indexOf('{');
+            int end = content.lastIndexOf('}');
+            if (start != -1 && end != -1 && start <= end) {
+                content = content.substring(start, end + 1);
+            } else {
+                throw new IllegalArgumentException("No se encontró JSON en la respuesta. Contenido crudo: " + content);
+            }
+            Map<?, ?> json;
+            try {
+                json = objectMapper.readValue(content, Map.class);
+            } catch (Exception ex) {
+                throw new IllegalArgumentException("Fallo al parsear JSON. Contenido extraído: " + content, ex);
+            }
             return FeedbackIaResponse.builder()
                     .resumen(getText(json.get("resumen"), "Práctica analizada por el modelo externo."))
                     .aciertos(getList(json.get("aciertos")))
