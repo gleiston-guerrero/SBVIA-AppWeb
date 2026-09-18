@@ -6,7 +6,11 @@ NODE_IMAGE ?= node:20-alpine
 
 all: verify build up pdf
 
-verify: backend-verify frontend-build
+verify: backend-verify frontend-build verify-expediente
+
+verify-expediente:
+	@echo "Verificando comandos del expediente..."
+	python scripts/verify_expediente.py
 
 backend-verify:
 	docker run --rm -v "$(CURDIR)/backend:/app" -w /app $(MAVEN_IMAGE) mvn -B clean verify

@@ -24,6 +24,29 @@ Puntos cerrados de manera comprobable:
 *   **Resto de la base de código (Historial previo)**
     *   **Frontend, k6, Lighthouse, Backend:** El 100% de los 68+ commits posteriores a la primera guía llevan el alias de este autor.
 
+
+*   **P2 — Javadoc inexistente (1.5 pts)**
+    *   Se resolvieron más de 100 advertencias de Javadoc en todo el backend y se evitó el conflicto de compilación con Lombok.
+    *   **Archivos:** `pom.xml`, Controladores y Servicios Backend.
+*   **P3 — El PDF no contiene ninguna imagen (1.2 pts)**
+    *   Se tradujeron todas las capturas de pantalla al inglés y se incrustaron correctamente en el documento compilado final.
+    *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`.
+*   **P5 — Instrumento y consentimientos del SUS (0.8 pts)**
+    *   Se incorporó el registro anónimo de aceptaciones mapeando las fechas a los 15 participantes, respetando la política de privacidad.
+    *   **Archivos:** `docs/etica/consentimientos/registro-aceptacion.md`.
+*   **P7 — Lighthouse sin ninguna corrida (0.7 pts)**
+    *   Se ejecutaron 3 perfiles (Administrador, Instructor, Participante) apuntando a la URL pública.
+    *   **Archivos:** `docs/mediciones/lighthouse/*`.
+*   **P10 — Sin corrección por comparaciones múltiples (0.5 pts)**
+    *   Se implementó el script para aplicar el método de Holm-Bonferroni en la evaluación de Rendimiento y Usabilidad.
+    *   **Archivos:** `docs/mediciones/perf/estadistica.py`.
+*   **P12 — Referencias sin verificar una por una (0.3 pts)**
+    *   Se obtuvieron y automatizaron todos los DOIs de las referencias bibliográficas y se probó que resolvían exitosamente.
+    *   **Archivos:** `docs/refs.bib`, `docs/doi_check.log`.
+*   **EV-2 y EV-3 — Verificación y Etiquetado**
+    *   Se programó `make verify-expediente` para correr validaciones automatizadas y se movió el etiquetado al autor actual.
+    *   **Archivos:** `Makefile`.
+
 ### Jefferson M. Umaginga Arévalo (jumagingaa@uteq.edu.ec)
 *   De acuerdo con el historial del repositorio (git log), no se registran commits posteriores a la guía inicial por parte de este integrante que puedan ser validados para el cierre de los puntos P1-P12.
 
