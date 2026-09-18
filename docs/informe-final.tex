@@ -225,10 +225,12 @@ En el desarrollo de la capa de persistencia de datos, el mapeo estructural const
 La separación de responsabilidades se gestiona a nivel estructural mediante el modelo C4 \cite{brown2020software} y el patrón MVC \cite{fowler2002patterns}. Como se muestra en la Figura~\ref{fig:c4-level2}, el nivel de contenedores describe la interacción entre el cliente Angular, la API Spring Boot y las capas de caché y persistencia.
 
 El \textbf{Diagrama de Contenedores (Nivel 2)} detalla la arquitectura interna del sistema, mostrando cómo la aplicación web (Angular) se comunica con la API de Spring Boot, la cual a su vez interactúa con PostgreSQL y Redis.
+
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/c4-level-2.png}
-\caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
-\label{fig:c4-level2}
+    \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
+    \label{fig:c4-level2}
 \end{figure}
 
 \section{Estructura de Objetos del Dominio Central}
@@ -421,18 +423,12 @@ El recorrido típico comienza con una petición HTTPS al frontend. La aplicació
 
 As shown in Figure~\ref{fig:flujo-mvc}, la separación mostrada permite ubicar la validación HTTP en el controlador, las reglas en el servicio y el acceso durable en los repositorios, evitando que la interfaz dependa directamente del motor de datos.
 
-\begin{figure}[htbp]
-    \centering
-    
 \subsection{Flujo de Interacción MVC}
-El patrón Modelo-Vista-Controlador (MVC) dicta cómo fluye la informacin a través de la aplicación. La Figura~\ref{fig:mvc-flow} ilustra este flujo en el entorno Spring Boot: las peticiones HTTP del cliente son recibidas por el Controlador, el cual delega la lógica al Servicio. El Servicio manipula el Modelo y los DTOs interactuando con la base de datos a través de los Repositorios. Finalmente, la respuesta viaja de vuelta al cliente.
+El patrón Modelo-Vista-Controlador (MVC) dicta cómo fluye la información a través de la aplicación. La Figura~\ref{fig:flujo-mvc} ilustra este flujo en el entorno Spring Boot: las peticiones HTTP del cliente son recibidas por el Controlador, el cual delega la lógica al Servicio. El Servicio manipula el Modelo y los DTOs interactuando con la base de datos a través de los Repositorios. Finalmente, la respuesta viaja de vuelta al cliente.
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/mvc-flow-springboot-en.png}
-    \caption{Diagrama de Flujo MVC en Spring Boot. Fuente: Elaboración propia.}
-    \label{fig:mvc-flow}
-\end{figure}
-
     \caption{MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}
     \label{fig:flujo-mvc}
 \end{figure}
