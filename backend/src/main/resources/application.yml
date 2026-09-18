@@ -45,10 +45,10 @@ ia:
   # Proveedor de retroalimentación: local (motor de reglas, por defecto) u openai
   # (API compatible con chat completions). La clave SOLO vive en variables de
   # entorno del backend; jamás en el frontend ni en el repositorio.
-  proveedor: ${AI_PROVEEDOR:local}
-  api-url: ${AI_API_URL:}
+  proveedor: ${AI_PROVEEDOR:openai}
+  api-url: ${AI_API_URL:https://api.groq.com/openai/v1/chat/completions}
   api-key: ${AI_API_KEY:}
-  modelo: ${AI_MODELO:gpt-4o-mini}
+  modelo: ${AI_MODELO:llama3-8b-8192}
   timeout-segundos: ${AI_TIMEOUT_SEGUNDOS:15}
 
 springdoc:
