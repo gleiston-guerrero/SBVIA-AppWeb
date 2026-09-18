@@ -20,12 +20,12 @@ public class TrafficRuleDTO {
     @Size(max = 50)
     private String codigo;
 
-    @NotBlank(message = "El name de la regla es obligatorio")
+    @NotBlank(message = "El nombre de la regla es obligatorio")
     @Size(max = 255)
-    private String name;
+    private String nombre;
 
     @Size(max = 500)
-    private String description;
+    private String descripcion;
 
     @NotBlank(message = "La categoría es obligatoria")
     @Size(max = 100)

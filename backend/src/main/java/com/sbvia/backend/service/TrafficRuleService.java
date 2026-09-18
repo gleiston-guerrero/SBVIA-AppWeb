@@ -24,8 +24,8 @@ public class TrafficRuleService {
     public TrafficRuleDTO create(TrafficRuleDTO dto) {
         TrafficRule regla = TrafficRule.builder()
                 .codigo(dto.getCodigo().trim())
-                .name(dto.getName().trim())
-                .description(dto.getDescription())
+                .nombre(dto.getNombre().trim())
+                .descripcion(dto.getDescripcion())
                 .categoria(dto.getCategoria().trim())
                 .penalizacionBase(dto.getPenalizacionBase())
                 .activa(true)
@@ -38,8 +38,8 @@ public class TrafficRuleService {
         TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));
         regla.setCodigo(dto.getCodigo().trim());
-        regla.setName(dto.getName().trim());
-        regla.setDescription(dto.getDescription());
+        regla.setNombre(dto.getNombre().trim());
+        regla.setDescripcion(dto.getDescripcion());
         regla.setCategoria(dto.getCategoria().trim());
         regla.setPenalizacionBase(dto.getPenalizacionBase());
         return toDTO(trafficRuleRepository.save(regla));
@@ -56,8 +56,8 @@ public class TrafficRuleService {
         return TrafficRuleDTO.builder()
                 .id(regla.getIdReglaTransito())
                 .codigo(regla.getCodigo())
-                .name(regla.getName())
-                .description(regla.getDescription())
+                .nombre(regla.getNombre())
+                .descripcion(regla.getDescripcion())
                 .categoria(regla.getCategoria())
                 .penalizacionBase(regla.getPenalizacionBase())
                 .activa(regla.isActiva())

@@ -87,10 +87,8 @@ class DrivingSimulationIntegrationTest {
         entityManager.persist(MetricType.builder().name("TOTAL_INFRACCIONES").build());
         entityManager.persist(MetricType.builder().name("PUNTAJE_SEGURIDAD").build());
         entityManager.persist(MetricType.builder().name("PORCENTAJE_CUMPLIMIENTO").build());
-        entityManager.persist(TrafficRule.builder().codigo("RT-001").name("Semáforo")
-                .categoria("SENALIZACION").penalizacionBase(new BigDecimal("20.00")).build());
-        entityManager.persist(TrafficRule.builder().codigo("RT-002").name("Velocidad")
-                .categoria("VELOCIDAD").penalizacionBase(new BigDecimal("15.00")).build());
+        entityManager.persist(TrafficRule.builder().codigo("R001").nombre("Exceso de velocidad").categoria("GRAVE").penalizacionBase(new BigDecimal("10.00")).activa(true).build());
+        entityManager.persist(TrafficRule.builder().codigo("R002").nombre("Paso de semáforo en rojo").categoria("MUY_GRAVE").penalizacionBase(new BigDecimal("20.00")).activa(true).build());
         entityManager.persist(SeverityLevel.builder().name("MODERADA").value(4).build());
         entityManager.persist(SeverityLevel.builder().name("GRAVE").value(7).build());
         entityManager.flush();

@@ -31,8 +31,8 @@ class TrafficRuleServiceTest {
     @Test
     void listaReglas() {
         when(reglaRepository.findAll()).thenReturn(List.of(
-                TrafficRule.builder().idReglaTransito(8).codigo("RT-001").name("Límite 30 km/h")
-                        .description("Reducir velocidad").categoria("Velocidad")
+                TrafficRule.builder().idReglaTransito(8).codigo("RT-001").nombre("Límite 30 km/h")
+                        .descripcion("Reducir velocidad").categoria("Velocidad")
                         .penalizacionBase(new BigDecimal("5.00")).activa(true).build()));
 
         List<TrafficRuleDTO> resultado = service.list();
@@ -40,14 +40,14 @@ class TrafficRuleServiceTest {
         assertThat(resultado).singleElement().satisfies(regla -> {
             assertThat(regla.getId()).isEqualTo(8);
             assertThat(regla.getCodigo()).isEqualTo("RT-001");
-            assertThat(regla.getName()).isEqualTo("Límite 30 km/h");
+            assertThat(regla.getNombre()).isEqualTo("Límite 30 km/h");
         });
     }
 
     @Test
     void creaRegla() {
-        TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-002").name("  Pare  ")
-                .description(" Detención total ").categoria(" Señalización ")
+        TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-002").nombre("  Pare  ")
+                .descripcion(" Detención total ").categoria(" Señalización ")
                 .penalizacionBase(new BigDecimal("10.00")).build();
         when(reglaRepository.save(any())).thenAnswer(invocacion -> {
             TrafficRule regla = invocacion.getArgument(0);
@@ -58,28 +58,28 @@ class TrafficRuleServiceTest {
         TrafficRuleDTO creada = service.create(entrada);
 
         assertThat(creada.getId()).isEqualTo(10);
-        assertThat(creada.getName()).isEqualTo("Pare");
+        assertThat(creada.getNombre()).isEqualTo("Pare");
         assertThat(creada.getCategoria()).isEqualTo("Señalización");
     }
 
     @Test
     void actualizaUnaReglaExistente() {
         TrafficRule existente = TrafficRule.builder().idReglaTransito(4).codigo("RT-003")
-                .name("Velocidad").categoria("Velocidad").penalizacionBase(BigDecimal.ZERO).build();
-        TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-003").name("Ceda el paso")
-                .description(null).categoria("Prioridad").penalizacionBase(new BigDecimal("8.00")).build();
+                .nombre("Velocidad").categoria("Velocidad").penalizacionBase(BigDecimal.ZERO).build();
+        TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-003").nombre("Ceda el paso")
+                .descripcion(null).categoria("Prioridad").penalizacionBase(new BigDecimal("8.00")).build();
         when(reglaRepository.findById(4)).thenReturn(Optional.of(existente));
         when(reglaRepository.save(existente)).thenReturn(existente);
 
-        assertThat(service.update(4, entrada).getName()).isEqualTo("Ceda el paso");
-        assertThat(existente.getDescription()).isNull();
+        assertThat(service.update(4, entrada).getNombre()).isEqualTo("Ceda el paso");
+        assertThat(existente.getDescripcion()).isNull();
     }
 
     @Test
     void rechazaReglaInexistente() {
         when(reglaRepository.findById(99)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> service.update(99, TrafficRuleDTO.builder().codigo("X").name("X").categoria("X").penalizacionBase(BigDecimal.ZERO).build()))
+        assertThatThrownBy(() -> service.update(99, TrafficRuleDTO.builder().codigo("X").nombre("X").categoria("X").penalizacionBase(BigDecimal.ZERO).build()))
                 .isInstanceOf(ResourceNotFoundException.class);
         verify(reglaRepository, never()).save(any());
     }

@@ -1,36 +1,42 @@
-# Declaración de Contribuciones (EV-4)
+# Declaración de Aportes (EV-4)
 
-Este documento detalla las contribuciones específicas de cada uno de los autores en el desarrollo e implementación del proyecto **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)**, cumpliendo con el requisito EV-4 de la evaluación.
+Este documento detalla quién resolvió cada uno de los puntos pendientes de la evaluación, con evidencia contrastable en el historial del repositorio. Todo el trabajo reciente ha sido realizado por el primer integrante, tal como lo demuestra el registro de commits.
 
-## Autores del Proyecto
+## Resoluciones por Integrante
 
-1. **Justyn K. Cruz Pérez**
-   - **Rol Principal:** Arquitecto de Software y Desarrollador Backend
-   - **Contribuciones Específicas:**
-     - Diseño e implementación de la arquitectura híbrida (JPA + Procedimientos Almacenados) en Spring Boot.
-     - Configuración e implementación de la seguridad mediante JWT y Spring Security.
-     - Desarrollo de los contenedores Docker y orquestación con Docker Compose.
-     - Implementación de las pruebas de integración y configuración de métricas (JaCoCo).
-     - Redacción de la sección de Arquitectura y Configuración del Servidor en el Informe Final.
-     - Auditorías de seguridad de la API y corrección de vulnerabilidades (OWASP ZAP y SpotBugs).
+### Justyn K. Cruz Pérez (jcruzp@uteq.edu.ec)
+**Usuario Git:** `JustynCruz04` / `keithdrox`
 
-2. **Jefferson M. Umaginga Arévalo**
-   - **Rol Principal:** Desarrollador Frontend y Analista de Calidad (QA)
-   - **Contribuciones Específicas:**
-     - Diseño y desarrollo de la interfaz de usuario utilizando Angular 17.
-     - Integración y consumo de la API RESTful asegurada desde el cliente web.
-     - Diseño de la experiencia de usuario (UX) e implementación de la herramienta de evaluación SUS.
-     - Ejecución y análisis de pruebas de rendimiento y estrés utilizando k6.
-     - Optimización de Web Vitals y ejecución de auditorías con Google Lighthouse.
-     - Estructuración de los diagramas C4 y modelado UML en el Informe Final.
+Puntos cerrados de manera comprobable:
 
-## Trabajo en Conjunto
+*   **P1 — Sin despliegue público (1.3 pts)**
+    *   **Archivos:** `README.md`, `frontend/proxy.conf.json`, configuración de Render.
+    *   **Commits:** `bd17051`, `a1e5714` y recientes arreglos de la etiqueta.
+*   **Piso 3 (ZAP Falso) -> Escaneo ZAP Real**
+    *   Se eliminó el reporte ZAP falsificado a mano (`docs/mediciones/sec/zap/zap-report.html`) y se generó un nuevo reporte real apuntando al backend productivo `https://sbvia-appweb.onrender.com`.
+    *   **Archivos:** `docs/mediciones/sec/zap/zap-report.html` (Nuevo archivo real de 40kB).
+*   **P6 — Nombres en español en el código (Contrato REST roto) (1.0 pts)**
+    *   Se restauraron y corrigieron los contratos REST (DTOs y Controladores) que habían sido traducidos al inglés mecánicamente, devolviendo consistencia a las peticiones del frontend (ej: error 400 en Reglas de Tránsito y parámetros de Auditoría).
+    *   **Archivos:** `AuditController.java`, `TrafficRuleDTO.java`, `TrafficRule.java`, `TrafficRuleService.java`.
+*   **P11 — Cookie de sesión sin el atributo Secure (0.4 pts)**
+    *   Se aplicó la configuración correcta para la cookie mediante `cookieSecure` para que contenga `.secure(true)` y `.httpOnly(true)` en producción.
+    *   **Archivos:** `AuthController.java`, `application.yml`, `application-prod.yml`.
+*   **Resto de la base de código (Historial previo)**
+    *   **Frontend, k6, Lighthouse, Backend:** El 100% de los 68+ commits posteriores a la primera guía llevan el alias de este autor.
 
-Ambos autores participaron equitativamente en:
-- Levantamiento y análisis de requerimientos bajo estándares ISO/IEC/IEEE 29148:2018.
-- Diseño del modelo de base de datos relacional (PostgreSQL).
-- Redacción, revisión y corrección del Informe Final (formato LaTeX).
-- Pruebas manuales de aceptación del sistema.
+### Jefferson M. Umaginga Arévalo (jumagingaa@uteq.edu.ec)
+*   De acuerdo con el historial del repositorio (git log), no se registran commits posteriores a la guía inicial por parte de este integrante que puedan ser validados para el cierre de los puntos P1-P12.
 
 ---
-*Documento generado para validación de rúbrica (EV-4) - Periodo Académico 2026-2027*
+
+## Firmas
+
+Declaramos bajo nuestro correo institucional que la información presentada en este documento y respaldada por el historial de Git es cierta y verificable.
+
+**Firma 1:** ___________________________  
+**Nombre:** Justyn Keith Cruz Pérez  
+**Correo:** jcruzp@uteq.edu.ec  
+
+**Firma 2:** ___________________________  
+**Nombre:** Jefferson Manuel Umaginga Arévalo  
+**Correo:** jumagingaa@uteq.edu.ec  

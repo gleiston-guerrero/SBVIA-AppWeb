@@ -20,10 +20,10 @@ public class TrafficRule {
     private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 255)
-    private String name;
+    private String nombre;
 
     @Column(name = "descripcion", length = 500)
-    private String description;
+    private String descripcion;
 
     @Column(name = "categoria", nullable = false, length = 100)
     private String categoria;

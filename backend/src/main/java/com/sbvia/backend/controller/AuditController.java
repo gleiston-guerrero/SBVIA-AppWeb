@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/auditoria")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuditController {
 
     private final AuditService auditService;
@@ -38,10 +37,10 @@ public class AuditController {
             @RequestParam(required = false) String tabla,
             @RequestParam(required = false) String operation,
             @RequestParam(required = false) String user,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         
-        List<AuditLog> registros = auditService.getAuditLogs(tabla, operation, user, fechaInicio, endDate);
+        List<AuditLog> registros = auditService.getAuditLogs(tabla, operation, user, startDate, endDate);
         return ResponseEntity.ok(registros);
     }
 
@@ -62,10 +61,10 @@ public class AuditController {
             @RequestParam(required = false) String tabla,
             @RequestParam(required = false) String operation,
             @RequestParam(required = false) String user,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         
-        byte[] pdfBytes = auditService.generatePdfReport(tabla, operation, user, fechaInicio, endDate);
+        byte[] pdfBytes = auditService.generatePdfReport(tabla, operation, user, startDate, endDate);
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
