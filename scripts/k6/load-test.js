@@ -29,7 +29,7 @@ export let options = {
  */
 export function setup() {
     const loginRes = http.post(`${API_URL}/api/auth/login`,
-        JSON.stringify({ correo: EMAIL, password: PASSWORD }),
+        JSON.stringify({ email: EMAIL, password: PASSWORD }),
         { headers: { 'Content-Type': 'application/json' } });
     if (loginRes.status !== 200) {
         throw new Error(`Fallo el login en setup(): HTTP ${loginRes.status}`);

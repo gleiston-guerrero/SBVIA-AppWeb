@@ -10,8 +10,8 @@ authors:
     given-names: "Jefferson M."
     orcid: "https://orcid.org/0009-0005-9831-0801"
     affiliation: "Universidad Técnica Estatal de Quevedo"
-version: 1.0.0
-date-released: "2026-08-31"
+version: 1.2.0
+date-released: "2026-09-18"
 doi: "10.5281/zenodo.22740480"
 identifiers:
   - type: doi

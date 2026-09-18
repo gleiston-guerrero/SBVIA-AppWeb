@@ -1,16 +1,19 @@
 ReqID,Type,Description,Module,TestFile,Status,tipo_acceso,sql_file
 RF-01,FUNC,Autenticación stateless con JWT,Backend,AuthServiceTest.java,VERIFIED,CRUD-ORM,
-RF-02,FUNC,Gestión de Escenarios viales (CRUD),Backend,EscenarioServiceTest.java,VERIFIED,CRUD-ORM,
-RF-03,FUNC,Consulta multi-tabla de resultados de simulación,Backend,SimulacionServiceTest.java,IMPLEMENTED,SP,db/procs/sp_reporte_simulacion.sql
-RF-04,FUNC,Cálculo agregado de promedio de desempeño de conductor,Backend,SimulacionServiceTest.java,IMPLEMENTED,SP,db/procs/sp_calcular_promedio_usuario.sql
-RF-05,FUNC,Generación de reporte consolidado diario de actividad,Backend,SimulacionServiceTest.java,IMPLEMENTED,SP,db/procs/sp_reporte_actividad_diaria.sql
+RF-02,FUNC,Gestión de Escenarios viales (CRUD),Backend,ScenarioServiceTest.java,VERIFIED,CRUD-ORM,
+RF-03,FUNC,Consulta multi-tabla de resultados de simulación,Backend,SimulationServiceTest.java,IMPLEMENTED,SP,db/procs/sp_reporte_simulacion.sql
+RF-04,FUNC,Cálculo agregado de promedio de desempeño de conductor,Backend,SimulationServiceTest.java,IMPLEMENTED,SP,db/procs/sp_calcular_promedio_usuario.sql
+RF-05,FUNC,Generación de reporte consolidado diario de actividad,Backend,SimulationServiceTest.java,IMPLEMENTED,SP,db/procs/sp_reporte_actividad_diaria.sql
 RF-06,FUNC,Actualización masiva de conductores inactivos,Backend,AuthControllerTest.java,IMPLEMENTED,SP,db/procs/sp_actualizar_usuarios_inactivos.sql
-RF-07,FUNC,Validación cruzada de consistencia de reglas de escenario,Backend,EscenarioServiceTest.java,IMPLEMENTED,SP,db/procs/sp_validar_escenario.sql
-RF-08,FUNC,Generación de código secuencial único para certificado,Backend,SimulacionServiceTest.java,IMPLEMENTED,SP,db/procs/sp_generar_codigo_certificado.sql
+RF-07,FUNC,Validación cruzada de consistencia de reglas de escenario,Backend,ScenarioServiceTest.java,IMPLEMENTED,SP,db/procs/sp_validar_escenario.sql
+RF-08,FUNC,Generación de código secuencial único para certificado,Backend,SimulationServiceTest.java,IMPLEMENTED,SP,db/procs/sp_generar_codigo_certificado.sql
 RF-09,FUNC,Evaluación Automática de Comportamiento Vial (IA),Motor IA,FeedbackServiceTest.java,TESTED,CRUD-ORM,
 RF-10,FUNC,Generación de Retroalimentación Textual (IA),Motor IA,FeedbackServiceTest.java,TESTED,CRUD-ORM,
-RF-11,FUNC,Reglas de Negocio: Certificación y Puntaje,Backend,sp_calcular_puntaje.sql,IMPLEMENTED,SP,db/procs/sp_calcular_puntaje.sql
-RF-12,FUNC,Persistencia de Entidades Secundarias,Database,SimulacionIntegracionTest.java,IMPLEMENTED,CRUD-ORM,
+RF-11,FUNC,Reglas de Negocio: Certificación y Puntaje (umbral >=70),Backend,SimulationServiceTest.java,VERIFIED,SP+ORM,db/procs/sp_calcular_puntaje_simulacion.sql
+RF-12,FUNC,Persistencia de Entidades Secundarias,Database,DrivingSimulationIntegrationTest.java,VERIFIED,CRUD-ORM,
+RF-13,FUNC,Protección de Datos Personales,Backend,service/feedback/ExternalAiFeedbackServiceTest.java,IMPLEMENTED,CRUD-ORM,
+RF-14,FUNC,Respaldo y Disponibilidad con RTO/RPO,Backend,BackupServiceTest.java,IMPLEMENTED,CRUD-ORM,
+RF-15,FUNC,Trazabilidad de Eventos (AuditLog),Backend,AuditServiceTest.java,IMPLEMENTED,CRUD-ORM,
 RNF-01,PERF,Latencia de lectura en caché caliente p95 <= 200ms,API,scripts/k6/load-test.js,VERIFIED,,
 RNF-02,PERF,Latencia de lectura en frío p95 <= 500ms,API,scripts/k6/load-test.js,VERIFIED,,
 RNF-03,SEC,Contraseñas hasheadas con BCrypt y factor de costo >= 10,Backend,AuthServiceTest.java,VERIFIED,,
@@ -18,8 +21,8 @@ RNF-04,SEC,Cookie de token con HttpOnly y SameSite=Strict,Backend,AuthController
 RNF-05,SEC,Ausencia total de SQL dinámico en procedimientos,Database,scripts/audit-sql-dynamic.sh,VERIFIED,,
 RNF-06,USAB,Escala de Usabilidad del Sistema SUS >= 68 puntos,Frontend,docs/mediciones/sus/sus-analysis.md,VERIFIED,,
 RNF-07,SEC,Degradación controlada (Fallback) del proveedor de IA,Backend,FeedbackServiceTest.java,VERIFIED,,
-RNF-08,SEC,Privacidad de Datos y Minimización,Backend,FeedbackIaExternaServiceTest.java,TESTED,,
-RNF-09,USAB,Accesibilidad y Compatibilidad (WCAG 2.2),Frontend,Lighthouse,TESTED,,
+RNF-08,SEC,Privacidad de Datos y Minimización,Backend,service/feedback/ExternalAiFeedbackServiceTest.java,TESTED,,
+RNF-09,USAB,Accesibilidad y Compatibilidad (WCAG 2.2),Frontend,Lighthouse prod,VERIFIED,,
 RNF-10,PERF,Capacidad y Volumetría,Arquitectura,scripts/k6/load-test.js,TESTED,,
 US-01,USER,Registro autónomo de conductor,Frontend,app.component.spec.ts,TESTED,CRUD-ORM,
 US-02,USER,Inicio de sesión seguro y obtención de cookie,Frontend,app.component.spec.ts,TESTED,CRUD-ORM,
