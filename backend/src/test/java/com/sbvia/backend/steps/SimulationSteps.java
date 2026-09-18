@@ -6,42 +6,42 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
-public class SimulacionSteps {
+public class SimulationSteps {
 
-    private String estadoSimulacion;
-    private int puntaje;
-    private int infracciones;
+    private String simulationState;
+    private int score;
+    private int infractions;
 
     @Given("que el conductor está autenticado")
-    public void queElConductorEstaAutenticado() {
+    public void driverIsAuthenticated() {
         // Lógica de mock de autenticación
     }
 
     @And("selecciona el escenario {string}")
-    public void seleccionaElEscenario(String escenario) {
+    public void selectScenario(String scenario) {
         // Lógica para seleccionar escenario
     }
 
     @When("el conductor inicia la simulación")
-    public void elConductorIniciaLaSimulacion() {
-        this.estadoSimulacion = "EN_PROGRESO";
-        this.puntaje = 100;
+    public void driverStartsSimulation() {
+        this.simulationState = "EN_PROGRESO";
+        this.score = 100;
     }
 
     @And("comete {int} infracciones")
-    public void cometeInfracciones(int cantidad) {
-        this.infracciones = cantidad;
-        this.puntaje -= (cantidad * 10);
+    public void commitInfractions(int amount) {
+        this.infractions = amount;
+        this.score -= (amount * 10);
     }
 
     @Then("la simulación finaliza con estado {string}")
-    public void laSimulacionFinalizaConEstado(String estadoEsperado) {
-        this.estadoSimulacion = "FINALIZADA"; // Simulando el cambio
-        Assertions.assertEquals(estadoEsperado, this.estadoSimulacion);
+    public void simulationFinishesWithState(String expectedState) {
+        this.simulationState = "FINALIZADA"; // Simulando el cambio
+        Assertions.assertEquals(expectedState, this.simulationState);
     }
 
     @And("el puntaje final es {int}")
-    public void elPuntajeFinalEs(int puntajeEsperado) {
-        Assertions.assertEquals(puntajeEsperado, this.puntaje);
+    public void finalScoreIs(int expectedScore) {
+        Assertions.assertEquals(expectedScore, this.score);
     }
 }
