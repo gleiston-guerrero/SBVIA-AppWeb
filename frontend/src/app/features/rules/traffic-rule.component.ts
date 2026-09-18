@@ -62,6 +62,6 @@ export class TrafficRuleComponent implements OnInit {
   }
 
   private vacio(): TrafficRule {
-    return { codigo: '', nombre: '', description: '', categoria: '', penalizacionBase: 0, activa: true };
+    return { codigo: '', nombre: '', descripcion: '', categoria: '', penalizacionBase: 0, activa: true };
   }
 }
