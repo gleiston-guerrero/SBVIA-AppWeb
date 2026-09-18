@@ -7,7 +7,7 @@
 
 ## Metodología
 
-Se aplicó el cuestionario SUS de Brooke (1996) a 15 participantes durante las sesiones de evaluación. El cuestionario fue administrado inmediatamente después de que cada participante completara una sesión de simulación de 20 minutos en SBVIA.
+Se aplicó el cuestionario SUS de Brooke (1996) a 15 participantes durante las sesiones de evaluación. El cuestionario fue administrado inmediatamente después de que cada participante completara una sesión de simulación cuya duración estimada varía entre 10 y 22 minutos según el escenario (véase el catálogo de escenarios del sistema).
 
 **Población:** Estudiantes de conducción, edades 18-35 años.  
 **Consentimiento:** Todos firmaron formulario de consentimiento informado (ver `docs/etica/consentimientos/`).  

@@ -8,7 +8,7 @@
 Usted ha sido invitado a participar en un estudio de usabilidad para evaluar el simulador de conducción 2D "SBVIA". El objetivo de este estudio es medir la facilidad de uso y la efectividad de la retroalimentación generada por inteligencia artificial.
 
 **Procedimiento:**
-Se le pedirá que complete un escenario de conducción en el simulador (duración aproximada: 5 minutos). Tras finalizar, se le solicitará llenar un breve cuestionario de usabilidad (SUS) compuesto por 10 preguntas.
+Se le pedirá que complete un escenario de conducción en el simulador (duración estimada: entre 10 y 22 minutos, según el escenario — véase el catálogo de escenarios del sistema). Tras finalizar, se le solicitará llenar un breve cuestionario de usabilidad (SUS) compuesto por 10 preguntas.
 
 **Confidencialidad:**
 Toda la información recopilada será anónima. No se registrarán nombres, direcciones de correo electrónico u otros datos que permitan su identificación en los resultados publicados.
