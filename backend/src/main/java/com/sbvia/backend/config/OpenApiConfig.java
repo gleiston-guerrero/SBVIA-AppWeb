@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
                 description = "API REST del Simulador de Comportamiento Vial con IA",
                 contact = @Contact(
                         name = "Equipo SBVIA",
-                        url = "https://github.com/keithdrox/SBVIA-AppWeb"
+                        url = "https://github.com/gleiston-guerrero/SBVIA-AppWeb"
                 )
         )
 )

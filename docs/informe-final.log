@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  18 SEP 2026 01:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  18 SEP 2026 03:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -613,12 +613,12 @@ Cap\'{\i }tulo 1.
 
 ] [10] [11]
 Cap\'{\i }tulo 2.
-<diagramas/er-model-en.png, id=505, 4977.59625pt x 7514.0725pt>
+<diagramas/er-model-en.png, id=508, 4977.59625pt x 7514.0725pt>
 File: diagramas/er-model-en.png Graphic file (type png)
 <use diagramas/er-model-en.png>
 Package pdftex.def Info: diagramas/er-model-en.png  used on input line 219.
 (pdftex.def)             Requested size: 432.48051pt x 652.84767pt.
-<diagramas/c4-level-2.png, id=510, 3139.73pt x 1786.675pt>
+<diagramas/c4-level-2.png, id=513, 3139.73pt x 1786.675pt>
 File: diagramas/c4-level-2.png Graphic file (type png)
 <use diagramas/c4-level-2.png>
 Package pdftex.def Info: diagramas/c4-level-2.png  used on input line 231.
@@ -626,7 +626,7 @@ Package pdftex.def Info: diagramas/c4-level-2.png  used on input line 231.
 [12
 
 ] [13 <./diagramas/er-model-en.png>]
-<diagramas/uml-classes-en.png, id=528, 3864.4375pt x 3282.2625pt>
+<diagramas/uml-classes-en.png, id=531, 3864.4375pt x 3282.2625pt>
 File: diagramas/uml-classes-en.png Graphic file (type png)
 <use diagramas/uml-classes-en.png>
 Package pdftex.def Info: diagramas/uml-classes-en.png  used on input line 241.
@@ -814,12 +814,12 @@ Underfull \hbox (badness 3942) in paragraph at lines 350--350
 
 ] [21] [22]
 Cap\'{\i }tulo 6.
-<diagramas/c4-level-1.png, id=643, 2938.98pt x 1443.3925pt>
+<diagramas/c4-level-1.png, id=646, 2938.98pt x 1443.3925pt>
 File: diagramas/c4-level-1.png Graphic file (type png)
 <use diagramas/c4-level-1.png>
 Package pdftex.def Info: diagramas/c4-level-1.png  used on input line 405.
 (pdftex.def)             Requested size: 432.48051pt x 212.38098pt.
-<diagramas/c4-level-3.png, id=645, 3139.73pt x 2409.0pt>
+<diagramas/c4-level-3.png, id=648, 3139.73pt x 2409.0pt>
 File: diagramas/c4-level-3.png Graphic file (type png)
 <use diagramas/c4-level-3.png>
 Package pdftex.def Info: diagramas/c4-level-3.png  used on input line 415.
@@ -827,7 +827,7 @@ Package pdftex.def Info: diagramas/c4-level-3.png  used on input line 415.
 [23
 
  <./diagramas/c4-level-1.png>] [24 <./diagramas/c4-level-3.png>]
-<diagramas/mvc-flow-springboot-en.png, id=661, 4752.75626pt x 2392.94pt>
+<diagramas/mvc-flow-springboot-en.png, id=664, 4752.75626pt x 2392.94pt>
 File: diagramas/mvc-flow-springboot-en.png Graphic file (type png)
 <use diagramas/mvc-flow-springboot-en.png>
 Package pdftex.def Info: diagramas/mvc-flow-springboot-en.png  used on input li
@@ -844,7 +844,7 @@ nput line 466.
  [27
 
 ]
-<diagramas/pantalla-1---inicio-de-sesin-registro.png, id=710, 1203.7472pt x 579
+<diagramas/pantalla-1---inicio-de-sesin-registro.png, id=713, 1203.7472pt x 579
 .66562pt>
 File: diagramas/pantalla-1---inicio-de-sesin-registro.png Graphic file (type pn
 g)
@@ -852,14 +852,14 @@ g)
 Package pdftex.def Info: diagramas/pantalla-1---inicio-de-sesin-registro.png  u
 sed on input line 500.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/pantalla-2---dashboard-principal.png, id=711, 1203.7472pt x 575.1487
+<diagramas/pantalla-2---dashboard-principal.png, id=714, 1203.7472pt x 575.1487
 4pt>
 File: diagramas/pantalla-2---dashboard-principal.png Graphic file (type png)
 <use diagramas/pantalla-2---dashboard-principal.png>
 Package pdftex.def Info: diagramas/pantalla-2---dashboard-principal.png  used o
 n input line 507.
 (pdftex.def)             Requested size: 427.93057pt x 204.46445pt.
-<diagramas/pantalla-3---seleccin-de-escenario-core.png, id=712, 1203.7472pt x 5
+<diagramas/pantalla-3---seleccin-de-escenario-core.png, id=715, 1203.7472pt x 5
 79.66562pt>
 File: diagramas/pantalla-3---seleccin-de-escenario-core.png Graphic file (type 
 png)
@@ -867,7 +867,7 @@ png)
 Package pdftex.def Info: diagramas/pantalla-3---seleccin-de-escenario-core.png 
  used on input line 514.
 (pdftex.def)             Requested size: 427.93057pt x 206.07019pt.
-<diagramas/pantalla-4---reporte-de-retroalimentacin.png, id=713, 1203.7472pt x 
+<diagramas/pantalla-4---reporte-de-retroalimentacin.png, id=716, 1203.7472pt x 
 579.66562pt>
 File: diagramas/pantalla-4---reporte-de-retroalimentacin.png Graphic file (type
  png)
@@ -883,7 +883,7 @@ File: lstlang1.sty 2025/11/14 1.11b listings language file
 cenario-core.png>] [30 <./diagramas/pantalla-4---reporte-de-retroalimentacin.pn
 g>]
 Cap\'{\i }tulo 8.
-<diagramas/k6-latencia-comparativa.png, id=740, 578.16pt x 361.35pt>
+<diagramas/k6-latencia-comparativa.png, id=743, 578.16pt x 361.35pt>
 File: diagramas/k6-latencia-comparativa.png Graphic file (type png)
 <use diagramas/k6-latencia-comparativa.png>
 Package pdftex.def Info: diagramas/k6-latencia-comparativa.png  used on input l
@@ -892,7 +892,7 @@ ine 571.
 [31
 
 ]
-<diagramas/sus-boxplot.png, id=747, 578.16pt x 361.35pt>
+<diagramas/sus-boxplot.png, id=750, 578.16pt x 361.35pt>
 File: diagramas/sus-boxplot.png Graphic file (type png)
 <use diagramas/sus-boxplot.png>
 Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 585.
@@ -1011,7 +1011,7 @@ Package rerunfilecheck Info: File `informe-final.out' has not changed.
 Here is how much of TeX's memory you used:
  15125 strings out of 467501
  234448 string characters out of 5407579
- 977544 words of memory out of 5000000
+ 978944 words of memory out of 5000000
  43937 multiletter control sequences out of 15000+600000
  640091 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1038,9 +1038,9 @@ sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
 s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
 s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (49 pages, 10846521 bytes).
+Output written on informe-final.pdf (49 pages, 10847177 bytes).
 PDF statistics:
- 975 PDF objects out of 1000 (max. 8388607)
+ 978 PDF objects out of 1000 (max. 8388607)
  236 named destinations out of 1000 (max. 500000)
  613 words of extra memory for PDF output out of 10000 (max. 10000000)
 

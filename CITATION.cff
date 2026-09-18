@@ -17,7 +17,7 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.22740480"
 license: MIT
-repository-code: "https://github.com/keithdrox/SBVIA-AppWeb"
+repository-code: "https://github.com/gleiston-guerrero/SBVIA-AppWeb"
 keywords:
   - "simulador vial"
   - "inteligencia artificial"
