@@ -1,4 +1,4 @@
-:host{--blue:#2563eb;--violet:#7c3aed;--ink:#172033;--muted:#68758a;--line:#e6eaf0;display:block;font-family:Inter,"Segoe UI",sans-serif}*{box-sizing:border-box}
+:host{--blue:#2563eb;--violet:#7c3aed;--ink:#172033;--muted:#475569;--line:#e6eaf0;display:block;font-family:Inter,"Segoe UI",sans-serif}*{box-sizing:border-box}
 .hero{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:28px}
 .eyebrow{color:var(--blue);font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
 .hero h1{margin:8px 0 6px;font-size:2rem;letter-spacing:-.035em}

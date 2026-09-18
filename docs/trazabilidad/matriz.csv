@@ -30,3 +30,8 @@ US-03,USER,Exploración interactiva de escenarios viales,Frontend,app.component.
 US-04,USER,Ejecución de simulación y captura de decisiones,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_reporte_simulacion.sql
 US-05,USER,Visualización de métricas y feedback en dashboard,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_calcular_promedio_usuario.sql
 US-06,USER,Descarga de certificado con código secuencial,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_generar_codigo_certificado.sql
+RF-16,FUNC,Cierre de simulaciones vencidas (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_cerrar_simulaciones_vencidas.sql
+RF-17,FUNC,Generacion de codigo de reporte (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_generar_codigo_reporte.sql
+RF-18,FUNC,Generacion de reporte de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_generar_reporte_simulacion.sql
+RF-19,FUNC,Resumen de usuario (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_resumen_usuario.sql
+RF-20,FUNC,Validacion general de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_validar_simulacion.sql

@@ -47,34 +47,35 @@
         \renewcommand{\arraystretch}{1.5}
         \begin{tabularx}{\textwidth}{|l|X|}
             \hline
-            \textbf{Repositorio canónico (desarrollo)} & \url{https://github.com/keithdrox/SBVIA-AppWeb} \\ \hline
-            \textbf{Repositorio de entrega (transferido)} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
-            \textbf{Punto del historial} & etiqueta v1.1.0 \\ \hline
+            \textbf{Repositorio de entrega} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
+            \textbf{Punto del historial} & etiqueta v1.2.0 \\ \hline
             \textbf{DOI del software (Zenodo)} & \texttt{10.5281/zenodo.22740480} \\ \hline
             \textbf{Fecha de emisión} & 18 de septiembre de 2026 \\ \hline
         \end{tabularx}
     \end{table}
 
-    \vspace{0.5cm}
-    {\small\textit{Nota sobre el repositorio: El repositorio canónico donde se desarrolló el proyecto es
-    \texttt{keithdrox/SBVIA-AppWeb}. Por instrucción del docente-director, fue transferido a
-    \texttt{gleiston-guerrero/SBVIA-AppWeb} el 18 de septiembre de 2026 como constancia de entrega del
-    examen suspenso, dentro del protocolo académico establecido. Esta transferencia no constituye cesión
-    de derechos ni autorización de uso de la información fuera del contexto de la evaluación.}}
-
     \vfill
 
-    {\Large \textbf{AUTORES}}\\[0.2cm]
-    {\large Cruz Pérez, Justyn K.}\\[0.1cm]
-    {\normalsize ORCID: \texttt{0009-0009-0847-0780}}\\[0.1cm]
-    {\normalsize Correo: \texttt{jcruzp@uteq.edu.ec}}\\[0.5cm]
-
-    {\large Umaginga Arévalo, Jefferson M.}\\[0.1cm]
-    {\normalsize ORCID: \texttt{0009-0005-9831-0801}}\\[0.1cm]
-    {\normalsize Correo: \texttt{jumagingaa@uteq.edu.ec}}\\[0.5cm]
+    {\Large \textbf{AUTORES}}\\[0.5cm]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        {\large Cruz Pérez, Justyn K.}\\[0.1cm]
+        {\small ORCID: \texttt{0009-0009-0847-0780}}\\[0.1cm]
+        {\small Correo: \texttt{jcruzp@uteq.edu.ec}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        {\large Umaginga Arévalo, Jefferson M.}\\[0.1cm]
+        {\small ORCID: \texttt{0009-0005-9831-0801}}\\[0.1cm]
+        {\small Correo: \texttt{jumagingaa@uteq.edu.ec}}
+    \end{minipage}
+    \vspace{1cm}
 
     {\Large \textbf{DOCENTE-DIRECTOR}}\\[0.2cm]
     {\large Ing. Gleiston Cíceron Guerrero Ulloa, Ph.D.}\\[0.5cm]
+
+    \footnotetext{Nota aclaratoria de autoría: El tercer integrante originalmente propuesto, Carlos Zamora Bumbila, no participó en la elaboración ni desarrollo de este proyecto, por lo que ha sido excluido del informe final y los metadatos del repositorio.}
     
 \end{titlepage}
 
@@ -537,9 +538,9 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \item \textbf{AC-01.} El sistema completo se construye y levanta desde una clonación limpia mediante \texttt{make all}.
     \item \textbf{AC-02.} Las pruebas automatizadas superan la cobertura global de 70\% y el análisis estático no reporta vulnerabilidades graves.
     \item \textbf{AC-03.} Los procedimientos almacenados están versionados, catalogados, parametrizados y trazados (ver Sección 6).
-    \item \textbf{AC-04.} Cinco corridas k6 cumplen el umbral de caché caliente (RNF-01); Lighthouse y ZAP conservan evidencia reproducible. La corrida en frío (RNF-02) se añadirá en v1.2.x.
+    \item \textbf{AC-04.} Cinco corridas k6 cumplen el umbral de caché caliente (RNF-01); Lighthouse y ZAP conservan evidencia reproducible. La corrida en frío (RNF-02) demostró los tiempos de spin-down en Render (documentado en RNF-02).
     \item \textbf{AC-05.} El despliegue público dispone de healthcheck, runbook, backup y cuenta demo no administrativa.
-    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.1.0 coherentes con el commit declarado. El repositorio de entrega es \texttt{gleiston-guerrero/SBVIA-AppWeb} (ver Nota N14).
+    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.2.0 coherentes con el commit declarado. El repositorio de entrega es \texttt{gleiston-guerrero/SBVIA-AppWeb}.
 \end{itemize}
 
 \newpage
@@ -569,15 +570,20 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     RF-10 & IA Retroalimentación & FeedbackServiceTest & TESTED & US-04 \\ \hline
     RF-11 & Certificación $\geq$70 & SimulationServiceTest & VERIFIED & US-06 \\ \hline
     RF-12 & Persistencia entidades & DrivingSimulationIntegrationTest & VERIFIED & — \\ \hline
-    RF-13 & Protección datos & ExternalAiFeedbackServiceTest & IMPLEMENTED & — \\ \hline
-    RF-14 & Respaldo RTO/RPO & BackupServiceTest & IMPLEMENTED & — \\ \hline
-    RF-15 & AuditLog & AuditServiceTest & IMPLEMENTED & — \\ \hline
+    RF-13 & Protección datos & ExternalAiFeedbackServiceTest & IMPLEMENTED & - \\ \hline
+    RF-14 & Respaldo RTO/RPO & BackupServiceTest & IMPLEMENTED & - \\ \hline
+    RF-15 & AuditLog & AuditServiceTest & IMPLEMENTED & - \\ \hline
+    RF-16 & Cerrar simulaciones (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
+    RF-17 & Código de reporte (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
+    RF-18 & Reporte simulación (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
+    RF-19 & Resumen usuario (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
+    RF-20 & Validar simulación (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
     RNF-01 & Latencia caché p95 & k6 load-test.js & VERIFIED & — \\ \hline
     RNF-02 & Latencia frío p95 & k6 load-test.js & TESTED & — \\ \hline
     RNF-03 & BCrypt factor$\geq$10 & AuthServiceTest & VERIFIED & — \\ \hline
     RNF-04 & Cookie Secure & AuthControllerTest & VERIFIED & — \\ \hline
     RNF-05 & Sin SQL dinámico & audit-sql-dynamic.sh & VERIFIED & — \\ \hline
-    RNF-06 & SUS $\geq$68 & sus-analysis.md & VERIFIED & — \\ \hline
+    RNF-06 & SUS $\ge$68 & sus-analysis.md & VERIFIED & — \\ \hline
     RNF-07 & Fallback IA & FeedbackServiceTest & VERIFIED & — \\ \hline
     RNF-08 & No PII a IA & ExternalAiFeedbackServiceTest & TESTED & — \\ \hline
     RNF-09 & WCAG / Lighthouse & Lighthouse prod & VERIFIED & — \\ \hline
