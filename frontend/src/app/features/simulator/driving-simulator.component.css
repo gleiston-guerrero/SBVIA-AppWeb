@@ -7,6 +7,8 @@ h2 { color: #18375a; margin: .2rem 0 1rem; }
 .ayuda { color: #5f6b7a; margin: 0; }
 .timer { background: #e8f0fe; color: #1558a6; border-radius: 12px; padding: .8rem 1.2rem; font-size: 1.5rem; font-weight: 700; white-space: nowrap; }
 .hud { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.juego-layout { display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start; justify-content: center; margin-bottom: 1.5rem; }
+.hud-laterales { display: flex; flex-direction: column; gap: 1rem; flex: 1; min-width: 220px; }
 .hud-item { background: #f4f8fc; border-radius: 12px; padding: .9rem 1rem; }
 .hud-item small { display: block; color: #5f6b7a; text-transform: uppercase; font-size: .72rem; letter-spacing: .06em; }
 .hud-item strong { font-size: 1.4rem; color: #18375a; }
@@ -19,6 +21,7 @@ h2 { color: #18375a; margin: .2rem 0 1rem; }
 .hud-item.puntaje strong { color: #137333; }
 .hud-item.puntaje.bajo strong { color: #b3261e; }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1rem; }
+.chips-laterales { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 0.5rem; }
 .chip { background: #f4f8fc; border: 1px solid #d7e2ee; border-radius: 20px; padding: .3rem .8rem; font-size: .9rem; }
 .chip.marca { background: #fce8e6; border-color: #e44b4b; }
 .chip.ok { background: #e6f4ea; border-color: #34a853; }

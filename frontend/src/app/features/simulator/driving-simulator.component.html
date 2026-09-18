@@ -11,41 +11,43 @@
 
     <div *ngIf="aviso" class="aviso">{{ aviso }}</div>
 
-    <div class="hud">
-      <div class="hud-item velocimetro">
-        <small>Velocidad</small>
-        <strong>{{ velocidadKmh | number:'1.0-0' }} <span>km/h</span></strong>
-        <div class="barra"><div class="relleno" [style.width.%]="(velocidadKmh / VEL_MAX_KMH) * 100"></div></div>
+    <div class="juego-layout">
+      <div class="lienzo-wrapper">
+        <canvas #lienzo [attr.width]="ANCHO" [attr.height]="ALTO" aria-label="Simulador de conducción 2D"></canvas>
       </div>
-      <div class="hud-item puntaje" [class.bajo]="puntaje < 70">
-        <small>Puntaje</small>
-        <strong>{{ puntaje }} <span>/ 100</span></strong>
-      </div>
-      <div class="hud-item">
-        <small>Límite</small>
-        <strong>{{ LIMITE_KMH }} <span>km/h</span></strong>
-      </div>
-      <div class="hud-item">
-        <small>Distancia</small>
-        <strong>{{ distanciaKm | number:'1.2-2' }} <span>km</span></strong>
-      </div>
-      <div class="hud-item">
-        <small>Estado</small>
-        <strong class="estado" [class.activo]="estado === 'corriendo'">{{ estado }}</strong>
-      </div>
-    </div>
 
-    <div class="chips">
-      <span class="chip" [class.marca]="colisiones > 0">💥 {{ colisiones }}</span>
-      <span class="chip" [class.marca]="salidasCarril > 0">🛣️ {{ salidasCarril }}</span>
-      <span class="chip" [class.marca]="excesosVelocidad > 0">🚀 {{ excesosVelocidad }}</span>
-      <span class="chip" [class.marca]="semaforosIgnorados > 0">🚦 {{ semaforosIgnorados }}</span>
-      <span class="chip" [class.marca]="distanciaInsegura > 0">🚗 {{ distanciaInsegura }}</span>
-      <span class="chip ok">✅ {{ semaforosRespetados }}</span>
-    </div>
-
-    <div class="lienzo-wrapper">
-      <canvas #lienzo [attr.width]="ANCHO" [attr.height]="ALTO" aria-label="Simulador de conducción 2D"></canvas>
+      <div class="hud-laterales">
+        <div class="hud-item velocimetro">
+          <small>Velocidad</small>
+          <strong>{{ velocidadKmh | number:'1.0-0' }} <span>km/h</span></strong>
+          <div class="barra"><div class="relleno" [style.width.%]="(velocidadKmh / VEL_MAX_KMH) * 100"></div></div>
+        </div>
+        <div class="hud-item puntaje" [class.bajo]="puntaje < 70">
+          <small>Puntaje</small>
+          <strong>{{ puntaje }} <span>/ 100</span></strong>
+        </div>
+        <div class="hud-item">
+          <small>Límite</small>
+          <strong>{{ LIMITE_KMH }} <span>km/h</span></strong>
+        </div>
+        <div class="hud-item">
+          <small>Distancia</small>
+          <strong>{{ distanciaKm | number:'1.2-2' }} <span>km</span></strong>
+        </div>
+        <div class="hud-item">
+          <small>Estado</small>
+          <strong class="estado" [class.activo]="estado === 'corriendo'">{{ estado }}</strong>
+        </div>
+        
+        <div class="chips-laterales">
+          <span class="chip" [class.marca]="colisiones > 0">💥 {{ colisiones }}</span>
+          <span class="chip" [class.marca]="salidasCarril > 0">🛣️ {{ salidasCarril }}</span>
+          <span class="chip" [class.marca]="excesosVelocidad > 0">🚀 {{ excesosVelocidad }}</span>
+          <span class="chip" [class.marca]="semaforosIgnorados > 0">🚦 {{ semaforosIgnorados }}</span>
+          <span class="chip" [class.marca]="distanciaInsegura > 0">🚗 {{ distanciaInsegura }}</span>
+          <span class="chip ok">✅ {{ semaforosRespetados }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="controles">
