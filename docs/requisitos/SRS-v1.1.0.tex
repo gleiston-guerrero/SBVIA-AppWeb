@@ -39,7 +39,7 @@
     {\large Estándar ISO/IEC/IEEE 29148:2018}\\[1cm]
     
     {\huge \bfseries \color{uteqblue} Sistema de Simulación de Comportamiento Vial con Inteligencia Artificial (SBVIA)}\\[0.5cm]
-    {\Large Versión 1.0.0}\\[1cm]
+    {\Large Versión 1.1.0}\\[1cm]
     
     \begin{table}[h]
         \centering
@@ -47,9 +47,9 @@
         \begin{tabularx}{\textwidth}{|l|X|}
             \hline
             \textbf{Repositorio} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
-            \textbf{Punto del historial} & etiqueta v1.0.0 \\ \hline
+            \textbf{Punto del historial} & etiqueta v1.1.0 \\ \hline
             \textbf{DOI del software (Zenodo)} & \texttt{10.5281/zenodo.22740480} \\ \hline
-            \textbf{Fecha de emisión} & 17 de septiembre de 2026 \\ \hline
+            \textbf{Fecha de emisión} & 18 de septiembre de 2026 \\ \hline
         \end{tabularx}
     \end{table}
 
@@ -83,7 +83,8 @@
         \hline
         \rowcolor{uteqblue}
         \textcolor{white}{\textbf{Versión}} & \textcolor{white}{\textbf{Fecha}} & \textcolor{white}{\textbf{Descripción}} & \textcolor{white}{\textbf{Estado}} \\ \hline
-        1.0.0 & 17-09-2026 & Línea base de la entrega final & Pendiente de aprobación \\ \hline
+        1.0.0 & 17-09-2026 & Línea base de la entrega final & Aprobada \\ \hline
+        1.1.0 & 18-09-2026 & Correcciones finales (contrato REST, Lighthouse, URLs y limpieza) & Pendiente de aprobación \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -95,7 +96,7 @@
 \section{Introducción}
 
 \subsection{Propósito}
-Este documento establece los requisitos verificables de SBVIA v1.0.0 y constituye la línea base contractual para desarrollo, prueba, despliegue y evaluación académica.
+Este documento establece los requisitos verificables de SBVIA v1.1.0 y constituye la línea base contractual para desarrollo, prueba, despliegue y evaluación académica.
 
 \subsection{Alcance}
 SBVIA es una aplicación web de formación vial que administra usuarios y escenarios, conserva prácticas de simulación, calcula resultados y presenta retroalimentación. Incluye un backend Java 21 con Spring Boot, un frontend Angular, PostgreSQL 16, Redis 7 y orquestación Docker Compose.
@@ -341,7 +342,7 @@ El navegador admite cookies SameSite y JavaScript moderno. El entorno dispone de
 \end{requisito}
 
 \begin{requisito}{RNF-09 - Accesibilidad y Compatibilidad (WCAG 2.2)}
-    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} VERIFIED \\[0.2cm]
     \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
     \textbf{Descripción:} El sistema deberá cumplir con las directrices de accesibilidad web WCAG 2.2 nivel AA. \\[0.2cm]
     \textbf{Criterio de aceptación:} La aplicación puede ser navegada completamente con el teclado y cuenta con un ratio de contraste adecuado validado por Lighthouse. \\[0.2cm]
@@ -416,8 +417,18 @@ El navegador admite cookies SameSite y JavaScript moderno. El entorno dispone de
     \item \textbf{AC-03.} Los procedimientos almacenados están versionados, catalogados, parametrizados y trazados.
     \item \textbf{AC-04.} Cinco corridas k6 cumplen los umbrales frío y caliente; Lighthouse y ZAP conservan evidencia reproducible.
     \item \textbf{AC-05.} El despliegue público dispone de healthcheck, runbook, backup y cuenta demo no administrativa.
-    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.0.0 coherentes con el commit declarado.
+    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.1.0 coherentes con el commit declarado.
 \end{itemize}
+
+\vspace{2cm}
+
+\begin{center}
+    \rule{7cm}{0.4pt} \\
+    \textbf{Ing. Gleiston Cíceron Guerrero Ulloa, Ph.D.} \\
+    \textit{Docente-Director} \\
+    \vspace{0.5cm}
+    \textbf{[ ESPACIO PENDIENTE DE FIRMA ]}
+\end{center}
 
 \vspace{1cm}
 \noindent\textbf{\Large Fin de la especificación}
