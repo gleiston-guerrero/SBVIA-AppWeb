@@ -6,7 +6,7 @@
 [![DOI Dataset](https://zenodo.org/badge/DOI/10.5281/zenodo.22785358.svg)](https://doi.org/10.5281/zenodo.22785358)
 
 ## 📌 Descripción del Proyecto
-El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)** proporciona un entorno interactivo y reproducible de entrenamiento y evaluación para conductores en formación. Esta versión final (`v1.1.0`) integra autenticación segura con JWT en cookies `HttpOnly + Secure + SameSite=Strict`, CRUD optimizado sobre Spring Boot 3.2.x y PostgreSQL 16, estrategia híbrida de acceso a datos con Procedimientos Almacenados, caché distribuida con Redis 7 y frontend reactivo en Angular 17+.
+El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA)** proporciona un entorno interactivo y reproducible de entrenamiento y evaluación para conductores en formación. Esta versión final (`v1.2.0`) integra autenticación segura con JWT en cookies `HttpOnly + Secure + SameSite=Strict`, CRUD optimizado sobre Spring Boot 3.2.x y PostgreSQL 16, estrategia híbrida de acceso a datos con Procedimientos Almacenados, caché distribuida con Redis 7 y frontend reactivo en Angular 17+.
 
 ---
 
@@ -23,8 +23,8 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 ---
 
 ## 🐳 Artefactos Docker
-- **Imagen Docker Backend:** `ghcr.io/keithdrox/sbvia-backend:v1.1.0`
-- **Imagen Docker Frontend:** `ghcr.io/keithdrox/sbvia-frontend:v1.1.0`
+- **Imagen Docker Backend:** `ghcr.io/keithdrox/sbvia-backend:v1.2.0`
+- **Imagen Docker Frontend:** `ghcr.io/keithdrox/sbvia-frontend:v1.2.0`
 
 > Los digests SHA-256 exactos se obtienen al publicar las imágenes con `docker buildx build --push`.
 > Consultar el registro: [GitHub Container Registry](https://github.com/gleiston-guerrero/SBVIA-AppWeb/pkgs/container/sbvia-backend)

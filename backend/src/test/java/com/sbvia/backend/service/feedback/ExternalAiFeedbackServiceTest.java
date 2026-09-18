@@ -6,16 +6,19 @@ import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class FeedbackIaExternaServiceTest {
+class ExternalAiFeedbackServiceTest {
 
     private HttpServer servidor;
 
@@ -91,5 +94,66 @@ class FeedbackIaExternaServiceTest {
         assertThat(sinClave.isEnabled()).isFalse();
         assertThatThrownBy(() -> sinClave.generate(datos()))
                 .isInstanceOf(AiUnavailableException.class);
+    }
+
+    private void responderCapturando(String cuerpo, AtomicReference<String> bodyCapture) throws IOException {
+        servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        byte[] bytes = cuerpo.getBytes(StandardCharsets.UTF_8);
+        servidor.createContext("/chat", intercambio -> {
+            InputStream requestBody = intercambio.getRequestBody();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] chunk = new byte[4096];
+            int n;
+            while ((n = requestBody.read(chunk)) != -1) {
+                buffer.write(chunk, 0, n);
+            }
+            bodyCapture.set(buffer.toString(StandardCharsets.UTF_8));
+
+            intercambio.getResponseHeaders().set("Content-Type", "application/json");
+            intercambio.sendResponseHeaders(200, bytes.length);
+            try (OutputStream salida = intercambio.getResponseBody()) {
+                salida.write(bytes);
+            }
+        });
+        servidor.start();
+    }
+
+    @Test
+    void noPiiEnviadoAlProveedorExterno() throws Exception {
+        AtomicReference<String> bodyCapture = new AtomicReference<>("");
+
+        String respuestaValida = "{\"choices\":[{\"message\":{\"content\":"
+                + "\"```json\\n{\\\"resumen\\\":\\\"OK\\\","
+                + "\\\"aciertos\\\":[],\\\"errores\\\":[],"
+                + "\\\"nivelRiesgo\\\":\\\"BAJO\\\","
+                + "\\\"recomendaciones\\\":[\\\"A\\\"],"
+                + "\\\"mensajeMotivador\\\":\\\"Bien\\\"}\\n```\"}}]}";
+
+        responderCapturando(respuestaValida, bodyCapture);
+        servicio(url()).generate(datos());
+
+        String payload = bodyCapture.get().toLowerCase();
+
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (email)")
+                .doesNotContain("email");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (correo)")
+                .doesNotContain("correo");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (firstname)")
+                .doesNotContain("firstname");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (lastname)")
+                .doesNotContain("lastname");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (telefono)")
+                .doesNotContain("telefono");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (userid)")
+                .doesNotContain("userid");
+        assertThat(payload)
+                .as("El payload enviado al proveedor externo no debe contener PII (id_usuario)")
+                .doesNotContain("id_usuario");
     }
 }

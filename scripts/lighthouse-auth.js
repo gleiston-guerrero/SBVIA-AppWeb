@@ -38,6 +38,6 @@ module.exports = async (browser, context) => {
   
   // Esperar a que la redireccion al dashboard termine
   console.log(`[Lighthouse Auth] Esperando redireccion al dashboard...`);
-  await page.waitForNavigation({ waitUntil: 'networkidle0', timeout: 15000 });
+  await page.waitForNavigation({ waitUntil: 'networkidle0', timeout: 60000 });
   console.log(`[Lighthouse Auth] Sesion iniciada exitosamente.`);
 };

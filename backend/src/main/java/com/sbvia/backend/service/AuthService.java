@@ -19,6 +19,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final TokenBlacklistService tokenBlacklistService;
     private final UsernameGeneratorService usernameGeneratorService;
+    private final EntityManager entityManager;
 
     @Transactional
     /**
@@ -310,5 +315,24 @@ public class AuthService {
                 .phone(user.getPhone())
                 .accountLocked(user.isAccountLocked())
                 .build();
+    }
+
+    /**
+     * Invoca sp_actualizar_usuarios_inactivos (RF-06): desactiva en masa las cuentas
+     * cuyo ultimo_acceso es anterior a la fecha limite indicada y deja traza en bitacora_auditoria.
+     *
+     * @param fechaLimite fecha de corte; usuarios con ultimo_acceso anterior a esta fecha seran desactivados
+     * @return numero de usuarios desactivados
+     */
+    @Transactional
+    public int inactivarUsuariosInactivos(LocalDate fechaLimite) {
+        StoredProcedureQuery query = entityManager
+                .createStoredProcedureQuery("sp_actualizar_usuarios_inactivos")
+                .registerStoredProcedureParameter("p_fecha_limite", java.sql.Date.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("actualizados", Integer.class, ParameterMode.OUT)
+                .setParameter("p_fecha_limite", java.sql.Date.valueOf(fechaLimite));
+        query.execute();
+        Integer actualizados = (Integer) query.getOutputParameterValue("actualizados");
+        return actualizados != null ? actualizados : 0;
     }
 }
