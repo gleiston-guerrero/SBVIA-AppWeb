@@ -16,6 +16,7 @@ Automation plan warnings:
 	Job spider error accessing URL https://sbvia-appweb.onrender.com status code returned : 401 expected 200
 ```
 - **Ruta del archivo que la respalda:** `docs/mediciones/sec/zap/zap-report.html` (Verificado: tamaño 40kB).
+- **Cifras y Notebook de Rendimiento:** Las cifras contradictorias en el informe (ej. SUS 82.5 vs 84.17) fueron unificadas hacia los datos reales del experimento (84.17). El antiguo cuaderno Jupyter que producía `KeyError` ha sido descontinuado y reemplazado de manera definitiva por un script estable en Python (`docs/mediciones/perf/estadistica.py`) que procesa los JSON de k6 y maneja correctamente la corrección de múltiples hipótesis.
 
 ## P1 — Sin despliegue público
 
