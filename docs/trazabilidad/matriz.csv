@@ -35,3 +35,21 @@ RF-17,FUNC,Generacion de codigo de reporte (SP),Database,SimulationRepositoryTes
 RF-18,FUNC,Generacion de reporte de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_generar_reporte_simulacion.sql
 RF-19,FUNC,Resumen de usuario (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_resumen_usuario.sql
 RF-20,FUNC,Validacion general de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_validar_simulacion.sql
+
+--- ENLACES BIDIRECCIONALES (INVERSOS) ---
+TestFile/Artifact,Validates_ReqIDs
+AuthServiceTest.java,RF-01 | RNF-03
+ScenarioServiceTest.java,RF-02 | RF-07
+SimulationServiceTest.java,RF-03 | RF-04 | RF-05 | RF-08 | RF-11
+AuthControllerTest.java,RF-06 | RNF-04
+FeedbackServiceTest.java,RF-09 | RF-10 | RNF-07
+DrivingSimulationIntegrationTest.java,RF-12
+service/feedback/ExternalAiFeedbackServiceTest.java,RF-13 | RNF-08
+BackupServiceTest.java,RF-14
+AuditServiceTest.java,RF-15
+scripts/k6/load-test.js,RNF-01 | RNF-02 | RNF-10
+scripts/audit-sql-dynamic.sh,RNF-05
+docs/mediciones/sus/sus-analysis.md,RNF-06
+Lighthouse prod,RNF-09
+app.component.spec.ts,US-01 | US-02 | US-03 | US-04 | US-05 | US-06
+SimulationRepositoryTest.java,RF-16 | RF-17 | RF-18 | RF-19 | RF-20

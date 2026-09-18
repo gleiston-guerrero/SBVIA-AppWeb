@@ -346,6 +346,46 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Verificación:} Prueba de Integración (AuditServiceTest.java) \quad \textbf{SQL:} No aplica
 \end{requisito}
 
+\begin{requisito}{RF-16 - Cierre de simulaciones vencidas}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá cerrar automáticamente simulaciones abiertas que hayan superado el tiempo de inactividad utilizando \texttt{sp\_cerrar\_simulaciones\_vencidas}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Las simulaciones inactivas pasan a estado 'ABANDONADA' o 'CERRADA'. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_cerrar\_simulaciones\_vencidas.sql
+\end{requisito}
+
+\begin{requisito}{RF-17 - Generación de código de reporte}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá generar un código de seguimiento para reportes usando \texttt{sp\_generar\_codigo\_reporte}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Todo reporte generado obtiene un código único. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_reporte.sql
+\end{requisito}
+
+\begin{requisito}{RF-18 - Generación de reporte de simulación general}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá compilar los datos generales en un informe completo usando \texttt{sp\_generar\_reporte\_simulacion}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} El reporte incluye todas las métricas de la simulación. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_generar\_reporte\_simulacion.sql
+\end{requisito}
+
+\begin{requisito}{RF-19 - Generación de resumen de usuario}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá consolidar el resumen de desempeño de un usuario usando \texttt{sp\_resumen\_usuario}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Se retorna el promedio histórico y total de prácticas del conductor. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_resumen\_usuario.sql
+\end{requisito}
+
+\begin{requisito}{RF-20 - Validación general de simulación}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá validar la integridad de una simulación completa usando \texttt{sp\_validar\_simulacion}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Una simulación inválida es rechazada con un estado de error correspondiente. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_validar\_simulacion.sql
+\end{requisito}
+
 \newpage
 % ==============================
 % 4. REQUISITOS NO FUNCIONALES

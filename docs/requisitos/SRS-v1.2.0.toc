@@ -13,8 +13,8 @@
 \contentsline {subsection}{\numberline {2.5}Suposiciones y dependencias}{3}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Datos, seguridad y calidad}{3}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Requisitos funcionales}{6}{section.3}%
-\contentsline {section}{\numberline {4}Requisitos no funcionales}{10}{section.4}%
-\contentsline {section}{\numberline {5}Historias de usuario (Casos de Uso)}{13}{section.5}%
-\contentsline {section}{\numberline {6}Registro de procedimientos almacenados}{15}{section.6}%
-\contentsline {section}{\numberline {7}Criterios de aceptación de la versión}{16}{section.7}%
-\contentsline {section}{\numberline {8}Matriz de trazabilidad (resumen)}{17}{section.8}%
+\contentsline {section}{\numberline {4}Requisitos no funcionales}{11}{section.4}%
+\contentsline {section}{\numberline {5}Historias de usuario (Casos de Uso)}{14}{section.5}%
+\contentsline {section}{\numberline {6}Registro de procedimientos almacenados}{16}{section.6}%
+\contentsline {section}{\numberline {7}Criterios de aceptación de la versión}{17}{section.7}%
+\contentsline {section}{\numberline {8}Matriz de trazabilidad (resumen)}{18}{section.8}%
