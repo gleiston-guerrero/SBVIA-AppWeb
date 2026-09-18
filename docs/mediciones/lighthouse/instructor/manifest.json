@@ -1,11 +1,11 @@
 [
   {
-    "url": "http://localhost:4200/dashboard",
+    "url": "https://sbvia-frontend.onrender.com/dashboard",
     "isRepresentativeRun": true,
-    "htmlPath": "C:\\Users\\jessi\\OneDrive\\Desktop\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\instructor\\localhost-dashboard-2026_09_14_15_23_58.report.html",
-    "jsonPath": "C:\\Users\\jessi\\OneDrive\\Desktop\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\instructor\\localhost-dashboard-2026_09_14_15_23_58.report.json",
+    "htmlPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\instructor\\sbvia_frontend_onrender_com-dashboard-2026_09_18_09_26_15.report.html",
+    "jsonPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\instructor\\sbvia_frontend_onrender_com-dashboard-2026_09_18_09_26_15.report.json",
     "summary": {
-      "performance": 0.97,
+      "performance": 1,
       "accessibility": 0.91,
       "best-practices": 1,
       "seo": 1
