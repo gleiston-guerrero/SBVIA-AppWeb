@@ -14,12 +14,9 @@ import java.math.BigDecimal;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@lombok.NoArgsConstructor
 public class ScenarioDTO {
-    /** Default constructor for ScenarioDTO. */
-    public ScenarioDTO() {}
-
     private Integer id;
     private String name;
     private String description;

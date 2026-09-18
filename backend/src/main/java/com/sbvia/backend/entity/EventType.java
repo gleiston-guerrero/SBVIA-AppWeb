@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "tipo_evento")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class EventType {
-    /** Default constructor for EventType. */
-    public EventType() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_evento")

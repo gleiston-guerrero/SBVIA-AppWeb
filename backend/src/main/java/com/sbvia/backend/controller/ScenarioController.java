@@ -28,9 +28,6 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Scenarios", description = "CRUD de scenarios de simulación vial")
 @SecurityRequirement(name = "bearerAuth")
 public class ScenarioController {
-    /** Default constructor for ScenarioController. */
-    public ScenarioController() {}
-
     private final ScenarioService scenarioService;
 
     /**

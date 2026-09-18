@@ -7,10 +7,7 @@ import java.time.LocalDateTime;
  *
  * @author Keitho_
  */
-public class BackupRequestDTO {
-    /** Default constructor for BackupRequestDTO. */
-    public BackupRequestDTO() {}
-    private String modalidad;
+public class BackupRequestDTO {    private String modalidad;
     private LocalDateTime fechaProgramada;
     private String comentario;
 

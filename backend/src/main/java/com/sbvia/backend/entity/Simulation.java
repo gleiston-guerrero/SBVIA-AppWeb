@@ -12,13 +12,10 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "simulacion")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class Simulation {
-    /** Default constructor for Simulation. */
-    public Simulation() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_simulacion")

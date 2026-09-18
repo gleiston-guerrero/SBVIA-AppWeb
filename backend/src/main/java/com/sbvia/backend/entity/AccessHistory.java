@@ -12,13 +12,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "historial_acceso")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class AccessHistory {
-    /** Default constructor for AccessHistory. */
-    public AccessHistory() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_historial_acceso")

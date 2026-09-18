@@ -39,9 +39,6 @@ import java.util.Map;
 @Slf4j
 @Transactional
 public class FeedbackService {
-    /** Default constructor for FeedbackService. */
-    public FeedbackService() {}
-
     private final SimulationRepository simulationRepository;
     private final UserRepository userRepository;
     private final PerformanceMetricRepository performanceMetricRepository;

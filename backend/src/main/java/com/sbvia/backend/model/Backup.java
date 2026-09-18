@@ -15,9 +15,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Backup {
-    /** Default constructor for Backup. */
-    public Backup() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

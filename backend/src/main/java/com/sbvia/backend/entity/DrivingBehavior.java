@@ -13,13 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "comportamiento_vial")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class DrivingBehavior {
-    /** Default constructor for DrivingBehavior. */
-    public DrivingBehavior() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comportamiento")

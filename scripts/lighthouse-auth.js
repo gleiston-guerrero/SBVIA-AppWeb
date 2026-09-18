@@ -5,7 +5,7 @@ module.exports = async (browser, context) => {
   const page = await browser.newPage();
   
   // Usar la URL base de lhci o localhost
-  const baseUrl = (process.env.LHCI_BASE_URL || 'http://localhost:4200').replace(/\/$/, '');
+  const baseUrl = (process.env.LHCI_BASE_URL || 'https://sbvia-frontend.onrender.com').replace(/\/$/, '');
   
   console.log(`[Lighthouse Auth] Esperando inicializacion del navegador...`);
   await new Promise(r => setTimeout(r, 2000));

@@ -22,9 +22,6 @@ import java.util.function.Function;
  */
 @Service
 public class JwtService {
-    /** Default constructor for JwtService. */
-    public JwtService() {}
-
     @Value("${security.jwt.secret}")
     private String secretKey;
 

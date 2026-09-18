@@ -12,9 +12,6 @@ import lombok.Data;
  */
 @Data
 public class LoginRequest {
-    /** Default constructor for LoginRequest. */
-    public LoginRequest() {}
-
     private String identificador;
     private String email;
 

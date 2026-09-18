@@ -34,9 +34,6 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
-    /** Default constructor for JwtAuthFilter. */
-    public JwtAuthFilter() {}
-
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final TokenBlacklistService tokenBlacklistService;

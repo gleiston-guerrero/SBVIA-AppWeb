@@ -13,13 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "metrica_desempeno")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class PerformanceMetric {
-    /** Default constructor for PerformanceMetric. */
-    public PerformanceMetric() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_metrica")

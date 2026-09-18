@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "nivel_dificultad")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class DifficultyLevel {
-    /** Default constructor for DifficultyLevel. */
-    public DifficultyLevel() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_nivel_dificultad")

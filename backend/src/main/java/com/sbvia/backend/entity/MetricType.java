@@ -12,13 +12,10 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "tipo_metrica")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class MetricType {
-    /** Default constructor for MetricType. */
-    public MetricType() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_metrica")

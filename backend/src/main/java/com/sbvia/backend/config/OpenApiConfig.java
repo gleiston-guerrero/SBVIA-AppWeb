@@ -33,7 +33,4 @@ import org.springframework.context.annotation.Configuration;
         bearerFormat = "JWT",
         in = SecuritySchemeIn.HEADER
 )
-public class OpenApiConfig {
-    /** Default constructor for OpenApiConfig. */
-    public OpenApiConfig() {}
-}
+public class OpenApiConfig {}

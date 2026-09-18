@@ -33,9 +33,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @Tag(name = "Autenticación", description = "Endpoints de registro, login, logout y refresh token JWT")
 @Slf4j
 public class AuthController {
-    /** Default constructor for AuthController. */
-    public AuthController() {}
-
     private static final String ACCESS_COOKIE = "accessToken";
     private static final String REFRESH_COOKIE = "refreshToken";
 

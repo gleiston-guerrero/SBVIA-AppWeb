@@ -17,9 +17,6 @@ import java.util.List;
  */
 @Configuration
 public class CorsConfig {
-    /** Default constructor for CorsConfig. */
-    public CorsConfig() {}
-
     @Value("${cors.allowed-origins:http://localhost:4200,http://localhost:8080}")
     private String[] allowedOrigins;
 

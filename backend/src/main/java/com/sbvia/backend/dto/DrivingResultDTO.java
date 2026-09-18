@@ -12,12 +12,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@lombok.NoArgsConstructor
 public class DrivingResultDTO {
-    /** Default constructor for DrivingResultDTO. */
-    public DrivingResultDTO() {}
-
     private SimulationDTO simulation;
     private FeedbackIaResponse feedback;
 }

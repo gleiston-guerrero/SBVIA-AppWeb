@@ -18,9 +18,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class AuditLog {
-    /** Default constructor for AuditLog. */
-    public AuditLog() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

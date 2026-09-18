@@ -12,13 +12,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "rol")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class Role {
-    /** Default constructor for Role. */
-    public Role() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol")

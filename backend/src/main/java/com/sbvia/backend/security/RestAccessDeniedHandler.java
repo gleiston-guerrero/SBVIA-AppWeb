@@ -22,9 +22,6 @@ import java.net.URI;
 @Component
 @RequiredArgsConstructor
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
-    /** Default constructor for RestAccessDeniedHandler. */
-    public RestAccessDeniedHandler() {}
-
     private final ObjectMapper objectMapper;
 
     /** {@inheritDoc} */

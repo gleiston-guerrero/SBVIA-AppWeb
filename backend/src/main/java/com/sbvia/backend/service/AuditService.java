@@ -26,9 +26,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AuditService {
-    /** Default constructor for AuditService. */
-    public AuditService() {}
-
     private final AuditLogRepository repository;
 
     /**

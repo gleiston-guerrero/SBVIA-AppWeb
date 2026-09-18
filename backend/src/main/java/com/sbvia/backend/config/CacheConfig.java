@@ -26,9 +26,6 @@ import java.util.Map;
 @Configuration
 @EnableCaching
 public class CacheConfig {
-    /** Default constructor for CacheConfig. */
-    public CacheConfig() {}
-
     private static final Duration DEFAULT_TTL = Duration.ofMinutes(10);
     private static final Duration ESCENARIOS_TTL = Duration.ofMinutes(5);
 

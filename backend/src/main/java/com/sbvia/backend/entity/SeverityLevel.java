@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "nivel_gravedad")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class SeverityLevel {
-    /** Default constructor for SeverityLevel. */
-    public SeverityLevel() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_nivel_gravedad")

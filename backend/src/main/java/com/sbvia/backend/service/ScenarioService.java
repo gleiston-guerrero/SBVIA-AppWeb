@@ -27,9 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ScenarioService {
-    /** Default constructor for ScenarioService. */
-    public ScenarioService() {}
-
     private final ScenarioRepository escenarioRepository;
     private final RoadTypeRepository tipoViaRepository;
     private final DifficultyLevelRepository nivelDificultadRepository;

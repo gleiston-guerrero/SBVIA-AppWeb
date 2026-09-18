@@ -9,8 +9,5 @@ import lombok.Data;
  */
 @Data
 public class ChangeRoleRequest {
-    /** Default constructor for ChangeRoleRequest. */
-    public ChangeRoleRequest() {}
-
     private String nombreRol;
 }

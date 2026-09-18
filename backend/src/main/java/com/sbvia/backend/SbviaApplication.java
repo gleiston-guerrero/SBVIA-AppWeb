@@ -15,9 +15,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableScheduling
 public class SbviaApplication {
-    /** Default constructor for SbviaApplication. */
-    public SbviaApplication() {}
-
     /**
      * Método público.
      *

@@ -13,13 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "decision")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class Decision {
-    /** Default constructor for Decision. */
-    public Decision() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_decision")

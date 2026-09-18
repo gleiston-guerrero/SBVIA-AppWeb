@@ -31,9 +31,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
-    /** Default constructor for AuthService. */
-    public AuthService() {}
-
     private final UserRepository usuarioRepository;
     private final RoleRepository rolRepository;
     private final UserStateRepository estadoUsuarioRepository;

@@ -13,13 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "evento_vial")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class RoadEvent {
-    /** Default constructor for RoadEvent. */
-    public RoadEvent() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento_vial")

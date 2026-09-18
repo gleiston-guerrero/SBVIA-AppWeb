@@ -12,9 +12,6 @@ import lombok.Data;
  */
 @Data
 public class RegisterRequest {
-    /** Default constructor for RegisterRequest. */
-    public RegisterRequest() {}
-
     @NotBlank(message = "El name es obligatorio")
     @Size(max = 100)
     private String firstName;

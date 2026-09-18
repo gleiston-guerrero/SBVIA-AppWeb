@@ -12,13 +12,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "retroalimentacion")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class Feedback {
-    /** Default constructor for Feedback. */
-    public Feedback() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_retroalimentacion")

@@ -13,13 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "evaluacion_ia")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class AiEvaluation {
-    /** Default constructor for AiEvaluation. */
-    public AiEvaluation() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evaluacion_ia")

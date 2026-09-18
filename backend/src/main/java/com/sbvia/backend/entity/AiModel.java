@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "modelo_ia")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class AiModel {
-    /** Default constructor for AiModel. */
-    public AiModel() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_modelo_ia")

@@ -21,9 +21,6 @@ import java.util.Map;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    /** Default constructor for GlobalExceptionHandler. */
-    public GlobalExceptionHandler() {}
-
     @ExceptionHandler(ResourceNotFoundException.class)
     /**
      * Método público.

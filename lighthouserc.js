@@ -1,4 +1,4 @@
-const baseUrl = (process.env.LHCI_BASE_URL || 'http://localhost:4200').replace(/\/$/, '');
+const baseUrl = (process.env.LHCI_BASE_URL || 'https://sbvia-frontend.onrender.com').replace(/\/$/, '');
 const preset = process.env.SBVIA_LIGHTHOUSE_PRESET || 'mobile';
 
 module.exports = {

@@ -22,9 +22,6 @@ import java.util.List;
 @RequestMapping("/api/auditoria")
 @RequiredArgsConstructor
 public class AuditController {
-    /** Default constructor for AuditController. */
-    public AuditController() {}
-
     private final AuditService auditService;
 
     /**

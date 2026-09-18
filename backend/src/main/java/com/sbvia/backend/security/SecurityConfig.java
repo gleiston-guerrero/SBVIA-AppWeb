@@ -37,9 +37,6 @@ import org.springframework.security.web.header.writers.XXssProtectionHeaderWrite
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    /** Default constructor for SecurityConfig. */
-    public SecurityConfig() {}
-
     private final JwtAuthFilter jwtAuthFilter;
     private final CsrfTokenIssuerFilter csrfTokenIssuerFilter;
     private final CsrfTokenRepository csrfTokenRepository;

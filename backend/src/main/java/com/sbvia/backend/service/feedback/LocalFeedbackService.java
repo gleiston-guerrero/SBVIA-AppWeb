@@ -15,9 +15,6 @@ import java.util.List;
  */
 @Service
 public class LocalFeedbackService implements FeedbackProvider {
-    /** Default constructor for LocalFeedbackService. */
-    public LocalFeedbackService() {}
-
     /** Constant <code>ORIGIN="IA_LOCAL"</code> */
     public static final String ORIGIN = "IA_LOCAL";
 

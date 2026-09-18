@@ -22,9 +22,6 @@ import java.net.URI;
 @Component
 @RequiredArgsConstructor
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    /** Default constructor for RestAuthenticationEntryPoint. */
-    public RestAuthenticationEntryPoint() {}
-
     private final ObjectMapper objectMapper;
 
     /** {@inheritDoc} */

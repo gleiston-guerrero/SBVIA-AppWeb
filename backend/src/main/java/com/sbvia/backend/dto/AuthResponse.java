@@ -15,12 +15,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@lombok.NoArgsConstructor
 public class AuthResponse {
-    /** Default constructor for AuthResponse. */
-    public AuthResponse() {}
-
     private String accessToken;
     private String refreshToken;
     private long expiresIn;

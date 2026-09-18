@@ -16,9 +16,6 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
  */
 @Configuration
 public class CsrfConfig {
-    /** Default constructor for CsrfConfig. */
-    public CsrfConfig() {}
-
     @Bean
     /**
      * Método público.

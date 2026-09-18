@@ -11,13 +11,10 @@ import lombok.*;
 @Entity
 @Table(name = "tipo_via")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@lombok.NoArgsConstructor
 public class RoadType {
-    /** Default constructor for RoadType. */
-    public RoadType() {}
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_via")

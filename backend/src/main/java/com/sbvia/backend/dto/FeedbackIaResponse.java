@@ -15,12 +15,9 @@ import java.util.List;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@lombok.NoArgsConstructor
 public class FeedbackIaResponse {
-    /** Default constructor for FeedbackIaResponse. */
-    public FeedbackIaResponse() {}
-
     private String resumen;
     private List<String> aciertos;
     private List<String> errores;
