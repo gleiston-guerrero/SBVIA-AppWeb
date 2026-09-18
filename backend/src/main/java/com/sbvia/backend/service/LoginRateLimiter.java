@@ -16,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>Los umbrales se inyectan desde configuración externa con valores por defecto:
  * {@code security.login.max-attempts} (por defecto 5) y
  * {@code security.login.lock-duration-seconds} (por defecto 60 s).</p>
+ *
+ * @author Keitho_
  */
 @Service
 public class LoginRateLimiter {
@@ -27,6 +29,12 @@ public class LoginRateLimiter {
     private final long lockSeconds;
     private final ConcurrentHashMap<String, Attempts> attemptsByIp = new ConcurrentHashMap<>();
 
+    /**
+     * <p>Constructor for LoginRateLimiter.</p>
+     *
+     * @param maxAttempts a int
+     * @param lockSeconds a long
+     */
     public LoginRateLimiter(
             @Value("${security.login.max-attempts:5}") int maxAttempts,
             @Value("${security.login.lock-duration-seconds:60}") long lockSeconds) {
@@ -36,7 +44,9 @@ public class LoginRateLimiter {
 
     /**
      * Verifica si la IP ya superó el número de intentos fallidos permitidos.
-     * Lanza {@link RateLimitExceededException} (HTTP 429) cuando está bloqueada.
+     * Lanza {@link com.sbvia.backend.exception.RateLimitExceededException} (HTTP 429) cuando está bloqueada.
+     *
+     * @param ip a {@link java.lang.String} object
      */
     public void check(String ip) {
         if (ip == null || ip.isBlank()) {
@@ -57,6 +67,8 @@ public class LoginRateLimiter {
      * Registra un intento fallido para la IP. Implementa una ventana deslizante:
      * si el último fallo fue hace más de {@link #lockSeconds} segundos, se reinicia
      * el contador.
+     *
+     * @param ip a {@link java.lang.String} object
      */
     public void recordFailure(String ip) {
         if (ip == null || ip.isBlank()) {
@@ -74,6 +86,8 @@ public class LoginRateLimiter {
 
     /**
      * Limpia el contador de la IP después de un inicio de sesión exitoso.
+     *
+     * @param ip a {@link java.lang.String} object
      */
     public void reset(String ip) {
         if (ip == null || ip.isBlank()) {

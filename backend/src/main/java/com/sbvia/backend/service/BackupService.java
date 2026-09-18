@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+/**
+ * <p>BackupService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 public class BackupService {
 
@@ -45,6 +50,13 @@ public class BackupService {
 
     private final String backupDir = "/app/backups";
 
+    /**
+     * <p>Constructor for BackupService.</p>
+     *
+     * @param backupRepository a {@link com.sbvia.backend.repository.BackupRepository} object
+     * @param auditLogRepository a {@link com.sbvia.backend.repository.AuditLogRepository} object
+     * @param taskScheduler a {@link org.springframework.scheduling.TaskScheduler} object
+     */
     public BackupService(BackupRepository backupRepository, 
                            AuditLogRepository auditLogRepository,
                            TaskScheduler taskScheduler) {
@@ -60,6 +72,8 @@ public class BackupService {
 
     /**
      * Método público.
+     *
+     * @return a {@link java.util.List} object
      */
     public List<Backup> getAll() {
         return backupRepository.findAllByOrderByStartDateDesc();
@@ -67,6 +81,10 @@ public class BackupService {
 
     /**
      * Método público.
+     *
+     * @param request a {@link com.sbvia.backend.dto.BackupRequestDTO} object
+     * @param type a {@link java.lang.String} object
+     * @return a {@link com.sbvia.backend.model.Backup} object
      */
     public Backup generateBackup(BackupRequestDTO request, String type) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
@@ -120,6 +138,11 @@ public class BackupService {
         }
     }
 
+    /**
+     * <p>executePgDump.</p>
+     *
+     * @param backup a {@link com.sbvia.backend.model.Backup} object
+     */
     @Async
     protected void executePgDump(Backup backup) {
         String outputPath = backupDir + "/" + backup.getFileName();
@@ -194,6 +217,9 @@ public class BackupService {
 
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Long} object
+     * @return a {@link java.io.File} object
      */
     public File getFile(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
@@ -202,6 +228,8 @@ public class BackupService {
 
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Long} object
      */
     public void deleteBackup(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
@@ -216,6 +244,7 @@ public class BackupService {
     /**
      * Método público.
      */
+    /** Javadoc for this element. */
     public void scheduledBackup() {
         logger.info("Ejecutando respaldo automático programado...");
         BackupRequestDTO dto = new BackupRequestDTO();

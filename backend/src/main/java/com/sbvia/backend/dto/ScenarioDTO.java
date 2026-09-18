@@ -7,11 +7,18 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * <p>ScenarioDTO class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScenarioDTO {
+    /** Default constructor for ScenarioDTO. */
+    public ScenarioDTO() {}
 
     private Integer id;
     private String name;

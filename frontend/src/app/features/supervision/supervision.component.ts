@@ -38,7 +38,7 @@ export class SupervisionComponent implements OnInit {
   get filtradas(): Simulation[] {
     const texto = this.filtro.trim().toLowerCase();
     return this.practicas.filter(practica => {
-      const coincideTexto = !texto || [practica.username, practica.correoUsuario, practica.nombreEscenario]
+      const coincideTexto = !texto || [practica.username, practica.userEmail, practica.scenarioName]
         .some(value => value?.toLowerCase().includes(texto));
       return coincideTexto && this.coincideEstado(practica);
     });

@@ -8,13 +8,23 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>LocalFeedbackService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 public class LocalFeedbackService implements FeedbackProvider {
+    /** Default constructor for LocalFeedbackService. */
+    public LocalFeedbackService() {}
 
+    /** Constant <code>ORIGIN="IA_LOCAL"</code> */
     public static final String ORIGIN = "IA_LOCAL";
 
     @Override
     /**
+     * {@inheritDoc}
+     *
      * Método público.
      */
     public String origin() {
@@ -23,6 +33,8 @@ public class LocalFeedbackService implements FeedbackProvider {
 
     @Override
     /**
+     * {@inheritDoc}
+     *
      * Método público.
      */
     public FeedbackIaResponse generate(DrivingData d) {
@@ -115,6 +127,9 @@ public class LocalFeedbackService implements FeedbackProvider {
 
     /**
      * Método público.
+     *
+     * @param d a {@link com.sbvia.backend.service.feedback.DrivingData} object
+     * @return a {@link java.lang.String} object
      */
     public String compare(DrivingData d) {
         return comparison(d);

@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>Decision class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "decision")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Decision {
+    /** Default constructor for Decision. */
+    public Decision() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

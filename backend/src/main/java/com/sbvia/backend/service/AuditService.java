@@ -18,14 +18,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>AuditService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 public class AuditService {
+    /** Default constructor for AuditService. */
+    public AuditService() {}
 
     private final AuditLogRepository repository;
 
     /**
      * Método público.
+     *
+     * @param table a {@link java.lang.String} object
+     * @param operation a {@link java.lang.String} object
+     * @param user a {@link java.lang.String} object
+     * @param startDate a {@link java.time.LocalDateTime} object
+     * @param endDate a {@link java.time.LocalDateTime} object
+     * @return a {@link java.util.List} object
      */
     public List<AuditLog> getAuditLogs(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         Specification<AuditLog> spec = (root, query, criteriaBuilder) -> {
@@ -53,6 +67,13 @@ public class AuditService {
 
     /**
      * Método público.
+     *
+     * @param table a {@link java.lang.String} object
+     * @param operation a {@link java.lang.String} object
+     * @param user a {@link java.lang.String} object
+     * @param startDate a {@link java.time.LocalDateTime} object
+     * @param endDate a {@link java.time.LocalDateTime} object
+     * @return an array of {@link byte} objects
      */
     public byte[] generatePdfReport(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         List<AuditLog> records = getAuditLogs(table, operation, user, startDate, endDate);

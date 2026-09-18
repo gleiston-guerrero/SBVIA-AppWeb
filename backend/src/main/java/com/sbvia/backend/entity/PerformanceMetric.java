@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>PerformanceMetric class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "metrica_desempeno")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class PerformanceMetric {
+    /** Default constructor for PerformanceMetric. */
+    public PerformanceMetric() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

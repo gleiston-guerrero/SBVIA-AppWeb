@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * <p>TrafficRuleController class.</p>
+ *
+ * @author Keitho_
+ */
 @RestController
 @RequestMapping("/api/reglas-transito")
 @RequiredArgsConstructor

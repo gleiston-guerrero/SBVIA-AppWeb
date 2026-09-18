@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+/**
+ * <p>TrainingSession class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "sesion_entrenamiento")
 @Data

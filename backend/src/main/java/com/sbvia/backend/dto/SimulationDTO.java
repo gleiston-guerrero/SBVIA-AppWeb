@@ -8,6 +8,11 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+/**
+ * <p>SimulationDTO class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor

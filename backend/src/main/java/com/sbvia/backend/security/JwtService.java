@@ -17,9 +17,13 @@ import java.util.function.Function;
  * Servicio para generar y validar tokens JWT usando jjwt 0.12.x.
  * Firma tokens con HS256 y una clave secreta de al menos 256 bits.
  * Cada token incluye un JTI (JWT ID) único para soporte de blacklist en Redis.
+ *
+ * @author Keitho_
  */
 @Service
 public class JwtService {
+    /** Default constructor for JwtService. */
+    public JwtService() {}
 
     @Value("${security.jwt.secret}")
     private String secretKey;
@@ -38,6 +42,11 @@ public class JwtService {
 
     /**
      * Genera un access token JWT con claims personalizados.
+     *
+     * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
+     * @param userId a {@link java.lang.Long} object
+     * @param role a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String generateAccessToken(UserDetails userDetails, Long userId, String role) {
         return buildToken(
@@ -53,6 +62,10 @@ public class JwtService {
 
     /**
      * Genera un refresh token JWT.
+     *
+     * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
+     * @param userId a {@link java.lang.Long} object
+     * @return a {@link java.lang.String} object
      */
     public String generateRefreshToken(UserDetails userDetails, Long userId) {
         return buildToken(
@@ -84,6 +97,9 @@ public class JwtService {
 
     /**
      * Extrae el subject (ID del user) del token.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String extractSubject(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -91,6 +107,9 @@ public class JwtService {
 
     /**
      * Extrae el email del token.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String extractEmail(String token) {
         return extractAllClaims(token).get("email", String.class);
@@ -98,6 +117,9 @@ public class JwtService {
 
     /**
      * Extrae el JTI (JWT ID) del token — usado para blacklist en Redis.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String extractJti(String token) {
         return extractClaim(token, Claims::getId);
@@ -105,6 +127,9 @@ public class JwtService {
 
     /**
      * Extrae la fecha de expiración del token.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.util.Date} object
      */
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
@@ -112,17 +137,29 @@ public class JwtService {
 
     /**
      * Método público.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String extractIssuer(String token) {
         return extractClaim(token, Claims::getIssuer);
     }
 
+    /**
+     * <p>extractAudience.</p>
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.util.Set} object
+     */
     public java.util.Set<String> extractAudience(String token) {
         return extractClaim(token, Claims::getAudience);
     }
 
     /**
      * Método público.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.util.Date} object
      */
     public Date extractNotBefore(String token) {
         return extractClaim(token, Claims::getNotBefore);
@@ -130,6 +167,9 @@ public class JwtService {
 
     /**
      * Extrae el tipo de token (access o refresh).
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String extractTokenType(String token) {
         return extractAllClaims(token).get("type", String.class);
@@ -138,6 +178,10 @@ public class JwtService {
     /**
      * Valida que el token sea válido: firma correcta, no expirado,
      * y que el username coincida con el UserDetails.
+     *
+     * @param token a {@link java.lang.String} object
+     * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
+     * @return a boolean
      */
     public boolean validateToken(String token, UserDetails userDetails) {
         try {
@@ -151,6 +195,9 @@ public class JwtService {
     /**
      * Obtiene el tiempo restante de expiración en milisegundos.
      * Usado para configurar el TTL en Redis al revocar el token.
+     *
+     * @param token a {@link java.lang.String} object
+     * @return a long
      */
     public long getExpirationRemainingMs(String token) {
         Date expiration = extractExpiration(token);
@@ -159,6 +206,8 @@ public class JwtService {
 
     /**
      * Método público.
+     *
+     * @return a long
      */
     public long getAccessExpirationMs() {
         return accessExpirationMs;
@@ -166,6 +215,8 @@ public class JwtService {
 
     /**
      * Método público.
+     *
+     * @return a long
      */
     public long getRefreshExpirationMs() {
         return refreshExpirationMs;

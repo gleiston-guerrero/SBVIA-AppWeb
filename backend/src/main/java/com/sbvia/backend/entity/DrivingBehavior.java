@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>DrivingBehavior class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "comportamiento_vial")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class DrivingBehavior {
+    /** Default constructor for DrivingBehavior. */
+    public DrivingBehavior() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

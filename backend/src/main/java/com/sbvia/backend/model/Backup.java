@@ -5,11 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+/**
+ * <p>Backup class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "backup")
 @Getter
 @Setter
 public class Backup {
+    /** Default constructor for Backup. */
+    public Backup() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>DifficultyLevel class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "nivel_dificultad")
 @Data
@@ -10,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class DifficultyLevel {
+    /** Default constructor for DifficultyLevel. */
+    public DifficultyLevel() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

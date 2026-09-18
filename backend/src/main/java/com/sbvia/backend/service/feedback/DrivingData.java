@@ -2,6 +2,13 @@ package com.sbvia.backend.service.feedback;
 
 import java.math.BigDecimal;
 
+/**
+ * <p>DrivingData class.</p>
+ *
+ * @author Keitho_
+  * @param durationSeconds durationSeconds param
+  * @param averageSpeed averageSpeed param
+ */
 public record DrivingData(
         int durationSeconds,
         BigDecimal averageSpeed,

@@ -14,8 +14,10 @@ import java.util.regex.Pattern;
  *
  * Cumple con las restricciones de la base de datos:
  * - longitud mínima >= 4 (chk_usuario_nombre_usuario)
- * - longitud máxima <= 60 (VARCHAR(60) en user.nombre_usuario)
+ * - longitud máxima &lt;= 60 (VARCHAR(60) en user.nombre_usuario)
  * - caracteres alfanuméricos seguros para login
+ *
+ * @author Keitho_
  */
 @Service
 public class UsernameGeneratorService {
@@ -27,6 +29,9 @@ public class UsernameGeneratorService {
     /**
      * Normaliza un texto eliminando tildes, diacríticos (ej: ñ -> n),
      * caracteres especiales, espacios extras y convirtiendo a minúsculas.
+     *
+     * @param texto a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String normalizar(String texto) {
         if (texto == null) {
@@ -53,6 +58,10 @@ public class UsernameGeneratorService {
      * "Justyn Keith", "Cruz Perez" -> "jcruzp"
      * "Ana", "Li"                  -> "anli" (expandido a >= 4 caracteres)
      * "José Ángel", "Muñoz"        -> "jmunoz"
+     *
+     * @param firstName a {@link java.lang.String} object
+     * @param lastName a {@link java.lang.String} object
+     * @return a {@link java.lang.String} object
      */
     public String generateBase(String firstName, String lastName) {
         String normNombres = normalizar(firstName);
@@ -152,6 +161,10 @@ public class UsernameGeneratorService {
      * Determina el siguiente name de user disponible dada una lista de existentes.
      * Si 'base' no existe, retorna 'base'.
      * Si ya existe 'base', genera 'base1', 'base2', etc.
+     *
+     * @param base a {@link java.lang.String} object
+     * @param existentes a {@link java.util.Collection} object
+     * @return a {@link java.lang.String} object
      */
     public String generateNextAvailable(String base, Collection<String> existentes) {
         if (existentes == null || existentes.isEmpty()) {

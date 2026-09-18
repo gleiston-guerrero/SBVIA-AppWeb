@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+/**
+ * <p>MetricType class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "tipo_metrica")
 @Data
@@ -11,6 +16,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class MetricType {
+    /** Default constructor for MetricType. */
+    public MetricType() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

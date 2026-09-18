@@ -6,8 +6,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * <p>InfractionRepository interface.</p>
+ *
+ * @author Keitho_
+ */
 @Repository
 public interface InfractionRepository extends JpaRepository<Infraction, Integer> {
 
+    /**
+     * <p>findBySimulation_SimulationId.</p>
+     *
+     * @param simulationId a {@link java.lang.Integer} object
+     * @return a {@link java.util.List} object
+     */
     List<Infraction> findBySimulation_SimulationId(Integer simulationId);
 }

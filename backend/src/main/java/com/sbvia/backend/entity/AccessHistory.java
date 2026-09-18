@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+/**
+ * <p>AccessHistory class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "historial_acceso")
 @Data
@@ -11,6 +16,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class AccessHistory {
+    /** Default constructor for AccessHistory. */
+    public AccessHistory() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

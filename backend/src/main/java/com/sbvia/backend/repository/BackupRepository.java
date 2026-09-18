@@ -6,7 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * <p>BackupRepository interface.</p>
+ *
+ * @author Keitho_
+ */
 @Repository
 public interface BackupRepository extends JpaRepository<Backup, Long> {
+    /**
+     * <p>findAllByOrderByStartDateDesc.</p>
+     *
+     * @return a {@link java.util.List} object
+     */
     List<Backup> findAllByOrderByStartDateDesc();
 }

@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>AiModel class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "modelo_ia")
 @Data
@@ -10,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AiModel {
+    /** Default constructor for AiModel. */
+    public AiModel() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

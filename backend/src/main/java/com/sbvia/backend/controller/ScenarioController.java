@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controlador REST para el CRUD de Scenarios.
  * Demuestra el uso de Spring Data JPA con paginación y seguridad basada en roles.
+ *
+ * @author Keitho_
  */
 @RestController
 @RequestMapping("/api/scenarios")
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Scenarios", description = "CRUD de scenarios de simulación vial")
 @SecurityRequirement(name = "bearerAuth")
 public class ScenarioController {
+    /** Default constructor for ScenarioController. */
+    public ScenarioController() {}
 
     private final ScenarioService scenarioService;
 
@@ -71,6 +75,8 @@ public class ScenarioController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<ScenarioDTO> findById(@PathVariable Integer id) {
         ScenarioDTO dto = scenarioService.findById(id);
@@ -94,6 +100,8 @@ public class ScenarioController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<ScenarioDTO> create(@Valid @RequestBody ScenarioDTO dto) {
         ScenarioDTO creado = scenarioService.create(dto);
@@ -140,6 +148,8 @@ public class ScenarioController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         scenarioService.delete(id);

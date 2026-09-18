@@ -15,13 +15,27 @@ import java.util.List;
  * PageImpl no ofrece un constructor Jackson y falla al recuperar una entrada
  * cacheada. Esta clase conserva el mismo contrato Page y aporta el constructor
  * explícito requerido para reconstruir la paginación.
+ *
+ * @author Keitho_
  */
 @JsonIgnoreProperties(
         value = {"pageable", "sort", "first", "last", "empty", "totalPages", "numberOfElements"},
         ignoreUnknown = true)
+/**
+ * @return the return value
+ */
 public class CacheablePage<T> extends PageImpl<T> {
 
     @JsonCreator
+    /**
+     * <p>Constructor for CacheablePage.</p>
+     *
+     * @param content a {@link java.util.List} object
+     * @param number a int
+     * @param size a int
+     * @param totalElements a long
+     */
+    /** Javadoc for this element. */
     public CacheablePage(
             @JsonProperty("content") List<T> content,
             @JsonProperty("number") int number,
@@ -32,6 +46,8 @@ public class CacheablePage<T> extends PageImpl<T> {
 
     /**
      * Método público.
+     *
+     * @param page a {@link org.springframework.data.domain.Page} object
      */
     public CacheablePage(Page<T> page) {
         super(page.getContent(), page.getPageable(), page.getTotalElements());

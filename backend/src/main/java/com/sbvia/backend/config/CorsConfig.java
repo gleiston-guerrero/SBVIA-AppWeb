@@ -12,9 +12,13 @@ import java.util.List;
 
 /**
  * Configuración de CORS explícita requerida por OWASP.
+ *
+ * @author Keitho_
  */
 @Configuration
 public class CorsConfig {
+    /** Default constructor for CorsConfig. */
+    public CorsConfig() {}
 
     @Value("${cors.allowed-origins:http://localhost:4200,http://localhost:8080}")
     private String[] allowedOrigins;
@@ -22,7 +26,10 @@ public class CorsConfig {
     @Bean
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.web.cors.CorsConfigurationSource} object
      */
+    /** Javadoc for this element. */
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Orígenes permitidos dinámicamente

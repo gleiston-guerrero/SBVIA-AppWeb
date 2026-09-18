@@ -14,12 +14,20 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URI;
 
+/**
+ * <p>RestAuthenticationEntryPoint class.</p>
+ *
+ * @author Keitho_
+ */
 @Component
 @RequiredArgsConstructor
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    /** Default constructor for RestAuthenticationEntryPoint. */
+    public RestAuthenticationEntryPoint() {}
 
     private final ObjectMapper objectMapper;
 
+    /** {@inheritDoc} */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {

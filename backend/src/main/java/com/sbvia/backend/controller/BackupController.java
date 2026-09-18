@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.util.List;
 
+/**
+ * <p>BackupController class.</p>
+ *
+ * @author Keitho_
+ */
 @RestController
 @RequestMapping("/api/respaldos")
 @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -23,6 +28,8 @@ public class BackupController {
 
     /**
      * Método público.
+     *
+     * @param backupService a {@link com.sbvia.backend.service.BackupService} object
      */
     public BackupController(BackupService backupService) {
         this.backupService = backupService;

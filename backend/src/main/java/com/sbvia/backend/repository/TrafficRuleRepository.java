@@ -7,10 +7,26 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>TrafficRuleRepository interface.</p>
+ *
+ * @author Keitho_
+ */
 @Repository
 public interface TrafficRuleRepository extends JpaRepository<TrafficRule, Integer> {
 
+    /**
+     * <p>findByActivaTrue.</p>
+     *
+     * @return a {@link java.util.List} object
+     */
     List<TrafficRule> findByActivaTrue();
 
+    /**
+     * <p>findByCodigo.</p>
+     *
+     * @param codigo a {@link java.lang.String} object
+     * @return a {@link java.util.Optional} object
+     */
     Optional<TrafficRule> findByCodigo(String codigo);
 }

@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>EventType class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "tipo_evento")
 @Data
@@ -10,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class EventType {
+    /** Default constructor for EventType. */
+    public EventType() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

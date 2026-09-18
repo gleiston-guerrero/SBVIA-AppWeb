@@ -24,6 +24,8 @@ import jakarta.servlet.http.HttpServletRequest;
  * Controlador REST para autenticación: registro, login, logout y refresh token.
  * Endpoints públicos: /api/auth/registro, /api/auth/login
  * Endpoints protegidos: /api/auth/logout, /api/auth/refresh, /api/users/me
+ *
+ * @author Keitho_
  */
 @RestController
 @RequestMapping("/api/auth")
@@ -31,6 +33,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Tag(name = "Autenticación", description = "Endpoints de registro, login, logout y refresh token JWT")
 @Slf4j
 public class AuthController {
+    /** Default constructor for AuthController. */
+    public AuthController() {}
 
     private static final String ACCESS_COOKIE = "accessToken";
     private static final String REFRESH_COOKIE = "refreshToken";
@@ -58,6 +62,8 @@ public class AuthController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<AuthResponse> registro(@Valid @RequestBody RegisterRequest request) {
         AuthResponse response = null;
@@ -100,6 +106,8 @@ public class AuthController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         String ip = clientIp(httpRequest);

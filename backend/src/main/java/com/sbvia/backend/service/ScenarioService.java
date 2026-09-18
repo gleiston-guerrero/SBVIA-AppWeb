@@ -19,9 +19,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * <p>ScenarioService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 public class ScenarioService {
+    /** Default constructor for ScenarioService. */
+    public ScenarioService() {}
 
     private final ScenarioRepository escenarioRepository;
     private final RoadTypeRepository tipoViaRepository;
@@ -32,7 +39,11 @@ public class ScenarioService {
     @Transactional(readOnly = true)
     /**
      * Método público.
+     *
+     * @param pageable a {@link org.springframework.data.domain.Pageable} object
+     * @return a {@link org.springframework.data.domain.Page} object
      */
+    /** Javadoc for this element. */
     public Page<ScenarioDTO> listarActivos(Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
@@ -42,7 +53,14 @@ public class ScenarioService {
     @Transactional(readOnly = true)
     /**
      * Método público.
+     *
+     * @param roadType a {@link java.lang.String} object
+     * @param difficultyLevel a {@link java.lang.Integer} object
+     * @param clima a {@link java.lang.String} object
+     * @param pageable a {@link org.springframework.data.domain.Pageable} object
+     * @return a {@link org.springframework.data.domain.Page} object
      */
+    /** Javadoc for this element. */
     public Page<ScenarioDTO> findFiltered(String roadType, Integer difficultyLevel, String clima, Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
@@ -52,7 +70,11 @@ public class ScenarioService {
     @Transactional(readOnly = true)
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
      */
+    /** Javadoc for this element. */
     public ScenarioDTO findById(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -64,7 +86,11 @@ public class ScenarioService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param dto a {@link com.sbvia.backend.dto.ScenarioDTO} object
+     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
      */
+    /** Javadoc for this element. */
     public ScenarioDTO create(ScenarioDTO dto) {
         RoadType roadType = tipoViaRepository.findByName(dto.getRoadType())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -94,7 +120,12 @@ public class ScenarioService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @param dto a {@link com.sbvia.backend.dto.ScenarioDTO} object
+     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
      */
+    /** Javadoc for this element. */
     public ScenarioDTO update(Integer id, ScenarioDTO dto) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -110,7 +141,10 @@ public class ScenarioService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
      */
+    /** Javadoc for this element. */
     public void delete(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(

@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>SeverityLevel class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "nivel_gravedad")
 @Data
@@ -10,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SeverityLevel {
+    /** Default constructor for SeverityLevel. */
+    public SeverityLevel() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

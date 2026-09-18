@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
  * a la expiración del token, para que se auto-eliminen de Redis.
  *
  * Decisión documentada en ADR-003: jwt-redis.
+ *
+ * @author Keitho_
  */
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,9 @@ public class TokenBlacklistService {
     /**
      * Agrega un JTI a la blacklist de Redis con TTL en milisegundos.
      * Cuando el TTL expira, Redis elimina la entrada automáticamente.
+     *
+     * @param jti a {@link java.lang.String} object
+     * @param expirationMs a long
      */
     public void blacklistToken(String jti, long expirationMs) {
         String key = BLACKLIST_PREFIX + jti;
@@ -32,6 +37,9 @@ public class TokenBlacklistService {
     /**
      * Verifica si un JTI está en la blacklist.
      * Consultado por JwtAuthFilter en cada solicitud antes de autorizar.
+     *
+     * @param jti a {@link java.lang.String} object
+     * @return a boolean
      */
     public boolean isTokenBlacklisted(String jti) {
         String key = BLACKLIST_PREFIX + jti;

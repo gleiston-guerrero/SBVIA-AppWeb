@@ -7,9 +7,13 @@ import lombok.Data;
  * DTO para la petición de inicio de sesión.
  * Permite autenticarse mediante 'identificador' (que puede ser el name de user o el email electrónico).
  * Mantiene compatibilidad total con peticiones existentes que envían 'email'.
+ *
+ * @author Keitho_
  */
 @Data
 public class LoginRequest {
+    /** Default constructor for LoginRequest. */
+    public LoginRequest() {}
 
     private String identificador;
     private String email;
@@ -19,6 +23,8 @@ public class LoginRequest {
 
     /**
      * Método público.
+     *
+     * @return a {@link java.lang.String} object
      */
     public String getIdentificador() {
         if (identificador != null && !identificador.isBlank()) {
@@ -32,6 +38,8 @@ public class LoginRequest {
 
     /**
      * Método público.
+     *
+     * @param identificador a {@link java.lang.String} object
      */
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
@@ -39,6 +47,8 @@ public class LoginRequest {
 
     /**
      * Método público.
+     *
+     * @return a {@link java.lang.String} object
      */
     public String getEmail() {
         return getIdentificador();
@@ -46,6 +56,8 @@ public class LoginRequest {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
      */
     public void setEmail(String email) {
         this.email = email;

@@ -75,7 +75,7 @@
 
   <div class="modal-overlay" *ngIf="practicaSeleccionada" (click)="cerrarInforme()">
     <section class="informe-panel modal-content" (click)="$event.stopPropagation()">
-      <header><div><span class="eyebrow">Resultado guardado</span><h3>Informe IA · {{ practicaSeleccionada.nombreEscenario }}</h3></div><button type="button" class="btn-close-modal" (click)="cerrarInforme()" aria-label="Cerrar informe">×</button></header>
+      <header><div><span class="eyebrow">Resultado guardado</span><h3>Informe IA · {{ practicaSeleccionada.scenarioName }}</h3></div><button type="button" class="btn-close-modal" (click)="cerrarInforme()" aria-label="Cerrar informe">×</button></header>
       <p *ngIf="cargandoInforme" class="loading-informe">Cargando informe...</p>
       <p *ngIf="errorInforme" class="error-msg">{{ errorInforme }}</p>
       <ng-container *ngIf="informeSeleccionado as informe">

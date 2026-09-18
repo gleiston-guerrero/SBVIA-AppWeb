@@ -9,6 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
+/**
+ * <p>TrafficRuleDTO class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor

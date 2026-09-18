@@ -7,6 +7,11 @@ import lombok.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
+/**
+ * <p>User class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "usuario")
 @Data

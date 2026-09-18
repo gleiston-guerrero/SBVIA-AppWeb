@@ -10,12 +10,16 @@ import lombok.NoArgsConstructor;
  * El campo refreshToken se usa internamente entre servicio y controlador, pero el
  * controlador lo elimina antes de serializar la respuesta HTTP.
  * No tiene anotaciones @Entity.
+ *
+ * @author Keitho_
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {
+    /** Default constructor for AuthResponse. */
+    public AuthResponse() {}
 
     private String accessToken;
     private String refreshToken;

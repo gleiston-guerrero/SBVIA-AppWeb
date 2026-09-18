@@ -8,11 +8,18 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * <p>FeedbackIaResponse class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class FeedbackIaResponse {
+    /** Default constructor for FeedbackIaResponse. */
+    public FeedbackIaResponse() {}
 
     private String resumen;
     private List<String> aciertos;

@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>RoadEvent class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "evento_vial")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class RoadEvent {
+    /** Default constructor for RoadEvent. */
+    public RoadEvent() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

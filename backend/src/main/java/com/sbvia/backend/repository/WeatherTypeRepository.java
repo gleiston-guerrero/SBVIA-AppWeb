@@ -6,8 +6,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * <p>WeatherTypeRepository interface.</p>
+ *
+ * @author Keitho_
+ */
 @Repository
 public interface WeatherTypeRepository extends JpaRepository<WeatherType, Integer> {
 
+    /**
+     * <p>findByName.</p>
+     *
+     * @param name a {@link java.lang.String} object
+     * @return a {@link java.util.Optional} object
+     */
     Optional<WeatherType> findByName(String name);
 }

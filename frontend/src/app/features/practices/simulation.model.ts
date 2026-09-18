@@ -5,8 +5,8 @@ export interface Simulation {
   finalScore: number;
   completed: boolean;
   scenarioId?: number;
-  nombreEscenario: string;
+  scenarioName: string;
   userId?: number;
   username?: string;
-  correoUsuario?: string;
+  userEmail?: string;
 }

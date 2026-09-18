@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>WeatherType class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "tipo_clima")
 @Data

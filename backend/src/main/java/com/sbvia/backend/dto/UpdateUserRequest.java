@@ -7,6 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * <p>UpdateUserRequest class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor

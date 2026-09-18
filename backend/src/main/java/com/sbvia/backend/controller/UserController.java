@@ -21,6 +21,8 @@ import jakarta.validation.Valid;
 
 /**
  * Controlador REST para operaciones de user autenticado.
+ *
+ * @author Keitho_
  */
 @RestController
 @RequestMapping("/api/users")
@@ -45,6 +47,8 @@ public class UserController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<UserDTO> getPerfilActual(Authentication authentication) {
         String email = authentication.getName();
@@ -88,6 +92,8 @@ public class UserController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<Page<UserDTO>> listUsers(Pageable pageable) {
         return ResponseEntity.ok(authService.listUsers(pageable));
@@ -151,6 +157,8 @@ public class UserController {
     })
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.http.ResponseEntity} object
      */
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         authService.deleteUser(id);

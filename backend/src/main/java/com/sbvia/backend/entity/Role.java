@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+/**
+ * <p>Role class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "rol")
 @Data
@@ -11,6 +16,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Role {
+    /** Default constructor for Role. */
+    public Role() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

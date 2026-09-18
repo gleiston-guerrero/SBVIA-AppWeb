@@ -13,10 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * <p>AuditController class.</p>
+ *
+ * @author Keitho_
+ */
 @RestController
 @RequestMapping("/api/auditoria")
 @RequiredArgsConstructor
 public class AuditController {
+    /** Default constructor for AuditController. */
+    public AuditController() {}
 
     private final AuditService auditService;
 
@@ -27,9 +34,9 @@ public class AuditController {
      * @param tabla name de la tabla afectada a filtrar
      * @param operation tipo de operación realizada (INSERT, UPDATE, DELETE)
      * @param user name o identificador del user que realizó la acción
-     * @param fechaInicio fecha y hora de inicio para el rango de búsqueda
      * @param endDate fecha y hora de fin para el rango de búsqueda
      * @return una respuesta HTTP con la lista de objetos AuditLog
+     * @param startDate a {@link java.time.LocalDateTime} object
      */
     @GetMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -51,9 +58,9 @@ public class AuditController {
      * @param tabla name de la tabla afectada a filtrar
      * @param operation tipo de operación realizada
      * @param user name o identificador del user
-     * @param fechaInicio fecha y hora inicial
      * @param endDate fecha y hora final
      * @return una respuesta HTTP que contiene el archivo PDF como array de bytes para su descarga
+     * @param startDate a {@link java.time.LocalDateTime} object
      */
     @GetMapping("/reporte/pdf")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")

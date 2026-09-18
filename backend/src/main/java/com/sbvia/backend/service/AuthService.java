@@ -22,10 +22,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>AuthService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
+    /** Default constructor for AuthService. */
+    public AuthService() {}
 
     private final UserRepository usuarioRepository;
     private final RoleRepository rolRepository;
@@ -39,7 +46,11 @@ public class AuthService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param request a {@link com.sbvia.backend.dto.RegisterRequest} object
+     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
      */
+    /** Javadoc for this element. */
     public AuthResponse registro(RegisterRequest request) {
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException(
@@ -90,6 +101,9 @@ public class AuthService {
 
     /**
      * Método público.
+     *
+     * @param request a {@link com.sbvia.backend.dto.LoginRequest} object
+     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
      */
     public AuthResponse login(LoginRequest request) {
         String identificador = request.getIdentificador();
@@ -119,6 +133,8 @@ public class AuthService {
 
     /**
      * Método público.
+     *
+     * @param token a {@link java.lang.String} object
      */
     public void logout(String token) {
         String jti = jwtService.extractJti(token);
@@ -130,6 +146,9 @@ public class AuthService {
 
     /**
      * Método público.
+     *
+     * @param refreshToken a {@link java.lang.String} object
+     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
      */
     public AuthResponse refresh(String refreshToken) {
         String tokenType = jwtService.extractTokenType(refreshToken);
@@ -161,6 +180,9 @@ public class AuthService {
 
     /**
      * Método público.
+     *
+     * @param identificador a {@link java.lang.String} object
+     * @return a {@link com.sbvia.backend.dto.UserDTO} object
      */
     public UserDTO getCurrentUser(String identificador) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
@@ -168,6 +190,12 @@ public class AuthService {
         return mapToDTO(user);
     }
 
+    /**
+     * <p>listUsers.</p>
+     *
+     * @param pageable a {@link org.springframework.data.domain.Pageable} object
+     * @return a {@link org.springframework.data.domain.Page} object
+     */
     public org.springframework.data.domain.Page<UserDTO> listUsers(org.springframework.data.domain.Pageable pageable) {
         return usuarioRepository.findAll(pageable).map(this::mapToDTO);
     }
@@ -175,7 +203,12 @@ public class AuthService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @param nombreRol a {@link java.lang.String} object
+     * @return a {@link com.sbvia.backend.dto.UserDTO} object
      */
+    /** Javadoc for this element. */
     public UserDTO cambiarRol(Integer id, String nombreRol) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -191,7 +224,12 @@ public class AuthService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @param request a {@link com.sbvia.backend.dto.UpdateUserRequest} object
+     * @return a {@link com.sbvia.backend.dto.UserDTO} object
      */
+    /** Javadoc for this element. */
     public UserDTO updateUser(Integer id, UpdateUserRequest request) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -214,7 +252,12 @@ public class AuthService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param identificador a {@link java.lang.String} object
+     * @param request a {@link com.sbvia.backend.dto.UpdateProfileRequest} object
+     * @return a {@link com.sbvia.backend.dto.UserDTO} object
      */
+    /** Javadoc for this element. */
     public UserDTO updateCurrentUserProfile(String identificador, UpdateProfileRequest request) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
@@ -230,7 +273,10 @@ public class AuthService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
      */
+    /** Javadoc for this element. */
     public void deleteUser(Integer id) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -240,6 +286,8 @@ public class AuthService {
 
     /**
      * Método público.
+     *
+     * @return a long
      */
     public long getRefreshExpirationSeconds() {
         return jwtService.getRefreshExpirationMs() / 1000;

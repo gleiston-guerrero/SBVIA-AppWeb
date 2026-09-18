@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+/**
+ * <p>Simulation class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "simulacion")
 @Data
@@ -11,6 +16,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class Simulation {
+    /** Default constructor for Simulation. */
+    public Simulation() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

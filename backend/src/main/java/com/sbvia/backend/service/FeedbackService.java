@@ -29,11 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>FeedbackService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
 public class FeedbackService {
+    /** Default constructor for FeedbackService. */
+    public FeedbackService() {}
 
     private final SimulationRepository simulationRepository;
     private final UserRepository userRepository;
@@ -46,6 +53,10 @@ public class FeedbackService {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
+     * @param simulationId a {@link java.lang.Integer} object
+     * @return a {@link com.sbvia.backend.dto.FeedbackIaResponse} object
      */
     public FeedbackIaResponse generateReport(String email, Integer simulationId) {
         DrivingData data = buildData(email, simulationId);
@@ -54,6 +65,10 @@ public class FeedbackService {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
+     * @param simulationId a {@link java.lang.Integer} object
+     * @return a {@link com.sbvia.backend.dto.FeedbackIaResponse} object
      */
     public FeedbackIaResponse generateAndSave(String email, Integer simulationId) {
         Simulation simulation = loadOwnSimulation(email, simulationId);

@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * <p>TrafficRuleService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 public class TrafficRuleService {
@@ -18,6 +23,8 @@ public class TrafficRuleService {
     @Transactional(readOnly = true)
     /**
      * Método público.
+     *
+     * @return a {@link java.util.List} object
      */
     public List<TrafficRuleDTO> list() {
         return trafficRuleRepository.findAll().stream().map(this::toDTO).toList();
@@ -26,6 +33,9 @@ public class TrafficRuleService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param dto a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
+     * @return a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
      */
     public TrafficRuleDTO create(TrafficRuleDTO dto) {
         TrafficRule regla = TrafficRule.builder()
@@ -42,6 +52,10 @@ public class TrafficRuleService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
+     * @param dto a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
+     * @return a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
      */
     public TrafficRuleDTO update(Integer id, TrafficRuleDTO dto) {
         TrafficRule regla = trafficRuleRepository.findById(id)
@@ -57,6 +71,8 @@ public class TrafficRuleService {
     @Transactional
     /**
      * Método público.
+     *
+     * @param id a {@link java.lang.Integer} object
      */
     public void delete(Integer id) {
         TrafficRule regla = trafficRuleRepository.findById(id)

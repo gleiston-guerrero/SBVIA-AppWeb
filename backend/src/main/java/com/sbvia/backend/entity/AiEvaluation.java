@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>AiEvaluation class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "evaluacion_ia")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class AiEvaluation {
+    /** Default constructor for AiEvaluation. */
+    public AiEvaluation() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

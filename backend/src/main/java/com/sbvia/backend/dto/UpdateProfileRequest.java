@@ -4,6 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * <p>UpdateProfileRequest class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 public class UpdateProfileRequest {
 

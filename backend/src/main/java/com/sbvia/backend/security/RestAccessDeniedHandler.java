@@ -14,12 +14,20 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URI;
 
+/**
+ * <p>RestAccessDeniedHandler class.</p>
+ *
+ * @author Keitho_
+ */
 @Component
 @RequiredArgsConstructor
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
+    /** Default constructor for RestAccessDeniedHandler. */
+    public RestAccessDeniedHandler() {}
 
     private final ObjectMapper objectMapper;
 
+    /** {@inheritDoc} */
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException {

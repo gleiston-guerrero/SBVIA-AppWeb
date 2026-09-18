@@ -14,9 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>ExternalAiFeedbackService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 public class ExternalAiFeedbackService implements FeedbackProvider {
 
+    /** Constant <code>ORIGIN="OPENAI"</code> */
     public static final String ORIGIN = "OPENAI";
 
     private final RestClient restClient;
@@ -26,6 +32,16 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
     private final String apiKey;
     private final String model;
 
+    /**
+     * <p>Constructor for ExternalAiFeedbackService.</p>
+     *
+     * @param objectMapper a {@link com.fasterxml.jackson.databind.ObjectMapper} object
+     * @param provider a {@link java.lang.String} object
+     * @param apiUrl a {@link java.lang.String} object
+     * @param apiKey a {@link java.lang.String} object
+     * @param model a {@link java.lang.String} object
+     * @param timeoutSeconds a int
+     */
     public ExternalAiFeedbackService(
             ObjectMapper objectMapper,
             @Value("${ia.proveedor:local}") String provider,
@@ -46,6 +62,8 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
 
     @Override
     /**
+     * {@inheritDoc}
+     *
      * Método público.
      */
     public String origin() {
@@ -54,6 +72,8 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
 
     /**
      * Método público.
+     *
+     * @return a boolean
      */
     public boolean isEnabled() {
         return "openai".equalsIgnoreCase(provider) && apiKey != null && !apiKey.isBlank()
@@ -63,6 +83,8 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
     @Override
     @SuppressWarnings("unchecked")
     /**
+     * {@inheritDoc}
+     *
      * Método público.
      */
     public FeedbackIaResponse generate(DrivingData data) {

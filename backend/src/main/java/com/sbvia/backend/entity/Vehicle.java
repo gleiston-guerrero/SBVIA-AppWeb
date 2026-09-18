@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+/**
+ * <p>Vehicle class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "vehiculo")
 @Data

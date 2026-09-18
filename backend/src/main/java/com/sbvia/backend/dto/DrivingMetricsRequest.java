@@ -8,6 +8,13 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+/**
+ * <p>DrivingMetricsRequest class.</p>
+ *
+ * @author Keitho_
+  * @param durationSeconds durationSeconds param
+  * @param velocidadPromedio velocidadPromedio param
+ */
 public record DrivingMetricsRequest(
         @NotNull(message = "La duración es obligatoria")
         @Min(value = 1, message = "La duración mínima es 1 segundo")
@@ -55,6 +62,8 @@ public record DrivingMetricsRequest(
 
     /**
      * Método público.
+     *
+     * @return a int
      */
     public int respetados() {
         return semaforosRespetados() != null ? semaforosRespetados() : 0;

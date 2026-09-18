@@ -6,7 +6,7 @@ export interface TrafficRule {
   id?: number;
   codigo: string;
   nombre: string;
-  description?: string;
+  descripcion?: string;
   categoria: string;
   penalizacionBase: number;
   activa?: boolean;

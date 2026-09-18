@@ -3,6 +3,11 @@ package com.sbvia.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * <p>RoadType class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "tipo_via")
 @Data
@@ -10,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class RoadType {
+    /** Default constructor for RoadType. */
+    public RoadType() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

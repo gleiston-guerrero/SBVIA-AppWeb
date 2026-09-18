@@ -8,12 +8,17 @@ import java.util.Optional;
 
 /**
  * Repositorio JPA para la entidad Role.
+ *
+ * @author Keitho_
  */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
     /**
      * Busca un role por name.
+     *
+     * @param name a {@link java.lang.String} object
+     * @return a {@link java.util.Optional} object
      */
     Optional<Role> findByName(String name);
 }

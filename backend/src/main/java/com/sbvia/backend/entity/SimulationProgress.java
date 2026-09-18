@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>SimulationProgress class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "progreso_simulacion")
 @Data

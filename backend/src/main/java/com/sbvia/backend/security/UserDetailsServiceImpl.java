@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * <p>UserDetailsServiceImpl class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -19,6 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     /**
+     * {@inheritDoc}
+     *
      * Método público.
      */
     public UserDetails loadUserByUsername(String identificador) throws UsernameNotFoundException {

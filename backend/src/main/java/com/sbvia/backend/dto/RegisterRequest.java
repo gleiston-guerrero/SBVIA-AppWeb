@@ -5,8 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * <p>RegisterRequest class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 public class RegisterRequest {
+    /** Default constructor for RegisterRequest. */
+    public RegisterRequest() {}
 
     @NotBlank(message = "El name es obligatorio")
     @Size(max = 100)

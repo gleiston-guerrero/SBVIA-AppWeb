@@ -28,15 +28,20 @@ import java.io.IOException;
  * 2. Valida la firma y la expiración con JwtService.validateToken()
  * 3. Consulta Redis para verificar que el JTI no está en la blacklist
  * 4. Establece el UsernamePasswordAuthenticationToken en el SecurityContextHolder
+ *
+ * @author Keitho_
  */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
+    /** Default constructor for JwtAuthFilter. */
+    public JwtAuthFilter() {}
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final TokenBlacklistService tokenBlacklistService;
 
+    /** {@inheritDoc} */
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,

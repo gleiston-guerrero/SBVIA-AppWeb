@@ -20,10 +20,14 @@ import java.util.Map;
  * - Serialización JSON (GenericJackson2JsonRedisSerializer) en lugar de Java nativa
  *   para evitar ClassCastException entre versiones y poder inspeccionar claves en redis-cli.
  * - TTL global: 10 minutos. TTL específico para "scenarios": 5 minutos (datos semi-estáticos).
+ *
+ * @author Keitho_
  */
 @Configuration
 @EnableCaching
 public class CacheConfig {
+    /** Default constructor for CacheConfig. */
+    public CacheConfig() {}
 
     private static final Duration DEFAULT_TTL = Duration.ofMinutes(10);
     private static final Duration ESCENARIOS_TTL = Duration.ofMinutes(5);
@@ -31,7 +35,11 @@ public class CacheConfig {
     @Bean
     /**
      * Método público.
+     *
+     * @param connectionFactory a {@link org.springframework.data.redis.connection.RedisConnectionFactory} object
+     * @return a {@link org.springframework.data.redis.cache.RedisCacheManager} object
      */
+    /** Javadoc for this element. */
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         // Configuración por defecto: JSON + TTL 10 min + no cache null values
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()

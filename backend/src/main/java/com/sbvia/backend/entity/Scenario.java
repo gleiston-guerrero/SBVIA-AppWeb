@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+/**
+ * <p>Scenario class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "escenario")
 @Data
@@ -11,6 +16,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Scenario {
+    /** Default constructor for Scenario. */
+    public Scenario() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

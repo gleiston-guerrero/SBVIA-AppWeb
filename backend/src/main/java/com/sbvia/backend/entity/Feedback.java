@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
 
+/**
+ * <p>Feedback class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "retroalimentacion")
 @Data
@@ -11,6 +16,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Feedback {
+    /** Default constructor for Feedback. */
+    public Feedback() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

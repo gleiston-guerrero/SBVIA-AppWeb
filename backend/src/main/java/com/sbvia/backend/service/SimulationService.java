@@ -38,6 +38,11 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
+/**
+ * <p>SimulationService class.</p>
+ *
+ * @author Keitho_
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -50,11 +55,14 @@ public class SimulationService {
      * aún no tiene reglas equivalentes (propuesta: RT-006 a RT-008 en una migración futura).
      */
     public static final String REGLA_EXCESO = "RT-002";
+    /** Constant <code>REGLA_SEMAFORO="RT-001"</code> */
     public static final String REGLA_SEMAFORO = "RT-001";
 
     /** Descuentos fijos por episodio para tipos sin regla de catálogo. */
     public static final BigDecimal PENAL_COLISION = new BigDecimal("20");
+    /** Constant <code>PENAL_SALIDA</code> */
     public static final BigDecimal PENAL_SALIDA = new BigDecimal("10");
+    /** Constant <code>PENAL_DISTANCIA</code> */
     public static final BigDecimal PENAL_DISTANCIA = new BigDecimal("8");
 
     private final SimulationRepository simulacionRepository;
@@ -72,6 +80,10 @@ public class SimulationService {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
+     * @param scenarioId a {@link java.lang.Integer} object
+     * @return a {@link com.sbvia.backend.dto.SimulationDTO} object
      */
     public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
         User user = usuarioRepository.findByEmail(email)
@@ -106,6 +118,11 @@ public class SimulationService {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
+     * @param simulationId a {@link java.lang.Integer} object
+     * @param finalScore a {@link java.math.BigDecimal} object
+     * @return a {@link com.sbvia.backend.dto.SimulationDTO} object
      */
     public SimulationDTO finalizarSimulacion(String email, Integer simulationId, BigDecimal finalScore) {
         Simulation simulation = simulacionRepository.findById(simulationId)
@@ -127,6 +144,11 @@ public class SimulationService {
      * Finaliza una conducción del simulador 2D con las métricas reportadas por el frontend.
      * El puntaje se calcula en el servidor (el cliente nunca lo impone) y las métricas
      * se persisten en `metrica_desempeno` e `infraction` dentro de la misma transacción.
+     *
+     * @param email a {@link java.lang.String} object
+     * @param simulationId a {@link java.lang.Integer} object
+     * @param metricas a {@link com.sbvia.backend.dto.DrivingMetricsRequest} object
+     * @return a {@link com.sbvia.backend.dto.DrivingResultDTO} object
      */
     public DrivingResultDTO finalizarConduccion(String email, Integer simulationId, DrivingMetricsRequest metricas) {
         Simulation simulation = simulacionRepository.findById(simulationId)
@@ -210,6 +232,9 @@ public class SimulationService {
 
     /**
      * Método público.
+     *
+     * @param email a {@link java.lang.String} object
+     * @return a {@link java.util.List} object
      */
     public List<SimulationDTO> getMyPractices(String email) {
         User user = usuarioRepository.findByEmail(email)
@@ -225,6 +250,8 @@ public class SimulationService {
 
     /**
      * Método público.
+     *
+     * @return a {@link java.util.List} object
      */
     public List<SimulationDTO> getAll() {
         return simulacionRepository.findAllByOrderBySimulationIdDesc().stream()
@@ -232,6 +259,11 @@ public class SimulationService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * <p>getGlobalStatistics.</p>
+     *
+     * @return a {@link com.sbvia.backend.dto.StatisticsDTO} object
+     */
     public com.sbvia.backend.dto.StatisticsDTO getGlobalStatistics() {
         Object[] result = simulacionRepository.getGlobalStats();
         if (result == null || result[0] == null || result.length == 0 || ((Object[]) result[0])[0] == null) {

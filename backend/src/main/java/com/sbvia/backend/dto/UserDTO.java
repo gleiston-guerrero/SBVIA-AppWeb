@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+/**
+ * <p>UserDTO class.</p>
+ *
+ * @author Keitho_
+ */
 @Data
 @Builder
 @NoArgsConstructor

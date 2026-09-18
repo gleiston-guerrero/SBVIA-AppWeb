@@ -24,12 +24,19 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+/**
+ * <p>SimulationController class.</p>
+ *
+ * @author Keitho_
+ */
 @RestController
 @RequestMapping("/api/simulations")
 @RequiredArgsConstructor
 @Tag(name = "Simulations", description = "Endpoints de prácticas de simulations")
 @SecurityRequirement(name = "bearerAuth")
 public class SimulationController {
+    /** Default constructor for SimulationController. */
+    public SimulationController() {}
 
     private final SimulationService simulationService;
     private final FeedbackService retroalimentacionService;

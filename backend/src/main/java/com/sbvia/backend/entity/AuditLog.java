@@ -8,11 +8,18 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
+/**
+ * <p>AuditLog class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "audit_log")
 @Getter
 @Setter
 public class AuditLog {
+    /** Default constructor for AuditLog. */
+    public AuditLog() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

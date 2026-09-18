@@ -5,6 +5,11 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/**
+ * <p>Infraction class.</p>
+ *
+ * @author Keitho_
+ */
 @Entity
 @Table(name = "infraccion")
 @Data
@@ -12,6 +17,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Infraction {
+    /** Default constructor for Infraction. */
+    public Infraction() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

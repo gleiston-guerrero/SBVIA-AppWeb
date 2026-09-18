@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuración de Swagger UI / OpenAPI 3.
+ *
+ * @author Keitho_
  */
 @Configuration
 @OpenAPIDefinition(
@@ -32,4 +34,6 @@ import org.springframework.context.annotation.Configuration;
         in = SecuritySchemeIn.HEADER
 )
 public class OpenApiConfig {
+    /** Default constructor for OpenApiConfig. */
+    public OpenApiConfig() {}
 }

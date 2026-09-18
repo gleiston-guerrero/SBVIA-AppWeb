@@ -29,12 +29,16 @@ import org.springframework.security.web.header.writers.XXssProtectionHeaderWrite
  * - Cabeceras HTTP de seguridad (X-Content-Type-Options, X-Frame-Options, CSP)
  * - CORS configurado explícitamente
  * - Roles con @PreAuthorize habilitado
+ *
+ * @author Keitho_
  */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    /** Default constructor for SecurityConfig. */
+    public SecurityConfig() {}
 
     private final JwtAuthFilter jwtAuthFilter;
     private final CsrfTokenIssuerFilter csrfTokenIssuerFilter;
@@ -46,7 +50,12 @@ public class SecurityConfig {
     @Bean
     /**
      * Método público.
+     *
+     * @param http a {@link org.springframework.security.config.annotation.web.builders.HttpSecurity} object
+     * @return a {@link org.springframework.security.web.SecurityFilterChain} object
+     * @throws java.lang.Exception if any.
      */
+    /** Javadoc for this element. */
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         
@@ -113,6 +122,8 @@ public class SecurityConfig {
 
     /**
      * PasswordEncoder con BCrypt costo 12 (OWASP A02: Fallas criptográficas).
+     *
+     * @return a {@link org.springframework.security.crypto.password.PasswordEncoder} object
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -122,7 +133,10 @@ public class SecurityConfig {
     @Bean
     /**
      * Método público.
+     *
+     * @return a {@link org.springframework.security.authentication.AuthenticationProvider} object
      */
+    /** Javadoc for this element. */
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
@@ -130,6 +144,13 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    /**
+     * <p>authenticationManager.</p>
+     *
+     * @param config a {@link org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration} object
+     * @return a {@link org.springframework.security.authentication.AuthenticationManager} object
+     * @throws java.lang.Exception if any.
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
