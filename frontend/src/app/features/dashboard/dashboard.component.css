@@ -2,7 +2,7 @@
 .hero{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:28px}
 .eyebrow{color:var(--blue);font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
 .hero h1{margin:8px 0 6px;font-size:2rem;letter-spacing:-.035em}
-.hero p{margin:0;color:var(--muted)}
+.hero p{margin:0;color:#334155 !important}
 .hero button{border:0;color:#fff;background:linear-gradient(135deg,#2563eb,#6d4df6);box-shadow:0 10px 24px rgba(64,83,221,.25);border-radius:11px;padding:.9rem 1.15rem;font-weight:700;cursor:pointer}
 .hero button span{margin-left:10px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
