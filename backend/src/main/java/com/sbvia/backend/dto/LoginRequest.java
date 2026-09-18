@@ -17,6 +17,9 @@ public class LoginRequest {
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
 
+    /**
+     * Método público.
+     */
     public String getIdentificador() {
         if (identificador != null && !identificador.isBlank()) {
             return identificador.trim();
@@ -27,14 +30,23 @@ public class LoginRequest {
         return "";
     }
 
+    /**
+     * Método público.
+     */
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
 
+    /**
+     * Método público.
+     */
     public String getEmail() {
         return getIdentificador();
     }
 
+    /**
+     * Método público.
+     */
     public void setEmail(String email) {
         this.email = email;
         if (this.identificador == null || this.identificador.isBlank()) {

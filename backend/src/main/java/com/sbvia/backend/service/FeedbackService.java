@@ -44,11 +44,17 @@ public class FeedbackService {
     private final ExternalAiFeedbackService externalProvider;
     private final ObjectMapper objectMapper;
 
+    /**
+     * Método público.
+     */
     public FeedbackIaResponse generateReport(String email, Integer simulationId) {
         DrivingData data = buildData(email, simulationId);
         return generateWithFallback(data);
     }
 
+    /**
+     * Método público.
+     */
     public FeedbackIaResponse generateAndSave(String email, Integer simulationId) {
         Simulation simulation = loadOwnSimulation(email, simulationId);
         DrivingData data = buildData(simulation);

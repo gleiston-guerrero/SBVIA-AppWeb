@@ -45,10 +45,16 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public String origin() {
         return ORIGIN;
     }
 
+    /**
+     * Método público.
+     */
     public boolean isEnabled() {
         return "openai".equalsIgnoreCase(provider) && apiKey != null && !apiKey.isBlank()
                 && apiUrl != null && !apiUrl.isBlank();
@@ -56,6 +62,9 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
 
     @Override
     @SuppressWarnings("unchecked")
+    /**
+     * Método público.
+     */
     public FeedbackIaResponse generate(DrivingData data) {
         if (!isEnabled()) {
             throw new AiUnavailableException("Proveedor externo no configurado (ia.proveedor=openai + AI_API_KEY + AI_API_URL)");

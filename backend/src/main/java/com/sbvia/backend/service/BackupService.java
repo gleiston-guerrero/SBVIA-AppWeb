@@ -58,10 +58,16 @@ public class BackupService {
         }
     }
 
+    /**
+     * Método público.
+     */
     public List<Backup> getAll() {
         return backupRepository.findAllByOrderByStartDateDesc();
     }
 
+    /**
+     * Método público.
+     */
     public Backup generateBackup(BackupRequestDTO request, String type) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String filename = "sbvia_backup_" + timestamp + ".backup";
@@ -186,11 +192,17 @@ public class BackupService {
         backupRepository.save(backup);
     }
 
+    /**
+     * Método público.
+     */
     public File getFile(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
         return new File(backupDir + "/" + backup.getFileName());
     }
 
+    /**
+     * Método público.
+     */
     public void deleteBackup(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
         File file = new File(backupDir + "/" + backup.getFileName());
@@ -201,6 +213,9 @@ public class BackupService {
     }
 
     @Scheduled(cron = "0 0 2 * * ?")
+    /**
+     * Método público.
+     */
     public void scheduledBackup() {
         logger.info("Ejecutando respaldo automático programado...");
         BackupRequestDTO dto = new BackupRequestDTO();

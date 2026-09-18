@@ -110,6 +110,9 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    /**
+     * Método público.
+     */
     public String extractIssuer(String token) {
         return extractClaim(token, Claims::getIssuer);
     }
@@ -118,6 +121,9 @@ public class JwtService {
         return extractClaim(token, Claims::getAudience);
     }
 
+    /**
+     * Método público.
+     */
     public Date extractNotBefore(String token) {
         return extractClaim(token, Claims::getNotBefore);
     }
@@ -151,10 +157,16 @@ public class JwtService {
         return expiration.getTime() - System.currentTimeMillis();
     }
 
+    /**
+     * Método público.
+     */
     public long getAccessExpirationMs() {
         return accessExpirationMs;
     }
 
+    /**
+     * Método público.
+     */
     public long getRefreshExpirationMs() {
         return refreshExpirationMs;
     }

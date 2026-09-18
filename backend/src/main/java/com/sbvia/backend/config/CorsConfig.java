@@ -20,6 +20,9 @@ public class CorsConfig {
     private String[] allowedOrigins;
 
     @Bean
+    /**
+     * Método público.
+     */
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Orígenes permitidos dinámicamente

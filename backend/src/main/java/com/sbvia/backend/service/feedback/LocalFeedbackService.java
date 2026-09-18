@@ -14,11 +14,17 @@ public class LocalFeedbackService implements FeedbackProvider {
     public static final String ORIGIN = "IA_LOCAL";
 
     @Override
+    /**
+     * Método público.
+     */
     public String origin() {
         return ORIGIN;
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public FeedbackIaResponse generate(DrivingData d) {
         int total = d.speedingIncidents() + d.collisions() + d.laneDepartures()
                 + d.ignoredRedLights() + d.unsafeDistanceIncidents();
@@ -107,6 +113,9 @@ public class LocalFeedbackService implements FeedbackProvider {
         };
     }
 
+    /**
+     * Método público.
+     */
     public String compare(DrivingData d) {
         return comparison(d);
     }

@@ -21,21 +21,33 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler(DuplicateEmailException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleDuplicateEmailException(DuplicateEmailException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleIllegalArgumentException(IllegalArgumentException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleValidationExceptions(MethodArgumentNotValidException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Errores de validación en la petición");
         Map<String, String> errors = new HashMap<>();
@@ -49,26 +61,41 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(AuthenticationException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleAuthenticationException(AuthenticationException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, "Credenciales inválidas o token expirado");
     }
 
     @ExceptionHandler(RateLimitExceededException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleRateLimitExceededException(RateLimitExceededException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.TOO_MANY_REQUESTS, ex.getMessage());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleAccessDeniedException(AccessDeniedException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, "No tiene permisos para acceder a este recurso");
     }
 
     @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleMethodNotSupportedException(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.METHOD_NOT_ALLOWED, "Método HTTP no soportado: " + ex.getMethod());
     }
 
     @ExceptionHandler(Exception.class)
+    /**
+     * Método público.
+     */
     public ProblemDetail handleGlobalException(Exception ex) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno del servidor: " + ex.getMessage());
     }

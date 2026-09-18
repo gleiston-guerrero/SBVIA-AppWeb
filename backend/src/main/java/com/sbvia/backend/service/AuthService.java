@@ -37,6 +37,9 @@ public class AuthService {
     private final UsernameGeneratorService usernameGeneratorService;
 
     @Transactional
+    /**
+     * Método público.
+     */
     public AuthResponse registro(RegisterRequest request) {
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException(
@@ -85,6 +88,9 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Método público.
+     */
     public AuthResponse login(LoginRequest request) {
         String identificador = request.getIdentificador();
         Authentication authentication = authenticationManager.authenticate(
@@ -111,6 +117,9 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Método público.
+     */
     public void logout(String token) {
         String jti = jwtService.extractJti(token);
         long remainingMs = jwtService.getExpirationRemainingMs(token);
@@ -119,6 +128,9 @@ public class AuthService {
         }
     }
 
+    /**
+     * Método público.
+     */
     public AuthResponse refresh(String refreshToken) {
         String tokenType = jwtService.extractTokenType(refreshToken);
         if (!"refresh".equals(tokenType)) {
@@ -147,6 +159,9 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Método público.
+     */
     public UserDTO getCurrentUser(String identificador) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
@@ -158,6 +173,9 @@ public class AuthService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public UserDTO cambiarRol(Integer id, String nombreRol) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -171,6 +189,9 @@ public class AuthService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public UserDTO updateUser(Integer id, UpdateUserRequest request) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -191,6 +212,9 @@ public class AuthService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public UserDTO updateCurrentUserProfile(String identificador, UpdateProfileRequest request) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
@@ -204,6 +228,9 @@ public class AuthService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public void deleteUser(Integer id) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -211,6 +238,9 @@ public class AuthService {
         usuarioRepository.save(user);
     }
 
+    /**
+     * Método público.
+     */
     public long getRefreshExpirationSeconds() {
         return jwtService.getRefreshExpirationMs() / 1000;
     }

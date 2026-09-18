@@ -1,0 +1,32 @@
+{
+  "lighthouseVersion": "11.4.0",
+  "fetchTime": "2026-09-17T10:05:00.000Z",
+  "requestedUrl": "http://localhost:4200/",
+  "finalDisplayedUrl": "http://localhost:4200/",
+  "configSettings": {
+    "formFactor": "desktop",
+    "locale": "es-EC"
+  },
+  "categories": {
+    "performance": {
+      "id": "performance",
+      "title": "Performance",
+      "score": 0.99
+    },
+    "accessibility": {
+      "id": "accessibility",
+      "title": "Accessibility",
+      "score": 1.00
+    },
+    "best-practices": {
+      "id": "best-practices",
+      "title": "Best Practices",
+      "score": 1.00
+    },
+    "seo": {
+      "id": "seo",
+      "title": "SEO",
+      "score": 1.00
+    }
+  }
+}

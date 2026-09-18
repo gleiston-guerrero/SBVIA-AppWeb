@@ -70,6 +70,9 @@ public class SimulationService {
     private final VehicleRepository vehiculoRepository;
     private final FeedbackService retroalimentacionService;
 
+    /**
+     * Método público.
+     */
     public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
         User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User no encontrado"));
@@ -101,6 +104,9 @@ public class SimulationService {
         return mapToDTO(simulacionRepository.save(simulation));
     }
 
+    /**
+     * Método público.
+     */
     public SimulationDTO finalizarSimulacion(String email, Integer simulationId, BigDecimal finalScore) {
         Simulation simulation = simulacionRepository.findById(simulationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Simulación no encontrada"));
@@ -202,6 +208,9 @@ public class SimulationService {
                 .build();
     }
 
+    /**
+     * Método público.
+     */
     public List<SimulationDTO> getMyPractices(String email) {
         User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
@@ -214,6 +223,9 @@ public class SimulationService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Método público.
+     */
     public List<SimulationDTO> getAll() {
         return simulacionRepository.findAllByOrderBySimulationIdDesc().stream()
                 .map(this::mapToDTO)

@@ -43,6 +43,9 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Datos devueltos exitosamente"),
         @ApiResponse(responseCode = "401", description = "No autorizado o token expirado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<UserDTO> getPerfilActual(Authentication authentication) {
         String email = authentication.getName();
         UserDTO user = authService.getCurrentUser(email);
@@ -83,6 +86,9 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Lista devuelta exitosamente"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<Page<UserDTO>> listUsers(Pageable pageable) {
         return ResponseEntity.ok(authService.listUsers(pageable));
     }
@@ -143,6 +149,9 @@ public class UserController {
         @ApiResponse(responseCode = "204", description = "User desactivado"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         authService.deleteUser(id);
         return ResponseEntity.noContent().build();

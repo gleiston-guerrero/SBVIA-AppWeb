@@ -26,11 +26,17 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public CsrfToken generateToken(HttpServletRequest request) {
         return delegate.generateToken(request);
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public void saveToken(CsrfToken token, HttpServletRequest request, HttpServletResponse response) {
         if (token != null) {
             delegate.saveToken(token, request, response);
@@ -38,11 +44,17 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public CsrfToken loadToken(HttpServletRequest request) {
         return delegate.loadToken(request);
     }
 
     @Override
+    /**
+     * Método público.
+     */
     public DeferredCsrfToken loadDeferredToken(HttpServletRequest request, HttpServletResponse response) {
         return delegate.loadDeferredToken(request, response);
     }

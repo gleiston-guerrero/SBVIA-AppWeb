@@ -29,6 +29,9 @@ public class CacheConfig {
     private static final Duration ESCENARIOS_TTL = Duration.ofMinutes(5);
 
     @Bean
+    /**
+     * Método público.
+     */
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         // Configuración por defecto: JSON + TTL 10 min + no cache null values
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()

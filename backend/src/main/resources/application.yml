@@ -48,7 +48,7 @@ ia:
   proveedor: ${AI_PROVEEDOR:openai}
   api-url: ${AI_API_URL:https://api.groq.com/openai/v1/chat/completions}
   api-key: ${AI_API_KEY:}
-  modelo: ${AI_MODELO:llama3-8b-8192}
+  modelo: ${AI_MODELO:llama-3.1-8b-instant}
   timeout-segundos: ${AI_TIMEOUT_SEGUNDOS:15}
 
 springdoc:

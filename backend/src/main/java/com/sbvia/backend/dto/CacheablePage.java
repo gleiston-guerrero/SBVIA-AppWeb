@@ -30,6 +30,9 @@ public class CacheablePage<T> extends PageImpl<T> {
         super(content, PageRequest.of(number, Math.max(size, 1)), totalElements);
     }
 
+    /**
+     * Método público.
+     */
     public CacheablePage(Page<T> page) {
         super(page.getContent(), page.getPageable(), page.getTotalElements());
     }

@@ -16,6 +16,9 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 public class CsrfConfig {
 
     @Bean
+    /**
+     * Método público.
+     */
     public CsrfTokenRepository csrfTokenRepository() {
         return new StatelessCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

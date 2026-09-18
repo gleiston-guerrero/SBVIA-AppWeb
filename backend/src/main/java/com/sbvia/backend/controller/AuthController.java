@@ -56,6 +56,9 @@ public class AuthController {
         @ApiResponse(responseCode = "201", description = "User creado exitosamente"),
         @ApiResponse(responseCode = "400", description = "Datos inválidos o email ya registrado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<AuthResponse> registro(@Valid @RequestBody RegisterRequest request) {
         AuthResponse response = null;
         int maxIntentos = 3;
@@ -95,6 +98,9 @@ public class AuthController {
         @ApiResponse(responseCode = "200", description = "Autenticación exitosa"),
         @ApiResponse(responseCode = "401", description = "Credenciales inválidas")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         String ip = clientIp(httpRequest);
 

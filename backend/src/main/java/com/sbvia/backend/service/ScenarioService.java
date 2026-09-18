@@ -30,6 +30,9 @@ public class ScenarioService {
 
     @Cacheable(value = "scenarios", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
     @Transactional(readOnly = true)
+    /**
+     * Método público.
+     */
     public Page<ScenarioDTO> listarActivos(Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
@@ -37,6 +40,9 @@ public class ScenarioService {
     }
 
     @Transactional(readOnly = true)
+    /**
+     * Método público.
+     */
     public Page<ScenarioDTO> findFiltered(String roadType, Integer difficultyLevel, String clima, Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
@@ -44,6 +50,9 @@ public class ScenarioService {
     }
 
     @Transactional(readOnly = true)
+    /**
+     * Método público.
+     */
     public ScenarioDTO findById(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -53,6 +62,9 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
+    /**
+     * Método público.
+     */
     public ScenarioDTO create(ScenarioDTO dto) {
         RoadType roadType = tipoViaRepository.findByName(dto.getRoadType())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -80,6 +92,9 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
+    /**
+     * Método público.
+     */
     public ScenarioDTO update(Integer id, ScenarioDTO dto) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -93,6 +108,9 @@ public class ScenarioService {
 
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
+    /**
+     * Método público.
+     */
     public void delete(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(

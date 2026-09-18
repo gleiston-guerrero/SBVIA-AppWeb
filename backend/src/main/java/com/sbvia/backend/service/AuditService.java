@@ -24,6 +24,9 @@ public class AuditService {
 
     private final AuditLogRepository repository;
 
+    /**
+     * Método público.
+     */
     public List<AuditLog> getAuditLogs(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         Specification<AuditLog> spec = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -48,6 +51,9 @@ public class AuditService {
         return repository.findAll(spec, Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
+    /**
+     * Método público.
+     */
     public byte[] generatePdfReport(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         List<AuditLog> records = getAuditLogs(table, operation, user, startDate, endDate);
         

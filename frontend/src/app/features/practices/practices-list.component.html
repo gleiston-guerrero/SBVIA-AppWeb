@@ -55,7 +55,7 @@
       <tbody>
         <tr *ngFor="let practica of practicasFiltradas">
           <td>{{ practica.startDate | date:'dd/MM/yyyy' }}</td>
-          <td>{{ practica.nombreEscenario }}</td>
+          <td>{{ practica.scenarioName }}</td>
           <td><span class="estado" [class.aprobada]="(practica.completed || practica.endDate) && practica.finalScore >= 70" [class.reprobada]="(practica.completed || practica.endDate) && practica.finalScore < 70">{{ (practica.completed || practica.endDate) ? (practica.finalScore >= 70 ? 'Aprobada' : 'Reprobada') : 'En progreso' }}</span></td>
           <td><strong>{{ (practica.completed || practica.endDate) ? (practica.finalScore + '/100') : '—' }}</strong></td>
           <td class="acciones">

@@ -11,6 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class SbviaApplication {
 
+    /**
+     * Método público.
+     */
     public static void main(String[] args) {
         SpringApplication.run(SbviaApplication.class, args);
     }

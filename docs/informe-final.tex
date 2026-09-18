@@ -226,7 +226,7 @@ La separación de responsabilidades se gestiona a nivel estructural mediante el 
 
 El \textbf{Diagrama de Contenedores (Nivel 2)} detalla la arquitectura interna del sistema, mostrando cómo la aplicación web (Angular) se comunica con la API de Spring Boot, la cual a su vez interactúa con PostgreSQL y Redis.
     \centering
-    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 2.png}
+    \includegraphics[width=0.95\textwidth]{diagramas/c4-level-2.png}
 \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
 \label{fig:c4-level2}
 \end{figure}
@@ -369,6 +369,8 @@ La evaluación cuantitativa se organiza con un nivel de significación $\alpha=0
 
 Para usabilidad, $H_{0U}$ establece que la media poblacional SUS no supera el umbral de 68 y $H_{1U}$ que lo supera. Debido al tamaño y tipo de muestreo, la decisión se presenta mediante media, mediana, desviación típica e intervalo de confianza con $t$ de Student; la puntuación no se denomina porcentaje. Para cobertura, seguridad y Lighthouse se aplican criterios de aceptación previamente fijados y no pruebas de hipótesis retrospectivas.
 
+Dado que este estudio evalúa simultáneamente el rendimiento (latencia en frío vs caliente) y la usabilidad (puntuación SUS frente a un umbral), se realizan múltiples pruebas de hipótesis estadísticas sobre el mismo experimento. Para controlar la Tasa de Error por Familia (FWER) y reducir el riesgo de falsos positivos (Error Tipo I), se aplica el procedimiento de corrección paso a paso de Holm-Bonferroni \cite{holm1979simple}. De este modo, los valores $p$ obtenidos se ordenarán de menor a mayor y se compararán contra niveles de significancia ajustados progresivamente ($\alpha / k, \alpha / (k-1), \dots$) antes de rechazar cualquier hipótesis nula.
+
 \section{Variables y criterios de aceptación}
 Para rendimiento, la variable principal es la duración de solicitudes HTTP y el estadístico de decisión es el percentil 95. Se selecciona $p95$ porque representa el límite experimentado por la mayoría de usuarios sin ocultar la cola de latencias tras una media. Las variables secundarias son $p50$, $p90$, $p99$, media, desviación y tasa de errores. Los criterios son $p95 \le 200$ ms con caché caliente y $p95 \le 500$ ms en frío.
 
@@ -398,7 +400,7 @@ En el nivel de contexto (ver Figura~\ref{fig:c4-level1}), el conductor y el admi
 El \textbf{Diagrama de Contexto (Nivel 1)} proporciona una visión general de las interacciones entre los usuarios (Estudiante, Instructor, Administrador) y el Sistema SBVIA, así como las dependencias externas.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 1.png}
+    \includegraphics[width=0.95\textwidth]{diagramas/c4-level-1.png}
     \caption{Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}
     \label{fig:c4-level1}
 \end{figure}
@@ -408,7 +410,7 @@ En el nivel de componentes (ver Figura~\ref{fig:c4-level3}), los controladores t
 El \textbf{Diagrama de Componentes (Nivel 3)} se enfoca en el backend de Spring Boot, ilustrando los controladores, servicios y repositorios clave que manejan la lógica de negocio (Simulaciones, Autenticación, Reportes).
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.95\textwidth]{diagramas/C4 Level 3.png}
+    \includegraphics[width=0.95\textwidth]{diagramas/c4-level-3.png}
     \caption{Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}
     \label{fig:c4-level3}
 \end{figure}
@@ -499,28 +501,28 @@ Como se ilustra en las siguientes figuras, las mejoras recientes añadieron el l
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 1 - Inicio de Sesión Registro.png}
+    \includegraphics[width=0.94\textwidth]{diagramas/pantalla-1---inicio-de-sesin-registro.png}
     \caption{Pantalla de inicio de sesión y registro de usuarios en el sistema.}
     \label{fig:pantalla1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 2 - Dashboard Principal.png}
+    \includegraphics[width=0.94\textwidth]{diagramas/pantalla-2---dashboard-principal.png}
     \caption{Dashboard principal con acceso a escenarios, prácticas e historial.}
     \label{fig:pantalla2}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 3 - Selección de Escenario (Core).png}
+    \includegraphics[width=0.94\textwidth]{diagramas/pantalla-3---seleccin-de-escenario-core.png}
     \caption{Pantalla core para la selección y configuración de escenarios de conducción.}
     \label{fig:pantalla3}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{diagramas/Pantalla 4 - Reporte de Retroalimentación.png}
+    \includegraphics[width=0.94\textwidth]{diagramas/pantalla-4---reporte-de-retroalimentacin.png}
     \caption{Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}
     \label{fig:pantalla4}
 \end{figure}

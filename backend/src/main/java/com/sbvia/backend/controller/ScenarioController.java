@@ -69,6 +69,9 @@ public class ScenarioController {
         @ApiResponse(responseCode = "404", description = "Scenario no encontrado"),
         @ApiResponse(responseCode = "401", description = "No autorizado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<ScenarioDTO> findById(@PathVariable Integer id) {
         ScenarioDTO dto = scenarioService.findById(id);
         return ResponseEntity.ok(dto);
@@ -89,6 +92,9 @@ public class ScenarioController {
         @ApiResponse(responseCode = "400", description = "Datos de entrada inválidos"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado (requiere ROLE_ADMIN)")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<ScenarioDTO> create(@Valid @RequestBody ScenarioDTO dto) {
         ScenarioDTO creado = scenarioService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
@@ -132,6 +138,9 @@ public class ScenarioController {
         @ApiResponse(responseCode = "404", description = "Scenario no encontrado"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
+    /**
+     * Método público.
+     */
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         scenarioService.delete(id);
         return ResponseEntity.noContent().build();

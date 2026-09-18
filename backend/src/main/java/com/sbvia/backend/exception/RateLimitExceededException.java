@@ -7,6 +7,9 @@ package com.sbvia.backend.exception;
  */
 public class RateLimitExceededException extends RuntimeException {
 
+    /**
+     * Método público.
+     */
     public RateLimitExceededException(String message) {
         super(message);
     }

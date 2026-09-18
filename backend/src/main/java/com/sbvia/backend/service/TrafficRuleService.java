@@ -16,11 +16,17 @@ public class TrafficRuleService {
     private final TrafficRuleRepository trafficRuleRepository;
 
     @Transactional(readOnly = true)
+    /**
+     * Método público.
+     */
     public List<TrafficRuleDTO> list() {
         return trafficRuleRepository.findAll().stream().map(this::toDTO).toList();
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public TrafficRuleDTO create(TrafficRuleDTO dto) {
         TrafficRule regla = TrafficRule.builder()
                 .codigo(dto.getCodigo().trim())
@@ -34,6 +40,9 @@ public class TrafficRuleService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public TrafficRuleDTO update(Integer id, TrafficRuleDTO dto) {
         TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));
@@ -46,6 +55,9 @@ public class TrafficRuleService {
     }
 
     @Transactional
+    /**
+     * Método público.
+     */
     public void delete(Integer id) {
         TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));

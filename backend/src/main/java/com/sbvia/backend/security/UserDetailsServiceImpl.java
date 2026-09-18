@@ -18,6 +18,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository usuarioRepository;
 
     @Override
+    /**
+     * Método público.
+     */
     public UserDetails loadUserByUsername(String identificador) throws UsernameNotFoundException {
         if (identificador == null || identificador.isBlank()) {
             throw new UsernameNotFoundException("Identificador de user no proporcionado");

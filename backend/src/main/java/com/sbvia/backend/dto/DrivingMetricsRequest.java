@@ -53,6 +53,9 @@ public record DrivingMetricsRequest(
         @Max(value = 100000, message = "El conteo supera el máximo permitido")
         Integer semaforosRespetados) {
 
+    /**
+     * Método público.
+     */
     public int respetados() {
         return semaforosRespetados() != null ? semaforosRespetados() : 0;
     }

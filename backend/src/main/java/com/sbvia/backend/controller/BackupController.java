@@ -21,6 +21,9 @@ public class BackupController {
 
     private final BackupService backupService;
 
+    /**
+     * Método público.
+     */
     public BackupController(BackupService backupService) {
         this.backupService = backupService;
     }

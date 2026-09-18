@@ -62,8 +62,8 @@
     </div>
   </section>
 
-  <section *ngIf="estado === 'finalizado'" class="panel resultado">
-    <p class="eyebrow">Recorrido terminado</p>
+  <div class="modal-overlay" *ngIf="estado === 'finalizado'">
+  <section class="panel resultado">
     <h2>{{ nombreEscenario }}</h2>
     <div class="nota" [class.aprobada]="(puntajeServidor ?? puntaje) >= 70">{{ puntajeServidor ?? puntaje }}</div>
     <p *ngIf="puntajeServidor !== null" class="origen-puntaje">Puntaje calculado por el servidor</p>
@@ -108,4 +108,5 @@
       <a routerLink="/practicas">Ver mis prácticas</a>
     </div>
   </section>
+  </div>
 </main>

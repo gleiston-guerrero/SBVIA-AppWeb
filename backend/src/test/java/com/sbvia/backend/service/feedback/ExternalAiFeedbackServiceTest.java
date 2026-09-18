@@ -67,7 +67,7 @@ class FeedbackIaExternaServiceTest {
 
         FeedbackIaResponse informe = servicio(url()).generate(datos());
 
-        assertThat(informe.getOrigen()).isEqualTo("IA_EXTERNA");
+        assertThat(informe.getOrigen()).isEqualTo("OPENAI");
         assertThat(informe.getResumen()).isEqualTo("Buen manejo");
         assertThat(informe.getNivelRiesgo()).isEqualTo("BAJO");
         assertThat(informe.getRecomendaciones()).containsExactly("Uno", "Dos", "Tres");
