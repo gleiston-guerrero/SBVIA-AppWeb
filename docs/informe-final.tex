@@ -217,7 +217,7 @@ En el desarrollo de la capa de persistencia de datos, el mapeo estructural const
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{diagramas/er-model-en.png}
-\caption{Modelo Entidad-Relación de la aplicación SBVIA. Fuente: Elaboración propia.}
+\caption{Entity-Relationship model of the SBVIA application. Source: Own elaboration.}
 \label{fig:er-model}
 \end{figure}
 
@@ -229,7 +229,7 @@ El \textbf{Diagrama de Contenedores (Nivel 2)} detalla la arquitectura interna d
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/c4-level-2.png}
-    \caption{Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}
+    \caption{C4 Container diagram (Level 2) for SBVIA. Source: Own elaboration.}
     \label{fig:c4-level2}
 \end{figure}
 
@@ -239,7 +239,7 @@ La orientación a objetos del núcleo del sistema aísla las reglas de negocio d
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{diagramas/uml-classes-en.png}
-\caption{Diagrama de Clases UML para los componentes principales. Fuente: Elaboración propia.}
+\caption{UML class diagram of the main components. Source: Own elaboration.}
 \label{fig:uml-classes}
 \end{figure}
 
@@ -403,7 +403,7 @@ El \textbf{Diagrama de Contexto (Nivel 1)} proporciona una visión general de la
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/c4-level-1.png}
-    \caption{Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}
+    \caption{C4 Context diagram (Level 1) for SBVIA. Source: Own elaboration.}
     \label{fig:c4-level1}
 \end{figure}
 
@@ -413,7 +413,7 @@ El \textbf{Diagrama de Componentes (Nivel 3)} se enfoca en el backend de Spring 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{diagramas/c4-level-3.png}
-    \caption{Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}
+    \caption{C4 Component diagram (Level 3) for the backend. Source: Own elaboration.}
     \label{fig:c4-level3}
 \end{figure}
 
@@ -493,33 +493,33 @@ La protección incluye limitación de intentos de login y registro de eventos re
 \section{Frontend y experiencia de uso}
 Angular organiza vistas de autenticación, dashboard, escenarios, usuarios y prácticas. Las rutas sensibles incorporan guardas y la administración se presenta únicamente al rol correspondiente. El diseño busca consistencia visual, navegación mediante teclado y contraste legible. Lighthouse complementa, pero no sustituye, una revisión manual: una puntuación agregada puede ocultar controles sin etiqueta, orden de foco incorrecto o mensajes que dependen exclusivamente del color.
 
-Como se ilustra en las siguientes figuras, las mejoras recientes añadieron el landmark \texttt{main}, ajustaron el contraste del login y eliminaron dependencias tipográficas externas. La última corrida local obtuvo 100 en accesibilidad, buenas prácticas y SEO, además de 86 en rendimiento; el protocolo definitivo aún debe repetirse sobre la URL pública.
+Como se ilustra en las Figuras~\ref{fig:pantalla1}, \ref{fig:pantalla2}, \ref{fig:pantalla3} y \ref{fig:pantalla4}, las mejoras recientes añadieron el landmark \texttt{main}, ajustaron el contraste del login y eliminaron dependencias tipográficas externas. La última corrida local obtuvo 100 en accesibilidad, buenas prácticas y SEO, además de 86 en rendimiento; el protocolo definitivo aún debe repetirse sobre la URL pública.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.94\textwidth]{diagramas/pantalla-1---inicio-de-sesin-registro.png}
-    \caption{Pantalla de inicio de sesión y registro de usuarios en el sistema.}
+    \caption{Login and user registration screen of the system.}
     \label{fig:pantalla1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.94\textwidth]{diagramas/pantalla-2---dashboard-principal.png}
-    \caption{Dashboard principal con acceso a escenarios, prácticas e historial.}
+    \caption{Main dashboard with access to scenarios, practices and history.}
     \label{fig:pantalla2}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.94\textwidth]{diagramas/pantalla-3---seleccin-de-escenario-core.png}
-    \caption{Pantalla core para la selección y configuración de escenarios de conducción.}
+    \caption{Core screen for selecting and configuring driving scenarios.}
     \label{fig:pantalla3}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.94\textwidth]{diagramas/pantalla-4---reporte-de-retroalimentacin.png}
-    \caption{Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}
+    \caption{Detailed AI-generated feedback report shown at the end of the practice.}
     \label{fig:pantalla4}
 \end{figure}
 
@@ -569,7 +569,7 @@ As shown in Figure~\ref{fig:k6-boxplot}, la distribución observada en las corri
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{diagramas/k6-latencia-comparativa.png}
-    \caption{Distribución de latencia comparativa de las ejecuciones de k6. Fuente: Elaboración propia.}
+    \caption{Comparative latency distribution of the k6 runs. Source: Own elaboration.}
     \label{fig:k6-boxplot}
 \end{figure}
 
@@ -583,7 +583,7 @@ As depicted in Figure~\ref{fig:sus-distribution}, la línea de media coincide co
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.96\textwidth]{diagramas/sus-boxplot.png}
-    \caption{Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia.}
+    \caption{SUS score distribution and individual scores for 15 participants. Source: Own elaboration.}
     \label{fig:sus-distribution}
 \end{figure}
 

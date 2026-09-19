@@ -3,24 +3,24 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Modelo Entidad-Relación de la aplicación SBVIA. Fuente: Elaboración propia.}}{13}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagrama de Contenedores C4 (Nivel 2) para SBVIA. Fuente: Elaboración propia.}}{14}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Diagrama de Clases UML para los componentes principales. Fuente: Elaboración propia.}}{15}{figure.2.3}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Entity-Relationship model of the SBVIA application. Source: Own elaboration.}}{13}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces C4 Container diagram (Level 2) for SBVIA. Source: Own elaboration.}}{14}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces UML class diagram of the main components. Source: Own elaboration.}}{15}{figure.2.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Diagrama de Contexto C4 (Nivel 1) para SBVIA. Fuente: Elaboración propia.}}{23}{figure.6.1}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Diagrama de Componentes C4 (Nivel 3) para el Backend. Fuente: Elaboración propia.}}{24}{figure.6.2}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces C4 Context diagram (Level 1) for SBVIA. Source: Own elaboration.}}{23}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces C4 Component diagram (Level 3) for the backend. Source: Own elaboration.}}{24}{figure.6.2}%
 \contentsline {figure}{\numberline {6.3}{\ignorespaces MVC data flow between Angular, Spring Boot, Redis and PostgreSQL. Source: Own elaboration from SBVIA versioned architecture.}}{25}{figure.6.3}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Pantalla de inicio de sesión y registro de usuarios en el sistema.}}{28}{figure.7.1}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Dashboard principal con acceso a escenarios, prácticas e historial.}}{29}{figure.7.2}%
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Pantalla core para la selección y configuración de escenarios de conducción.}}{29}{figure.7.3}%
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Reporte detallado de retroalimentación generado por la IA al finalizar la práctica.}}{30}{figure.7.4}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Login and user registration screen of the system.}}{28}{figure.7.1}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Main dashboard with access to scenarios, practices and history.}}{29}{figure.7.2}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Core screen for selecting and configuring driving scenarios.}}{29}{figure.7.3}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Detailed AI-generated feedback report shown at the end of the practice.}}{30}{figure.7.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Distribución de latencia comparativa de las ejecuciones de k6. Fuente: Elaboración propia.}}{32}{figure.8.1}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Distribución y puntuaciones individuales de la escala SUS para 15 participantes. Fuente: elaboración propia.}}{33}{figure.8.2}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Comparative latency distribution of the k6 runs. Source: Own elaboration.}}{32}{figure.8.1}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces SUS score distribution and individual scores for 15 participants. Source: Own elaboration.}}{33}{figure.8.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
