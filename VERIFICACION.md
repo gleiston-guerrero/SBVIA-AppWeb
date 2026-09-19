@@ -62,18 +62,18 @@ Automation plan warnings:
 
 ## P3 — El PDF no contiene ninguna imagen
 
-- **Descripción:** Se corrigieron los paths de las imágenes en LaTeX y se tradujeron las leyendas al inglés, asegurando la correcta incrustación en el PDF de 49 páginas.
+- **Descripción:** Se corrigieron los paths de las imágenes en LaTeX, asegurando la correcta incrustación en el PDF de 49 páginas. Las leyendas de las figuras permanecen en español (la traducción al inglés está pendiente).
 - **Orden exacta:** `ls -l docs/informe-final.pdf | awk '{print $5}'`
 - **Salida esperada:** Un tamaño en bytes superior a 10MB (aprox. 10847177), demostrando que las imágenes vectoriales y PNG están incrustadas.
 - **Ruta del archivo que la respalda:** `docs/informe-final.pdf`.
 
 ## P5 — Instrumento y consentimientos del SUS
 
-- **Descripción:** Se versionó el instrumento original y se adjuntó el registro nominal anónimo de aceptación con las fechas reales (3 y 4 de septiembre) de los 15 participantes. Las firmas reales se mantienen en custodia física bajo `ETHICS.md`.
+- **Descripción:** Se versionó el instrumento original y el registro anónimo de aceptación. La fecha de aplicación declarada es 28-29 de julio de 2026 (según `sus-analysis.md`, sin alteración desde el 8-ago). La custodia de los consentimientos se declara NO verificada en el repositorio (ver `ETHICS.md` §iii).
 - **Orden exacta:** `cat docs/etica/consentimientos/registro-aceptacion.md | grep "P15"`
 - **Salida:**
 ```
-| P15 | 2026-09-04 | Firmado y en custodia |
+| P15 | 2026-07-28 / 2026-07-29 | No verificado |
 ```
 - **Ruta del archivo que la respalda:** `docs/etica/consentimientos/registro-aceptacion.md` y `docs/mediciones/sus/instrumento-sus.md`.
 
@@ -92,19 +92,45 @@ Automation plan warnings:
 ```
 === Aplicación de Holm-Bonferroni (alpha = 0.05) ===
 Paso 1: Usabilidad (SUS > 68)
-  P-valor crudo = 1e-05
+  P-valor crudo = 2.131e-06
   Alpha ajustado (0.05 / 2) = 0.0250
   Rechazar H0? SI
 Paso 2: Rendimiento (Frio > Caliente)
-  P-valor crudo = 0.0005
+  P-valor crudo = 6.727e-04
   Alpha ajustado (0.05 / 1) = 0.0500
   Rechazar H0? SI
 ```
 - **Ruta del archivo que la respalda:** `docs/mediciones/perf/estadistica.py`.
 
-## P12 — Referencias sin verificar una por una
+## P12 — Referencias verificadas una por una
 
-- **Descripción:** Se inyectaron todos los DOIs de las referencias de `refs.bib` y se comprobó que todos apuntan correctamente a URLs válidas (HTTP 200).
-- **Orden exacta:** `cat docs/doi_check.log | grep "FOUND" | wc -l`
-- **Salida esperada:** Un recuento equivalente a los DOIs recuperados.
+- **Descripción:** Se auditaron los 46 DOIs de `docs/refs.bib` contra Crossref uno por uno (título citado vs título resuelto): 18 correctos, 10 corregidos y 18 retirados. El detalle completo está en `docs/doi_check.log`.
+- **Orden exacta:** `grep -c "Veredicto:" docs/doi_check.log`
+- **Salida:** `46`
 - **Ruta del archivo que la respalda:** `docs/refs.bib` y `docs/doi_check.log`.
+
+## P4 — Zenodo (Depósito y DOI)
+
+- **Descripción:** El software (licencia MIT) y el dataset de validación (CC BY 4.0) están depositados en Zenodo y sus DOIs resuelven correctamente.
+- **Orden exacta:** `curl -s -o /dev/null -w "%{http_code}\n" https://doi.org/api/handles/10.5281/zenodo.22740480 https://doi.org/api/handles/10.5281/zenodo.22785358`
+- **Salida:**
+```
+200
+200
+```
+- **Ruta del archivo que la respalda:** `CITATION.cff` y `docs/informe-final.tex` (DOI del software y del dataset).
+
+## P8 — GQM y preguntas de investigación
+
+- **Descripción:** El enfoque Goal-Question-Metric se aplicó con 6 objetivos (G1–G6), cada uno con pregunta y métrica, y las preguntas RQ1–RQ3 están planteadas y respondidas en el informe.
+- **Orden exacta:** `grep -c "textbf{G[0-9]" docs/informe-final.tex`
+- **Salida:** `6`
+- **Ruta del archivo que la respalda:** `docs/informe-final.tex` (Tabla GQM y respuestas RQ1–RQ3).
+
+## P2 — Javadoc
+
+- **Estado:** Pendiente. Persisten bloques `Método público.` sin traducir y la cobertura de Javadoc no alcanza el umbral del 90%. Se corrige en la fase de código (maven-javadoc-plugin).
+
+## P9 — SRS firmado
+
+- **Estado:** Pendiente. El SRS aún no cuenta con bloque de firma; la firma real debe gestionarse con el docente por canal privado (no lo resuelve el código).
