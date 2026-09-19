@@ -8,19 +8,21 @@ package com.sbvia.backend.service.feedback;
 public class AiUnavailableException extends RuntimeException {
 
     /**
-     * Método público.
+     * Constructs an exception indicating that the AI feedback service is
+     * currently unavailable.
      *
-     * @param message a {@link java.lang.String} object
+     * @param message the detail message describing the unavailability
      */
     public AiUnavailableException(String message) {
         super(message);
     }
 
     /**
-     * Método público.
+     * Constructs an exception indicating that the AI feedback service is
+     * unavailable, with the underlying cause.
      *
-     * @param message a {@link java.lang.String} object
-     * @param cause a {@link java.lang.Throwable} object
+     * @param message the detail message describing the unavailability
+     * @param cause the underlying cause of the unavailability
      */
     public AiUnavailableException(String message, Throwable cause) {
         super(message, cause);

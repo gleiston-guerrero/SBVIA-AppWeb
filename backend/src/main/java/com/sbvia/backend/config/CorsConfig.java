@@ -20,13 +20,18 @@ public class CorsConfig {
     @Value("${cors.allowed-origins:http://localhost:4200,http://localhost:8080}")
     private String[] allowedOrigins;
 
-    @Bean
     /**
-     * Método público.
+     * Creates the CORS configuration source that applies the explicit CORS
+     * policy required by OWASP. It allows only the origins configured in
+     * {@code cors.allowed-origins}, permits the standard HTTP methods (GET,
+     * POST, PUT, DELETE, OPTIONS) and the {@code Authorization},
+     * {@code Content-Type} and {@code Accept} headers, exposes the
+     * {@code Authorization} header to the client, enables credentials, and
+     * registers the policy for every URL path of the application.
      *
-     * @return a {@link org.springframework.web.cors.CorsConfigurationSource} object
+     * @return a {@link org.springframework.web.cors.CorsConfigurationSource} applying the allowed-origins policy to all endpoints
      */
-    /** Javadoc for this element. */
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Orígenes permitidos dinámicamente

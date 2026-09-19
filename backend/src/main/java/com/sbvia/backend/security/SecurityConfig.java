@@ -44,15 +44,25 @@ public class SecurityConfig {
     private final RestAuthenticationEntryPoint authenticationEntryPoint;
     private final RestAccessDeniedHandler accessDeniedHandler;
 
-    @Bean
     /**
-     * Método público.
+     * Builds the main Spring Security filter chain of the application. It
+     * configures CSRF protection with the double-submit cookie pattern required
+     * by the Angular frontend, hardens the HTTP security headers
+     * (X-Content-Type-Options, X-Frame-Options, HSTS, XSS protection and CSP),
+     * delegates CORS handling, registers the custom authentication entry point
+     * and access denied handler, enforces stateless sessions for JWT
+     * authentication, and sets the authorization rules: the authentication and
+     * Swagger endpoints are public, GET on scenarios requires authentication,
+     * the mutating scenario operations require the ADMINISTRADOR authority and
+     * every other request requires authentication. Finally it registers the DAO
+     * authentication provider and inserts the JWT and CSRF issuing filters
+     * around the standard username/password authentication filter.
      *
-     * @param http a {@link org.springframework.security.config.annotation.web.builders.HttpSecurity} object
-     * @return a {@link org.springframework.security.web.SecurityFilterChain} object
-     * @throws java.lang.Exception if any.
+     * @param http the {@link org.springframework.security.config.annotation.web.builders.HttpSecurity} builder used to configure the chain
+     * @return the fully configured {@link org.springframework.security.web.SecurityFilterChain}
+     * @throws java.lang.Exception if the security configuration cannot be built
      */
-    /** Javadoc for this element. */
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         
@@ -127,13 +137,15 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(12);
     }
 
-    @Bean
     /**
-     * Método público.
+     * Creates the authentication provider that validates credentials against
+     * the users stored in the database. It is backed by a
+     * {@link org.springframework.security.authentication.dao.DaoAuthenticationProvider} wired with the
+     * application user details service and the BCrypt password encoder.
      *
-     * @return a {@link org.springframework.security.authentication.AuthenticationProvider} object
+     * @return a configured {@link org.springframework.security.authentication.AuthenticationProvider} for database-backed authentication
      */
-    /** Javadoc for this element. */
+    @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);

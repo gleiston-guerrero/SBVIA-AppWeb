@@ -27,9 +27,10 @@ public class BackupController {
     private final BackupService backupService;
 
     /**
-     * Método público.
+     * Constructs the backup controller with the service that handles backup
+     * listing, generation, file download and deletion.
      *
-     * @param backupService a {@link com.sbvia.backend.service.BackupService} object
+     * @param backupService the {@link com.sbvia.backend.service.BackupService} used to manage the backups
      */
     public BackupController(BackupService backupService) {
         this.backupService = backupService;

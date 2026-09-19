@@ -58,9 +58,15 @@ public class AuthController {
         @ApiResponse(responseCode = "400", description = "Datos inválidos o email ya registrado")
     })
     /**
-     * Método público.
+     * Registers a new user account. The registration is retried up to three
+     * times when the auto-generated username collides with an existing one. On
+     * success it sets the access token cookie for the whole site and the
+     * refresh token cookie for the auth endpoints, hides the refresh token
+     * from the response body, and returns the created user together with the
+     * access token and HTTP 201 status.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param request the validated registration data (email, names, password and profile fields)
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.AuthResponse} with the access token and the created user
      */
     public ResponseEntity<AuthResponse> registro(@Valid @RequestBody RegisterRequest request) {
         AuthResponse response = null;
@@ -102,9 +108,17 @@ public class AuthController {
         @ApiResponse(responseCode = "401", description = "Credenciales inválidas")
     })
     /**
-     * Método público.
+     * Authenticates a user with the given credentials. The client IP is used
+     * to enforce the login rate limit (HTTP 429 when exceeded); failed
+     * attempts are recorded and successful logins reset the counter. On
+     * success the access token cookie is set for the whole site, the refresh
+     * token cookie for the auth endpoints, the refresh token is removed from
+     * the body, and the access token together with the user details is
+     * returned.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param request the validated login data containing the identifier (email or username) and password
+     * @param httpRequest the current HTTP request, used to obtain the client IP for rate limiting
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.AuthResponse} with the access token and user details
      */
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         String ip = clientIp(httpRequest);

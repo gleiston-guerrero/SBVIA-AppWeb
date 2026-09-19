@@ -32,46 +32,44 @@ public class ScenarioService {
     private final DifficultyLevelRepository nivelDificultadRepository;
     private final WeatherTypeRepository tipoClimaRepository;
 
+    /**
+     * Returns a cached page of active scenarios.
+     *
+     * @param pageable the pagination information
+     * @return the page of active scenarios converted to DTOs
+     */
     @Cacheable(value = "scenarios", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
     @Transactional(readOnly = true)
-    /**
-     * Método público.
-     *
-     * @param pageable a {@link org.springframework.data.domain.Pageable} object
-     * @return a {@link org.springframework.data.domain.Page} object
-     */
-    /** Javadoc for this element. */
     public Page<ScenarioDTO> listarActivos(Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
         return new CacheablePage<>(page);
     }
 
-    @Transactional(readOnly = true)
     /**
-     * Método público.
+     * Returns a page of active scenarios. The filter arguments are accepted for API
+     * compatibility but are not applied by the current query, which returns all active scenarios.
      *
-     * @param roadType a {@link java.lang.String} object
-     * @param difficultyLevel a {@link java.lang.Integer} object
-     * @param clima a {@link java.lang.String} object
-     * @param pageable a {@link org.springframework.data.domain.Pageable} object
-     * @return a {@link org.springframework.data.domain.Page} object
+     * @param roadType the road type to filter by
+     * @param difficultyLevel the difficulty level id to filter by
+     * @param clima the weather type to filter by
+     * @param pageable the pagination information
+     * @return the page of active scenarios converted to DTOs
      */
-    /** Javadoc for this element. */
+    @Transactional(readOnly = true)
     public Page<ScenarioDTO> findFiltered(String roadType, Integer difficultyLevel, String clima, Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
         return new CacheablePage<>(page);
     }
 
-    @Transactional(readOnly = true)
     /**
-     * Método público.
+     * Returns the scenario with the given id as a DTO.
      *
-     * @param id a {@link java.lang.Integer} object
-     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
+     * @param id the id of the scenario to find
+     * @return the DTO with the data of the found scenario
      */
-    /** Javadoc for this element. */
+    @Transactional(readOnly = true)
     public ScenarioDTO findById(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -79,15 +77,15 @@ public class ScenarioService {
         return mapToDTO(scenario);
     }
 
+    /**
+     * Creates a new active scenario, resolving its road type, difficulty level, and
+     * weather type by name, and evicts the scenarios cache.
+     *
+     * @param dto the scenario data to persist
+     * @return the DTO of the created scenario
+     */
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    /**
-     * Método público.
-     *
-     * @param dto a {@link com.sbvia.backend.dto.ScenarioDTO} object
-     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
-     */
-    /** Javadoc for this element. */
     public ScenarioDTO create(ScenarioDTO dto) {
         RoadType roadType = tipoViaRepository.findByName(dto.getRoadType())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -113,16 +111,16 @@ public class ScenarioService {
         return mapToDTO(escenarioRepository.save(scenario));
     }
 
+    /**
+     * Updates the name, description, and traffic density of the scenario with the given
+     * id and evicts the scenarios cache.
+     *
+     * @param id the id of the scenario to update
+     * @param dto the new values for the scenario
+     * @return the DTO of the updated scenario
+     */
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    /**
-     * Método público.
-     *
-     * @param id a {@link java.lang.Integer} object
-     * @param dto a {@link com.sbvia.backend.dto.ScenarioDTO} object
-     * @return a {@link com.sbvia.backend.dto.ScenarioDTO} object
-     */
-    /** Javadoc for this element. */
     public ScenarioDTO update(Integer id, ScenarioDTO dto) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -134,14 +132,14 @@ public class ScenarioService {
         return mapToDTO(scenario);
     }
 
+    /**
+     * Soft-deletes the scenario with the given id by marking it inactive and evicts the
+     * scenarios cache.
+     *
+     * @param id the id of the scenario to deactivate
+     */
     @CacheEvict(value = "scenarios", allEntries = true)
     @Transactional
-    /**
-     * Método público.
-     *
-     * @param id a {@link java.lang.Integer} object
-     */
-    /** Javadoc for this element. */
     public void delete(Integer id) {
         Scenario scenario = escenarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(

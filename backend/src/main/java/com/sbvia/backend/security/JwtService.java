@@ -133,10 +133,10 @@ public class JwtService {
     }
 
     /**
-     * Método público.
+     * Extracts the issuer claim (iss) from the given JWT token.
      *
-     * @param token a {@link java.lang.String} object
-     * @return a {@link java.lang.String} object
+     * @param token the JWT token from which the issuer claim is extracted
+     * @return the issuer value declared in the token, or {@code null} if the claim is absent
      */
     public String extractIssuer(String token) {
         return extractClaim(token, Claims::getIssuer);
@@ -153,10 +153,10 @@ public class JwtService {
     }
 
     /**
-     * Método público.
+     * Extracts the not-before claim (nbf) from the given JWT token.
      *
-     * @param token a {@link java.lang.String} object
-     * @return a {@link java.util.Date} object
+     * @param token the JWT token from which the not-before claim is extracted
+     * @return the date before which the token must not be accepted, or {@code null} if the claim is absent
      */
     public Date extractNotBefore(String token) {
         return extractClaim(token, Claims::getNotBefore);
@@ -202,18 +202,18 @@ public class JwtService {
     }
 
     /**
-     * Método público.
+     * Returns the configured lifetime of the access tokens issued by this service.
      *
-     * @return a long
+     * @return the access token expiration time in milliseconds
      */
     public long getAccessExpirationMs() {
         return accessExpirationMs;
     }
 
     /**
-     * Método público.
+     * Returns the configured lifetime of the refresh tokens issued by this service.
      *
-     * @return a long
+     * @return the refresh token expiration time in milliseconds
      */
     public long getRefreshExpirationMs() {
         return refreshExpirationMs;

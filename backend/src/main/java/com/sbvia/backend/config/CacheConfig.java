@@ -29,14 +29,18 @@ public class CacheConfig {
     private static final Duration DEFAULT_TTL = Duration.ofMinutes(10);
     private static final Duration ESCENARIOS_TTL = Duration.ofMinutes(5);
 
-    @Bean
     /**
-     * Método público.
+     * Builds the {@link org.springframework.data.redis.cache.RedisCacheManager} that backs all
+     * {@code @Cacheable} and {@code @CacheEvict} operations with Redis as the
+     * cache backend. Values are serialized as JSON with
+     * {@code GenericJackson2JsonRedisSerializer}, null values are never cached,
+     * and entries expire after 10 minutes by default, except those in the
+     * dedicated "scenarios" cache which expire after 5 minutes.
      *
-     * @param connectionFactory a {@link org.springframework.data.redis.connection.RedisConnectionFactory} object
-     * @return a {@link org.springframework.data.redis.cache.RedisCacheManager} object
+     * @param connectionFactory the Redis connection factory used to connect to the Redis server
+     * @return a configured {@link org.springframework.data.redis.cache.RedisCacheManager} with JSON serialization and per-cache TTLs
      */
-    /** Javadoc for this element. */
+    @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         // Configuración por defecto: JSON + TTL 10 min + no cache null values
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()

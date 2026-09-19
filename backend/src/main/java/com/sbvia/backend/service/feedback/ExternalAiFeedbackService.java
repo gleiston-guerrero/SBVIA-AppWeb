@@ -62,18 +62,18 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
 
     @Override
     /**
-     * {@inheritDoc}
+     * Returns the identifier of this feedback provider.
      *
-     * Método público.
+     * @return the constant {@code ORIGIN}, which identifies the external provider as OpenAI
      */
     public String origin() {
         return ORIGIN;
     }
 
     /**
-     * Método público.
+     * Indicates whether the external AI provider is configured and usable.
      *
-     * @return a boolean
+     * @return {@code true} when the provider is OpenAI and the API key and URL are set
      */
     public boolean isEnabled() {
         return "openai".equalsIgnoreCase(provider) && apiKey != null && !apiKey.isBlank()
@@ -83,9 +83,12 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
     @Override
     @SuppressWarnings("unchecked")
     /**
-     * {@inheritDoc}
+     * Calls the external AI provider with the given driving metrics and maps its JSON
+     * response to a feedback report. Throws when the provider is not configured or the
+     * call fails.
      *
-     * Método público.
+     * @param data the aggregated driving metrics of the practice to evaluate
+     * @return the feedback report produced by the external provider
      */
     public FeedbackIaResponse generate(DrivingData data) {
         if (!isEnabled()) {

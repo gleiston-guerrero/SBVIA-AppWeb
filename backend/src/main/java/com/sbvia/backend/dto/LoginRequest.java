@@ -19,9 +19,11 @@ public class LoginRequest {
     private String password;
 
     /**
-     * Método público.
+     * Returns the login identifier, trimming whitespace and falling back to the
+     * email address when no identifier is set.
      *
-     * @return a {@link java.lang.String} object
+     * @return the trimmed identifier used for authentication, or an empty string
+     *         if neither the identifier nor the email is set
      */
     public String getIdentificador() {
         if (identificador != null && !identificador.isBlank()) {
@@ -34,27 +36,29 @@ public class LoginRequest {
     }
 
     /**
-     * Método público.
+     * Sets the login identifier (username or email) used for authentication.
      *
-     * @param identificador a {@link java.lang.String} object
+     * @param identificador the identifier to use for login
      */
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
 
     /**
-     * Método público.
+     * Returns the email address used for login, resolved through the shared
+     * identifier logic for compatibility with legacy requests.
      *
-     * @return a {@link java.lang.String} object
+     * @return the email address used for authentication
      */
     public String getEmail() {
         return getIdentificador();
     }
 
     /**
-     * Método público.
+     * Sets the email address used for login and backfills the identifier with
+     * it when no identifier is set.
      *
-     * @param email a {@link java.lang.String} object
+     * @param email the email address to use for login
      */
     public void setEmail(String email) {
         this.email = email;

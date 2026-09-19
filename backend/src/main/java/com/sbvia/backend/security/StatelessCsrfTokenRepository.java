@@ -29,7 +29,11 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     /**
      * {@inheritDoc}
      *
-     * Método público.
+     * Generates a new CSRF token by delegating to the wrapped cookie-based
+     * repository.
+     *
+     * @param request the current HTTP request
+     * @return the newly generated {@link org.springframework.security.web.csrf.CsrfToken}
      */
     public CsrfToken generateToken(HttpServletRequest request) {
         return delegate.generateToken(request);
@@ -39,7 +43,14 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     /**
      * {@inheritDoc}
      *
-     * Método público.
+     * Saves the given CSRF token by delegating to the wrapped repository. A
+     * null token is ignored so that the token rotation triggered by Spring
+     * Security after authentication cannot erase the cookie in a stateless
+     * session (see ADR-009).
+     *
+     * @param token the CSRF token to save, or null to leave the stored token untouched
+     * @param request the current HTTP request
+     * @param response the current HTTP response
      */
     public void saveToken(CsrfToken token, HttpServletRequest request, HttpServletResponse response) {
         if (token != null) {
@@ -51,7 +62,11 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     /**
      * {@inheritDoc}
      *
-     * Método público.
+     * Loads the CSRF token associated with the current request by delegating to
+     * the wrapped cookie-based repository.
+     *
+     * @param request the current HTTP request
+     * @return the stored {@link org.springframework.security.web.csrf.CsrfToken}, or null if none exists
      */
     public CsrfToken loadToken(HttpServletRequest request) {
         return delegate.loadToken(request);
@@ -61,7 +76,12 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
     /**
      * {@inheritDoc}
      *
-     * Método público.
+     * Loads a deferred CSRF token for the current request/response pair by
+     * delegating to the wrapped cookie-based repository.
+     *
+     * @param request the current HTTP request
+     * @param response the current HTTP response
+     * @return the {@link org.springframework.security.web.csrf.DeferredCsrfToken} resolved from the wrapped repository
      */
     public DeferredCsrfToken loadDeferredToken(HttpServletRequest request, HttpServletResponse response) {
         return delegate.loadDeferredToken(request, response);

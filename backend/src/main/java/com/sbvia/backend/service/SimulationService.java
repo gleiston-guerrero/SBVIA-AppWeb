@@ -79,11 +79,12 @@ public class SimulationService {
     private final FeedbackService retroalimentacionService;
 
     /**
-     * Método público.
+     * Starts a new simulation for the given user and active scenario, creating an open
+     * training session and assigning the first available active vehicle.
      *
-     * @param email a {@link java.lang.String} object
-     * @param scenarioId a {@link java.lang.Integer} object
-     * @return a {@link com.sbvia.backend.dto.SimulationDTO} object
+     * @param email the email of the user starting the simulation
+     * @param scenarioId the id of the active scenario to practice
+     * @return the DTO of the created simulation in progress
      */
     public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
         User user = usuarioRepository.findByEmail(email)
@@ -117,12 +118,13 @@ public class SimulationService {
     }
 
     /**
-     * Método público.
+     * Finalizes an owned, not yet completed simulation by setting its end date and final
+     * score and marking it as completed.
      *
-     * @param email a {@link java.lang.String} object
-     * @param simulationId a {@link java.lang.Integer} object
-     * @param finalScore a {@link java.math.BigDecimal} object
-     * @return a {@link com.sbvia.backend.dto.SimulationDTO} object
+     * @param email the email of the user who owns the simulation
+     * @param simulationId the id of the simulation to finish
+     * @param finalScore the final score to record for the simulation
+     * @return the DTO of the finalized simulation
      */
     public SimulationDTO finalizarSimulacion(String email, Integer simulationId, BigDecimal finalScore) {
         Simulation simulation = simulacionRepository.findById(simulationId)
@@ -231,10 +233,10 @@ public class SimulationService {
     }
 
     /**
-     * Método público.
+     * Returns the simulations of the given user ordered by id descending.
      *
-     * @param email a {@link java.lang.String} object
-     * @return a {@link java.util.List} object
+     * @param email the email of the user whose simulations are requested
+     * @return the list of the user's simulation DTOs, newest first
      */
     public List<SimulationDTO> getMyPractices(String email) {
         User user = usuarioRepository.findByEmail(email)
@@ -249,9 +251,9 @@ public class SimulationService {
     }
 
     /**
-     * Método público.
+     * Returns all simulations ordered by id descending.
      *
-     * @return a {@link java.util.List} object
+     * @return the list of all simulation DTOs, newest first
      */
     public List<SimulationDTO> getAll() {
         return simulacionRepository.findAllByOrderBySimulationIdDesc().stream()

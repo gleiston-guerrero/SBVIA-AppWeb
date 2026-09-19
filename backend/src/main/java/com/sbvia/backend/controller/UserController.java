@@ -46,9 +46,11 @@ public class UserController {
         @ApiResponse(responseCode = "401", description = "No autorizado o token expirado")
     })
     /**
-     * Método público.
+     * Returns the profile of the currently authenticated user, resolved from
+     * the email contained in the authentication token.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param authentication the current authentication object holding the authenticated user's identity
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the user's profile data
      */
     public ResponseEntity<UserDTO> getPerfilActual(Authentication authentication) {
         String email = authentication.getName();
@@ -69,6 +71,15 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Perfil actualizado exitosamente"),
         @ApiResponse(responseCode = "401", description = "No autorizado o token expirado")
     })
+    /**
+     * Updates the profile data of the currently authenticated user, resolved
+     * from the email in the authentication token, and returns the updated
+     * profile.
+     *
+     * @param authentication the current authentication object holding the authenticated user's identity
+     * @param request the validated profile fields to update (names, email and similar)
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the updated profile
+     */
     public ResponseEntity<UserDTO> updateCurrentUserProfile(
             Authentication authentication,
             @Valid @RequestBody com.sbvia.backend.dto.UpdateProfileRequest request) {
@@ -91,9 +102,11 @@ public class UserController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
     /**
-     * Método público.
+     * Lists every user in the system as a page of DTOs. Only users with the
+     * ADMINISTRADOR authority may call this endpoint.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param pageable the pagination settings (page number, size and ordering)
+     * @return a {@link org.springframework.http.ResponseEntity} carrying a {@link org.springframework.data.domain.Page} of {@link com.sbvia.backend.dto.UserDTO}
      */
     public ResponseEntity<Page<UserDTO>> listUsers(Pageable pageable) {
         return ResponseEntity.ok(authService.listUsers(pageable));
@@ -113,6 +126,15 @@ public class UserController {
         @ApiResponse(responseCode = "200", description = "Role actualizado exitosamente"),
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
+    /**
+     * Changes the role assigned to the user identified by the given ID and
+     * returns the user with the updated role. Only users with the
+     * ADMINISTRADOR authority may call this endpoint.
+     *
+     * @param id the unique identifier of the user whose role is changed
+     * @param request the validated request containing the name of the new role to assign
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the updated role
+     */
     public ResponseEntity<UserDTO> cambiarRol(
             @PathVariable Integer id,
             @Valid @RequestBody ChangeRoleRequest request) {
@@ -135,6 +157,15 @@ public class UserController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado"),
         @ApiResponse(responseCode = "409", description = "Email ya registrado")
     })
+    /**
+     * Updates the data of the user identified by the given ID and returns the
+     * updated user. Only users with the ADMINISTRADOR authority may call this
+     * endpoint; a 409 conflict is returned if the new email is already taken.
+     *
+     * @param id the unique identifier of the user to update
+     * @param request the validated request with the new user data (names, email and state)
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the updated data
+     */
     public ResponseEntity<UserDTO> updateUser(
             @PathVariable Integer id,
             @Valid @RequestBody UpdateUserRequest request) {
@@ -156,9 +187,12 @@ public class UserController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
     /**
-     * Método público.
+     * Soft-deletes (deactivates) the user identified by the given ID and
+     * returns HTTP 204 (No Content) on success. Only users with the
+     * ADMINISTRADOR authority may call this endpoint.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param id the unique identifier of the user to deactivate
+     * @return a {@link org.springframework.http.ResponseEntity} with HTTP 204 (No Content) if the operation succeeded
      */
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
         authService.deleteUser(id);

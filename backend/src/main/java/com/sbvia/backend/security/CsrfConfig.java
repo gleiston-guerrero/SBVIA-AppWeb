@@ -16,13 +16,17 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
  */
 @Configuration
 public class CsrfConfig {
-    @Bean
     /**
-     * Método público.
+     * Creates the shared CSRF token repository used both by the security
+     * configuration and by the token issuing filter, so that the token issued
+     * to the client is the same one that gets validated. The cookie-based
+     * repository is wrapped in a stateless variant that ignores the token
+     * deletion performed by Spring Security's per-authentication rotation (see
+     * ADR-009).
      *
-     * @return a {@link org.springframework.security.web.csrf.CsrfTokenRepository} object
+     * @return a {@link org.springframework.security.web.csrf.CsrfTokenRepository} backed by a non-HTTP-only cookie and wrapped for stateless use
      */
-    /** Javadoc for this element. */
+    @Bean
     public CsrfTokenRepository csrfTokenRepository() {
         return new StatelessCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

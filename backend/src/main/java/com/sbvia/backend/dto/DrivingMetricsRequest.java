@@ -14,6 +14,13 @@ import java.math.BigDecimal;
  * @author Keitho_
   * @param durationSeconds durationSeconds param
   * @param velocidadPromedio velocidadPromedio param
+  * @param velocidadMaxima the maximum speed reached during the driving session, in km/h
+  * @param excesosVelocidad the number of speeding incidents recorded during the session
+  * @param colisiones the number of collisions recorded during the session
+  * @param salidasCarril the number of lane departures recorded during the session
+  * @param semaforosIgnorados the number of red lights the driver failed to respect
+  * @param distanciaInsegura the number of unsafe-following-distance incidents recorded
+  * @param semaforosRespetados the number of red lights the driver respected
  */
 public record DrivingMetricsRequest(
         @NotNull(message = "La duración es obligatoria")
@@ -61,9 +68,10 @@ public record DrivingMetricsRequest(
         Integer semaforosRespetados) {
 
     /**
-     * Método público.
+     * Returns the number of red lights the driver respected, defaulting to
+     * zero when the metric was not provided.
      *
-     * @return a int
+     * @return the number of respected traffic lights, or 0 if null
      */
     public int respetados() {
         return semaforosRespetados() != null ? semaforosRespetados() : 0;

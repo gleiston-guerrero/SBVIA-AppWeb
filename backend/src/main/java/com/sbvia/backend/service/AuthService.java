@@ -45,14 +45,14 @@ public class AuthService {
     private final UsernameGeneratorService usernameGeneratorService;
     private final EntityManager entityManager;
 
-    @Transactional
     /**
-     * Método público.
+     * Registers a new user with the PARTICIPANT role and the ACTIVO state, generating
+     * a unique username, and issues JWT access and refresh tokens for the new account.
      *
-     * @param request a {@link com.sbvia.backend.dto.RegisterRequest} object
-     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
+     * @param request the registration data with the user's first name, last name, email, phone, and password
+     * @return the authentication response with the generated tokens and the created user
      */
-    /** Javadoc for this element. */
+    @Transactional
     public AuthResponse registro(RegisterRequest request) {
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException(
@@ -102,10 +102,11 @@ public class AuthService {
     }
 
     /**
-     * Método público.
+     * Authenticates a user by email or username and password, and issues JWT access and
+     * refresh tokens for the authenticated account.
      *
-     * @param request a {@link com.sbvia.backend.dto.LoginRequest} object
-     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
+     * @param request the login credentials containing the user identifier and the password
+     * @return the authentication response with the generated tokens and the logged-in user
      */
     public AuthResponse login(LoginRequest request) {
         String identificador = request.getIdentificador();
@@ -134,9 +135,10 @@ public class AuthService {
     }
 
     /**
-     * Método público.
+     * Revokes the given JWT token by blacklisting its unique identifier for the time
+     * remaining until its expiration.
      *
-     * @param token a {@link java.lang.String} object
+     * @param token the JWT access token to revoke
      */
     public void logout(String token) {
         String jti = jwtService.extractJti(token);
@@ -147,10 +149,11 @@ public class AuthService {
     }
 
     /**
-     * Método público.
+     * Validates the given refresh token, rejects revoked tokens, and issues a new access
+     * token for the same user.
      *
-     * @param refreshToken a {@link java.lang.String} object
-     * @return a {@link com.sbvia.backend.dto.AuthResponse} object
+     * @param refreshToken the JWT refresh token used to obtain a new access token
+     * @return the authentication response with the new access token and the user
      */
     public AuthResponse refresh(String refreshToken) {
         String tokenType = jwtService.extractTokenType(refreshToken);
@@ -181,10 +184,10 @@ public class AuthService {
     }
 
     /**
-     * Método público.
+     * Loads the user identified by email or username and returns its data as a DTO.
      *
-     * @param identificador a {@link java.lang.String} object
-     * @return a {@link com.sbvia.backend.dto.UserDTO} object
+     * @param identificador the email or username of the user to look up
+     * @return the DTO with the data of the found user
      */
     public UserDTO getCurrentUser(String identificador) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
@@ -202,15 +205,14 @@ public class AuthService {
         return usuarioRepository.findAll(pageable).map(this::mapToDTO);
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Changes the role of the user with the given id to the role with the given name.
      *
-     * @param id a {@link java.lang.Integer} object
-     * @param nombreRol a {@link java.lang.String} object
-     * @return a {@link com.sbvia.backend.dto.UserDTO} object
+     * @param id the id of the user whose role is changed
+     * @param nombreRol the name of the new role to assign
+     * @return the DTO with the updated user
      */
-    /** Javadoc for this element. */
+    @Transactional
     public UserDTO cambiarRol(Integer id, String nombreRol) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -223,15 +225,15 @@ public class AuthService {
         return mapToDTO(user);
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Updates the basic data of the user with the given id, checking email uniqueness
+     * when the email changes.
      *
-     * @param id a {@link java.lang.Integer} object
-     * @param request a {@link com.sbvia.backend.dto.UpdateUserRequest} object
-     * @return a {@link com.sbvia.backend.dto.UserDTO} object
+     * @param id the id of the user to update
+     * @param request the new first name, last name, phone, and email values
+     * @return the DTO with the updated user
      */
-    /** Javadoc for this element. */
+    @Transactional
     public UserDTO updateUser(Integer id, UpdateUserRequest request) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -251,15 +253,14 @@ public class AuthService {
         return mapToDTO(user);
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Updates the profile data of the user identified by email or username.
      *
-     * @param identificador a {@link java.lang.String} object
-     * @param request a {@link com.sbvia.backend.dto.UpdateProfileRequest} object
-     * @return a {@link com.sbvia.backend.dto.UserDTO} object
+     * @param identificador the email or username of the user whose profile is updated
+     * @param request the new first name, last name, and phone values
+     * @return the DTO with the updated user
      */
-    /** Javadoc for this element. */
+    @Transactional
     public UserDTO updateCurrentUserProfile(String identificador, UpdateProfileRequest request) {
         User user = usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(identificador, identificador)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado"));
@@ -272,13 +273,12 @@ public class AuthService {
         return mapToDTO(user);
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Soft-deletes the user with the given id by locking its account.
      *
-     * @param id a {@link java.lang.Integer} object
+     * @param id the id of the user to deactivate
      */
-    /** Javadoc for this element. */
+    @Transactional
     public void deleteUser(Integer id) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
@@ -287,9 +287,9 @@ public class AuthService {
     }
 
     /**
-     * Método público.
+     * Returns the configured refresh token lifetime expressed in seconds.
      *
-     * @return a long
+     * @return the refresh token expiration time in seconds
      */
     public long getRefreshExpirationSeconds() {
         return jwtService.getRefreshExpirationMs() / 1000;

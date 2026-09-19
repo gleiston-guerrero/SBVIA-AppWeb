@@ -12,54 +12,56 @@ public class BackupRequestDTO {    private String modalidad;
     private String comentario;
 
     /**
-     * Método público.
+     * Returns the backup modality (e.g. manual or scheduled) configured for
+     * this backup request.
      *
-     * @return a {@link java.lang.String} object
+     * @return the backup modality as a string
      */
     public String getModalidad() {
         return modalidad;
     }
 
     /**
-     * Método público.
+     * Sets the backup modality (e.g. manual or scheduled) for this backup
+     * request.
      *
-     * @param modalidad a {@link java.lang.String} object
+     * @param modalidad the backup modality to configure
      */
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
     }
 
     /**
-     * Método público.
+     * Returns the date and time at which the backup is scheduled to run.
      *
-     * @return a {@link java.time.LocalDateTime} object
+     * @return the scheduled date and time of the backup
      */
     public LocalDateTime getFechaProgramada() {
         return fechaProgramada;
     }
 
     /**
-     * Método público.
+     * Sets the date and time at which the backup is scheduled to run.
      *
-     * @param fechaProgramada a {@link java.time.LocalDateTime} object
+     * @param fechaProgramada the date and time to schedule the backup for
      */
     public void setFechaProgramada(LocalDateTime fechaProgramada) {
         this.fechaProgramada = fechaProgramada;
     }
 
     /**
-     * Método público.
+     * Returns the free-text comment attached to this backup request.
      *
-     * @return a {@link java.lang.String} object
+     * @return the comment describing this backup request
      */
     public String getComentario() {
         return comentario;
     }
 
     /**
-     * Método público.
+     * Sets the free-text comment attached to this backup request.
      *
-     * @param comentario a {@link java.lang.String} object
+     * @param comentario the comment describing this backup request
      */
     public void setComentario(String comentario) {
         this.comentario = comentario;

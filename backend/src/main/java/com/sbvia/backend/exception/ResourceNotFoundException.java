@@ -7,9 +7,10 @@ package com.sbvia.backend.exception;
  */
 public class ResourceNotFoundException extends RuntimeException {
     /**
-     * Método público.
+     * Constructs an exception indicating that a requested resource was not
+     * found in the database.
      *
-     * @param message a {@link java.lang.String} object
+     * @param message the detail message identifying the missing resource
      */
     public ResourceNotFoundException(String message) {
         super(message);

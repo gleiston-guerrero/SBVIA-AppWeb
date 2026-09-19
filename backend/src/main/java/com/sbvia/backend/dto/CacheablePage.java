@@ -17,25 +17,29 @@ import java.util.List;
  * explícito requerido para reconstruir la paginación.
  *
  * @author Keitho_
+ * @param <T> the type of elements in the cached page
  */
 @JsonIgnoreProperties(
         value = {"pageable", "sort", "first", "last", "empty", "totalPages", "numberOfElements"},
         ignoreUnknown = true)
 /**
- * @return the return value
+ * Redis JSON-compatible page implementation that preserves the Spring Data
+ * {@link Page} contract for cached entries.
+ *
+ * @param <T> the type of elements in the cached page
  */
 public class CacheablePage<T> extends PageImpl<T> {
 
-    @JsonCreator
     /**
-     * <p>Constructor for CacheablePage.</p>
+     * Reconstructs a page from a Redis cache entry through the explicit
+     * Jackson constructor, which {@link PageImpl} does not provide.
      *
-     * @param content a {@link java.util.List} object
-     * @param number a int
-     * @param size a int
-     * @param totalElements a long
+     * @param content the list of elements contained in this page
+     * @param number the zero-based page number
+     * @param size the page size
+     * @param totalElements the total number of elements across all pages
      */
-    /** Javadoc for this element. */
+    @JsonCreator
     public CacheablePage(
             @JsonProperty("content") List<T> content,
             @JsonProperty("number") int number,
@@ -45,9 +49,10 @@ public class CacheablePage<T> extends PageImpl<T> {
     }
 
     /**
-     * Método público.
+     * Creates a cacheable page from an existing Spring Data {@link Page},
+     * copying its content, pagination metadata, and total element count.
      *
-     * @param page a {@link org.springframework.data.domain.Page} object
+     * @param page the source {@link Page} whose data is wrapped by this cacheable page
      */
     public CacheablePage(Page<T> page) {
         super(page.getContent(), page.getPageable(), page.getTotalElements());

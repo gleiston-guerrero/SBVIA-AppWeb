@@ -16,9 +16,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class SbviaApplication {
     /**
-     * Método público.
+     * Boots the SBVIA Spring Boot application by starting the embedded server
+     * and initializing the whole application context, including the scheduled
+     * and asynchronous task support enabled at class level.
      *
-     * @param args an array of {@link java.lang.String} objects
+     * @param args command line arguments passed to the application at startup
      */
     public static void main(String[] args) {
         SpringApplication.run(SbviaApplication.class, args);

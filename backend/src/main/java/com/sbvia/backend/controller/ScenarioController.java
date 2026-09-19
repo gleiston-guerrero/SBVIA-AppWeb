@@ -71,9 +71,11 @@ public class ScenarioController {
         @ApiResponse(responseCode = "401", description = "No autorizado")
     })
     /**
-     * Método público.
+     * Returns the scenario identified by the given ID. Any authenticated user
+     * may call this endpoint.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param id the unique identifier of the scenario to retrieve
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.ScenarioDTO} that matches the ID
      */
     public ResponseEntity<ScenarioDTO> findById(@PathVariable Integer id) {
         ScenarioDTO dto = scenarioService.findById(id);
@@ -96,9 +98,12 @@ public class ScenarioController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado (requiere ROLE_ADMIN)")
     })
     /**
-     * Método público.
+     * Creates a new scenario from the validated data and returns it with its
+     * generated ID and HTTP 201 status. Only users with the ADMINISTRADOR
+     * authority may call this endpoint.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param dto the validated scenario data used to create the new scenario
+     * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.ScenarioDTO} of the newly created scenario
      */
     public ResponseEntity<ScenarioDTO> create(@Valid @RequestBody ScenarioDTO dto) {
         ScenarioDTO creado = scenarioService.create(dto);
@@ -144,9 +149,12 @@ public class ScenarioController {
         @ApiResponse(responseCode = "403", description = "Acceso denegado")
     })
     /**
-     * Método público.
+     * Soft-deletes the scenario identified by the given ID and returns HTTP
+     * 204 (No Content) on success. Only users with the ADMINISTRADOR authority
+     * may call this endpoint.
      *
-     * @return a {@link org.springframework.http.ResponseEntity} object
+     * @param id the unique identifier of the scenario to soft-delete
+     * @return a {@link org.springframework.http.ResponseEntity} with HTTP 204 (No Content) confirming the deletion
      */
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         scenarioService.delete(id);

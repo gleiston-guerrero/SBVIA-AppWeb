@@ -261,6 +261,20 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Javadoc: generación con failOnError y doclint para que
+                 referencias rotas o sintaxis inválida rompan el build. La cobertura de
+                 comentarios se verifica con `mvn javadoc:javadoc` (warnings 'no comment'). -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+                    <doclint>all</doclint>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

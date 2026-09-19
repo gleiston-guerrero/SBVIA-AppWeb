@@ -7,9 +7,10 @@ package com.sbvia.backend.exception;
  */
 public class DuplicateEmailException extends RuntimeException {
     /**
-     * Método público.
+     * Constructs an exception indicating that an email address already exists
+     * in the database.
      *
-     * @param message a {@link java.lang.String} object
+     * @param message the detail message explaining which email is duplicated
      */
     public DuplicateEmailException(String message) {
         super(message);

@@ -20,9 +20,9 @@ public class LocalFeedbackService implements FeedbackProvider {
 
     @Override
     /**
-     * {@inheritDoc}
+     * Returns the identifier of this feedback provider.
      *
-     * Método público.
+     * @return the constant {@code ORIGIN}, which identifies the local engine
      */
     public String origin() {
         return ORIGIN;
@@ -30,9 +30,12 @@ public class LocalFeedbackService implements FeedbackProvider {
 
     @Override
     /**
-     * {@inheritDoc}
+     * Builds a feedback report from the given driving metrics using local rules: it
+     * counts the incidents, derives the risk level, and composes the hits, mistakes,
+     * recommendations, and motivational message of the report.
      *
-     * Método público.
+     * @param d the aggregated driving metrics of the practice to evaluate
+     * @return the locally generated feedback report
      */
     public FeedbackIaResponse generate(DrivingData d) {
         int total = d.speedingIncidents() + d.collisions() + d.laneDepartures()
@@ -123,10 +126,11 @@ public class LocalFeedbackService implements FeedbackProvider {
     }
 
     /**
-     * Método público.
+     * Compares the score of the current practice with the average of the user's previous
+     * practices and returns a human-readable comparison.
      *
-     * @param d a {@link com.sbvia.backend.service.feedback.DrivingData} object
-     * @return a {@link java.lang.String} object
+     * @param d the driving metrics of the practice to compare
+     * @return a message describing how the current score relates to the previous average
      */
     public String compare(DrivingData d) {
         return comparison(d);

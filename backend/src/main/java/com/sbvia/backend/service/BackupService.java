@@ -71,20 +71,22 @@ public class BackupService {
     }
 
     /**
-     * Método público.
+     * Returns all registered backups ordered by start date descending.
      *
-     * @return a {@link java.util.List} object
+     * @return the list of all backups, newest first
      */
     public List<Backup> getAll() {
         return backupRepository.findAllByOrderByStartDateDesc();
     }
 
     /**
-     * Método público.
+     * Creates and runs a database backup. When the request carries a future scheduled
+     * date, the backup is saved as PROGRAMADO and executed asynchronously at that date;
+     * otherwise pg_dump runs immediately. The operation is recorded in the audit log.
      *
-     * @param request a {@link com.sbvia.backend.dto.BackupRequestDTO} object
-     * @param type a {@link java.lang.String} object
-     * @return a {@link com.sbvia.backend.model.Backup} object
+     * @param request the backup request with the mode, comment, and optional scheduled date
+     * @param type the type of the backup
+     * @return the persisted backup entity with its resulting status
      */
     public Backup generateBackup(BackupRequestDTO request, String type) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
@@ -216,10 +218,10 @@ public class BackupService {
     }
 
     /**
-     * Método público.
+     * Resolves the file on disk for the backup with the given id.
      *
-     * @param id a {@link java.lang.Long} object
-     * @return a {@link java.io.File} object
+     * @param id the id of the backup whose file is requested
+     * @return the backup file
      */
     public File getFile(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
@@ -227,9 +229,10 @@ public class BackupService {
     }
 
     /**
-     * Método público.
+     * Deletes the backup with the given id, removing both its file on disk and its
+     * database record.
      *
-     * @param id a {@link java.lang.Long} object
+     * @param id the id of the backup to delete
      */
     public void deleteBackup(Long id) {
         Backup backup = backupRepository.findById(id).orElseThrow(() -> new RuntimeException("Respaldo no encontrado"));
@@ -240,11 +243,11 @@ public class BackupService {
         backupRepository.delete(backup);
     }
 
-    @Scheduled(cron = "0 0 2 * * ?")
     /**
-     * Método público.
+     * Runs the automatic daily backup scheduled at 02:00 by generating a full backup
+     * with the mode COMPLETO.
      */
-    /** Javadoc for this element. */
+    @Scheduled(cron = "0 0 2 * * ?")
     public void scheduledBackup() {
         logger.info("Ejecutando respaldo automático programado...");
         BackupRequestDTO dto = new BackupRequestDTO();

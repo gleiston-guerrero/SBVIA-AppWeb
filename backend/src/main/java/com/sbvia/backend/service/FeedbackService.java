@@ -49,11 +49,13 @@ public class FeedbackService {
     private final ObjectMapper objectMapper;
 
     /**
-     * Método público.
+     * Builds the driving feedback report for the given user's simulation, using the
+     * external AI provider when it is available and falling back to the local engine
+     * otherwise.
      *
-     * @param email a {@link java.lang.String} object
-     * @param simulationId a {@link java.lang.Integer} object
-     * @return a {@link com.sbvia.backend.dto.FeedbackIaResponse} object
+     * @param email the email of the user who owns the simulation
+     * @param simulationId the id of the simulation to analyze
+     * @return the generated feedback report with the risk level and recommendations
      */
     public FeedbackIaResponse generateReport(String email, Integer simulationId) {
         DrivingData data = buildData(email, simulationId);
@@ -61,11 +63,12 @@ public class FeedbackService {
     }
 
     /**
-     * Método público.
+     * Builds the driving feedback report for the given user's simulation and persists
+     * it as a Feedback record associated with that simulation.
      *
-     * @param email a {@link java.lang.String} object
-     * @param simulationId a {@link java.lang.Integer} object
-     * @return a {@link com.sbvia.backend.dto.FeedbackIaResponse} object
+     * @param email the email of the user who owns the simulation
+     * @param simulationId the id of the simulation to analyze
+     * @return the generated and saved feedback report
      */
     public FeedbackIaResponse generateAndSave(String email, Integer simulationId) {
         Simulation simulation = loadOwnSimulation(email, simulationId);

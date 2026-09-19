@@ -20,23 +20,23 @@ import java.util.List;
 public class TrafficRuleService {
     private final TrafficRuleRepository trafficRuleRepository;
 
-    @Transactional(readOnly = true)
     /**
-     * Método público.
+     * Returns all traffic rules converted to DTOs.
      *
-     * @return a {@link java.util.List} object
+     * @return the list of all traffic rules
      */
+    @Transactional(readOnly = true)
     public List<TrafficRuleDTO> list() {
         return trafficRuleRepository.findAll().stream().map(this::toDTO).toList();
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Creates a new active traffic rule from the values of the given DTO.
      *
-     * @param dto a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
-     * @return a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
+     * @param dto the traffic rule data to persist
+     * @return the DTO of the created traffic rule
      */
+    @Transactional
     public TrafficRuleDTO create(TrafficRuleDTO dto) {
         TrafficRule regla = TrafficRule.builder()
                 .codigo(dto.getCodigo().trim())
@@ -49,14 +49,14 @@ public class TrafficRuleService {
         return toDTO(trafficRuleRepository.save(regla));
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Updates the traffic rule with the given id with the values of the given DTO.
      *
-     * @param id a {@link java.lang.Integer} object
-     * @param dto a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
-     * @return a {@link com.sbvia.backend.dto.TrafficRuleDTO} object
+     * @param id the id of the traffic rule to update
+     * @param dto the new traffic rule values
+     * @return the DTO of the updated traffic rule
      */
+    @Transactional
     public TrafficRuleDTO update(Integer id, TrafficRuleDTO dto) {
         TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));
@@ -68,12 +68,12 @@ public class TrafficRuleService {
         return toDTO(trafficRuleRepository.save(regla));
     }
 
-    @Transactional
     /**
-     * Método público.
+     * Deletes the traffic rule with the given id.
      *
-     * @param id a {@link java.lang.Integer} object
+     * @param id the id of the traffic rule to delete
      */
+    @Transactional
     public void delete(Integer id) {
         TrafficRule regla = trafficRuleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Regla de tránsito no encontrada con ID: " + id));

@@ -26,7 +26,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     /**
      * {@inheritDoc}
      *
-     * Método público.
+     * Loads a user by the given email or username. It rejects blank
+     * identifiers, looks the user up case-insensitively by email or username,
+     * refuses locked accounts, and builds the Spring Security user carrying the
+     * account's role as its single granted authority.
+     *
+     * @param identificador the email or username that identifies the user
+     * @return a {@link org.springframework.security.core.userdetails.UserDetails} with the user's credentials and role
+     * @throws UsernameNotFoundException if the identifier is blank, no matching user exists, or the account is locked
      */
     public UserDetails loadUserByUsername(String identificador) throws UsernameNotFoundException {
         if (identificador == null || identificador.isBlank()) {

@@ -29,14 +29,15 @@ public class AuditService {
     private final AuditLogRepository repository;
 
     /**
-     * Método público.
+     * Searches for audit log entries that match the given optional filters, newest first.
+     * A {@code null} or empty filter value means that criterion is not applied.
      *
-     * @param table a {@link java.lang.String} object
-     * @param operation a {@link java.lang.String} object
-     * @param user a {@link java.lang.String} object
-     * @param startDate a {@link java.time.LocalDateTime} object
-     * @param endDate a {@link java.time.LocalDateTime} object
-     * @return a {@link java.util.List} object
+     * @param table the exact table name to filter by, or {@code null}/empty to match any table
+     * @param operation the exact operation to filter by, or {@code null}/empty to match any operation
+     * @param user a case-insensitive partial match on the application user, or {@code null}/empty to match any user
+     * @param startDate the minimum creation date, inclusive, or {@code null} for no lower bound
+     * @param endDate the maximum creation date, inclusive, or {@code null} for no upper bound
+     * @return the matching audit log entries ordered by creation date descending
      */
     public List<AuditLog> getAuditLogs(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         Specification<AuditLog> spec = (root, query, criteriaBuilder) -> {
@@ -63,14 +64,16 @@ public class AuditService {
     }
 
     /**
-     * Método público.
+     * Builds a PDF report with the audit log entries matching the given optional filters.
+     * The report lists the applied filters and a table with each entry's date, table,
+     * operation, user, and previous and new data.
      *
-     * @param table a {@link java.lang.String} object
-     * @param operation a {@link java.lang.String} object
-     * @param user a {@link java.lang.String} object
-     * @param startDate a {@link java.time.LocalDateTime} object
-     * @param endDate a {@link java.time.LocalDateTime} object
-     * @return an array of {@link byte} objects
+     * @param table the exact table name to filter by, or {@code null}/empty to match any table
+     * @param operation the exact operation to filter by, or {@code null}/empty to match any operation
+     * @param user a case-insensitive partial match on the application user, or {@code null}/empty to match any user
+     * @param startDate the minimum creation date, inclusive, or {@code null} for no lower bound
+     * @param endDate the maximum creation date, inclusive, or {@code null} for no upper bound
+     * @return a byte array containing the generated PDF report
      */
     public byte[] generatePdfReport(String table, String operation, String user, LocalDateTime startDate, LocalDateTime endDate) {
         List<AuditLog> records = getAuditLogs(table, operation, user, startDate, endDate);

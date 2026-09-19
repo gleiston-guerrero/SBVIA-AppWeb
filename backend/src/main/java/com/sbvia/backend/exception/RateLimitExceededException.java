@@ -10,9 +10,10 @@ package com.sbvia.backend.exception;
 public class RateLimitExceededException extends RuntimeException {
 
     /**
-     * Método público.
+     * Constructs an exception indicating that the client exceeded the allowed
+     * number of login attempts, mapped to HTTP 429 Too Many Requests.
      *
-     * @param message a {@link java.lang.String} object
+     * @param message the detail message describing the rate-limit violation
      */
     public RateLimitExceededException(String message) {
         super(message);
