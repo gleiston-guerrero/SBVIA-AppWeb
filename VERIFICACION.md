@@ -37,8 +37,8 @@ Automation plan warnings:
 
 ## P11 — Cookie de sesión sin el atributo Secure
 
-- **Descripción:** Las cookies JWT `accessToken` y `refreshToken` se generan con los atributos correctos para producción (`secure(true)` y `httpOnly(true)`).
-- **Orden exacta:** `grep -A 5 "tokenCookie(" backend/src/main/java/com/sbvia/backend/controller/AuthController.java`
+- **Descripción:** Las cookies JWT `accessToken` y `refreshToken` se generan con los atributos correctos para producción (`secure(true)`, `httpOnly(true)` y `SameSite=Strict`).
+- **Orden exacta:** `grep -A 5 "private ResponseCookie tokenCookie(" backend/src/main/java/com/sbvia/backend/controller/AuthController.java`
 - **Salida:**
 ```java
     private ResponseCookie tokenCookie(String name, String value, long maxAgeSeconds, String path) {
@@ -46,12 +46,18 @@ Automation plan warnings:
                 .httpOnly(true)
                 .secure(cookieSecure)
                 .sameSite("Strict")
+                .path(path)
 ```
-- **Orden exacta:** `grep "cookieSecure" backend/src/main/resources/application-prod.yml`
+- **Orden exacta:** `grep -n "secure" backend/src/main/resources/application-prod.yml`
 - **Salida:**
-```yaml
-      secure: true
 ```
+3:    secure: true
+```
+- **Resolución de `security.cookie.secure`:**
+  - `AuthController.java:43` inyecta `@Value("${security.cookie.secure:false}")` (por defecto `false`).
+  - `application-prod.yml` fija `security.cookie.secure: true` (literal, sin variable de entorno).
+  - `application.yml:38` (perfil base, no `prod`) resuelve `secure: ${COOKIE_SECURE:false}`, leyendo la variable de entorno `COOKIE_SECURE` (por defecto `false`).
+  - **No verificable desde el repositorio:** si Render definiera la variable de entorno `SECURITY_COOKIE_SECURE` (enlace relajado de Spring Boot) o `COOKIE_SECURE`, esta tendría precedencia sobre `application-prod.yml`. El valor en producción ya fue comprobado en vivo en la evaluación (cookie `Secure; HttpOnly; SameSite=Strict`).
 - **Ruta del archivo que la respalda:** `backend/src/main/java/com/sbvia/backend/controller/AuthController.java` y `backend/src/main/resources/application-prod.yml`.
 
 ## P3 — El PDF no contiene ninguna imagen
