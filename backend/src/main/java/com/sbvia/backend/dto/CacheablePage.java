@@ -10,11 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 /**
- * Página compatible con la serialización JSON de Redis.
- *
- * PageImpl no ofrece un constructor Jackson y falla al recuperar una entrada
- * cacheada. Esta clase conserva el mismo contrato Page y aporta el constructor
- * explícito requerido para reconstruir la paginación.
+ * Redis JSON-compatible page implementation that preserves the Spring Data
+ * {@link Page} contract for cached entries. {@link PageImpl} provides no Jackson
+ * constructor, so this class supplies the explicit constructor required to
+ * rebuild pagination from a cached entry.
  *
  * @author Keitho_
  * @param <T> the type of elements in the cached page
@@ -22,12 +21,6 @@ import java.util.List;
 @JsonIgnoreProperties(
         value = {"pageable", "sort", "first", "last", "empty", "totalPages", "numberOfElements"},
         ignoreUnknown = true)
-/**
- * Redis JSON-compatible page implementation that preserves the Spring Data
- * {@link Page} contract for cached entries.
- *
- * @param <T> the type of elements in the cached page
- */
 public class CacheablePage<T> extends PageImpl<T> {
 
     /**

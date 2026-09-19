@@ -25,7 +25,6 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
         this.delegate = delegate;
     }
 
-    @Override
     /**
      * {@inheritDoc}
      *
@@ -35,11 +34,11 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
      * @param request the current HTTP request
      * @return the newly generated {@link org.springframework.security.web.csrf.CsrfToken}
      */
+    @Override
     public CsrfToken generateToken(HttpServletRequest request) {
         return delegate.generateToken(request);
     }
 
-    @Override
     /**
      * {@inheritDoc}
      *
@@ -52,13 +51,13 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
      * @param request the current HTTP request
      * @param response the current HTTP response
      */
+    @Override
     public void saveToken(CsrfToken token, HttpServletRequest request, HttpServletResponse response) {
         if (token != null) {
             delegate.saveToken(token, request, response);
         }
     }
 
-    @Override
     /**
      * {@inheritDoc}
      *
@@ -68,11 +67,11 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
      * @param request the current HTTP request
      * @return the stored {@link org.springframework.security.web.csrf.CsrfToken}, or null if none exists
      */
+    @Override
     public CsrfToken loadToken(HttpServletRequest request) {
         return delegate.loadToken(request);
     }
 
-    @Override
     /**
      * {@inheritDoc}
      *
@@ -83,6 +82,7 @@ final class StatelessCsrfTokenRepository implements CsrfTokenRepository {
      * @param response the current HTTP response
      * @return the {@link org.springframework.security.web.csrf.DeferredCsrfToken} resolved from the wrapped repository
      */
+    @Override
     public DeferredCsrfToken loadDeferredToken(HttpServletRequest request, HttpServletResponse response) {
         return delegate.loadDeferredToken(request, response);
     }

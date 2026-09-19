@@ -18,17 +18,16 @@ public class LocalFeedbackService implements FeedbackProvider {
     /** Constant <code>ORIGIN="IA_LOCAL"</code> */
     public static final String ORIGIN = "IA_LOCAL";
 
-    @Override
     /**
      * Returns the identifier of this feedback provider.
      *
      * @return the constant {@code ORIGIN}, which identifies the local engine
      */
+    @Override
     public String origin() {
         return ORIGIN;
     }
 
-    @Override
     /**
      * Builds a feedback report from the given driving metrics using local rules: it
      * counts the incidents, derives the risk level, and composes the hits, mistakes,
@@ -37,6 +36,7 @@ public class LocalFeedbackService implements FeedbackProvider {
      * @param d the aggregated driving metrics of the practice to evaluate
      * @return the locally generated feedback report
      */
+    @Override
     public FeedbackIaResponse generate(DrivingData d) {
         int total = d.speedingIncidents() + d.collisions() + d.laneDepartures()
                 + d.ignoredRedLights() + d.unsafeDistanceIncidents();

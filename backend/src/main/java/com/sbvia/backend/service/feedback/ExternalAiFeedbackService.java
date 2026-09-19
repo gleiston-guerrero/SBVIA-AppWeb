@@ -60,12 +60,12 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
         this.restClient = RestClient.builder().requestFactory(factory).build();
     }
 
-    @Override
     /**
      * Returns the identifier of this feedback provider.
      *
      * @return the constant {@code ORIGIN}, which identifies the external provider as OpenAI
      */
+    @Override
     public String origin() {
         return ORIGIN;
     }
@@ -80,8 +80,6 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
                 && apiUrl != null && !apiUrl.isBlank();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
     /**
      * Calls the external AI provider with the given driving metrics and maps its JSON
      * response to a feedback report. Throws when the provider is not configured or the
@@ -90,6 +88,8 @@ public class ExternalAiFeedbackService implements FeedbackProvider {
      * @param data the aggregated driving metrics of the practice to evaluate
      * @return the feedback report produced by the external provider
      */
+    @Override
+    @SuppressWarnings("unchecked")
     public FeedbackIaResponse generate(DrivingData data) {
         if (!isEnabled()) {
             throw new AiUnavailableException("Proveedor externo no configurado (ia.proveedor=openai + AI_API_KEY + AI_API_URL)");

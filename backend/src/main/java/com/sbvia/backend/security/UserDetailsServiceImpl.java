@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository usuarioRepository;
 
-    @Override
     /**
      * {@inheritDoc}
      *
@@ -35,6 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return a {@link org.springframework.security.core.userdetails.UserDetails} with the user's credentials and role
      * @throws UsernameNotFoundException if the identifier is blank, no matching user exists, or the account is locked
      */
+    @Override
     public UserDetails loadUserByUsername(String identificador) throws UsernameNotFoundException {
         if (identificador == null || identificador.isBlank()) {
             throw new UsernameNotFoundException("Identificador de user no proporcionado");
