@@ -82,10 +82,31 @@ Automation plan warnings:
 
 ## P7 — Lighthouse sin ninguna corrida
 
-- **Descripción:** Se configuraron y ejecutaron auditorías Lighthouse reales utilizando `@lhci/cli` apuntando a la URL pública. Los informes JSON y HTML resultantes se versionaron correctamente.
-- **Orden exacta:** `ls docs/mediciones/lighthouse/participante | grep "manifest.json"`
-- **Salida:** `manifest.json`
-- **Ruta del archivo que la respalda:** `docs/mediciones/lighthouse/participante/manifest.json`.
+- **Descripción:** Se ejecutaron auditorías Lighthouse **reales** contra la URL pública `https://sbvia-frontend.onrender.com/login` (punto de entrada declarado en RNF-09) en los **dos perfiles de dispositivo**: `mobile` y `desktop`, con **3 corridas por perfil**. Se guardan **todas** las corridas (JSON + HTML) y un `manifest.json` por perfil, no solo la representativa.
+  - Motivo: la revisión del 18-sep observó que las corridas anteriores eran **todas de escritorio y ninguna móvil**, y que el equipo confundía «perfil» con rol de usuario. Estas corridas cubren los dos perfiles de dispositivo que pide la guía.
+- **Orden exacta:** `git ls-files docs/mediciones/lighthouse/mobile docs/mediciones/lighthouse/desktop`
+- **Salida:**
+```
+docs/mediciones/lighthouse/desktop/manifest.json
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153756-desktop-run1.report.html
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153756-desktop-run1.report.json
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153803-desktop-run2.report.html
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153803-desktop-run2.report.json
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153812-desktop-run3.report.html
+docs/mediciones/lighthouse/desktop/sbvia_frontend_onrender_com_login-20260919_153812-desktop-run3.report.json
+docs/mediciones/lighthouse/mobile/manifest.json
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153708-mobile-run1.report.html
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153708-mobile-run1.report.json
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153718-mobile-run2.report.html
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153718-mobile-run2.report.json
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153732-mobile-run3.report.html
+docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153732-mobile-run3.report.json
+```
+- **Resultado real** (Lighthouse `12.1.0`, 155 auditorías por informe):
+  - `mobile`: performance 0.98 / 0.86 / 0.99 (media 0.94), accessibility 1, best-practices 1, seo 1.
+  - `desktop`: 1 en las cuatro categorías en las tres corridas.
+- **Ruta del archivo que la respalda:** `docs/mediciones/lighthouse/mobile/manifest.json` y `docs/mediciones/lighthouse/desktop/manifest.json`.
+- **Generación:** `node scripts/lighthouse-collect.js <url> <mobile|desktop> <corridas> <dirSalida>` (Lighthouse conectado a un Chrome propio con puerto de depuración; véase el encabezado del script).
 
 ## P10 — Sin corrección por comparaciones múltiples
 
@@ -131,9 +152,17 @@ Paso 1: Rendimiento (Frio > Caliente)
 - **Salida:** `6`
 - **Ruta del archivo que la respalda:** `docs/informe-final.tex` (Tabla GQM y respuestas RQ1–RQ3).
 
-## P2 — Javadoc
+## P2 — Javadoc público sin documentar
 
-- **Estado:** Pendiente. Persisten bloques `Método público.` sin traducir y la cobertura de Javadoc no alcanza el umbral del 90%. Se corrige en la fase de código (maven-javadoc-plugin).
+- **Estado:** **Resuelto.** No queda ningún bloque placeholder `Método público.` en `backend/src/main/java`, y `maven-javadoc-plugin` 3.10.1 está configurado con `failOnError=true` y `doclint=all` en `backend/pom.xml`.
+- **Orden exacta:** `git grep -n "todo p" -- backend/src/main/java || echo 0 coincidencias`
+- **Salida:**
+```
+0 coincidencias
+```
+- **Sobre el patrón:** `todo p` es la subcadena ASCII de `Método público.` (el acento cae entre la `M` y `todo`), de modo que la orden no depende de la codificación con la que se copie.
+- **Control — la misma orden sí detecta el texto cuando existe:** `git grep -n "todo p" 786e042 -- backend/src/main/java` devuelve **89** líneas en `786e042` (commit que introdujo el backend) y 0 en el estado actual. Es decir, el resultado vacío de arriba es un negativo real, no un fallo de búsqueda.
+- **Ruta del archivo que la respalda:** `backend/pom.xml` y `backend/src/main/java/**/*.java`.
 
 ## P9 — SRS firmado
 
