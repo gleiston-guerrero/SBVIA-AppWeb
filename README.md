@@ -97,7 +97,7 @@ docker run --rm -v "%cd%\docs:/work" -w /work \
 
 ## 🗄️ Semillas y Determinismo
 - **Semilla Aleatoria Global (PRNG):** `SEED=42`
-- **Dataset de Evaluación SUS:** $N = 15$ participantes (media SUS: 84.17, DT: 8.64, IC 95%: [79.38, 88.95]).
+- **Dataset de Evaluación SUS (estudio retirado):** $N = 15$ respuestas crudas en `docs/mediciones/sus/sus-raw-data.csv`. El estudio de usabilidad se retira y **no** se reporta media, desviación típica ni intervalo de confianza: la fecha declarada de aplicación (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación evaluada (`55201f5`, 2026-09-03; `5e852c6`, 2026-09-04). Véase `docs/mediciones/sus/sus-analysis.md`.
 
 ---
 

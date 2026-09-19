@@ -45,29 +45,37 @@ def generar_svg_rendimiento():
     print("Figura k6 generada con éxito.")
 
 def generar_svg_sus():
-    """Genera diagrama de caja SVG simplificado de usabilidad SUS."""
+    """Registro SVG de las respuestas crudas SUS.
+
+    El estudio SUS esta RETIRADO (fecha declarada 2026-07-28/29 anterior a los
+    commits 55201f5 y 5e852c6 que introducen la funcionalidad de simulacion
+    evaluada). Por eso esta figura NO muestra media, mediana, minimo, maximo ni
+    clasificacion: solo las respuestas individuales registradas, en ingles.
+    """
+    respuestas = [75.0, 92.5, 75.0, 92.5, 85.0, 75.0, 95.0, 75.0, 92.5, 77.5,
+                  95.0, 80.0, 75.0, 95.0, 82.5]
+    puntos = "".join(
+        f'<circle cx="{80 + (v - 60) * 8.8:.1f}" cy="150" r="6" '
+        f'fill="{COLOR_SKY_BLUE}" stroke="#333" stroke-width="1.5" />'
+        for v in respuestas
+    )
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
         <style>
             .axis {{ stroke: #333; stroke-width: 1.5; }}
             .text {{ font-family: sans-serif; font-size: 13px; fill: #333; }}
             .title {{ font-family: sans-serif; font-size: 15px; font-weight: bold; fill: #111; }}
         </style>
-        <text x="300" y="30" text-anchor="middle" class="title">Distribución de Puntuaciones SUS (N = 15 Participantes)</text>
-        <line x1="80" y1="240" x2="520" y2="240" class="axis" />
-        
-        <!-- Boxplot (Q1=77.5, Mediana=82.5, Q3=87.5, Min=72.5, Max=95.0) -->
-        <line x1="160" y1="130" x2="480" y2="130" stroke="#333" stroke-dasharray="4" />
-        <rect x="240" y="90" width="160" height="80" fill="{COLOR_SKY_BLUE}" stroke="#333" stroke-width="2" rx="4" />
-        <line x1="320" y1="90" x2="320" y2="170" stroke="#D55E00" stroke-width="3" />
-        
-        <text x="320" y="75" text-anchor="middle" class="text">Media: 82.5 (Grado A - Excelente)</text>
-        <text x="160" y="260" text-anchor="middle" class="text">Min: 72.5</text>
-        <text x="320" y="260" text-anchor="middle" class="text">Mediana: 82.5</text>
-        <text x="480" y="260" text-anchor="middle" class="text">Max: 95.0</text>
+        <text x="300" y="30" text-anchor="middle" class="title">Individual SUS responses (study retracted - raw material only)</text>
+        <line x1="80" y1="200" x2="520" y2="200" class="axis" />
+        {puntos}
+        <text x="80" y="225" text-anchor="middle" class="text">60</text>
+        <text x="300" y="225" text-anchor="middle" class="text">85</text>
+        <text x="520" y="225" text-anchor="middle" class="text">100</text>
+        <text x="300" y="260" text-anchor="middle" class="text">SUS Score (raw responses, no aggregated statistics reported)</text>
     </svg>"""
     with open(os.path.join(OUT_DIR, "sus-boxplot.svg"), "w", encoding="utf-8") as f:
         f.write(svg_content)
-    print("Figura SUS generada con éxito.")
+    print("Figura SUS generada con éxito (datos crudos, sin estadísticos).")
 
 if __name__ == "__main__":
     generar_svg_rendimiento()

@@ -16,7 +16,7 @@ Automation plan warnings:
 	Job spider error accessing URL https://sbvia-appweb.onrender.com status code returned : 401 expected 200
 ```
 - **Ruta del archivo que la respalda:** `docs/mediciones/sec/zap/zap-report.html` (Verificado: tamaño 40kB).
-- **Cifras y Notebook de Rendimiento:** Las cifras contradictorias en el informe (ej. SUS 82.5 vs 84.17) fueron unificadas hacia los datos reales del experimento (84.17). El antiguo cuaderno Jupyter que producía `KeyError` ha sido descontinuado y reemplazado de manera definitiva por un script estable en Python (`docs/mediciones/perf/estadistica.py`) que procesa los JSON de k6 y maneja correctamente la corrección de múltiples hipótesis.
+- **Cifras y Notebook de Rendimiento:** Las cifras de rendimiento provienen del script estable en Python (`docs/mediciones/perf/estadistica.py`), que procesa los JSON de k6 y aplica la corrección por comparaciones múltiples; el antiguo cuaderno Jupyter que producía `KeyError` fue descontinuado. Las cifras de usabilidad (SUS 82.5 y 84.17) **no se unifican hacia ninguna de las dos**: el estudio SUS se retira por completo (véase P5) y no se reporta media, desviación típica ni intervalo de confianza.
 
 ## P1 — Sin despliegue público
 
@@ -69,13 +69,16 @@ Automation plan warnings:
 
 ## P5 — Instrumento y consentimientos del SUS
 
-- **Descripción:** Se versionó el instrumento original y el registro anónimo de aceptación. La fecha de aplicación declarada es 28-29 de julio de 2026 (según `sus-analysis.md`, sin alteración desde el 8-ago). La custodia de los consentimientos se declara NO verificada en el repositorio (ver `ETHICS.md` §iii).
-- **Orden exacta:** `cat docs/etica/consentimientos/registro-aceptacion.md | grep "P15"`
+- **Estado:** **Sin avance (0%).** El punto no se resuelve. El estudio SUS se retira de todo el expediente en lugar de sostenerse con documentación añadida.
+- **Motivo de la retirada:** La fecha declarada de aplicación del instrumento (2026-07-28/29, en `sus-analysis.md` y en `registro-aceptacion.md`, sin alteración desde el commit `bd17051` del 8-ago-2026) es **anterior a la incorporación al repositorio de la funcionalidad de simulación que el instrumento dice haber evaluado**. No se propone ninguna explicación alternativa para esa inconsistencia: los datos crudos se conservan como material de registro, sin garantía de validez metodológica.
+- **Orden exacta:** `git log --no-walk --date=short --pretty=format:"%h %ad" 55201f5 5e852c6`
 - **Salida:**
 ```
-| P15 | 2026-07-28 / 2026-07-29 | No verificado |
+5e852c6 2026-09-04
+55201f5 2026-09-03
 ```
-- **Ruta del archivo que la respalda:** `docs/etica/consentimientos/registro-aceptacion.md` y `docs/mediciones/sus/instrumento-sus.md`.
+- **Además:** la custodia de los 15 consentimientos informados permanece **NO verificada** (`ETHICS.md` §iii) y no se reporta puntuación SUS agregada en ningún documento del repositorio.
+- **Ruta del archivo que la respalda:** `docs/etica/consentimientos/registro-aceptacion.md`, `docs/mediciones/sus/sus-analysis.md` y `docs/etica/ETHICS.md`.
 
 ## P7 — Lighthouse sin ninguna corrida
 
@@ -86,16 +89,17 @@ Automation plan warnings:
 
 ## P10 — Sin corrección por comparaciones múltiples
 
-- **Descripción:** Se implementó el procedimiento Holm-Bonferroni en el cálculo estadístico para corregir la tasa de error (FWER) al evaluar múltiples hipótesis (Rendimiento Frio > Caliente y Usabilidad > 68).
+- **Descripción:** Se implementó el procedimiento Holm-Bonferroni en el cálculo estadístico para corregir la tasa de error (FWER) cuando se evalúan múltiples hipótesis. La familia declarada originalmente incluía rendimiento (frío > caliente) y usabilidad (SUS > 68); al retirarse el estudio SUS, la única hipótesis efectivamente evaluada es la de rendimiento. El script conserva el procedimiento para el caso en que se añadan nuevas pruebas.
 - **Orden exacta:** `python docs/mediciones/perf/estadistica.py`
 - **Salida:**
 ```
+=== Resultados de Evaluación Estadística ===
+Estudio SUS: RETIRADO. Respuestas crudas conservadas: N=15, sin análisis estadístico.
+Muestra Rendimiento (N=10): Media Diferencia = 9.00ms
+  t = 4.5708, p-valor (una cola, df=9) = 6.727e-04
+
 === Aplicación de Holm-Bonferroni (alpha = 0.05) ===
-Paso 1: Usabilidad (SUS > 68)
-  P-valor crudo = 2.131e-06
-  Alpha ajustado (0.05 / 2) = 0.0250
-  Rechazar H0? SI
-Paso 2: Rendimiento (Frio > Caliente)
+Paso 1: Rendimiento (Frio > Caliente)
   P-valor crudo = 6.727e-04
   Alpha ajustado (0.05 / 1) = 0.0500
   Rechazar H0? SI

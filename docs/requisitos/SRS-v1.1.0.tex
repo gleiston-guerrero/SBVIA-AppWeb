@@ -123,6 +123,7 @@ Equipo de desarrollo, docente-director, evaluadores, administradores, instructor
         VERIFIED & El requisito ha sido implementado y comprobado mediante pruebas automatizadas exhaustivas o auditorías. \\ \hline
         TESTED & El requisito ha sido verificado únicamente a nivel de componente o prueba superficial, o implementado exitosamente. \\ \hline
         IMPLEMENTED & El requisito está desarrollado en el código fuente, pero su cobertura de prueba no valida completamente el criterio. \\ \hline
+        NOT VERIFIED & El requisito cuenta con evidencia declarada que no puede sostenerse contra el repositorio; no se considera cumplido. \\ \hline
         Inactividad & Ausencia de autenticación y uso del sistema por un período superior a 6 meses. \\ \hline
         Práctica & Registro individual del desempeño de un conductor en un escenario específico. \\ \hline
         Certificado & Documento inmutable emitido al aprobar un escenario. \\ \hline
@@ -321,10 +322,11 @@ El navegador admite cookies SameSite y JavaScript moderno. El entorno dispone de
 \end{requisito}
 
 \begin{requisito}{RNF-06 - Escala de Usabilidad del Sistema SUS $\ge$ 68 puntos}
-    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
     \textbf{Descripción:} El sistema deberá ofrecer una interfaz altamente usable, alcanzando un puntaje SUS sobre la media estándar de la industria. \\[0.2cm]
     \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \\[0.2cm]
+    \textbf{Nota (corrección posterior a la revisión):} El estudio SUS se retira: su fecha declarada de aplicación (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación que dice haber evaluado (commits \texttt{55201f5} y \texttt{5e852c6}, 2026-09-03/04). No se reporta puntuación agregada. Este requisito pasa a NOT VERIFIED sin alterar el resto del contenido revisado. \\[0.2cm]
     \textbf{Verificación:} Prueba de Usabilidad (docs/mediciones/sus/sus-analysis.md) \quad \textbf{SQL:} No aplica
 \end{requisito}
 

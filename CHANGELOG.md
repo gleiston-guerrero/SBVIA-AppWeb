@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Removed
+- **Resultados del estudio SUS (retirados):** se eliminan la media 84.17, la desviación típica 8.64 y el intervalo de confianza [79.38, 88.95], junto con toda clasificación del sistema según escalas de interpretación del SUS. El estudio de usabilidad se retira porque su fecha declarada de aplicación (2026-07-28/29) es **anterior a la incorporación al repositorio de la funcionalidad de simulación que dice haber evaluado**: la "práctica vial interactiva" entra el 2026-09-03 (commit `55201f5`) y el "simulador de conducción 2D" el 2026-09-04 (commit `5e852c6`). No se propone ninguna explicación alternativa para esa inconsistencia. Las respuestas crudas se conservan en `docs/mediciones/sus/sus-raw-data.csv` sin garantía de validez metodológica y el consentimiento informado de los participantes permanece sin verificar. Detalle en `docs/mediciones/sus/sus-analysis.md`.
+
 ## [1.0.0] - 2026-08-16 — Entrega Final
 
 ### Added
@@ -32,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Caché Redis real en `EscenarioService`:** Implementación de `@Cacheable` y `@CacheEvict` con `RedisCacheManager`.
 - **Tests unitarios e integración:** `EscenarioServiceTest`, `AuthControllerTest`, `TokenBlacklistServiceTest`.
-- **Evidencia SUS:** `docs/mediciones/sus/sus-raw-data.csv` (15 participantes) y `sus-analysis.md`.
+- **Evidencia SUS:** `docs/mediciones/sus/sus-raw-data.csv` (15 participantes) y `sus-analysis.md`. *(Estudio retirado; véase [Unreleased].)*
 - **Auditoría OWASP:** `docs/mediciones/owasp/curl-audit.sh` y reporte.
 
 ## [0.7.0] - 2026-06-14 — Entrega 1B (Primer Módulo Funcional)

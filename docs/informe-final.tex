@@ -86,7 +86,7 @@
 \textbf{Contexto y problema:} Los siniestros viales constituyen una de las principales causas de mortalidad en conductores novatos, atribuibles en gran medida a la deficiente formación en toma de decisiones críticas bajo escenarios de estrés o tráfico denso. Los simuladores tradicionales suelen ser monolíticos y difíciles de reproducir. \\
 \textbf{Objetivo:} Desarrollar y evaluar empíricamente el sistema SBVIA, una plataforma web escalable y reproducible basada en una arquitectura híbrida de acceso a datos con Spring Boot 3.2, Angular 17, PostgreSQL 16 y Redis 7. \\
 \textbf{Métodos:} Se aplicó la metodología Design Science Research (DSR). Los requisitos se formalizaron bajo ISO/IEC/IEEE 29148:2018 e INCOSE v4. Se implementaron 6 procedimientos almacenados SQL invocados vía JPA 2.1. La evaluación empírica abarcó pruebas de carga k6 ($50\text{ VUs}$), auditoría de cabeceras HTTP conforme OWASP Top 10, cobertura JaCoCo y ensayo de usabilidad SUS ($N=15$). \\
-\textbf{Resultados principales:} Cinco corridas k6 con caché caliente registraron valores $p95$ entre 29.35 y 126.41 ms, sin errores; un ensayo complementario de 10 ciclos observó un speedup aproximado de 1.2x. JaCoCo registró $79.73\%$ de líneas y $70.41\%$ de ramas. La puntuación SUS media fue de $84.17/100$ ($DT=8.64$; $N=15$). \\
+\textbf{Resultados principales:} Cinco corridas k6 con caché caliente registraron valores $p95$ entre 29.35 y 126.41 ms, sin errores; un ensayo complementario de 10 ciclos observó un speedup aproximado de 1.2x. JaCoCo registró $79.73\%$ de líneas y $70.41\%$ de ramas. El ensayo de usabilidad SUS se \textbf{retira}: su fecha declarada de aplicación es anterior a la existencia de la funcionalidad de simulación, por lo que no puede sostenerse como evidencia empírica. \\
 \textbf{Conclusiones:} La arquitectura híbrida desacoplada ofrece alta reproducibilidad computacional y desempeño óptimo para la formación vial interactiva. \\
 \textbf{Palabras clave:} Simulación vial, Arquitectura de software, Spring Boot, Evaluación empírica, Reproducibilidad computacional, OWASP.
 
@@ -96,7 +96,7 @@
 \textbf{Context and problem:} Road traffic accidents are among the leading causes of mortality among novice drivers, largely due to inadequate decision-making training in high-risk traffic scenarios. Conventional driving training systems often lack web-native reproducibility. \\
 \textbf{Objective:} To design, implement, and empirically evaluate SBVIA, a reproducible web-based traffic behavior simulator featuring a hybrid data-access architecture using Spring Boot 3.2, Angular 17, PostgreSQL 16, and Redis 7. \\
 \textbf{Methods:} Guided by Design Science Research (DSR), requirements were specified according to ISO/IEC/IEEE 29148:2018 and INCOSE v4. Six stored procedures were engineered and invoked via JPA 2.1. Empirical validation incorporated k6 load tests ($50\text{ VUs}$), HTTP security header audit per OWASP Top 10, JaCoCo code coverage, and a System Usability Scale (SUS) trial ($N=15$). \\
-\textbf{Main results:} Five hot-cache k6 runs recorded $p95$ values between 29.35 and 126.41 ms with no errors; a separate 10-cycle experiment observed an approximate 1.2x speedup. JaCoCo reported $79.73\%$ line coverage and $70.41\%$ branch coverage. The mean SUS score was $84.17/100$ ($SD=8.64$; $N=15$). \\
+\textbf{Main results:} Five hot-cache k6 runs recorded $p95$ values between 29.35 and 126.41 ms with no errors; a separate 10-cycle experiment observed an approximate 1.2x speedup. JaCoCo reported $79.73\%$ line coverage and $70.41\%$ branch coverage. The SUS usability trial is \textbf{retracted}: its declared application date predates the existence of the simulation feature, so it cannot be sustained as empirical evidence. \\
 \textbf{Conclusions:} The hybrid decoupled web architecture satisfies strict empirical quality thresholds and ensures robust educational delivery. \\
 \textbf{Keywords:} Traffic simulation, Software architecture, Empirical software engineering, Web applications, Performance evaluation.
 \end{otherlanguage}
@@ -337,7 +337,7 @@ Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{
 \midrule
 \textbf{G1. Rendimiento:} Evaluar la capacidad de respuesta bajo carga concurrente & ¿El sistema responde de manera oportuna a 50 usuarios simultáneos? & Latencia percentil 95 ($p95 \le 200$ ms) y tasa de error & k6 \\
 \midrule
-\textbf{G2. Usabilidad:} Medir la facilidad de uso percibida del prototipo & ¿Es el sistema considerado usable por los conductores novatos? & Puntuación individual y media SUS (umbral $> 68$) & Cuestionario SUS \\
+\textbf{G2. Usabilidad:} Medir la facilidad de uso percibida del prototipo & ¿Es el sistema considerado usable por los conductores novatos? & Puntuación individual y media SUS (umbral $> 68$). \textbf{No se reporta: estudio retirado} & Cuestionario SUS (no aplicado) \\
 \midrule
 \textbf{G3. Seguridad:} Comprobar la resiliencia contra ataques comunes & ¿El backend implementa cabeceras seguras y carece de defectos críticos? & Número de hallazgos por severidad; controles de cabeceras & OWASP ZAP, SpotBugs, \texttt{curl} \\
 \midrule
@@ -353,7 +353,7 @@ Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{
 \section{Instrumentos de Medición y Protocolo Experimental}
 \begin{itemize}
     \item \textbf{Rendimiento:} k6 (50 VUs / 30s) en 5 corridas independientes de caché caliente y una medición complementaria de 10 ciclos frío/caliente.
-    \item \textbf{Usabilidad:} Cuestionario SUS de 10 ítems \cite{brooke1996sus} aplicado a $N = 15$ usuarios con consentimiento informado.
+    \item \textbf{Usabilidad:} Cuestionario SUS de 10 ítems \cite{brooke1996sus} con $N = 15$ respuestas registradas. La aplicación se \textbf{retira} como evidencia empírica (véase la sección de Usabilidad) y el consentimiento informado no está verificado.
     \item \textbf{Seguridad:} Script reproducible de curl, escaneo OWASP ZAP 2.14 y análisis estático SpotBugs 4.8.
     \item \textbf{Calidad Web:} Auditoría Lighthouse CI (mobile/desktop).
     \item \textbf{Cobertura:} JaCoCo 0.8.12 sobre capas de servicio, controlador y dominio.
@@ -369,21 +369,21 @@ En consecuencia, los resultados SUS describen únicamente a la muestra observada
 \section{Preguntas, hipótesis y análisis estadístico}
 La evaluación cuantitativa se organiza con un nivel de significación $\alpha=0.05$. Para rendimiento, la hipótesis nula es $H_{0R}$: la latencia $p95$ de lecturas frías no es mayor que la de lecturas calientes bajo el mismo perfil; la alternativa unilateral $H_{1R}$ establece que la latencia fría es mayor. Cuando existan cinco pares homogéneos se aplicará Wilcoxon de rangos con signo, se informará el valor $p$ en notación científica y se acompañará con $A_{12}$ de Vargha--Delaney o delta de Cliff \cite{arcuri2012hitchhiker,vargha2000critique,cliff1993dominance}. No se emitirá una conclusión inferencial mientras falten esos pares.
 
-Para usabilidad, $H_{0U}$ establece que la media poblacional SUS no supera el umbral de 68 y $H_{1U}$ que lo supera. Debido al tamaño y tipo de muestreo, la decisión se presenta mediante media, mediana, desviación típica e intervalo de confianza con $t$ de Student; la puntuación no se denomina porcentaje. Para cobertura, seguridad y Lighthouse se aplican criterios de aceptación previamente fijados y no pruebas de hipótesis retrospectivas.
+Para usabilidad se declaró $H_{0U}$: la media poblacional SUS no supera el umbral de 68, frente a $H_{1U}$, que lo supera. \textbf{Esa hipótesis no se evalúa en este informe}: el estudio SUS se retira por no poder verificarse contra el historial de desarrollo del sistema (véase la sección de Usabilidad), de modo que no se reportan media, mediana, desviación típica ni intervalo de confianza como resultado de la prueba. Para cobertura, seguridad y Lighthouse se aplican criterios de aceptación previamente fijados y no pruebas de hipótesis retrospectivas.
 
-Dado que este estudio evalúa simultáneamente el rendimiento (latencia en frío vs caliente) y la usabilidad (puntuación SUS frente a un umbral), se realizan múltiples pruebas de hipótesis estadísticas sobre el mismo experimento. Para controlar la Tasa de Error por Familia (FWER) y reducir el riesgo de falsos positivos (Error Tipo I), se aplica el procedimiento de corrección paso a paso de Holm-Bonferroni \cite{holm1979simple}. De este modo, los valores $p$ obtenidos se ordenarán de menor a mayor y se compararán contra niveles de significancia ajustados progresivamente ($\alpha / k, \alpha / (k-1), \dots$) antes de rechazar cualquier hipótesis nula.
+La familia de hipótesis se declaró contemplando dos pruebas sobre el mismo experimento (rendimiento frío/caliente y usabilidad SUS frente al umbral de 68). Al retirarse el estudio SUS, en este informe solo permanece la comparación de rendimiento como prueba de hipótesis efectivamente evaluable; el procedimiento de Holm-Bonferroni se mantiene documentado para el caso en que se incorporen nuevas pruebas. De aplicarse, los valores $p$ obtenidos se ordenarían de menor a mayor y se compararían contra niveles de significancia ajustados progresivamente ($\alpha / k, \alpha / (k-1), \dots$) antes de rechazar cualquier hipótesis nula \cite{holm1979simple}.
 
 \section{Variables y criterios de aceptación}
 Para rendimiento, la variable principal es la duración de solicitudes HTTP y el estadístico de decisión es el percentil 95. Se selecciona $p95$ porque representa el límite experimentado por la mayoría de usuarios sin ocultar la cola de latencias tras una media. Las variables secundarias son $p50$, $p90$, $p99$, media, desviación y tasa de errores. Los criterios son $p95 \le 200$ ms con caché caliente y $p95 \le 500$ ms en frío.
 
-Para cobertura, las unidades son líneas y ramas instrumentadas por JaCoCo. La cobertura de líneas confirma ejecución, mientras que la de ramas exige recorrer resultados alternativos de decisiones. Ambas deben alcanzar al menos 70\%; aprobar solo una no satisface el criterio conjunto. Para usabilidad, la variable es el puntaje SUS individual en escala de 0 a 100 y el umbral del proyecto es 68. Para seguridad, se utilizan resultados categóricos por control, hallazgos del escáner y ausencia de defectos de severidad bloqueante.
+Para cobertura, las unidades son líneas y ramas instrumentadas por JaCoCo. La cobertura de líneas confirma ejecución, mientras que la de ramas exige recorrer resultados alternativos de decisiones. Ambas deben alcanzar al menos 70\%; aprobar solo una no satisface el criterio conjunto. Para usabilidad, la variable declarada fue el puntaje SUS individual en escala de 0 a 100 y el umbral del proyecto 68, pero el estudio se retira y esa variable no se analiza. Para seguridad, se utilizan resultados categóricos por control, hallazgos del escáner y ausencia de defectos de severidad bloqueante.
 
 \section{Procedimiento reproducible}
 El protocolo comienza desde una copia limpia del repositorio. Se configuran las variables descritas en \texttt{.env.example}, se construyen los contenedores y se espera a que los chequeos de salud confirmen PostgreSQL, Redis, backend y frontend. Las pruebas unitarias se ejecutan antes de carga para evitar medir una versión funcionalmente defectuosa. Cada corrida de rendimiento conserva su salida cruda y un resumen tabular con identificador, carga, duración y percentiles.
 
 La condición fría requiere invalidar Redis antes de la lectura inicial; la condición caliente requiere precargar la misma clave y mantener constantes endpoint, conjunto de datos, número de usuarios virtuales y duración. Las corridas deben alternarse o parearse para reducir el sesgo temporal. El análisis estadístico solo se calcula cuando se dispone de al menos cinco pares comparables. Lighthouse se ejecuta sobre una compilación de producción, y los controles de seguridad se aplican contra servicios levantados con configuración equivalente a la documentada.
 
-Para SUS, cada participante completa una sesión guiada con duración estimada entre 10 y 22 minutos según el escenario (véase el catálogo de escenarios) y responde inmediatamente los diez ítems estándar en escala Likert de 1 a 5. Los ítems impares aportan $respuesta-1$ y los pares $5-respuesta$; la suma se multiplica por 2.5. El archivo crudo conserva respuestas y código anónimo, mientras el cuaderno recalcula puntuaciones, dispersión e intervalo. Cualquier aprobación institucional y consentimiento firmado se custodia fuera del repositorio público; su existencia debe comprobarse documentalmente antes de presentar el estudio como aprobado.
+Para SUS, el protocolo declarado preveía que cada participante completara una sesión guiada y respondiera inmediatamente los diez ítems estándar en escala Likert de 1 a 5; los ítems impares aportan $respuesta-1$ y los pares $5-respuesta$, y la suma se multiplica por 2.5. \textbf{Ese protocolo no puede sostenerse contra el historial del repositorio} (véase la sección de Usabilidad): la fecha declarada de aplicación es anterior a la existencia de la funcionalidad de simulación. El archivo crudo se conserva como material sin garantía de validez metodológica.
 
 Las herramientas declaradas corresponden a las configuraciones versionadas: JaCoCo 0.8.12, SpotBugs 4.8 con FindSecBugs, OWASP ZAP 2.14, Angular 17 y el JSON de Lighthouse conserva su propia versión y fecha. Los comandos exactos, entradas crudas y productos se relacionan en \texttt{DATA-PROVENANCE.md} para evitar atribuir a una herramienta resultados redactados manualmente.
 
@@ -573,17 +573,18 @@ As shown in Figure~\ref{fig:k6-boxplot}, la distribución observada en las corri
     \label{fig:k6-boxplot}
 \end{figure}
 
-\section{Usabilidad del Sistema (SUS)}
-En la prueba con $N = 15$ participantes se obtuvo una media SUS de $84.17$ ($DT = 8.64$, $IC\ 95\% = [79.38, 88.95]$), lo cual posiciona al sistema en la categoría adjetival ``Bien+'' (Grado B+) según los intervalos de interpretación adoptados a partir de Bangor, Kortum \& Miller (2008).
+\section{Usabilidad del Sistema (SUS) — estudio retirado}
+\label{sec:sus-retirado}
+El estudio de usabilidad basado en el cuestionario SUS se \textbf{retira como evidencia empírica}: el origen y las condiciones exactas de aplicación del instrumento no pueden verificarse contra el historial del repositorio. La fecha declarada de aplicación (2026-07-28/29) es \textbf{anterior a la existencia de la funcionalidad de simulación} que el instrumento dice haber evaluado: la ``práctica vial interactiva'' se incorpora al repositorio el 2026-09-03 (commit \texttt{55201f5}) y el ``simulador de conducción 2D'' el 2026-09-04 (commit \texttt{5e852c6}).
 
-SUS mide percepción de usabilidad y no porcentaje de tareas completadas \cite{brooke1996sus}. El resultado sugiere una recepción favorable en la muestra observada, pero no demuestra eficacia pedagógica ni representa automáticamente a todos los conductores. La muestra es pequeña y localizada; por tanto, se informa tamaño, dispersión e intervalo de confianza. Los registros se conservan anonimizados mediante códigos P01--P15.
+En consecuencia, las respuestas de \texttt{docs/mediciones/sus/sus-raw-data.csv} se presentan \textbf{sin garantía de validez metodológica} y \textbf{no deben interpretarse como evidencia empírica confiable del sistema}. Tampoco puede confirmarse el consentimiento informado de los participantes (véase \texttt{docs/etica/consentimientos/registro-aceptacion.md}, \texttt{docs/mediciones/sus/sus-analysis.md} y \texttt{ETHICS.md} \S iii).
 
-As depicted in Figure~\ref{fig:sus-distribution}, la línea de media coincide con 84.17 y permite comprobar visualmente que todos los participantes superaron el umbral de aceptación de 68 puntos.
+La Figura~\ref{fig:sus-distribution} se conserva únicamente como registro gráfico de los datos crudos. \textbf{No se reportan} media, desviación estándar ni intervalo de confianza como resultados válidos, ni se clasifica al sistema según escalas de interpretación del SUS.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.96\textwidth]{diagramas/sus-boxplot.png}
-    \caption{SUS score distribution and individual scores for 15 participants. Source: Own elaboration.}
+    \caption{Individual SUS raw responses from 15 participants (study retracted; shown as raw material only, without aggregated statistics). Source: Own elaboration.}
     \label{fig:sus-distribution}
 \end{figure}
 
@@ -600,7 +601,7 @@ El reporte JaCoCo versionado registra una cobertura global de líneas del $79.73
 La evidencia funcional cubre diferencias entre 400, 401, 403 y 429, atributos de cookie y cabeceras. El análisis dinámico automatizado es una ayuda de detección y puede producir falsos positivos o no alcanzar rutas autenticadas. Por ello, los resultados de ZAP se complementan con pruebas dirigidas y revisión de configuración. Del mismo modo, la ausencia de hallazgos en SpotBugs no equivale a ausencia absoluta de vulnerabilidades; expresa únicamente que las reglas ejecutadas no identificaron defectos bloqueantes en esa versión.
 
 \section{Síntesis de cumplimiento}
-Los resultados se clasifican en tres grupos. Se consideran cumplidos el protocolo de cinco corridas calientes, el umbral de latencia, la tasa de error observada, el objetivo SUS, las coberturas de líneas y ramas, los controles funcionales documentados, el despliegue HTTPS verificable y la auditoría Lighthouse en producción (con $91\%$ en Accesibilidad). Se consideran parciales la comparación estadística frío/caliente y la descarga completa de certificado. Permanecen externos al código la firma de aprobación, el video, la defensa y los DOI definitivos.
+Los resultados se clasifican en tres grupos. Se consideran cumplidos el protocolo de cinco corridas calientes, el umbral de latencia, la tasa de error observada, las coberturas de líneas y ramas, los controles funcionales documentados, el despliegue HTTPS verificable y la auditoría Lighthouse en producción (con $91\%$ en Accesibilidad). Se consideran parciales la comparación estadística frío/caliente y la descarga completa de certificado. Permanecen externos al código la firma de aprobación, el video, la defensa y los DOI definitivos.
 
 Esta clasificación refleja un alto grado de madurez del sistema. La matriz de trazabilidad funciona como fuente operativa para cerrar cada brecha final (como la recolección de firmas) antes de la presentación.
 
@@ -608,18 +609,18 @@ Esta clasificación refleja un alto grado de madurez del sistema. La matriz de t
 % B.11 CAPÍTULO 9: DISCUSIÓN
 % ==========================================
 \chapter{Discusión}
-Los resultados responden afirmativamente a las tres preguntas de investigación:
+Los resultados responden a las preguntas de investigación allí donde existe evidencia válida; se declara explícitamente el caso en que no:
 \begin{itemize}
     \item \textbf{Respuesta a RQ1:} Las cinco corridas de carga con caché caliente permanecieron bajo el umbral de 200 ms y el ensayo secuencial mostró un speedup de 1.2x. El requisito de latencia queda verificado; una afirmación causal más fuerte sobre el speedup requiere un diseño pareado homogéneo.
     \item \textbf{Respuesta a RQ2:} Se alcanzó $79.73\%$ de líneas y $70.41\%$ de ramas, con el umbral de Maven configurado en 70\% para ambas métricas. La evidencia permite considerar cumplido el criterio cuantitativo.
-    \item \textbf{Respuesta a RQ3:} La media SUS de $84.17$ (Grado B+, ``Bien+'') confirma una usabilidad aceptable para conductores en formación, con margen de mejora en el diseño de interfaz.
+    \item \textbf{Respuesta a RQ3:} Esta pregunta de investigación no pudo responderse con evidencia empírica válida: el instrumento de usabilidad disponible en el repositorio no puede verificarse contra el historial de desarrollo del sistema (véase \texttt{docs/etica/consentimientos/registro-aceptacion.md} y \texttt{docs/mediciones/sus/sus-analysis.md}).
 \end{itemize}
 
 La latencia caliente observada es suficientemente baja para el umbral académico, pero el speedup 1.2x del ensayo secuencial es menor que el declarado en versiones anteriores del informe. La diferencia demuestra por qué es necesario versionar datos crudos y separar protocolos. El beneficio de caché depende del tamaño de datos, proximidad del motor, costo de serialización y proporción de aciertos; en un entorno local con PostgreSQL y Redis cercanos, el margen puede ser reducido.
 
 La cobertura presenta una distinción relevante. El $79.73\%$ de líneas indica una base amplia de ejecución automatizada y el $70.41\%$ de ramas confirma que el mínimo también se alcanzó sobre decisiones alternativas. Aun así, las áreas de seguridad, excepciones y servicios conservan ramas no cubiertas; superar el umbral no elimina la necesidad de pruebas orientadas al riesgo.
 
-El resultado SUS debe leerse junto con Lighthouse. SUS captura percepción posterior al uso; Lighthouse inspecciona propiedades técnicas de una página y configuración de carga. Una media SUS favorable puede coexistir con oportunidades de accesibilidad. La triangulación evita reducir la experiencia de usuario a una única cifra y orienta acciones concretas sobre contraste, semántica, foco y rendimiento.
+El estudio SUS se retira y por tanto no se triangula con Lighthouse ni con ninguna otra medición. La evaluación de usabilidad de este proyecto queda limitada a la auditoría Lighthouse, que inspecciona propiedades técnicas de una página y su configuración de carga, no la percepción del usuario. No se dispone de evidencia empírica sobre la usabilidad autopercibida de la interfaz, y esa ausencia se declara como tal en lugar de sustituirse por una medición distinta.
 
 % ==========================================
 % B.12 CAPÍTULO 10: AMENAZAS A LA VALIDEZ
@@ -629,7 +630,7 @@ La organización de amenazas internas, externas, de constructo y de conclusión 
 \begin{itemize}
     \item \textbf{Validez de Constructo:} Mitigada mediante el uso de instrumentos estándar consolidados en la literatura (escala SUS original de Brooke y métricas HTTP estandarizadas).
     \item \textbf{Validez Interna:} Se aisló el entorno con Docker y se conservaron archivos crudos de cinco ejecuciones. La comparación frío/caliente usa un protocolo secuencial distinto al ensayo concurrente; esta limitación se reporta para evitar sobreinterpretación.
-    \item \textbf{Validez Externa:} La muestra de usabilidad ($N=15$) incluyó diversidad de edades y dispositivos, aunque se reconoce la necesidad de ampliar los ensayos a escuelas de conducción en distintas provincias.
+    \item \textbf{Validez Externa:} La evaluación empírica con personas se retira (véase la sección de Usabilidad), por lo que no se sostiene ninguna afirmación sobre la composición de la muestra ni sobre la generalización de sus resultados. Se reconoce la necesidad de realizar ensayos de usabilidad con participantes caracterizados explícitamente y en escuelas de conducción de distintas provincias.
     \item \textbf{Validez de Conclusión:} Se reportaron intervalos de confianza al 95\%, estadísticos no paramétricos y tamaños de efecto sin depender exclusivamente del valor $p$.
 \end{itemize}
 
@@ -938,7 +939,7 @@ Cobertura & JaCoCo XML y CSV & Líneas y ramas globales y por paquete \\
 Rendimiento & Cinco pares frío/caliente & Percentiles, prueba y efecto \\
 Calidad web & Seis JSON Lighthouse & Promedios móvil y escritorio \\
 Seguridad & ZAP, SpotBugs y auditoría & Hallazgos y acciones \\
-Usabilidad & Respuestas SUS anónimas & Media, mediana, DT e IC 95\% \\
+Usabilidad (retirada) & Respuestas SUS anónimas & Sin resultado derivado: estudio retirado \\
 Trazabilidad & Matriz de requisitos & Cobertura requisito--evidencia \\
 \bottomrule
 \end{tabularx}

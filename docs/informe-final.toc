@@ -47,7 +47,7 @@
 \contentsline {section}{\numberline {7.4}Configuración y operación}{28}{section.7.4}%
 \contentsline {chapter}{\numberline {8}Evaluación Empírica y Resultados}{31}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Rendimiento y Carga (k6)}{31}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Usabilidad del Sistema (SUS)}{31}{section.8.2}%
+\contentsline {section}{\numberline {8.2}Usabilidad del Sistema (SUS) — estudio retirado}{31}{section.8.2}%
 \contentsline {section}{\numberline {8.3}Cobertura de Código (JaCoCo)}{32}{section.8.3}%
 \contentsline {section}{\numberline {8.4}Seguridad y Auditoría Web}{32}{section.8.4}%
 \contentsline {section}{\numberline {8.5}Síntesis de cumplimiento}{33}{section.8.5}%

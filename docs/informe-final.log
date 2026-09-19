@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  18 SEP 2026 21:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  19 SEP 2026 00:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -756,6 +756,11 @@ Underfull \hbox (badness 2035) in paragraph at lines 350--350
  []
 
 
+Underfull \hbox (badness 3872) in paragraph at lines 350--350
+\OT1/cmr/bx/n/9 por-ta: es-tu-dio
+ []
+
+
 Underfull \hbox (badness 4193) in paragraph at lines 350--350
 []|\OT1/cmr/m/n/9 N^^Sume-ro de ha-
  []
@@ -892,14 +897,20 @@ ine 571.
 [31
 
 ]
-<diagramas/sus-boxplot.png, id=748, 578.16pt x 361.35pt>
+<diagramas/sus-boxplot.png, id=747, 578.16pt x 361.35pt>
 File: diagramas/sus-boxplot.png Graphic file (type png)
 <use diagramas/sus-boxplot.png>
-Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 585.
+Package pdftex.def Info: diagramas/sus-boxplot.png  used on input line 586.
 (pdftex.def)             Requested size: 437.0374pt x 273.14566pt.
  [32 <./diagramas/k6-latencia-comparativa.png>] [33 <./diagramas/sus-boxplot.pn
 g>]
 Cap\'{\i }tulo 9.
+
+Overfull \hbox (98.24527pt too wide) in paragraph at lines 616--617
+\OT1/cmr/m/n/10.95 se con-tra el his-to-rial de de-sa-rro-llo del sis-te-ma (v^
+^Sease \OT1/cmtt/m/n/10.95 docs/etica/consentimientos/registro-aceptacion.md
+ []
+
 [34
 
 ]
@@ -927,32 +938,32 @@ Underfull \hbox (badness 1052) in paragraph at lines 8--13
 ] [40]) [41]
 Ap\'{e}ndice A.
 
-Underfull \hbox (badness 10000) in paragraph at lines 710--710
+Underfull \hbox (badness 10000) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Reescritura seg^^Sun ISO/IEC/IEEE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 710--710
+Underfull \hbox (badness 10000) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Colecci^^Son de 25 pe-ti-cio-nes en
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 710--710
+Underfull \hbox (badness 1968) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Creaci^^Son de tags sem^^Santi-cos v0.7.0 y
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 710--710
+Underfull \hbox (badness 10000) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Cookies Htt-pOnly, Se-cu-re, Sa-me-Si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 710--710
+Underfull \hbox (badness 10000) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Creaci^^Son de DATA-DICTIONARY y
  []
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 710--710
+Underfull \hbox (badness 1502) in paragraph at lines 711--711
 []|\OT1/cmr/m/n/6 Automatizaci^^Son end-to-end con Doc-ker
  []
 
@@ -961,12 +972,12 @@ Underfull \hbox (badness 1502) in paragraph at lines 710--710
 ]
 Ap\'{e}ndice B.
 
-Underfull \hbox (badness 10000) in paragraph at lines 769--769
+Underfull \hbox (badness 10000) in paragraph at lines 770--770
 []|\OT1/cmr/m/n/10.95 Dos mi-gra-cio-nes
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 769--769
+Underfull \hbox (badness 2326) in paragraph at lines 770--770
 []|\OT1/cmr/m/n/10.95 Registros dis-po-ni-
  []
 
@@ -975,17 +986,17 @@ Underfull \hbox (badness 2326) in paragraph at lines 769--769
 ] [44]
 Ap\'{e}ndice C.
 
-Underfull \hbox (badness 5119) in paragraph at lines 864--864
+Underfull \hbox (badness 5119) in paragraph at lines 865--865
 []|\OT1/cmr/m/n/10.95 SpotBugs/FindSecBugs y au-di-
  []
 
 
-Underfull \hbox (badness 4205) in paragraph at lines 864--864
+Underfull \hbox (badness 4205) in paragraph at lines 865--865
 []|\OT1/cmr/m/n/10.95 Robo de re-no-va-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 865--865
 []|\OT1/cmr/m/n/10.95 Manipulaci^^Son de
  []
 
@@ -995,7 +1006,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 864--864
 Ap\'{e}ndice D.
 [47
 
-] [48] (informe-final.aux
+]
+Underfull \hbox (badness 4479) in paragraph at lines 945--945
+[]|\OT1/cmr/m/n/10.95 Usabilidad (re-ti-
+ []
+
+[48] (informe-final.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 LaTeX Info: Redefining \. on input line 13.
@@ -1006,41 +1022,42 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-07-20>
  ***********
 Package rerunfilecheck Info: File `informe-final.out' has not changed.
-(rerunfilecheck)             Checksum: 8D8694E11EF68137C5B1E42B8227B45B;14180.
+(rerunfilecheck)             Checksum: 4827DE009AC348554537C552B825742B;14287.
  ) 
 Here is how much of TeX's memory you used:
- 15125 strings out of 467501
- 234448 string characters out of 5407579
- 977114 words of memory out of 5000000
- 43937 multiletter control sequences out of 15000+600000
- 640091 words of font info for 86 fonts, out of 8000000 for 9000
+ 15129 strings out of 467501
+ 234506 string characters out of 5407579
+ 977252 words of memory out of 5000000
+ 43940 multiletter control sequences out of 15000+600000
+ 640432 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,11n,79p,945b,2151s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
-tt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/Keitho_/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/Keitho_/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Keith
-o_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
-Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
-8.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmmi9.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Keitho_/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Keitho_/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Keitho_/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Keitho
-_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/U
-sers/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9
-.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on informe-final.pdf (49 pages, 10846368 bytes).
+rm1095.pk> <C:\Users\Keitho_\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
+pi600\tctt0900.pk><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Keitho_/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx6.pfb><C:/Users/Keitho_/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/Keitho_/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Use
+rs/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmmi8.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmmi9.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Keitho_/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/Keitho_/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Keitho_
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/User
+s/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmsy9.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on informe-final.pdf (49 pages, 10840195 bytes).
 PDF statistics:
- 976 PDF objects out of 1000 (max. 8388607)
+ 980 PDF objects out of 1000 (max. 8388607)
  236 named destinations out of 1000 (max. 500000)
  613 words of extra memory for PDF output out of 10000 (max. 10000000)
 

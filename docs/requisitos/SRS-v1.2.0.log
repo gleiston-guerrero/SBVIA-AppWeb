@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  18 SEP 2026 14:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  19 SEP 2026 00:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -478,19 +478,19 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
 []|\OT1/cmr/m/n/10.95 Motor de re-tro-ali-men-ta-ci^^Son ex-terno. El ser-vi-ci
 o
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
 \OT1/cmtt/m/n/10.95 ExternalAiFeedbackService \OT1/cmr/m/n/10.95 in-vo-ca la AP
 I ba-jo
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
 []|\OT1/cmr/m/n/10.95 Repositorio de pu-bli-ca-ci^^Son de soft-wa-re DOI
  []
 
@@ -498,182 +498,172 @@ Underfull \hbox (badness 10000) in paragraph at lines 186--186
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 251--251
+Underfull \hbox (badness 10000) in paragraph at lines 252--252
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-tion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--259
+Underfull \hbox (badness 10000) in paragraph at lines 260--260
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-tion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--267
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-tion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 275--275
+Underfull \hbox (badness 10000) in paragraph at lines 276--276
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Auth-Con-tro-ller-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--283
+Underfull \hbox (badness 10000) in paragraph at lines 284--284
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Sce-na-rio-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--291
+Underfull \hbox (badness 10000) in paragraph at lines 292--292
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-tion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 315--315
+Underfull \hbox (badness 10000) in paragraph at lines 316--316
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-tion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 355--355
+Underfull \hbox (badness 10000) in paragraph at lines 356--356
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Si-mu-la-tion-Re-po-si-tory-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--363
+Underfull \hbox (badness 10000) in paragraph at lines 364--364
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Si-mu-la-tion-Re-po-si-tory-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 371--371
+Underfull \hbox (badness 10000) in paragraph at lines 372--372
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Si-mu-la-tion-Re-po-si-tory-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--379
+Underfull \hbox (badness 10000) in paragraph at lines 380--380
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Si-mu-la-tion-Re-po-si-tory-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--387
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Si-mu-la-tion-Re-po-si-tory-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 458--458
+Underfull \hbox (badness 10000) in paragraph at lines 459--459
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 ser-vi-ce/feedback/ExternalAiFeedbackServiceTest.java)
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 467--467
+Underfull \hbox (badness 10000) in paragraph at lines 468--468
 []|\OT1/cmr/bx/n/10.95 Criterio de acep-ta-ci^^Son: \OT1/cmr/m/n/10.95 El re-po
 r-te Lighthou-se eje-cu-ta-do con-tra [][]$\OT1/cmtt/m/n/10.95 https :
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 520--520
+Underfull \hbox (badness 10000) in paragraph at lines 521--521
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 530--530
+Underfull \hbox (badness 10000) in paragraph at lines 531--531
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--540
+Underfull \hbox (badness 10000) in paragraph at lines 541--541
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [15]
-Overfull \hbox (9.20885pt too wide) in paragraph at lines 567--567
+Overfull \hbox (9.20885pt too wide) in paragraph at lines 568--568
 []|[]\OT1/cmr/bx/n/10.95 Requisito[]| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--567
+Underfull \hbox (badness 10000) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 RF-04,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--567
+Underfull \hbox (badness 10000) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 RF-08,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--567
+Underfull \hbox (badness 10000) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 RF-03,
  []
 
 
-Overfull \hbox (1.02563pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.02563pt too wide) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 Hu^^Serfano
  []
 
 
-Overfull \hbox (1.02563pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.02563pt too wide) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 Hu^^Serfano
  []
 
 
-Overfull \hbox (1.02563pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.02563pt too wide) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 Hu^^Serfano
  []
 
 
-Overfull \hbox (1.02563pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.02563pt too wide) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 Hu^^Serfano
  []
 
 
-Overfull \hbox (1.02563pt too wide) in paragraph at lines 567--567
+Overfull \hbox (1.02563pt too wide) in paragraph at lines 568--568
 []|\OT1/cmr/m/n/10.95 Hu^^Serfano
  []
 
 [16]
-Overfull \hbox (25.82439pt too wide) in paragraph at lines 583--584
+Overfull \hbox (25.82439pt too wide) in paragraph at lines 584--585
 \OT1/cmr/m/n/10.95 ren-tes con el com-mit de-cla-ra-do. El re-po-si-to-rio de e
 n-tre-ga es \OT1/cmtt/m/n/10.95 gleiston-guerrero/SBVIA-AppWeb\OT1/cmr/m/n/10.9
 5 . 
  []
 
 [17]
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 601--601
-[]|\OT1/cmr/m/n/10.95 VERIFIED| 
- []
-
-
-Overfull \hbox (9.05518pt too wide) in paragraph at lines 602--602
-[]|\OT1/cmr/m/n/10.95 ScenarioServiceTest| 
- []
-
-
 Overfull \hbox (11.91884pt too wide) in paragraph at lines 602--602
 []|\OT1/cmr/m/n/10.95 VERIFIED| 
  []
 
 
-Overfull \hbox (20.27895pt too wide) in paragraph at lines 603--603
-[]|\OT1/cmr/m/n/10.95 SimulationServiceTest| 
+Overfull \hbox (9.05518pt too wide) in paragraph at lines 603--603
+[]|\OT1/cmr/m/n/10.95 ScenarioServiceTest| 
  []
 
 
-Overfull \hbox (42.48764pt too wide) in paragraph at lines 603--603
-[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
+Overfull \hbox (11.91884pt too wide) in paragraph at lines 603--603
+[]|\OT1/cmr/m/n/10.95 VERIFIED| 
  []
 
 
@@ -697,8 +687,8 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 605--605
  []
 
 
-Overfull \hbox (8.14267pt too wide) in paragraph at lines 606--606
-[]|\OT1/cmr/m/n/10.95 AuthControllerTest| 
+Overfull \hbox (20.27895pt too wide) in paragraph at lines 606--606
+[]|\OT1/cmr/m/n/10.95 SimulationServiceTest| 
  []
 
 
@@ -707,8 +697,8 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 606--606
  []
 
 
-Overfull \hbox (9.05518pt too wide) in paragraph at lines 607--607
-[]|\OT1/cmr/m/n/10.95 ScenarioServiceTest| 
+Overfull \hbox (8.14267pt too wide) in paragraph at lines 607--607
+[]|\OT1/cmr/m/n/10.95 AuthControllerTest| 
  []
 
 
@@ -717,8 +707,8 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 607--607
  []
 
 
-Overfull \hbox (20.27895pt too wide) in paragraph at lines 608--608
-[]|\OT1/cmr/m/n/10.95 SimulationServiceTest| 
+Overfull \hbox (9.05518pt too wide) in paragraph at lines 608--608
+[]|\OT1/cmr/m/n/10.95 ScenarioServiceTest| 
  []
 
 
@@ -727,13 +717,13 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 608--608
  []
 
 
-Overfull \hbox (12.82683pt too wide) in paragraph at lines 609--609
-[]|\OT1/cmr/m/n/10.95 FeedbackServiceTest| 
+Overfull \hbox (20.27895pt too wide) in paragraph at lines 609--609
+[]|\OT1/cmr/m/n/10.95 SimulationServiceTest| 
  []
 
 
-Overfull \hbox (2.48967pt too wide) in paragraph at lines 609--609
-[]|\OT1/cmr/m/n/10.95 TESTED| 
+Overfull \hbox (42.48764pt too wide) in paragraph at lines 609--609
+[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
  []
 
 
@@ -747,18 +737,18 @@ Overfull \hbox (2.48967pt too wide) in paragraph at lines 610--610
  []
 
 
-Overfull \hbox (20.27895pt too wide) in paragraph at lines 611--611
+Overfull \hbox (12.82683pt too wide) in paragraph at lines 611--611
+[]|\OT1/cmr/m/n/10.95 FeedbackServiceTest| 
+ []
+
+
+Overfull \hbox (2.48967pt too wide) in paragraph at lines 611--611
+[]|\OT1/cmr/m/n/10.95 TESTED| 
+ []
+
+
+Overfull \hbox (20.27895pt too wide) in paragraph at lines 612--612
 []|\OT1/cmr/m/n/10.95 SimulationServiceTest| 
- []
-
-
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 611--611
-[]|\OT1/cmr/m/n/10.95 VERIFIED| 
- []
-
-
-Overfull \hbox (75.51569pt too wide) in paragraph at lines 612--612
-[]|\OT1/cmr/m/n/10.95 DrivingSimulationIntegrationTest| 
  []
 
 
@@ -767,18 +757,18 @@ Overfull \hbox (11.91884pt too wide) in paragraph at lines 612--612
  []
 
 
-Overfull \hbox (65.32608pt too wide) in paragraph at lines 613--613
+Overfull \hbox (75.51569pt too wide) in paragraph at lines 613--613
+[]|\OT1/cmr/m/n/10.95 DrivingSimulationIntegrationTest| 
+ []
+
+
+Overfull \hbox (11.91884pt too wide) in paragraph at lines 613--613
+[]|\OT1/cmr/m/n/10.95 VERIFIED| 
+ []
+
+
+Overfull \hbox (65.32608pt too wide) in paragraph at lines 614--614
 []|\OT1/cmr/m/n/10.95 ExternalAiFeedbackServiceTest| 
- []
-
-
-Overfull \hbox (42.48764pt too wide) in paragraph at lines 613--613
-[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
- []
-
-
-Overfull \hbox (4.61435pt too wide) in paragraph at lines 614--614
-[]|\OT1/cmr/m/n/10.95 BackupServiceTest| 
  []
 
 
@@ -787,13 +777,13 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 614--614
  []
 
 
-Overfull \hbox (42.48764pt too wide) in paragraph at lines 615--615
-[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
+Overfull \hbox (4.61435pt too wide) in paragraph at lines 615--615
+[]|\OT1/cmr/m/n/10.95 BackupServiceTest| 
  []
 
 
-Overfull \hbox (38.43773pt too wide) in paragraph at lines 616--616
-[]|\OT1/cmr/m/n/10.95 SimulationRepositoryTest| 
+Overfull \hbox (42.48764pt too wide) in paragraph at lines 615--615
+[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
  []
 
 
@@ -842,23 +832,23 @@ Overfull \hbox (42.48764pt too wide) in paragraph at lines 620--620
  []
 
 
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 621--621
+Overfull \hbox (38.43773pt too wide) in paragraph at lines 621--621
+[]|\OT1/cmr/m/n/10.95 SimulationRepositoryTest| 
+ []
+
+
+Overfull \hbox (42.48764pt too wide) in paragraph at lines 621--621
+[]|\OT1/cmr/m/n/10.95 IMPLEMENTED| 
+ []
+
+
+Overfull \hbox (11.91884pt too wide) in paragraph at lines 622--622
 []|\OT1/cmr/m/n/10.95 VERIFIED| 
  []
 
 
-Overfull \hbox (2.48967pt too wide) in paragraph at lines 622--622
+Overfull \hbox (2.48967pt too wide) in paragraph at lines 623--623
 []|\OT1/cmr/m/n/10.95 TESTED| 
- []
-
-
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 623--623
-[]|\OT1/cmr/m/n/10.95 VERIFIED| 
- []
-
-
-Overfull \hbox (8.14267pt too wide) in paragraph at lines 624--624
-[]|\OT1/cmr/m/n/10.95 AuthControllerTest| 
  []
 
 
@@ -867,8 +857,8 @@ Overfull \hbox (11.91884pt too wide) in paragraph at lines 624--624
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 625--625
-[]|\OT1/cmr/m/n/10.95 audit-sql-
+Overfull \hbox (8.14267pt too wide) in paragraph at lines 625--625
+[]|\OT1/cmr/m/n/10.95 AuthControllerTest| 
  []
 
 
@@ -877,38 +867,48 @@ Overfull \hbox (11.91884pt too wide) in paragraph at lines 625--625
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 626--626
+[]|\OT1/cmr/m/n/10.95 audit-sql-
+ []
+
+
 Overfull \hbox (11.91884pt too wide) in paragraph at lines 626--626
 []|\OT1/cmr/m/n/10.95 VERIFIED| 
  []
 
 
-Overfull \hbox (12.82683pt too wide) in paragraph at lines 627--627
+Underfull \hbox (badness 10000) in paragraph at lines 627--627
+[]|\OT1/cmr/m/n/10.95 NOT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 627--627
+\OT1/cmr/m/n/10.95 VE-RI-
+ []
+
+
+Overfull \hbox (12.82683pt too wide) in paragraph at lines 628--628
 []|\OT1/cmr/m/n/10.95 FeedbackServiceTest| 
  []
 
 
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 627--627
+Overfull \hbox (11.91884pt too wide) in paragraph at lines 628--628
 []|\OT1/cmr/m/n/10.95 VERIFIED| 
  []
 
 
-Overfull \hbox (65.32608pt too wide) in paragraph at lines 628--628
+Overfull \hbox (65.32608pt too wide) in paragraph at lines 629--629
 []|\OT1/cmr/m/n/10.95 ExternalAiFeedbackServiceTest| 
  []
 
 
-Overfull \hbox (2.48967pt too wide) in paragraph at lines 628--628
+Overfull \hbox (2.48967pt too wide) in paragraph at lines 629--629
 []|\OT1/cmr/m/n/10.95 TESTED| 
  []
 
 
-Overfull \hbox (11.91884pt too wide) in paragraph at lines 629--629
+Overfull \hbox (11.91884pt too wide) in paragraph at lines 630--630
 []|\OT1/cmr/m/n/10.95 VERIFIED| 
- []
-
-
-Overfull \hbox (2.48967pt too wide) in paragraph at lines 630--630
-[]|\OT1/cmr/m/n/10.95 TESTED| 
  []
 
 
@@ -941,6 +941,11 @@ Overfull \hbox (2.48967pt too wide) in paragraph at lines 636--636
 []|\OT1/cmr/m/n/10.95 TESTED| 
  []
 
+
+Overfull \hbox (2.48967pt too wide) in paragraph at lines 637--637
+[]|\OT1/cmr/m/n/10.95 TESTED| 
+ []
+
 [18] [19] (SRS-v1.2.0.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
@@ -955,11 +960,11 @@ Package rerunfilecheck Info: File `SRS-v1.2.0.out' has not changed.
 Here is how much of TeX's memory you used:
  11653 strings out of 467501
  184683 string characters out of 5407579
- 689859 words of memory out of 5000000
+ 690859 words of memory out of 5000000
  40746 multiletter control sequences out of 15000+600000
  635558 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,12n,79p,469b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,12n,79p,563b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/t
@@ -973,7 +978,7 @@ itho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:
 ts/cm/cmsy10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmti10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on SRS-v1.2.0.pdf (20 pages, 246518 bytes).
+Output written on SRS-v1.2.0.pdf (20 pages, 246415 bytes).
 PDF statistics:
  262 PDF objects out of 1000 (max. 8388607)
  39 named destinations out of 1000 (max. 500000)

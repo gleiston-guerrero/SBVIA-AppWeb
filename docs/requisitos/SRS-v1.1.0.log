@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  18 SEP 2026 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.7)  19 SEP 2026 00:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -591,62 +591,69 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.94 \newpage
-              [2] [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 203--203
+              [2]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-cion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--211
+Underfull \hbox (badness 10000) in paragraph at lines 212--212
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-cion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--219
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-cion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 227--227
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de In-te-gra
 -ci^^Son (Auth-Con-tro-ller-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 235--235
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 236--236
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Es-ce-na-rio-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--243
+Underfull \hbox (badness 10000) in paragraph at lines 244--244
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba Uni-ta-ria (
 Si-mu-la-cion-Ser-vi-ce-Test.java)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 267--267
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 An^^Sali-sis de Ins-
 pec-ci^^Son (sp[]calcular[]puntaje.sql)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 [7] [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 396--396
+Underfull \hbox (badness 10000) in paragraph at lines 398--398
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--403
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--410
+Underfull \hbox (badness 10000) in paragraph at lines 412--412
 []|\OT1/cmr/bx/n/10.95 Verificaci^^Son: \OT1/cmr/m/n/10.95 Prue-ba de Com-po-ne
 n-te E2E (app.component.spec.ts)  \OT1/cmr/bx/n/10.95 SQL:
  []
@@ -665,11 +672,11 @@ Package rerunfilecheck Info: File `SRS-v1.1.0.out' has not changed.
 Here is how much of TeX's memory you used:
  11535 strings out of 467501
  182970 string characters out of 5407579
- 644328 words of memory out of 5000000
+ 646328 words of memory out of 5000000
  40644 multiletter control sequences out of 15000+600000
  634478 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,13n,79p,408b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,13n,79p,446b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmbx10.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb><C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/t
@@ -680,7 +687,7 @@ ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Ke
 itho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><
 C:/Users/Keitho_/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
 mtt10.pfb>
-Output written on SRS-v1.1.0.pdf (15 pages, 182151 bytes).
+Output written on SRS-v1.1.0.pdf (15 pages, 183069 bytes).
 PDF statistics:
  192 PDF objects out of 1000 (max. 8388607)
  28 named destinations out of 1000 (max. 500000)

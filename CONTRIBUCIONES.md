@@ -28,10 +28,10 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   Se añadió a `CITATION.cff` la referencia al dataset de validación con su DOI real (`10.5281/zenodo.22785358`), además del DOI del software (`10.5281/zenodo.22740480`).
     *   **Commit:** `12297ee`.
     *   **Archivos:** `CITATION.cff`.
-*   **P5 — Instrumento y consentimientos del SUS (0.8 pts)**
-    *   Se corrigió el registro de aceptación para declarar solo lo verificable: fecha de aplicación declarada 28-29 de julio de 2026 (según `sus-analysis.md`, sin alteración desde el 8-ago) y custodia **no verificada**, alineado con `ETHICS.md`.
-    *   **Commit:** `ec56c20`.
-    *   **Archivos:** `docs/etica/consentimientos/registro-aceptacion.md`, `docs/mediciones/sus/*`.
+*   **P5 — Instrumento y consentimientos del SUS (0.8 pts) — NO RESUELTO**
+    *   **Estado:** sin avance (0%). El estudio SUS se retira de todo el expediente. Su fecha declarada de aplicación (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación que el instrumento dice haber evaluado: la "práctica vial interactiva" entra el 2026-09-03 (commit `55201f5`) y el "simulador de conducción 2D" el 2026-09-04 (commit `5e852c6`). No se propone ninguna explicación alternativa para esa inconsistencia, y la custodia de los consentimientos permanece no verificada.
+    *   **Referencias del historial (no se presentan como logro):** las respuestas crudas y el análisis se incorporaron en `bd17051` (2026-08-08); el registro de aceptación se creó en `0107364` y se corrigió en `ec56c20` (ambos de 2026-09-18) para declarar únicamente hechos verificables. La retirada del estudio no aporta puntaje.
+    *   **Archivos:** `docs/mediciones/sus/*`, `docs/etica/consentimientos/registro-aceptacion.md`, `docs/etica/ETHICS.md`, `VERIFICACION.md`.
 *   **P6 — Nombres en español en el código (Contrato REST roto) (1.0 pts)**
     *   Se restauraron los contratos REST y, en la ronda final, se alinearon los modelos del frontend (Backup y AuditLog) con el JSON real del backend, campo por campo, verificados con una prueba end-to-end contra producción.
     *   **Commits:** `21edc80`, `a191fb3`.

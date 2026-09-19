@@ -16,10 +16,14 @@ El proyecto está instrumentado con `sonar-project.properties`. Las revisiones a
 * **Code Smells:** 0 problemas críticos o bloqueantes.
 * **Duplicidad:** Inferior al 3%.
 
-## 4. Pruebas de Usabilidad (SUS - System Usability Scale)
-Se aplicó un cuestionario SUS a 15 conductores en formación (ver plantillas en `docs/etica/consentimientos`).
-* **Puntuación Promedio:** 82.5 / 100.
-* **Conclusión:** El sistema se considera "Excelente" en términos de facilidad de uso y curva de aprendizaje, validando las decisiones de diseño del SPA en Angular (ADR-001).
+## 4. Pruebas de Usabilidad (SUS - System Usability Scale) — RETIRADO
+
+El estudio SUS se retira como evidencia empírica. La fecha declarada de aplicación del instrumento (2026-07-28/29) es **anterior a la incorporación al repositorio de la funcionalidad de simulación que el instrumento dice haber evaluado**: la "práctica vial interactiva" entra el 2026-09-03 (commit `55201f5`) y el "simulador de conducción 2D" el 2026-09-04 (commit `5e852c6`). Tampoco puede confirmarse el consentimiento informado de los participantes (véase `docs/etica/ETHICS.md` §iii).
+
+* **Puntuación Promedio:** no se reporta. La cifra 82.5 / 100 publicada antes en este documento no se sostiene y se elimina; no se sustituye por ninguna otra.
+* **Conclusión:** no se emite. No se clasifica al sistema en ninguna escala de interpretación del SUS.
+
+Véase `docs/mediciones/sus/sus-analysis.md`.
 
 ## 5. Pruebas de Aceptación (BDD)
 Mediante Cucumber y el formato Gherkin, se comprobaron las Historias de Usuario principales (ej. Iniciar y finalizar simulación).

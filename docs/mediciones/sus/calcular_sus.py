@@ -10,7 +10,14 @@ def calculate_sus():
             valid_responses = 0
             
             print("=========================================")
-            print("      CÁLCULO DE SUS - RESULTADOS        ")
+            print("   ESTUDIO SUS RETIRADO - SIN RESULTADOS ")
+            print("=========================================")
+            print("Este script solo verifica que la columna sus_score del CSV")
+            print("reproduzca la formula SUS. El estudio se retira: la fecha")
+            print("declarada de aplicacion (2026-07-28/29) es anterior a los")
+            print("commits 55201f5 (2026-09-03) y 5e852c6 (2026-09-04) que")
+            print("introducen la funcionalidad de simulacion evaluada.")
+            print("No debe citarse el promedio como resultado de usabilidad.")
             print("=========================================")
             
             for row in reader:
@@ -49,10 +56,7 @@ def calculate_sus():
                 
             print("=========================================")
             print(f"Participantes válidos: {valid_responses}")
-            print(f"Suma total de scores:  {total_sum}")
-            if valid_responses > 0:
-                promedio = total_sum / valid_responses
-                print(f"Promedio SUS:          {promedio:.2f}")
+            print("No se calcula promedio: estudio SUS retirado.")
             print("=========================================")
 
     except FileNotFoundError:

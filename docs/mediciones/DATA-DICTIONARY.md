@@ -4,7 +4,9 @@ Este documento describe el 100% de las variables presentes en los archivos de da
 
 ---
 
-## 1. Archivo: `docs/mediciones/sus/sus-raw-data.csv` (Evaluación de Usabilidad SUS)
+## 1. Archivo: `docs/mediciones/sus/sus-raw-data.csv` (Estudio SUS — RETIRADO)
+
+> **Estudio retirado.** La fecha declarada de aplicación del instrumento (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación que dice haber evaluado (commits `55201f5`, 2026-09-03, y `5e852c6`, 2026-09-04). Las variables se documentan para trazabilidad del archivo crudo; de ellas **no se deriva ningún resultado de usabilidad** (ni media, ni desviación típica, ni intervalo de confianza). Véase `sus-analysis.md`.
 
 | Variable | Tipo | Unidad | Rango | Significado |
 |:---|:---:|:---:|:---:|:---|

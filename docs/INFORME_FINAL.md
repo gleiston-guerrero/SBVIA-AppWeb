@@ -48,7 +48,7 @@ La siguiente matriz evidencia la implementación técnica de todos los requerimi
 | **RNF-01** | Latencia < 100ms | **Sí.** Caché `Redis` (ADR-004) y fallback local para la IA externa. |
 | **RNF-02/04**| Alta disponibilidad y Respaldos | **Sí.** Docker Compose con `restart: always` y `RespaldoController` operativo. |
 | **RNF-03** | Seguridad y Cifrado | **Sí.** Hashing BCrypt, CORS estricto y cookies `HttpOnly`. |
-| **RNF-05** | Usabilidad comprobada | **Sí.** Verificado superando la media en las pruebas SUS (ver Capítulo 8). |
+| **RNF-05** | Usabilidad comprobada | **No.** El estudio SUS se retira: su fecha declarada de aplicación es anterior a la existencia de la funcionalidad de simulación evaluada. No hay evidencia empírica de usabilidad autopercibida (véase Capítulo 8). |
 | **RNF-06** | 50 usuarios concurrentes | **Sí.** Comprobado sin errores mediante pruebas de carga en k6 (Bloque C.1). |
 
 *(Nota: Los diagramas estructurales como el Modelo Entidad-Relación, Diagrama de Clases UML y C4 presentados en este repositorio constituyen la materialización directa y funcional del diseño conceptual propuesto).*

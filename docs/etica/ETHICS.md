@@ -11,7 +11,9 @@ El sistema SBVIA registra datos de cuenta y métricas de comportamiento, como ti
 ## iii. Consentimiento y aprobación institucional
 Para cualquier prueba de usabilidad con personas se requiere aprobación previa de la instancia académica correspondiente y consentimiento informado individual. La plantilla propuesta se encuentra en [plantilla.md](consentimientos/plantilla.md).
 
-El repositorio público **no contiene evidencia suficiente para declarar cerrado este requisito**: falta registrar el código, la fecha y la autoridad de la aprobación, además de confirmar la custodia externa de los 15 consentimientos y del registro de sesiones. Estos documentos no deben publicarse con firmas o datos personales; deberán mostrarse al docente por un canal privado. Hasta esa verificación, el estudio SUS se presenta como evidencia técnica pendiente de regularización ética y no como un estudio institucionalmente aprobado.
+El repositorio público **no contiene evidencia suficiente para declarar cerrado este requisito**: falta registrar el código, la fecha y la autoridad de la aprobación, además de confirmar la custodia externa de los 15 consentimientos y del registro de sesiones. Estos documentos no deben publicarse con firmas o datos personales; deberán mostrarse al docente por un canal privado.
+
+Además, la cronología declarada del estudio es **incompatible con el historial de desarrollo del repositorio**: la fecha de aplicación declarada (2026-07-28/29) es **anterior a la incorporación de la funcionalidad de simulación que el instrumento dice haber evaluado** —la "práctica vial interactiva" entra el 2026-09-03 (commit `55201f5`) y el "simulador de conducción 2D" el 2026-09-04 (commit `5e852c6`)—. Por ese motivo el estudio SUS **se retira** como evidencia empírica y no se presenta como estudio institucionalmente aprobado ni como resultado de usabilidad. No se propone ninguna explicación alternativa para esa incompatibilidad.
 
 ## iv. Ausencia de datos identificables en el repositorio
 Se certifica que en este repositorio público **no se incluyen datos personales identificables** (PII), ni de los usuarios del sistema, ni de los participantes en las pruebas empíricas. Los datos crudos reportados en `docs/mediciones/` han sido anonimizados mediante códigos identificadores (ej. `P01`, `P02`).
@@ -22,3 +24,5 @@ Se certifica que en este repositorio público **no se incluyen datos personales 
 - Un consentimiento firmado por cada participante, con finalidad, conservación, acceso y retiro.
 - Registro de sesión con código anónimo, fecha, hora, duración y modalidad.
 - Confirmación de correspondencia entre los 15 códigos del registro y las 15 filas analizadas.
+
+El estudio SUS se retira (véase §iii): la presentación de estos documentos por canal privado no restablece la validez del estudio, porque la incompatibilidad de la fecha declarada con el historial de desarrollo es independiente de la custodia documental.

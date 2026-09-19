@@ -65,21 +65,19 @@ def t_survival(t, df):
     return 0.5 * _regularized_beta(x, df / 2.0, 0.5)
 
 
-# --- 1. Leer y calcular SUS ---
+# --- 1. Estudio SUS: RETIRADO (no se evalúa hipótesis de usabilidad) ---
+# Motivo: la fecha declarada de aplicación del instrumento (2026-07-28/29) es
+# anterior a la incorporación al repositorio de la funcionalidad de simulación
+# que el instrumento dice haber evaluado (commit 55201f5, 2026-09-03,
+# "práctica vial interactiva"; commit 5e852c6, 2026-09-04, "simulador de
+# conducción 2D"). Las respuestas crudas se conservan únicamente como material
+# de registro, sin garantía de validez metodológica, y no se reporta media,
+# desviación típica, intervalo de confianza ni valor p.
 sus_file = os.path.join(os.path.dirname(__file__), '..', 'sus', 'sus-raw-data.csv')
-sus_scores = []
+sus_rows = 0
 with open(sus_file, 'r', encoding='utf-8') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        sus_scores.append(float(row['sus_score']))
-
-mean_sus = sum(sus_scores) / len(sus_scores)
-var_sus = sum((x - mean_sus)**2 for x in sus_scores) / (len(sus_scores) - 1)
-n_sus = len(sus_scores)
-
-# T-test de una muestra: H0: mu <= 68 vs H1: mu > 68
-t_stat_sus = (mean_sus - 68) / math.sqrt(var_sus / n_sus)
-p_sus = t_survival(t_stat_sus, n_sus - 1)
+    for _ in csv.DictReader(f):
+        sus_rows += 1
 
 # --- 2. Leer y calcular Rendimiento (Speedup) ---
 speedup_file = os.path.join(os.path.dirname(__file__), 'speedup-realtime.txt')
@@ -110,7 +108,6 @@ p_perf = t_survival(t_stat_perf, n_diff - 1)
 # --- 3. Corrección Holm-Bonferroni ---
 alpha = 0.05
 p_values = [
-    ('Usabilidad (SUS > 68)', p_sus),
     ('Rendimiento (Frio > Caliente)', p_perf)
 ]
 
@@ -118,8 +115,7 @@ p_values = [
 p_values_sorted = sorted(p_values, key=lambda x: x[1])
 
 print("=== Resultados de Evaluación Estadística ===")
-print(f"Muestra SUS (N={n_sus}): Media = {mean_sus:.2f}, Varianza = {var_sus:.2f}")
-print(f"  t = {t_stat_sus:.4f}, p-valor (una cola, df={n_sus - 1}) = {p_sus:.3e}")
+print(f"Estudio SUS: RETIRADO. Respuestas crudas conservadas: N={sus_rows}, sin análisis estadístico.")
 print(f"Muestra Rendimiento (N={n_diff}): Media Diferencia = {mean_diff:.2f}ms")
 print(f"  t = {t_stat_perf:.4f}, p-valor (una cola, df={n_diff - 1}) = {p_perf:.3e}")
 print("\n=== Aplicación de Holm-Bonferroni (alpha = 0.05) ===")

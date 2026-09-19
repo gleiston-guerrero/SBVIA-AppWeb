@@ -137,6 +137,7 @@ Equipo de desarrollo, docente-director, evaluadores, administradores, instructor
         VERIFIED & El requisito ha sido implementado y comprobado mediante pruebas automatizadas exhaustivas o auditorías. \\ \hline
         TESTED & El requisito ha sido verificado únicamente a nivel de componente o prueba superficial, o implementado exitosamente. \\ \hline
         IMPLEMENTED & El requisito está desarrollado en el código fuente, pero su cobertura de prueba no valida completamente el criterio. \\ \hline
+        NOT VERIFIED & El requisito cuenta con evidencia declarada que no puede sostenerse contra el repositorio; no se considera cumplido. \\ \hline
         Inactividad & Ausencia de autenticación y uso del sistema por un período superior a 6 meses (medido por el campo \texttt{ultimo\_acceso} en la entidad \texttt{User}). \\ \hline
         Práctica & Registro individual del desempeño de un conductor en un escenario específico. \\ \hline
         Certificado & Documento inmutable emitido al aprobar un escenario. \\ \hline
@@ -200,14 +201,14 @@ Los datos de conductores (nombre, correo, teléfono, fecha de nacimiento) son re
     \item \textbf{Minimización:} Solo se recolectan datos necesarios para la operación. No se transmiten datos de identificación personal al proveedor externo de IA.
     \item \textbf{Retención:} Los datos se retienen mientras la cuenta esté activa. Las cuentas inactivas por más de 6 meses son desactivadas automáticamente.
     \item \textbf{Supresión:} Las cuentas desactivadas pueden solicitarse eliminar por el administrador del sistema.
-    \item \textbf{Anonimización:} Las métricas de evaluación (SUS) se publican únicamente en forma anonimizada con códigos P01–P15.
+    \item \textbf{Anonimización:} Las métricas de evaluación (SUS) se publican únicamente en forma anonimizada con códigos P01–P15. El estudio SUS en sí está retirado y no se reportan resultados agregados (véase \texttt{docs/mediciones/sus/sus-analysis.md}).
 \end{itemize}
 
 \subsubsection*{Seguridad}
 El sistema implementa controles de seguridad alineados con OWASP Top 10: autenticación BCrypt (A02), cookies HttpOnly+Secure+SameSite (A02), rate limiting de login (A07), cabecera HSTS (A05), sin SQL dinámico en procedimientos (A03), registro de eventos de autenticación (A09).
 
 \subsubsection*{Calidad}
-Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación SUS media: 84.17 ($N=15$, DT=8.64). Lighthouse accesibilidad: 0.91 (color-contrast corregido en v1.2.0).
+Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación SUS media: no se reporta (estudio retirado; véase RNF-06). Lighthouse accesibilidad: 0.91 (color-contrast corregido en v1.2.0).
 
 \newpage
 % ==============================
@@ -434,10 +435,10 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
 \end{requisito}
 
 \begin{requisito}{RNF-06 - Escala de Usabilidad del Sistema SUS $\ge$ 68 puntos}
-    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
     \textbf{Descripción:} El sistema deberá ofrecer una interfaz altamente usable, alcanzando un puntaje SUS sobre la media estándar de la industria. \\[0.2cm]
-    \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. Resultado real: media = 84.17 ($N=15$, IC 95\%: [79.38, 88.95]). \\[0.2cm]
+    \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \textbf{No se reporta resultado}: el estudio SUS se retira porque su fecha declarada de aplicación (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación que dice haber evaluado (commit \texttt{55201f5}, 2026-09-03, y commit \texttt{5e852c6}, 2026-09-04). Las respuestas crudas se conservan sin garantía de validez metodológica. \\[0.2cm]
     \textbf{Verificación:} Prueba de Usabilidad (docs/mediciones/sus/sus-analysis.md) \quad \textbf{SQL:} No aplica
 \end{requisito}
 
@@ -623,7 +624,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     RNF-03 & BCrypt factor$\geq$10 & AuthServiceTest & VERIFIED & — \\ \hline
     RNF-04 & Cookie Secure & AuthControllerTest & VERIFIED & — \\ \hline
     RNF-05 & Sin SQL dinámico & audit-sql-dynamic.sh & VERIFIED & — \\ \hline
-    RNF-06 & SUS $\ge$68 & sus-analysis.md & VERIFIED & — \\ \hline
+    RNF-06 & SUS $\ge$68 & sus-analysis.md & NOT VERIFIED & — \\ \hline
     RNF-07 & Fallback IA & FeedbackServiceTest & VERIFIED & — \\ \hline
     RNF-08 & No PII a IA & ExternalAiFeedbackServiceTest & TESTED & — \\ \hline
     RNF-09 & WCAG / Lighthouse & Lighthouse prod & VERIFIED & — \\ \hline

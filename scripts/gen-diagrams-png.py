@@ -13,44 +13,34 @@ COLOR_BLUISH_GREEN = "#009E73"
 COLOR_VERMILLION = "#D55E00"
 
 def generar_sus():
+    """Registro grafico de las respuestas crudas SUS.
+
+    El estudio SUS esta RETIRADO: la fecha declarada de aplicacion
+    (2026-07-28/29) es anterior a los commits 55201f5 (2026-09-03) y 5e852c6
+    (2026-09-04) que introducen la funcionalidad de simulacion evaluada. Por eso
+    esta figura NO muestra media, mediana, minimo, maximo ni clasificacion
+    alguna: solo las respuestas individuales registradas.
+    """
     scores = []
     with open('docs/mediciones/sus/sus-raw-data.csv', 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
             scores.append(float(row['sus_score']))
-    
-    mean_score = sum(scores) / len(scores)
-    median = sorted(scores)[len(scores)//2]
-    min_val = min(scores)
-    max_val = max(scores)
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    
-    # Draw boxplot horizontally for similar look to original SVG if desired, 
-    # but the SVG was custom. We'll use ax.boxplot
-    bp = ax.boxplot(scores, vert=False, patch_artist=True, widths=0.4,
-                    boxprops=dict(facecolor=COLOR_SKY_BLUE, color='black', linewidth=1.5),
-                    medianprops=dict(color=COLOR_VERMILLION, linewidth=2),
-                    whiskerprops=dict(linewidth=1.5, linestyle='--'),
-                    capprops=dict(linewidth=1.5))
 
-    ax.set_title("SUS Score Distribution (N = 15 Participants)", fontsize=14, fontweight='bold')
+    ax.plot(scores, [1] * len(scores), 'o', color=COLOR_SKY_BLUE,
+            markeredgecolor='black', markeredgewidth=1.2, markersize=10)
+
+    ax.set_title("Individual SUS responses (study retracted - raw material only)",
+                 fontsize=13, fontweight='bold')
     ax.set_xlabel("SUS Score", fontsize=12)
     ax.set_yticks([])
-    
-    # Adding the text annotations exactly as requested
-    ax.text(mean_score, 1.35, f"Mean: {mean_score:.2f} (Grade B+ - Good+)", 
-            horizontalalignment='center', color='black', fontsize=11, fontweight='bold')
-            
-    ax.text(min_val, 0.7, f"Min: {min_val:.1f}", horizontalalignment='center')
-    ax.text(median, 0.7, f"Median: {median:.1f}", horizontalalignment='center')
-    ax.text(max_val, 0.7, f"Max: {max_val:.1f}", horizontalalignment='center')
-    
     ax.set_xlim(60, 100)
     fig.tight_layout()
     out_path = os.path.join(OUT_DIR, "sus-boxplot.png")
     fig.savefig(out_path, dpi=120)
-    print(f"Generated {out_path} with mean {mean_score:.2f}, min {min_val}, max {max_val}")
+    print(f"Generated {out_path} (retracted study: raw responses only, no statistics)")
 
 
 def generar_k6():
