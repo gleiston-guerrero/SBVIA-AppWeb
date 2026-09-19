@@ -10,7 +10,7 @@ Evaluación del paquete de datos, software y metadatos de SBVIA según las direc
   - Software: pendiente de publicación y asignación de DOI en Zenodo.
   - Dataset de mediciones: publicado separadamente con DOI `10.5281/zenodo.22785358`.
 - [x] **F2. Los datos se describen con metadatos enriquecidos:**
-  - Definidos en `CITATION.cff` (v1.2.0), `CONTRIBUTORS.md` (CRediT) y `DATA-DICTIONARY.md`.
+  - Definidos en `CITATION.cff` (v1.1.0), `CONTRIBUTORS.md` (CRediT) y `DATA-DICTIONARY.md`.
 - [ ] **F3. Los metadatos incluyen explícitamente el identificador de los datos que describen:**
   - DOI del Software: `10.5281/zenodo.22740480`
   - DOI del Dataset: `10.5281/zenodo.22785358`
