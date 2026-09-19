@@ -35,3 +35,13 @@ preferred-citation:
       orcid: "https://orcid.org/0009-0005-9831-0801"
   title: "Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA): Arquitectura Híbrida y Evaluación Empírica"
   year: 2026
+references:
+  - type: data
+    title: "Dataset de Mediciones y Evaluación Empírica - Proyecto SBVIA"
+    authors:
+      - family-names: "Cruz Perez"
+        given-names: "Justyn Keith"
+    doi: "10.5281/zenodo.22785358"
+    year: 2026
+    version: 1.0.0
+    url: "https://doi.org/10.5281/zenodo.22785358"
