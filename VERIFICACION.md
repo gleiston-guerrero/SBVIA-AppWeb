@@ -143,6 +143,9 @@ Paso 1: Rendimiento (Frio > Caliente)
 200
 200
 ```
+- **Nota de obtención:** Salida ejecutada por el integrante del equipo en su propia terminal (PowerShell con `curl.exe` nativo) el **2026-09-19**, invocando cada URL por separado con el mismo formato `-w "%{http_code}"`; ambas devolvieron `200`, que es lo que imprime la orden combinada de arriba.
+  - No se pudo ejecutar desde el entorno de automatización empleado en las rondas anteriores: su `curl` (8.21.0, backend Schannel) **no negocia TLS con ningún host** y falla con `schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e)` y código de salida 35. Control del fallo: `curl -s -o /dev/null -w "%{http_code}\n" https://api.github.com` también devuelve `000` con código 35, de modo que el problema es del entorno, no de los DOI.
+  - Comprobación independiente con otro cliente TLS (Python `urllib`) contra el mismo endpoint: `HTTP 200` en ambos handles.
 - **Ruta del archivo que la respalda:** `CITATION.cff` y `docs/informe-final.tex` (DOI del software y del dataset).
 
 ## P8 — GQM y preguntas de investigación
