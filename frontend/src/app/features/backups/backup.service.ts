@@ -7,7 +7,7 @@ import { Respaldo } from './backup.model';
   providedIn: 'root'
 })
 export class BackupService {
-  private apiUrl = '/api/backups';
+  private apiUrl = '/api/respaldos';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class BackupService {
   }
 
   generate(payload: any): Observable<Respaldo> {
-    return this.http.post<Respaldo>(`${this.apiUrl}/generate`, payload);
+    return this.http.post<Respaldo>(`${this.apiUrl}/generar`, payload);
   }
 
   delete(id: number): Observable<void> {
@@ -24,6 +24,6 @@ export class BackupService {
   }
 
   download(id: number): void {
-    window.location.href = `${this.apiUrl}/download/${id}`;
+    window.location.href = `${this.apiUrl}/descargar/${id}`;
   }
 }

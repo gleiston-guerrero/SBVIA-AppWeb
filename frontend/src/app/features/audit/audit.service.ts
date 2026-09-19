@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 export interface AuditLog {
-  idAuditoria: number;
+  id: number;
   tableName: string;
   operation: string;
   dbUser: string;
   appUser: string;
-  timestamp: string;
+  createdAt: string;
   previousData: string;
   newData: string;
 }

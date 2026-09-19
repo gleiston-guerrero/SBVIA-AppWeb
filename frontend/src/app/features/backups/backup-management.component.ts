@@ -56,7 +56,7 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
   }
 
   loadBackupsSilently(): void {
-    const hayEnProgreso = this.backups.some(r => r.estado === 'EN_PROGRESO' || r.estado === 'PROGRAMADO');
+    const hayEnProgreso = this.backups.some(r => r.status === 'EN_PROGRESO' || r.status === 'PROGRAMADO');
     if (hayEnProgreso) {
       this.backupService.list().subscribe(data => this.backups = data);
     }
@@ -105,7 +105,7 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
   delete(): void {
     if (this.backupToDelete) {
       this.backupService.delete(this.backupToDelete).subscribe(() => {
-        this.backups = this.backups.filter(r => r.idRespaldo !== this.backupToDelete);
+        this.backups = this.backups.filter(r => r.id !== this.backupToDelete);
         this.backupToDelete = null;
       });
     }

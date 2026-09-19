@@ -39,43 +39,43 @@
       <tbody>
         <tr *ngFor="let res of backups">
           <td class="font-mono">
-            <div class="truncate-text" [title]="res.nombreArchivo">{{ res.nombreArchivo }}</div>
+            <div class="truncate-text" [title]="res.fileName">{{ res.fileName }}</div>
           </td>
           <td>
-            <span class="badge" [ngClass]="res.tipo === 'MANUAL' ? 'badge-blue' : 'badge-purple'">
-              {{ res.tipo === 'MANUAL' ? '🧑‍💻 Manual' : '⏱️ Programado' }}
+            <span class="badge" [ngClass]="res.type === 'MANUAL' ? 'badge-blue' : 'badge-purple'">
+              {{ res.type === 'MANUAL' ? '🧑‍💻 Manual' : '⏱️ Programado' }}
             </span>
           </td>
           <td>
-            <span class="badge badge-gray">{{ res.modalidad }}</span>
+            <span class="badge badge-gray">{{ res.mode }}</span>
           </td>
           <td>
             <span class="badge" 
                   [ngClass]="{
-                    'badge-yellow': res.estado === 'EN_PROGRESO' || res.estado === 'PROGRAMADO',
-                    'badge-green': res.estado === 'COMPLETADO',
-                    'badge-red': res.estado === 'FALLIDO'
+                    'badge-yellow': res.status === 'EN_PROGRESO' || res.status === 'PROGRAMADO',
+                    'badge-green': res.status === 'COMPLETADO',
+                    'badge-red': res.status === 'FALLIDO'
                   }">
-              {{ res.estado === 'EN_PROGRESO' ? '⏳ Progreso' : 
-                 res.estado === 'PROGRAMADO' ? '📅 Programado' :
-                 res.estado === 'COMPLETADO' ? '✅ Completado' : '❌ Fallido' }}
+              {{ res.status === 'EN_PROGRESO' ? '⏳ Progreso' : 
+                 res.status === 'PROGRAMADO' ? '📅 Programado' :
+                 res.status === 'COMPLETADO' ? '✅ Completado' : '❌ Fallido' }}
             </span>
           </td>
           <td class="whitespace-nowrap">{{ res.startDate | date:'dd/MM/yyyy HH:mm' }}</td>
-          <td class="whitespace-nowrap">{{ res.fechaProgramada ? (res.fechaProgramada | date:'dd/MM/yyyy HH:mm') : '-' }}</td>
-          <td class="whitespace-nowrap">{{ res.estado === 'COMPLETADO' ? formatearBytes(res.tamanioBytes) : '-' }}</td>
+          <td class="whitespace-nowrap">{{ res.scheduledDate ? (res.scheduledDate | date:'dd/MM/yyyy HH:mm') : '-' }}</td>
+          <td class="whitespace-nowrap">{{ res.status === 'COMPLETADO' ? formatearBytes(res.sizeBytes) : '-' }}</td>
           <td class="text-sm">
-            <div class="truncate-text" [title]="res.comentario || '-'">{{ res.comentario || '-' }}</div>
+            <div class="truncate-text" [title]="res.comment || '-'">{{ res.comment || '-' }}</div>
           </td>
           <td class="actions">
             <button class="btn-icon btn-download" 
-                    [disabled]="res.estado !== 'COMPLETADO'" 
-                    (click)="download(res.idRespaldo)" 
+                    [disabled]="res.status !== 'COMPLETADO'" 
+                    (click)="download(res.id)" 
                     title="Descargar">
               ⬇️
             </button>
             <button class="btn-icon btn-delete" 
-                    (click)="solicitarEliminacion(res.idRespaldo)" 
+                    (click)="solicitarEliminacion(res.id)" 
                     title="Eliminar">
               🗑️
             </button>

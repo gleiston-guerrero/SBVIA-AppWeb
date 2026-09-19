@@ -71,7 +71,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let reg of registros">
-            <td>{{ reg.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td>{{ reg.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>
               <strong>{{ reg.appUser || 'N/A' }}</strong>
               <small>DB: {{ reg.dbUser }}</small>
@@ -102,8 +102,8 @@
     </header>
     <div class="modal-body">
       <div class="info-grid">
-        <div><strong>ID Auditoría:</strong> {{ registroSeleccionado?.idAuditoria }}</div>
-        <div><strong>Fecha:</strong> {{ registroSeleccionado?.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+        <div><strong>ID Auditoría:</strong> {{ registroSeleccionado?.id }}</div>
+        <div><strong>Fecha:</strong> {{ registroSeleccionado?.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
         <div><strong>Tabla:</strong> <span class="code-badge">{{ registroSeleccionado?.tableName }}</span></div>
         <div><strong>Operación:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operation?.toLowerCase() || ''">{{ registroSeleccionado?.operation }}</span></div>
         <div><strong>User App:</strong> {{ registroSeleccionado?.appUser || 'N/A' }}</div>
