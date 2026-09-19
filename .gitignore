@@ -30,8 +30,31 @@ frontend/.angular/
 
 # Herramientas y resultados temporales locales
 .tmp-tools/
+.tmp/
 zap-results/
 # Archivos temporales generados durante validaciones locales
 /tmp/
 
 .lighthouseci/
+
+# Intermedios de LaTeX (se regeneran en cada compilacion con `make pdf`)
+*.aux
+*.toc
+*.lof
+*.lot
+*.out
+*.blg
+docs/informe-final.log
+docs/requisitos/SRS-*.log
+docs/entrega -1a.log
+
+# Logs de compilacion de Maven (se regeneran con `mvn verify`)
+backend/compile.log
+backend/mvn_verify.log
+
+# Cache de Python
+__pycache__/
+*.pyc
+
+# Plan de trabajo local (no forma parte del expediente)
+PLAN_RESOLUCION_EVALUACION_SBVIA.md
