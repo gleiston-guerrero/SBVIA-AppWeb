@@ -25,3 +25,4 @@ Control formal del ciclo de vida y evolución de requisitos según la norma ISO/
 | `v0.9.0` | 2026-07-24 | RNF-01, RNF-02 | Modificación | Incorporación de caché Redis y umbrales p95 en k6. |
 | `v1.0.0` | 2026-08-17 | RF-03 a RF-08 | Agregación / Refactor | Consolidación de estrategia híbrida con 6 Procedimientos Almacenados en PostgreSQL. |
 | `v1.1.0` | 2026-09-18 | RNF-04, RNF-09, Funcionales Generales | Estabilización / Corrección | Contrato REST de reglas de tránsito validado. Cookie Secure en producción, y Lighthouse ejecutado contra URL productiva real. Limpieza del repositorio. |
+| `v1.1.0` | 2026-09-18 | SRS (control del documento) | Validación | El docente-director confirmó, por WhatsApp, que su firma en el informe de revisión (`Revision_SRS_SBVIA_v1.1.0.pdf`) constituye validación suficiente del SRS. Se actualiza la fila v1.1.0 del control del documento de "Pendiente de aprobación" a "Aprobada — validada mediante firma del docente-director". |

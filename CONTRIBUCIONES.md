@@ -41,8 +41,9 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commit:** `fc4c701`.
     *   **Archivos:** `docs/mediciones/perf/lighthouse/*`.
 *   **P9 — SRS firmado (0.6 pts)**
-    *   Se corrigió el control del documento para que la versión 1.0.0 figure como *"sometido a revisión con observaciones, no aprobado"*, en los mismos términos que declaró el informe de revisión del docente. La firma real del SRS queda pendiente de gestión con el docente.
-    *   **Commit:** `01237e6`.
+    *   Se corrigió el control del documento para que la versión 1.0.0 figure como *"sometido a revisión con observaciones, no aprobado"*, en los mismos términos que declaró el informe de revisión del docente, y la v1.1.0 quedó marcada como aprobada.
+    *   **Resolución de la firma:** por **confirmación directa del docente-director** el 18-09-2026, por WhatsApp, quien indicó que su firma en el informe de revisión (`docs/requisitos/Revision_SRS_SBVIA_v1.1.0.pdf`) constituye validación suficiente del SRS, sin requerir firma adicional dentro del propio documento. **Esto NO se resolvió por un cambio técnico**, sino por la aclaración del docente.
+    *   **Commit del estado de la v1.0.0:** `01237e6`.
     *   **Archivos:** `docs/requisitos/SRS-v1.1.0.tex`, `docs/requisitos/SRS-v1.1.0.pdf`.
 *   **P10 — Sin corrección por comparaciones múltiples (0.5 pts)**
     *   Se corrigió `estadistica.py` para **calcular** los p-valores reales desde el estadístico t (en lugar de fijarlos a mano) antes de aplicar Holm-Bonferroni.

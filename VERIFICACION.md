@@ -133,4 +133,4 @@ Paso 2: Rendimiento (Frio > Caliente)
 
 ## P9 — SRS firmado
 
-- **Estado:** Pendiente. El SRS aún no cuenta con bloque de firma; la firma real debe gestionarse con el docente por canal privado (no lo resuelve el código).
+- **Estado:** Resuelto por **confirmación directa del docente-director**, no por un cambio técnico. El docente-director confirmó el 18-09-2026, por WhatsApp, que su firma en el informe de revisión (`docs/requisitos/Revision_SRS_SBVIA_v1.1.0.pdf`) constituye validación suficiente del SRS, sin requerir firma adicional dentro del propio SRS. En consecuencia, el control del documento marca la v1.1.0 como **Aprobada — validada mediante firma del docente-director**; la v1.0.0 permanece como "Sometido a revisión con observaciones, no aprobado".
