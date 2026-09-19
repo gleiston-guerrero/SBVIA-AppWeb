@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://sbvia-frontend.onrender.com/login",
+    "preset": "desktop",
+    "isRepresentativeRun": true,
+    "jsonPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153756-desktop-run1.report.json",
+    "htmlPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153756-desktop-run1.report.html",
+    "fetchTime": "2026-09-19T15:37:40.263Z",
+    "lighthouseVersion": "12.1.0",
+    "summary": {
+      "performance": 1,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "https://sbvia-frontend.onrender.com/login",
+    "preset": "desktop",
+    "isRepresentativeRun": false,
+    "jsonPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153803-desktop-run2.report.json",
+    "htmlPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153803-desktop-run2.report.html",
+    "fetchTime": "2026-09-19T15:37:58.233Z",
+    "lighthouseVersion": "12.1.0",
+    "summary": {
+      "performance": 1,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  },
+  {
+    "url": "https://sbvia-frontend.onrender.com/login",
+    "preset": "desktop",
+    "isRepresentativeRun": false,
+    "jsonPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153812-desktop-run3.report.json",
+    "htmlPath": "E:\\SBVIA-AppWeb\\docs\\mediciones\\lighthouse\\desktop\\sbvia_frontend_onrender_com_login-20260919_153812-desktop-run3.report.html",
+    "fetchTime": "2026-09-19T15:38:05.429Z",
+    "lighthouseVersion": "12.1.0",
+    "summary": {
+      "performance": 1,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1
+    }
+  }
+]
