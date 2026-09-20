@@ -75,12 +75,19 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
 
 ## Firmas
 
-Declaramos bajo nuestro correo institucional que la información presentada en este documento y respaldada por el historial de Git es cierta y verificable.
+Declaramos que la información presentada en este documento y respaldada por el historial de Git es cierta y verificable.
 
-**Firma 1:** ___________________________  
-**Nombre:** Justyn Keith Cruz Pérez  
-**Correo:** jcruzp@uteq.edu.ec  
+**Identidad de las cuentas empleadas.** Los 140 commits de Jefferson M. Umaginga Arévalo están firmados con su correo institucional `jumagingaa@uteq.edu.ec`. Los de Justyn K. Cruz Pérez están firmados con la dirección personal `justyncruzperez@gmail.com`, en sus dos cuentas de GitHub (`JustynCruz04`, 175 commits, y `keithdrox`, 41); `jcruzp@uteq.edu.ec` es su correo institucional de contacto y no aparece en ninguno de ellos.
 
-**Firma 2:** ___________________________  
-**Nombre:** Jefferson Manuel Umaginga Arévalo  
-**Correo:** jumagingaa@uteq.edu.ec  
+**Firma 1:** Justyn Keith Cruz Pérez
+**Nombre:** Justyn Keith Cruz Pérez
+**Correo institucional:** jcruzp@uteq.edu.ec
+**Fecha:** 2026-09-20
+
+**Firma 2:** *No firma.*
+**Nombre:** Jefferson Manuel Umaginga Arévalo
+**Motivo:** no registra actividad en el repositorio desde el **2026-09-04** (commit `34f9bf8`), anterior al trabajo que declara este documento. Sus aportes previos constan en la sección correspondiente.
+
+> La línea de firma 1 reproduce el nombre y la fecha del declarante y **no es una firma manuscrita**. Si el evaluador requiere firma manuscrita, el equipo imprimirá el documento, lo firmará y aportará el escaneo.
+>
+> La firma 2 se deja explícitamente sin firmar y no en blanco: firmar por una persona que no participó en el trabajo declarado no es admisible, y dejar la línea vacía sin explicación fue el defecto que señaló la evaluación.
