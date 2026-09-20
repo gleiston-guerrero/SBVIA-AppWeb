@@ -1,0 +1,293 @@
+% =====================================================================
+%  Cuestionario de Usabilidad del Sistema (SUS) — Proyecto SBVIA
+%  Universidad Técnica Estatal de Quevedo (UTEQ)
+%  Facultad de Ciencias de la Computación y Diseño Digital
+%
+%  Compilar con:  pdflatex Cuestionario-SUS-Participante.tex   (2 veces)
+%  Salida:        Cuestionario-SUS-Participante.pdf  (A4, 1 página)
+%
+%  Imágenes (compartidas con el formulario de consentimiento):
+%     docs/etica/assets/logo-uteq-915x1024.png
+%     docs/etica/assets/facultad.jpg
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage[
+  a4paper,
+  top=10.5mm, bottom=10mm, left=13mm, right=13mm
+]{geometry}
+
+\graphicspath{{../../etica/assets/}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}   % el ancho de columnas se controla a mano
+\setlength{\arrayrulewidth}{0.4pt}
+
+% ------------------------- Paleta institucional -------------------------
+\definecolor{verdeUTEQ}{HTML}{0B7A3B}   % verde institucional
+\definecolor{verdeOsc}{HTML}{075C2C}    % verde oscuro (títulos)
+\definecolor{dorado}{HTML}{C89A2B}      % dorado institucional
+\definecolor{doradoClaro}{HTML}{FBF3DC}
+\definecolor{gris}{HTML}{5A5A5A}
+\definecolor{grisClaro}{HTML}{F4F4F4}
+\definecolor{grisLinea}{HTML}{DCDCDC}
+\definecolor{grisFila}{HTML}{FAFAFA}
+\definecolor{tinta}{HTML}{1A1A1A}
+
+% ------------------------- Columnas auxiliares -------------------------
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+
+% ------------------------- Estilo de secciones -------------------------
+\titleformat{\section}
+  {\normalfont\bfseries\color{verdeOsc}\fontsize{9.5}{11}\selectfont}
+  {}{0pt}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{3.4mm}{1.8mm}
+\titleformat{name=\section,numberless}
+  {\normalfont\bfseries\color{verdeOsc}\fontsize{9.5}{11}\selectfont}
+  {}{0pt}{\MakeUppercase}
+
+% Línea dorada bajo cada título de sección
+\newcommand{\seccion}[1]{%
+  \section*{#1}%
+  \vspace{-2.6mm}%
+  {\color{dorado}\hrule height 1.3pt}%
+  \vspace{2.2mm}%
+}
+
+% Casilla cuadrada para marcar (cuadro hueco)
+\newcommand{\casilla}{\fbox{\hbox to 2.44mm{\rule{0pt}{2.44mm}}}}
+% Versión mayor para la columna de respuestas
+\newcommand{\casillaG}{\fbox{\hbox to 2.84mm{\rule{0pt}{2.84mm}}}}
+
+% =====================================================================
+\begin{document}
+
+% ---------------------------------------------------------------- CABECERA
+\begin{minipage}[c]{27mm}
+  \includegraphics[width=26mm]{logo-uteq-915x1024.png}
+\end{minipage}%
+\begin{minipage}[c]{130mm}
+  \centering
+  {\fontsize{10.5}{12.5}\selectfont\bfseries\color{verdeOsc}%
+   UNIVERSIDAD T\'ECNICA ESTATAL DE QUEVEDO\par}
+  \vspace{1.0mm}
+  {\fontsize{8.8}{10.5}\selectfont\color{gris}%
+   Facultad de Ciencias de la Computaci\'on y Dise\~no Digital\par}
+  \vspace{0.8mm}
+  {\fontsize{7.6}{9.2}\selectfont\itshape\color{gris}%
+   Proyecto SBVIA --- Simulador de Comportamiento Vial con Inteligencia Artificial\par}
+\end{minipage}%
+\begin{minipage}[c]{27mm}
+  \raggedleft
+  \includegraphics[width=19mm]{facultad.jpg}
+\end{minipage}
+
+\vspace{1.6mm}
+{\color{verdeUTEQ}\hrule height 2.2pt}
+
+% ------------------------------------------------------------------ TÍTULO
+\vspace{5mm}
+\begin{center}
+  {\fontsize{15}{17}\selectfont\bfseries\color{verdeOsc}%
+   Cuestionario de Usabilidad del Sistema (SUS)\par}
+  \vspace{1.5mm}
+  {\fontsize{8.6}{10.2}\selectfont\itshape\color{gris}%
+   System Usability Scale --- Brooke (1996)\par}
+  \vspace{1.0mm}
+  {\fontsize{7.4}{9}\selectfont\color{gris}%
+   Formulario v1.0 --- septiembre de 2026\par}
+\end{center}
+
+% ---------------------------------------------------------- INSTRUCCIONES
+\seccion{Instrucciones para el participante}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=5.6mm, labelsep=1.8mm,
+                  itemsep=1.4pt, topsep=0pt, parsep=0pt]
+  \item \small Escribe \textbf{\'unicamente tu c\'odigo de participante} en la casilla de
+        abajo. No escribas tu nombre ni tus apellidos.
+  \item \small Responde este cuestionario \textbf{inmediatamente despu\'es} de haber usado
+        el sistema SBVIA.
+  \item \small Marca \textbf{una sola casilla por pregunta}. No hay respuestas correctas
+        ni incorrectas.
+  \item \small Responde seg\'un lo que \textbf{realmente sentiste} al usar el sistema,
+        sin pensarlo demasiado.
+  \item \small \textbf{No dejes ninguna pregunta sin responder.}
+\end{enumerate}
+
+% ------------------------------------------------------ CÓDIGO PARTICIPANTE
+\seccion{C\'odigo de participante}
+
+\begin{tabular}{|m{50.8mm}|m{132.6mm}|}
+  \hline
+  \rowcolor{doradoClaro}
+  \vspace{1.2mm}{\bfseries\color{verdeOsc}\fontsize{9.3}{11}\selectfont
+   \hspace*{3mm}C\'odigo asignado} &
+  \vspace{1.2mm}{\fontsize{12.5}{15}\selectfont
+   \hspace*{5mm}\textbf{\color{verdeOsc}P}\hspace{4mm}%
+   {\color{dorado}\rule[0.6ex]{104mm}{1.1pt}}} \\[1.2mm]
+  \hline
+\end{tabular}
+
+\vspace{1.3mm}
+{\fontsize{7.1}{8.6}\selectfont\itshape\color{gris}%
+ Escribe solo el n\'umero que te fue asignado (ejemplo: 01, 02, 03). No escribas tu nombre.\par}
+
+% -------------------------------------------------------------- PREGUNTAS
+\seccion{Preguntas}
+
+% Leyenda de la escala
+\noindent
+\begingroup
+\setlength{\fboxsep}{0pt}
+\colorbox{grisClaro}{%
+  \begin{minipage}{\linewidth}
+    \vspace{4pt}
+    \hspace*{7pt}{\color{dorado}\rule[-1.2mm]{2.4pt}{5.4mm}}\hspace{2.5mm}%
+    {\fontsize{7.8}{9.6}\selectfont\color{gris}%
+     \textbf{Marca una casilla por pregunta.}\hspace{2mm}·\hspace{2mm}%
+     \textbf{1} = Muy en desacuerdo\quad \textbf{2} = En desacuerdo\quad
+     \textbf{3} = Neutral\quad \textbf{4} = De acuerdo\quad
+     \textbf{5} = Muy de acuerdo\par}
+    \vspace{4pt}
+  \end{minipage}}
+\endgroup
+\par
+
+\vspace{1.8mm}
+
+% Tabla de los 10 ítems SUS
+\begingroup
+\renewcommand{\arraystretch}{1.32}
+\fontsize{9}{10.8}\selectfont
+
+\begin{tabular}{C{12.73mm}L{101.07mm}C{12.73mm}C{12.73mm}C{12.73mm}C{12.73mm}C{12.73mm}}  \hline
+  \rowcolor{verdeUTEQ}
+  {\color{white}\textbf{\#}} &
+  {\color{white}\textbf{\hspace*{4mm}Pregunta}} &
+  {\color{white}\textbf{1}} & {\color{white}\textbf{2}} &
+  {\color{white}\textbf{3}} & {\color{white}\textbf{4}} &
+  {\color{white}\textbf{5}} \\ \hline
+
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P1} &
+  \hspace*{3mm}Me gustar\'ia usar este sistema con frecuencia. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \textbf{\color{verdeOsc}P2} &
+  \hspace*{3mm}Encontr\'e el sistema innecesariamente complejo. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \rowcolor{grisFila}
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P3} &
+  \hspace*{3mm}Pens\'e que el sistema era f\'acil de usar. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P4} &
+  \hspace*{3mm}Creo que necesitar\'ia ayuda t\'ecnica para poder usar este sistema. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \rowcolor{grisFila}
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P5} &
+  \hspace*{3mm}Encontr\'e que las diversas funciones del sistema estaban bien integradas. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P6} &
+  \hspace*{3mm}Pens\'e que hab\'ia demasiada inconsistencia en el sistema. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \rowcolor{grisFila}
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P7} &
+  \hspace*{3mm}Imagino que la mayor\'ia de las personas aprender\'ia a usar este sistema muy r\'apidamente. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P8} &
+  \hspace*{3mm}Encontr\'e el sistema muy complicado de usar. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \rowcolor{grisFila}
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P9} &
+  \hspace*{3mm}Me sent\'i muy seguro(a) al usar el sistema. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+
+  \cellcolor{doradoClaro}\textbf{\color{verdeOsc}P10} &
+  \hspace*{3mm}Necesit\'e aprender muchas cosas antes de poder empezar a usar el sistema. &
+  \casillaG & \casillaG & \casillaG & \casillaG & \casillaG \\ \hline
+\end{tabular}
+\endgroup
+
+% ------------------------------------------------------- DATOS DE LA SESIÓN
+\seccion{Datos de la sesi\'on (uso interno)}
+
+\begingroup
+\renewcommand{\arraystretch}{1.55}
+\fontsize{8.7}{10.4}\selectfont
+
+\begin{tabular}{|m{38.8mm}|m{141.2mm}|}
+  \hline
+  \rowcolor{grisClaro}
+  \textbf{\color{verdeOsc}%
+    \hspace*{2.5mm}Fecha en que respondiste el cuestionario} &
+  \hspace*{2.5mm}\_\_\_\_ / \_\_\_\_ / \_\_\_\_\_\_\_\_\_\_ \\ \hline
+  \rowcolor{grisClaro}
+  \textbf{\color{verdeOsc}%
+    \hspace*{2.5mm}Duraci\'on aproximada de la sesi\'on} &
+  \hspace*{2.5mm}\_\_\_\_\_\_\_\_\_\_ minutos \\ \hline
+  \rowcolor{grisClaro}
+  \textbf{\color{verdeOsc}%
+    \hspace*{2.5mm}Sistema evaluado} &
+  \hspace*{2.5mm}\texttt{https://sbvia-frontend.onrender.com}\hspace{5mm}%
+  versi\'on: \rule{22mm}{0.4pt} \\ \hline
+  \rowcolor{grisClaro}
+  \textbf{\color{verdeOsc}%
+    \hspace*{2.5mm}Dispositivo utilizado} &
+  \hspace*{2.5mm}\casilla\hspace{1.5mm}Laptop\hspace{4mm}%
+  \casilla\hspace{1.5mm}Computadora de escritorio\hspace{4mm}%
+  \casilla\hspace{1.5mm}Otro: \_\_\_\_\_\_ \\ \hline
+\end{tabular}
+\endgroup
+
+% -------------------------------------------------------------------- PIE
+\vspace{2.6mm}
+\begin{center}
+  {\fontsize{10.2}{12}\selectfont\bfseries\color{verdeOsc}%
+   ¡Gracias por tu participaci\'on!\par}
+\end{center}
+
+\vspace{1.6mm}
+\noindent
+\begingroup
+\setlength{\fboxsep}{0pt}
+\colorbox{grisClaro}{%
+  \begin{minipage}{\dimexpr\linewidth-16pt\relax}
+    \vspace{1.3mm}
+    \noindent{\color{verdeUTEQ}\rule{\linewidth}{1.6pt}}
+    \vspace{1.8mm}
+    \par\noindent
+    {\fontsize{7.0}{8.7}\selectfont\color{gris}%
+     \textbf{Confidencialidad:} tus respuestas se tratan de forma
+     \textbf{confidencial y seudonimizada}: se identifican \'unicamente con el
+     c\'odigo asignado, nunca con tu nombre. Se usar\'an exclusivamente con fines
+     acad\'emicos, como parte del examen del curso de Aplicaciones Web de la UTEQ.
+     Este cuestionario se conserva por separado de tu formulario de consentimiento
+     informado, que es el documento firmado y custodiado por los investigadores.\par}
+    \vspace{1.3mm}
+  \end{minipage}}
+\endgroup
+\par
+
+\end{document}

@@ -47,6 +47,8 @@ zap-results/
 docs/informe-final.log
 docs/requisitos/SRS-*.log
 docs/entrega -1a.log
+docs/etica/consentimientos/*.log
+docs/mediciones/sus/*.log
 
 # Logs de compilacion de Maven (se regeneran con `mvn verify`)
 backend/compile.log
@@ -58,3 +60,7 @@ __pycache__/
 
 # Plan de trabajo local (no forma parte del expediente)
 PLAN_RESOLUCION_EVALUACION_SBVIA.md
+
+# Material temporal con datos personales de participantes (escaneos firmados).
+# NUNCA debe versionarse: se elimina al terminar de procesarlo.
+.sus-tmp/

@@ -1,0 +1,203 @@
+% =====================================================================
+%  Formulario de Consentimiento Informado — Estudio de Usabilidad SBVIA
+%  Universidad Técnica Estatal de Quevedo (UTEQ)
+%  Facultad de Ciencias de la Computación y Diseño Digital
+%
+%  Compilar con:  pdflatex Consentimiento-Informado-SBVIA.tex   (2 veces)
+%  Salida:        Consentimiento-Informado-SBVIA.pdf  (A4, 2 páginas)
+%
+%  Imágenes (compartidas con el cuestionario SUS):
+%     docs/etica/assets/logo-uteq-915x1024.png
+%     docs/etica/assets/facultad.jpg
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[a4paper, top=14mm, bottom=14mm, left=20mm, right=20mm]{geometry}
+
+\graphicspath{{../assets/}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.2mm}
+\setlength{\tabcolsep}{0pt}
+\setlength{\arrayrulewidth}{0.4pt}
+
+% ------------------------- Paleta institucional -------------------------
+\definecolor{verdeUTEQ}{HTML}{0B7A3B}
+\definecolor{verdeOsc}{HTML}{075C2C}
+\definecolor{dorado}{HTML}{C89A2B}
+\definecolor{gris}{HTML}{5A5A5A}
+\definecolor{grisClaro}{HTML}{F4F4F4}
+\definecolor{grisLinea}{HTML}{DCDCDC}
+
+% ------------------------- Estilo de secciones -------------------------
+\titleformat{\section}
+  {\normalfont\bfseries\color{verdeOsc}\fontsize{11}{13}\selectfont}
+  {\thesection.}{1.6mm}{}
+\titlespacing*{\section}{0pt}{4.2mm}{1.6mm}
+
+% Punto de viñeta en el color institucional
+\newcommand{\vin}{\textcolor{dorado}{\textbullet}\hspace{1.6mm}}
+
+% Línea para escribir (rellena el ancho disponible)
+\newcommand{\linea}{\rule[0.4ex]{\linewidth}{0.4pt}}
+% Línea desplazada a la derecha (descuenta el margen interno de la celda)
+\newcommand{\lineac}{\rule[0.4ex]{\dimexpr\linewidth-2.5mm\relax}{0.4pt}}
+
+% =====================================================================
+\begin{document}
+
+% ---------------------------------------------------------------- CABECERA
+\begin{minipage}[c]{27mm}
+  \includegraphics[width=26mm]{logo-uteq-915x1024.png}
+\end{minipage}%
+\begin{minipage}[c]{114mm}
+  \centering
+  {\fontsize{10.5}{12.5}\selectfont\bfseries\color{verdeOsc}%
+   UNIVERSIDAD T\'ECNICA ESTATAL DE QUEVEDO\par}
+  \vspace{1.0mm}
+  {\fontsize{9}{10.8}\selectfont\color{gris}%
+   Facultad de Ciencias de la Computaci\'on y Dise\~no Digital\par}
+\end{minipage}%
+\begin{minipage}[c]{27mm}
+  \raggedleft
+  \includegraphics[width=20mm]{facultad.jpg}
+\end{minipage}
+
+\vspace{1.6mm}
+{\color{verdeUTEQ}\hrule height 2.2pt}
+
+% ------------------------------------------------------------------ TÍTULO
+\vspace{5.5mm}
+\begin{center}
+  {\fontsize{16}{18}\selectfont\bfseries\color{verdeOsc}%
+   Formulario de Consentimiento Informado\par}
+  \vspace{1.6mm}
+  {\fontsize{10.5}{12.5}\selectfont\color{gris}%
+   Estudio de Usabilidad --- Sistema SBVIA\par}
+  \vspace{0.8mm}
+  {\fontsize{9.5}{11.5}\selectfont\itshape\color{gris}%
+   (Simulador de Comportamiento Vial con Inteligencia Artificial)\par}
+  \vspace{1.0mm}
+  {\fontsize{8}{9.6}\selectfont\color{gris}%
+   Formulario v1.0 --- septiembre de 2026\par}
+  \vspace{2.2mm}
+  {\color{dorado}\hrule height 1.2pt}
+\end{center}
+
+\vspace{3mm}
+
+% ------------------------------------------------------- DATOS DEL ESTUDIO
+\begin{tabular}{@{}p{48mm}p{121.7mm}@{}}
+  \hline
+  \textbf{Investigador responsable:} &
+    Cruz P\'erez, Justyn K. y Umaginga Ar\'evalo, Jefferson M. \\[1.4mm]
+  \textbf{Proyecto:} &
+    SBVIA (equipo: Cruz P\'erez, Justyn K. / Umaginga Ar\'evalo, Jefferson M.) \\[1.4mm]
+  \textbf{Instituci\'on:} & Universidad T\'ecnica Estatal de Quevedo (UTEQ) \\[1.4mm]
+  \textbf{Sistema evaluado:} &
+    \texttt{https://sbvia-frontend.onrender.com} \\[1.4mm]
+  \textbf{Fecha de la sesi\'on:} & \linea \\[0.6mm]
+  \hline
+\end{tabular}
+
+% -------------------------------------------------------------- SECCIONES
+\section{Prop\'osito del estudio}
+Usted ha sido invitado(a) a participar en una evaluaci\'on de usabilidad del sistema SBVIA, una
+plataforma de simulaci\'on de comportamiento vial con fines educativos. El objetivo es medir qu\'e
+tan f\'acil e intuitivo resulta el uso del sistema para personas en formaci\'on como conductores.
+
+\section{En qu\'e consiste su participaci\'on}
+\begin{itemize}[leftmargin=6mm, label=\vin, itemsep=1.6mm, topsep=1mm, parsep=0pt]
+  \item Usted usar\'a el sistema SBVIA durante una sesi\'on de pr\'actica de manejo simulado
+        (duraci\'on aproximada: \textbf{10 a 22 minutos}, seg\'un el escenario).
+  \item Inmediatamente despu\'es, se le pedir\'a completar un cuestionario breve de 10 preguntas
+        (Escala de Usabilidad del Sistema --- SUS), que toma aproximadamente 5 minutos.
+  \item No se le pedir\'a realizar ninguna otra tarea fuera de esto.
+\end{itemize}
+
+\section{Riesgos y molestias}
+Esta actividad no representa ning\'un riesgo f\'isico o psicol\'ogico m\'as all\'a de los propios
+del uso normal de una computadora o dispositivo. Puede detener su participaci\'on en cualquier
+momento sin ninguna consecuencia.
+
+\section{Confidencialidad y uso de los datos}
+\begin{itemize}[leftmargin=6mm, label=\vin, itemsep=1.6mm, topsep=1mm, parsep=0pt]
+  \item Sus respuestas se registrar\'an de forma \textbf{confidencial y seudonimizada}:
+        se identifican solo con un c\'odigo (ej. P01, P02\ldots), no con su nombre.
+  \item Los datos se usar\'an exclusivamente con fines acad\'emicos, como parte del examen del
+        curso de Aplicaciones Web de la UTEQ.
+  \item No se compartir\'a su identidad con terceros ni se usar\'a su informaci\'on para ning\'un
+        otro prop\'osito.
+  \item Los datos seudonimizados podr\'an incluirse en el repositorio p\'ublico del proyecto y en
+        el informe final, pero nunca de forma que permita identificarlo a usted personalmente.
+  \item \textbf{Este formulario firmado no se publica.} Se conserva custodiado por los
+        investigadores, en un almacenamiento de acceso restringido y separado de las respuestas,
+        y se muestra al docente-director por canal privado cuando lo solicite.
+  \item \textbf{Retiro de los datos:} adem\'as de retirarse, puede solicitar que se eliminen las
+        respuestas que ya haya proporcionado, escribiendo a cualquiera de los contactos de la
+        secci\'on 6.
+\end{itemize}
+
+\section{Participaci\'on voluntaria}
+Su participaci\'on es completamente voluntaria. Puede negarse a participar o retirarse en cualquier
+momento, incluso despu\'es de haber comenzado, sin necesidad de dar explicaciones y sin ninguna
+consecuencia para usted.
+
+% --------------------------------------------------------------- CONTACTO
+\section{Contacto}
+Si tiene preguntas sobre este estudio, puede contactar a:
+\begin{itemize}[leftmargin=6mm, label=\vin, itemsep=1.4mm, topsep=1mm, parsep=0pt]
+  \item Justyn Cruz P\'erez --- jcruzp@uteq.edu.ec
+  \item Jefferson Umaginga Ar\'evalo --- jumagingaa@uteq.edu.ec
+\end{itemize}
+
+\vspace{2mm}
+{\color{dorado}\hrule height 1.2pt}
+
+% ------------------------------------------------- DECLARACIÓN DE CONSENTIMIENTO
+\vspace{3.5mm}
+{\fontsize{12}{14}\selectfont\bfseries\color{verdeOsc}%
+ Declaraci\'on de consentimiento\par}
+
+\vspace{2mm}
+He le\'ido (o se me ha explicado) la informaci\'on anterior. Entiendo el prop\'osito del estudio,
+en qu\'e consiste mi participaci\'on, y que puedo retirarme en cualquier momento sin
+consecuencias. Acepto participar voluntariamente en esta evaluaci\'on de usabilidad.
+
+\vspace{3.5mm}
+
+% Tabla de firmas
+\begingroup
+\renewcommand{\arraystretch}{1.9}
+\begin{tabular}{|m{58mm}|m{110.2mm}|}
+  \hline
+  \rowcolor{grisClaro}\textbf{\color{verdeOsc}\hspace*{2.5mm}%
+    Nombre completo del participante} &
+  \hspace*{2.5mm}\lineac \\ \hline
+  \rowcolor{grisClaro}\textbf{\color{verdeOsc}\hspace*{2.5mm}%
+    C\'odigo asignado (uso interno)} &
+  \hspace*{2.5mm}\lineac \\ \hline
+  \rowcolor{grisClaro}\textbf{\color{verdeOsc}\hspace*{2.5mm}Firma} &
+  \hspace*{2.5mm}\lineac \\ \hline
+  \rowcolor{grisClaro}\textbf{\color{verdeOsc}\hspace*{2.5mm}Fecha} &
+  \hspace*{2.5mm}\lineac \\ \hline
+\end{tabular}
+\endgroup
+
+\vspace{2.5mm}
+{\fontsize{8}{9.8}\selectfont\itshape\color{gris}%
+ Este documento debe conservarse por los investigadores como constancia del consentimiento, por
+ separado de las respuestas seudonimizadas del participante.\par}
+
+\end{document}

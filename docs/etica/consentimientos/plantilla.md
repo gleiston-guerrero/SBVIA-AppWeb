@@ -1,30 +1,41 @@
 # Formulario de Consentimiento Informado
 
+> **Versión superada.** El formulario vigente, que es el que se imprime y se firma, es
+> [`Consentimiento-Informado-SBVIA.pdf`](Consentimiento-Informado-SBVIA.pdf)
+> (LaTeX: [`Consentimiento-Informado-SBVIA.tex`](Consentimiento-Informado-SBVIA.tex)),
+> formulario v1.0 de septiembre de 2026.
+>
+> Esta página se conserva por trazabilidad histórica y **no debe entregarse a participantes**.
+
+## Corrección de la versión inicial
+
+La versión inicial de este documento describía los datos como "**completamente anónimos**"
+mientras recogía nombre, firma y fecha. Esa descripción era **incorrecta**: como el formulario
+firmado queda en custodia y lleva el código asignado en el mismo documento, la correspondencia
+entre código y persona existe. Por tanto los datos son **confidenciales y seudonimizados**, no
+anónimos. La versión vigente ya lo redacta así.
+
+Tampoco basta con afirmar el anonimato para poder publicar el formulario: el documento firmado
+**no se publica nunca**, porque contiene datos personales.
+
+## Historial (texto de la versión de julio de 2026)
+
 **Proyecto:** Simulador de Comportamiento Vial con IA (SBVIA)
 **Investigadores:** Cruz Pérez Justyn K., Umaginga Arévalo Jefferson M.
-Estimado/a participante:
 
-Le invitamos a formar parte de las pruebas de evaluación de usabilidad (System Usability Scale - SUS) para el proyecto SBVIA.
+Le invitamos a formar parte de las pruebas de evaluación de usabilidad (System Usability Scale -
+SUS) para el proyecto SBVIA.
 
-## Propósito del estudio
-El objetivo es medir la facilidad de uso y la experiencia general de nuestra aplicación web de simulación vial.
+**Propósito del estudio.** Medir la facilidad de uso y la experiencia general de la aplicación web
+de simulación vial.
 
-## Procedimiento
-Si accede a participar, se le pedirá que complete tareas básicas en el sistema (como iniciar sesión, navegar por el dashboard, iniciar una simulación y cerrar sesión) y posteriormente llene un breve cuestionario de 10 preguntas.
+**Procedimiento.** Completar tareas básicas en el sistema (iniciar sesión, navegar por el dashboard,
+iniciar una simulación y cerrar sesión) y, posteriormente, llenar un cuestionario de 10 preguntas.
 
-## Confidencialidad y Anonimato
-Los datos recopilados serán **completamente anónimos** y se utilizarán exclusivamente con fines académicos para la mejora del sistema. Su identidad no será revelada en ningún informe ni se publicará en el repositorio público.
+**Voluntariedad.** La participación es voluntaria y puede retirarse en cualquier momento sin
+consecuencia alguna.
 
-## Voluntariedad
-Su participación es voluntaria. Puede decidir no participar o retirarse del estudio en cualquier momento sin ninguna consecuencia.
+**Declaración de consentimiento.** Al firmar, el participante confirma que ha leído y comprendido
+la información y que acepta participar voluntariamente.
 
-## Declaración de Consentimiento
-Al firmar este documento, confirmo que he leído y comprendido la información proporcionada, que he tenido la oportunidad de hacer preguntas, y que acepto participar voluntariamente en el estudio.
-
-**Nombre del participante:** ________________________________________
-
-**Firma:** ____________________________________________________
-
-**Fecha:** _______________________
-
-*(Este documento, una vez firmado, no se subirá al repositorio público).*
+*(Este documento, una vez firmado, no se sube al repositorio público.)*
