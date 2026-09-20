@@ -41,10 +41,9 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commit:** `fc4c701`.
     *   **Archivos:** `docs/mediciones/perf/lighthouse/*`.
 *   **P9 — SRS firmado (0.6 pts)**
-    *   Se corrigió el control del documento para que la versión 1.0.0 figure como *"sometido a revisión con observaciones, no aprobado"*, en los mismos términos que declaró el informe de revisión del docente, y la v1.1.0 quedó marcada como aprobada.
-    *   **Resolución de la firma:** por **confirmación directa del docente-director** el 18-09-2026, por WhatsApp, quien indicó que su firma en el informe de revisión (`docs/requisitos/Revision_SRS_SBVIA_v1.1.0.pdf`) constituye validación suficiente del SRS, sin requerir firma adicional dentro del propio documento. **Esto NO se resolvió por un cambio técnico**, sino por la aclaración del docente.
-    *   **Commit del estado de la v1.0.0:** `01237e6`.
-    *   **Archivos:** `docs/requisitos/SRS-v1.1.0.tex`, `docs/requisitos/SRS-v1.1.0.pdf`.
+    *   El control del documento quedó con la versión 1.0.0 y la 1.1.0 marcadas como *revisadas con observaciones*, en los mismos términos que declararon los informes de revisión del docente.
+    *   **Corrección de la declaración de aprobación (observación X6):** se retiran de `SRS-v1.1.0.tex`, `CHANGELOG-REQ.md`, `CONTRIBUCIONES.md` y `VERIFICACION.md` las frases que afirmaban que la v1.1.0 estaba "Aprobada — validada mediante firma del docente-director" y que la firma del informe "constituye validación suficiente del SRS". El docente-director escribió lo contrario en dos informes distintos: su firma *"no asigna calificación y no constituye aprobación del SRS"*. La firma acredita revisión, no aprobación; ninguna versión figura por tanto como aprobada.
+    *   **Archivos:** `docs/requisitos/SRS-v1.1.0.tex`, `docs/requisitos/SRS-v1.1.0.pdf`, `docs/requisitos/CHANGELOG-REQ.md`, `CONTRIBUCIONES.md`, `VERIFICACION.md`.
 *   **P10 — Sin corrección por comparaciones múltiples (0.5 pts)**
     *   Se corrigió `estadistica.py` para **calcular** los p-valores reales desde el estadístico t (en lugar de fijarlos a mano) antes de aplicar Holm-Bonferroni.
     *   **Commit:** `7b3cfbe`.
