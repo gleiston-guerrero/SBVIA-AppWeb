@@ -103,6 +103,24 @@ Todos los hashes de esta tabla son verificables con `git show <hash>`.
 | **Qué se hizo** | Se revirtió `V14` a su estado original y la corrección se movió a la migración nueva `V18__conectar_procedimientos_sp.sql`, restaurando la coherencia de *checksums* de Flyway con la base desplegada. |
 | **Por qué** | Reescribir una migración ya aplicada rompe la reproducibilidad del esquema: el mismo archivo produciría bases distintas según cuándo se ejecutara. |
 
+### R-09 — Atribución al docente sin texto que la respalde ("MD5 confirmado por el docente")
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | En `docs/observaciones/OBSERVACIONES.md`, la nota del punto X11 afirmaba que el PDF del repositorio era "idéntico byte a byte al revisado (MD5 confirmado por el docente)", sin citar ningún texto del docente ni indicar cómo comprobarlo. |
+| **Commit de corrección** | `5c02c22` — 20-09-2026 — *docs(integrity): fix an unsupported attribution and a citation to a non-existent report* |
+| **Qué se hizo** | Se sustituye por el hecho comprobable: el archivo `docs/requisitos/SRS-v1.2.0.pdf` en el commit `a5938b8` tiene MD5 `79d62386e6c4afb634147ff7f6c8384c`, que es el que consigna el informe de revisión, y se aclara que el PDF se recompiló después, por lo que su hash actual es distinto. |
+| **Por qué** | Es el mismo patrón que la atribución verbal retirada en la ronda X6: atribuir al docente una confirmación sin texto que la respalde. Lo detectó el propio docente-director en su evaluación del 2026-09-20, que lo cuenta entre las dos afirmaciones graves que mantienen el Piso 3 en riesgo. Se corrige con una comprobación reproducible en lugar de con otra afirmación. |
+
+### R-10 — Cuatro citas a un informe de revisión que no existía en el repositorio
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | Cuatro archivos citaban `Revision_SRS_SBVIA_v1.2.0.pdf` como informe firmado del docente-director: `docs/observaciones/OBSERVACIONES.md`, `docs/requisitos/CHANGELOG-REQ.md`, `docs/RETRACTIONS.md` y `VERIFICACION.md`. Ese archivo **no existía ni había existido nunca** en el historial (`git log --all` sobre esa ruta no devuelve nada), mientras que los informes de las versiones 1.0.0 y 1.1.0 sí estaban versionados. |
+| **Commit de corrección** | `5c02c22` — 20-09-2026 — *docs(integrity): fix an unsupported attribution and a citation to a non-existent report* |
+| **Qué se hizo** | Se incorpora `docs/requisitos/Revision_SRS_SBVIA_v1.2.0.pdf` al repositorio, junto a los informes de las otras dos versiones, de modo que las cuatro citas pasan a ser verdaderas y verificables. Dos de ellas se completan con la ruta `docs/requisitos/`. |
+| **Por qué** | Citar como prueba un archivo inexistente es del mismo tipo que pegar una salida que la orden no produce: la afirmación no resiste su propia comprobación. El origen del error fue dar por versionado un documento que solo se había recibido como adjunto, sin comprobarlo con `git log` antes de citarlo. |
+
 ---
 
 ## 3. Resumen
@@ -117,6 +135,8 @@ Todos los hashes de esta tabla son verificables con `git show <hash>`.
 | R-06 | Lista blanca de fallos en el verificador (EV-2) | `7a691d0` | 18-09-2026 |
 | R-07 | Estudio SUS retirado por incompatibilidad de fechas (P5) | `ec56c20`, `93ab5ce` | 18–19-09-2026 |
 | R-08 | Migración V14 ya aplicada reescrita (N4) | `deda187` | 18-09-2026 |
+| R-09 | Atribución al docente sin texto que la respalde ("MD5 confirmado por el docente") | `5c02c22` | 20-09-2026 |
+| R-10 | Cuatro citas a un informe de revisión que no existía en el repositorio | `5c02c22` | 20-09-2026 |
 
 ---
 
