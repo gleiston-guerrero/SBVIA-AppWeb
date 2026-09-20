@@ -53,9 +53,9 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commit:** `e7a1e34`.
     *   **Archivos:** `VERIFICACION.md`, `AuthController.java`, `application-prod.yml`.
 *   **P12 — Referencias sin verificar una por una (0.3 pts)**
-    *   Se auditaron los 46 DOIs de `refs.bib` uno por uno contra Crossref (18 correctos, 10 corregidos, 18 retirados), con log auditable.
-    *   **Commit:** `94fdd61`.
-    *   **Archivos:** `docs/refs.bib`, `docs/doi_check.log`.
+    *   Se auditaron las **46 referencias** de `refs.bib` una por una contra Crossref, DataCite y OpenLibrary. La primera pasada (`94fdd61`) dio 18 correctos, 10 corregidos y 18 retirados; una **segunda auditoría completa** (`833925c`) dejó el resultado en **30 con DOI resuelto y verificado**, **16 sin DOI registrado pero con ISBN o URL oficial verificados** y **0 sin ningún identificador** (antes eran 16 las que no tenían DOI, URL ni ISBN). El registro es auditable y reproducible con `python scripts/check_dois.py`.
+    *   **Commits:** `94fdd61`, `833925c`.
+    *   **Archivos:** `docs/refs.bib`, `docs/doi_check.log`, `scripts/check_dois.py`.
 *   **EV-1 — Expediente de verificación**
     *   Se completó `VERIFICACION.md` con los puntos P2, P4, P8 y P9 y se corrigieron las salidas obsoletas.
     *   **Commit:** `6f450de`.

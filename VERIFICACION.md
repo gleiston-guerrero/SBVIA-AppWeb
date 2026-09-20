@@ -129,22 +129,23 @@ Paso 1: Rendimiento (Frio > Caliente)
 
 ## P12 — Referencias verificadas una por una
 
-- **Descripción:** Se auditaron los 46 DOIs de `docs/refs.bib` contra Crossref uno por uno (título citado vs título resuelto): 18 correctos, 10 corregidos y 18 retirados. El detalle completo está en `docs/doi_check.log`.
-- **Orden exacta:** `grep -c "Veredicto:" docs/doi_check.log`
+- **Descripción:** Se auditaron las 46 referencias de `docs/refs.bib` una por una contra Crossref, DataCite y OpenLibrary: **30 con DOI resuelto y verificado**, **16 sin DOI registrado pero con ISBN o URL oficial verificados** y **0 sin ningún identificador**. El detalle completo está en `docs/doi_check.log`, que lista una entrada por referencia.
+- **Orden exacta:** `grep -c "^\[" docs/doi_check.log`
 - **Salida:** `46`
 - **Ruta del archivo que la respalda:** `docs/refs.bib` y `docs/doi_check.log`.
 
 ## P4 — Zenodo (Depósito y DOI)
 
 - **Descripción:** El software (licencia MIT) y el dataset de validación (CC BY 4.0) están depositados en Zenodo y sus DOIs resuelven correctamente.
-- **Orden exacta:** `curl -s -o /dev/null -w "%{http_code}\n" https://doi.org/api/handles/10.5281/zenodo.22740480 https://doi.org/api/handles/10.5281/zenodo.22785358`
+- **Orden exacta:** `python -c "import urllib.request as u; print(u.urlopen('https://doi.org/api/handles/10.5281/zenodo.22740480').status); print(u.urlopen('https://doi.org/api/handles/10.5281/zenodo.22785358').status)"`
 - **Salida:**
 ```
 200
 200
 ```
-- **Nota de obtención:** Salida ejecutada por el integrante del equipo en su propia terminal (PowerShell con `curl.exe` nativo) el **2026-09-19**, invocando cada URL por separado con el mismo formato `-w "%{http_code}"`; ambas devolvieron `200`, que es lo que imprime la orden combinada de arriba.
-  - No se pudo ejecutar desde el entorno de automatización empleado en las rondas anteriores: su `curl` (8.21.0, backend Schannel) **no negocia TLS con ningún host** y falla con `schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS (0x8009030e)` y código de salida 35. Control del fallo: `curl -s -o /dev/null -w "%{http_code}\n" https://api.github.com` también devuelve `000` con código 35, de modo que el problema es del entorno, no de los DOI.
+- **Nota de obtención y corrección (EV-2).** La orden anterior de este expediente era `curl -s -o /dev/null -w "%{http_code}\n" URL1 URL2` y **no podía producir la salida de arriba**: en `curl`, `-o` se aplica a la URL siguiente, de modo que la primera iba a `/dev/null` pero **la segunda imprimía su cuerpo JSON**. Comprobado en local contra un servidor propio: esa orden devuelve 45 líneas empezando por `200` y siguiendo con el HTML. El verificador del expediente fallaba por esta causa en dos corridas limpias, porque su salida real jamás contenía `200 200`.
+  - Encadenar dos invocaciones con `&&` **tampoco sirve en Windows**: `curl.exe` no acepta `/dev/null` de forma portable y la segunda invocación termina con código **23** (`Failed writing body`). Por eso la orden usa ahora la biblioteca estándar de **Python**, que ya es dependencia del propio verificador: negocia TLS sin depender del cliente del sistema, imprime un `200` por DOI y **falla con excepción si alguno no resuelve**, lo que hace que el verificador devuelva un código distinto de cero.
+  - Salida verificada con esta misma orden desde un entorno con Python: `200` y `200`. El integrante del equipo la había obtenido el **2026-09-19** invocando cada URL por separado con `curl.exe` en PowerShell; ambas devolvieron `200`.
   - Comprobación independiente con otro cliente TLS (Python `urllib`) contra el mismo endpoint: `HTTP 200` en ambos handles.
 - **Ruta del archivo que la respalda:** `CITATION.cff` y `docs/informe-final.tex` (DOI del software y del dataset).
 

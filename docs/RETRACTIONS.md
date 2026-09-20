@@ -73,7 +73,7 @@ Todos los hashes de esta tabla son verificables con `git show <hash>`.
 |:---|:---|
 | **Qué se retractó** | Entradas de `docs/refs.bib` cuyo DOI resolvía a un trabajo diferente del citado, o que no correspondía a una obra existente. |
 | **Commit de corrección** | `94fdd61` — 18-09-2026 — *fix(refs): correct and retract DOIs pointing to wrong works (P12)* |
-| **Qué se hizo** | Se auditaron los 46 DOI uno por uno contra Crossref y se dejó registro auditable en `docs/doi_check.log`. Resultado: 10 DOIs corregidos, 18 retirados y 18 que ya eran correctos. |
+| **Qué se hizo** | Se auditaron los 46 DOI uno por uno contra Crossref y se dejó registro auditable en `docs/doi_check.log`. Resultado de esa pasada: 10 DOIs corregidos, 18 retirados y 18 que ya eran correctos. Una auditoría posterior y más completa (commit `833925c`, véase el punto P12 del expediente) dejó el conjunto en 30 con DOI verificado, 16 con ISBN o URL oficial verificados y 0 sin identificador. |
 | **Por qué** | Un identificador persistente que apunta a otra obra no es un error tipográfico: es una cita falsa verificable por cualquiera. |
 
 ### R-06 — Lista blanca de fallos en el verificador del expediente (EV-2)
