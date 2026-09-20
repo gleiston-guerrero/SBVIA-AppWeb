@@ -19,10 +19,17 @@ La versión vigente es `v1.2.0`, etiquetada de forma anotada sobre el commit que
 
 ## Excepción a la política de no reescribir etiquetas
 
-Confirmado directamente por el docente-director (Ing. Gleiston Cíceron Guerrero Ulloa) el 19-09-2026, respondiendo a la consulta explícita del equipo sobre si usar v1.1.0 de forma continua o etiquetas nuevas por versión: "como quieras si es con la anterior, no hay problema (parece que sería mejor)".
+El propio docente-director autoriza expresamente mover `v1.1.0`. Consta **por escrito** en su evaluación del **2026-09-20**, apartado 2 (*"Cómo dejar la etiqueta donde ustedes quieran"*), que incluye las órdenes concretas:
 
-En consecuencia, v1.1.0 se sigue actualizando (reetiquetando) con cada ronda de correcciones del examen suspenso, por instrucción explícita y verificable del evaluador. Esto sustituye, únicamente para v1.1.0 como línea base del examen, la recomendación general de X1 (revisión del SRS v1.2.0) de no reescribir etiquetas publicadas. El respaldo documental de la excepción es el propio mensaje del docente-director, conservado por el equipo.
+> Su v1.1.0 quedó cuatro commits por detrás porque, al existir ya en el remoto, un envío normal se rechaza. Estas son las órdenes:
+>
+>     git tag -f -a v1.1.0 -m "Entrega del examen suspenso" <commit>
+>     git push --force origin refs/tags/v1.1.0
+
+En consecuencia, `v1.1.0` se sigue actualizando (reetiquetando) con cada ronda de correcciones del examen suspenso, por instrucción escrita del evaluador. Esto sustituye, **únicamente para `v1.1.0` como línea base del examen**, la recomendación general de X1 (revisión del SRS v1.2.0) de no reescribir etiquetas publicadas.
 
 Quedan **fuera** de esta excepción la `v1.2.0` y cualquier etiqueta futura de versión del SRS, que se rigen por la política general de inmutabilidad.
+
+**Nota sobre la cita.** El documento del 2026-09-20 es una evaluación del docente-director conservada por el equipo y **no está versionado en este repositorio**; se cita con su fecha y su texto literal, conforme a la regla de atribución de [`docs/etica/ETHICS.md`](etica/ETHICS.md) §v.
 
 La versión `v0.9.0` se conserva como referencia de la tercera entrega. Los commits siguen Conventional Commits para mantener un historial legible y facilitar la generación del changelog.

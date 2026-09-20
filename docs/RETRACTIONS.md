@@ -9,7 +9,7 @@
 
 ## 1. Por qué existe este documento
 
-El informe de revisión del Libro de Requisitos (`Revision_SRS_SBVIA_v1.2.0.pdf`), en su
+El informe de revisión del Libro de Requisitos (`docs/requisitos/Revision_SRS_SBVIA_v1.2.0.pdf`), en su
 apartado *"Observación sobre el expediente"*, señaló que una serie de commits del 18 y 19 de
 septiembre corrigen evidencia del informe final, y que **la magnitud de lo corregido obliga a
 una lectura cuidadosa del informe**, por lo que conviene que el propio informe declare qué

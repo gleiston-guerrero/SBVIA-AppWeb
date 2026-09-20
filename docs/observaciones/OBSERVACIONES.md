@@ -42,7 +42,7 @@ Observaciones de la evaluación de la **Práctica Experimental Unidad III**, res
 
 ### Revisión del Libro de Requisitos v1.2.0 — observaciones X1–X12 (2026-09-19)
 
-Observaciones del informe `Revision_SRS_SBVIA_v1.2.0.pdf` del docente-director, resueltas en la versión `v1.2.0`.
+Observaciones del informe `docs/requisitos/Revision_SRS_SBVIA_v1.2.0.pdf` del docente-director, resueltas en la versión `v1.2.0`.
 
 | Código | Criterio Afectado | Observación | Decisión del Equipo | Evidencia | Estado |
 |:---:|:---:|:---|:---|:---:|:---:|
@@ -59,7 +59,7 @@ Observaciones del informe `Revision_SRS_SBVIA_v1.2.0.pdf` del docente-director, 
 | **X11** | Entrega del PDF | El archivo llegó como `SRS-SGVIA-v1.2.0.pdf` (G por B); en el repositorio el nombre es correcto. | No es un defecto del repositorio. Se registra como recordatorio de proceso. | — | Recordatorio |
 | **X12** | Requisito Must sin plan | RNF-06 sigue siendo Must sin plan tras retirar el estudio SUS. | RNF-06 se mantiene Must y declara que la reevaluación de usabilidad sobre el sistema construido está en curso, sin fecha de cierre ni resultados parciales. | `SRS-v1.2.0.tex` RNF-06 | Resuelta |
 
-> **Nota (X11) — recordatorio de proceso, no defecto del repositorio:** antes de enviar el PDF al docente por fuera del repositorio, verificar el nombre del archivo (`SRS-v1.2.0.pdf`, con B de SBVIA). El archivo del repositorio es idéntico byte a byte al revisado (MD5 confirmado por el docente).
+> **Nota (X11) — recordatorio de proceso, no defecto del repositorio:** antes de enviar el PDF al docente por fuera del repositorio, verificar el nombre del archivo (`SRS-v1.2.0.pdf`, con B de SBVIA); el nombre con el que le llegó traía una letra cambiada. La identidad byte a byte entre lo entregado y lo versionado **es comprobable en el historial**: el archivo `docs/requisitos/SRS-v1.2.0.pdf` en el commit `a5938b8` tiene MD5 `79d62386e6c4afb634147ff7f6c8384c`, que es el que consigna el informe de revisión. El PDF se recompiló después para corregir las observaciones X1–X12, por lo que su MD5 actual es distinto; la identidad corresponde a la versión revisada.
 
 > **Nota (X4/X5) — evidencia verificada antes de reclasificar:** `SimulationRepositoryTest.java` no existe en ninguna ruta del repositorio (búsqueda recursiva: 0 coincidencias). Los cinco procedimientos tienen 0 invocaciones en `backend/src/main/java` y 0 invocaciones `CALL`/`SELECT` en todo el repositorio. Ninguno de los dos hechos se dio por supuesto: se comprobaron sobre el árbol de trabajo antes de declarar NOT VERIFIED.
 
