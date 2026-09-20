@@ -40,9 +40,35 @@ Observaciones de la evaluación de la **Práctica Experimental Unidad III**, res
 
 ---
 
+### Revisión del Libro de Requisitos v1.2.0 — observaciones X1–X12 (2026-09-19)
+
+Observaciones del informe `Revision_SRS_SBVIA_v1.2.0.pdf` del docente-director, resueltas en la versión `v1.2.0`.
+
+| Código | Criterio Afectado | Observación | Decisión del Equipo | Evidencia | Estado |
+|:---:|:---:|:---|:---|:---:|:---:|
+| **X1** | Línea base / etiquetas | La etiqueta `v1.1.0` fue movida de `1e95329` a `a5938b8`; una etiqueta reescrita deja de ser línea base. | Se congela `v1.1.0` en `a5938b8` y no se vuelve a mover. Se adopta por escrito la política de no reescribir etiquetas publicadas. | `docs/VERSIONING.md` | Resuelta |
+| **X2** | Línea base / metadatos | No existe la etiqueta `v1.2.0` que el documento declara como versión. | Se crea la etiqueta anotada `v1.2.0` sobre el commit final y el SRS declara `Punto del historial: etiqueta v1.2.0` (y AC-06 en consecuencia). | `v1.2.0`, `SRS-v1.2.0.tex` | Resuelta |
+| **X3** | Contradicción interna | La sección 6 llama "Huérfano (sin RF)" a los cinco procedimientos que RF-16 a RF-20 sí especifican. | La sección 6 pasa a vincularlos a RF-16..RF-20 con estado NOT VERIFIED, igual que los requisitos. | `SRS-v1.2.0.tex` §6 | Resuelta |
+| **X4** | Trazabilidad | RF-16 a RF-20 citan `SimulationRepositoryTest.java`, que no existe. | Se retira la cita inexistente y se cita la evidencia real: la definición del SP en `db/procs/` incluida en la migración V14. | `SRS-v1.2.0.tex` RF-16..RF-20 | Resuelta |
+| **X5** | Estado declarado | Los cinco SP se declaran IMPLEMENTED con cero invocaciones en `backend/src/main/java`. | Pasan a NOT VERIFIED y se documenta el conteo cero de invocaciones. | `SRS-v1.2.0.tex` §6 y matriz | Resuelta |
+| **X6** | Aprobación del SRS | Cuatro archivos declaran la v1.1.0 "Aprobada — validada mediante firma del docente-director". | Los cuatro pasan a "Revisada con observaciones" citando los dos informes; se retira toda afirmación de validación por firma o por confirmación verbal. | `SRS-v1.1.0.tex`, `CHANGELOG-REQ.md`, `CONTRIBUCIONES.md`, `VERIFICACION.md` | Resuelta |
+| **X7** | Accesibilidad | §2.6 declara accesibilidad 0,91 (dashboard) frente a 1,00 en `/login`. | Se fija 1,00 y se declara vigente el conjunto del 19-09 sobre `/login`; el del dashboard queda como histórico no vigente. | `docs/mediciones/lighthouse/` | Resuelta |
+| **X8** | Nombre de tabla | RF-06 nombra `AuditLog` y el procedimiento escribe en `bitacora_auditoria`. | Se documenta que `AuditLog` es la entidad JPA de la tabla creada como `bitacora_auditoria` (V3) y renombrada a `audit_log` (V17). Se declara abierta la incoherencia de destino en V18. | `SRS-v1.2.0.tex` RF-06, RF-15 | Resuelta |
+| **X9** | Metadatos | `CITATION.cff` declara `version: 1.1.0` y `date-released: 2026-09-18`. | Pasa a `1.2.0` / `2026-09-19`; se alinean también `README.md` y el checklist FAIR. | `CITATION.cff`, `README.md`, `docs/checklists/fair.md` | Resuelta |
+| **X10** | Autoría | La nota al pie llama "Carlos Zamora Bumbila" al tercer integrante. | Se corrige al nombre oficial indicado por el docente: "Zamora Bumbila, Diego Alexander". | `SRS-v1.2.0.tex` nota al pie | Resuelta |
+| **X11** | Entrega del PDF | El archivo llegó como `SRS-SGVIA-v1.2.0.pdf` (G por B); en el repositorio el nombre es correcto. | No es un defecto del repositorio. Se registra como recordatorio de proceso. | — | Recordatorio |
+| **X12** | Requisito Must sin plan | RNF-06 sigue siendo Must sin plan tras retirar el estudio SUS. | RNF-06 se mantiene Must y declara que la reevaluación de usabilidad sobre el sistema construido está en curso, sin fecha de cierre ni resultados parciales. | `SRS-v1.2.0.tex` RNF-06 | Resuelta |
+
+> **Nota (X11) — recordatorio de proceso, no defecto del repositorio:** antes de enviar el PDF al docente por fuera del repositorio, verificar el nombre del archivo (`SRS-v1.2.0.pdf`, con B de SBVIA). El archivo del repositorio es idéntico byte a byte al revisado (MD5 confirmado por el docente).
+
+> **Nota (X4/X5) — evidencia verificada antes de reclasificar:** `SimulationRepositoryTest.java` no existe en ninguna ruta del repositorio (búsqueda recursiva: 0 coincidencias). Los cinco procedimientos tienen 0 invocaciones en `backend/src/main/java` y 0 invocaciones `CALL`/`SELECT` en todo el repositorio. Ninguno de los dos hechos se dio por supuesto: se comprobaron sobre el árbol de trabajo antes de declarar NOT VERIFIED.
+
+---
+
 ### Resumen de Cumplimiento por Entrega
 - **Entrega 1A:** 4 observaciones recibidas | 3 resueltas y 1 parcial.
 - **Entrega 1B:** 3 observaciones recibidas | 2 resueltas y 1 parcial.
 - **Entrega 3:** 5 observaciones recibidas | 5 resueltas (**100 %**)
 - **Práctica Experimental Unidad III:** 10 observaciones recibidas | 8 resueltas y 2 parciales.
-- **Total acumulado:** 22 observaciones | 18 resueltas y 4 parciales.
+- **Revisión SRS v1.2.0 (X1–X12):** 12 observaciones recibidas | 11 resueltas y 1 recordatorio de proceso.
+- **Total acumulado:** 34 observaciones | 29 resueltas, 4 parciales y 1 recordatorio de proceso.
