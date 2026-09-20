@@ -13,7 +13,14 @@ Las etiquetas adicionales (ej. `-rc`, `-alpha`) están disponibles como metadato
 
 ## Entrega actual
 
-La versión vigente es `v1.2.0`, etiquetada de forma anotada sobre el commit que resuelve las observaciones X1–X12 del informe de revisión del docente-director. La `v1.1.0` es la **línea base del examen suspenso** y se rige por la excepción documentada más abajo.
+Hay **dos etiquetas con papeles distintos**, y conviene no confundirlas:
+
+| Etiqueta | Papel | Dónde apunta |
+| :--- | :--- | :--- |
+| `v1.1.0` | **Línea base del examen suspenso.** Se mueve con cada ronda de correcciones, por la excepción documentada más abajo. | Al commit evaluado (el último de `main`) |
+| `v1.2.0` | **Etiqueta de la especificación SRS v1.2.0.** No se mueve: identifica el documento revisado por el docente-director. | Al commit de la especificación v1.2.0 (`0302db6`) |
+
+El chequeo de *"etiqueta anotada sobre HEAD"* lo satisface `v1.1.0`, que es la etiqueta de entrega del examen. `v1.2.0` **no se reescribe**: hacerlo dejaría la etiqueta sin correspondencia con el contenido del documento `SRS-v1.2.0`, que es exactamente el problema que el docente-director señaló en X2. La próxima versión de la especificación recibirá su propia etiqueta nueva.
 
 **Política de etiquetas:** con carácter general, una etiqueta publicada es inmutable. Cada ronda de correcciones se publica sobre una etiqueta **nueva** (`v1.3.0`, `v1.4.0`, ...), nunca moviendo ni forzando una etiqueta existente. Esta política atiende la indicación escrita del docente-director en la revisión de la v1.2.0 (observaciones X1 y X2): una etiqueta de versión que se reescribe deja de ser una línea base.
 
