@@ -1,222 +1,343 @@
 \begin{thebibliography}{10}
 
 \bibitem{who2023roadsafety}
-{World Health Organization}, ``Global status report on road safety 2023,''
-  tech. rep., World Health Organization, Geneva, 2023.
+{World Health Organization}.
+\newblock Global status report on road safety 2023.
+\newblock Technical report, World Health Organization, Geneva, 2023.
+\newblock URL: \url{https://www.who.int/publications/i/item/9789240086517}.
 
 \bibitem{martin2019simulator}
-L.~M. Mart{\'i}n-delosReyes, E.~Jim{\'e}nez-Mej{\'i}as, V.~Mart{\'i}nez-Ruiz,
-  E.~Moreno-Rold{\'a}n, D.~Molina-Soberanes, and P.~Lardelli-Claret, ``Efficacy
-  of training with driving simulators in improving safety in young novice or
-  learner drivers: A systematic review,'' {\em Transportation Research Part F:
-  Traffic Psychology and Behaviour}, vol.~62, pp.~58--65, 2019.
+Luis~Miguel Mart{\'i}n-delosReyes, Eladio Jim{\'e}nez-Mej{\'i}as, Virginia
+  Mart{\'i}nez-Ruiz, Elena Moreno-Rold{\'a}n, Daniel Molina-Soberanes, and
+  Pablo Lardelli-Claret.
+\newblock Efficacy of training with driving simulators in improving safety in
+  young novice or learner drivers: A systematic review.
+\newblock {\em Transportation Research Part F: Traffic Psychology and
+  Behaviour}, 62:58--65, 2019.
+\newblock \href {https://doi.org/10.1016/j.trf.2018.12.006}
+  {\path{doi:10.1016/j.trf.2018.12.006}}.
 
 \bibitem{alonso2023simulators}
-F.~Alonso, M.~Faus, J.~V. Riera, M.~Fernandez-Marin, and S.~A. Useche,
-  ``Effectiveness of driving simulators for drivers' training: A systematic
-  review,'' {\em Applied Sciences}, vol.~13, no.~9, p.~5266, 2023.
+Francisco Alonso, Mireia Faus, Jos{\'e}~V. Riera, Marcos Fernandez-Marin, and
+  Sergio~A. Useche.
+\newblock Effectiveness of driving simulators for drivers' training: A
+  systematic review.
+\newblock {\em Applied Sciences}, 13(9):5266, 2023.
+\newblock \href {https://doi.org/10.3390/app13095266}
+  {\path{doi:10.3390/app13095266}}.
 
 \bibitem{krasniuk2024simulator}
-S.~Krasniuk, A.~M. Crizzle, {\em et~al.}, ``The effectiveness of driving
-  simulator training on driving skills and safety in young novice drivers: A
-  systematic review of interventions,'' {\em Journal of Safety Research},
-  vol.~91, pp.~20--37, 2024.
+Sarah Krasniuk, Alexander~M. Crizzle, et~al.
+\newblock The effectiveness of driving simulator training on driving skills and
+  safety in young novice drivers: A systematic review of interventions.
+\newblock {\em Journal of Safety Research}, 91:20--37, 2024.
+\newblock \href {https://doi.org/10.1016/j.jsr.2024.08.002}
+  {\path{doi:10.1016/j.jsr.2024.08.002}}.
 
 \bibitem{iso25010}
-{ISO/IEC}, ``Systems and software engineering -- systems and software quality
-  requirements and evaluation (square) -- system and software quality models,''
-  tech. rep., ISO/IEC 25010:2011, 2011.
+{ISO/IEC}.
+\newblock Systems and software engineering -- systems and software quality
+  requirements and evaluation (square) -- system and software quality models.
+\newblock Technical report, ISO/IEC 25010:2011, 2011.
+\newblock \href {https://doi.org/10.3403/30215101}
+  {\path{doi:10.3403/30215101}}.
 
 \bibitem{rfc7519}
-M.~Jones, J.~Bradley, and N.~Sakimura, ``Json web token (jwt),'' 2015.
+Michael Jones, John Bradley, and Nat Sakimura.
+\newblock Json web token (jwt), 2015.
+\newblock \href {https://doi.org/10.17487/rfc7519}
+  {\path{doi:10.17487/rfc7519}}.
 
 \bibitem{owasp2021}
-{OWASP Foundation}, ``Owasp top 10: 2021 -- the ten most critical web
-  application security risks,'' tech. rep., OWASP, 2021.
+{OWASP Foundation}.
+\newblock Owasp top 10: 2021 -- the ten most critical web application security
+  risks.
+\newblock Technical report, OWASP, 2021.
+\newblock URL: \url{https://owasp.org/Top10/}.
 
 \bibitem{fowler2002patterns}
-M.~Fowler, {\em Patterns of Enterprise Application Architecture}.
+Martin Fowler.
+\newblock {\em Patterns of Enterprise Application Architecture}.
 \newblock Addison-Wesley Longman Publishing Co., Inc., 2002.
 
 \bibitem{kleppmann2017designing}
-M.~Kleppmann, {\em Designing Data-Intensive Applications: The Big Ideas Behind
+Martin Kleppmann.
+\newblock {\em Designing Data-Intensive Applications: The Big Ideas Behind
   Reliable, Scalable, and Maintainable Systems}.
 \newblock O'Reilly Media, 2017.
 
 \bibitem{peng2011reproducible}
-R.~D. Peng, ``Reproducible research in computational science,'' {\em Science},
-  vol.~334, no.~6060, pp.~1226--1227, 2011.
+Roger~D. Peng.
+\newblock Reproducible research in computational science.
+\newblock {\em Science}, 334(6060):1226--1227, 2011.
+\newblock \href {https://doi.org/10.1126/science.1213847}
+  {\path{doi:10.1126/science.1213847}}.
 
 \bibitem{sandve2013ten}
-G.~K. Sandve, A.~Nekrutenko, J.~Taylor, and E.~Hovig, ``Ten simple rules for
-  reproducible computational research,'' {\em PLoS Computational Biology},
-  vol.~9, no.~10, p.~e1003285, 2013.
+Geir~Kjetil Sandve, Anton Nekrutenko, James Taylor, and Eivind Hovig.
+\newblock Ten simple rules for reproducible computational research.
+\newblock {\em PLoS Computational Biology}, 9(10):e1003285, 2013.
+\newblock \href {https://doi.org/10.1371/journal.pcbi.1003285}
+  {\path{doi:10.1371/journal.pcbi.1003285}}.
 
 \bibitem{wilkinson2016fair}
-M.~D. Wilkinson, M.~Dumontier, I.~J. Aalbersberg, G.~Appleton, M.~Axton,
-  A.~Baak, {\em et~al.}, ``The fair guiding principles for scientific data
-  management and stewardship,'' {\em Scientific Data}, vol.~3, p.~160018, 2016.
+Mark~D. Wilkinson, Michel Dumontier, IJsbrand~Jan Aalbersberg, Gabrielle
+  Appleton, Myles Axton, Arie Baak, et~al.
+\newblock The fair guiding principles for scientific data management and
+  stewardship.
+\newblock {\em Scientific Data}, 3:160018, 2016.
+\newblock \href {https://doi.org/10.1038/sdata.2016.18}
+  {\path{doi:10.1038/sdata.2016.18}}.
 
 \bibitem{pohl2010requirements}
-K.~Pohl, {\em Requirements Engineering: Fundamentals, Principles, and
+Klaus Pohl.
+\newblock {\em Requirements Engineering: Fundamentals, Principles, and
   Techniques}.
 \newblock Springer Publishing Company, 2010.
+\newblock \href {https://doi.org/10.1007/978-3-642-12578-2}
+  {\path{doi:10.1007/978-3-642-12578-2}}.
 
 \bibitem{iso29148}
-{ISO/IEC/IEEE}, ``Systems and software engineering -- life cycle processes --
-  requirements engineering,'' tech. rep., ISO/IEC/IEEE 29148:2018, 2018.
+{ISO/IEC/IEEE}.
+\newblock Systems and software engineering -- life cycle processes --
+  requirements engineering.
+\newblock Technical report, ISO/IEC/IEEE 29148:2018, 2018.
+\newblock \href {https://doi.org/10.3403/30230210}
+  {\path{doi:10.3403/30230210}}.
 
 \bibitem{incose2023}
-{INCOSE}, ``Incose guide to writing requirements,'' Tech. Rep.
-  INCOSE-TP-2010-006-04, International Council on Systems Engineering, 2023.
+{INCOSE}.
+\newblock Incose guide to writing requirements.
+\newblock Technical Report INCOSE-TP-2010-006-04, International Council on
+  Systems Engineering, 2023.
+\newblock URL:
+  \url{https://www.incose.org/docs/default-source/working-groups/requirements-wg/gtwr/incose_rwg_gtwr_v4_040423_final_drafts.pdf}.
 
 \bibitem{brown2023c4}
-S.~Brown, {\em The C4 Model for Visualising Software Architecture}.
+Simon Brown.
+\newblock {\em The C4 Model for Visualising Software Architecture}.
 \newblock Leanpub, 2023.
+\newblock URL: \url{https://c4model.com/}.
 
 \bibitem{treiber2013traffic}
-M.~Treiber and A.~Kesting, {\em Traffic Flow Dynamics: Data, Models and
-  Simulation}.
+Martin Treiber and Arne Kesting.
+\newblock {\em Traffic Flow Dynamics: Data, Models and Simulation}.
 \newblock Springer, 2013.
+\newblock \href {https://doi.org/10.1007/978-3-642-32460-4}
+  {\path{doi:10.1007/978-3-642-32460-4}}.
 
 \bibitem{brown2020software}
-S.~Brown, {\em Software Architecture for Developers}.
+Simon Brown.
+\newblock {\em Software Architecture for Developers}.
 \newblock Leanpub, 2020.
+\newblock URL: \url{https://leanpub.com/software-architecture-for-developers}.
 
 \bibitem{brooke1996sus}
-J.~Brooke, ``Sus: A 'quick and dirty' usability scale,'' {\em Usability
-  Evaluation in Industry}, vol.~189, no.~194, pp.~4--7, 1996.
+John Brooke.
+\newblock Sus: A 'quick and dirty' usability scale.
+\newblock {\em Usability Evaluation in Industry}, 189(194):4--7, 1996.
+\newblock \href {https://doi.org/10.1201/9781498710411-35}
+  {\path{doi:10.1201/9781498710411-35}}.
 
 \bibitem{kitchenham2007guidelines}
-B.~Kitchenham and S.~Charters, ``Guidelines for performing systematic
-  literature reviews in software engineering,'' {\em EBSE Technical Report
-  EBSE-2007-01}, 2007.
+Barbara Kitchenham and Stuart Charters.
+\newblock Guidelines for performing systematic literature reviews in software
+  engineering.
+\newblock Technical report, EBSE Technical Report EBSE-2007-01, 2007.
+\newblock URL:
+  \url{https://legacyfileshare.elsevier.com/promis_misc/525444systematicreviewsguide.pdf}.
 
 \bibitem{page2021prisma}
-M.~J. Page, J.~E. McKenzie, P.~M. Bossuyt, I.~Boutron, T.~C. Hoffmann, C.~D.
-  Mulrow, {\em et~al.}, ``The prisma 2020 statement: an updated guideline for
-  reporting systematic reviews,'' {\em BMJ}, vol.~372, p.~n71, 2021.
+Matthew~J. Page, Joanne~E. McKenzie, Patrick~M. Bossuyt, Isabelle Boutron,
+  Tammy~C. Hoffmann, Cynthia~D. Mulrow, et~al.
+\newblock The prisma 2020 statement: an updated guideline for reporting
+  systematic reviews.
+\newblock {\em BMJ}, 372:n71, 2021.
+\newblock \href {https://doi.org/10.1136/bmj.n71} {\path{doi:10.1136/bmj.n71}}.
 
 \bibitem{wynne2019validation}
-R.~A. Wynne, V.~Beanland, and P.~M. Salmon, ``Systematic review of driving
-  simulator validation studies,'' {\em Safety Science}, vol.~117, pp.~138--151,
-  2019.
+Rachael~A. Wynne, Vanessa Beanland, and Paul~M. Salmon.
+\newblock Systematic review of driving simulator validation studies.
+\newblock {\em Safety Science}, 117:138--151, 2019.
+\newblock \href {https://doi.org/10.1016/j.ssci.2019.04.004}
+  {\path{doi:10.1016/j.ssci.2019.04.004}}.
 
 \bibitem{vanleeuwen2015changes}
-P.~M. van Leeuwen, R.~Happee, and J.~C.~F. de~Winter, ``Changes of driving
-  performance and gaze behavior of novice drivers during a 30-min
-  simulator-based training,'' {\em Procedia Manufacturing}, vol.~3,
-  pp.~3325--3332, 2015.
+Pieter~M. van Leeuwen, Riender Happee, and Joost C.~F. de~Winter.
+\newblock Changes of driving performance and gaze behavior of novice drivers
+  during a 30-min simulator-based training.
+\newblock {\em Procedia Manufacturing}, 3:3325--3332, 2015.
+\newblock \href {https://doi.org/10.1016/j.promfg.2015.07.422}
+  {\path{doi:10.1016/j.promfg.2015.07.422}}.
 
 \bibitem{rosenbloom2014workshops}
-T.~Rosenbloom and E.~Eldror, ``Effectiveness evaluation of simulative workshops
-  for newly licensed drivers,'' {\em Accident Analysis \& Prevention}, vol.~63,
-  pp.~30--36, 2014.
+Tova Rosenbloom and Ehud Eldror.
+\newblock Effectiveness evaluation of simulative workshops for newly licensed
+  drivers.
+\newblock {\em Accident Analysis \& Prevention}, 63:30--36, 2014.
+\newblock \href {https://doi.org/10.1016/j.aap.2013.09.018}
+  {\path{doi:10.1016/j.aap.2013.09.018}}.
 
 \bibitem{mayhew2011validation}
-D.~R. Mayhew, H.~M. Simpson, K.~M. Wood, L.~Lonero, K.~M. Clinton, and A.~G.
-  Johnson, ``On-road and simulated driving: Concurrent and discriminant
-  validation,'' {\em Journal of Safety Research}, vol.~42, no.~4, pp.~267--275,
-  2011.
+Daniel~R. Mayhew, Herb~M. Simpson, Katherine~M. Wood, Lawrence Lonero,
+  Kathryn~M. Clinton, and Amanda~G. Johnson.
+\newblock On-road and simulated driving: Concurrent and discriminant
+  validation.
+\newblock {\em Journal of Safety Research}, 42(4):267--275, 2011.
+\newblock \href {https://doi.org/10.1016/j.jsr.2011.06.004}
+  {\path{doi:10.1016/j.jsr.2011.06.004}}.
 
 \bibitem{hulme2021blueprint}
-K.~F. Hulme, R.~S.~A. Lim, M.~Bauer, N.~Hatten, H.~Destro, B.~Switzer, J.-A.
-  Dequesnay, R.~Cashmore, I.~Duncan, A.~Abraham, J.~Deutsch, N.~Bald, G.~A.
-  Fabiano, and K.~E. Lewis, ``Blueprint for a simulation framework to increase
-  driver training safety in north america: Case study,'' {\em Safety}, vol.~7,
-  no.~2, p.~24, 2021.
+Kevin~F. Hulme, Rachel Su~Ann Lim, Meghan Bauer, Nailah Hatten, Helena Destro,
+  Brenden Switzer, Jodie-Ann Dequesnay, Rebecca Cashmore, Ian Duncan, Anand
+  Abraham, Jacob Deutsch, Nichaela Bald, Gregory~A. Fabiano, and Kemper~E.
+  Lewis.
+\newblock Blueprint for a simulation framework to increase driver training
+  safety in north america: Case study.
+\newblock {\em Safety}, 7(2):24, 2021.
+\newblock \href {https://doi.org/10.3390/safety7020024}
+  {\path{doi:10.3390/safety7020024}}.
 
 \bibitem{wiegers2013software}
-K.~E. Wiegers and J.~Beatty, {\em Software Requirements}.
-\newblock Microsoft Press, 3rd~ed., 2013.
+Karl~E. Wiegers and Joy Beatty.
+\newblock {\em Software Requirements}.
+\newblock Microsoft Press, 3rd edition, 2013.
 
 \bibitem{cohn2004user}
-M.~Cohn, {\em User Stories Applied: For Agile Software Development}.
+Mike Cohn.
+\newblock {\em User Stories Applied: For Agile Software Development}.
 \newblock Addison-Wesley Professional, 2004.
 
 \bibitem{cockburn2001writing}
-A.~Cockburn, {\em Writing Effective Use Cases}.
+Alistair Cockburn.
+\newblock {\em Writing Effective Use Cases}.
 \newblock Addison-Wesley Professional, 2001.
 
 \bibitem{peffers2007design}
-K.~Peffers, T.~Tuunanen, M.~A. Rothenberger, and S.~Chatterjee, ``A design
-  science research methodology for information systems research,'' {\em Journal
-  of Management Information Systems}, vol.~24, no.~3, pp.~45--77, 2007.
+Ken Peffers, Tuure Tuunanen, Marcus~A. Rothenberger, and Samir Chatterjee.
+\newblock A design science research methodology for information systems
+  research.
+\newblock {\em Journal of Management Information Systems}, 24(3):45--77, 2007.
+\newblock \href {https://doi.org/10.2753/mis0742-1222240302}
+  {\path{doi:10.2753/mis0742-1222240302}}.
 
 \bibitem{hevner2004design}
-A.~R. Hevner, S.~T. March, J.~Park, and S.~Ram, ``Design science in information
-  systems research,'' {\em MIS Quarterly}, vol.~28, no.~1, pp.~75--105, 2004.
+Alan~R. Hevner, Salvatore~T. March, Jinsoo Park, and Sudha Ram.
+\newblock Design science in information systems research.
+\newblock {\em MIS Quarterly}, 28(1):75--105, 2004.
+\newblock \href {https://doi.org/10.2307/25148625}
+  {\path{doi:10.2307/25148625}}.
 
 \bibitem{basili1994gqm}
-V.~R. Basili, G.~Caldiera, and H.~D. Rombach, ``The goal question metric
-  approach,'' {\em Encyclopedia of Software Engineering}, vol.~1, pp.~528--532,
-  1994.
+Victor~R. Basili, Gianluigi Caldiera, and H.~Dieter Rombach.
+\newblock The goal question metric approach.
+\newblock In {\em Encyclopedia of Software Engineering}, volume~1, pages
+  528--532. John Wiley \& Sons, 1994.
+\newblock Edici\'on en l\'inea de Wiley (2002) del mismo cap\'itulo.
+\newblock \href {https://doi.org/10.1002/0471028959.sof142}
+  {\path{doi:10.1002/0471028959.sof142}}.
 
 \bibitem{wohlin2012experimentation}
-C.~Wohlin, P.~Runeson, M.~H{\"o}st, M.~C. Ohlsson, B.~Regnell, and
-  A.~Wessl{\'e}n, {\em Experimentation in Software Engineering}.
+Claes Wohlin, Per Runeson, Martin H{\"o}st, Magnus~C. Ohlsson, Bj{\"o}rn
+  Regnell, and Anders Wessl{\'e}n.
+\newblock {\em Experimentation in Software Engineering}.
 \newblock Springer Science \& Business Media, 2012.
+\newblock \href {https://doi.org/10.1007/978-3-642-29044-2}
+  {\path{doi:10.1007/978-3-642-29044-2}}.
 
 \bibitem{baltes2022sampling}
-S.~Baltes and P.~Ralph, ``Sampling in software engineering research: A critical
-  review and guidelines,'' {\em Empirical Software Engineering}, vol.~27,
-  no.~4, p.~94, 2022.
+Sebastian Baltes and Paul Ralph.
+\newblock Sampling in software engineering research: A critical review and
+  guidelines.
+\newblock {\em Empirical Software Engineering}, 27(4):94, 2022.
+\newblock \href {https://doi.org/10.1007/s10664-021-10072-8}
+  {\path{doi:10.1007/s10664-021-10072-8}}.
 
 \bibitem{arcuri2012hitchhiker}
-A.~Arcuri and L.~Briand, ``A hitchhiker's guide to statistical tests for
-  assessing randomized algorithms in software engineering,'' {\em Software
-  Testing, Verification and Reliability}, vol.~24, no.~3, pp.~219--250, 2014.
+Andrea Arcuri and Lionel Briand.
+\newblock A hitchhiker's guide to statistical tests for assessing randomized
+  algorithms in software engineering.
+\newblock {\em Software Testing, Verification and Reliability}, 24(3):219--250,
+  2014.
+\newblock \href {https://doi.org/10.1002/stvr.1486}
+  {\path{doi:10.1002/stvr.1486}}.
 
 \bibitem{vargha2000critique}
-A.~Vargha and H.~D. Delaney, ``A critique and improvement of the cl common
-  language effect size statistics of mcgraw and wong,'' {\em Journal of
-  Educational and Behavioral Statistics}, vol.~25, no.~2, pp.~101--132, 2000.
+Andr\'as Vargha and Harold~D. Delaney.
+\newblock A critique and improvement of the cl common language effect size
+  statistics of mcgraw and wong.
+\newblock {\em Journal of Educational and Behavioral Statistics},
+  25(2):101--132, 2000.
+\newblock \href {https://doi.org/10.3102/10769986025002101}
+  {\path{doi:10.3102/10769986025002101}}.
 
 \bibitem{cliff1993dominance}
-N.~Cliff, ``Dominance statistics: Ordinal analyses to answer ordinal
-  questions,'' {\em Psychological Bulletin}, vol.~114, no.~3, pp.~494--509,
-  1993.
+Norman Cliff.
+\newblock Dominance statistics: Ordinal analyses to answer ordinal questions.
+\newblock {\em Psychological Bulletin}, 114(3):494--509, 1993.
+\newblock \href {https://doi.org/10.1037/0033-2909.114.3.494}
+  {\path{doi:10.1037/0033-2909.114.3.494}}.
 
 \bibitem{holm1979simple}
-S.~Holm, ``A simple sequentially rejective multiple test procedure,'' {\em
-  Scandinavian Journal of Statistics}, vol.~6, no.~2, pp.~65--70, 1979.
+Sture Holm.
+\newblock A simple sequentially rejective multiple test procedure.
+\newblock {\em Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
+\newblock Sin DOI registrado; identificador persistente: JSTOR 4615733.
+\newblock URL: \url{https://www.jstor.org/stable/4615733}.
 
 \bibitem{ralph2021empirical}
-P.~Ralph, N.~b. Ali, S.~Baltes, D.~Bianculli, J.~Diaz, Y.~Dittrich, N.~Ernst,
-  M.~Felderer, R.~Feldt, A.~Filieri, {\em et~al.}, ``Empirical standards for
-  software engineering research,'' {\em ACM Transactions on Software
-  Engineering and Methodology (TOSEM)}, vol.~30, no.~4, pp.~1--49, 2021.
+Paul Ralph, Nauman~bin Ali, Sebastian Baltes, Domenico Bianculli, Jessica Diaz,
+  Yvonne Dittrich, Neil Ernst, Michael Felderer, Robert Feldt, Antonio Filieri,
+  et~al.
+\newblock Empirical standards for software engineering research, 2020.
+\newblock URL: \url{https://arxiv.org/abs/2010.03525}, \href
+  {https://arxiv.org/abs/2010.03525} {\path{arXiv:2010.03525}}, \href
+  {https://doi.org/10.48550/arXiv.2010.03525}
+  {\path{doi:10.48550/arXiv.2010.03525}}.
 
 \bibitem{fielding2000architectural}
-R.~T. Fielding, ``Architectural styles and the design of network-based software
-  architectures,'' 2000.
+Roy~Thomas Fielding.
+\newblock Architectural styles and the design of network-based software
+  architectures, 2000.
 \newblock PhD thesis.
+\newblock URL: \url{https://ics.uci.edu/~fielding/pubs/dissertation/top.htm}.
 
 \bibitem{walls2022spring}
-C.~Walls, {\em Spring in Action}.
-\newblock Manning Publications, 6th~ed., 2022.
+Craig Walls.
+\newblock {\em Spring in Action}.
+\newblock Manning Publications, 6th edition, 2022.
 
 \bibitem{bass2021software}
-L.~Bass, P.~Clements, and R.~Kazman, {\em Software Architecture in Practice}.
-\newblock Addison-Wesley Professional, 4th~ed., 2021.
+Len Bass, Paul Clements, and Rick Kazman.
+\newblock {\em Software Architecture in Practice}.
+\newblock Addison-Wesley Professional, 4th edition, 2021.
 
 \bibitem{richards2020fundamentals}
-M.~Richards and N.~Ford, {\em Fundamentals of Software Architecture: An
-  Engineering Approach}.
+Mark Richards and Neal Ford.
+\newblock {\em Fundamentals of Software Architecture: An Engineering Approach}.
 \newblock O'Reilly Media, 2020.
 
 \bibitem{runeson2009guidelines}
-P.~Runeson and M.~H{\"o}st, ``Guidelines for conducting and reporting case
-  study research in software engineering,'' {\em Empirical Software
-  Engineering}, vol.~14, no.~2, pp.~131--164, 2009.
+Per Runeson and Martin H{\"o}st.
+\newblock Guidelines for conducting and reporting case study research in
+  software engineering.
+\newblock {\em Empirical Software Engineering}, 14(2):131--164, 2009.
+\newblock \href {https://doi.org/10.1007/s10664-008-9102-8}
+  {\path{doi:10.1007/s10664-008-9102-8}}.
 
 \bibitem{smith2016software}
-A.~M. Smith, D.~S. Katz, K.~E. Niemeyer, and {FORCE11 Software Citation Working
-  Group}, ``Software citation principles,'' {\em PeerJ Computer Science},
-  vol.~2, p.~e86, 2016.
+Arfon~M. Smith, Daniel~S. Katz, Kyle~E. Niemeyer, and {FORCE11 Software
+  Citation Working Group}.
+\newblock Software citation principles.
+\newblock {\em PeerJ Computer Science}, 2:e86, 2016.
+\newblock \href {https://doi.org/10.7717/peerj-cs.86}
+  {\path{doi:10.7717/peerj-cs.86}}.
 
 \bibitem{niso2022credit}
-{NISO}, ``Ansi/niso z39.104-2022, credit, contributor roles taxonomy,'' tech.
-  rep., National Information Standards Organization, 2022.
+{NISO}.
+\newblock Ansi/niso z39.104-2022, credit, contributor roles taxonomy.
+\newblock Technical report, National Information Standards Organization, 2022.
+\newblock \href {https://doi.org/10.3789/ansi.niso.z39.104-2022}
+  {\path{doi:10.3789/ansi.niso.z39.104-2022}}.
 
 \end{thebibliography}

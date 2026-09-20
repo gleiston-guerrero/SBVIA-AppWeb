@@ -1,288 +1,324 @@
-SBVIA — Auditoría de DOIs de docs/refs.bib
-Fecha: 2026-09-18 19:17:14
-Método: resolución de cada DOI en api.crossref.org y comparación título citado vs título resuelto.
+SBVIA — Auditoria de referencias de docs/refs.bib
+Fecha: 2026-09-20 07:20:59
+Entradas: 46 | con DOI resuelto: 30 | sin DOI pero con ISBN/URL: 16 | sin identificador: 0
+Metodo: cada DOI se resuelve en api.crossref.org (y api.datacite.org como respaldo) y el titulo
+        resuelto se compara con el citado. Los ISBN se validan en OpenLibrary y las URL por HTTP.
+        Un DOI no resuelto se declara NO RESUELVE; no se propone ningun DOI no registrado.
 
-Key                        Resultado   DOI anterior -> nuevo
-----------------------------------------------------------------------------------------------------
-ralph2021empirical         retirado    10.1145/3239235.3267437 -> (retirado)
-baltes2022sampling         correcto    10.1007/s10664-021-10072-8
-peffers2007design          corregido   10.7717/peerj-cs.3957/fig-2 -> 10.2753/mis0742-1222240302
-hevner2004design           corregido   10.26686/wgtn.13088591 -> 10.2307/25148625
-page2021prisma             corregido   10.1016/j.jval.2020.04.1154 -> 10.1136/bmj.n71
-wilkinson2016fair          corregido   10.3410/f.726216348.793543848 -> 10.1038/sdata.2016.18
-peng2011reproducible       corregido   10.22541/au.174965568.86721412/v1 -> 10.1126/science.1213847
-sandve2013ten              corregido   10.3410/f.720906062.793556792 -> 10.1371/journal.pcbi.1003285
-runeson2009guidelines      correcto    10.1007/s10664-008-9102-8
-wohlin2012experimentation  corregido   10.1007/3-540-27662-9_19 -> 10.1007/978-3-642-29044-2
-pohl2010requirements       corregido   10.5860/choice.48-3304 -> 10.1007/978-3-642-12578-2
-wiegers2013software        retirado    10.1109/9781118156674.gloss -> (retirado)
-bass2021software           retirado    10.1109/wicsa.2005.62 -> (retirado)
-fowler2002patterns         retirado    10.1007/978-1-4302-1010-8_1 -> (retirado)
-kleppmann2017designing     retirado    10.3990/1.9789036574273 -> (retirado)
-richards2020fundamentals   retirado    10.1201/b10681-7 -> (retirado)
-brown2023c4                retirado    10.1109/wicsa-ecsa.212.58 -> (retirado)
-cockburn2001writing        retirado    10.1007/978-1-4842-9830-5_14 -> (retirado)
-cohn2004user               retirado    10.4018/978-1-59904-216-9.ch004 -> (retirado)
-brooke1996sus              correcto    10.1201/9781498710411-35
-iso29148                   correcto    10.3403/30230210
-iso25010                   correcto    10.3403/30215101
-incose2023                 retirado    10.1002/j.2334-5837.1994.tb01834.x -> (retirado)
-owasp2021                  retirado    10.31326/jisa.v6i2.1656 -> (retirado)
-rfc7519                    corregido   10.17487/rfc9701 -> 10.17487/rfc7519
-fielding2000architectural  retirado    10.1016/j.jss.2016.01.039 -> (retirado)
-niso2022credit             correcto    10.3789/ansi.niso.z39.104-2022
-smith2016software          corregido   10.7287/peerj.preprints.2169v3 -> 10.7717/peerj-cs.86
-kitchenham2007guidelines   retirado    10.1145/1134285.1134500 -> (retirado)
-walls2022spring            retirado    10.2172/5141637 -> (retirado)
-basili1994gqm              retirado    10.1002/0471028959.sof142 -> (retirado)
-who2023roadsafety          retirado    10.26719/2011.17.10.770 -> (retirado)
-krasniuk2024simulator      correcto    10.1016/j.jsr.2024.08.002
-martin2019simulator        correcto    10.1016/j.trf.2018.12.006
-alonso2023simulators       correcto    10.3390/app13095266
-wynne2019validation        correcto    10.1016/j.ssci.2019.04.004
-vanleeuwen2015changes      correcto    10.1016/j.promfg.2015.07.422
-rosenbloom2014workshops    correcto    10.1016/j.aap.2013.09.018
-mayhew2011validation       correcto    10.1016/j.jsr.2011.06.004
-hulme2021blueprint         correcto    10.3390/safety7020024
-arcuri2012hitchhiker       correcto    10.1002/stvr.1486
-vargha2000critique         correcto    10.3102/10769986025002101
-cliff1993dominance         correcto    10.1037/0033-2909.114.3.494
-brown2020software          retirado    10.1109/ms.2015.125 -> (retirado)
-treiber2013traffic         correcto    10.1007/978-3-642-32460-4
-holm1979simple             retirado    10.2307/2532027 -> (retirado)
+Clave                        Veredicto                    DOI/Identificador                                   Sim  Comprobacion
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ralph2021empirical           CORRECTO                     10.48550/arXiv.2010.03525                          1.0   DataCite HTTP 200
+baltes2022sampling           CORRECTO                     10.1007/s10664-021-10072-8                         1.0   Crossref HTTP 200
+peffers2007design            CORRECTO                     10.2753/mis0742-1222240302                         1.0   Crossref HTTP 200
+hevner2004design             CORRECTO                     10.2307/25148625                                   0.988  Crossref HTTP 200
+page2021prisma               CORRECTO                     10.1136/bmj.n71                                    1.0   Crossref HTTP 200
+wilkinson2016fair            CORRECTO                     10.1038/sdata.2016.18                              1.0   Crossref HTTP 200
+peng2011reproducible         CORRECTO                     10.1126/science.1213847                            1.0   Crossref HTTP 200
+sandve2013ten                CORRECTO                     10.1371/journal.pcbi.1003285                       1.0   Crossref HTTP 200
+runeson2009guidelines        CORRECTO                     10.1007/s10664-008-9102-8                          1.0   Crossref HTTP 200
+wohlin2012experimentation    CORRECTO                     10.1007/978-3-642-29044-2                          1.0   Crossref HTTP 200
+pohl2010requirements         CORRECTO                     10.1007/978-3-642-12578-2                          0.568  Crossref HTTP 200 — titulo abreviado en la fuente; autor coincide
+wiegers2013software          SIN DOI (con identificador)  ISBN 9780735679665                                       ISBN FALLO (OpenLibrary HTTP None)
+bass2021software             SIN DOI (con identificador)  ISBN 9780136886099                                       ISBN FALLO (OpenLibrary HTTP None)
+fowler2002patterns           SIN DOI (con identificador)  ISBN 9780321127426                                       ISBN OK (Patterns of Enterprise Application Architecture (2007-10-?))
+kleppmann2017designing       SIN DOI (con identificador)  ISBN 9781449373320                                       ISBN FALLO (OpenLibrary HTTP None)
+richards2020fundamentals     SIN DOI (con identificador)  ISBN 9781492043454                                       ISBN FALLO (OpenLibrary HTTP None)
+brown2023c4                  SIN DOI (con identificador)  https://c4model.com/                                     URL OK (HTTP 200)
+cockburn2001writing          SIN DOI (con identificador)  ISBN 9780201702255                                       ISBN FALLO (OpenLibrary HTTP 503)
+cohn2004user                 SIN DOI (con identificador)  ISBN 9780321205681                                       ISBN FALLO (OpenLibrary HTTP 503)
+brooke1996sus                CORRECTO                     10.1201/9781498710411-35                           1.0   Crossref HTTP 200
+iso29148                     CORRECTO                     10.3403/30230210                                   1.0   Crossref HTTP 200
+iso25010                     CORRECTO                     10.3403/30215101                                   1.0   Crossref HTTP 200
+incose2023                   SIN DOI (con identificador)  https://www.incose.org/docs/default-source/working       URL FALLO (HTTP 403)
+owasp2021                    SIN DOI (con identificador)  https://owasp.org/Top10/                                 URL OK (HTTP 200)
+rfc7519                      CORRECTO                     10.17487/rfc7519                                   1.0   Crossref HTTP 200
+fielding2000architectural    SIN DOI (con identificador)  https://ics.uci.edu/~fielding/pubs/dissertation/to       URL OK (HTTP 200)
+niso2022credit               CORRECTO                     10.3789/ansi.niso.z39.104-2022                     1.0   Crossref HTTP 200
+smith2016software            CORRECTO                     10.7717/peerj-cs.86                                1.0   Crossref HTTP 200
+kitchenham2007guidelines     SIN DOI (con identificador)  https://legacyfileshare.elsevier.com/promis_misc/5       URL OK (HTTP 200)
+walls2022spring              SIN DOI (con identificador)  ISBN 9781617297571                                       ISBN OK (Spring in Action, Sixth Edition (2022))
+basili1994gqm                CORRECTO                     10.1002/0471028959.sof142                          0.812  Crossref HTTP 200
+who2023roadsafety            SIN DOI (con identificador)  ISBN 978-92-4-008651-7 + https://www.who.int/publi       ISBN FALLO (OpenLibrary HTTP None); URL OK (HTTP 200)
+krasniuk2024simulator        CORRECTO                     10.1016/j.jsr.2024.08.002                          1.0   Crossref HTTP 200
+martin2019simulator          CORRECTO                     10.1016/j.trf.2018.12.006                          1.0   Crossref HTTP 200
+alonso2023simulators         CORRECTO                     10.3390/app13095266                                1.0   Crossref HTTP 200
+wynne2019validation          CORRECTO                     10.1016/j.ssci.2019.04.004                         1.0   Crossref HTTP 200
+vanleeuwen2015changes        CORRECTO                     10.1016/j.promfg.2015.07.422                       1.0   Crossref HTTP 200
+rosenbloom2014workshops      CORRECTO                     10.1016/j.aap.2013.09.018                          1.0   Crossref HTTP 200
+mayhew2011validation         CORRECTO                     10.1016/j.jsr.2011.06.004                          1.0   Crossref HTTP 200
+hulme2021blueprint           CORRECTO                     10.3390/safety7020024                              1.0   Crossref HTTP 200
+arcuri2012hitchhiker         CORRECTO                     10.1002/stvr.1486                                  1.0   Crossref HTTP 200
+vargha2000critique           CORRECTO                     10.3102/10769986025002101                          0.988  Crossref HTTP 200
+cliff1993dominance           CORRECTO                     10.1037/0033-2909.114.3.494                        1.0   Crossref HTTP 200
+brown2020software            SIN DOI (con identificador)  https://leanpub.com/software-architecture-for-deve       URL OK (HTTP 200)
+treiber2013traffic           CORRECTO                     10.1007/978-3-642-32460-4                          0.623  Crossref HTTP 200 — titulo abreviado en la fuente; autor coincide
+holm1979simple               SIN DOI (con identificador)  https://www.jstor.org/stable/4615733                     URL OK (HTTP 200)
 
-Detalle de comparación (título citado vs título que resuelve el DOI):
+======================================================================================================================================================
+DETALLE POR ENTRADA
+======================================================================================================================================================
 
 [ralph2021empirical]
-  Citado  : Empirical standards for software engineering research
-  Resuelto: Standards of validity and the validity of standards in behavioral software engineering research  (year=2018, author=Gren)
-  Veredicto: RETIRADO — 10.1145/3239235.3267437 apunta a otra obra
+  Citado   : Empirical Standards for Software Engineering Research
+  Resuelto : Empirical Standards for Software Engineering Research  (year=2020, DataCite)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.48550/arXiv.2010.03525
 
 [baltes2022sampling]
-  Citado  : Sampling in software engineering research: A critical review and guidelines
-  Resuelto: Sampling in software engineering research: a critical review and guidelines  (year=2022, author=Baltes)
+  Citado   : Sampling in software engineering research: A critical review and guidelines
+  Resuelto : Sampling in software engineering research: a critical review and guidelines  (year=2022, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1007/s10664-021-10072-8
 
 [peffers2007design]
-  Citado  : A design science research methodology for information systems research
-  Resuelto: Figure 2: Design science methodology for information systems research (Wu et al., 2014).  (year=None, author=)
-  Veredicto: CORREGIDO — 10.7717/peerj-cs.3957/fig-2 -> 10.2753/mis0742-1222240302
+  Citado   : A design science research methodology for information systems research
+  Resuelto : A Design Science Research Methodology for Information Systems Research  (year=2007, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.2753/mis0742-1222240302
 
 [hevner2004design]
-  Citado  : Design science in information systems research
-  Resuelto: Design Science as Design of Social Systems – Implications for Information Systems Research  (year=2020, author=Drechsler)
-  Veredicto: CORREGIDO — 10.26686/wgtn.13088591 -> 10.2307/25148625
+  Citado   : Design science in information systems research
+  Resuelto : Design Science in Information Systems Research1  (year=2004, Crossref)
+  Similitud: 0.988
+  Veredicto: CORRECTO — 10.2307/25148625
 
 [page2021prisma]
-  Citado  : The PRISMA 2020 statement: an updated guideline for reporting systematic reviews
-  Resuelto: PNS154 THE PRISMA 2020 STATEMENT: DEVELOPMENT OF AND KEY CHANGES IN AN UPDATED GUIDELINE FOR REPORTING SYSTEMATIC REVIEWS AND META-ANALYSES  (year=2020, author=Tetzlaff)
-  Veredicto: CORREGIDO — 10.1016/j.jval.2020.04.1154 -> 10.1136/bmj.n71
+  Citado   : The PRISMA 2020 statement: an updated guideline for reporting systematic reviews
+  Resuelto : The PRISMA 2020 statement: an updated guideline for reporting systematic reviews  (year=2021, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.1136/bmj.n71
 
 [wilkinson2016fair]
-  Citado  : The FAIR Guiding Principles for scientific data management and stewardship
-  Resuelto: Faculty Opinions recommendation of The FAIR Guiding Principles for scientific data management and stewardship.  (year=2018, author=Schulz)
-  Veredicto: CORREGIDO — 10.3410/f.726216348.793543848 -> 10.1038/sdata.2016.18
+  Citado   : The FAIR Guiding Principles for scientific data management and stewardship
+  Resuelto : The FAIR Guiding Principles for scientific data management and stewardship  (year=2016, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.1038/sdata.2016.18
 
 [peng2011reproducible]
-  Citado  : Reproducible research in computational science
-  Resuelto: Reproducible Science In Intelligent Transportation Research: Lessons from Computational Biology and Bioinformatics  (year=2025, author=Bhadani)
-  Veredicto: CORREGIDO — 10.22541/au.174965568.86721412/v1 -> 10.1126/science.1213847
+  Citado   : Reproducible research in computational science
+  Resuelto : Reproducible Research in Computational Science  (year=2011, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.1126/science.1213847
 
 [sandve2013ten]
-  Citado  : Ten simple rules for reproducible computational research
-  Resuelto: Faculty Opinions recommendation of Ten simple rules for reproducible computational research.  (year=2019, author=Sauro)
-  Veredicto: CORREGIDO — 10.3410/f.720906062.793556792 -> 10.1371/journal.pcbi.1003285
+  Citado   : Ten simple rules for reproducible computational research
+  Resuelto : Ten Simple Rules for Reproducible Computational Research  (year=2013, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.1371/journal.pcbi.1003285
 
 [runeson2009guidelines]
-  Citado  : Guidelines for conducting and reporting case study research in software engineering
-  Resuelto: Guidelines for conducting and reporting case study research in software engineering  (year=2009, author=Runeson)
+  Citado   : Guidelines for conducting and reporting case study research in software engineering
+  Resuelto : Guidelines for conducting and reporting case study research in software engineering  (year=2008, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1007/s10664-008-9102-8
 
 [wohlin2012experimentation]
-  Citado  : Experimentation in Software Engineering
-  Resuelto: Experimentation in Software Engineering  (year=None, author=Basili)
-  Veredicto: CORREGIDO — 10.1007/3-540-27662-9_19 -> 10.1007/978-3-642-29044-2
+  Citado   : Experimentation in Software Engineering
+  Resuelto : Experimentation in Software Engineering  (year=2012, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.1007/978-3-642-29044-2
 
 [pohl2010requirements]
-  Citado  : Requirements Engineering: Fundamentals, Principles, and Techniques
-  Resuelto: Requirements engineering: fundamentals, principles, and techniques  (year=2011, author=)
-  Veredicto: CORREGIDO — 10.5860/choice.48-3304 -> 10.1007/978-3-642-12578-2
+  Citado   : Requirements Engineering: Fundamentals, Principles, and Techniques
+  Resuelto : Requirements Engineering  (year=2010, Crossref)
+  Similitud: 0.568  (titulo abreviado en la fuente; autor coincide)
+  Veredicto: CORRECTO — 10.1007/978-3-642-12578-2
 
 [wiegers2013software]
-  Citado  : Software Requirements
-  Resuelto: Software Requirements Engineering Glossary  (year=2011, author=)
-  Veredicto: RETIRADO — 10.1109/9781118156674.gloss apunta a otra obra
+  Citado   : Software Requirements
+  Sin DOI registrado. Identificador: ISBN 9780735679665
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
 
 [bass2021software]
-  Citado  : Software Architecture in Practice
-  Resuelto: Software Architecture Documentation in Practice Session Report  (year=None, author=Clements)
-  Veredicto: RETIRADO — 10.1109/wicsa.2005.62 apunta a otra obra
+  Citado   : Software Architecture in Practice
+  Sin DOI registrado. Identificador: ISBN 9780136886099
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
 
 [fowler2002patterns]
-  Citado  : Patterns of Enterprise Application Architecture
-  Resuelto: Introducing Enterprise Java Application Architecture and Design  (year=None, author=)
-  Veredicto: RETIRADO — 10.1007/978-1-4302-1010-8_1 apunta a otra obra
+  Citado   : Patterns of Enterprise Application Architecture
+  Sin DOI registrado. Identificador: ISBN 9780321127426
+  Comprobacion: ISBN OK (Patterns of Enterprise Application Architecture (2007-10-?))
 
 [kleppmann2017designing]
-  Citado  : Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems
-  Resuelto: Designing interoperable, scalable, and maintainable remote patient monitoring IoT systems  (year=None, author=Lopes de Souza)
-  Veredicto: RETIRADO — 10.3990/1.9789036574273 apunta a otra obra
+  Citado   : Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems
+  Sin DOI registrado. Identificador: ISBN 9781449373320
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
 
 [richards2020fundamentals]
-  Citado  : Fundamentals of Software Architecture: An Engineering Approach
-  Resuelto: Fundamentals of Software Engineering for Games  (year=2009, author=)
-  Veredicto: RETIRADO — 10.1201/b10681-7 apunta a otra obra
+  Citado   : Fundamentals of Software Architecture: An Engineering Approach
+  Sin DOI registrado. Identificador: ISBN 9781492043454
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
 
 [brown2023c4]
-  Citado  : The C4 Model for Visualising Software Architecture
-  Resuelto: [Cover art]  (year=2012, author=)
-  Veredicto: RETIRADO — 10.1109/wicsa-ecsa.212.58 apunta a otra obra
+  Citado   : The C4 Model for Visualising Software Architecture
+  Sin DOI registrado. Identificador: https://c4model.com/
+  Comprobacion: URL OK (HTTP 200)
 
 [cockburn2001writing]
-  Citado  : Writing Effective Use Cases
-  Resuelto: Use Cases  (year=2023, author=Koelsch)
-  Veredicto: RETIRADO — 10.1007/978-1-4842-9830-5_14 apunta a otra obra
+  Citado   : Writing Effective Use Cases
+  Sin DOI registrado. Identificador: ISBN 9780201702255
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP 503)
 
 [cohn2004user]
-  Citado  : User Stories Applied: For Agile Software Development
-  Resuelto: Requirements Specification using User Stories  (year=2007, author=Monochristou)
-  Veredicto: RETIRADO — 10.4018/978-1-59904-216-9.ch004 apunta a otra obra
+  Citado   : User Stories Applied: For Agile Software Development
+  Sin DOI registrado. Identificador: ISBN 9780321205681
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP 503)
 
 [brooke1996sus]
-  Citado  : SUS: A 'quick and dirty' usability scale
-  Resuelto: SUS: A 'Quick and Dirty' Usability Scale  (year=1996, author=)
+  Citado   : SUS: A 'quick and dirty' usability scale
+  Resuelto : SUS: A 'Quick and Dirty' Usability Scale  (year=1996, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1201/9781498710411-35
 
 [iso29148]
-  Citado  : Systems and software engineering -- Life cycle processes -- Requirements engineering
-  Resuelto: Systems and software engineering. Life cycle processes. Requirements engineering  (year=None, author=)
+  Citado   : Systems and software engineering -- Life cycle processes -- Requirements engineering
+  Resuelto : Systems and software engineering. Life cycle processes. Requirements engineering  (year=, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.3403/30230210
 
 [iso25010]
-  Citado  : Systems and software engineering -- Systems and software Quality Requirements and Evaluation (SQuaRE) -- System and software quality models
-  Resuelto: Systems and software engineering. Systems and software quality requirements and evaluation (SQuaRE). System and software quality models  (year=None, author=)
+  Citado   : Systems and software engineering -- Systems and software Quality Requirements and Evaluation (SQuaRE) -- System and software quality models
+  Resuelto : Systems and software engineering. Systems and software quality requirements and evaluation (SQuaRE). System and software quality models  (year=, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.3403/30215101
 
 [incose2023]
-  Citado  : INCOSE Guide to Writing Requirements
-  Resuelto: WRITING GOOD REQUIREMENTS  (year=1994, author=Hooks)
-  Veredicto: RETIRADO — 10.1002/j.2334-5837.1994.tb01834.x apunta a otra obra
+  Citado   : INCOSE Guide to Writing Requirements
+  Sin DOI registrado. Identificador: https://www.incose.org/docs/default-source/working-groups/requirements-wg/gtwr/incose_rwg_gtwr_v4_040423_final_drafts.pdf
+  Comprobacion: URL FALLO (HTTP 403)
 
 [owasp2021]
-  Citado  : OWASP Top 10: 2021 -- The Ten Most Critical Web Application Security Risks
-  Resuelto: Penetration Testing Tangerang City Web Application With Implementing OWASP Top 10 Web Security Risks Framework  (year=2023, author=Armando)
-  Veredicto: RETIRADO — 10.31326/jisa.v6i2.1656 apunta a otra obra
+  Citado   : OWASP Top 10: 2021 -- The Ten Most Critical Web Application Security Risks
+  Sin DOI registrado. Identificador: https://owasp.org/Top10/
+  Comprobacion: URL OK (HTTP 200)
 
 [rfc7519]
-  Citado  : JSON Web Token (JWT)
-  Resuelto: JSON Web Token (JWT) Response for OAuth Token Introspection  (year=2025, author=Dzhuvinov)
-  Veredicto: CORREGIDO — 10.17487/rfc9701 -> 10.17487/rfc7519
+  Citado   : JSON Web Token (JWT)
+  Resuelto : JSON Web Token (JWT)  (year=2015, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.17487/rfc7519
 
 [fielding2000architectural]
-  Citado  : Architectural Styles and the Design of Network-based Software Architectures
-  Resuelto: Preserving architectural styles in the search based design of software product line architectures  (year=2016, author=Mariani)
-  Veredicto: RETIRADO — 10.1016/j.jss.2016.01.039 apunta a otra obra
+  Citado   : Architectural Styles and the Design of Network-based Software Architectures
+  Sin DOI registrado. Identificador: https://ics.uci.edu/~fielding/pubs/dissertation/top.htm
+  Comprobacion: URL OK (HTTP 200)
 
 [niso2022credit]
-  Citado  : ANSI/NISO Z39.104-2022, CRediT, Contributor Roles Taxonomy
-  Resuelto: ANSI/NISO Z39.104-2022, CRediT, Contributor Roles Taxonomy  (year=None, author=)
+  Citado   : ANSI/NISO Z39.104-2022, CRediT, Contributor Roles Taxonomy
+  Resuelto : ANSI/NISO Z39.104-2022, CRediT, Contributor Roles Taxonomy  (year=, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.3789/ansi.niso.z39.104-2022
 
 [smith2016software]
-  Citado  : Software citation principles
-  Resuelto: Software Citation Principles  (year=2016, author=Smith)
-  Veredicto: CORREGIDO — 10.7287/peerj.preprints.2169v3 -> 10.7717/peerj-cs.86
+  Citado   : Software citation principles
+  Resuelto : Software citation principles  (year=2016, Crossref)
+  Similitud: 1.0
+  Veredicto: CORRECTO — 10.7717/peerj-cs.86
 
 [kitchenham2007guidelines]
-  Citado  : Guidelines for performing Systematic Literature Reviews in Software Engineering
-  Resuelto: Performing systematic literature reviews in software engineering  (year=2006, author=Budgen)
-  Veredicto: RETIRADO — 10.1145/1134285.1134500 apunta a otra obra
+  Citado   : Guidelines for performing Systematic Literature Reviews in Software Engineering
+  Sin DOI registrado. Identificador: https://legacyfileshare.elsevier.com/promis_misc/525444systematicreviewsguide.pdf
+  Comprobacion: URL OK (HTTP 200)
 
 [walls2022spring]
-  Citado  : Spring in Action
-  Resuelto: Weldon Spring quarry construction staging area and water treatment plant site remedial action characterization report for the Weldon Spring Site Remedial Action Project, Weldon Spring, Missouri  (year=1991, author=)
-  Veredicto: RETIRADO — 10.2172/5141637 apunta a otra obra
+  Citado   : Spring in Action
+  Sin DOI registrado. Identificador: ISBN 9781617297571
+  Comprobacion: ISBN OK (Spring in Action, Sixth Edition (2022))
 
 [basili1994gqm]
-  Citado  : The Goal Question Metric Approach
-  Resuelto: Goal Question Metric (
+  Citado   : The Goal Question Metric Approach
+  Resuelto : Goal Question Metric (
             <scp>GQM</scp>
-            ) Approach  (year=2002, author=van Solingen)
-  Veredicto: RETIRADO — 10.1002/0471028959.sof142 apunta a otra obra
+            ) Approach  (year=2002, Crossref)
+  Similitud: 0.812
+  Veredicto: CORRECTO — 10.1002/0471028959.sof142
 
 [who2023roadsafety]
-  Citado  : Global Status Report on Road Safety 2023
-  Resuelto: Road safety in the Eastern Mediterranean Region – findings from the Global Road Safety Status Report  (year=2011, author=Soori)
-  Veredicto: RETIRADO — 10.26719/2011.17.10.770 apunta a otra obra
+  Citado   : Global Status Report on Road Safety 2023
+  Sin DOI registrado. Identificador: ISBN 978-92-4-008651-7 + https://www.who.int/publications/i/item/9789240086517
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP None); URL OK (HTTP 200)
 
 [krasniuk2024simulator]
-  Citado  : The effectiveness of driving simulator training on driving skills and safety in young novice drivers: A systematic review of interventions
-  Resuelto: The effectiveness of driving simulator training on driving skills and safety in young novice drivers: A systematic review of interventions  (year=2024, author=Krasniuk)
+  Citado   : The effectiveness of driving simulator training on driving skills and safety in young novice drivers: A systematic review of interventions
+  Resuelto : The effectiveness of driving simulator training on driving skills and safety in young novice drivers: A systematic review of interventions  (year=2024, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.jsr.2024.08.002
 
 [martin2019simulator]
-  Citado  : Efficacy of training with driving simulators in improving safety in young novice or learner drivers: A systematic review
-  Resuelto: Efficacy of training with driving simulators in improving safety in young novice or learner drivers: A systematic review  (year=2019, author=Martín-delosReyes)
+  Citado   : Efficacy of training with driving simulators in improving safety in young novice or learner drivers: A systematic review
+  Resuelto : Efficacy of training with driving simulators in improving safety in young novice or learner drivers: A systematic review  (year=2019, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.trf.2018.12.006
 
 [alonso2023simulators]
-  Citado  : Effectiveness of Driving Simulators for Drivers' Training: A Systematic Review
-  Resuelto: Effectiveness of Driving Simulators for Drivers’ Training: A Systematic Review  (year=2023, author=Alonso)
+  Citado   : Effectiveness of Driving Simulators for Drivers' Training: A Systematic Review
+  Resuelto : Effectiveness of Driving Simulators for Drivers’ Training: A Systematic Review  (year=2023, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.3390/app13095266
 
 [wynne2019validation]
-  Citado  : Systematic review of driving simulator validation studies
-  Resuelto: Systematic review of driving simulator validation studies  (year=2019, author=Wynne)
+  Citado   : Systematic review of driving simulator validation studies
+  Resuelto : Systematic review of driving simulator validation studies  (year=2019, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.ssci.2019.04.004
 
 [vanleeuwen2015changes]
-  Citado  : Changes of Driving Performance and Gaze Behavior of Novice Drivers During a 30-min Simulator-based Training
-  Resuelto: Changes of Driving Performance and Gaze Behavior of Novice drivers During a 30-min Simulator-based Training  (year=2015, author=van Leeuwen)
+  Citado   : Changes of Driving Performance and Gaze Behavior of Novice Drivers During a 30-min Simulator-based Training
+  Resuelto : Changes of Driving Performance and Gaze Behavior of Novice drivers During a 30-min Simulator-based Training  (year=2015, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.promfg.2015.07.422
 
 [rosenbloom2014workshops]
-  Citado  : Effectiveness Evaluation of Simulative Workshops for Newly Licensed Drivers
-  Resuelto: Effectiveness evaluation of simulative workshops for newly licensed drivers  (year=2014, author=Rosenbloom)
+  Citado   : Effectiveness Evaluation of Simulative Workshops for Newly Licensed Drivers
+  Resuelto : Effectiveness evaluation of simulative workshops for newly licensed drivers  (year=2014, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.aap.2013.09.018
 
 [mayhew2011validation]
-  Citado  : On-road and Simulated Driving: Concurrent and Discriminant Validation
-  Resuelto: On-road and simulated driving: Concurrent and discriminant validation  (year=2011, author=Mayhew)
+  Citado   : On-road and Simulated Driving: Concurrent and Discriminant Validation
+  Resuelto : On-road and simulated driving: Concurrent and discriminant validation  (year=2011, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1016/j.jsr.2011.06.004
 
 [hulme2021blueprint]
-  Citado  : Blueprint for a Simulation Framework to Increase Driver Training Safety in North America: Case Study
-  Resuelto: Blueprint for a Simulation Framework to Increase Driver Training Safety in North America: Case Study  (year=2021, author=Hulme)
+  Citado   : Blueprint for a Simulation Framework to Increase Driver Training Safety in North America: Case Study
+  Resuelto : Blueprint for a Simulation Framework to Increase Driver Training Safety in North America: Case Study  (year=2021, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.3390/safety7020024
 
 [arcuri2012hitchhiker]
-  Citado  : A Hitchhiker's Guide to Statistical Tests for Assessing Randomized Algorithms in Software Engineering
-  Resuelto: A Hitchhiker's guide to statistical tests for assessing randomized algorithms in software engineering  (year=2014, author=Arcuri)
+  Citado   : A Hitchhiker's Guide to Statistical Tests for Assessing Randomized Algorithms in Software Engineering
+  Resuelto : A Hitchhiker's guide to statistical tests for assessing randomized algorithms in software engineering  (year=2012, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1002/stvr.1486
 
 [vargha2000critique]
-  Citado  : A Critique and Improvement of the CL Common Language Effect Size Statistics of McGraw and Wong
-  Resuelto: A Critique and Improvement of the
+  Citado   : A Critique and Improvement of the CL Common Language Effect Size Statistics of McGraw and Wong
+  Resuelto : A Critique and Improvement of the
                     <i>CL</i>
-                    Common Language Effect Size Statistics of McGraw and Wong  (year=2000, author=Vargha)
+                    Common Language Effect Size Statistics of McGraw and Wong  (year=2000, Crossref)
+  Similitud: 0.988
   Veredicto: CORRECTO — 10.3102/10769986025002101
 
 [cliff1993dominance]
-  Citado  : Dominance Statistics: Ordinal Analyses to Answer Ordinal Questions
-  Resuelto: Dominance statistics: Ordinal analyses to answer ordinal questions.  (year=1993, author=Cliff)
+  Citado   : Dominance Statistics: Ordinal Analyses to Answer Ordinal Questions
+  Resuelto : Dominance statistics: Ordinal analyses to answer ordinal questions.  (year=1993, Crossref)
+  Similitud: 1.0
   Veredicto: CORRECTO — 10.1037/0033-2909.114.3.494
 
 [brown2020software]
-  Citado  : Software Architecture for Developers
-  Resuelto: Software Architecture for Developers  (year=2015, author=Johann)
-  Veredicto: RETIRADO — 10.1109/ms.2015.125 apunta a otra obra
+  Citado   : Software Architecture for Developers
+  Sin DOI registrado. Identificador: https://leanpub.com/software-architecture-for-developers
+  Comprobacion: URL OK (HTTP 200)
 
 [treiber2013traffic]
-  Citado  : Traffic Flow Dynamics: Data, Models and Simulation
-  Resuelto: Traffic Flow Dynamics  (year=2013, author=Treiber)
+  Citado   : Traffic Flow Dynamics: Data, Models and Simulation
+  Resuelto : Traffic Flow Dynamics  (year=2013, Crossref)
+  Similitud: 0.623  (titulo abreviado en la fuente; autor coincide)
   Veredicto: CORRECTO — 10.1007/978-3-642-32460-4
 
 [holm1979simple]
-  Citado  : A simple sequentially rejective multiple test procedure
-  Resuelto: Correction: An Improved Sequentially Rejective Bonferroni Test Procedure  (year=1987, author=)
-  Veredicto: RETIRADO — 10.2307/2532027 apunta a otra obra
+  Citado   : A simple sequentially rejective multiple test procedure
+  Sin DOI registrado. Identificador: https://www.jstor.org/stable/4615733
+  Comprobacion: URL OK (HTTP 200)
+
