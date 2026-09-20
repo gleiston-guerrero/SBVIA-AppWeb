@@ -146,8 +146,10 @@ Las retractaciones anteriores corrigen evidencia del expediente; **no corrigen p
 puntaje de los puntos afectados**. Varios de esos puntos siguen sin cumplir su criterio por
 otras razones, que se declaran en sus propios requisitos y en el informe de evaluación:
 
-- **RNF-06 (SUS)** sigue siendo `NOT VERIFIED` y con prioridad *Must*; se está ejecutando una
-  nueva evaluación de usabilidad sobre el sistema ya construido (véase la nota X12 en el SRS).
+- **RNF-06 (SUS)** sigue siendo `NOT VERIFIED` en el SRS: la retirada de R-07 no se revierte. Se
+  ejecutó una **nueva** evaluación de usabilidad en septiembre de 2026 (15 participantes, media
+  69,00; véase [`sus-analysis-2026-09.md`](mediciones/sus/sus-analysis-2026-09.md)), que es evidencia
+  nueva y trazable. Su incorporación al SRS se resolverá en la próxima versión del documento.
 - **RNF-02 (latencia en frío)** declara su umbral incumplido con la medición real.
 - **RF-16 a RF-20** pasan a `NOT VERIFIED` porque los procedimientos no se invocan desde la
   aplicación, aunque su definición exista y esté versionada.
