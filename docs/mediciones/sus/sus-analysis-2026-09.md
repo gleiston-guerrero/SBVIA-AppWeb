@@ -118,7 +118,29 @@ Se declaran explícitamente, en lugar de omitirlas:
 9. **Procedencia heterogénea de los formularios.** Catorce cuestionarios provienen de la plantilla
    LaTeX; el de P14 se generó en Microsoft Word. El contenido de los 10 ítems es el mismo.
 
-## 4. Reproducibilidad
+## 4. Trazabilidad del estudio
+
+El estudio de julio de 2026 se retiró porque su aplicación **no puede sostenerse contra el historial
+del repositorio** (véanse [`sus-analysis.md`](sus-analysis.md) y [`RETRACTIONS.md`](../../RETRACTIONS.md),
+R-07). Este estudio documenta su procedencia **paso a paso**, para que la diferencia sea comprobable
+y no una afirmación:
+
+| # | Eslabón | Evidencia | Cómo se comprueba |
+| :---: | :--- | :--- | :--- |
+| 1 | Instrumento | Los diez ítems del SUS, versionados desde el commit `786e042` (2026-09-18), anterior a toda sesión | `git log -- docs/mediciones/sus/instrumento-sus.md` |
+| 2 | Formulario imprimible | `Cuestionario-SUS-Participante.tex` → `.pdf`, incorporado con este estudio | Compilable con `pdflatex` |
+| 3 | Consentimiento | Formulario generado el 2026-09-19, firmado **antes** de cada sesión | Originales en custodia externa |
+| 4 | Sesiones | 19 y 20 de septiembre de 2026, sobre el sistema desplegado | Fechas en `sus-raw-data-2026-09.csv` |
+| 5 | Respuestas | Marcadas en el formulario de cada participante | Formularios digitalizados, custodia externa |
+| 6 | Datos | `sus-raw-data-2026-09.csv`: solo códigos, respuestas y metadatos de sesión | Este repositorio |
+| 7 | Verificación | `calcular_sus.py` recalcula cada puntuación y **falla si el CSV no la reproduce** | `python docs/mediciones/sus/calcular_sus.py --ronda 2026-09` |
+| 8 | Convalidación | `APPWEB-SBVIA-2026-01`, 2026-09-20 | [`convalidacion-APPWEB-SBVIA-2026-01.md`](../../etica/convalidacion-APPWEB-SBVIA-2026-01.md) |
+
+Cada eslabón se comprueba con un comando o con un archivo del repositorio. **Los formularios firmados
+y los datos personales no están en el repositorio**: se conservan en custodia externa y se muestran al
+docente-director por canal privado.
+
+## 5. Reproducibilidad
 
 El cálculo se reproduce con un solo comando desde la raíz del repositorio:
 
@@ -129,6 +151,6 @@ python docs/mediciones/sus/calcular_sus.py --ronda 2026-09
 El script recalcula cada puntuación desde las respuestas crudas con la fórmula de Brooke y **falla si
 alguna fila del CSV no reproduce su `sus_score`**; es decir, verifica el CSV en lugar de confiar en él.
 
-## 5. Referencias
+## 6. Referencias
 
 - Brooke, J. (1996). SUS: A "quick and dirty" usability scale. *Usability Evaluation in Industry*, 189(194), 4–7. `doi:10.1201/9781498710411-35`
