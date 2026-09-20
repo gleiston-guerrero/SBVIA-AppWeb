@@ -48,9 +48,9 @@
         \begin{tabularx}{\textwidth}{|l|X|}
             \hline
             \textbf{Repositorio de entrega} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
-            \textbf{Punto del historial} & etiqueta v1.1.0 \\ \hline
+            \textbf{Punto del historial} & etiqueta v1.2.0 \\ \hline
             \textbf{DOI del software (Zenodo)} & \texttt{10.5281/zenodo.22740480} \\ \hline
-            \textbf{Fecha de emisión} & 18 de septiembre de 2026 \\ \hline
+            \textbf{Fecha de emisión} & 19 de septiembre de 2026 \\ \hline
         \end{tabularx}
     \end{table}
 
@@ -75,7 +75,7 @@
     {\Large \textbf{DOCENTE-DIRECTOR}}\\[0.2cm]
     {\large Ing. Gleiston Cíceron Guerrero Ulloa, Ph.D.}\\[0.5cm]
 
-    \footnotetext{Nota aclaratoria de autoría: El tercer integrante originalmente propuesto, Carlos Zamora Bumbila, no participó en la elaboración ni desarrollo de este proyecto, por lo que ha sido excluido del informe final y los metadatos del repositorio.}
+    \footnotetext{Nota aclaratoria de autoría: El tercer integrante originalmente propuesto, Zamora Bumbila, Diego Alexander, no participó en la elaboración ni desarrollo de este proyecto, por lo que ha sido excluido del informe final y los metadatos del repositorio.}
     
 \end{titlepage}
 
@@ -95,13 +95,16 @@
         \textcolor{white}{\textbf{Versión}} & \textcolor{white}{\textbf{Fecha}} & \textcolor{white}{\textbf{Descripción}} & \textcolor{white}{\textbf{Estado}} \\ \hline
         1.0.0 & 17-09-2026 & Línea base de la entrega final & Revisada con observaciones \\ \hline
         1.1.0 & 18-09-2026 & Correcciones de URLs, Lighthouse y limpieza & Revisada con observaciones \\ \hline
-        1.2.0 & 18-09-2026 & Corrección de 14 observaciones del informe de revisión (N1–N14) & Pendiente de revisión \\ \hline
+        1.2.0 & 19-09-2026 & Corrección de 14 observaciones (N1–N14) y de 12 observaciones (X1–X12) del informe de revisión & Revisada con observaciones \\ \hline
     \end{tabularx}
 \end{table}
 
-\textit{Nota: El informe de revisión firmado (\texttt{Revision\_SRS\_SBVIA\_v1.1.0.pdf}) declara explícitamente que
-``no asigna calificación y no constituye aprobación del SRS''. Los estados anteriores reflejan que fueron
-sometidos a revisión con observaciones, no aprobados.}
+\textit{Nota: Los dos informes de revisión firmados por el docente-director
+(\texttt{Revision\_SRS\_SBVIA\_v1.1.0.pdf} y \texttt{Revision\_SRS\_SBVIA\_v1.2.0.pdf}) declaran
+explícitamente, ambos, que ``no asignan calificación y no constituyen aprobación del SRS''.
+Ninguna versión figura por tanto como aprobada: las tres constan como revisadas con observaciones.
+La aprobación del SRS se emite por escrito y en el propio documento, no por inferencia de una
+confirmación verbal.}
 
 \newpage
 
@@ -111,7 +114,7 @@ sometidos a revisión con observaciones, no aprobados.}
 \section{Introducción}
 
 \subsection{Propósito}
-Este documento establece los requisitos verificables de SBVIA v1.2.0 y constituye la línea base contractual para desarrollo, prueba, despliegue y evaluación académica. Esta versión corrige las 14 observaciones del informe de revisión emitido por el docente-director sobre la v1.1.0.
+Este documento establece los requisitos verificables de SBVIA v1.2.0 y constituye la línea base contractual para desarrollo, prueba, despliegue y evaluación académica. Esta versión corrige las 14 observaciones (N1–N14) del informe de revisión emitido por el docente-director sobre la v1.1.0 y las 12 observaciones (X1–X12) de su informe de revisión sobre esta misma v1.2.0, además de la observación sobre el expediente de evidencia retractada.
 
 \subsection{Alcance}
 SBVIA es una aplicación web de formación vial que administra usuarios y escenarios, conserva prácticas de simulación, calcula resultados y presenta retroalimentación. Incluye un backend Java 21 con Spring Boot, un frontend Angular, PostgreSQL 16, Redis 7 y orquestación Docker Compose.
@@ -208,7 +211,7 @@ Los datos de conductores (nombre, correo, teléfono, fecha de nacimiento) son re
 El sistema implementa controles de seguridad alineados con OWASP Top 10: autenticación BCrypt (A02), cookies HttpOnly+Secure+SameSite (A02), rate limiting de login (A07), cabecera HSTS (A05), sin SQL dinámico en procedimientos (A03), registro de eventos de autenticación (A09).
 
 \subsubsection*{Calidad}
-Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación SUS media: no se reporta (estudio retirado; véase RNF-06). Lighthouse accesibilidad: 0.91 (color-contrast corregido en v1.2.0).
+Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación SUS media: no se reporta (estudio retirado; véase RNF-06). Lighthouse accesibilidad: \textbf{1.00}. El conjunto de corridas \textbf{vigente} es el ejecutado el 19-09-2026 contra \url{https://sbvia-frontend.onrender.com/login} (tres corridas en perfil móvil y tres en perfil escritorio, accesibilidad 1.00 en las seis y cero auditorías fallidas), conservado en \texttt{docs/mediciones/lighthouse/mobile/} y \texttt{docs/mediciones/lighthouse/desktop/}. Las corridas del 18-09-2026 sobre \texttt{/dashboard} (accesibilidad 0.91, una auditoría \texttt{color-contrast} fallida) se conservan únicamente como registro \textbf{histórico y no vigente} en \texttt{docs/mediciones/lighthouse/administrador/}, \texttt{instructor/} y \texttt{participante/}, y no deben citarse como el estado actual de accesibilidad.
 
 \newpage
 % ==============================
@@ -272,6 +275,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá actualizar periódicamente el estado de las cuentas de conductor inactivos mediante una operación masiva y dejar traza de auditoría. La inactividad se mide por el campo \texttt{ultimo\_acceso} en la entidad \texttt{User} (no por fecha de registro). \\[0.2cm]
     \textbf{Criterio de aceptación:} La operación masiva cambia únicamente usuarios cuyo último acceso supera los 6 meses, conserva los demás registros y guarda un registro en la tabla de auditoría (AuditLog). \\[0.2cm]
+    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA que mapea la tabla física de auditoría; no son dos almacenes distintos. Esa tabla se creó como \texttt{bitacora\_auditoria} en la migración \texttt{V3\_\_auditoria\_operaciones.sql} y la migración \texttt{V17\_\_renombrar\_tablas\_ingles.sql} la renombró a \texttt{audit\_log}, que es el nombre declarado en \texttt{@Table(name = "audit\_log")} dentro de \texttt{AuditLog.java}. El procedimiento \texttt{sp\_actualizar\_usuarios\_inactivos} redefinido en \texttt{V18\_\_conectar\_procedimientos\_sp.sql} sigue insertando en el nombre anterior al renombrado (\texttt{bitacora\_auditoria}); esa incoherencia se declara aquí como punto abierto pendiente de verificar contra la base desplegada, y no se corrige en esta versión para no alterar el \textit{checksum} de una migración ya aplicada. \\[0.2cm]
     \textbf{Verificación:} Prueba de Integración (AuthControllerTest.java) \quad \textbf{SQL:} db/procs/sp\_actualizar\_usuarios\_inactivos.sql
 \end{requisito}
 
@@ -344,47 +348,53 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
     \textbf{Descripción:} El sistema deberá registrar en un log de auditoría (AuditLog) los eventos de autenticación, modificación de usuarios, respaldos y operaciones masivas. \\[0.2cm]
     \textbf{Criterio de aceptación:} Cada evento de autenticación exitoso y fallido genera una entrada en la tabla \texttt{AuditLog}. Las operaciones de RF-06 (inactivación masiva) y RF-14 (respaldo) también registran en AuditLog. \\[0.2cm]
+    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA (\texttt{@Table(name = "audit\_log")}) que mapea la tabla física creada como \texttt{bitacora\_auditoria} en \texttt{V3} y renombrada a \texttt{audit\_log} en \texttt{V17}; véase la nota de RF-06. \\[0.2cm]
     \textbf{Verificación:} Prueba de Integración (AuditServiceTest.java) \quad \textbf{SQL:} No aplica
 \end{requisito}
 
 \begin{requisito}{RF-16 - Cierre de simulaciones vencidas}
-    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá cerrar automáticamente simulaciones abiertas que hayan superado el tiempo de inactividad utilizando \texttt{sp\_cerrar\_simulaciones\_vencidas}. \\[0.2cm]
     \textbf{Criterio de aceptación:} Las simulaciones inactivas pasan a estado 'ABANDONADA' o 'CERRADA'. \\[0.2cm]
-    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_cerrar\_simulaciones\_vencidas.sql
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_cerrar\_simulaciones\_vencidas.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_cerrar\_simulaciones\_vencidas.sql
 \end{requisito}
 
 \begin{requisito}{RF-17 - Generación de código de reporte}
-    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá generar un código de seguimiento para reportes usando \texttt{sp\_generar\_codigo\_reporte}. \\[0.2cm]
     \textbf{Criterio de aceptación:} Todo reporte generado obtiene un código único. \\[0.2cm]
-    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_reporte.sql
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_generar\_codigo\_reporte.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_reporte.sql
 \end{requisito}
 
 \begin{requisito}{RF-18 - Generación de reporte de simulación general}
-    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá compilar los datos generales en un informe completo usando \texttt{sp\_generar\_reporte\_simulacion}. \\[0.2cm]
     \textbf{Criterio de aceptación:} El reporte incluye todas las métricas de la simulación. \\[0.2cm]
-    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_generar\_reporte\_simulacion.sql
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_generar\_reporte\_simulacion.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_generar\_reporte\_simulacion.sql
 \end{requisito}
 
 \begin{requisito}{RF-19 - Generación de resumen de usuario}
-    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá consolidar el resumen de desempeño de un usuario usando \texttt{sp\_resumen\_usuario}. \\[0.2cm]
     \textbf{Criterio de aceptación:} Se retorna el promedio histórico y total de prácticas del conductor. \\[0.2cm]
-    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_resumen\_usuario.sql
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_resumen\_usuario.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_resumen\_usuario.sql
 \end{requisito}
 
 \begin{requisito}{RF-20 - Validación general de simulación}
-    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
     \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá validar la integridad de una simulación completa usando \texttt{sp\_validar\_simulacion}. \\[0.2cm]
     \textbf{Criterio de aceptación:} Una simulación inválida es rechazada con un estado de error correspondiente. \\[0.2cm]
-    \textbf{Verificación:} Prueba de Integración (SimulationRepositoryTest.java) \quad \textbf{SQL:} db/procs/sp\_validar\_simulacion.sql
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. Se retira además la cita a \texttt{SimulationRepositoryTest.java} (X4): esa clase no existe en el repositorio. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_validar\_simulacion.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_validar\_simulacion.sql
 \end{requisito}
 
 \newpage
@@ -439,6 +449,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
     \textbf{Descripción:} El sistema deberá ofrecer una interfaz altamente usable, alcanzando un puntaje SUS sobre la media estándar de la industria. \\[0.2cm]
     \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \textbf{No se reporta resultado}: el estudio SUS se retira porque su fecha declarada de aplicación (2026-07-28/29) es anterior a la incorporación al repositorio de la funcionalidad de simulación que dice haber evaluado (commit \texttt{55201f5}, 2026-09-03, y commit \texttt{5e852c6}, 2026-09-04). Las respuestas crudas se conservan sin garantía de validez metodológica. \\[0.2cm]
+    \textbf{Plan de reevaluación (X12):} El requisito sigue vigente y conserva prioridad \textit{Must}; no se aplaza ni se elimina. Se está ejecutando una nueva evaluación de usabilidad sobre el sistema ya construido, con el fin de sustituir la evidencia retirada por una medición metodológicamente sostenible. No se declara fecha de cierre ni resultados parciales: el instrumento definitivo, los consentimientos verificados y los datos se incorporarán al expediente cuando la reevaluación esté completa. \\[0.2cm]
     \textbf{Verificación:} Prueba de Usabilidad (docs/mediciones/sus/sus-analysis.md) \quad \textbf{SQL:} No aplica
 \end{requisito}
 
@@ -560,15 +571,15 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
         sp\_reporte\_actividad\_diaria & FUNCTION & RF-05 & Requerido \\ \hline
         sp\_reporte\_simulacion & FUNCTION & RF-03, US-04 & Requerido \\ \hline
         sp\_validar\_escenario & FUNCTION & RF-07 & Requerido \\ \hline
-        sp\_cerrar\_simulaciones\_vencidas & PROCEDURE & Huérfano (sin RF) & Pendiente vincular o eliminar \\ \hline
-        sp\_generar\_codigo\_reporte & PROCEDURE & Huérfano (sin RF) & Pendiente vincular o eliminar \\ \hline
-        sp\_generar\_reporte\_simulacion & PROCEDURE & Huérfano (sin RF) & Pendiente vincular o eliminar \\ \hline
-        sp\_resumen\_usuario & PROCEDURE & Huérfano (sin RF) & Pendiente vincular o eliminar \\ \hline
-        sp\_validar\_simulacion & PROCEDURE & Huérfano (sin RF) & Pendiente vincular o eliminar \\ \hline
+        sp\_cerrar\_simulaciones\_vencidas & PROCEDURE & RF-16 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_generar\_codigo\_reporte & PROCEDURE & RF-17 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_generar\_reporte\_simulacion & PROCEDURE & RF-18 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_resumen\_usuario & PROCEDURE & RF-19 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_validar\_simulacion & PROCEDURE & RF-20 & NOT VERIFIED (sin invocaciones) \\ \hline
     \end{tabularx}
 \end{table}
 
-\textit{Nota: Los 5 procedimientos marcados como ``Huérfano'' existen en la migración V14 pero no son invocados por ningún servicio Java ni cubiertos por ningún requisito formal. Se deberán vincular a un RF o eliminar en la próxima iteración.}
+\textit{Nota (X3/X5): Los cinco procedimientos finales están definidos en la migración \texttt{V14\_\_procedimientos\_almacenados.sql} y están especificados por RF-16 a RF-20 de este mismo documento. Ninguno se invoca desde la aplicación: cero ocurrencias de sus nombres en \texttt{backend/src/main/java}, de modo que quedan huérfanos de ejecución y su estado es NOT VERIFIED, no IMPLEMENTED. Esta sección y los requisitos RF-16 a RF-20 declaran ahora el mismo estado, con lo que desaparece la contradicción interna señalada en la revisión.}
 
 \newpage
 % ==============================
@@ -581,7 +592,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \item \textbf{AC-03.} Los procedimientos almacenados están versionados, catalogados, parametrizados y trazados (ver Sección 6).
     \item \textbf{AC-04.} Cinco corridas k6 cumplen el umbral de caché caliente (RNF-01); Lighthouse y ZAP conservan evidencia reproducible. La corrida en frío (RNF-02) demostró los tiempos de spin-down en Render (documentado en RNF-02).
     \item \textbf{AC-05.} El despliegue público dispone de healthcheck, runbook, backup y cuenta demo no administrativa.
-    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.1.0 coherentes con el commit declarado. El repositorio de entrega es \texttt{gleiston-guerrero/SBVIA-AppWeb}.
+    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.2.0 coherentes con el commit declarado. El repositorio de entrega es \texttt{gleiston-guerrero/SBVIA-AppWeb}.
 \end{itemize}
 
 \newpage
@@ -614,11 +625,11 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     RF-13 & Protección datos & ExternalAiFeedbackServiceTest & IMPLEMENTED & - \\ \hline
     RF-14 & Respaldo RTO/RPO & BackupServiceTest & IMPLEMENTED & - \\ \hline
     RF-15 & AuditLog & AuditServiceTest & IMPLEMENTED & - \\ \hline
-    RF-16 & Cerrar simulaciones (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
-    RF-17 & Código de reporte (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
-    RF-18 & Reporte simulación (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
-    RF-19 & Resumen usuario (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
-    RF-20 & Validar simulación (SP) & SimulationRepositoryTest & IMPLEMENTED & - \\ \hline
+    RF-16 & Cerrar simulaciones (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-17 & Código de reporte (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-18 & Reporte simulación (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-19 & Resumen usuario (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-20 & Validar simulación (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
     RNF-01 & Latencia caché p95 & k6 load-test.js & VERIFIED & — \\ \hline
     RNF-02 & Latencia frío p95 & k6 load-test.js & TESTED & — \\ \hline
     RNF-03 & BCrypt factor$\geq$10 & AuthServiceTest & VERIFIED & — \\ \hline
