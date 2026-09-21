@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.Instant;
 
 /**
- * <p>Scenario class.</p>
+ * JPA entity that defines a driving scenario available for practice.
  *
  * @author Keitho_
  */

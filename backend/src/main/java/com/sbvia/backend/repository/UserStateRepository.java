@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * <p>UserStateRepository interface.</p>
+ * Spring Data JPA repository for {@link UserState} entities.
  *
  * @author Keitho_
  */

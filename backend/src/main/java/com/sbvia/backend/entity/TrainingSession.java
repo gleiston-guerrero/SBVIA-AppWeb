@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.Instant;
 
 /**
- * <p>TrainingSession class.</p>
+ * JPA entity that groups the simulations belonging to a training session.
  *
  * @author Keitho_
  */

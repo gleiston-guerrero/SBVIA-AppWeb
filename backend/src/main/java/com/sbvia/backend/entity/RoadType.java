@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>RoadType class.</p>
+ * JPA entity that defines a type of road used by a scenario.
  *
  * @author Keitho_
  */

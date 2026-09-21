@@ -3,7 +3,7 @@ package com.sbvia.backend.dto;
 import java.time.LocalDateTime;
 
 /**
- * <p>BackupRequestDTO class.</p>
+ * Request body for creating a database backup.
  *
  * @author Keitho_
  */

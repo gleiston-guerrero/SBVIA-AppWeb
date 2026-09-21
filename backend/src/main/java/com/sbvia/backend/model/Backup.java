@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
- * <p>Backup class.</p>
+ * Domain model that represents a database backup record.
  *
  * @author Keitho_
  */

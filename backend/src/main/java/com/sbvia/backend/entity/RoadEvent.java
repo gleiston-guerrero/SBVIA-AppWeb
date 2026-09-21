@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>RoadEvent class.</p>
+ * JPA entity that records an event that occurred on the road during a simulation.
  *
  * @author Keitho_
  */

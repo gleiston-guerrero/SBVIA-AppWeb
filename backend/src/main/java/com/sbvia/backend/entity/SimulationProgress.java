@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>SimulationProgress class.</p>
+ * JPA entity that tracks how far a simulation has advanced.
  *
  * @author Keitho_
  */

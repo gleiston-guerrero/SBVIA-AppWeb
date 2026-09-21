@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <p>ScenarioService class.</p>
+ * Business logic for creating, updating and listing driving scenarios.
  *
  * @author Keitho_
  */

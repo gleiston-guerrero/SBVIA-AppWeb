@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- * <p>DrivingMetricsRequest class.</p>
+ * Driving metrics reported by the client during a simulation.
  *
  * @author Keitho_
   * @param durationSeconds durationSeconds param

@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.Instant;
 
 /**
- * <p>Role class.</p>
+ * JPA entity that defines a user role and the authorities it grants.
  *
  * @author Keitho_
  */

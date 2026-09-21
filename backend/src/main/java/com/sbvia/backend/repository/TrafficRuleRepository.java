@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * <p>TrafficRuleRepository interface.</p>
+ * Spring Data JPA repository for {@link TrafficRule} entities.
  *
  * @author Keitho_
  */

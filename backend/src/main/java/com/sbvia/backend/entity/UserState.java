@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>UserState class.</p>
+ * JPA entity that defines the lifecycle state of a user account.
  *
  * @author Keitho_
  */

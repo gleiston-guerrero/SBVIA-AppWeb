@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * <p>SimulationStateRepository interface.</p>
+ * Spring Data JPA repository for {@link SimulationState} entities.
  *
  * @author Keitho_
  */

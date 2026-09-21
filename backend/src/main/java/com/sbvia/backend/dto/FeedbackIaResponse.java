@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * <p>FeedbackIaResponse class.</p>
+ * AI-generated feedback returned for a completed practice.
  *
  * @author Keitho_
  */

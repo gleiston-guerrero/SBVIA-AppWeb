@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 /**
- * <p>User class.</p>
+ * JPA entity that represents a user account.
  *
  * @author Keitho_
  */

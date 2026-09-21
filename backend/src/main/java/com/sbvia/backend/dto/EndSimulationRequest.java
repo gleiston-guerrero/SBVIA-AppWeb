@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- * <p>EndSimulationRequest class.</p>
+ * Request body that closes a simulation and submits its final metrics.
  *
  * @author Keitho_
   * @param finalScore finalScore param

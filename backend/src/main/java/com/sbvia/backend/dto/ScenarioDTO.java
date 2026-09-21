@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * <p>ScenarioDTO class.</p>
+ * Transport object that exposes a driving scenario to the client.
  *
  * @author Keitho_
  */

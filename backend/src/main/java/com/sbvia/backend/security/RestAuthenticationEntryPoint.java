@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * <p>RestAuthenticationEntryPoint class.</p>
+ * Returns a JSON body when a request arrives without valid authentication.
  *
  * @author Keitho_
  */

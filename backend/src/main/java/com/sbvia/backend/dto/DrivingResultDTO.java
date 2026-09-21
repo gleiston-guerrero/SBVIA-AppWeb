@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>DrivingResultDTO class.</p>
+ * Result of a driving simulation, with its score and recorded infractions.
  *
  * @author Keitho_
  */

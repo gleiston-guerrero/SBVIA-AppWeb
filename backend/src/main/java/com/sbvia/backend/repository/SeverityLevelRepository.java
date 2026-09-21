@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * <p>SeverityLevelRepository interface.</p>
+ * Spring Data JPA repository for {@link SeverityLevel} entities.
  *
  * @author Keitho_
  */

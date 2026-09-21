@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.Instant;
 
 /**
- * <p>AccessHistory class.</p>
+ * JPA entity that records a user's sign-in history.
  *
  * @author Keitho_
  */

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * <p>SbviaApplication class.</p>
+ * Entry point that bootstraps the SBVIA Spring Boot application.
  *
  * @author Keitho_
  */

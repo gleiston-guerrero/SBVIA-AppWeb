@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 /**
- * <p>SimulationDTO class.</p>
+ * Transport object that exposes a simulation session to the client.
  *
  * @author Keitho_
  */

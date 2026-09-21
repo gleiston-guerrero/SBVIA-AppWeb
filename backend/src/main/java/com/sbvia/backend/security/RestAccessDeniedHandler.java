@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * <p>RestAccessDeniedHandler class.</p>
+ * Returns a JSON body when an authenticated user lacks the required authority.
  *
  * @author Keitho_
  */

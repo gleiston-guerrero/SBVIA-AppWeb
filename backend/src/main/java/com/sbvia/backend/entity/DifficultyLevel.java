@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>DifficultyLevel class.</p>
+ * JPA entity that defines a scenario difficulty level.
  *
  * @author Keitho_
  */

@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * <p>BackupController class.</p>
+ * REST endpoints for creating, listing and downloading database backups.
  *
  * @author Keitho_
  */

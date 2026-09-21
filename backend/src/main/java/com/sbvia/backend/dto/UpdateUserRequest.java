@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>UpdateUserRequest class.</p>
+ * Request body for updating another user's data as an administrator.
  *
  * @author Keitho_
  */

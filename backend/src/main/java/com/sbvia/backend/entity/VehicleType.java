@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>VehicleType class.</p>
+ * JPA entity that defines a type of vehicle.
  *
  * @author Keitho_
  */

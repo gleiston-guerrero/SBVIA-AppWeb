@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * <p>SimulationRepository interface.</p>
+ * Spring Data JPA repository for {@link Simulation} entities.
  *
  * @author Keitho_
  */

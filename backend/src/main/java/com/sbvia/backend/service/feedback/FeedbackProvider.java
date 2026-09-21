@@ -3,7 +3,7 @@ package com.sbvia.backend.service.feedback;
 import com.sbvia.backend.dto.FeedbackIaResponse;
 
 /**
- * <p>FeedbackProvider interface.</p>
+ * Contract implemented by every source of practice feedback.
  *
  * @author Keitho_
  */

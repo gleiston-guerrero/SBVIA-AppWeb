@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>PerformanceMetric class.</p>
+ * JPA entity that stores a single measured performance value.
  *
  * @author Keitho_
  */

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>LocalFeedbackService class.</p>
+ * Feedback provider that generates the report locally, with no external model.
  *
  * @author Keitho_
  */

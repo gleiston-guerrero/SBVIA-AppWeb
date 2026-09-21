@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * <p>MetricTypeRepository interface.</p>
+ * Spring Data JPA repository for {@link MetricType} entities.
  *
  * @author Keitho_
  */

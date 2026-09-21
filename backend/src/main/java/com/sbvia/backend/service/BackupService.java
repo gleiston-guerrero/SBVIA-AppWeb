@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.ArrayList;
 
 /**
- * <p>BackupService class.</p>
+ * Creates and restores database backup records.
  *
  * @author Keitho_
  */

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * <p>AuditController class.</p>
+ * REST endpoints that expose the audit log to administrators.
  *
  * @author Keitho_
  */

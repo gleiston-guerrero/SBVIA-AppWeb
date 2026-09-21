@@ -3,7 +3,7 @@ package com.sbvia.backend.dto;
 import lombok.Data;
 
 /**
- * <p>ChangeRoleRequest class.</p>
+ * Request body for changing a user's role.
  *
  * @author Keitho_
  */

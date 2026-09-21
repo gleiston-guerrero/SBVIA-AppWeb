@@ -9,7 +9,7 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 /**
- * <p>AuditLog class.</p>
+ * JPA entity that records a change made to a tracked table.
  *
  * @author Keitho_
  */

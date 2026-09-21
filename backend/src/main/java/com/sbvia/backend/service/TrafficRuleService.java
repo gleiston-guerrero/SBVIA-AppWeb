@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * <p>TrafficRuleService class.</p>
+ * Business logic for managing traffic rules.
  *
  * @author Keitho_
  */

@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 /**
- * <p>SimulationController class.</p>
+ * REST endpoints for starting, tracking and scoring driving simulations.
  *
  * @author Keitho_
  */

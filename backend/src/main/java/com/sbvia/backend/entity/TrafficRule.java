@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>TrafficRule class.</p>
+ * JPA entity that defines a traffic rule enforced during the simulation.
  *
  * @author Keitho_
  */

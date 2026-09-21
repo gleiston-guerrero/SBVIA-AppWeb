@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
- * <p>UpdateProfileRequest class.</p>
+ * Request body for updating the authenticated user's own profile.
  *
  * @author Keitho_
  */

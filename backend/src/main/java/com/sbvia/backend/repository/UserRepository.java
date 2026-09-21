@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * <p>UserRepository interface.</p>
+ * Spring Data JPA repository for {@link User} entities.
  *
  * @author Keitho_
  */

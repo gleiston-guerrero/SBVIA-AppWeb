@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>AuditLogRepository interface.</p>
+ * Spring Data JPA repository for {@link AuditLog} entities.
  *
  * @author Keitho_
  */

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * <p>UserDTO class.</p>
+ * Transport object that exposes a user account without its credentials.
  *
  * @author Keitho_
  */

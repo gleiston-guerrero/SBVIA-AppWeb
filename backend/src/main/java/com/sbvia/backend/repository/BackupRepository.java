@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>BackupRepository interface.</p>
+ * Spring Data JPA repository for {@link com.sbvia.backend.model.Backup} records.
  *
  * @author Keitho_
  */

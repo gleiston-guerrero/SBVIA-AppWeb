@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>ScenarioRepository interface.</p>
+ * Spring Data JPA repository for {@link Scenario} entities.
  *
  * @author Keitho_
  */

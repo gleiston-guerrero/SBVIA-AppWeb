@@ -3,7 +3,7 @@ package com.sbvia.backend.service.feedback;
 import java.math.BigDecimal;
 
 /**
- * <p>DrivingData class.</p>
+ * Driving measurements handed to a feedback provider.
  *
  * @author Keitho_
   * @param durationSeconds durationSeconds param

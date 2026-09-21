@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>SeverityLevel class.</p>
+ * JPA entity that defines how severe an infraction is.
  *
  * @author Keitho_
  */

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>StatisticsDTO class.</p>
+ * Aggregated practice statistics, either global or for a single user.
  *
  * @author Keitho_
  */

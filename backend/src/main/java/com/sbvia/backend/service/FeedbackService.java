@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>FeedbackService class.</p>
+ * Builds the feedback shown after a practice.
  *
  * @author Keitho_
  */

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>AuditService class.</p>
+ * Reads and filters the audit log.
  *
  * @author Keitho_
  */

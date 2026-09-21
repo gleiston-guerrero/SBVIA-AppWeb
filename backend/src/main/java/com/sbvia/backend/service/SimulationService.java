@@ -39,7 +39,7 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 /**
- * <p>SimulationService class.</p>
+ * Business logic for running simulations and scoring a practice.
  *
  * @author Keitho_
  */

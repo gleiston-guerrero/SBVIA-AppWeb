@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.Instant;
 
 /**
- * <p>Feedback class.</p>
+ * JPA entity that stores the feedback issued for a practice.
  *
  * @author Keitho_
  */

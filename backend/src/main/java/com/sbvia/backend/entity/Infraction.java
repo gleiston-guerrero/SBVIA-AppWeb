@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>Infraction class.</p>
+ * JPA entity that records a driving infraction committed during a simulation.
  *
  * @author Keitho_
  */

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>PerformanceMetricRepository interface.</p>
+ * Spring Data JPA repository for {@link PerformanceMetric} entities.
  *
  * @author Keitho_
  */

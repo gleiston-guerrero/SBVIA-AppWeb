@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>EventType class.</p>
+ * JPA entity that classifies the road events that can be recorded.
  *
  * @author Keitho_
  */

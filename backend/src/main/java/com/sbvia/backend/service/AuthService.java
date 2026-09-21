@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>AuthService class.</p>
+ * Authenticates users, issues tokens and manages the session.
  *
  * @author Keitho_
  */

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>WeatherType class.</p>
+ * JPA entity that defines a weather condition that a scenario can use.
  *
  * @author Keitho_
  */

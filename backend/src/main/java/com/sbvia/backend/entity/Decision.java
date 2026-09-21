@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>Decision class.</p>
+ * JPA entity that records a driving decision taken during a simulation.
  *
  * @author Keitho_
  */

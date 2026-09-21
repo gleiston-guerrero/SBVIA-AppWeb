@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * <p>TrafficRuleDTO class.</p>
+ * Transport object that exposes a traffic rule to the client.
  *
  * @author Keitho_
  */

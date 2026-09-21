@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>InfractionRepository interface.</p>
+ * Spring Data JPA repository for {@link Infraction} entities.
  *
  * @author Keitho_
  */

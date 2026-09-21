@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>DrivingBehavior class.</p>
+ * JPA entity that describes a driving behaviour assessed in a simulation.
  *
  * @author Keitho_
  */

@@ -1,7 +1,7 @@
 package com.sbvia.backend.service.feedback;
 
 /**
- * <p>AiUnavailableException class.</p>
+ * Raised when the external AI provider cannot be reached.
  *
  * @author Keitho_
  */

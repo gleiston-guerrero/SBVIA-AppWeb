@@ -5,7 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * <p>Vehicle class.</p>
+ * JPA entity that defines a vehicle available in the simulator.
  *
  * @author Keitho_
  */

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>FeedbackRepository interface.</p>
+ * Spring Data JPA repository for {@link Feedback} entities.
  *
  * @author Keitho_
  */

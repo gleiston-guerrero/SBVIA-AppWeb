@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>ExternalAiFeedbackService class.</p>
+ * Feedback provider that delegates the report to an external AI model.
  *
  * @author Keitho_
  */

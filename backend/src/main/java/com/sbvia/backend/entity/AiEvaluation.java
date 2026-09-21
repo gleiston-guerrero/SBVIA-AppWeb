@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * <p>AiEvaluation class.</p>
+ * JPA entity that stores an evaluation produced by an AI model.
  *
  * @author Keitho_
  */

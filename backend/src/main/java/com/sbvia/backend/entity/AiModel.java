@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>AiModel class.</p>
+ * JPA entity that describes an AI model available to the simulator.
  *
  * @author Keitho_
  */

@@ -5,7 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * <p>Simulation class.</p>
+ * JPA entity that represents a practice session carried out by a user.
  *
  * @author Keitho_
  */

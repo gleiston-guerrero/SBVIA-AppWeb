@@ -5,7 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * <p>MetricType class.</p>
+ * JPA entity that defines a type of performance metric.
  *
  * @author Keitho_
  */

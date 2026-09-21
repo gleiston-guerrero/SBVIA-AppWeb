@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 /**
- * <p>VehicleRepository interface.</p>
+ * Spring Data JPA repository for {@link Vehicle} entities.
  *
  * @author Keitho_
  */

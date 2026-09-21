@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * <p>SimulationState class.</p>
+ * JPA entity that defines the lifecycle state of a simulation.
  *
  * @author Keitho_
  */

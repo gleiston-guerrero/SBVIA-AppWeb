@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * <p>UserDetailsServiceImpl class.</p>
+ * Loads user accounts from the database for Spring Security.
  *
  * @author Keitho_
  */

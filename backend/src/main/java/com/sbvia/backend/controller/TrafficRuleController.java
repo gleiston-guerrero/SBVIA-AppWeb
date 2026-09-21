@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>TrafficRuleController class.</p>
+ * REST endpoints that manage the traffic rules used by the simulator.
  *
  * @author Keitho_
  */

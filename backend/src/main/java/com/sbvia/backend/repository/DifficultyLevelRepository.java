@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * <p>DifficultyLevelRepository interface.</p>
+ * Spring Data JPA repository for {@link DifficultyLevel} entities.
  *
  * @author Keitho_
  */
