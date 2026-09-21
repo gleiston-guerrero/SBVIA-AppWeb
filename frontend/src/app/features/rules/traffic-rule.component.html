@@ -1,20 +1,20 @@
 <div class="rules-page">
-  <header><span>Configuración administrativa</span><h1>Reglas de tránsito</h1><p>Gestiona las normativas utilizadas por cada escenario de conducción.</p></header>
+  <header><span>{{ 'rules.eyebrow' | t }}</span><h1>{{ 'rules.title' | t }}</h1><p>{{ 'rules.subtitle' | t }}</p></header>
   <section class="editor">
-    <h2>{{ form.id ? 'Editar regla' : 'Nueva regla' }}</h2>
+    <h2>{{ (form.id ? 'rules.editTitle' : 'rules.newTitle') | t }}</h2>
     <form (ngSubmit)="save()" #ruleNgForm="ngForm">
-      <label>Código<input name="codigo" [(ngModel)]="form.codigo" maxlength="50" placeholder="RT-001" required></label>
-      <label>Nombre<input name="nombre" [(ngModel)]="form.nombre" maxlength="255" required></label>
-      <label>Categoría<input name="categoria" [(ngModel)]="form.categoria" maxlength="100" placeholder="Velocidad, prioridad, seguridad..." required></label>
-      <label>Penalización base<input type="number" name="penalizacionBase" [(ngModel)]="form.penalizacionBase" min="0" step="0.01" required></label>
-      <label class="wide">Descripción<textarea name="description" [(ngModel)]="form.descripcion" maxlength="500" rows="3"></textarea></label>
-      <div class="form-actions"><button *ngIf="form.id" type="button" class="secondary" (click)="cancel()">Cancelar</button><button type="submit" [disabled]="ruleNgForm.invalid || isSaving">{{ isSaving ? 'Guardando...' : 'Guardar regla' }}</button></div>
+      <label>{{ 'rules.code' | t }}<input name="codigo" [(ngModel)]="form.codigo" maxlength="50" placeholder="RT-001" required></label>
+      <label>{{ 'rules.name' | t }}<input name="nombre" [(ngModel)]="form.nombre" maxlength="255" required></label>
+      <label>{{ 'rules.category' | t }}<input name="categoria" [(ngModel)]="form.categoria" maxlength="100" [attr.placeholder]="'rules.categoryPlaceholder' | t" required></label>
+      <label>{{ 'rules.basePenalty' | t }}<input type="number" name="penalizacionBase" [(ngModel)]="form.penalizacionBase" min="0" step="0.01" required></label>
+      <label class="wide">{{ 'rules.description' | t }}<textarea name="description" [(ngModel)]="form.descripcion" maxlength="500" rows="3"></textarea></label>
+      <div class="form-actions"><button *ngIf="form.id" type="button" class="secondary" (click)="cancel()">{{ 'common.cancel' | t }}</button><button type="submit" [disabled]="ruleNgForm.invalid || isSaving">{{ (isSaving ? 'common.saving' : 'rules.saveRule') | t }}</button></div>
     </form>
   </section>
   <section class="list">
-    <div class="list-head"><div><h2>Normativas registradas</h2><small>{{ reglas.length }} reglas</small></div><input [(ngModel)]="filtro" placeholder="Buscar código, regla o categoría"></div>
-    <p class="empty" *ngIf="isLoading">Cargando reglas...</p>
-    <div class="table-wrap" *ngIf="!isLoading"><table><thead><tr><th>Código</th><th>Regla</th><th>Categoría</th><th>Penalización</th><th>Acciones</th></tr></thead><tbody><tr *ngFor="let regla of filtradas"><td><strong>{{ regla.codigo }}</strong></td><td><strong>{{ regla.nombre }}</strong><small>{{ regla.descripcion || 'Sin descripción' }}</small></td><td>{{ regla.categoria }}</td><td>{{ regla.penalizacionBase }}</td><td class="actions"><button type="button" (click)="editar(regla)">Editar</button><button type="button" class="danger" (click)="confirmDeletion = regla">Eliminar</button></td></tr><tr *ngIf="filtradas.length === 0"><td colspan="5" class="empty">No hay reglas que coincidan con la búsqueda.</td></tr></tbody></table></div>
+    <div class="list-head"><div><h2>{{ 'rules.registered' | t }}</h2><small>{{ reglas.length }} {{ 'rules.unit' | t }}</small></div><input [(ngModel)]="filtro" [attr.placeholder]="'rules.searchPlaceholder' | t"></div>
+    <p class="empty" *ngIf="isLoading">{{ 'rules.loading' | t }}</p>
+    <div class="table-wrap" *ngIf="!isLoading"><table><thead><tr><th>{{ 'rules.code' | t }}</th><th>{{ 'rules.thRule' | t }}</th><th>{{ 'rules.category' | t }}</th><th>{{ 'rules.thPenalty' | t }}</th><th>{{ 'practices.thActions' | t }}</th></tr></thead><tbody><tr *ngFor="let regla of filtradas"><td><strong>{{ regla.codigo }}</strong></td><td><strong>{{ regla.nombre }}</strong><small>{{ regla.descripcion || ('rules.noDescription' | t) }}</small></td><td>{{ regla.categoria }}</td><td>{{ regla.penalizacionBase }}</td><td class="actions"><button type="button" (click)="editar(regla)">{{ 'scenarios.edit' | t }}</button><button type="button" class="danger" (click)="confirmDeletion = regla">{{ 'scenarios.delete' | t }}</button></td></tr><tr *ngIf="filtradas.length === 0"><td colspan="5" class="empty">{{ 'rules.noMatch' | t }}</td></tr></tbody></table></div>
   </section>
 </div>
-<div class="modal-backdrop" *ngIf="confirmDeletion"><div class="modal"><h2>Eliminar regla</h2><p>¿Deseas delete “{{ confirmDeletion.nombre }}”?</p><div><button type="button" class="secondary" (click)="confirmDeletion = undefined">Cancelar</button><button type="button" class="danger solid" (click)="delete()">Eliminar</button></div></div></div>
+<div class="modal-backdrop" *ngIf="confirmDeletion"><div class="modal"><h2>{{ 'rules.deleteTitle' | t }}</h2><p>{{ 'rules.deleteQuestion' | t }} "{{ confirmDeletion.nombre }}"?</p><div><button type="button" class="secondary" (click)="confirmDeletion = undefined">{{ 'common.cancel' | t }}</button><button type="button" class="danger solid" (click)="delete()">{{ 'scenarios.delete' | t }}</button></div></div></div>

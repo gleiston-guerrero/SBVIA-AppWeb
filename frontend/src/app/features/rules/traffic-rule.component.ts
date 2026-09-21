@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/components/toast/toast.service';
 import { TrafficRule, TrafficRuleService } from './traffic-rule.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
-  selector: 'app-traffic-rule', standalone: true, imports: [CommonModule, FormsModule],
+  selector: 'app-traffic-rule', standalone: true, imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './traffic-rule.component.html', styleUrl: './traffic-rule.component.css'
 })
 export class TrafficRuleComponent implements OnInit {

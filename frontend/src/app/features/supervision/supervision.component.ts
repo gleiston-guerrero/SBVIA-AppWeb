@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { Simulation } from '../practices/simulation.model';
 import { SimulationService } from '../practices/simulation.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-supervision',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './supervision.component.html',
   styleUrls: ['./supervision.component.css', './supervision-admin-actions.component.css']
 })
