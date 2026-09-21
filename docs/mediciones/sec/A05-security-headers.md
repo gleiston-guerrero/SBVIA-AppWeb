@@ -89,24 +89,35 @@ exige el criterio; quedan anotadas como mejora opcional.
 
 ### Frontend (`sbvia-frontend.onrender.com`)
 
-| Cabecera | Estado |
-| :--- | :--- |
-| `Content-Security-Policy` | **no se envía** |
-| `X-Frame-Options` | **no se envía** |
-| `X-Content-Type-Options` | `nosniff` (la añade el proveedor) |
-| `Strict-Transport-Security` | `max-age=315360000; includeSubdomains; preload` (la añade el proveedor) |
+El proveedor añade por su cuenta `X-Content-Type-Options: nosniff` y
+`Strict-Transport-Security`, pero **no** CSP ni `X-Frame-Options`. Se añadieron las cuatro
+cabeceras que faltaban desde el panel del servicio, en la sección **Headers**, sobre la
+ruta `/*` (Render no lee reglas de cabecera de ningún archivo del repositorio:
+https://render.com/docs/static-site-headers.md).
 
-El proveedor añade por su cuenta `nosniff` y HSTS, pero **no** CSP ni `X-Frame-Options`.
-El frontend es un sitio estático y Render no lee reglas de cabecera de ningún archivo del
-repositorio: se definen en el panel del servicio
-(https://render.com/docs/static-site-headers.md). Valores recomendados sobre la ruta `/*`:
+Estado verificado tras aplicarlas:
 
-| Nombre | Valor |
+| Cabecera | Valor |
 | :--- | :--- |
 | `Content-Security-Policy` | `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://sbvia-appweb.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'` |
 | `X-Frame-Options` | `DENY` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Permissions-Policy` | `geolocation=(), microphone=(), camera=()` |
+| `X-Content-Type-Options` | `nosniff` (del proveedor) |
+| `Strict-Transport-Security` | `max-age=315360000; includeSubdomains; preload` (del proveedor) |
 
-La `connect-src` debe incluir el origen de la API porque el frontend la invoca desde el
-navegador. `nosniff` y HSTS ya llegan por el proveedor; repetirlos es inocuo.
+Se comprobó que la regla cubre todas las rutas y no solo la raíz: `/`, `/login`,
+`/dashboard`, `/favicon.ico` y los recursos reales del build (`/styles-*.css`,
+`/chunk-*.js`) devuelven las cabeceras.
+
+**Control de no regresión:** con la CSP activa se cargó el sitio con un navegador real y se
+completó un inicio de sesión contra la API, que respondió `200` y redirigió a `/dashboard`.
+También cargaron la lista de escenarios y el informe de IA. La directiva `connect-src`
+incluye el origen de la API, que es la única que podía romper la aplicación si faltara.
+
+> **Nota de procedimiento.** Estas cabeceras se intentaron primero en la página
+> `Redirects/Rewrites`, que **no** es la correcta: allí cada fila tiene *Source,
+> Destination* y *Action*, y una cabecera introducida ahí se convierte en una redirección.
+> Las reglas se descartaron sin guardar y no llegaron a aplicarse. La sección válida es
+> **Headers**, con columnas *Request Path, Header Name, Header Value*. La distinción útil:
+> si la interfaz pide una *Action*, es la página de redirecciones.
