@@ -1,78 +1,78 @@
 <div class="form-container">
   <div class="form-card">
     <div class="form-header">
-      <h2>{{ isEditMode ? 'Editar Scenario' : 'Nuevo Scenario' }}</h2>
+      <h2>{{ (isEditMode ? 'scenarioForm.editTitle' : 'scenarioForm.newTitle') | t }}</h2>
       <a routerLink="/scenarios" class="btn-close">&times;</a>
     </div>
 
     <form [formGroup]="escenarioForm" (ngSubmit)="onSubmit()">
-      
+
       <div class="form-group">
-        <label for="name">Nombre del Escenario</label>
-        <input 
-          type="text" 
-          id="name" 
-          formControlName="name" 
-          placeholder="Ej: Curva Peligrosa en Lluvia"
+        <label for="name">{{ 'scenarioForm.name' | t }}</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          [attr.placeholder]="'scenarioForm.namePlaceholder' | t"
           [class.invalid]="escenarioForm.get('name')?.invalid && escenarioForm.get('name')?.touched">
         <div class="error-msg" *ngIf="escenarioForm.get('name')?.invalid && escenarioForm.get('name')?.touched">
-          El nombre es requerido y debe ser menor a 100 caracteres.
+          {{ 'scenarioForm.nameError' | t }}
         </div>
       </div>
 
       <div class="form-group">
-        <label for="description">Descripción</label>
-        <textarea 
-          id="description" 
-          formControlName="description" 
+        <label for="description">{{ 'scenarioForm.description' | t }}</label>
+        <textarea
+          id="description"
+          formControlName="description"
           rows="3"
-          placeholder="Detalles sobre el escenario y sus desafíos..."></textarea>
+          [attr.placeholder]="'scenarioForm.descriptionPlaceholder' | t"></textarea>
       </div>
 
       <div class="form-row">
         <div class="form-group half-width">
-          <label for="roadType">Tipo de Vía</label>
+          <label for="roadType">{{ 'scenarioForm.roadType' | t }}</label>
           <select id="roadType" formControlName="roadType" [class.invalid]="escenarioForm.get('roadType')?.invalid && escenarioForm.get('roadType')?.touched">
-            <option value="" disabled selected>Seleccione...</option>
-            <option value="URBANA">Urbana</option>
-            <option value="RURAL">Rural</option>
-            <option value="AUTOPISTA">Autopista</option>
-            <option value="INTERSECCION">Intersección</option>
+            <option value="" disabled selected>{{ 'scenarioForm.select' | t }}</option>
+            <option value="URBANA">{{ 'rt.URBANA' | t }}</option>
+            <option value="RURAL">{{ 'rt.RURAL' | t }}</option>
+            <option value="AUTOPISTA">{{ 'rt.AUTOPISTA' | t }}</option>
+            <option value="INTERSECCION">{{ 'rt.INTERSECCION' | t }}</option>
           </select>
         </div>
 
         <div class="form-group half-width">
-          <label for="difficultyLevel">Nivel de Dificultad</label>
+          <label for="difficultyLevel">{{ 'scenarioForm.difficulty' | t }}</label>
           <select id="difficultyLevel" formControlName="difficultyLevel">
-            <option value="" disabled selected>Seleccione...</option>
-            <option value="BASICO">Básico</option>
-            <option value="INTERMEDIO">Intermedio</option>
-            <option value="AVANZADO">Avanzado</option>
-            <option value="EXPERTO">Experto</option>
+            <option value="" disabled selected>{{ 'scenarioForm.select' | t }}</option>
+            <option value="BASICO">{{ 'dl.BASICO' | t }}</option>
+            <option value="INTERMEDIO">{{ 'dl.INTERMEDIO' | t }}</option>
+            <option value="AVANZADO">{{ 'dl.AVANZADO' | t }}</option>
+            <option value="EXPERTO">{{ 'dl.EXPERTO' | t }}</option>
           </select>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group half-width">
-          <label for="weatherType">Condición Climática</label>
+          <label for="weatherType">{{ 'scenarioForm.weather' | t }}</label>
           <select id="weatherType" formControlName="weatherType" [class.invalid]="escenarioForm.get('weatherType')?.invalid && escenarioForm.get('weatherType')?.touched">
-            <option value="" disabled selected>Seleccione...</option>
-            <option value="DESPEJADO">Despejado</option>
-            <option value="LLUVIA">Lluvia</option>
-            <option value="NIEBLA">Niebla</option>
-            <option value="TORMENTA">Tormenta</option>
+            <option value="" disabled selected>{{ 'scenarioForm.select' | t }}</option>
+            <option value="DESPEJADO">{{ 'wt.DESPEJADO' | t }}</option>
+            <option value="LLUVIA">{{ 'wt.LLUVIA' | t }}</option>
+            <option value="NIEBLA">{{ 'wt.NIEBLA' | t }}</option>
+            <option value="TORMENTA">{{ 'wt.TORMENTA' | t }}</option>
           </select>
         </div>
 
         <div class="form-group half-width">
-          <label for="trafficDensity">Densidad de Tráfico</label>
+          <label for="trafficDensity">{{ 'scenarioForm.traffic' | t }}</label>
           <select id="trafficDensity" formControlName="trafficDensity" [class.invalid]="escenarioForm.get('trafficDensity')?.invalid && escenarioForm.get('trafficDensity')?.touched">
-            <option value="" disabled selected>Seleccione...</option>
-            <option value="BAJA">Baja</option>
-            <option value="MEDIA">Media</option>
-            <option value="ALTA">Alta</option>
-            <option value="MUY_ALTA">Muy alta</option>
+            <option value="" disabled selected>{{ 'scenarioForm.select' | t }}</option>
+            <option value="BAJA">{{ 'td.BAJA' | t }}</option>
+            <option value="MEDIA">{{ 'td.MEDIA' | t }}</option>
+            <option value="ALTA">{{ 'td.ALTA' | t }}</option>
+            <option value="MUY_ALTA">{{ 'td.MUY_ALTA' | t }}</option>
           </select>
         </div>
       </div>
@@ -82,9 +82,9 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="btn-cancel" routerLink="/scenarios">Cancelar</button>
+        <button type="button" class="btn-cancel" routerLink="/scenarios">{{ 'common.cancel' | t }}</button>
         <button type="submit" class="btn-primary" [disabled]="loading || escenarioForm.invalid">
-          {{ loading ? 'Guardando...' : 'Guardar escenario' }}
+          {{ (loading ? 'common.saving' : 'scenarioForm.save') | t }}
         </button>
       </div>
 

@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EscenarioService } from '../scenarios/scenario.service';
 import { InformeIA, MetricasConduccion, SimulationService } from '../practices/simulation.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 type EstadoJuego = 'listo' | 'corriendo' | 'pausado' | 'finalizado';
 
@@ -23,7 +24,7 @@ interface SemaforoEvento {
 @Component({
   selector: 'app-driving-simulator',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './driving-simulator.component.html',
   styleUrl: './driving-simulator.component.css'
 })

@@ -2,9 +2,9 @@
   <section class="panel">
     <header>
       <div>
-        <p class="eyebrow">Simulador de conducción</p>
+        <p class="eyebrow">{{ 'driver.eyebrow' | t }}</p>
         <h1>{{ nombreEscenario }}</h1>
-        <p class="ayuda">Usa <strong>← → ↑ ↓</strong> o <strong>W A S D</strong> para dirigir y acelerar. Tecla <strong>P</strong> para pausar.</p>
+        <p class="ayuda">{{ 'driver.help' | t }}</p>
       </div>
       <div class="timer">{{ tiempo }}</div>
     </header>
@@ -13,32 +13,32 @@
 
     <div class="juego-layout">
       <div class="lienzo-wrapper">
-        <canvas #lienzo [attr.width]="ANCHO" [attr.height]="ALTO" aria-label="Simulador de conducción 2D"></canvas>
+        <canvas #lienzo [attr.width]="ANCHO" [attr.height]="ALTO" [attr.aria-label]="'driver.eyebrow' | t"></canvas>
       </div>
 
       <div class="hud-laterales">
         <div class="hud-item velocimetro">
-          <small>Velocidad</small>
+          <small>{{ 'driver.speed' | t }}</small>
           <strong>{{ velocidadKmh | number:'1.0-0' }} <span>km/h</span></strong>
           <div class="barra"><div class="relleno" [style.width.%]="(velocidadKmh / VEL_MAX_KMH) * 100"></div></div>
         </div>
         <div class="hud-item puntaje" [class.bajo]="puntaje < 70">
-          <small>Puntaje</small>
+          <small>{{ 'driver.score' | t }}</small>
           <strong>{{ puntaje }} <span>/ 100</span></strong>
         </div>
         <div class="hud-item">
-          <small>Límite</small>
+          <small>{{ 'driver.limit' | t }}</small>
           <strong>{{ LIMITE_KMH }} <span>km/h</span></strong>
         </div>
         <div class="hud-item">
-          <small>Distancia</small>
+          <small>{{ 'driver.distance' | t }}</small>
           <strong>{{ distanciaKm | number:'1.2-2' }} <span>km</span></strong>
         </div>
         <div class="hud-item">
-          <small>Estado</small>
-          <strong class="estado" [class.activo]="estado === 'corriendo'">{{ estado }}</strong>
+          <small>{{ 'driver.status' | t }}</small>
+          <strong class="estado" [class.activo]="estado === 'corriendo'">{{ (estado === 'corriendo' ? 'driver.running' : estado === 'pausado' ? 'driver.paused' : 'driver.finished') | t }}</strong>
         </div>
-        
+
         <div class="chips-laterales">
           <span class="chip" [class.marca]="colisiones > 0">💥 {{ colisiones }}</span>
           <span class="chip" [class.marca]="salidasCarril > 0">🛣️ {{ salidasCarril }}</span>
@@ -51,13 +51,13 @@
     </div>
 
     <div class="controles">
-      <button type="button" class="btn primario" (click)="start()" [disabled]="estado === 'corriendo'">▶ Iniciar</button>
+      <button type="button" class="btn primario" (click)="start()" [disabled]="estado === 'corriendo'">▶ {{ 'driver.start' | t }}</button>
       <button type="button" class="btn" (click)="estado === 'pausado' ? reanudar() : pausar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado'">
-        {{ estado === 'pausado' ? '⏵ Reanudar' : '⏸ Pausar' }}
+        {{ (estado === 'pausado' ? 'driver.resume' : 'driver.pause') | t }}
       </button>
-      <button type="button" class="btn" (click)="restart()">↺ Reiniciar</button>
+      <button type="button" class="btn" (click)="restart()">↺ {{ 'driver.restart' | t }}</button>
       <button type="button" class="btn exito" (click)="finish()" [disabled]="estado !== 'corriendo' && estado !== 'pausado' || isSaving">
-        {{ isSaving ? 'Guardando...' : '■ Finalizar' }}
+        {{ (isSaving ? 'common.saving' : 'driver.finish') | t }}
       </button>
     </div>
   </section>
@@ -66,46 +66,46 @@
   <section class="panel resultado">
     <h2>{{ nombreEscenario }}</h2>
     <div class="nota" [class.aprobada]="(puntajeServidor ?? puntaje) >= 70">{{ puntajeServidor ?? puntaje }}</div>
-    <p *ngIf="puntajeServidor !== null" class="origen-puntaje">Puntaje calculado por el servidor</p>
-    <p *ngIf="puntajeServidor === null" class="origen-puntaje">Puntaje local (no guardado en el servidor)</p>
+    <p *ngIf="puntajeServidor !== null" class="origen-puntaje">{{ 'driver.serverScore' | t }}</p>
+    <p *ngIf="puntajeServidor === null" class="origen-puntaje">{{ 'driver.localScore' | t }}</p>
     <div class="resumen">
-      <div><small>Tiempo</small><strong>{{ tiempo }}</strong></div>
-      <div><small>Distancia</small><strong>{{ distanciaKm | number:'1.2-2' }} km</strong></div>
-      <div><small>Vel. promedio</small><strong>{{ velocidadPromedio | number:'1.0-0' }} km/h</strong></div>
-      <div><small>Vel. máxima</small><strong>{{ velocidadMax | number:'1.0-0' }} km/h</strong></div>
-      <div><small>Colisiones</small><strong>{{ colisiones }}</strong></div>
-      <div><small>Salidas</small><strong>{{ salidasCarril }}</strong></div>
-      <div><small>Excesos</small><strong>{{ excesosVelocidad }}</strong></div>
-      <div><small>Semáforos</small><strong>{{ semaforosIgnorados }}</strong></div>
-      <div><small>Distancia</small><strong>{{ distanciaInsegura }}</strong></div>
+      <div><small>{{ 'driver.time' | t }}</small><strong>{{ tiempo }}</strong></div>
+      <div><small>{{ 'driver.distance' | t }}</small><strong>{{ distanciaKm | number:'1.2-2' }} km</strong></div>
+      <div><small>{{ 'driver.avgSpeed' | t }}</small><strong>{{ velocidadPromedio | number:'1.0-0' }} km/h</strong></div>
+      <div><small>{{ 'driver.maxSpeed' | t }}</small><strong>{{ velocidadMax | number:'1.0-0' }} km/h</strong></div>
+      <div><small>{{ 'driver.collisions' | t }}</small><strong>{{ colisiones }}</strong></div>
+      <div><small>{{ 'driver.laneDepartures' | t }}</small><strong>{{ salidasCarril }}</strong></div>
+      <div><small>{{ 'driver.speeding' | t }}</small><strong>{{ excesosVelocidad }}</strong></div>
+      <div><small>{{ 'driver.trafficLights' | t }}</small><strong>{{ semaforosIgnorados }}</strong></div>
+      <div><small>{{ 'driver.distance' | t }}</small><strong>{{ distanciaInsegura }}</strong></div>
     </div>
     <div *ngIf="informe" class="informe">
       <div class="informe-head">
-        <h3>Informe de desempeño</h3>
-        <span class="origen">{{ informe.origen === 'IA_EXTERNA' ? 'IA externa' : 'IA local' }}</span>
-        <span class="riesgo" [ngClass]="informe.nivelRiesgo.toLowerCase()">Riesgo {{ informe.nivelRiesgo }}</span>
+        <h3>{{ 'driver.reportTitle' | t }}</h3>
+        <span class="origen">{{ (informe.origen === 'IA_EXTERNA' ? 'driver.externalAi' : 'driver.localAi') | t }}</span>
+        <span class="riesgo" [ngClass]="informe.nivelRiesgo.toLowerCase()">{{ 'driver.risk' | t }} {{ informe.nivelRiesgo }}</span>
       </div>
       <p class="resumen-ia">{{ informe.resumen }}</p>
       <div class="columnas">
         <div>
-          <h4>✅ Aciertos</h4>
+          <h4>✅ {{ 'driver.strengths' | t }}</h4>
           <ul><li *ngFor="let a of informe.aciertos">{{ a }}</li></ul>
         </div>
         <div>
-          <h4>⚠️ Errores</h4>
+          <h4>⚠️ {{ 'driver.errors' | t }}</h4>
           <ul *ngIf="informe.errores.length > 0"><li *ngFor="let e of informe.errores">{{ e }}</li></ul>
-          <p *ngIf="informe.errores.length === 0" class="sin-errores">Sin errores registrados.</p>
+          <p *ngIf="informe.errores.length === 0" class="sin-errores">{{ 'driver.noErrors' | t }}</p>
         </div>
       </div>
-      <h4>💡 Recomendaciones</h4>
+      <h4>💡 {{ 'driver.recommendations' | t }}</h4>
       <ol><li *ngFor="let r of informe.recomendaciones">{{ r }}</li></ol>
       <p *ngIf="informe.comparacion" class="comparacion">📊 {{ informe.comparacion }}</p>
       <p class="motivador">“{{ informe.mensajeMotivador }}”</p>
     </div>
-    <p *ngIf="!informe" class="nota-etapa">Informe no disponible en modo local.</p>
+    <p *ngIf="!informe" class="nota-etapa">{{ 'driver.noReport' | t }}</p>
     <div class="acciones">
-      <button type="button" class="btn primario" (click)="restart()">Conducir de nuevo</button>
-      <a routerLink="/practicas">Ver mis prácticas</a>
+      <button type="button" class="btn primario" (click)="restart()">{{ 'driver.driveAgain' | t }}</button>
+      <a routerLink="/practicas">{{ 'driver.viewPractices' | t }}</a>
     </div>
   </section>
   </div>

@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EscenarioService, Scenario } from './scenario.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
+import { LanguageService } from '../../i18n/language.service';
 
 @Component({
   selector: 'app-scenario-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, TranslatePipe],
   templateUrl: './scenario-form.component.html',
   styleUrl: './scenario-form.component.css'
 })
@@ -22,7 +24,8 @@ export class ScenarioFormComponent implements OnInit {
     private fb: FormBuilder,
     private scenarioService: EscenarioService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private i18n: LanguageService
   ) {
     this.escenarioForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
@@ -58,7 +61,7 @@ export class ScenarioFormComponent implements OnInit {
         this.loading = false;
       },
       error: (err: any) => {
-        this.errorMessage = err.error?.detail ?? 'Error al load los datos del scenario.';
+        this.errorMessage = err.error?.detail ?? this.i18n.t('scenarioForm.loadFailed');
         console.error(err);
         this.loading = false;
       }
@@ -81,7 +84,7 @@ export class ScenarioFormComponent implements OnInit {
           this.router.navigate(['/scenarios']);
         },
         error: (err: any) => {
-          this.errorMessage = this.getErrorMessage(err, 'Error al update el scenario.');
+          this.errorMessage = this.getErrorMessage(err, this.i18n.t('scenarioForm.updateFailed'));
           console.error(err);
           this.loading = false;
         }
@@ -92,7 +95,7 @@ export class ScenarioFormComponent implements OnInit {
           this.router.navigate(['/scenarios']);
         },
         error: (err: any) => {
-          this.errorMessage = this.getErrorMessage(err, 'Error al create el scenario.');
+          this.errorMessage = this.getErrorMessage(err, this.i18n.t('scenarioForm.createFailed'));
           console.error(err);
           this.loading = false;
         }
