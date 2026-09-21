@@ -93,7 +93,7 @@ export class PracticesListComponent implements OnInit {
     this.informeSeleccionado = null;
     this.errorInforme = '';
     this.cargandoInforme = true;
-    this.simulationService.getRetroalimentacion(practica.simulationId).subscribe({
+    this.simulationService.getFeedback(practica.simulationId).subscribe({
       next: (informe: any) => {
         this.informeSeleccionado = informe;
         this.cargandoInforme = false;

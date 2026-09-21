@@ -124,7 +124,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     this.ctx = ctx;
-    this.xAuto = this.centroCarril(1);
+    this.xAuto = this.centerLane(1);
     this.ajustarLienzo();
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);
@@ -157,11 +157,11 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.ultimaMarca = performance.now();
   }
 
-  pausar(): void {
+  pause(): void {
     if (this.estado === 'corriendo') this.estado = 'pausado';
   }
 
-  reanudar(): void {
+  resume(): void {
     if (this.estado === 'pausado') {
       this.estado = 'corriendo';
       this.ultimaMarca = performance.now();
@@ -186,7 +186,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.modoLocal = this.scenarioId === null;
     this.aviso = this.modoLocal ? 'Sin escenario disponible: modo local.' : '';
     this.isSaving = false;
-    this.xAuto = this.centroCarril(1);
+    this.xAuto = this.centerLane(1);
     this.desplazamiento = 0;
     this.npcs = [];
     this.semaforos = [];
@@ -267,7 +267,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
       e.preventDefault();
     }
     if (tecla === 'p' && presionada && (this.estado === 'corriendo' || this.estado === 'pausado')) {
-      this.estado === 'corriendo' ? this.pausar() : this.reanudar();
+      this.estado === 'corriendo' ? this.pause() : this.resume();
       return;
     }
     if (presionada) this.teclas.add(tecla);
@@ -279,7 +279,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     const dt = Math.min((marca - this.ultimaMarca) / 1000, 0.1);
     this.ultimaMarca = marca;
     if (this.estado === 'corriendo') this.update(dt);
-    this.dibujar();
+    this.draw();
     this.raf = requestAnimationFrame((m) => this.bucle(m));
   }
 
@@ -346,7 +346,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     // Colisiones (AABB) con 2s de invulnerabilidad
     if (this.colisionCooldown <= 0) {
       const golpe = this.npcs.find((n) =>
-        Math.abs(this.centroCarril(n.carril) - this.xAuto) < 44 && Math.abs(n.y - this.Y_AUTO) < 76);
+        Math.abs(this.centerLane(n.carril) - this.xAuto) < 44 && Math.abs(n.y - this.Y_AUTO) < 76);
       if (golpe) {
         this.colisiones++;
         this.colisionCooldown = 2;
@@ -357,7 +357,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     // Distancia segura: mismo carril, vehículo delante a menos de 110px y más lento
-    const miCarril = this.carrilCercano(this.xAuto);
+    const miCarril = this.nearestLane(this.xAuto);
     const delante = this.npcs
       .filter((n) => n.carril === miCarril && n.y < this.Y_AUTO)
       .map((n) => (this.Y_AUTO - 38) - (n.y + 38))
@@ -411,22 +411,22 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  private centroCarril(i: number): number {
+  private centerLane(i: number): number {
     const anchoVia = this.ANCHO - this.MARGEN * 2;
     return this.MARGEN + (anchoVia / this.CARRILES) * (i + 0.5);
   }
 
-  private carrilCercano(x: number): number {
+  private nearestLane(x: number): number {
     let mejor = 0;
-    let mejorDist = Math.abs(x - this.centroCarril(0));
+    let mejorDist = Math.abs(x - this.centerLane(0));
     for (let i = 1; i < this.CARRILES; i++) {
-      const d = Math.abs(x - this.centroCarril(i));
+      const d = Math.abs(x - this.centerLane(i));
       if (d < mejorDist) { mejorDist = d; mejor = i; }
     }
     return mejor;
   }
 
-  private dibujar(): void {
+  private draw(): void {
     const c = this.ctx;
     c.fillStyle = '#3d8b4f';
     c.fillRect(0, 0, this.ANCHO, this.ALTO);
@@ -443,11 +443,11 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
         c.fillRect(x - 3, y + this.desplazamiento, 6, 32);
       }
     }
-    this.dibujarSenalVelocidad(c);
-    this.semaforos.forEach((s) => this.dibujarSemaforoEn(c, s.y, s.fase));
-    this.npcs.forEach((n) => this.dibujarAuto(c, this.centroCarril(n.carril), n.y, n.color));
+    this.drawSpeedSign(c);
+    this.semaforos.forEach((s) => this.drawTrafficLightIn(c, s.y, s.fase));
+    this.npcs.forEach((n) => this.drawCar(c, this.centerLane(n.carril), n.y, n.color));
     if (this.destello <= 0 || Math.floor(this.destello * 10) % 2 === 0) {
-      this.dibujarAuto(c, this.xAuto, this.Y_AUTO, '#1a73e8', true);
+      this.drawCar(c, this.xAuto, this.Y_AUTO, '#1a73e8', true);
     }
     if (this.tailgating && this.estado === 'corriendo') {
       c.fillStyle = '#fbbc04';
@@ -471,7 +471,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     }
   }
 
-  private dibujarAuto(c: CanvasRenderingContext2D, x: number, y: number, color: string, jugador = false): void {
+  private drawCar(c: CanvasRenderingContext2D, x: number, y: number, color: string, jugador = false): void {
     const w = 44, h = 76;
     c.fillStyle = 'rgba(0,0,0,0.25)';
     c.fillRect(x - w / 2 + 3, y - h / 2 + 5, w, h);
@@ -495,7 +495,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     }
   }
 
-  private dibujarSenalVelocidad(c: CanvasRenderingContext2D): void {
+  private drawSpeedSign(c: CanvasRenderingContext2D): void {
     const x = 20, y = 300;
     c.fillStyle = '#5f6368';
     c.fillRect(x + 8, y + 22, 4, 40);
@@ -514,7 +514,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     c.fillText(String(this.LIMITE_KMH), x + 10, y + 7);
   }
 
-  private dibujarSemaforoEn(c: CanvasRenderingContext2D, y: number, fase: 'verde' | 'rojo'): void {
+  private drawTrafficLightIn(c: CanvasRenderingContext2D, y: number, fase: 'verde' | 'rojo'): void {
     const x = this.ANCHO - 20;
     // Línea de pare sobre la calzada
     c.fillStyle = 'rgba(255,255,255,0.85)';

@@ -35,7 +35,7 @@ class ExternalAiFeedbackServiceTest {
                 BigDecimal.ZERO, BigDecimal.ZERO);
     }
 
-    private ExternalAiFeedbackService servicio(String url) {
+    private ExternalAiFeedbackService aiService(String url) {
         return new ExternalAiFeedbackService(new ObjectMapper(), "openai", url,
                 "clave-de-prueba", "modelo-test", 5);
     }
@@ -68,7 +68,7 @@ class ExternalAiFeedbackServiceTest {
                 + "\\\"mensajeMotivador\\\":\\\"Sigue así\\\"}\\n```\"}}]}",
                 "application/json");
 
-        FeedbackIaResponse informe = servicio(url()).generate(datos());
+        FeedbackIaResponse informe = aiService(url()).generate(datos());
 
         assertThat(informe.getOrigen()).isEqualTo("OPENAI");
         assertThat(informe.getResumen()).isEqualTo("Buen manejo");
@@ -82,7 +82,7 @@ class ExternalAiFeedbackServiceTest {
     void throwsWhenResponseIsInvalid() throws Exception {
         respond("{\"choices\":[]}", "application/json");
 
-        assertThatThrownBy(() -> servicio(url()).generate(datos()))
+        assertThatThrownBy(() -> aiService(url()).generate(datos()))
                 .isInstanceOf(AiUnavailableException.class);
     }
 
@@ -130,7 +130,7 @@ class ExternalAiFeedbackServiceTest {
                 + "\\\"mensajeMotivador\\\":\\\"Bien\\\"}\\n```\"}}]}";
 
         respondCapturing(respuestaValida, bodyCapture);
-        servicio(url()).generate(datos());
+        aiService(url()).generate(datos());
 
         String payload = bodyCapture.get().toLowerCase();
 

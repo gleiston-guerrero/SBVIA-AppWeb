@@ -15,7 +15,7 @@ export class TrafficRuleComponent implements OnInit {
   isLoading = true;
   isSaving = false;
   confirmDeletion?: TrafficRule;
-  form: TrafficRule = this.vacio();
+  form: TrafficRule = this.emptyRule();
 
   constructor(private reglasService: TrafficRuleService,
               private toast: ToastService) {}
@@ -37,8 +37,8 @@ export class TrafficRuleComponent implements OnInit {
     });
   }
 
-  editar(regla: TrafficRule): void { this.form = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  cancel(): void { this.form = this.vacio(); }
+  edit(regla: TrafficRule): void { this.form = { ...regla }; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  cancel(): void { this.form = this.emptyRule(); }
 
   save(): void {
     if (!this.form.codigo.trim() || !this.form.nombre.trim()
@@ -62,7 +62,7 @@ export class TrafficRuleComponent implements OnInit {
     });
   }
 
-  private vacio(): TrafficRule {
+  private emptyRule(): TrafficRule {
     return { codigo: '', nombre: '', descripcion: '', categoria: '', penalizacionBase: 0, activa: true };
   }
 }

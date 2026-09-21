@@ -30,7 +30,7 @@ export class SupervisionComponent implements OnInit {
     // El catálogo actual no tiene role AUDITOR: nadie recibe la vista de solo lectura.
     this.esAuditor = false;
     this.esAdmin = role === 'ADMINISTRADOR';
-    this.simulationService.getTodas().subscribe({
+    this.simulationService.getAll().subscribe({
       next: (practicas: any) => { this.practicas = practicas; this.isLoading = false; },
       error: (error: any) => { this.error = error.error?.detail ?? 'No se pudo load la supervisión.'; this.isLoading = false; }
     });

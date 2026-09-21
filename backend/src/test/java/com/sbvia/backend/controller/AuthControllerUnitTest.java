@@ -68,7 +68,7 @@ class AuthControllerUnitTest {
 
     @Test
     void refreshPrefersCookieToken() {
-        when(authService.refresh("refresh-cookie")).thenReturn(respuesta());
+        when(authService.refresh("refresh-cookie")).thenReturn(response());
         when(authService.getRefreshExpirationSeconds()).thenReturn(3_600L);
 
         authController.refresh("refresh-cookie", solicitud("refresh-body"));
@@ -78,7 +78,7 @@ class AuthControllerUnitTest {
 
     @Test
     void refreshAcceptsBodyTokenWhenThereIsNoCookie() {
-        when(authService.refresh("refresh-body")).thenReturn(respuesta());
+        when(authService.refresh("refresh-body")).thenReturn(response());
         when(authService.getRefreshExpirationSeconds()).thenReturn(3_600L);
 
         authController.refresh(null, solicitud("refresh-body"));
@@ -88,7 +88,7 @@ class AuthControllerUnitTest {
 
     @Test
     void keepsAccessCookieMaxAgeInSeconds() {
-        when(authService.refresh("refresh-cookie")).thenReturn(respuesta());
+        when(authService.refresh("refresh-cookie")).thenReturn(response());
         when(authService.getRefreshExpirationSeconds()).thenReturn(604_800L);
 
         ResponseEntity<AuthResponse> respuesta = authController.refresh("refresh-cookie", null);
@@ -150,7 +150,7 @@ class AuthControllerUnitTest {
         return request;
     }
 
-    private AuthResponse respuesta() {
+    private AuthResponse response() {
         return AuthResponse.builder()
                 .accessToken("access-nuevo")
                 .refreshToken("refresh-nuevo")

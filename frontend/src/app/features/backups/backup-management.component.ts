@@ -112,7 +112,7 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     }
   }
 
-  formatearBytes(bytes: number | undefined): string {
+  formatBytes(bytes: number | undefined): string {
     if (!bytes) return '0 B';
     const k = 1024;
     const dm = 2;

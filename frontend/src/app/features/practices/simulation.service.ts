@@ -48,7 +48,7 @@ export class SimulationService {
     return this.http.get<any>(`${this.apiUrl}/estadisticas`);
   }
 
-  getTodas(): Observable<Simulation[]> {
+  getAll(): Observable<Simulation[]> {
     return this.http.get<Simulation[]>(this.apiUrl);
   }
 
@@ -64,7 +64,7 @@ export class SimulationService {
     return this.http.post<ResultadoConduccion>(`${this.apiUrl}/${simulationId}/conduccion/finalizar`, metricas);
   }
 
-  getRetroalimentacion(simulationId: number): Observable<InformeIA> {
+  getFeedback(simulationId: number): Observable<InformeIA> {
     return this.http.get<InformeIA>(`${this.apiUrl}/${simulationId}/feedback`);
   }
 }

@@ -63,7 +63,7 @@
           </td>
           <td class="whitespace-nowrap">{{ res.startDate | date:'dd/MM/yyyy HH:mm' }}</td>
           <td class="whitespace-nowrap">{{ res.scheduledDate ? (res.scheduledDate | date:'dd/MM/yyyy HH:mm') : '-' }}</td>
-          <td class="whitespace-nowrap">{{ res.status === 'COMPLETADO' ? formatearBytes(res.sizeBytes) : '-' }}</td>
+          <td class="whitespace-nowrap">{{ res.status === 'COMPLETADO' ? formatBytes(res.sizeBytes) : '-' }}</td>
           <td class="text-sm">
             <div class="truncate-text" [title]="res.comment || '-'">{{ res.comment || '-' }}</div>
           </td>

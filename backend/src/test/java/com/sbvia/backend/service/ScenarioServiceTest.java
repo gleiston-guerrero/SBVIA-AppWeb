@@ -45,26 +45,26 @@ class ScenarioServiceTest {
     @InjectMocks
     private ScenarioService scenarioService;
 
-    private RoadType buildTipoVia(String name) {
+    private RoadType buildRoadType(String name) {
         return RoadType.builder().idTipoVia(1).name(name).build();
     }
 
-    private DifficultyLevel buildNivelDificultad(Integer value) {
+    private DifficultyLevel buildDifficultyLevel(Integer value) {
         return DifficultyLevel.builder().idNivelDificultad(1).name("Nivel " + value).value(value).build();
     }
 
-    private WeatherType buildTipoClima(String name) {
+    private WeatherType buildWeatherType(String name) {
         return WeatherType.builder().idTipoClima(1).name(name).build();
     }
 
-    private Scenario buildEscenario(Integer id, String name) {
+    private Scenario buildScenario(Integer id, String name) {
         return Scenario.builder()
                 .scenarioId(id)
                 .name(name)
                 .description("Descripción de " + name)
-                .roadType(buildTipoVia("Urbana"))
-                .difficultyLevel(buildNivelDificultad(2))
-                .weatherType(buildTipoClima("Soleado"))
+                .roadType(buildRoadType("Urbana"))
+                .difficultyLevel(buildDifficultyLevel(2))
+                .weatherType(buildWeatherType("Soleado"))
                 .trafficDensity("Media")
                 .activo(true)
                 .build();
@@ -75,8 +75,8 @@ class ScenarioServiceTest {
     void listActive_maps_pagination() {
         Pageable pageable = PageRequest.of(0, 10);
         List<Scenario> escenarios = List.of(
-                buildEscenario(1, "Autopista Norte"),
-                buildEscenario(2, "Centro Histórico")
+                buildScenario(1, "Autopista Norte"),
+                buildScenario(2, "Centro Histórico")
         );
         Page<Scenario> pageResult = new PageImpl<>(escenarios, pageable, 2);
 
@@ -93,7 +93,7 @@ class ScenarioServiceTest {
     @Test
     @DisplayName("findById: retorna DTO cuando el escenario existe")
     void findById_existing() {
-        Scenario escenario = buildEscenario(1, "Zona Industrial");
+        Scenario escenario = buildScenario(1, "Zona Industrial");
         when(escenarioRepository.findById(1)).thenReturn(Optional.of(escenario));
 
         ScenarioDTO dto = scenarioService.findById(1);
@@ -125,11 +125,11 @@ class ScenarioServiceTest {
                 .trafficDensity("Alta")
                 .build();
 
-        Scenario saved = buildEscenario(5, "Redonda del Sur");
-        when(tipoViaRepository.findByName("Urbana")).thenReturn(Optional.of(buildTipoVia("Urbana")));
+        Scenario saved = buildScenario(5, "Redonda del Sur");
+        when(tipoViaRepository.findByName("Urbana")).thenReturn(Optional.of(buildRoadType("Urbana")));
         when(nivelDificultadRepository.findByName("Intermedio"))
                 .thenReturn(Optional.of(DifficultyLevel.builder().idNivelDificultad(2).name("Intermedio").value(2).build()));
-        when(tipoClimaRepository.findByName("Lluvia")).thenReturn(Optional.of(buildTipoClima("Lluvia")));
+        when(tipoClimaRepository.findByName("Lluvia")).thenReturn(Optional.of(buildWeatherType("Lluvia")));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(saved);
 
         ScenarioDTO result = scenarioService.create(dto);
@@ -142,7 +142,7 @@ class ScenarioServiceTest {
     @Test
     @DisplayName("delete: hace soft-delete (activo=false) sin borrar el registro")
     void delete_softDelete() {
-        Scenario escenario = buildEscenario(3, "Scenario A borrar");
+        Scenario escenario = buildScenario(3, "Scenario A borrar");
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(escenario);
 

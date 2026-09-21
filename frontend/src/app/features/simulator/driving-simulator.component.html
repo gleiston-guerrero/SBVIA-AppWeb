@@ -52,7 +52,7 @@
 
     <div class="controles">
       <button type="button" class="btn primario" (click)="start()" [disabled]="estado === 'corriendo'">▶ {{ 'driver.start' | t }}</button>
-      <button type="button" class="btn" (click)="estado === 'pausado' ? reanudar() : pausar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado'">
+      <button type="button" class="btn" (click)="estado === 'pausado' ? resume() : pause()" [disabled]="estado !== 'corriendo' && estado !== 'pausado'">
         {{ (estado === 'pausado' ? 'driver.resume' : 'driver.pause') | t }}
       </button>
       <button type="button" class="btn" (click)="restart()">↺ {{ 'driver.restart' | t }}</button>

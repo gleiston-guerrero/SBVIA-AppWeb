@@ -49,19 +49,19 @@ class RepositoryIntegrationTest {
     private Role rolUsuario;
     private UserState estadoActivo;
 
-    private RoadType persistTipoVia(String name) {
+    private RoadType persistRoadType(String name) {
         RoadType tv = RoadType.builder().name(name).build();
         entityManager.persist(tv);
         return tv;
     }
 
-    private DifficultyLevel persistNivelDificultad(Integer value) {
+    private DifficultyLevel persistDifficultyLevel(Integer value) {
         DifficultyLevel nd = DifficultyLevel.builder().name("Nivel " + value).value(value).build();
         entityManager.persist(nd);
         return nd;
     }
 
-    private WeatherType persistTipoClima(String name) {
+    private WeatherType persistWeatherType(String name) {
         WeatherType tc = WeatherType.builder().name(name).build();
         entityManager.persist(tc);
         return tc;
@@ -79,9 +79,9 @@ class RepositoryIntegrationTest {
     @Test
     @DisplayName("findByActivoTrue devuelve solo escenarios activos")
     void findByActivoTrue_returnsOnlyActiveScenarios() {
-        RoadType tv = persistTipoVia("AVENIDA");
-        DifficultyLevel nd = persistNivelDificultad(1);
-        WeatherType tc = persistTipoClima("Soleado");
+        RoadType tv = persistRoadType("AVENIDA");
+        DifficultyLevel nd = persistDifficultyLevel(1);
+        WeatherType tc = persistWeatherType("Soleado");
 
         escenarioRepository.save(Scenario.builder()
                 .name("Av. Amazonas")
@@ -150,9 +150,9 @@ class RepositoryIntegrationTest {
                 .userState(estadoActivo)
                 .build());
 
-        RoadType tv = persistTipoVia("CICLOVÍA");
-        DifficultyLevel nd = persistNivelDificultad(1);
-        WeatherType tc = persistTipoClima("Soleado");
+        RoadType tv = persistRoadType("CICLOVÍA");
+        DifficultyLevel nd = persistDifficultyLevel(1);
+        WeatherType tc = persistWeatherType("Soleado");
 
         Scenario escenario = escenarioRepository.save(Scenario.builder()
                 .name("Ciclovía Centro")

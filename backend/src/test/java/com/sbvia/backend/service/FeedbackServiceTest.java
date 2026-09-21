@@ -50,13 +50,13 @@ class FeedbackServiceTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private FeedbackService servicioReal() {
+    private FeedbackService realService() {
         return new FeedbackService(simulacionRepository, usuarioRepository,
                 metricaDesempenoRepository, infraccionRepository, retroalimentacionRepository,
                 motorLocal, proveedorExterno, objectMapper);
     }
 
-    private Simulation simulacionPropia() {
+    private Simulation ownSimulation() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Scenario escenario = Scenario.builder().scenarioId(3).name("Centro urbano").build();
         return Simulation.builder().simulationId(21).user(user).scenario(escenario)
@@ -68,7 +68,7 @@ class FeedbackServiceTest {
 
     @Test
     void usesLocalEngineWhenExternalIsDisabled() {
-        when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
+        when(simulacionRepository.findById(21)).thenReturn(Optional.of(ownSimulation()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.isEnabled()).thenReturn(false);
@@ -76,7 +76,7 @@ class FeedbackServiceTest {
                 .origen("IA_LOCAL").nivelRiesgo("MEDIO").build();
         when(motorLocal.generate(any(DrivingData.class))).thenReturn(local);
 
-        FeedbackIaResponse informe = servicioReal().generateReport("conductor@sbvia.test", 21);
+        FeedbackIaResponse informe = realService().generateReport("conductor@sbvia.test", 21);
 
         assertThat(informe.getOrigen()).isEqualTo("IA_LOCAL");
         verify(proveedorExterno, never()).generate(any());
@@ -84,7 +84,7 @@ class FeedbackServiceTest {
 
     @Test
     void usesLocalEngineWhenExternalFails() {
-        when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
+        when(simulacionRepository.findById(21)).thenReturn(Optional.of(ownSimulation()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.isEnabled()).thenReturn(true);
@@ -94,14 +94,14 @@ class FeedbackServiceTest {
                 .origen("IA_LOCAL").nivelRiesgo("MEDIO").build();
         when(motorLocal.generate(any(DrivingData.class))).thenReturn(local);
 
-        FeedbackIaResponse informe = servicioReal().generateReport("conductor@sbvia.test", 21);
+        FeedbackIaResponse informe = realService().generateReport("conductor@sbvia.test", 21);
 
         assertThat(informe.getOrigen()).isEqualTo("IA_LOCAL");
     }
 
     @Test
     void savesFeedbackOnGenerateAndSave() {
-        when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
+        when(simulacionRepository.findById(21)).thenReturn(Optional.of(ownSimulation()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
         when(proveedorExterno.isEnabled()).thenReturn(false);
@@ -111,7 +111,7 @@ class FeedbackServiceTest {
         when(retroalimentacionRepository.save(any(Feedback.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
 
-        servicioReal().generateAndSave("conductor@sbvia.test", 21);
+        realService().generateAndSave("conductor@sbvia.test", 21);
 
         verify(retroalimentacionRepository).save(any(Feedback.class));
     }
@@ -123,7 +123,7 @@ class FeedbackServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
 
         org.assertj.core.api.Assertions.assertThatThrownBy(
-                        () -> servicioReal().generateReport("conductor@sbvia.test", 21))
+                        () -> realService().generateReport("conductor@sbvia.test", 21))
                 .isInstanceOf(org.springframework.security.access.AccessDeniedException.class);
     }
 }
