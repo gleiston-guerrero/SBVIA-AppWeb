@@ -461,3 +461,11 @@
   line-height: 3rem;
   color: white !important;
 }
+
+/* Cabecera del formulario: titulo a la izquierda, selector de idioma a la derecha */
+.form-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}

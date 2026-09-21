@@ -7,41 +7,43 @@
     <nav class="sidebar-nav">
       <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item">
         <span class="nav-icon">◈</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Panel</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.dashboard' | t }}</span>
       </a>
       <a routerLink="/scenarios" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">◉</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Escenarios</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.scenarios' | t }}</span>
       </a>
       <a routerLink="/practicas" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">▣</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Prácticas</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.practices' | t }}</span>
       </a>
       <a routerLink="/simulador" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">▶</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Simulador</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.simulator' | t }}</span>
       </a>
       <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/users" routerLinkActive="active" class="nav-item">
         <span class="nav-icon">★</span>
-        <span class="nav-label" *ngIf="sidebarAbierto">Usuarios</span>
+        <span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.users' | t }}</span>
       </a>
-      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/reglas-transito" routerLinkActive="active" class="nav-item"><span class="nav-icon">⚑</span><span class="nav-label" *ngIf="sidebarAbierto">Reglas de tránsito</span></a>
-      <a *ngIf="user?.role === 'INSTRUCTOR' || user?.role === 'ADMINISTRADOR'" routerLink="/instructor" routerLinkActive="active" class="nav-item"><span class="nav-icon">♙</span><span class="nav-label" *ngIf="sidebarAbierto">Instructor</span></a>
-      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/auditoria" routerLinkActive="active" class="nav-item"><span class="nav-icon">◎</span><span class="nav-label" *ngIf="sidebarAbierto">Auditoría</span></a>
-      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/backups" routerLinkActive="active" class="nav-item"><span class="nav-icon">🗄️</span><span class="nav-label" *ngIf="sidebarAbierto">Respaldos</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/reglas-transito" routerLinkActive="active" class="nav-item"><span class="nav-icon">⚑</span><span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.rules' | t }}</span></a>
+      <a *ngIf="user?.role === 'INSTRUCTOR' || user?.role === 'ADMINISTRADOR'" routerLink="/instructor" routerLinkActive="active" class="nav-item"><span class="nav-icon">♙</span><span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.instructor' | t }}</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/auditoria" routerLinkActive="active" class="nav-item"><span class="nav-icon">◎</span><span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.audit' | t }}</span></a>
+      <a *ngIf="user?.role === 'ADMINISTRADOR'" routerLink="/backups" routerLinkActive="active" class="nav-item"><span class="nav-icon">🗄️</span><span class="nav-label" *ngIf="sidebarAbierto">{{ 'nav.backups' | t }}</span></a>
     </nav>
   </aside>
   <div class="main-area">
     <header class="topbar">
       <button type="button" class="toggle-btn" (click)="toggleSidebar()">☰</button>
       <div class="topbar-spacer"></div>
-      
+
+      <app-lang-toggle></app-lang-toggle>
+
       <!-- Contenedor relativo para el Dropdown -->
       <div class="account-container">
         <div class="account" (click)="toggleMenu()">
           <div class="account-info">
             <strong>{{ user?.firstName }}</strong>
-            <small>{{ user?.role === 'ADMINISTRADOR' ? 'Administrador' : user?.role === 'INSTRUCTOR' ? 'Instructor' : 'Conductor' }}</small>
+            <small>{{ user?.role === 'ADMINISTRADOR' ? ('shell.roleAdmin' | t) : user?.role === 'INSTRUCTOR' ? ('shell.roleInstructor' | t) : ('shell.roleDriver' | t) }}</small>
           </div>
           <span class="avatar">{{ user?.firstName.charAt(0) || 'U' }}</span>
         </div>
@@ -49,10 +51,10 @@
         <!-- Menú desplegable -->
         <div class="account-dropdown" *ngIf="menuAbierto">
           <button class="dropdown-item" (click)="abrirModalPerfil()">
-            <span>✎</span> Editar Perfil
+            <span>✎</span> {{ 'shell.editProfile' | t }}
           </button>
           <button class="dropdown-item logout" (click)="logout()">
-            <span>⟶</span> Cerrar Sesión
+            <span>⟶</span> {{ 'shell.logout' | t }}
           </button>
         </div>
       </div>
@@ -67,39 +69,39 @@
 <div class="modal-overlay" *ngIf="modalPerfilAbierto">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Editar Perfil</h2>
+      <h2>{{ 'shell.profileTitle' | t }}</h2>
       <button class="close-btn" (click)="cerrarModalPerfil()">×</button>
     </div>
     <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
       <div class="modal-body">
         <div class="form-group">
-          <label for="firstName">Nombres</label>
-          <input id="firstName" type="text" formControlName="firstName" placeholder="Ingresa tus nombres" />
+          <label for="firstName">{{ 'shell.firstName' | t }}</label>
+          <input id="firstName" type="text" formControlName="firstName" [attr.placeholder]="'shell.firstNamePlaceholder' | t" />
           <small class="error-msg" *ngIf="profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched">
-            Los nombres son obligatorios.
+            {{ 'shell.firstNameRequired' | t }}
           </small>
         </div>
-        
+
         <div class="form-group">
-          <label for="lastName">Apellidos</label>
-          <input id="lastName" type="text" formControlName="lastName" placeholder="Ingresa tus apellidos" />
+          <label for="lastName">{{ 'shell.lastName' | t }}</label>
+          <input id="lastName" type="text" formControlName="lastName" [attr.placeholder]="'shell.lastNamePlaceholder' | t" />
           <small class="error-msg" *ngIf="profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
-            Los apellidos son obligatorios.
+            {{ 'shell.lastNameRequired' | t }}
           </small>
         </div>
-        
+
         <div class="form-group">
-          <label for="phone">Teléfono</label>
-          <input id="phone" type="text" formControlName="phone" placeholder="Ingresa tu teléfono (Opcional)" />
+          <label for="phone">{{ 'shell.phone' | t }}</label>
+          <input id="phone" type="text" formControlName="phone" [attr.placeholder]="'shell.phonePlaceholder' | t" />
         </div>
         <div *ngIf="profileError" class="error-banner" style="margin-top: 1rem; color: #ef4444; background: #fee2e2; padding: 0.5rem; border-radius: 4px; text-align: center; font-size: 0.9rem;">
           {{ profileError }}
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-cancel" (click)="cerrarModalPerfil()" [disabled]="guardandoPerfil">Cancelar</button>
+        <button type="button" class="btn-cancel" (click)="cerrarModalPerfil()" [disabled]="guardandoPerfil">{{ 'common.cancel' | t }}</button>
         <button type="submit" class="btn-save" [disabled]="profileForm.invalid || guardandoPerfil">
-          {{ guardandoPerfil ? 'Guardando...' : 'Guardar Cambios' }}
+          {{ (guardandoPerfil ? 'common.saving' : 'shell.saveChanges') | t }}
         </button>
       </div>
     </form>

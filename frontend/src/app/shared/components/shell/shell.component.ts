@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
+import { TranslatePipe } from '../../../i18n/translate.pipe';
+import { LangToggleComponent } from '../../../i18n/lang-toggle.component';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, RouterOutlet, ReactiveFormsModule,
+            TranslatePipe, LangToggleComponent],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.css'
 })

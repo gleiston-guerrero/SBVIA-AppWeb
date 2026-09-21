@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Simulation } from './simulation.model';
 import { SimulationService } from './simulation.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 interface Infraction {
   nombre: string;
@@ -13,7 +14,7 @@ interface Infraction {
 @Component({
   selector: 'app-simulation',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './simulation.component.html',
   styleUrl: './simulation.component.css'
 })
@@ -27,10 +28,10 @@ export class SimulationComponent implements OnInit, OnDestroy {
   private temporizador?: ReturnType<typeof setInterval>;
 
   infractions: Infraction[] = [
-    { nombre: 'Exceso de velocidad', penalizacion: 15, cantidad: 0 },
-    { nombre: 'No respetar una señal', penalizacion: 20, cantidad: 0 },
-    { nombre: 'Cambio de carril inseguro', penalizacion: 10, cantidad: 0 },
-    { nombre: 'Frenado brusco', penalizacion: 5, cantidad: 0 }
+    { nombre: 'sim.infSpeeding', penalizacion: 15, cantidad: 0 },
+    { nombre: 'sim.infSignal', penalizacion: 20, cantidad: 0 },
+    { nombre: 'sim.infLane', penalizacion: 10, cantidad: 0 },
+    { nombre: 'sim.infBraking', penalizacion: 5, cantidad: 0 }
   ];
 
   constructor(private route: ActivatedRoute, private simulationService: SimulationService) {}

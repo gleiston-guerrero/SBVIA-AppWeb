@@ -1,68 +1,68 @@
 <div class="dashboard-content">
   <section class="hero">
     <div>
-      <span class="eyebrow">Panel de control</span>
-      <h1>Hola, {{ user?.firstName }} 👋</h1>
-      <p>Entrena, analiza tu desempeño y mejora tus decisiones al conducir.</p>
+      <span class="eyebrow">{{ 'dashboard.eyebrow' | t }}</span>
+      <h1>{{ 'dashboard.hello' | t }}, {{ user?.firstName }} 👋</h1>
+      <p>{{ 'dashboard.heroText' | t }}</p>
     </div>
-    <button type="button" (click)="navigate('/scenarios')">Iniciar nueva práctica <span>→</span></button>
+    <button type="button" (click)="navigate('/scenarios')">{{ 'dashboard.startPractice' | t }} <span>→</span></button>
   </section>
   <section class="stats" [class.loading]="cargandoMetricas">
     <article>
       <span class="stat-icon blue">◉</span>
-      <div><small>Prácticas realizadas</small><strong>{{ totalPracticas }}</strong></div>
+      <div><small>{{ 'dashboard.statPractices' | t }}</small><strong>{{ totalPracticas }}</strong></div>
     </article>
     <article>
       <span class="stat-icon violet">★</span>
-      <div><small>Puntaje promedio</small><strong>{{ promedio }}<em>/100</em></strong></div>
+      <div><small>{{ 'dashboard.statAverage' | t }}</small><strong>{{ promedio }}<em>/100</em></strong></div>
     </article>
     <article>
       <span class="stat-icon green">✓</span>
-      <div><small>Tasa de aprobación</small><strong>{{ tasaAprobacion }}<em>%</em></strong></div>
+      <div><small>{{ 'dashboard.statApproval' | t }}</small><strong>{{ tasaAprobacion }}<em>%</em></strong></div>
     </article>
     <article>
       <span class="stat-icon orange">◇</span>
-      <div><small>Scenarios disponibles</small><strong>{{ totalEscenarios }}</strong></div>
+      <div><small>{{ 'dashboard.statScenarios' | t }}</small><strong>{{ totalEscenarios }}</strong></div>
     </article>
   </section>
   <section class="dashboard-grid">
     <article class="panel performance">
       <div class="panel-title">
-        <div><span class="target">◎</span><h2>Análisis de rendimiento</h2></div>
-        <a routerLink="/practicas">Ver historial</a>
+        <div><span class="target">◎</span><h2>{{ 'dashboard.performance' | t }}</h2></div>
+        <a routerLink="/practicas">{{ 'dashboard.viewHistory' | t }}</a>
       </div>
       <div class="progress-item">
-        <div><span>Puntaje promedio</span><strong>{{ promedio }}%</strong></div>
+        <div><span>{{ 'dashboard.statAverage' | t }}</span><strong>{{ promedio }}%</strong></div>
         <div class="track"><span class="blue-bar" [style.width.%]="promedio"></span></div>
       </div>
       <div class="progress-item">
-        <div><span>Prácticas aprobadas</span><strong>{{ tasaAprobacion }}%</strong></div>
+        <div><span>{{ 'dashboard.approvedPractices' | t }}</span><strong>{{ tasaAprobacion }}%</strong></div>
         <div class="track"><span class="green-bar" [style.width.%]="tasaAprobacion"></span></div>
       </div>
-      <div class="empty-tip" *ngIf="totalPracticas === 0">Tus indicadores aparecerán después de completar la primera práctica.</div>
+      <div class="empty-tip" *ngIf="totalPracticas === 0">{{ 'dashboard.emptyTip' | t }}</div>
     </article>
     <article class="panel insight">
-      <div class="insight-heading"><span>✦</span><div><small>Recomendación personalizada</small><h2>Tu siguiente paso</h2></div></div>
-      <p>{{ recomendacion }}</p>
-      <a routerLink="/scenarios">Explorar scenarios →</a>
+      <div class="insight-heading"><span>✦</span><div><small>{{ 'dashboard.personalTip' | t }}</small><h2>{{ 'dashboard.nextStep' | t }}</h2></div></div>
+      <p>{{ recomendacionKey | t }}</p>
+      <a routerLink="/scenarios">{{ 'dashboard.exploreScenarios' | t }} →</a>
     </article>
   </section>
   <section class="modules">
-    <div class="section-title"><span class="eyebrow">Accesos rápidos</span><h2>Continúa tu entrenamiento</h2></div>
+    <div class="section-title"><span class="eyebrow">{{ 'dashboard.quickAccess' | t }}</span><h2>{{ 'dashboard.continueTraining' | t }}</h2></div>
     <div class="module-grid">
       <button type="button" (click)="navigate('/scenarios')">
         <span class="module-icon blue">▣</span>
-        <div><strong>Escenarios viales</strong><small>Selecciona una situación y comienza a practicar.</small></div>
+        <div><strong>{{ 'dashboard.moduleScenarios' | t }}</strong><small>{{ 'dashboard.moduleScenariosText' | t }}</small></div>
         <b>→</b>
       </button>
       <button type="button" (click)="navigate('/practicas')">
         <span class="module-icon violet">▥</span>
-        <div><strong>Mi progreso</strong><small>Consulta resultados, promedios y prácticas.</small></div>
+        <div><strong>{{ 'dashboard.moduleProgress' | t }}</strong><small>{{ 'dashboard.moduleProgressText' | t }}</small></div>
         <b>→</b>
       </button>
       <button *ngIf="user?.role === 'ADMINISTRADOR'" type="button" (click)="navigate('/users')">
         <span class="module-icon green">♙</span>
-        <div><strong>Administrar usuarios</strong><small>Gestiona cuentas, accesos y roles.</small></div>
+        <div><strong>{{ 'dashboard.moduleUsers' | t }}</strong><small>{{ 'dashboard.moduleUsersText' | t }}</small></div>
         <b>→</b>
       </button>
     </div>

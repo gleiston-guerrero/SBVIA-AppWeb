@@ -64,3 +64,7 @@ PLAN_RESOLUCION_EVALUACION_SBVIA.md
 # Material temporal con datos personales de participantes (escaneos firmados).
 # NUNCA debe versionarse: se elimina al terminar de procesarlo.
 .sus-tmp/
+
+# Cache de npm y dependencias del frontend (locales, no versionadas)
+.npm-cache/
+frontend/node_modules/

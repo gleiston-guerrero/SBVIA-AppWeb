@@ -5,11 +5,12 @@ import { AuthService } from '../../auth/auth.service';
 import { EscenarioService } from '../scenarios/scenario.service';
 import { SimulationService } from '../practices/simulation.service';
 import { UsuarioService } from '../users/user.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -72,11 +73,12 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  get recomendacion(): string {
-    if (this.totalPracticas === 0) return 'Empieza con un escenario de dificultad baja para establecer tu primera referencia.';
-    if (this.promedio < 70) return 'Repite los escenarios practicados y concéntrate en reducir las infracciones de mayor penalización.';
-    if (this.promedio < 90) return 'Vas por buen camino. Prueba escenarios de mayor dificultad para fortalecer tu anticipación.';
-    return 'Tu rendimiento es sobresaliente. Mantén la constancia con escenarios y condiciones variadas.';
+  /** Devuelve la CLAVE de la recomendación; el texto se traduce en la plantilla. */
+  get recomendacionKey(): string {
+    if (this.totalPracticas === 0) return 'dashboard.tipStart';
+    if (this.promedio < 70) return 'dashboard.tipLow';
+    if (this.promedio < 90) return 'dashboard.tipMid';
+    return 'dashboard.tipHigh';
   }
 
   navigate(path: string): void {

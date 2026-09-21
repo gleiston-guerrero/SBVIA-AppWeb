@@ -4,11 +4,12 @@ import { EscenarioService, Scenario } from './scenario.service';
 import { AuthService } from '../../auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../shared/components/toast/toast.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-scenario-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './scenario-list.component.html',
   styleUrl: './scenario-list.component.css'
 })

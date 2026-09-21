@@ -1,42 +1,42 @@
 <main class="simulation-container">
-  <div *ngIf="isLoading" class="panel estado">Preparando la práctica...</div>
-  <div *ngIf="error" class="panel error">{{ error }} <a routerLink="/scenarios">Volver</a></div>
+  <div *ngIf="isLoading" class="panel estado">{{ 'sim.preparing' | t }}</div>
+  <div *ngIf="error" class="panel error">{{ error }} <a routerLink="/scenarios">{{ 'sim.back' | t }}</a></div>
 
   <section *ngIf="practica && !resultado" class="panel">
     <header>
       <div>
-        <p class="eyebrow">Práctica en progreso</p>
+        <p class="eyebrow">{{ 'sim.inProgress' | t }}</p>
         <h1>{{ practica.scenarioName }}</h1>
       </div>
       <div class="timer">{{ tiempo }}</div>
     </header>
 
-    <div class="score">Puntaje actual: <strong>{{ puntaje }}/100</strong></div>
-    <p>Registra las incidencias observadas durante el recorrido. Cada una descuenta puntos automáticamente.</p>
+    <div class="score">{{ 'sim.currentScore' | t }}: <strong>{{ puntaje }}/100</strong></div>
+    <p>{{ 'sim.instructions' | t }}</p>
 
     <div class="infractions">
       <button *ngFor="let infraction of infractions" type="button" (click)="registrar(infraction)">
-        <span>{{ infraction.nombre }}</span>
-        <small>-{{ infraction.penalizacion }} puntos</small>
+        <span>{{ infraction.nombre | t }}</span>
+        <small>-{{ infraction.penalizacion }} {{ 'sim.points' | t }}</small>
         <strong>{{ infraction.cantidad }}</strong>
       </button>
     </div>
 
     <button class="btn-finalizar" type="button" (click)="finalizar()" [disabled]="finalizando">
-      {{ finalizando ? 'Guardando resultado...' : 'Finalizar práctica' }}
+      {{ (finalizando ? 'sim.savingResult' : 'sim.finish') | t }}
     </button>
   </section>
 
   <section *ngIf="resultado" class="panel resultado">
-    <p class="eyebrow">Reporte final</p>
+    <p class="eyebrow">{{ 'sim.finalReport' | t }}</p>
     <h1>{{ resultado.scenarioName }}</h1>
     <div class="nota" [class.aprobada]="resultado.finalScore >= 70">{{ resultado.finalScore }}</div>
-    <h2>{{ resultado.finalScore >= 70 ? 'Aprobada' : 'Reprobada' }}</h2>
-    <p *ngIf="resultado.finalScore >= 70">Buen trabajo. Continúa practicando para mantener una conducción segura.</p>
-    <p *ngIf="resultado.finalScore < 70">Revisa las infracciones registradas y vuelve a practicar este escenario.</p>
+    <h2>{{ (resultado.finalScore >= 70 ? 'sim.passed' : 'sim.failed') | t }}</h2>
+    <p *ngIf="resultado.finalScore >= 70">{{ 'sim.goodWork' | t }}</p>
+    <p *ngIf="resultado.finalScore < 70">{{ 'sim.reviewInfractions' | t }}</p>
     <div class="acciones">
-      <a routerLink="/practicas">Ver historial</a>
-      <a routerLink="/scenarios">Elegir otro escenario</a>
+      <a routerLink="/practicas">{{ 'sim.viewHistory' | t }}</a>
+      <a routerLink="/scenarios">{{ 'sim.chooseAnother' | t }}</a>
     </div>
   </section>
 </main>
