@@ -1,6 +1,16 @@
 \documentclass[11pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-tabla]{babel}
+% Los pies de figura y de tabla van en ingles (es el criterio de P3), asi que
+% sus etiquetas automaticas tambien: "Figure 3.1" y "Table 5.1" en vez de
+% "Figura" y "Tabla". El cuerpo del documento sigue en espanol.
+% babel fija estas etiquetas al empezar el documento, asi que hay que
+% sobreescribirlas dentro de su propio gancho de idioma: un \renewcommand en el
+% preambulo no sirve porque se aplica antes y babel lo pisa despues.
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Table}%
+  \renewcommand{\figurename}{Figure}%
+}
 % Fuentes Type1 escalables (Latin Modern) con las mismas metricas que
 % Computer Modern T1/EC. Evita que la compilacion dependa de la generacion
 % de fuentes bitmap (mktextfm) y hace reproducible `make pdf`.
