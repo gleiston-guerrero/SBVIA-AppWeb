@@ -1,9 +1,9 @@
 <div class="auditoria-page">
   <header class="page-header">
     <div>
-      <span class="eyebrow">Administración Técnica</span>
-      <h1>Auditoría del Sistema</h1>
-      <p>Supervisa las operaciones a nivel de base de datos en las tablas maestras y de configuración.</p>
+      <span class="eyebrow">{{ 'audit.eyebrow' | t }}</span>
+      <h1>{{ 'audit.title' | t }}</h1>
+      <p>{{ 'audit.subtitle' | t }}</p>
     </div>
     <div class="actions">
       <button class="btn btn-primary" (click)="downloadReport()">
@@ -11,7 +11,7 @@
           <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
           <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
         </svg>
-        Descargar PDF
+        {{ 'audit.downloadPdf' | t }}
       </button>
     </div>
   </header>
@@ -19,13 +19,13 @@
   <section class="panel">
     <div class="filters">
       <label>
-        <span>User App</span>
-        <input [(ngModel)]="filtros.user" (change)="loadAuditLogs()" placeholder="Correo del user">
+        <span>{{ 'audit.userApp' | t }}</span>
+        <input [(ngModel)]="filtros.user" (change)="loadAuditLogs()" [attr.placeholder]="'audit.userPlaceholder' | t">
       </label>
       <label>
-        <span>Tabla</span>
+        <span>{{ 'audit.table' | t }}</span>
         <select [(ngModel)]="filtros.tabla" (change)="loadAuditLogs()">
-          <option value="">Todas</option>
+          <option value="">{{ 'audit.all' | t }}</option>
           <option value="user">user</option>
           <option value="regla_transito">regla_transito</option>
           <option value="scenario">scenario</option>
@@ -35,9 +35,9 @@
         </select>
       </label>
       <label>
-        <span>Operación</span>
+        <span>{{ 'audit.operation' | t }}</span>
         <select [(ngModel)]="filtros.operation" (change)="loadAuditLogs()">
-          <option value="">Todas</option>
+          <option value="">{{ 'audit.all' | t }}</option>
           <option value="INSERT">INSERT</option>
           <option value="UPDATE">UPDATE</option>
           <option value="DELETE">DELETE</option>
@@ -45,28 +45,28 @@
         </select>
       </label>
       <label>
-        <span>Desde</span>
+        <span>{{ 'audit.from' | t }}</span>
         <input type="date" [(ngModel)]="filtros.startDate" (change)="loadAuditLogs()">
       </label>
       <label>
-        <span>Hasta</span>
+        <span>{{ 'audit.to' | t }}</span>
         <input type="date" [(ngModel)]="filtros.endDate" (change)="loadAuditLogs()">
       </label>
-      <button class="btn btn-secondary" (click)="filtros={tabla:'', operation:'', user:'', startDate:'', endDate:''}; loadAuditLogs()">Limpiar</button>
+      <button class="btn btn-secondary" (click)="filtros={tabla:'', operation:'', user:'', startDate:'', endDate:''}; loadAuditLogs()">{{ 'audit.clear' | t }}</button>
     </div>
 
-    <div *ngIf="isLoading" class="message">Cargando registros de auditoría...</div>
+    <div *ngIf="isLoading" class="message">{{ 'audit.loading' | t }}</div>
     <div *ngIf="error" class="message error">{{ error }}</div>
 
     <div class="table-wrap" *ngIf="!isLoading && !error">
       <table>
         <thead>
           <tr>
-            <th>Fecha</th>
-            <th>User</th>
-            <th>Tabla</th>
-            <th>Operación</th>
-            <th>Acción</th>
+            <th>{{ 'audit.thDate' | t }}</th>
+            <th>{{ 'audit.thUser' | t }}</th>
+            <th>{{ 'audit.thTable' | t }}</th>
+            <th>{{ 'audit.thOperation' | t }}</th>
+            <th>{{ 'audit.thAction' | t }}</th>
           </tr>
         </thead>
         <tbody>
@@ -74,18 +74,18 @@
             <td>{{ reg.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>
               <strong>{{ reg.appUser || 'N/A' }}</strong>
-              <small>DB: {{ reg.dbUser }}</small>
+              <small>{{ 'audit.dbShort' | t }}: {{ reg.dbUser }}</small>
             </td>
             <td><span class="code-badge">{{ reg.tableName }}</span></td>
             <td>
               <span class="op-badge" [ngClass]="reg.operation.toLowerCase()">{{ reg.operation }}</span>
             </td>
             <td class="actions">
-              <button class="btn btn-sm" (click)="viewDetail(reg)">Ver Detalles</button>
+              <button class="btn btn-sm" (click)="viewDetail(reg)">{{ 'audit.viewDetails' | t }}</button>
             </td>
           </tr>
           <tr *ngIf="registros.length === 0">
-            <td colspan="5" class="empty">No se encontraron registros de auditoría.</td>
+            <td colspan="5" class="empty">{{ 'audit.empty' | t }}</td>
           </tr>
         </tbody>
       </table>
@@ -93,30 +93,30 @@
   </section>
 </div>
 
-<!-- Modal Detalles -->
+<!-- Modal de detalles -->
 <div class="modal-overlay" *ngIf="modalAbierto" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <header>
-      <h2>Detalle de Operación</h2>
+      <h2>{{ 'audit.detailTitle' | t }}</h2>
       <button class="close-btn" (click)="closeModal()">×</button>
     </header>
     <div class="modal-body">
       <div class="info-grid">
-        <div><strong>ID Auditoría:</strong> {{ registroSeleccionado?.id }}</div>
-        <div><strong>Fecha:</strong> {{ registroSeleccionado?.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
-        <div><strong>Tabla:</strong> <span class="code-badge">{{ registroSeleccionado?.tableName }}</span></div>
-        <div><strong>Operación:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operation?.toLowerCase() || ''">{{ registroSeleccionado?.operation }}</span></div>
-        <div><strong>User App:</strong> {{ registroSeleccionado?.appUser || 'N/A' }}</div>
-        <div><strong>User DB:</strong> {{ registroSeleccionado?.dbUser }}</div>
+        <div><strong>{{ 'audit.auditId' | t }}:</strong> {{ registroSeleccionado?.id }}</div>
+        <div><strong>{{ 'audit.thDate' | t }}:</strong> {{ registroSeleccionado?.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+        <div><strong>{{ 'audit.table' | t }}:</strong> <span class="code-badge">{{ registroSeleccionado?.tableName }}</span></div>
+        <div><strong>{{ 'audit.operation' | t }}:</strong> <span class="op-badge" [ngClass]="registroSeleccionado?.operation?.toLowerCase() || ''">{{ registroSeleccionado?.operation }}</span></div>
+        <div><strong>{{ 'audit.userApp' | t }}:</strong> {{ registroSeleccionado?.appUser || 'N/A' }}</div>
+        <div><strong>{{ 'audit.userDb' | t }}:</strong> {{ registroSeleccionado?.dbUser }}</div>
       </div>
-      
+
       <div class="diff-view">
         <div class="diff-panel before" *ngIf="registroSeleccionado?.operation !== 'INSERT'">
-          <h3>Datos Anteriores</h3>
+          <h3>{{ 'audit.previousData' | t }}</h3>
           <pre>{{ datosAntiguosObj | json }}</pre>
         </div>
         <div class="diff-panel after" *ngIf="registroSeleccionado?.operation !== 'DELETE'">
-          <h3>Datos Nuevos</h3>
+          <h3>{{ 'audit.newData' | t }}</h3>
           <pre>{{ datosNuevosObj | json }}</pre>
         </div>
       </div>

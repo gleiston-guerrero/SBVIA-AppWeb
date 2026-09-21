@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { UsuarioService, User } from './user.service';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/components/toast/toast.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
+import { LanguageService } from '../../i18n/language.service';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
@@ -35,8 +37,18 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UsuarioService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private i18n: LanguageService
   ) { }
+
+  /** Traduce una clave y sustituye marcadores {nombre}. */
+  private tr(clave: string, valores: Record<string, string> = {}): string {
+    let texto = this.i18n.t(clave);
+    for (const [k, v] of Object.entries(valores)) {
+      texto = texto.replace(`{${k}}`, v);
+    }
+    return texto;
+  }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -63,17 +75,17 @@ export class UserListComponent implements OnInit {
     if (user.role === nuevoRol) return;
     
     this.openConfirmation(
-      `¿Estás seguro de cambiar el role de ${user.firstName} a ${nuevoRol}?`,
+      this.tr('users.confirmRole', { name: user.firstName, role: nuevoRol }),
       () => {
         if (user.id !== undefined) {
           this.userService.changeRole(user.id, nuevoRol).subscribe({
             next: () => {
-              this.toastService.showSuccess('Role actualizado exitosamente');
+              this.toastService.showSuccess(this.i18n.t('users.roleUpdated'));
               this.loadUsers();
             },
             error: (err: any) => {
               console.error('Error actualizando role', err);
-              const errMsg = err.error?.detail || err.error?.message || 'No se pudo update el role';
+              const errMsg = err.error?.detail || err.error?.message || this.i18n.t('users.roleUpdateFailed');
               this.toastService.showError(errMsg);
               this.loadUsers();
             }
@@ -89,16 +101,16 @@ export class UserListComponent implements OnInit {
   deactivateUser(id: number | undefined, nombre: string): void {
     if (id !== undefined) {
       this.openConfirmation(
-        `¿Estás seguro de desactivar la cuenta de ${nombre}?`,
+        this.tr('users.confirmDeactivate', { name: nombre }),
         () => {
           this.userService.delete(id).subscribe({
             next: () => {
-              this.toastService.showSuccess('User desactivado exitosamente');
+              this.toastService.showSuccess(this.i18n.t('users.deactivated'));
               this.loadUsers();
             },
             error: (err: any) => {
               console.error('Error al desactivar user', err);
-              const errMsg = err.error?.detail || err.error?.message || 'No se pudo desactivar al user';
+              const errMsg = err.error?.detail || err.error?.message || this.i18n.t('users.deactivateFailed');
               this.toastService.showError(errMsg);
             }
           });
@@ -124,14 +136,14 @@ export class UserListComponent implements OnInit {
     this.isSaving = true;
     this.userService.updateUser(this.editingUser.id, this.editingUser).subscribe({
       next: () => {
-        this.toastService.showSuccess('User actualizado exitosamente');
+        this.toastService.showSuccess(this.i18n.t('users.updated'));
         this.isSaving = false;
         this.closeModal();
         this.loadUsers();
       },
       error: (err: any) => {
         console.error('Error al update user', err);
-        const errMsg = err.error?.detail || err.error?.message || 'Error desconocido al update';
+        const errMsg = err.error?.detail || err.error?.message || this.i18n.t('users.updateFailed');
         this.toastService.showError(errMsg);
         this.isSaving = false;
       }
