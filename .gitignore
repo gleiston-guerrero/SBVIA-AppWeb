@@ -71,3 +71,7 @@ frontend/node_modules/
 
 # Utilidades locales de captura de pantalla (no versionadas)
 .capture/
+
+# Temporales de trabajo
+.m.tmp
+*.tmp
