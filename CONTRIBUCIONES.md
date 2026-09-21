@@ -21,9 +21,10 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commits:** `b03f8e3`, `735dc81`.
     *   **Archivos:** `backend/pom.xml`, controladores y servicios del backend.
 *   **P3 — El PDF no contiene ninguna imagen (1.2 pts)**
-    *   Se tradujeron al inglés los pies de figura (las 12 figuras del documento) y se referenciaron desde el texto las 4 capturas de interfaz que no estaban citadas. Las imágenes incrustadas son capturas reales de la aplicación; **no** se tradujeron las capturas de pantalla de la interfaz.
-    *   **Commit:** `9afd075`.
-    *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`.
+    *   Se referenciaron desde el texto las 4 capturas de interfaz que no estaban citadas y se empezaron a traducir al inglés los pies de figura. La primera pasada (`9afd075`) tradujo 12 de 20 y dejó 8 en español, que es la inconsistencia que recoge la evaluación. Esta ronda **completa la traducción: los 20 pies de figura del informe están en inglés**. Las imágenes incrustadas son capturas reales de la aplicación, no reconstrucciones.
+    *   **Pendiente y declarado:** las 4 capturas de la interfaz siguen en español porque la aplicación **no tiene multi-idioma** (`ngx-translate` ni `@angular/localize` están integrados). Traducirlas exigiría implementar i18n, traducir las 17 plantillas y recapturar; no es un cambio de documentación.
+    *   **Commits:** `9afd075`, `6fc74d3`.
+    *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`, `docs/diagramas/pantalla-*.png`.
 *   **P4 — Sin depósito propio en Zenodo (1.0 pts)**
     *   Se añadió a `CITATION.cff` la referencia al dataset de validación con su DOI real (`10.5281/zenodo.22785358`), además del DOI del software (`10.5281/zenodo.22840356`).
     *   **Commit:** `12297ee`.
