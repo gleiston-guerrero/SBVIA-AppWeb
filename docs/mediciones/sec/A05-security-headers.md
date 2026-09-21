@@ -51,3 +51,52 @@ curl -sI http://localhost:8080/api/escenarios
 - `Permissions-Policy` y cabeceras `Cross-Origin-*` (COOP/COEP/CORP) no
   están configuradas explícitamente; no se documentan para no inventar
   evidencia.
+
+---
+
+## Comprobación de cabeceras en el sistema DESPLEGADO (P1/P11)
+
+Comprobación ejecutada el 2026-09-21 contra los dos servicios en producción, con
+un cliente TLS independiente del navegador. Resultado: **ninguno de los dos envía
+cabeceras de seguridad**.
+
+| Cabecera | Frontend (`sbvia-frontend.onrender.com`) | API (`sbvia-appweb.onrender.com`) |
+| :--- | :--- | :--- |
+| `Content-Security-Policy` | ausente | ausente |
+| `X-Frame-Options` | ausente | ausente |
+| `X-Content-Type-Options` | ausente | ausente |
+| `Strict-Transport-Security` | ausente | ausente |
+| `X-XSS-Protection` | ausente | ausente |
+
+En la API se probaron tres rutas: `/actuator/health` (200), `/api/simulations/mis-practicas`
+sin token (401) y `/api/auth/login` con credenciales inválidas (401). Las dos últimas
+atraviesan la cadena de filtros de Spring Security y **tampoco** traen las cabeceras.
+
+### Diagnóstico
+
+El código **sí** configura las cabeceras: `SecurityConfig.securityFilterChain` incluye
+`contentTypeOptions`, `frameOptions(deny)`, `httpStrictTransportSecurity`,
+`xssProtection` y `contentSecurityPolicy("default-src 'self'; frame-ancestors 'none';")`.
+Ese archivo no se ha modificado desde el commit `b03f8e3` (2026-09-18), anterior a la
+revisión. Que el servicio desplegado no las aplique indica que **la instancia en
+ejecución no corresponde a ese código**: procede **redesplegar el servicio de la API**
+en Render y volver a comprobar con la misma orden.
+
+### Cabeceras del sitio estático
+
+El frontend es un sitio estático, y Render no las toma de ningún archivo del
+repositorio: se definen en el panel del servicio
+(https://render.com/docs/static-site-headers.md). Valores recomendados, para pegar
+como reglas de cabecera sobre la ruta `/*`:
+
+| Nombre | Valor |
+| :--- | :--- |
+| `Content-Security-Policy` | `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://sbvia-appweb.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'` |
+| `X-Frame-Options` | `DENY` |
+| `X-Content-Type-Options` | `nosniff` |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| `Permissions-Policy` | `geolocation=(), microphone=(), camera=()` |
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` |
+
+La `connect-src` debe incluir el origen de la API porque el frontend la invoca
+desde el navegador.
