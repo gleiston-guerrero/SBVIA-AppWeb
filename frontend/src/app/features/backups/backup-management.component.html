@@ -1,39 +1,39 @@
 <div class="backups-container">
   <div class="header-section">
     <div>
-      <h1>Gestión de Respaldos</h1>
-      <p class="subtitle">Administre las copias de seguridad de la base de datos SBVIA.</p>
+      <h1>{{ 'backups.title' | t }}</h1>
+      <p class="subtitle">{{ 'backups.subtitle' | t }}</p>
     </div>
     <button class="btn-primary" (click)="openModal()" [disabled]="generando">
-      <span class="icon">💾</span> 
-      {{ generando ? 'Procesando...' : 'Nuevo Respaldo' }}
+      <span class="icon">💾</span>
+      {{ (generando ? 'backups.processing' : 'backups.new') | t }}
     </button>
   </div>
 
   <div *ngIf="isLoading" class="loading-state">
     <div class="spinner"></div>
-    <p>Cargando historial de backups...</p>
+    <p>{{ 'backups.loading' | t }}</p>
   </div>
 
   <div *ngIf="!isLoading && backups.length === 0" class="empty-state">
     <span class="icon-large">🗄️</span>
-    <h3>No hay backups disponibles</h3>
-    <p>Genere un nuevo respaldo manual o espere a que se ejecute la programación automática.</p>
+    <h3>{{ 'backups.emptyTitle' | t }}</h3>
+    <p>{{ 'backups.emptyText' | t }}</p>
   </div>
 
   <div *ngIf="!isLoading && backups.length > 0" class="table-card">
     <table class="modern-table">
       <thead>
         <tr>
-          <th>Archivo</th>
-          <th>Tipo</th>
-          <th>Modo</th>
-          <th>Estado</th>
-          <th>Inicio</th>
-          <th>Programado Para</th>
-          <th>Tamaño</th>
-          <th>Comentario</th>
-          <th>Acciones</th>
+          <th>{{ 'backups.thFile' | t }}</th>
+          <th>{{ 'backups.thType' | t }}</th>
+          <th>{{ 'backups.thMode' | t }}</th>
+          <th>{{ 'backups.thStatus' | t }}</th>
+          <th>{{ 'backups.thStart' | t }}</th>
+          <th>{{ 'backups.thScheduled' | t }}</th>
+          <th>{{ 'backups.thSize' | t }}</th>
+          <th>{{ 'backups.thComment' | t }}</th>
+          <th>{{ 'users.confirm' | t }}</th>
         </tr>
       </thead>
       <tbody>
@@ -43,22 +43,22 @@
           </td>
           <td>
             <span class="badge" [ngClass]="res.type === 'MANUAL' ? 'badge-blue' : 'badge-purple'">
-              {{ res.type === 'MANUAL' ? '🧑‍💻 Manual' : '⏱️ Programado' }}
+              {{ (res.type === 'MANUAL' ? 'backups.manual' : 'backups.scheduled') | t }}
             </span>
           </td>
           <td>
             <span class="badge badge-gray">{{ res.mode }}</span>
           </td>
           <td>
-            <span class="badge" 
+            <span class="badge"
                   [ngClass]="{
                     'badge-yellow': res.status === 'EN_PROGRESO' || res.status === 'PROGRAMADO',
                     'badge-green': res.status === 'COMPLETADO',
                     'badge-red': res.status === 'FALLIDO'
                   }">
-              {{ res.status === 'EN_PROGRESO' ? '⏳ Progreso' : 
-                 res.status === 'PROGRAMADO' ? '📅 Programado' :
-                 res.status === 'COMPLETADO' ? '✅ Completado' : '❌ Fallido' }}
+              {{ (res.status === 'EN_PROGRESO' ? 'backups.inProgress' :
+                 res.status === 'PROGRAMADO' ? 'backups.scheduled' :
+                 res.status === 'COMPLETADO' ? 'backups.completed' : 'backups.failed') | t }}
             </span>
           </td>
           <td class="whitespace-nowrap">{{ res.startDate | date:'dd/MM/yyyy HH:mm' }}</td>
@@ -68,15 +68,15 @@
             <div class="truncate-text" [title]="res.comment || '-'">{{ res.comment || '-' }}</div>
           </td>
           <td class="actions">
-            <button class="btn-icon btn-download" 
-                    [disabled]="res.status !== 'COMPLETADO'" 
-                    (click)="download(res.id)" 
-                    title="Descargar">
+            <button class="btn-icon btn-download"
+                    [disabled]="res.status !== 'COMPLETADO'"
+                    (click)="download(res.id)"
+                    [attr.title]="'backups.download' | t">
               ⬇️
             </button>
-            <button class="btn-icon btn-delete" 
-                    (click)="requestDeletion(res.id)" 
-                    title="Eliminar">
+            <button class="btn-icon btn-delete"
+                    (click)="requestDeletion(res.id)"
+                    [attr.title]="'scenarios.delete' | t">
               🗑️
             </button>
           </td>
@@ -86,60 +86,60 @@
   </div>
 </div>
 
-<!-- Modal para Configurar Respaldo -->
+<!-- Modal para configurar el respaldo -->
 <div class="modal-overlay" *ngIf="modalAbierto">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Opciones de Respaldo</h2>
+      <h2>{{ 'backups.optionsTitle' | t }}</h2>
       <button class="close-btn" (click)="closeModal()">×</button>
     </div>
     <form [formGroup]="respaldoForm" (ngSubmit)="generateBackup()">
       <div class="modal-body">
-        
+
         <div class="form-group">
-          <label for="modalidad">Tipo de Respaldo</label>
+          <label for="modalidad">{{ 'backups.typeLabel' | t }}</label>
           <select id="modalidad" formControlName="modalidad" class="form-control">
-            <option value="COMPLETO">Completo (Estructura y Datos)</option>
-            <option value="SOLO_ESTRUCTURA">Solo Estructura (Sin Datos)</option>
-            <option value="SOLO_DATOS">Solo Datos (Sin Estructura)</option>
+            <option value="COMPLETO">{{ 'backups.full' | t }}</option>
+            <option value="SOLO_ESTRUCTURA">{{ 'backups.structureOnly' | t }}</option>
+            <option value="SOLO_DATOS">{{ 'backups.dataOnly' | t }}</option>
           </select>
         </div>
-        
+
         <div class="form-group">
-          <label for="fechaProgramada">Programar (Opcional)</label>
+          <label for="fechaProgramada">{{ 'backups.scheduleLabel' | t }}</label>
           <input id="fechaProgramada" type="datetime-local" formControlName="fechaProgramada" class="form-control" />
-          <small class="help-text">Déjalo vacío para ejecutarlo inmediatamente.</small>
+          <small class="help-text">{{ 'backups.scheduleHint' | t }}</small>
         </div>
-        
+
         <div class="form-group">
-          <label for="comentario">Comentario / Motivo</label>
-          <textarea id="comentario" formControlName="comentario" class="form-control" rows="2" placeholder="Ej: Antes de la actualización v2.0"></textarea>
+          <label for="comentario">{{ 'backups.commentLabel' | t }}</label>
+          <textarea id="comentario" formControlName="comentario" class="form-control" rows="2" [attr.placeholder]="'backups.commentPlaceholder' | t"></textarea>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-cancel" (click)="closeModal()" [disabled]="generando">Cancelar</button>
+        <button type="button" class="btn-cancel" (click)="closeModal()" [disabled]="generando">{{ 'common.cancel' | t }}</button>
         <button type="submit" class="btn-primary" [disabled]="respaldoForm.invalid || generando">
-          {{ generando ? 'Procesando...' : 'Confirmar' }}
+          {{ (generando ? 'backups.processing' : 'users.confirm') | t }}
         </button>
       </div>
     </form>
   </div>
 </div>
 
-<!-- Modal para Confirmar Eliminación -->
+<!-- Modal para confirmar la eliminación -->
 <div class="modal-overlay" *ngIf="backupToDelete !== null">
   <div class="modal-content">
     <div class="modal-header">
-      <h2>Eliminar respaldo</h2>
+      <h2>{{ 'backups.deleteTitle' | t }}</h2>
       <button class="close-btn" (click)="cancelDeletion()">×</button>
     </div>
     <div class="modal-body">
-      <p>¿Está seguro de delete este respaldo permanentemente?</p>
+      <p>{{ 'backups.deleteQuestion' | t }}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn-cancel" (click)="cancelDeletion()">Cancelar</button>
-      <button type="button" class="btn-delete solid" style="background-color: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;" (click)="delete()">Eliminar</button>
+      <button type="button" class="btn-cancel" (click)="cancelDeletion()">{{ 'common.cancel' | t }}</button>
+      <button type="button" class="btn-delete solid" style="background-color: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;" (click)="delete()">{{ 'scenarios.delete' | t }}</button>
     </div>
   </div>
 </div>
