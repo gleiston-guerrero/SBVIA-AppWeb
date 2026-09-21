@@ -5,11 +5,12 @@ import { Simulation } from './simulation.model';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Scenario, EscenarioService } from '../scenarios/scenario.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-practices-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   templateUrl: './practices-list.component.html',
   styleUrl: './practices-list.component.css'
 })
