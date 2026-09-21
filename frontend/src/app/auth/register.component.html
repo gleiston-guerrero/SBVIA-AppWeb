@@ -2,7 +2,7 @@
 
   <!-- COLUMNA IZQUIERDA: Inmersión visual (idéntica al login) -->
   <div class="login-visual">
-    <img src="assets/img/login_bg.jpg" alt="Simulación vial" class="visual-bg" />
+    <img src="assets/img/login_bg.jpg" [attr.alt]="'app.name' | t" class="visual-bg" />
     <div class="visual-overlay"></div>
     <div class="visual-content">
       <div class="visual-logo">
@@ -17,21 +17,21 @@
         <span>SBVIA</span>
       </div>
       <div class="visual-tagline">
-        <h1>Únete al<br>Simulador Vial</h1>
-        <p>Crea tu cuenta y comienza a entrenar tus habilidades de conducción en un entorno seguro e inteligente.</p>
+        <h1>{{ 'register.taglineTitle1' | t }}<br>{{ 'register.taglineTitle2' | t }}</h1>
+        <p>{{ 'register.taglineText' | t }}</p>
       </div>
       <div class="visual-features">
         <div class="feature-chip">
           <span class="chip-dot"></span>
-          Simulations en tiempo real
+          {{ 'login.featureRealtime' | t }}
         </div>
         <div class="feature-chip">
           <span class="chip-dot chip-dot--orange"></span>
-          IA adaptativa
+          {{ 'login.featureAi' | t }}
         </div>
         <div class="feature-chip">
           <span class="chip-dot chip-dot--cyan"></span>
-          Análisis de desempeño
+          {{ 'login.featureAnalysis' | t }}
         </div>
       </div>
     </div>
@@ -44,8 +44,11 @@
       <!-- CASO 1: Formulario de Registro -->
       <ng-container *ngIf="!registered">
         <div class="form-header">
-          <h2>Crear Cuenta</h2>
-          <p>Completa tus datos para comenzar</p>
+          <div class="form-header-top">
+            <h2>{{ 'register.title' | t }}</h2>
+            <app-lang-toggle></app-lang-toggle>
+          </div>
+          <p>{{ 'register.subtitle' | t }}</p>
         </div>
 
         <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
@@ -53,7 +56,7 @@
           <!-- Nombres + Apellidos en fila -->
           <div class="form-row">
             <div class="form-group">
-              <label for="firstName">Nombres</label>
+              <label for="firstName">{{ 'register.firstName' | t }}</label>
               <div class="input-wrapper">
                 <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -64,12 +67,12 @@
                   name="firstName"
                   [(ngModel)]="data.firstName"
                   required
-                  placeholder="Juan">
+                  [attr.placeholder]="'register.firstNamePlaceholder' | t">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="lastName">Apellidos</label>
+              <label for="lastName">{{ 'register.lastName' | t }}</label>
               <div class="input-wrapper">
                 <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -80,14 +83,14 @@
                   name="lastName"
                   [(ngModel)]="data.lastName"
                   required
-                  placeholder="Pérez">
+                  [attr.placeholder]="'register.lastNamePlaceholder' | t">
               </div>
             </div>
           </div>
 
           <!-- Correo -->
           <div class="form-group">
-            <label for="email">Correo Electrónico</label>
+            <label for="email">{{ 'register.emailLabel' | t }}</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
@@ -104,7 +107,7 @@
 
           <!-- Teléfono -->
           <div class="form-group">
-            <label for="phone">Teléfono <span class="label-optional">(opcional)</span></label>
+            <label for="phone">{{ 'register.phoneOptional' | t }}</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
@@ -120,7 +123,7 @@
 
           <!-- Contraseña -->
           <div class="form-group">
-            <label for="password">Contraseña</label>
+            <label for="password">{{ 'login.passwordLabel' | t }}</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
@@ -134,31 +137,31 @@
                 minlength="6"
                 placeholder="••••••••">
             </div>
-            <p class="field-hint">Mínimo 6 caracteres</p>
+            <p class="field-hint">{{ 'register.passwordHint' | t }}</p>
           </div>
 
           <!-- Error -->
-          <div *ngIf="errorMessage" class="error-message">
+          <div *ngIf="errorKey" class="error-message">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
-            {{ errorMessage }}
+            {{ errorKey | t }}
           </div>
 
           <button type="submit" [disabled]="loading || !registerForm.form.valid" class="btn-submit">
-            <span *ngIf="!loading">Crear Cuenta</span>
+            <span *ngIf="!loading">{{ 'register.create' | t }}</span>
             <span *ngIf="loading" class="loading-dots">
               <span></span><span></span><span></span>
             </span>
           </button>
 
           <div class="form-footer">
-            ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+            {{ 'register.hasAccount' | t }} <a routerLink="/login">{{ 'register.loginLink' | t }}</a>
           </div>
         </form>
       </ng-container>
 
-      <!-- CASO 2: Confirmación de Cuenta Creada con Nombre de User Asignado -->
+      <!-- CASO 2: Confirmación de Cuenta Creada con Nombre de Usuario Asignado -->
       <div *ngIf="registered" class="register-success-card">
         <div class="success-icon-badge">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00b4d8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -167,11 +170,11 @@
           </svg>
         </div>
 
-        <h2>¡Cuenta Creada Exitosamente!</h2>
-        <p class="success-subtitle">Tu registro en el sistema SBVIA se ha completado.</p>
+        <h2>{{ 'register.successTitle' | t }}</h2>
+        <p class="success-subtitle">{{ 'register.successSubtitle' | t }}</p>
 
         <div class="username-display-box">
-          <span class="username-label">Tu nombre de user es:</span>
+          <span class="username-label">{{ 'register.usernameLabel' | t }}</span>
           <span class="username-value">{{ registeredUsername }}</span>
         </div>
 
@@ -179,12 +182,12 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
-          También puedes iniciar sesión utilizando tu email electrónico (<strong>{{ registeredEmail }}</strong>).
+          {{ 'register.successNote' | t }} (<strong>{{ registeredEmail }}</strong>).
         </p>
 
         <div style="margin-top: 2rem;">
           <a routerLink="/login" class="btn-submit btn-submit--link">
-            Iniciar Sesión
+            {{ 'register.loginButton' | t }}
           </a>
         </div>
       </div>

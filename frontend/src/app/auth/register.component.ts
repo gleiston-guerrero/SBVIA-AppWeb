@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from './auth.service';
+import { TranslatePipe } from '../i18n/translate.pipe';
+import { LangToggleComponent } from '../i18n/lang-toggle.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe, LangToggleComponent],
   templateUrl: './register.component.html',
   styleUrl: './login.component.css' // Reutilizamos estilos del login
 })
@@ -19,10 +21,11 @@ export class RegisterComponent {
     password: '',
     phone: ''
   };
-  errorMessage = '';
+  /** Se guarda la CLAVE del error, no el texto, para que se retraduzca al cambiar de idioma. */
+  errorKey = '';
   loading = false;
 
-  // Estado para show confirmación de registro exitoso con el nombre de user generado
+  // Estado para show confirmación de registro exitoso con el nombre de usuario generado
   registered = false;
   registeredUsername = '';
   registeredEmail = '';
@@ -31,12 +34,12 @@ export class RegisterComponent {
 
   onSubmit() {
     if (!this.data.firstName || !this.data.lastName || !this.data.email || !this.data.password) {
-      this.errorMessage = 'Todos los campos son obligatorios';
+      this.errorKey = 'register.errorRequired';
       return;
     }
 
     this.loading = true;
-    this.errorMessage = '';
+    this.errorKey = '';
 
     this.authService.register(this.data).subscribe({
       next: (res: any) => {
@@ -48,11 +51,11 @@ export class RegisterComponent {
       error: (err: any) => {
         this.loading = false;
         if (err.status === 409) {
-          this.errorMessage = 'El email ya está registrado';
+          this.errorKey = 'register.errorEmailTaken';
         } else if (err.status === 400) {
-          this.errorMessage = 'Datos inválidos. Verifique el formato.';
+          this.errorKey = 'register.errorInvalid';
         } else {
-          this.errorMessage = 'Error en el servidor. Intente más tarde.';
+          this.errorKey = 'login.errorServer';
         }
       }
     });
