@@ -85,7 +85,7 @@ class SimulationServiceTest {
     private SimulationService simulationService;
 
     @Test
-    void iniciaUnaSimulacionParaElUsuarioAutenticado() {
+    void startsSimulationForAuthenticatedUser() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Scenario escenario = Scenario.builder().scenarioId(3).name("Intersección urbana").activo(true).build();
         SimulationState enProgreso = SimulationState.builder()
@@ -114,7 +114,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void rechazaIniciarUnaSimulacionConEscenarioInactivo() {
+    void rejectsStartingSimulationWithInactiveScenario() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Scenario escenario = Scenario.builder().scenarioId(3).activo(false).build();
         when(usuarioRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
@@ -126,7 +126,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void finalizaLaSimulacionYApruebaConSetentaPuntos() {
+    void finishesSimulationAndPassesWithSeventyPoints() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(user)
@@ -142,7 +142,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void impideFinalizarLaPracticaDeOtroUsuario() {
+    void preventsFinishingAnotherUsersPractice() {
         User propietario = User.builder().email("propietario@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(propietario).build();
@@ -154,7 +154,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void impideFinalizarDosVecesLaMismaPractica() {
+    void preventsFinishingTheSamePracticeTwice() {
         User user = User.builder().email("conductor@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(user).completed(true).build();
@@ -167,7 +167,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void obtieneLasPracticasDelUsuarioConSuEscenario() {
+    void getsUserPracticesWithTheirScenario() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Scenario escenario = Scenario.builder().scenarioId(3).name("Intersección urbana").build();
         Simulation simulation = Simulation.builder()
@@ -194,7 +194,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void rechazaLaConsultaCuandoElUsuarioNoExiste() {
+    void rejectsQueryWhenUserDoesNotExist() {
         when(usuarioRepository.findByEmail("desconocido@sbvia.test")).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> simulationService.getMyPractices("desconocido@sbvia.test"))
@@ -203,7 +203,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void finalizaConduccionCalculandoElPuntajeEnElServidor() {
+    void finishesDrivingScoringOnTheServer() {
         User user = User.builder().userId(7).email("conductor@sbvia.test").build();
         Scenario escenario = Scenario.builder().scenarioId(3).name("Centro urbano").build();
         Simulation simulation = Simulation.builder()
@@ -245,7 +245,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void impideFinalizarConduccionDeOtroUsuario() {
+    void preventsFinishingDrivingForAnotherUser() {
         User propietario = User.builder().email("propietario@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(propietario).completed(false).build();
@@ -259,7 +259,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void impideFinalizarDosVecesLaConduccion() {
+    void preventsFinishingDrivingTwice() {
         User user = User.builder().email("conductor@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(user).completed(true).build();
@@ -274,7 +274,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void rechazaMetricasConMaximaMenorQueElPromedio() {
+    void rejectsMetricsWithMaxBelowAverage() {
         User user = User.builder().email("conductor@sbvia.test").build();
         Simulation simulation = Simulation.builder()
                 .simulationId(21).user(user).completed(false).build();
@@ -289,7 +289,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    void listaTodasLasPracticasAunqueNoTenganEscenario() {
+    void listsAllPracticesEvenWithoutScenario() {
         Simulation simulation = Simulation.builder()
                 .simulationId(15)
                 .build();

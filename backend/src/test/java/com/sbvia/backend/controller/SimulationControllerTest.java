@@ -38,7 +38,7 @@ public class SimulationControllerTest {
     private SimulationController controller;
 
     @Test
-    void testIniciar() {
+    void testStart() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
         when(simulationService.startSimulation("user", 1)).thenReturn(new SimulationDTO());
@@ -48,7 +48,7 @@ public class SimulationControllerTest {
     }
 
     @Test
-    void testFinalizar() {
+    void testFinish() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
         when(simulationService.finishSimulation(eq("user"), eq(1), any(BigDecimal.class))).thenReturn(new SimulationDTO());
@@ -58,7 +58,7 @@ public class SimulationControllerTest {
     }
 
     @Test
-    void testFinalizarConduccion() {
+    void testFinishDriving() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
         when(simulationService.finishDriving(eq("user"), eq(1), any(DrivingMetricsRequest.class))).thenReturn(new DrivingResultDTO());
@@ -82,7 +82,7 @@ public class SimulationControllerTest {
     }
 
     @Test
-    void testObtenerMisPracticas() {
+    void testGetMyPractices() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
         when(simulationService.getMyPractices("user")).thenReturn(List.of(new SimulationDTO()));
@@ -92,14 +92,14 @@ public class SimulationControllerTest {
     }
 
     @Test
-    void testObtenerTodas() {
+    void testGetAll() {
         when(simulationService.getAll()).thenReturn(List.of(new SimulationDTO()));
         ResponseEntity<List<SimulationDTO>> res = controller.getAll();
         assertEquals(200, res.getStatusCode().value());
     }
 
     @Test
-    void testObtenerEstadisticasGlobales() {
+    void testGetGlobalStatistics() {
         when(simulationService.getGlobalStatistics()).thenReturn(new StatisticsDTO(1, 100, 50));
         ResponseEntity<StatisticsDTO> res = controller.getGlobalStatistics();
         assertEquals(200, res.getStatusCode().value());

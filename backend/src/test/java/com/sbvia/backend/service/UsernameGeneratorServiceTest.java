@@ -12,7 +12,7 @@ public class UsernameGeneratorServiceTest {
     private final UsernameGeneratorService service = new UsernameGeneratorService();
 
     @Test
-    void testNormalizar() {
+    void testNormalize() {
         assertEquals("", service.normalizar(null));
         assertEquals("", service.normalizar(""));
         assertEquals("nino", service.normalizar("Niño"));
@@ -20,7 +20,7 @@ public class UsernameGeneratorServiceTest {
     }
 
     @Test
-    void testGenerarBase() {
+    void testGenerateBase() {
         // Base normal
         assertEquals("jcruzp", service.generateBase("Justyn Keith", "Cruz Perez"));
         // Base muy corta
@@ -38,7 +38,7 @@ public class UsernameGeneratorServiceTest {
     }
 
     @Test
-    void testGenerarSiguienteDisponible() {
+    void testGenerateNextAvailable() {
         assertEquals("jcruzp", service.generateNextAvailable("jcruzp", null));
         assertEquals("jcruzp", service.generateNextAvailable("jcruzp", List.of()));
         assertEquals("jcruzp1", service.generateNextAvailable("jcruzp", List.of("jcruzp")));

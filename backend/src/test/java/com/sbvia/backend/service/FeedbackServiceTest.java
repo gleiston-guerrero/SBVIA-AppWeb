@@ -67,7 +67,7 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void usaElMotorLocalCuandoElExternoNoEstaHabilitado() {
+    void usesLocalEngineWhenExternalIsDisabled() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
@@ -83,7 +83,7 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void usaElMotorLocalCuandoElExternoFalla() {
+    void usesLocalEngineWhenExternalFails() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
@@ -100,7 +100,7 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void guardaLaFeedbackAlGenerarYGuardar() {
+    void savesFeedbackOnGenerateAndSave() {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulacionPropia()));
         when(metricaDesempenoRepository.findBySimulation_SimulationId(21)).thenReturn(List.of());
         when(simulacionRepository.findByUser_UserIdOrderBySimulationIdDesc(7)).thenReturn(List.of());
@@ -117,7 +117,7 @@ class FeedbackServiceTest {
     }
 
     @Test
-    void impideVerElInformeDeOtroUsuario() {
+    void preventsViewingAnotherUsersReport() {
         User otro = User.builder().email("otro@sbvia.test").build();
         Simulation simulation = Simulation.builder().simulationId(21).user(otro).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));

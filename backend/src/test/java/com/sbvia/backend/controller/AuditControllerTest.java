@@ -27,7 +27,7 @@ public class AuditControllerTest {
     private AuditController controller;
 
     @Test
-    void testObtenerAuditoria() {
+    void testGetAuditLog() {
         when(auditService.getAuditLogs(any(), any(), any(), any(), any())).thenReturn(List.of(new AuditLog()));
         ResponseEntity<List<AuditLog>> res = controller.getAuditLogs(null, null, null, null, null);
         assertEquals(200, res.getStatusCode().value());
@@ -35,7 +35,7 @@ public class AuditControllerTest {
     }
 
     @Test
-    void testDescargarReportePdf() {
+    void testDownloadPdfReport() {
         when(auditService.generatePdfReport(any(), any(), any(), any(), any())).thenReturn(new byte[]{1, 2, 3});
         ResponseEntity<byte[]> res = controller.downloadPdfReport(null, null, null, null, null);
         assertEquals(200, res.getStatusCode().value());

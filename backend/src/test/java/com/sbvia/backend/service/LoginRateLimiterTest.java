@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LoginRateLimiterTest {
 
     @Test
-    void permiteHastaCincoIntentosFallidosYLanza429EnElSexto() {
+    void allowsFiveFailedAttemptsAndThrows429OnTheSixth() {
         LoginRateLimiter limiter = new LoginRateLimiter(5, 60);
 
         for (int i = 1; i <= 5; i++) {
@@ -27,7 +27,7 @@ class LoginRateLimiterTest {
     }
 
     @Test
-    void noBloqueaCuandoElNumeroDeIntentosEstaPorDebajoDelUmbral() {
+    void doesNotBlockWhenAttemptsAreBelowThreshold() {
         LoginRateLimiter limiter = new LoginRateLimiter(10, 60);
 
         limiter.recordFailure("10.0.0.2");
@@ -37,7 +37,7 @@ class LoginRateLimiterTest {
     }
 
     @Test
-    void resetLimpiaElContadorDeLaIp() {
+    void resetClearsTheIpCounter() {
         LoginRateLimiter limiter = new LoginRateLimiter(2, 60);
 
         limiter.recordFailure("10.0.0.3");

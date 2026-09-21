@@ -39,26 +39,26 @@ class AuthControllerUnitTest {
     private AuthController authController;
 
     @BeforeEach
-    void configurarCookiesSeguras() {
+    void configureSecureCookies() {
         ReflectionTestUtils.setField(authController, "cookieSecure", true);
     }
 
     @Test
-    void logoutPriorizaElTokenDeLaCookie() {
+    void logoutPrefersCookieToken() {
         authController.logout("Bearer token-header", "token-cookie");
 
         verify(authService).logout("token-cookie");
     }
 
     @Test
-    void logoutAceptaBearerCuandoNoHayCookie() {
+    void logoutAcceptsBearerWhenThereIsNoCookie() {
         authController.logout("Bearer token-header", null);
 
         verify(authService).logout("token-header");
     }
 
     @Test
-    void logoutSinTokenSoloLimpiaLasCookies() {
+    void logoutWithoutTokenOnlyClearsCookies() {
         ResponseEntity<Void> respuesta = authController.logout("Basic credencial", null);
 
         verify(authService, never()).logout(org.mockito.ArgumentMatchers.anyString());
@@ -67,7 +67,7 @@ class AuthControllerUnitTest {
     }
 
     @Test
-    void refreshPriorizaElTokenDeLaCookie() {
+    void refreshPrefersCookieToken() {
         when(authService.refresh("refresh-cookie")).thenReturn(respuesta());
         when(authService.getRefreshExpirationSeconds()).thenReturn(3_600L);
 
@@ -77,7 +77,7 @@ class AuthControllerUnitTest {
     }
 
     @Test
-    void refreshAceptaElTokenDelCuerpoSiNoHayCookie() {
+    void refreshAcceptsBodyTokenWhenThereIsNoCookie() {
         when(authService.refresh("refresh-body")).thenReturn(respuesta());
         when(authService.getRefreshExpirationSeconds()).thenReturn(3_600L);
 
@@ -87,7 +87,7 @@ class AuthControllerUnitTest {
     }
 
     @Test
-    void conservaLaVigenciaEnSegundosDeLaCookieDeAcceso() {
+    void keepsAccessCookieMaxAgeInSeconds() {
         when(authService.refresh("refresh-cookie")).thenReturn(respuesta());
         when(authService.getRefreshExpirationSeconds()).thenReturn(604_800L);
 
@@ -98,21 +98,21 @@ class AuthControllerUnitTest {
     }
 
     @Test
-    void refreshRechazaLaAusenciaDeToken() {
+    void refreshRejectsMissingToken() {
         assertThatThrownBy(() -> authController.refresh(null, null))
                 .isInstanceOf(org.springframework.security.authentication.BadCredentialsException.class)
                 .hasMessage("Refresh token ausente o no proporcionado");
     }
 
     @Test
-    void refreshRechazaUnTokenEnBlanco() {
+    void refreshRejectsBlankToken() {
         assertThatThrownBy(() -> authController.refresh(null, solicitud("  ")))
                 .isInstanceOf(org.springframework.security.authentication.BadCredentialsException.class)
                 .hasMessage("Refresh token ausente o no proporcionado");
     }
 
     @Test
-    void loginRechazaCuentoSegunRateLimiterAntesDeAutenticar() {
+    void loginRejectsAccountByRateLimiterBeforeAuthenticating() {
         when(request.getRemoteAddr()).thenReturn("10.0.0.7");
         org.mockito.Mockito.doThrow(new RateLimitExceededException("Demasiados intentos fallidos"))
                 .when(loginRateLimiter).check("10.0.0.7");
@@ -129,7 +129,7 @@ class AuthControllerUnitTest {
     }
 
     @Test
-    void loginRegistraFalloCuandoLaAutenticacionFalla() {
+    void loginRecordsFailureWhenAuthenticationFails() {
         when(request.getRemoteAddr()).thenReturn("10.0.0.8");
         when(authService.login(org.mockito.ArgumentMatchers.any(LoginRequest.class)))
                 .thenThrow(new org.springframework.security.authentication.BadCredentialsException("bad"));

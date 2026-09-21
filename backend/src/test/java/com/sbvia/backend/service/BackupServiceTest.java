@@ -58,7 +58,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testObtenerTodos() {
+    void testGetAll() {
         Backup r = new Backup();
         r.setId(1L);
         when(respaldoRepository.findAllByOrderByStartDateDesc()).thenReturn(List.of(r));
@@ -68,7 +68,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testGenerarRespaldoInmediato() {
+    void testCreateImmediateBackup() {
         BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("COMPLETO");
         dto.setComentario("Test comment");
@@ -94,7 +94,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testGenerarRespaldoProgramado() {
+    void testCreateScheduledBackup() {
         BackupRequestDTO dto = new BackupRequestDTO();
         dto.setModalidad("SOLO_ESTRUCTURA");
         dto.setFechaProgramada(LocalDateTime.now().plusDays(1));
@@ -113,7 +113,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testObtenerArchivo() {
+    void testGetFile() {
         Backup r = new Backup();
         r.setId(1L);
         r.setFileName("test.backup");
@@ -125,7 +125,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testEliminarRespaldo() {
+    void testDeleteBackup() {
         Backup r = new Backup();
         r.setId(1L);
         r.setFileName("dummy.backup");
@@ -136,7 +136,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testRespaldoProgramadoCron() {
+    void testScheduledBackupCron() {
         BackupService spyService = spy(backupService);
         doReturn(new Backup()).when(spyService).generateBackup(any(BackupRequestDTO.class), eq("PROGRAMADO"));
 
@@ -148,7 +148,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testGenerarRespaldoNullRequest() {
+    void testCreateBackupWithNullRequest() {
         when(respaldoRepository.save(any(Backup.class))).thenAnswer(inv -> inv.getArgument(0));
         BackupService spyService = spy(backupService);
         doNothing().when(spyService).executePgDump(any(Backup.class));
@@ -161,7 +161,7 @@ public class BackupServiceTest {
     }
 
     @Test
-    void testEjecutarPgDump() throws Exception {
+    void testRunPgDump() throws Exception {
         Backup respaldo = new Backup();
         respaldo.setFileName("test_dump.backup");
         respaldo.setMode("SOLO_ESTRUCTURA");

@@ -92,7 +92,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Login exitoso con email retorna access token y oculta refresh token")
-    void loginExitoso() throws Exception {
+    void successfulLogin() throws Exception {
         LoginRequest request = new LoginRequest();
         request.setEmail("test@example.com");
         request.setPassword("password123");
@@ -114,7 +114,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Login exitoso con nombre_usuario retorna access token")
-    void loginExitosoConNombreUsuario() throws Exception {
+    void successfulLoginWithUsername() throws Exception {
         LoginRequest request = new LoginRequest();
         request.setIdentificador("testuser");
         request.setPassword("password123");
@@ -133,7 +133,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Login: cookie accessToken tiene HttpOnly y SameSite=Strict")
-    void loginCookieTieneHttpOnlyYSameSite() throws Exception {
+    void loginCookieHasHttpOnlyAndSameSite() throws Exception {
         LoginRequest request = new LoginRequest();
         request.setEmail("test@example.com");
         request.setPassword("password123");
@@ -166,7 +166,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Registro: cookie accessToken tiene HttpOnly y SameSite=Strict")
-    void registroCookieTieneHttpOnlyYSameSite() throws Exception {
+    void registrationCookieHasHttpOnlyAndSameSite() throws Exception {
         usuarioRepository.deleteAll();
 
         RegisterRequest request = new RegisterRequest();
@@ -200,7 +200,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Login con clave incorrecta retorna 401")
-    void loginClaveIncorrecta() throws Exception {
+    void loginWithWrongPassword() throws Exception {
         LoginRequest request = new LoginRequest();
         request.setEmail("test@example.com");
         request.setPassword("wrongpassword");
@@ -213,7 +213,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Registro con email duplicado retorna 409 Conflict")
-    void registroEmailDuplicado() throws Exception {
+    void registrationWithDuplicateEmail() throws Exception {
         RegisterRequest request = new RegisterRequest();
         request.setFirstName("Nuevo");
         request.setLastName("User");
@@ -229,7 +229,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Acceso sin token retorna Problem Details 401")
-    void accesoSinToken() throws Exception {
+    void accessWithoutToken() throws Exception {
         mockMvc.perform(get("/api/users/me"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.title").value("No autenticado"))
@@ -240,7 +240,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Verifica que las contraseñas usan BCrypt con factor de costo 12")
-    void verificaFactorDeCostoBcrypt() {
+    void verifiesBcryptCostFactor() {
         String rawPassword = "password123";
         String encoded = passwordEncoder.encode(rawPassword);
         
@@ -250,7 +250,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Acceso con token válido retorna datos del user")
-    void accesoConTokenValido() throws Exception {
+    void accessWithValidToken() throws Exception {
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail("test@example.com");
         loginReq.setPassword("password123");
@@ -271,7 +271,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("User autenticado sin rol administrativo recibe Problem Details 403")
-    void accesoSinRolAdministrativo() throws Exception {
+    void accessWithoutAdministrativeRole() throws Exception {
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail("test@example.com");
         loginReq.setPassword("password123");

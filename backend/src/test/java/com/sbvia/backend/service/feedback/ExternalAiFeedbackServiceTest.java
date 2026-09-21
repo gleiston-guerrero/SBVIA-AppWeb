@@ -23,7 +23,7 @@ class ExternalAiFeedbackServiceTest {
     private HttpServer servidor;
 
     @AfterEach
-    void detener() {
+    void stop() {
         if (servidor != null) {
             servidor.stop(0);
         }
@@ -40,7 +40,7 @@ class ExternalAiFeedbackServiceTest {
                 "clave-de-prueba", "modelo-test", 5);
     }
 
-    private void responder(String cuerpo, String contentType) throws IOException {
+    private void respond(String cuerpo, String contentType) throws IOException {
         servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
         byte[] bytes = cuerpo.getBytes(StandardCharsets.UTF_8);
         servidor.createContext("/chat", intercambio -> {
@@ -58,8 +58,8 @@ class ExternalAiFeedbackServiceTest {
     }
 
     @Test
-    void interpretaLaRespuestaJsonDelProveedor() throws Exception {
-        responder("{\"choices\":[{\"message\":{\"content\":"
+    void interpretsProviderJsonResponse() throws Exception {
+        respond("{\"choices\":[{\"message\":{\"content\":"
                 + "\"```json\\n{\\\"resumen\\\":\\\"Buen manejo\\\","
                 + "\\\"aciertos\\\":[\\\"Respeta límites\\\"],"
                 + "\\\"errores\\\":[],"
@@ -79,15 +79,15 @@ class ExternalAiFeedbackServiceTest {
     }
 
     @Test
-    void lanzaExcepcionCuandoLaRespuestaEsInvalida() throws Exception {
-        responder("{\"choices\":[]}", "application/json");
+    void throwsWhenResponseIsInvalid() throws Exception {
+        respond("{\"choices\":[]}", "application/json");
 
         assertThatThrownBy(() -> servicio(url()).generate(datos()))
                 .isInstanceOf(AiUnavailableException.class);
     }
 
     @Test
-    void lanzaExcepcionCuandoNoEstaConfigurado() {
+    void throwsWhenNotConfigured() {
         ExternalAiFeedbackService sinClave = new ExternalAiFeedbackService(
                 new ObjectMapper(), "local", "", "", "modelo-test", 5);
 
@@ -96,7 +96,7 @@ class ExternalAiFeedbackServiceTest {
                 .isInstanceOf(AiUnavailableException.class);
     }
 
-    private void responderCapturando(String cuerpo, AtomicReference<String> bodyCapture) throws IOException {
+    private void respondCapturing(String cuerpo, AtomicReference<String> bodyCapture) throws IOException {
         servidor = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
         byte[] bytes = cuerpo.getBytes(StandardCharsets.UTF_8);
         servidor.createContext("/chat", intercambio -> {
@@ -119,7 +119,7 @@ class ExternalAiFeedbackServiceTest {
     }
 
     @Test
-    void noPiiEnviadoAlProveedorExterno() throws Exception {
+    void noPiiSentToExternalProvider() throws Exception {
         AtomicReference<String> bodyCapture = new AtomicReference<>("");
 
         String respuestaValida = "{\"choices\":[{\"message\":{\"content\":"
@@ -129,7 +129,7 @@ class ExternalAiFeedbackServiceTest {
                 + "\\\"recomendaciones\\\":[\\\"A\\\"],"
                 + "\\\"mensajeMotivador\\\":\\\"Bien\\\"}\\n```\"}}]}";
 
-        responderCapturando(respuestaValida, bodyCapture);
+        respondCapturing(respuestaValida, bodyCapture);
         servicio(url()).generate(datos());
 
         String payload = bodyCapture.get().toLowerCase();

@@ -32,7 +32,7 @@ public class UserControllerTest {
     private UserController controller;
 
     @Test
-    void testGetPerfilActual() {
+    void testGetCurrentProfile() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("test@test.com");
         when(authService.getCurrentUser("test@test.com")).thenReturn(new UserDTO());
@@ -42,7 +42,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void testListarUsuarios() {
+    void testListUsers() {
         Page<UserDTO> page = new PageImpl<>(List.of(new UserDTO()));
         when(authService.listUsers(any(Pageable.class))).thenReturn(page);
 
@@ -52,7 +52,7 @@ public class UserControllerTest {
     }
 
     @Test
-    void testCambiarRol() {
+    void testChangeRole() {
         when(authService.changeRole(eq(1), any())).thenReturn(new UserDTO());
         ChangeRoleRequest request = new ChangeRoleRequest();
         request.setNombreRol("ADMINISTRADOR");
@@ -62,14 +62,14 @@ public class UserControllerTest {
     }
 
     @Test
-    void testActualizarUsuario() {
+    void testUpdateUser() {
         when(authService.updateUser(eq(1), any())).thenReturn(new UserDTO());
         ResponseEntity<UserDTO> res = controller.updateUser(1, new UpdateUserRequest());
         assertEquals(200, res.getStatusCode().value());
     }
 
     @Test
-    void testEliminarUsuario() {
+    void testDeleteUser() {
         doNothing().when(authService).deleteUser(1);
         ResponseEntity<Void> res = controller.deleteUser(1);
         assertEquals(204, res.getStatusCode().value());

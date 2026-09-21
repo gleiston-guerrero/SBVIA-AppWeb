@@ -29,7 +29,7 @@ class TrafficRuleServiceTest {
     }
 
     @Test
-    void listaReglas() {
+    void listsRules() {
         when(reglaRepository.findAll()).thenReturn(List.of(
                 TrafficRule.builder().idReglaTransito(8).codigo("RT-001").nombre("Límite 30 km/h")
                         .descripcion("Reducir velocidad").categoria("Velocidad")
@@ -45,7 +45,7 @@ class TrafficRuleServiceTest {
     }
 
     @Test
-    void creaRegla() {
+    void createsRule() {
         TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-002").nombre("  Pare  ")
                 .descripcion(" Detención total ").categoria(" Señalización ")
                 .penalizacionBase(new BigDecimal("10.00")).build();
@@ -63,7 +63,7 @@ class TrafficRuleServiceTest {
     }
 
     @Test
-    void actualizaUnaReglaExistente() {
+    void updatesExistingRule() {
         TrafficRule existente = TrafficRule.builder().idReglaTransito(4).codigo("RT-003")
                 .nombre("Velocidad").categoria("Velocidad").penalizacionBase(BigDecimal.ZERO).build();
         TrafficRuleDTO entrada = TrafficRuleDTO.builder().codigo("RT-003").nombre("Ceda el paso")
@@ -76,7 +76,7 @@ class TrafficRuleServiceTest {
     }
 
     @Test
-    void rechazaReglaInexistente() {
+    void rejectsMissingRule() {
         when(reglaRepository.findById(99)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.update(99, TrafficRuleDTO.builder().codigo("X").nombre("X").categoria("X").penalizacionBase(BigDecimal.ZERO).build()))
@@ -85,7 +85,7 @@ class TrafficRuleServiceTest {
     }
 
     @Test
-    void eliminaUnaReglaExistente() {
+    void deletesExistingRule() {
         TrafficRule existente = TrafficRule.builder().idReglaTransito(4).build();
         when(reglaRepository.findById(4)).thenReturn(Optional.of(existente));
 

@@ -27,7 +27,7 @@ class TokenBlacklistServiceTest {
     private TokenBlacklistService tokenBlacklistService;
 
     @Test
-    void guardaElJtiRevocadoConSuTiempoDeVida() {
+    void savesRevokedJtiWithItsLifetime() {
         when(redisTemplate.opsForValue()).thenReturn(valueOperations);
 
         tokenBlacklistService.blacklistToken("token-123", 45_000);
@@ -41,14 +41,14 @@ class TokenBlacklistServiceTest {
     }
 
     @Test
-    void informaCuandoElTokenEstaRevocado() {
+    void reportsWhenTokenIsRevoked() {
         when(redisTemplate.hasKey("jwt:blacklist:token-123")).thenReturn(true);
 
         assertThat(tokenBlacklistService.isTokenBlacklisted("token-123")).isTrue();
     }
 
     @Test
-    void trataUnaRespuestaNulaDeRedisComoTokenVigente() {
+    void treatsNullRedisResponseAsValidToken() {
         when(redisTemplate.hasKey("jwt:blacklist:token-123")).thenReturn(null);
 
         assertThat(tokenBlacklistService.isTokenBlacklisted("token-123")).isFalse();

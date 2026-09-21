@@ -72,7 +72,7 @@ class ScenarioServiceTest {
 
     @Test
     @DisplayName("listarActivos: delega paginación al repositorio y mapea resultado correctamente")
-    void listarActivos_mapea_paginacion() {
+    void listActive_maps_pagination() {
         Pageable pageable = PageRequest.of(0, 10);
         List<Scenario> escenarios = List.of(
                 buildEscenario(1, "Autopista Norte"),
@@ -92,7 +92,7 @@ class ScenarioServiceTest {
 
     @Test
     @DisplayName("findById: retorna DTO cuando el escenario existe")
-    void buscarPorId_existente() {
+    void findById_existing() {
         Scenario escenario = buildEscenario(1, "Zona Industrial");
         when(escenarioRepository.findById(1)).thenReturn(Optional.of(escenario));
 
@@ -105,7 +105,7 @@ class ScenarioServiceTest {
 
     @Test
     @DisplayName("findById: lanza ResourceNotFoundException cuando no existe")
-    void buscarPorId_noExistente_lanzaExcepcion() {
+    void findById_missing_throws() {
         when(escenarioRepository.findById(99)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> scenarioService.findById(99))
@@ -115,7 +115,7 @@ class ScenarioServiceTest {
 
     @Test
     @DisplayName("create: persiste entidad y retorna DTO con ID asignado")
-    void crear_persiste_scenario() {
+    void create_persists_scenario() {
         ScenarioDTO dto = ScenarioDTO.builder()
                 .name("Redonda del Sur")
                 .description("Intersección compleja")
@@ -141,7 +141,7 @@ class ScenarioServiceTest {
 
     @Test
     @DisplayName("delete: hace soft-delete (activo=false) sin borrar el registro")
-    void eliminar_softDelete() {
+    void delete_softDelete() {
         Scenario escenario = buildEscenario(3, "Scenario A borrar");
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
         when(escenarioRepository.save(any(Scenario.class))).thenReturn(escenario);

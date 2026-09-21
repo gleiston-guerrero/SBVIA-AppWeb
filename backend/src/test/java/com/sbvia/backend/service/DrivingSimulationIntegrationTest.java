@@ -52,7 +52,7 @@ class DrivingSimulationIntegrationTest {
     private EntityManager entityManager;
 
     @Test
-    void finalizaConduccionYPersisteMetricasEInfracciones() {
+    void finishesDrivingAndPersistsMetricsAndInfractions() {
         Role rol = Role.builder().name("PARTICIPANTE").description("Conductor").build();
         entityManager.persist(rol);
         UserState activo = UserState.builder().name("ACTIVO").description("Habilitada").build();

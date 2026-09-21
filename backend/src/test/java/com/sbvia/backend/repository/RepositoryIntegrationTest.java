@@ -78,7 +78,7 @@ class RepositoryIntegrationTest {
 
     @Test
     @DisplayName("findByActivoTrue devuelve solo escenarios activos")
-    void findByActivoTrue_devuelveSoloEscenariosActivos() {
+    void findByActivoTrue_returnsOnlyActiveScenarios() {
         RoadType tv = persistTipoVia("AVENIDA");
         DifficultyLevel nd = persistNivelDificultad(1);
         WeatherType tc = persistTipoClima("Soleado");
@@ -118,7 +118,7 @@ class RepositoryIntegrationTest {
 
     @Test
     @DisplayName("findByCorreo y existsByCorreo resuelven la autenticación")
-    void findByCorreo_y_existsByCorreo_resuelvenAutenticacion() {
+    void findByCorreoAndExistsByCorreo_resolveAuthentication() {
         User user = usuarioRepository.save(User.builder()
                 .firstName("Jefferson")
                 .lastName("Umaginga")
@@ -139,7 +139,7 @@ class RepositoryIntegrationTest {
 
     @Test
     @DisplayName("findByUsuario_IdUsuario lista las simulaciones de un user")
-    void findByUsuario_IdUsuario_listaSimulacionesDeUsuario() {
+    void findByUsuarioAndIdUsuario_listsUserSimulations() {
         User user = usuarioRepository.save(User.builder()
                 .firstName("Ana")
                 .lastName("Perez")

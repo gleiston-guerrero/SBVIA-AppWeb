@@ -29,21 +29,21 @@ public class BackupControllerTest {
     private BackupController controller;
 
     @Test
-    void testListar() {
+    void testList() {
         when(backupService.getAll()).thenReturn(List.of(new Backup()));
         List<Backup> res = controller.list();
         assertFalse(res.isEmpty());
     }
 
     @Test
-    void testGenerar() {
+    void testCreate() {
         when(backupService.generateBackup(any(), any())).thenReturn(new Backup());
         Backup res = controller.generate(new BackupRequestDTO());
         assertNotNull(res);
     }
 
     @Test
-    void testDescargar() throws IOException {
+    void testDownload() throws IOException {
         File tempFile = File.createTempFile("test", ".backup");
         tempFile.deleteOnExit();
         when(backupService.getFile(1L)).thenReturn(tempFile);
@@ -54,7 +54,7 @@ public class BackupControllerTest {
     }
     
     @Test
-    void testDescargarNotFound() {
+    void testDownloadNotFound() {
         File nonExistentFile = new File("doesnotexist12345.backup");
         when(backupService.getFile(1L)).thenReturn(nonExistentFile);
         
@@ -63,7 +63,7 @@ public class BackupControllerTest {
     }
 
     @Test
-    void testEliminar() {
+    void testDelete() {
         doNothing().when(backupService).deleteBackup(1L);
         ResponseEntity<Void> res = controller.delete(1L);
         assertEquals(204, res.getStatusCode().value());

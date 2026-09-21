@@ -18,7 +18,7 @@ class FeedbackLocalServiceTest {
     }
 
     @Test
-    void conduccionLimpiaDaRiesgoBajoYPuntajeMaximo() {
+    void cleanDrivingGivesLowRiskAndTopScore() {
         FeedbackIaResponse informe = motor.generate(base());
 
         assertThat(informe.getNivelRiesgo()).isEqualTo("BAJO");
@@ -31,7 +31,7 @@ class FeedbackLocalServiceTest {
     }
 
     @Test
-    void colisionYSemaforoDanRiesgoAlto() {
+    void collisionAndTrafficLightGiveHighRisk() {
         DrivingData datos = new DrivingData(90, new BigDecimal("50.00"), new BigDecimal("80.00"),
                 1, 1, 0, 1, 0, 0, new BigDecimal("50.00"), "Autopista", 3,
                 new BigDecimal("70.00"), new BigDecimal("80.00"));
@@ -45,7 +45,7 @@ class FeedbackLocalServiceTest {
     }
 
     @Test
-    void comparaContraElPromedioPrevio() {
+    void comparesAgainstPreviousAverage() {
         DrivingData datos = new DrivingData(60, new BigDecimal("40.00"), new BigDecimal("55.00"),
                 0, 0, 1, 0, 1, 0, new BigDecimal("90.00"), "Zona escolar", 2,
                 new BigDecimal("80.00"), new BigDecimal("82.00"));

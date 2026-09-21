@@ -54,7 +54,7 @@ public class AuditServiceTest {
     }
 
     @Test
-    void testObtenerAuditoriaConFiltros() {
+    void testGetAuditLogWithFilters() {
         List<AuditLog> expected = List.of(log1);
         
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
@@ -67,7 +67,7 @@ public class AuditServiceTest {
     }
 
     @Test
-    void testObtenerAuditoriaConFiltrosVarios() {
+    void testGetAuditLogWithSeveralFilters() {
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(List.of(log1));
         
         auditService.getAuditLogs("", "", "", null, null);
@@ -77,7 +77,7 @@ public class AuditServiceTest {
     }
 
     @Test
-    void testObtenerAuditoriaSinFiltros() {
+    void testGetAuditLogWithoutFilters() {
         List<AuditLog> expected = List.of(log1, log2);
         
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
@@ -89,7 +89,7 @@ public class AuditServiceTest {
     }
 
     @Test
-    void testGenerarReportePdf() throws Exception {
+    void testGeneratePdfReport() throws Exception {
         List<AuditLog> expected = List.of(log1, log2);
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expected);
 
@@ -105,7 +105,7 @@ public class AuditServiceTest {
     }
 
     @Test
-    void testGenerarReportePdfException() {
+    void testGeneratePdfReportThrows() {
         when(repository.findAll(any(Specification.class), any(Sort.class))).thenThrow(new RuntimeException("DB Error"));
 
         RuntimeException ex = assertThrows(RuntimeException.class, () -> {

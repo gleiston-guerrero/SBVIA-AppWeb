@@ -26,7 +26,7 @@ class UserDetailsServiceImplTest {
     private UserDetailsServiceImpl userDetailsService;
 
     @Test
-    void cargaUsuarioActivoPorCorreo() {
+    void loadsActiveUserByEmail() {
         User user = user(false);
         when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
                 .thenReturn(Optional.of(user));
@@ -40,7 +40,7 @@ class UserDetailsServiceImplTest {
     }
 
     @Test
-    void cargaUsuarioActivoPorNombreUsuario() {
+    void loadsActiveUserByUsername() {
         User user = user(false);
         when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getUsername(), user.getUsername()))
                 .thenReturn(Optional.of(user));
@@ -54,7 +54,7 @@ class UserDetailsServiceImplTest {
     }
 
     @Test
-    void rechazaUsuarioInactivo() {
+    void rejectsInactiveUser() {
         User user = user(true);
         when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
                 .thenReturn(Optional.of(user));
@@ -65,7 +65,7 @@ class UserDetailsServiceImplTest {
     }
 
     @Test
-    void rechazaIdentificadorNoRegistrado() {
+    void rejectsUnregisteredIdentifier() {
         when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase("ausente@sbvia.test", "ausente@sbvia.test"))
                 .thenReturn(Optional.empty());
 

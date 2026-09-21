@@ -44,7 +44,7 @@ class AuthServiceTest {
     private User user;
 
     @BeforeEach
-    void prepararUsuario() {
+    void prepareUser() {
         rol = Role.builder().roleId(1).name("ROLE_USER").build();
         user = User.builder()
                 .userId(9)
@@ -59,7 +59,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void rechazaUnRegistroConCorreoDuplicado() {
+    void rejectsRegistrationWithDuplicateEmail() {
         RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(true);
 
@@ -70,7 +70,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void rechazaUnRegistroSiFaltaElRolPredeterminado() {
+    void rejectsRegistrationWhenDefaultRoleIsMissing() {
         RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.empty());
@@ -81,7 +81,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void registraUsuarioConNombreUsuarioGeneradoExitosamente() {
+    void registersUserWithGeneratedUsernameSuccessfully() {
         RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.of(rol));
@@ -103,7 +103,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void revocaUnTokenQueTodaviaNoHaExpirado() {
+    void revokesTokenThatHasNotExpiredYet() {
         when(jwtService.extractJti("token")).thenReturn("jti-1");
         when(jwtService.getExpirationRemainingMs("token")).thenReturn(25_000L);
 
@@ -113,7 +113,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void noRevocaUnTokenQueYaExpiro() {
+    void doesNotRevokeTokenThatAlreadyExpired() {
         when(jwtService.extractJti("token")).thenReturn("jti-1");
         when(jwtService.getExpirationRemainingMs("token")).thenReturn(0L);
 
@@ -123,7 +123,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void rechazaUsarUnAccessTokenParaRenovar() {
+    void rejectsUsingAccessTokenToRefresh() {
         when(jwtService.extractTokenType("token")).thenReturn("access");
 
         assertThatThrownBy(() -> authService.refresh("token"))
@@ -132,7 +132,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void rechazaUnRefreshTokenRevocado() {
+    void rejectsRevokedRefreshToken() {
         when(jwtService.extractTokenType("token")).thenReturn("refresh");
         when(jwtService.extractJti("token")).thenReturn("jti-1");
         when(tokenBlacklistService.isTokenBlacklisted("jti-1")).thenReturn(true);
@@ -143,7 +143,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void obtieneElUsuarioActualPorIdentificador() {
+    void getsCurrentUserByIdentifier() {
         when(usuarioRepository.findByEmailIgnoreCaseOrUsernameIgnoreCase(user.getEmail(), user.getEmail()))
                 .thenReturn(Optional.of(user));
 
@@ -151,7 +151,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void cambiaElRolDelUsuario() {
+    void changesUserRole() {
         Role administrador = Role.builder().roleId(2).name("ROLE_ADMIN").build();
         when(usuarioRepository.findById(9)).thenReturn(Optional.of(user));
         when(rolRepository.findByName("ROLE_ADMIN")).thenReturn(Optional.of(administrador));
@@ -161,7 +161,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void haceEliminacionLogicaDelUsuario() {
+    void softDeletesUser() {
         when(usuarioRepository.findById(9)).thenReturn(Optional.of(user));
 
         authService.deleteUser(9);
