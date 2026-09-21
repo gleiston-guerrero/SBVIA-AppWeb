@@ -266,6 +266,88 @@ for f in (ruta("backend", "src", "main", "java")).rglob("*.java"):
 check("no queda ningun javadoc plantilla en el backend", plantilla == 0,
       f"{plantilla} encontrados")
 
+print("\n[12] Nombres en espanol (P6)")
+# Palabras inequivocamente espanolas del dominio. El escaneo cubre tipos y
+# metodos, que es lo que mide el criterio.
+_PAL = set("""
+servicio simulacion propia propio usuario usuarios correo correos activo activos inactivo
+regla reglas escenario escenarios practica practicas metrica metricas conduccion puntaje puntajes
+respaldo respaldos auditoria informe informes sesion sesiones revocado expirado duplicado generado
+exitosamente fallo limpia contador intentos umbral respuesta nula vigente busca actualiza persiste
+mapea paginacion eliminar editar formatear dibujar senal senales velocidad velocidades
+retroalimentacion todas todo toda todos nombre nombres apellido apellidos telefono telefonos
+contrasena clave claves codigo codigos fecha fechas estado estados tipo tipos nivel niveles
+riesgo riesgos nivelriesgo obtener crear listar iniciar finalizar guardar calcular validar
+verificar comprobar generar convertir asignar mostrar cargar cerrar abrir contar filtrar ordenar
+enviar recibir procesar ejecutar responder registrar cancelar confirmar seleccionar agregar
+modificar cambiar reiniciar pausar reanudar detener pintar mover almacenar anterior siguiente
+ultimo ultima primero primera nuevo nueva viejo conductor conductores vehiculo vehiculos carril
+carriles colision colisiones semaforo semaforos distancia distancias tiempo tiempos duracion
+infraccion infracciones desempeno rendimiento resultado resultados aprobado reprobado listado
+registro registros bitacora mensaje mensajes aviso correcto incorrecto valido invalido vacio
+disponible disponible habilitado cantidad numero porcentaje promedio
+""".split())
+
+# Nombres legitimos: impuestos por el esquema (derived queries sobre campos de
+# entidad), por el contrato JSON, o porque el nombre de la prueba refleja a
+# proposito el metodo de repositorio que verifica.
+_PERMITIDOS = {
+    "getFechaProgramada", "setFechaProgramada", "semaforosRespetados",
+    "findByActivoTrue", "findByCodigo", "findFirstByActivoTrueOrderByIdVehiculoAsc",
+    "findByActivoTrue_returnsOnlyActiveScenarios",
+    "findByCorreoAndExistsByCorreo_resolveAuthentication",
+    "findByUsuarioAndIdUsuario_listsUserSimulations",
+}
+
+_PALABRA = _re.compile(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])|[0-9]+")
+_DECL_TIPO = _re.compile(
+    r"(?m)^[ \t]*(?:@\w+(?:\([^)\n]*\))?[ \t]*\n?[ \t]*)*"
+    r"(?:(?:public|protected|private|static|final|abstract)\s+)*"
+    r"(?:class|interface|enum|record)\s+(\w+)"
+)
+_DECL_METODO = _re.compile(
+    r"(?m)^[ \t]*(?:@\w+(?:\([^)\n]*\))?[ \t]*\n?[ \t]*)*"
+    r"(?:(?:public|protected|private|static|final|abstract|synchronized|native|default|strictfp)\s+)*"
+    r"(?:[\w$]+(?:\s*<[^;{}()]*>)?(?:\[\])?(?:\s*\.\s*[\w$]+)*)\s+(\w+)\s*\("
+)
+_DECL_TS = _re.compile(r"(?m)^\s*(?:public\s+|private\s+|protected\s+)?(\w+)\s*\(")
+
+
+def _es_espanol(nombre: str) -> bool:
+    return any(p.lower() in _PAL for p in _PALABRA.findall(nombre))
+
+
+def _recoge(archivos, patrones):
+    marcados = set()
+    for f in archivos:
+        texto = f.read_text(encoding="utf-8")
+        clase = _re.search(r"(?:class|interface|enum|record)\s+(\w+)", texto)
+        nc = clase.group(1) if clase else ""
+        for patron in patrones:
+            for m in patron.finditer(texto):
+                n = m.group(1)
+                if n in nc or n in ("if", "for", "while", "switch", "catch", "return",
+                                    "new", "constructor", "try", "else", "do", "throw",
+                                    "assert", "super", "this"):
+                    continue
+                if _es_espanol(n):
+                    marcados.add(n)
+    return marcados
+
+
+_todos = set()
+_todos |= _recoge((ruta("backend", "src", "main").rglob("*.java")), (_DECL_TIPO, _DECL_METODO))
+_todos |= _recoge((ruta("backend", "src", "test").rglob("*.java")), (_DECL_TIPO, _DECL_METODO))
+_todos |= _recoge([p for p in (ruta("frontend", "src")).rglob("*.ts")
+                   if not p.name.endswith(".spec.ts")], (_DECL_TS,))
+
+_no_permitidos = sorted(_todos - _PERMITIDOS)
+check("no quedan nombres en espanol fuera de la lista blanca",
+      not _no_permitidos,
+      ", ".join(_no_permitidos[:6]))
+print(f"        marcados: {len(_todos)} | permitidos: {len(_todos & _PERMITIDOS)} | "
+      f"fuera de la lista: {len(_no_permitidos)}")
+
 print("\n" + "=" * 62)
 if fallos:
     print(f"INTEGRIDAD FALLIDA: {len(fallos)} de {total} comprobaciones")
