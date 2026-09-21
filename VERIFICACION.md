@@ -172,3 +172,17 @@ Paso 1: Rendimiento (Frio > Caliente)
 
 - **Estado:** **Rectificado (observación X6).** Se retira la declaración de aprobación. Los dos informes de revisión firmados por el docente-director (`docs/requisitos/Revision_SRS_SBVIA_v1.1.0.pdf` y `docs/requisitos/Revision_SRS_SBVIA_v1.2.0.pdf`) declaran por escrito, ambos, que *"no asignan calificación y no constituyen aprobación del SRS"*. La firma acredita que el documento fue revisado, no que fuera aprobado. En consecuencia, el control del documento marca la v1.0.0, la v1.1.0 y la v1.2.0 como **Revisada con observaciones**, y se elimina de este expediente toda afirmación de que la firma del informe "constituye validación suficiente del SRS".
 - **Comprobación:** la frase "Aprobada — validada mediante firma del docente-director" ya no aparece en el repositorio; los cuatro archivos que la contenían (`SRS-v1.1.0.tex`, `CHANGELOG-REQ.md`, `CONTRIBUCIONES.md` y este expediente) declaran el mismo estado. La aprobación del SRS se emite por escrito y en el propio documento, no por inferencia de una confirmación verbal.
+
+## Integridad de las mediciones — contenido y árbol de trabajo (EV-2)
+
+- **Descripción:** El verificador anterior comprobaba la **existencia** de la evidencia con `git ls-files`, que lee el **índice** y no el **árbol de trabajo** —de modo que un archivo borrado del disco seguía contando— y ninguna orden inspeccionaba el **contenido** de las mediciones. Esta comprobación cubre ambas cosas: las seis corridas de Lighthouse apuntan al despliegue público (ninguna a `localhost`), su accesibilidad es 1,00 y no tienen auditorías binarias fallidas; los manifiestos coinciden con sus informes; las cifras de cobertura que cita el informe reproducen el resumen de JaCoCo (y el CSV coincide con el XML); no hay `@CrossOrigin("*")`; `application-prod.yml` fija `secure: true`; el PDF del informe no es un archivo de prueba; y los contratos Backup (11 campos) y AuditLog (8 campos) coinciden campo por campo entre backend y frontend.
+- **Orden exacta:** `python scripts/verify_integridad_mediciones.py`
+- **Salida:** `INTEGRIDAD OK: 36 comprobaciones superadas`
+- **Ruta del archivo que la respalda:** `docs/mediciones/`, `docs/informe-final.pdf`, `backend/src/main/java/`, `frontend/src/app/features/`.
+
+## Resistencia a mutaciones del verificador de integridad (EV-2)
+
+- **Descripción:** Aplica **nueve** manipulaciones sobre el árbol de trabajo —apuntar Lighthouse a localhost, falsear la accesibilidad, marcar una auditoría como fallida, falsear un manifiesto, borrar una corrida, alterar la cifra de cobertura del informe, añadir `@CrossOrigin("*")`, romper un campo del contrato y sustituir el PDF por un archivo de un byte— y exige que el verificador de integridad **falle en todas**. Restaura el árbol al terminar y comprueba que vuelve a estar en verde. Es la comprobación que faltaba: antes sobrevivían ocho de doce mutaciones.
+- **Orden exacta:** `python scripts/test_mutaciones_integridad.py`
+- **Salida:** `Sobrevivientes : 0`
+- **Ruta del archivo que la respalda:** `scripts/test_mutaciones_integridad.py`.
