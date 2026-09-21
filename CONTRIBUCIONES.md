@@ -27,7 +27,7 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commits:** `9afd075`, `6fc74d3`, `0455786`, `ccee94f`, `d5f7841`, `9e7cc01`.
     *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`, `docs/diagramas/pantalla-*.png`, `frontend/src/app/i18n/`.
 *   **P4 — Sin depósito propio en Zenodo (1.0 pts)**
-    *   Se añadió a `CITATION.cff` la referencia al dataset de validación con su DOI real (`10.5281/zenodo.22785358`), además del DOI del software (`10.5281/zenodo.22840356`).
+    *   Se añadió a `CITATION.cff` la referencia al dataset de validación con su DOI real (`10.5281/zenodo.22785358`), además del DOI del software (`10.5281/zenodo.22866363`).
     *   **Commit:** `12297ee`.
     *   **Archivos:** `CITATION.cff`.
 *   **P5 — Instrumento y consentimientos del SUS (0.8 pts) — NO RESUELTO**
