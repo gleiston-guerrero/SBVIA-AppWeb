@@ -1,0 +1,657 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+% Colores
+\definecolor{uteqblue}{RGB}{20, 50, 100}
+\definecolor{reqheader}{RGB}{235, 240, 245}
+
+% Estilo de hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=uteqblue,
+    urlcolor=uteqblue
+}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    {\LARGE \textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\\[0.5cm]
+    {\large Facultad de Ciencias de la Ingeniería}\\[0.2cm]
+    {\large Carrera de Ingeniería de Software}\\[0.8cm]
+    
+    {\large ASIGNATURA: Aplicaciones Web}\\[0.2cm]
+    {\large Quinto Nivel — Período Académico 2026-2027}\\[1cm]
+    
+    {\Huge \bfseries Especificación de Requisitos de Software (SRS)}\\[0.5cm]
+    {\large Estándar ISO/IEC/IEEE 29148:2018}\\[1cm]
+    
+    {\huge \bfseries \color{uteqblue} Sistema de Simulación de Comportamiento Vial con Inteligencia Artificial (SBVIA)}\\[0.5cm]
+    {\Large Versión 1.3.0}\\[1cm]
+    
+    \begin{table}[h]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabularx}{\textwidth}{|l|X|}
+            \hline
+            \textbf{Repositorio de entrega} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
+            \textbf{Punto del historial} & etiqueta v1.3.0 \\ \hline
+            \textbf{DOI del software (Zenodo)} & \texttt{10.5281/zenodo.22840356} \\ \hline
+            \textbf{Fecha de emisión} & 21 de septiembre de 2026 \\ \hline
+        \end{tabularx}
+    \end{table}
+
+    \vfill
+
+    {\Large \textbf{AUTORES}}\\[0.5cm]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        {\large Cruz Pérez, Justyn K.}\\[0.1cm]
+        {\small ORCID: \texttt{0009-0009-0847-0780}}\\[0.1cm]
+        {\small Correo: \texttt{jcruzp@uteq.edu.ec}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        {\large Umaginga Arévalo, Jefferson M.}\\[0.1cm]
+        {\small ORCID: \texttt{0009-0005-9831-0801}}\\[0.1cm]
+        {\small Correo: \texttt{jumagingaa@uteq.edu.ec}}
+    \end{minipage}
+    \vspace{1cm}
+
+    {\Large \textbf{DOCENTE-DIRECTOR}}\\[0.2cm]
+    {\large Ing. Gleiston Cíceron Guerrero Ulloa, Ph.D.}\\[0.5cm]
+
+    \footnotetext{Nota aclaratoria de autoría: El tercer integrante originalmente propuesto, Zamora Bumbila, Diego Alexander, no participó en la elaboración ni desarrollo de este proyecto, por lo que ha sido excluido del informe final y los metadatos del repositorio.}
+    
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section*{Control del documento}
+\addcontentsline{toc}{section}{Control del documento}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{@{}|l|l|X|l|@{}}
+        \hline
+        \rowcolor{uteqblue}
+        \textcolor{white}{\textbf{Versión}} & \textcolor{white}{\textbf{Fecha}} & \textcolor{white}{\textbf{Descripción}} & \textcolor{white}{\textbf{Estado}} \\ \hline
+        1.0.0 & 17-09-2026 & Línea base de la entrega final & Revisada con observaciones \\ \hline
+        1.1.0 & 18-09-2026 & Correcciones de URLs, Lighthouse y limpieza & Revisada con observaciones \\ \hline
+        1.2.0 & 19-09-2026 & Corrección de 14 observaciones (N1–N14) y de 12 observaciones (X1–X12) del informe de revisión & Revisada con observaciones \\ \hline
+        1.3.0 & 21-09-2026 & Cierre del examen suspenso: correcciones P1–P12, estudio de usabilidad de septiembre de 2026 y registro de dos defectos propios (R-09, R-10) & Pendiente de aprobación \\ \hline
+    \end{tabularx}
+\end{table}
+
+\textit{Nota: Los dos informes de revisión firmados por el docente-director
+(\texttt{Revision\_SRS\_SBVIA\_v1.1.0.pdf} y \texttt{Revision\_SRS\_SBVIA\_v1.2.0.pdf}) declaran
+explícitamente, ambos, que ``no asignan calificación y no constituyen aprobación del SRS''.
+Ninguna versión figura por tanto como aprobada: las tres anteriores constan como revisadas con observaciones, y la v1.3.0 queda pendiente de aprobación.
+La aprobación del SRS se emite por escrito y en el propio documento, no por inferencia de una
+confirmación verbal.}
+
+\newpage
+
+% ==============================
+% 1. INTRODUCCIÓN
+% ==============================
+\section{Introducción}
+
+\subsection{Propósito}
+Este documento establece los requisitos verificables de SBVIA v1.3.0 y constituye la línea base contractual para desarrollo, prueba, despliegue y evaluación académica. La v1.2.0 corrigió las 14 observaciones (N1–N14) del informe de revisión sobre la v1.1.0 y las 12 observaciones (X1–X12) de su informe de revisión. Esta v1.3.0 cierra el examen suspenso: resuelve los doce puntos pendientes (P1–P12), incorpora el estudio de usabilidad de septiembre de 2026 que sustituye al estudio retirado, registra dos defectos propios en \texttt{docs/RETRACTIONS.md} (R-09 y R-10) y alinea los metadatos de depósito con el DOI del software efectivamente publicado.
+
+\subsection{Alcance}
+SBVIA es una aplicación web de formación vial que administra usuarios y escenarios, conserva prácticas de simulación, calcula resultados y presenta retroalimentación. Incluye un backend Java 21 con Spring Boot, un frontend Angular, PostgreSQL 16, Redis 7 y orquestación Docker Compose.
+
+\subsection{Audiencia}
+Equipo de desarrollo, docente-director, evaluadores, administradores, instructores y conductores en formación.
+
+\subsection{Definiciones}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{@{}|l|X|@{}}
+        \hline
+        \rowcolor{uteqblue}
+        \textcolor{white}{\textbf{Término}} & \textcolor{white}{\textbf{Definición}} \\ \hline
+        CRUD-ORM & Operaciones elementales implementadas mediante Spring Data JPA. \\ \hline
+        SP & Procedimiento almacenado o función SQL parametrizada. \\ \hline
+        JWT & Token firmado para autenticación stateless. \\ \hline
+        SUS & System Usability Scale. \\ \hline
+        p95 & Percentil 95 de una distribución de latencias. \\ \hline
+        RTO & Recovery Time Objective: tiempo máximo admisible para restaurar el servicio. \\ \hline
+        RPO & Recovery Point Objective: pérdida máxima admisible de datos medida en tiempo. \\ \hline
+        VERIFIED & El requisito ha sido implementado y comprobado mediante pruebas automatizadas exhaustivas o auditorías. \\ \hline
+        TESTED & El requisito ha sido verificado únicamente a nivel de componente o prueba superficial, o implementado exitosamente. \\ \hline
+        IMPLEMENTED & El requisito está desarrollado en el código fuente, pero su cobertura de prueba no valida completamente el criterio. \\ \hline
+        NOT VERIFIED & El requisito cuenta con evidencia declarada que no puede sostenerse contra el repositorio; no se considera cumplido. \\ \hline
+        Inactividad & Ausencia de autenticación y uso del sistema por un período superior a 6 meses (medido por el campo \texttt{ultimo\_acceso} en la entidad \texttt{User}). \\ \hline
+        Práctica & Registro individual del desempeño de un conductor en un escenario específico. \\ \hline
+        Certificado & Documento inmutable emitido al aprobar un escenario. \\ \hline
+        Puntaje & Valor numérico de 0 a 100 asignado por la simulación. \\ \hline
+        Escenario & Configuración específica del entorno vial (clima, tráfico, dificultad) a ser simulado. \\ \hline
+        Infracción & Violación a una regla de tránsito registrada durante una práctica. \\ \hline
+        Comportamiento Vial & Decisión tomada por el usuario evaluada por el motor de IA. \\ \hline
+    \end{tabularx}
+\end{table}
+
+% ==============================
+% 2. DESCRIPCIÓN GENERAL
+% ==============================
+\section{Descripción general}
+
+\subsection{Perspectiva del producto}
+La solución adopta arquitectura cliente-servidor. Angular consume una API REST protegida por JWT; Spring Boot implementa lógica, autorización por roles y persistencia; PostgreSQL conserva los datos y Redis gestiona caché y revocación de tokens.
+
+\subsection{Clases de usuario}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{@{}|l|X|@{}}
+        \hline
+        \rowcolor{uteqblue}
+        \textcolor{white}{\textbf{Rol}} & \textcolor{white}{\textbf{Capacidades principales}} \\ \hline
+        Conductor & Registro, autenticación, consulta de escenarios, prácticas, métricas y perfil. \\ \hline
+        Administrador & Gestión de escenarios, usuarios, roles, reglas de tránsito, respaldos y consulta global de prácticas. \\ \hline
+        Instructor & Consulta de resultados agregados de estudiantes a su cargo. \\ \hline
+    \end{tabularx}
+\end{table}
+
+\subsection{Interfaces externas}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{@{}|l|X|@{}}
+        \hline
+        \rowcolor{uteqblue}
+        \textcolor{white}{\textbf{Interfaz}} & \textcolor{white}{\textbf{Descripción}} \\ \hline
+        REST API Frontend-Backend & Angular consume la API en \texttt{/api/**} mediante JWT en cookie HttpOnly. Documentación disponible en \url{https://sbvia-appweb.onrender.com/api/swagger-ui.html}. \\ \hline
+        OpenAI / Groq API (IA) & Motor de retroalimentación externo. El servicio \texttt{ExternalAiFeedbackService} invoca la API bajo \texttt{AI\_API\_URL}. Si no está disponible, el sistema hace fallback al motor local de reglas. \\ \hline
+        PostgreSQL 16 & Base de datos relacional. Acceso mediante Spring Data JPA y 7 procedimientos almacenados (V14). \\ \hline
+        Redis 7 & Caché distribuida para listas de escenarios y lista negra de tokens JWT revocados. \\ \hline
+        Docker Compose & Orquestación de todos los servicios en entorno reproducible. \\ \hline
+        Zenodo & Repositorio de publicación de software DOI \texttt{10.5281/zenodo.22840356}. \\ \hline
+    \end{tabularx}
+\end{table}
+
+\subsection{Restricciones}
+La versión estable utiliza Java 21, Spring Boot, Angular 17 o superior, PostgreSQL 16, Flyway, Redis 7 y Docker Compose. No se admiten secretos productivos versionados. El despliegue público debe usar HTTPS. La cookie de sesión debe emitirse siempre con \texttt{HttpOnly}, \texttt{SameSite=Strict} y \texttt{Secure=true} en entorno de producción (perfil \texttt{prod}).
+
+\subsection{Suposiciones y dependencias}
+El navegador admite cookies SameSite y JavaScript moderno. El entorno dispone de Docker y conectividad entre servicios. Los servicios externos de publicación, DOI y dominio son responsabilidad organizativa y no se simulan dentro del software.
+
+\subsection{Datos, seguridad y calidad}
+
+\subsubsection*{Política de datos personales}
+Los datos de conductores (nombre, correo, teléfono, fecha de nacimiento) son recolectados bajo consentimiento informado documentado en \texttt{docs/etica/consentimientos/}. La política vigente establece:
+\begin{itemize}[label=\textbf{--}]
+    \item \textbf{Minimización:} Solo se recolectan datos necesarios para la operación. No se transmiten datos de identificación personal al proveedor externo de IA.
+    \item \textbf{Retención:} Los datos se retienen mientras la cuenta esté activa. Las cuentas inactivas por más de 6 meses son desactivadas automáticamente.
+    \item \textbf{Supresión:} Las cuentas desactivadas pueden solicitarse eliminar por el administrador del sistema.
+    \item \textbf{Seudonimización:} Las métricas de evaluación (SUS) se publican asociadas a códigos P01–P15, sin identificadores directos (ni nombres, ni firmas, ni correos). Se trata de datos \textbf{seudonimizados} y no anónimos: la clave de correspondencia existe y se conserva en custodia externa junto a los consentimientos firmados, que autorizan expresamente la publicación de estos datos. La reevaluación de septiembre de 2026 consta en \texttt{docs/mediciones/sus/sus-analysis-2026-09.md}; el estudio de julio de 2026 sigue retirado.
+\end{itemize}
+
+\subsubsection*{Seguridad}
+El sistema implementa controles de seguridad alineados con OWASP Top 10: autenticación BCrypt (A02), cookies HttpOnly+Secure+SameSite (A02), rate limiting de login (A07), cabecera HSTS (A05), sin SQL dinámico en procedimientos (A03), registro de eventos de autenticación (A09).
+
+\subsubsection*{Calidad}
+Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación SUS media: \textbf{69,00} con 15 participantes (estudio de septiembre de 2026; véase RNF-06). Lighthouse accesibilidad: \textbf{1.00}. El conjunto de corridas \textbf{vigente} es el ejecutado el 19-09-2026 contra \url{https://sbvia-frontend.onrender.com/login} (tres corridas en perfil móvil y tres en perfil escritorio, accesibilidad 1.00 en las seis y cero auditorías fallidas), conservado en \texttt{docs/mediciones/lighthouse/mobile/} y \texttt{docs/mediciones/lighthouse/desktop/}. Las corridas del 18-09-2026 sobre \texttt{/dashboard} (accesibilidad 0.91, una auditoría \texttt{color-contrast} fallida) se conservan únicamente como registro \textbf{histórico y no vigente} en \texttt{docs/mediciones/lighthouse/administrador/}, \texttt{instructor/} y \texttt{participante/}, y no deben citarse como el estado actual de accesibilidad.
+
+\newpage
+% ==============================
+% 3. REQUISITOS FUNCIONALES
+% ==============================
+\section{Requisitos funcionales}
+
+\newenvironment{requisito}[1]{
+    \vspace{0.5cm}
+    \noindent\tabularx{\textwidth}{@{}|X|@{}}
+    \hline
+    \rowcolor{reqheader} \textbf{#1} \\
+    \hline
+}{
+    \\ \hline
+    \endtabularx
+}
+
+\begin{requisito}{RF-01 - Autenticación stateless con JWT}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá autenticar a los usuarios mediante credenciales válidas y emitir un JWT (JSON Web Token) stateless. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Dado un usuario registrado, cuando presenta credenciales válidas, entonces recibe un JWT vigente y cookies seguras; credenciales inválidas producen 401. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (AuthServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-02 - Gestión de Escenarios viales (CRUD)}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá permitir a los administradores crear, leer, actualizar y eliminar (desactivar) escenarios viales, restringiendo la escritura a los conductores. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Un administrador puede crear, consultar, actualizar y desactivar escenarios; un conductor solo puede consultarlos y recibe 403 al intentar modificarlos. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (ScenarioServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-03 - Consulta multi-tabla de resultados de simulación}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá recuperar los resultados detallados de una simulación consultando múltiples tablas mediante un procedimiento almacenado. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Al consultar una simulación existente, el sistema compone sus datos relacionados mediante la función \texttt{sp\_reporte\_simulacion} (definida en V14) y retorna un resultado consistente. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_reporte\_simulacion.sql
+\end{requisito}
+
+\begin{requisito}{RF-04 - Cálculo agregado de promedio de desempeño de conductor}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá calcular el promedio global de desempeño de un conductor evaluando todas sus simulaciones completadas. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Para un conductor con simulaciones, el promedio calculado por la función \texttt{sp\_calcular\_promedio\_usuario} coincide con los datos persistidos. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_calcular\_promedio\_usuario.sql
+\end{requisito}
+
+\begin{requisito}{RF-05 - Generación de reporte consolidado diario de actividad}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá generar un reporte diario que consolide toda la actividad del sistema para la fecha especificada. \\[0.2cm]
+    \textbf{Criterio de aceptación:} El reporte diario incluye la actividad correspondiente a la fecha solicitada. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_reporte\_actividad\_diaria.sql
+\end{requisito}
+
+\begin{requisito}{RF-06 - Actualización masiva de conductores inactivos}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá actualizar periódicamente el estado de las cuentas de conductor inactivos mediante una operación masiva y dejar traza de auditoría. La inactividad se mide por el campo \texttt{ultimo\_acceso} en la entidad \texttt{User} (no por fecha de registro). \\[0.2cm]
+    \textbf{Criterio de aceptación:} La operación masiva cambia únicamente usuarios cuyo último acceso supera los 6 meses, conserva los demás registros y guarda un registro en la tabla de auditoría (AuditLog). \\[0.2cm]
+    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA que mapea la tabla física de auditoría; no son dos almacenes distintos. Esa tabla se creó como \texttt{bitacora\_auditoria} en la migración \texttt{V3\_\_auditoria\_operaciones.sql} y la migración \texttt{V17\_\_renombrar\_tablas\_ingles.sql} la renombró a \texttt{audit\_log}, que es el nombre declarado en \texttt{@Table(name = "audit\_log")} dentro de \texttt{AuditLog.java}. El procedimiento \texttt{sp\_actualizar\_usuarios\_inactivos} redefinido en \texttt{V18\_\_conectar\_procedimientos\_sp.sql} sigue insertando en el nombre anterior al renombrado (\texttt{bitacora\_auditoria}); esa incoherencia se declara aquí como punto abierto pendiente de verificar contra la base desplegada, y no se corrige en esta versión para no alterar el \textit{checksum} de una migración ya aplicada. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (AuthControllerTest.java) \quad \textbf{SQL:} db/procs/sp\_actualizar\_usuarios\_inactivos.sql
+\end{requisito}
+
+\begin{requisito}{RF-07 - Validación cruzada de consistencia de reglas de escenario}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá validar que las configuraciones de los escenarios no contengan reglas contradictorias antes de su guardado. \\[0.2cm]
+    \textbf{Criterio de aceptación:} La validación de escenario detecta configuraciones inconsistentes y acepta configuraciones válidas. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (ScenarioServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_validar\_escenario.sql
+\end{requisito}
+
+\begin{requisito}{RF-08 - Generación de código secuencial único para certificado}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá asignar un código de verificación único y secuencial a cada certificado generado. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Cada certificado generado recibe un código secuencial único y reproducible dentro de la transacción usando \texttt{sp\_generar\_codigo\_certificado}. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_certificado.sql
+\end{requisito}
+
+\begin{requisito}{RF-09 - Evaluación Automática de Comportamiento Vial (IA)}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Módulo:} Motor IA \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá evaluar las decisiones del usuario interactuando con un modelo de IA externo (OpenAI/Groq) o un motor de reglas local de respaldo, registrando el identificador del modelo utilizado. \\[0.2cm]
+    \textbf{Criterio de aceptación:} El sistema clasifica el comportamiento vial y guarda la decisión con el identificador del modelo utilizado (IA, IA\_LOCAL u OPENAI). \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (FeedbackServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-10 - Generación de Retroalimentación Textual (IA)}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Módulo:} Motor IA \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá generar retroalimentación textual y recomendaciones basadas en las acciones del conductor durante la simulación. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Todo comportamiento vial evaluado como incorrecto o subóptimo genera una recomendación de mejora registrada en la base de datos. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (FeedbackServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-11 - Reglas de Negocio: Certificación y Puntaje}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP + CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá emitir un certificado si y solo si el puntaje calculado en la simulación es mayor o igual a \textbf{70 puntos}. El cálculo de puntaje (100 menos penalizaciones acumuladas) lo realiza el procedimiento \texttt{sp\_calcular\_puntaje\_simulacion}; la decisión de certificar con $\geq 70$ es aplicada por \texttt{SimulationRepository} en Java (consulta JPQL, línea 37). \\[0.2cm]
+    \textbf{Criterio de aceptación:} Las simulaciones con puntaje $\geq$ 70 disparan la generación de certificado; las simulaciones con puntaje $<$ 70 se marcan como fallidas. La prueba \texttt{finalizaLaSimulacionYApruebaConSetentaPuntos()} en SimulationServiceTest.java confirma el umbral de 70. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_calcular\_puntaje\_simulacion.sql
+\end{requisito}
+
+\begin{requisito}{RF-12 - Persistencia de Entidades Secundarias}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá registrar y administrar de manera consistente las Reglas de Tránsito, Infracciones, Eventos Viales, Decisiones y Recompensas generadas durante las prácticas. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Las 5 entidades de dominio (TrafficRule, Infraction, EventoVial, Decision, Recompensa) persisten su estado relacional sin errores de integridad. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (DrivingSimulationIntegrationTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-13 - Protección de Datos Personales de Conductores}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend + Frontend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá implementar controles de minimización, retención, y derecho de supresión sobre los datos personales de los conductores, conforme a lo consignado en los formularios de consentimiento informado (\texttt{docs/etica/consentimientos/}). \\[0.2cm]
+    \textbf{Criterio de aceptación:} (a) Solo se recolectan los campos declarados en el consentimiento informado. (b) Las cuentas inactivas $>6$ meses se desactivan automáticamente (RF-06). (c) No se transmiten datos de identificación personal al proveedor de IA externo (RNF-08). (d) Un administrador puede eliminar la cuenta de un conductor desde el panel de gestión. \\[0.2cm]
+    \textbf{Verificación:} Inspección del consentimiento informado + Prueba Unitaria (ExternalAiFeedbackServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-14 - Respaldo y Disponibilidad con RTO/RPO}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá ejecutar respaldos programados y manuales de la base de datos, con metas de disponibilidad definidas: RTO $\leq$ 4 horas, RPO $\leq$ 24 horas. El módulo \texttt{BackupService} y \texttt{BackupController} implementan esta funcionalidad. \\[0.2cm]
+    \textbf{Criterio de aceptación:} (a) Un administrador puede iniciar un respaldo manual desde el panel. (b) El sistema registra cada respaldo en la tabla \texttt{historial\_respaldos} (migración V11). (c) La recuperación puede realizarse en un tiempo máximo de 4 horas. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (BackupServiceTest.java) + Inspección de BackupController.java \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-15 - Trazabilidad de Eventos (AuditLog)}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} IMPLEMENTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} CRUD-ORM \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá registrar en un log de auditoría (AuditLog) los eventos de autenticación, modificación de usuarios, respaldos y operaciones masivas. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Cada evento de autenticación exitoso y fallido genera una entrada en la tabla \texttt{AuditLog}. Las operaciones de RF-06 (inactivación masiva) y RF-14 (respaldo) también registran en AuditLog. \\[0.2cm]
+    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA (\texttt{@Table(name = "audit\_log")}) que mapea la tabla física creada como \texttt{bitacora\_auditoria} en \texttt{V3} y renombrada a \texttt{audit\_log} en \texttt{V17}; véase la nota de RF-06. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (AuditServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RF-16 - Cierre de simulaciones vencidas}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá cerrar automáticamente simulaciones abiertas que hayan superado el tiempo de inactividad utilizando \texttt{sp\_cerrar\_simulaciones\_vencidas}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Las simulaciones inactivas pasan a estado 'ABANDONADA' o 'CERRADA'. \\[0.2cm]
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_cerrar\_simulaciones\_vencidas.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_cerrar\_simulaciones\_vencidas.sql
+\end{requisito}
+
+\begin{requisito}{RF-17 - Generación de código de reporte}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá generar un código de seguimiento para reportes usando \texttt{sp\_generar\_codigo\_reporte}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Todo reporte generado obtiene un código único. \\[0.2cm]
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_generar\_codigo\_reporte.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_reporte.sql
+\end{requisito}
+
+\begin{requisito}{RF-18 - Generación de reporte de simulación general}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá compilar los datos generales en un informe completo usando \texttt{sp\_generar\_reporte\_simulacion}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} El reporte incluye todas las métricas de la simulación. \\[0.2cm]
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_generar\_reporte\_simulacion.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_generar\_reporte\_simulacion.sql
+\end{requisito}
+
+\begin{requisito}{RF-19 - Generación de resumen de usuario}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá consolidar el resumen de desempeño de un usuario usando \texttt{sp\_resumen\_usuario}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Se retorna el promedio histórico y total de prácticas del conductor. \\[0.2cm]
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_resumen\_usuario.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_resumen\_usuario.sql
+\end{requisito}
+
+\begin{requisito}{RF-20 - Validación general de simulación}
+    \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} NOT VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} SP \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá validar la integridad de una simulación completa usando \texttt{sp\_validar\_simulacion}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Una simulación inválida es rechazada con un estado de error correspondiente. \\[0.2cm]
+    \textbf{Nota (X3/X5):} El procedimiento existe y está versionado, pero la aplicación no lo invoca: cero ocurrencias de su nombre en \texttt{backend/src/main/java}. Por eso el estado es NOT VERIFIED y no IMPLEMENTED. Se retira además la cita a \texttt{SimulationRepositoryTest.java} (X4): esa clase no existe en el repositorio. \\[0.2cm]
+    \textbf{Verificación:} Definición del procedimiento en \texttt{db/procs/sp\_validar\_simulacion.sql}, incluida en la migración \texttt{V14\_\_procedimientos\_almacenados.sql}. Sin prueba automatizada asociada. \quad \textbf{SQL:} db/procs/sp\_validar\_simulacion.sql
+\end{requisito}
+
+\newpage
+% ==============================
+% 4. REQUISITOS NO FUNCIONALES
+% ==============================
+\section{Requisitos no funcionales}
+
+\begin{requisito}{RNF-01 - Latencia de lectura en caché caliente p95 $\le$ 200ms}
+    \textbf{Tipo:} PERF \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} API \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá responder a consultas cacheadas con un percentil 95 de latencia no mayor a 200 milisegundos bajo una carga de 50 usuarios virtuales concurrentes durante 30 segundos. \\[0.2cm]
+    \textbf{Criterio de aceptación:} La corrida k6 reporta p95 de caché caliente $\leq$ 200 ms y tasa de error inferior a 1\%. Se conserva la salida cruda NDJSON como evidencia en el repositorio. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Rendimiento (scripts/k6/load-test.js) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-02 - Latencia de lectura en frío p95 $\le$ 500ms}
+    \textbf{Tipo:} PERF \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Módulo:} API \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá responder a consultas sin caché previo con un percentil 95 de latencia no mayor a 500 milisegundos bajo carga de 50 VUs por 30s. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Una corrida k6 con caché vaciada antes de iniciar reporta p95 $\leq$ 500 ms. \\[0.2cm]
+    \textbf{Evidencia real (corrida en frío 18-sep-2026):} El p95 medido fue \textbf{17.18 s} (avg=7.62s, min=1.4s, max=19.46s) contra \texttt{https://sbvia-appweb.onrender.com}. El umbral no se cumple en el plan gratuito de Render (spin-down de hasta 30s). El NDJSON completo se conserva en \texttt{docs/mediciones/perf/k6-cold-run.ndjson}. Para cumplir el umbral se requeriría un plan de servidor que mantenga el proceso siempre activo. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Rendimiento (scripts/k6/load-test.js) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-03 - Contraseñas hasheadas con BCrypt y factor de costo $\ge$ 10}
+    \textbf{Tipo:} SEC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá hashear todas las contraseñas utilizando el algoritmo BCrypt con un factor de costo mínimo de 10. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Las contraseñas se almacenan con BCrypt y el sistema genera hashes con el prefijo correcto correspondiente al factor de costo configurado. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (AuthServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-04 - Cookie de token con HttpOnly, Secure y SameSite=Strict}
+    \textbf{Tipo:} SEC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá enviar el token de sesión a través de una cookie HTTP configurada con los flags \textbf{HttpOnly}, \textbf{Secure} y \textbf{SameSite=Strict}. En producción el flag \texttt{Secure} debe ser siempre \texttt{true} (perfil \texttt{prod} fija \texttt{security.cookie.secure=true}). \\[0.2cm]
+    \textbf{Criterio de aceptación:} La cookie de respuesta incluye HttpOnly, Secure y SameSite=Strict en el perfil de producción. El código (\texttt{AuthController.java}, línea 216) usa \texttt{.secure(cookieSecure)} donde \texttt{cookieSecure} se toma de \texttt{application-prod.yml} y su valor es \texttt{true} explícitamente. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (AuthControllerTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-05 - Ausencia total de SQL dinámico en procedimientos}
+    \textbf{Tipo:} SEC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Database \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá prevenir la inyección SQL en la base de datos evitando el uso de SQL dinámico inseguro. \\[0.2cm]
+    \textbf{Criterio de aceptación:} El análisis automático no detecta concatenación de cadenas dentro de bloques de ejecución dinámica (\texttt{EXECUTE} o \texttt{format}). \\[0.2cm]
+    \textbf{Verificación:} Análisis Estático (scripts/audit-sql-dynamic.sh) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-06 - Escala de Usabilidad del Sistema SUS $\ge$ 68 puntos}
+    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá ofrecer una interfaz altamente usable, alcanzando un puntaje SUS sobre la media estándar de la industria. \\[0.2cm]
+    \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \textbf{Resultado:} la reevaluación se ejecutó el 19 y 20 de septiembre de 2026 con \textbf{15 participantes} en 15 sesiones presenciales sobre el sistema desplegado, con el instrumento versionado con anterioridad a toda sesión (commit \texttt{786e042}). La media es \textbf{69,00} (DE 9,90; IC 95\,% [63,52; 74,48]; mediana 70,0), de modo que \textbf{el criterio se cumple con un margen de +1,00}. El estudio de julio de 2026 permanece retirado y no se emplea como evidencia. Análisis, limitaciones declaradas y trazabilidad en \texttt{docs/mediciones/sus/sus-analysis-2026-09.md}. \\[0.2cm]
+    \textbf{Cierre del plan de reevaluación (X12):} el plan queda \textbf{cumplido}. El requisito se mantiene vigente y con prioridad \textit{Must}. Se declaran sus limitaciones, entre ellas que la media se sitúa a 1,00 punto del umbral y que no se alcanzaron los 16 participantes previstos, de modo que un participante adicional con la media observada habría dejado la puntuación por debajo del criterio. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Usabilidad (docs/mediciones/sus/sus-analysis-2026-09.md) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-07 - Degradación controlada (Fallback) del proveedor de IA}
+    \textbf{Tipo:} RES \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá continuar operando mediante un motor de reglas local si el proveedor externo de IA (OpenAI/Groq) supera los 2 segundos de latencia o no está disponible. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Ante indisponibilidad del servicio externo, el sistema hace fallback al modelo local sin fallar la simulación. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Integración (FeedbackServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-08 - Privacidad de Datos y Minimización}
+    \textbf{Tipo:} SEC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá evitar enviar Información de Identificación Personal (PII) al proveedor externo de Inteligencia Artificial. \\[0.2cm]
+    \textbf{Criterio de aceptación:} Solo se envían las decisiones y el contexto del escenario a la API externa, excluyendo nombres, correos o IDs directos. Una prueba automatizada captura el cuerpo real enviado y confirma ausencia de PII. \\[0.2cm]
+    \textbf{Verificación:} Prueba Unitaria (service/feedback/ExternalAiFeedbackServiceTest.java) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-09 - Accesibilidad y Compatibilidad (WCAG 2.2 nivel AA)}
+    \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} VERIFIED \\[0.2cm]
+    \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá superar un score de accesibilidad Lighthouse $\geq$ 0.90 en la página de login (principal punto de entrada). \\[0.2cm]
+    \textbf{Criterio de aceptación:} El reporte Lighthouse ejecutado contra \url{https://sbvia-frontend.onrender.com} reporta \texttt{categories:accessibility $\geq$ 0.90}. En v1.2.0 el contraste de colores secundarios fue corregido para pasar la auditoría \texttt{color-contrast}. \\[0.2cm]
+    \textbf{Nota:} Lighthouse audita un subconjunto automatizable de WCAG 2.2. La conformidad AA completa requiere revisión manual adicional que excede el alcance de esta versión. \\[0.2cm]
+    \textbf{Verificación:} Análisis Automático (docs/mediciones/lighthouse/) contra URL de producción \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{RNF-10 - Capacidad y Volumetría}
+    \textbf{Tipo:} PERF \quad \textbf{Prioridad:} Should \quad \textbf{Estado:} TESTED \\[0.2cm]
+    \textbf{Módulo:} Arquitectura \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá soportar 50 usuarios concurrentes (carga medida con k6) y retener el histórico de prácticas de simulaciones por al menos 5 años. \\[0.2cm]
+    \textbf{Criterio de aceptación:} (a) La corrida k6 con \texttt{vus: 50} por 30 segundos no genera errores superiores al 1\%. (b) La política de respaldo (BackupService, RF-14) y el diseño de tablas de la BD soportan retención a largo plazo, verificado por inspección de \texttt{V11\_\_historial\_respaldos.sql} y \texttt{BackupService.java}. \\[0.2cm]
+    \textbf{Nota:} La carga medida es de 50 VUs (no 200). Para escalar a 200 VUs se requeriría un despliegue con más recursos que el plan actual de Render. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Carga (scripts/k6/load-test.js) + Inspección de diseño \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\newpage
+% ==============================
+% 5. HISTORIAS DE USUARIO (CASOS DE USO)
+% ==============================
+\section{Historias de usuario (Casos de Uso)}
+
+\begin{requisito}{US-01 - Registro autónomo de conductor}
+    \textbf{Actor principal:} Conductor \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Must\\[0.2cm]
+    \textbf{Precondición:} El usuario no tiene cuenta registrada en el sistema.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El conductor navega al formulario de registro. 2. Completa los campos obligatorios (nombres, apellidos, correo). 3. El sistema valida los datos y registra al conductor en la base de datos. 4. El sistema notifica el éxito y muestra el nombre de usuario generado. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Si el correo ya existe, el sistema muestra un error 409 y detiene el proceso.\\[0.2cm]
+    \textbf{Postcondición:} El conductor queda registrado con estado activo y puede autenticarse. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{US-02 - Inicio de sesión seguro y obtención de cookie}
+    \textbf{Actor principal:} Conductor / Administrador \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Must\\[0.2cm]
+    \textbf{Precondición:} El usuario tiene una cuenta activa.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El usuario ingresa credenciales en el login. 2. El sistema verifica el hash BCrypt. 3. El sistema emite un token JWT como cookie HttpOnly+Secure. 4. El usuario es redirigido a su panel de control correspondiente. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Credenciales incorrectas emiten 401. Tras 5 intentos fallidos, la cuenta se bloquea por 60 segundos (OWASP A07).\\[0.2cm]
+    \textbf{Postcondición:} El usuario tiene una sesión activa y accede a las rutas autorizadas por su rol. \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{US-03 - Exploración interactiva de escenarios viales}
+    \textbf{Actor principal:} Conductor \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Must\\[0.2cm]
+    \textbf{Precondición:} El conductor está autenticado.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El conductor solicita la lista de escenarios. 2. El sistema recupera los escenarios habilitados (desde caché Redis o BD). 3. El sistema pagina y muestra los escenarios con sus configuraciones de clima y dificultad. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Si no hay escenarios disponibles, se muestra un aviso de ``Catálogo vacío''.\\[0.2cm]
+    \textbf{Postcondición:} El conductor puede seleccionar un escenario para iniciar una práctica. \\[0.2cm]
+    \textbf{Vínculo:} RF-03 (consulta), RF-02 (gestión de escenarios) \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} No aplica
+\end{requisito}
+
+\begin{requisito}{US-04 - Ejecución de simulación y captura de decisiones}
+    \textbf{Actor principal:} Conductor \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Must\\[0.2cm]
+    \textbf{Precondición:} El conductor está autenticado y ha seleccionado un escenario activo.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El conductor inicia un escenario. 2. Toma decisiones ante eventos viales. 3. El motor IA evalúa cada decisión. 4. El sistema calcula el puntaje (100 menos penalizaciones) mediante \texttt{sp\_calcular\_puntaje\_simulacion}. 5. El resultado se consolida y se recupera con \texttt{sp\_reporte\_simulacion}. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Si ocurre una desconexión, la simulación se invalida o se reanuda dependiendo del estado.\\[0.2cm]
+    \textbf{Postcondición:} La práctica queda registrada y el puntaje calculado. \\[0.2cm]
+    \textbf{Vínculo:} RF-03 (sp\_reporte\_simulacion), RF-11 (puntaje), RF-09 (IA) \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} db/procs/sp\_reporte\_simulacion.sql
+\end{requisito}
+
+\begin{requisito}{US-05 - Visualización de métricas y feedback en dashboard}
+    \textbf{Actor principal:} Conductor \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Should\\[0.2cm]
+    \textbf{Precondición:} El conductor está autenticado y tiene al menos una práctica registrada.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El conductor accede al Dashboard. 2. El sistema recupera el promedio calculado por \texttt{sp\_calcular\_promedio\_usuario}. 3. Se presenta el promedio global, simulaciones recientes y sugerencias de mejora. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Datos insuficientes muestran marcadores por defecto (NA).\\[0.2cm]
+    \textbf{Postcondición:} El conductor puede ver su progreso histórico. \\[0.2cm]
+    \textbf{Vínculo:} RF-04 (sp\_calcular\_promedio\_usuario) \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} db/procs/sp\_calcular\_promedio\_usuario.sql
+\end{requisito}
+
+\begin{requisito}{US-06 - Descarga de certificado con código secuencial}
+    \textbf{Actor principal:} Conductor \quad \textbf{Estado:} TESTED \quad \textbf{Prioridad:} Should\\[0.2cm]
+    \textbf{Precondición:} El conductor completó una simulación con puntaje $\geq$ 70.\\[0.2cm]
+    \textbf{Flujo Principal:} 1. El conductor aprueba una simulación ($\geq 70$ pts). 2. El sistema genera un certificado invocando \texttt{sp\_generar\_codigo\_certificado}. 3. El conductor visualiza el certificado y lo exporta en formato inmutable. \\[0.2cm]
+    \textbf{Flujo Alternativo:} Si la práctica no fue aprobatoria (puntaje $< 70$), el botón de descarga se mantiene oculto.\\[0.2cm]
+    \textbf{Postcondición:} El conductor tiene un certificado con código único verificable. \\[0.2cm]
+    \textbf{Vínculo:} RF-08 (sp\_generar\_codigo\_certificado), RF-11 (umbral 70) \\[0.2cm]
+    \textbf{Verificación:} Prueba de Componente E2E (app.component.spec.ts) \quad \textbf{SQL:} db/procs/sp\_generar\_codigo\_certificado.sql
+\end{requisito}
+
+\newpage
+% ==============================
+% 6. PROCEDIMIENTOS ALMACENADOS
+% ==============================
+\section{Registro de procedimientos almacenados}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{@{}|l|l|X|l|@{}}
+        \hline
+        \rowcolor{uteqblue}
+        \textcolor{white}{\textbf{Nombre en V14}} & \textcolor{white}{\textbf{Tipo}} & \textcolor{white}{\textbf{Requisito}} & \textcolor{white}{\textbf{Estado}} \\ \hline
+        sp\_actualizar\_usuarios\_inactivos & PROCEDURE & RF-06 & Requerido \\ \hline
+        sp\_calcular\_promedio\_usuario & FUNCTION & RF-04, US-05 & Requerido \\ \hline
+        sp\_calcular\_puntaje\_simulacion & PROCEDURE & RF-11 & Requerido \\ \hline
+        sp\_generar\_codigo\_certificado & FUNCTION & RF-08, US-06 & Requerido \\ \hline
+        sp\_reporte\_actividad\_diaria & FUNCTION & RF-05 & Requerido \\ \hline
+        sp\_reporte\_simulacion & FUNCTION & RF-03, US-04 & Requerido \\ \hline
+        sp\_validar\_escenario & FUNCTION & RF-07 & Requerido \\ \hline
+        sp\_cerrar\_simulaciones\_vencidas & PROCEDURE & RF-16 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_generar\_codigo\_reporte & PROCEDURE & RF-17 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_generar\_reporte\_simulacion & PROCEDURE & RF-18 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_resumen\_usuario & PROCEDURE & RF-19 & NOT VERIFIED (sin invocaciones) \\ \hline
+        sp\_validar\_simulacion & PROCEDURE & RF-20 & NOT VERIFIED (sin invocaciones) \\ \hline
+    \end{tabularx}
+\end{table}
+
+\textit{Nota (X3/X5): Los cinco procedimientos finales están definidos en la migración \texttt{V14\_\_procedimientos\_almacenados.sql} y están especificados por RF-16 a RF-20 de este mismo documento. Ninguno se invoca desde la aplicación: cero ocurrencias de sus nombres en \texttt{backend/src/main/java}, de modo que quedan huérfanos de ejecución y su estado es NOT VERIFIED, no IMPLEMENTED. Esta sección y los requisitos RF-16 a RF-20 declaran ahora el mismo estado, con lo que desaparece la contradicción interna señalada en la revisión.}
+
+\newpage
+% ==============================
+% 7. CRITERIOS DE ACEPTACIÓN
+% ==============================
+\section{Criterios de aceptación de la versión}
+\begin{itemize}[label=\textbf{--}]
+    \item \textbf{AC-01.} El sistema completo se construye y levanta desde una clonación limpia mediante \texttt{make all}.
+    \item \textbf{AC-02.} Las pruebas automatizadas superan la cobertura global de 70\% y el análisis estático no reporta vulnerabilidades graves.
+    \item \textbf{AC-03.} Los procedimientos almacenados están versionados, catalogados, parametrizados y trazados (ver Sección 6).
+    \item \textbf{AC-04.} Cinco corridas k6 cumplen el umbral de caché caliente (RNF-01); Lighthouse y ZAP conservan evidencia reproducible. La corrida en frío (RNF-02) demostró los tiempos de spin-down en Render (documentado en RNF-02).
+    \item \textbf{AC-05.} El despliegue público dispone de healthcheck, runbook, backup y cuenta demo no administrativa.
+    \item \textbf{AC-06.} El repositorio contiene documentación, datos, metadatos y etiqueta v1.2.0 coherentes con el commit declarado. El repositorio de entrega es \texttt{gleiston-guerrero/SBVIA-AppWeb}.
+\end{itemize}
+
+\newpage
+% ==============================
+% 8. MATRIZ DE TRAZABILIDAD
+% ==============================
+\section{Matriz de trazabilidad (resumen)}
+
+\begin{longtable}{|p{1.6cm}|p{4.5cm}|p{3cm}|p{1.5cm}|p{2cm}|}
+    \hline
+    \rowcolor{uteqblue}
+    \textcolor{white}{\textbf{ReqID}} & \textcolor{white}{\textbf{Descripción}} & \textcolor{white}{\textbf{Prueba}} & \textcolor{white}{\textbf{Estado}} & \textcolor{white}{\textbf{US vinculado}} \\ \hline
+    \endfirsthead
+    \hline
+    \rowcolor{uteqblue}
+    \textcolor{white}{\textbf{ReqID}} & \textcolor{white}{\textbf{Descripción}} & \textcolor{white}{\textbf{Prueba}} & \textcolor{white}{\textbf{Estado}} & \textcolor{white}{\textbf{US vinculado}} \\ \hline
+    \endhead
+    RF-01 & Autenticación JWT & AuthServiceTest & VERIFIED & US-02 \\ \hline
+    RF-02 & CRUD Escenarios & ScenarioServiceTest & VERIFIED & US-03 \\ \hline
+    RF-03 & Reporte simulación (SP) & SimulationServiceTest & IMPLEMENTED & US-04 \\ \hline
+    RF-04 & Promedio conductor (SP) & SimulationServiceTest & IMPLEMENTED & US-05 \\ \hline
+    RF-05 & Reporte diario (SP) & SimulationServiceTest & IMPLEMENTED & — \\ \hline
+    RF-06 & Inactivación masiva (SP) & AuthControllerTest & IMPLEMENTED & — \\ \hline
+    RF-07 & Validar escenario (SP) & ScenarioServiceTest & IMPLEMENTED & — \\ \hline
+    RF-08 & Código certificado (SP) & SimulationServiceTest & IMPLEMENTED & US-06 \\ \hline
+    RF-09 & IA Evaluación & FeedbackServiceTest & TESTED & US-04 \\ \hline
+    RF-10 & IA Retroalimentación & FeedbackServiceTest & TESTED & US-04 \\ \hline
+    RF-11 & Certificación $\geq$70 & SimulationServiceTest & VERIFIED & US-06 \\ \hline
+    RF-12 & Persistencia entidades & DrivingSimulationIntegrationTest & VERIFIED & — \\ \hline
+    RF-13 & Protección datos & ExternalAiFeedbackServiceTest & IMPLEMENTED & - \\ \hline
+    RF-14 & Respaldo RTO/RPO & BackupServiceTest & IMPLEMENTED & - \\ \hline
+    RF-15 & AuditLog & AuditServiceTest & IMPLEMENTED & - \\ \hline
+    RF-16 & Cerrar simulaciones (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-17 & Código de reporte (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-18 & Reporte simulación (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-19 & Resumen usuario (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RF-20 & Validar simulación (SP) & SP en V14 (sin prueba) & NOT VERIFIED & - \\ \hline
+    RNF-01 & Latencia caché p95 & k6 load-test.js & VERIFIED & — \\ \hline
+    RNF-02 & Latencia frío p95 & k6 load-test.js & TESTED & — \\ \hline
+    RNF-03 & BCrypt factor$\geq$10 & AuthServiceTest & VERIFIED & — \\ \hline
+    RNF-04 & Cookie Secure & AuthControllerTest & VERIFIED & — \\ \hline
+    RNF-05 & Sin SQL dinámico & audit-sql-dynamic.sh & VERIFIED & — \\ \hline
+    RNF-06 & SUS $\ge$68 & sus-analysis-2026-09.md & VERIFIED & — \\ \hline
+    RNF-07 & Fallback IA & FeedbackServiceTest & VERIFIED & — \\ \hline
+    RNF-08 & No PII a IA & ExternalAiFeedbackServiceTest & TESTED & — \\ \hline
+    RNF-09 & WCAG / Lighthouse & Lighthouse prod & VERIFIED & — \\ \hline
+    RNF-10 & 50 VUs / 5 años & k6 + inspección & TESTED & — \\ \hline
+    US-01 & Registro conductor & E2E spec & TESTED & — \\ \hline
+    US-02 & Login seguro & E2E spec & TESTED & RF-01 \\ \hline
+    US-03 & Explorar escenarios & E2E spec & TESTED & RF-02, RF-03 \\ \hline
+    US-04 & Ejecución simulación & E2E spec & TESTED & RF-03, RF-09, RF-11 \\ \hline
+    US-05 & Dashboard métricas & E2E spec & TESTED & RF-04 \\ \hline
+    US-06 & Certificado & E2E spec & TESTED & RF-08, RF-11 \\ \hline
+\end{longtable}
+
+La matriz completa con rutas de archivos se mantiene en \texttt{docs/trazabilidad/matriz.csv}.
+
+\vspace{1cm}
+\noindent\textbf{\Large Fin de la especificación}
+
+\end{document}
