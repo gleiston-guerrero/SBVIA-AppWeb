@@ -130,11 +130,17 @@ a datos personales de los participantes. Se facilita al docente por el canal pri
 
 ### Nota sobre la cronología del instrumento
 
-Los diez ítems del SUS aplicados son los del cuestionario estándar de Brooke. El archivo se incorporó en el commit `786e042` (2026-09-18), pero su redacción en español se revisó el 2026-09-20 a las 18:05 (`b9cac65`), de modo que las sesiones del 19 de septiembre usaron la redacción anterior
-(2026-09-18), **anterior a la primera sesión** (2026-09-19). El formulario imprimible
+Los diez ítems del SUS aplicados son los del cuestionario estándar de Brooke. El archivo se incorporó
+en el commit `786e042` (2026-09-18), pero **su redacción en español se revisó el 2026-09-20 a las
+18:05** (`b9cac65`), de modo que las sesiones del **19 de septiembre** usaron la redacción anterior a
+esa revisión. **No se sostiene, por tanto, que el instrumento sea anterior a la primera sesión.** El
+formulario imprimible
 [`Cuestionario-SUS-Participante.tex`](../../mediciones/sus/Cuestionario-SUS-Participante.tex)
-reproduce esos mismos ítems. La fecha de compilación del PDF corresponde al artefacto, no a la
-fecha de aplicación del instrumento; la referencia válida del instrumento es el fuente versionado.
+reproduce los ítems en su redacción vigente, que no tiene por qué ser la aplicada el 19. La fecha de
+compilación del PDF corresponde al artefacto, no a la fecha de aplicación del instrumento; la
+referencia válida del instrumento es el fuente versionado.
 
-El consentimiento se generó el 2026-09-19, antes de las sesiones de ese día, y se firmó en papel
-antes de cada sesión.
+**Cronología del consentimiento.** Se declara con fecha de generación del **2026-09-19**, y su PDF
+lleva fecha interna de compilación del **2026-09-20 a las 13:03** (hora de Ecuador), posterior al
+inicio de las sesiones del 19. **Ambas fechas se declaran sin conciliarlas.** Las quince fechas de
+firma figuran como **por verificar**.
