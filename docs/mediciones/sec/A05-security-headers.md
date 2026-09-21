@@ -56,47 +56,57 @@ curl -sI http://localhost:8080/api/escenarios
 
 ## Comprobación de cabeceras en el sistema DESPLEGADO (P1/P11)
 
-Comprobación ejecutada el 2026-09-21 contra los dos servicios en producción, con
-un cliente TLS independiente del navegador. Resultado: **ninguno de los dos envía
-cabeceras de seguridad**.
+Comprobación ejecutada el 2026-09-21 contra los dos servicios en producción, con un
+cliente TLS independiente del navegador.
 
-| Cabecera | Frontend (`sbvia-frontend.onrender.com`) | API (`sbvia-appweb.onrender.com`) |
-| :--- | :--- | :--- |
-| `Content-Security-Policy` | ausente | ausente |
-| `X-Frame-Options` | ausente | ausente |
-| `X-Content-Type-Options` | ausente | ausente |
-| `Strict-Transport-Security` | ausente | ausente |
-| `X-XSS-Protection` | ausente | ausente |
+> **Corrección de una comprobación previa.** Una primera versión de esta comprobación
+> concluyó que **ninguno** de los dos servicios enviaba cabeceras. Era falso, y el error
+> estaba en la propia comprobación: convertía las cabeceras a un diccionario y las buscaba
+> con mayúsculas iniciales, pero las cabeceras HTTP son insensibles a mayúsculas y ambos
+> servicios responden en minúsculas. La comprobación correcta las consulta sin distinguir
+> mayúsculas. El resultado válido es el de esta sección. Se conserva el error anotado
+> porque explica por qué la conclusión anterior no debía darse por buena.
 
-En la API se probaron tres rutas: `/actuator/health` (200), `/api/simulations/mis-practicas`
-sin token (401) y `/api/auth/login` con credenciales inválidas (401). Las dos últimas
-atraviesan la cadena de filtros de Spring Security y **tampoco** traen las cabeceras.
+### API (`sbvia-appweb.onrender.com`)
 
-### Diagnóstico
+| Cabecera | Valor |
+| :--- | :--- |
+| `Content-Security-Policy` | `default-src 'self'; frame-ancestors 'none';` |
+| `X-Frame-Options` | `DENY` |
+| `X-Content-Type-Options` | `nosniff` |
+| `Strict-Transport-Security` | `max-age=31536000 ; includeSubDomains` |
+| `X-XSS-Protection` | `1; mode=block` |
+| `Referrer-Policy` | no se envía |
+| `Permissions-Policy` | no se envía |
 
-El código **sí** configura las cabeceras: `SecurityConfig.securityFilterChain` incluye
-`contentTypeOptions`, `frameOptions(deny)`, `httpStrictTransportSecurity`,
-`xssProtection` y `contentSecurityPolicy("default-src 'self'; frame-ancestors 'none';")`.
-Ese archivo no se ha modificado desde el commit `b03f8e3` (2026-09-18), anterior a la
-revisión. Que el servicio desplegado no las aplique indica que **la instancia en
-ejecución no corresponde a ese código**: procede **redesplegar el servicio de la API**
-en Render y volver a comprobar con la misma orden.
+Comprobado en tres rutas: `/actuator/health` (200), `/api/simulations/mis-practicas` sin
+token (401) y `/api/auth/login` con credenciales inválidas (401). **Las tres traen las
+cinco cabeceras**, de modo que la configuración de `SecurityConfig.securityFilterChain`
+—`contentSecurityPolicy`, `frameOptions(deny)`, `contentTypeOptions`,
+`httpStrictTransportSecurity` y `xssProtection`— **se aplica correctamente en producción**.
+Las cinco están alineadas con OWASP A05. `Referrer-Policy` y `Permissions-Policy` no las
+exige el criterio; quedan anotadas como mejora opcional.
 
-### Cabeceras del sitio estático
+### Frontend (`sbvia-frontend.onrender.com`)
 
-El frontend es un sitio estático, y Render no las toma de ningún archivo del
+| Cabecera | Estado |
+| :--- | :--- |
+| `Content-Security-Policy` | **no se envía** |
+| `X-Frame-Options` | **no se envía** |
+| `X-Content-Type-Options` | `nosniff` (la añade el proveedor) |
+| `Strict-Transport-Security` | `max-age=315360000; includeSubdomains; preload` (la añade el proveedor) |
+
+El proveedor añade por su cuenta `nosniff` y HSTS, pero **no** CSP ni `X-Frame-Options`.
+El frontend es un sitio estático y Render no lee reglas de cabecera de ningún archivo del
 repositorio: se definen en el panel del servicio
-(https://render.com/docs/static-site-headers.md). Valores recomendados, para pegar
-como reglas de cabecera sobre la ruta `/*`:
+(https://render.com/docs/static-site-headers.md). Valores recomendados sobre la ruta `/*`:
 
 | Nombre | Valor |
 | :--- | :--- |
 | `Content-Security-Policy` | `default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://sbvia-appweb.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'` |
 | `X-Frame-Options` | `DENY` |
-| `X-Content-Type-Options` | `nosniff` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Permissions-Policy` | `geolocation=(), microphone=(), camera=()` |
-| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` |
 
-La `connect-src` debe incluir el origen de la API porque el frontend la invoca
-desde el navegador.
+La `connect-src` debe incluir el origen de la API porque el frontend la invoca desde el
+navegador. `nosniff` y HSTS ya llegan por el proveedor; repetirlos es inocuo.
