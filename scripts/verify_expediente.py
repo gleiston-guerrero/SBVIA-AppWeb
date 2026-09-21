@@ -33,13 +33,20 @@ print("=== Iniciando Verificacion de Expediente ===")
 with open('VERIFICACION.md', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Divide el documento por cada "- **Orden exacta:** `comando`".
-parts = re.split(r'-\s*\*\*Orden exacta:\*\*\s*`([^`]+)`', content)
+# Cada punto del expediente es una seccion "## ". Se recorren una a una para que
+# el cuerpo de una orden NUNCA alcance a la seccion siguiente: antes se dividia
+# solo por "Orden exacta", de modo que una orden cuya salida esperada no se
+# reconocia dejaba pasar el bloque "**Salida:**" del punto siguiente y se
+# comparaba contra el. Es lo que ocurria entre P3 y P5.
 entries = []
-for idx in range(1, len(parts), 2):
-    cmd = parts[idx].strip()
-    section = parts[idx + 1] if idx + 1 < len(parts) else ''
-    entries.append((cmd, section))
+for seccion in re.split(r'(?m)^##\s+', content)[1:]:
+    partes = re.split(r'-\s*\*\*Orden exacta[^:]*:\*\*\s*`([^`]+)`', seccion)
+    for idx in range(1, len(partes), 2):
+        cmd = partes[idx].strip()
+        # El cuerpo de esta orden llega hasta la orden siguiente de la MISMA
+        # seccion, nunca hasta otra seccion.
+        section = partes[idx + 1] if idx + 1 < len(partes) else ''
+        entries.append((cmd, section))
 
 if not entries:
     print("No se encontraron comandos en VERIFICACION.md")
