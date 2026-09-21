@@ -21,10 +21,11 @@ Puntos cerrados de manera comprobable (el hash es el commit que aplicó la corre
     *   **Commits:** `b03f8e3`, `735dc81`.
     *   **Archivos:** `backend/pom.xml`, controladores y servicios del backend.
 *   **P3 — El PDF no contiene ninguna imagen (1.2 pts)**
-    *   Se referenciaron desde el texto las 4 capturas de interfaz que no estaban citadas y se empezaron a traducir al inglés los pies de figura. La primera pasada (`9afd075`) tradujo 12 de 20 y dejó 8 en español, que es la inconsistencia que recoge la evaluación. Esta ronda **completa la traducción: los 20 pies de figura del informe están en inglés**. Las imágenes incrustadas son capturas reales de la aplicación, no reconstrucciones.
-    *   **Pendiente y declarado:** las 4 capturas de la interfaz siguen en español porque la aplicación **no tiene multi-idioma** (`ngx-translate` ni `@angular/localize` están integrados). Traducirlas exigiría implementar i18n, traducir las 17 plantillas y recapturar; no es un cambio de documentación.
-    *   **Commits:** `9afd075`, `6fc74d3`.
-    *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`, `docs/diagramas/pantalla-*.png`.
+    *   Se referenciaron desde el texto las 4 capturas de interfaz que no estaban citadas y se empezaron a traducir al inglés los pies de figura. La primera pasada (`9afd075`) tradujo 12 de 20 y dejó 8 en español, que es la inconsistencia que recoge la evaluación. Después **se completó la traducción: los 20 pies de figura del informe están en inglés** (`6fc74d3`), y sus etiquetas automáticas también: `Figure 3.1` y `Table 5.1` en lugar de «Figura» y «Tabla» (`0455786`).
+    *   **Capturas de la interfaz en inglés.** El sistema es para conductores en formación ecuatorianos y su interfaz está en español; traducir el producto habría perjudicado a sus usuarios. La solución fue **internacionalización con español por defecto** (`ccee94f`): la aplicación sigue sirviendo en español y puede mostrarse en inglés desde un selector ES | EN. Con él se **recapturaron las 4 pantallas contra el sistema desplegado** (`9e7cc01`), en el mismo tamaño que las originales (1599×770).
+    *   **Se declara lo que sigue en español y por qué:** los nombres de escenario, los tipos de vía y el texto del informe de IA los genera el servidor o están en la base de datos. Son **contenido**, no interfaz, igual que los nombres de escenario son topónimos ecuatorianos. La interfaz de las cuatro capturas está íntegramente en inglés.
+    *   **Commits:** `9afd075`, `6fc74d3`, `0455786`, `ccee94f`, `d5f7841`, `9e7cc01`.
+    *   **Archivos:** `docs/informe-final.tex`, `docs/informe-final.pdf`, `docs/diagramas/pantalla-*.png`, `frontend/src/app/i18n/`.
 *   **P4 — Sin depósito propio en Zenodo (1.0 pts)**
     *   Se añadió a `CITATION.cff` la referencia al dataset de validación con su DOI real (`10.5281/zenodo.22785358`), además del DOI del software (`10.5281/zenodo.22840356`).
     *   **Commit:** `12297ee`.
