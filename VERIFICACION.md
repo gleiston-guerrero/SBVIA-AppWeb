@@ -185,7 +185,7 @@ DOIS OK: 2 resueltos con 200
 
 - **Descripción:** El verificador anterior comprobaba la **existencia** de la evidencia con `git ls-files`, que lee el **índice** y no el **árbol de trabajo** —de modo que un archivo borrado del disco seguía contando— y ninguna orden inspeccionaba el **contenido** de las mediciones. Esta comprobación cubre ambas cosas: las seis corridas de Lighthouse apuntan al despliegue público (ninguna a `localhost`), su accesibilidad es 1,00 y no tienen auditorías binarias fallidas; los manifiestos coinciden con sus informes; las cifras de cobertura que cita el informe reproducen el resumen de JaCoCo (y el CSV coincide con el XML); no hay `@CrossOrigin("*")`; `application-prod.yml` fija `secure: true`; el PDF del informe no es un archivo de prueba; y los contratos Backup (11 campos) y AuditLog (8 campos) coinciden campo por campo entre backend y frontend.
 - **Orden exacta:** `python scripts/verify_integridad_mediciones.py`
-- **Salida:** `INTEGRIDAD OK: 53 comprobaciones superadas`
+- **Salida:** `INTEGRIDAD OK: 54 comprobaciones superadas`
 - **Ruta del archivo que la respalda:** `docs/mediciones/`, `docs/informe-final.pdf`, `backend/src/main/java/`, `frontend/src/app/features/`.
 
 ## Resistencia a mutaciones del verificador de integridad (EV-2)

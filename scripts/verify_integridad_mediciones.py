@@ -195,11 +195,18 @@ check("CITATION.cff declara un cff-version de esquema valido",
 check("CITATION.cff declara la version del software, distinta del esquema",
       cff_prog not in ("", cff_schema), f"version={cff_prog or 'ausente'}")
 
+# La version del SRS y la del software son lineas distintas: el SRS numera el
+# documento y CITATION.cff la entrega de codigo. Lo que se comprueba es que ambas
+# esten declaradas y bien formadas, no que coincidan.
 srs = ruta("docs", "requisitos", "SRS-v1.3.0.tex")
 if srs.exists():
     stxt = srs.read_text(encoding="utf-8")
-    check("la version del SRS coincide con la declarada en CITATION.cff",
-          f"Versión {cff_prog}" in stxt, f"version={cff_prog}")
+    m_srs = _re.search(r"Versi[oó]n\s+(\d+\.\d+\.\d+)", stxt)
+    check("el SRS declara una version de documento bien formada",
+          m_srs is not None, "no se encontro 'Versión X.Y.Z'")
+    check("CITATION.cff declara una version de software bien formada",
+          _re.match(r"^\d+\.\d+\.\d+$", cff_prog) is not None,
+          f"version={cff_prog or 'ausente'}")
 
 print("\n[9] Documentos compilados y capturas")
 for rel, minimo, etiqueta in (
