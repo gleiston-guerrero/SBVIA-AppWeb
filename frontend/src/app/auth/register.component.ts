@@ -38,7 +38,7 @@ export class RegisterComponent {
     this.loading = true;
     this.errorMessage = '';
 
-    this.authService.registro(this.data).subscribe({
+    this.authService.register(this.data).subscribe({
       next: (res: any) => {
         this.loading = false;
         this.registered = true;

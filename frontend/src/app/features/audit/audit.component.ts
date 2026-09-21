@@ -79,7 +79,7 @@ export class AuditComponent implements OnInit {
     });
   }
 
-  verDetalle(registro: AuditLog): void {
+  viewDetail(registro: AuditLog): void {
     this.registroSeleccionado = registro;
     try {
       this.datosAntiguosObj = registro.previousData ? JSON.parse(registro.previousData) : null;
@@ -92,7 +92,7 @@ export class AuditComponent implements OnInit {
     this.modalAbierto = true;
   }
 
-  cerrarModal(): void {
+  closeModal(): void {
     this.modalAbierto = false;
     this.registroSeleccionado = null;
   }

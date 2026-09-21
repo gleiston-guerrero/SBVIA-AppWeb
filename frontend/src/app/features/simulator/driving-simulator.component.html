@@ -51,12 +51,12 @@
     </div>
 
     <div class="controles">
-      <button type="button" class="btn primario" (click)="iniciar()" [disabled]="estado === 'corriendo'">▶ Iniciar</button>
+      <button type="button" class="btn primario" (click)="start()" [disabled]="estado === 'corriendo'">▶ Iniciar</button>
       <button type="button" class="btn" (click)="estado === 'pausado' ? reanudar() : pausar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado'">
         {{ estado === 'pausado' ? '⏵ Reanudar' : '⏸ Pausar' }}
       </button>
-      <button type="button" class="btn" (click)="reiniciar()">↺ Reiniciar</button>
-      <button type="button" class="btn exito" (click)="finalizar()" [disabled]="estado !== 'corriendo' && estado !== 'pausado' || isSaving">
+      <button type="button" class="btn" (click)="restart()">↺ Reiniciar</button>
+      <button type="button" class="btn exito" (click)="finish()" [disabled]="estado !== 'corriendo' && estado !== 'pausado' || isSaving">
         {{ isSaving ? 'Guardando...' : '■ Finalizar' }}
       </button>
     </div>
@@ -104,7 +104,7 @@
     </div>
     <p *ngIf="!informe" class="nota-etapa">Informe no disponible en modo local.</p>
     <div class="acciones">
-      <button type="button" class="btn primario" (click)="reiniciar()">Conducir de nuevo</button>
+      <button type="button" class="btn primario" (click)="restart()">Conducir de nuevo</button>
       <a routerLink="/practicas">Ver mis prácticas</a>
     </div>
   </section>

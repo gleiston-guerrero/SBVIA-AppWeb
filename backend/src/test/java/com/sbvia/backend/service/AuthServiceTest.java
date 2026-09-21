@@ -60,10 +60,10 @@ class AuthServiceTest {
 
     @Test
     void rechazaUnRegistroConCorreoDuplicado() {
-        RegisterRequest request = registro();
+        RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(true);
 
-        assertThatThrownBy(() -> authService.registro(request))
+        assertThatThrownBy(() -> authService.register(request))
                 .isInstanceOf(DuplicateEmailException.class)
                 .hasMessageContaining(request.getEmail());
         verify(usuarioRepository, never()).save(any());
@@ -71,23 +71,23 @@ class AuthServiceTest {
 
     @Test
     void rechazaUnRegistroSiFaltaElRolPredeterminado() {
-        RegisterRequest request = registro();
+        RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> authService.registro(request))
+        assertThatThrownBy(() -> authService.register(request))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("PARTICIPANTE");
     }
 
     @Test
     void registraUsuarioConNombreUsuarioGeneradoExitosamente() {
-        RegisterRequest request = registro();
+        RegisterRequest request = register();
         when(usuarioRepository.existsByEmail(request.getEmail())).thenReturn(false);
         when(rolRepository.findByName("PARTICIPANTE")).thenReturn(Optional.of(rol));
         when(estadoUsuarioRepository.findByName("ACTIVO")).thenReturn(Optional.of(new UserState()));
         when(usernameGeneratorService.generateBase(request.getFirstName(), request.getLastName())).thenReturn("aperez");
-        when(usuarioRepository.findNombresUsuarioSimilares("aperez")).thenReturn(List.of());
+        when(usuarioRepository.findSimilarUsernames("aperez")).thenReturn(List.of());
         when(usernameGeneratorService.generateNextAvailable("aperez", List.of())).thenReturn("aperez");
         when(passwordEncoder.encode(request.getPassword())).thenReturn("hashed-pwd");
         when(usuarioRepository.save(any(User.class))).thenReturn(user);
@@ -95,7 +95,7 @@ class AuthServiceTest {
         when(jwtService.generateRefreshToken(any(), any())).thenReturn("refresh-token");
         when(jwtService.getAccessExpirationMs()).thenReturn(3600000L);
 
-        var response = authService.registro(request);
+        var response = authService.register(request);
 
         assertThat(response).isNotNull();
         assertThat(response.getAccessToken()).isEqualTo("access-token");
@@ -170,7 +170,7 @@ class AuthServiceTest {
         verify(usuarioRepository).save(user);
     }
 
-    private RegisterRequest registro() {
+    private RegisterRequest register() {
         RegisterRequest request = new RegisterRequest();
         request.setFirstName("Ana");
         request.setLastName("Pérez");

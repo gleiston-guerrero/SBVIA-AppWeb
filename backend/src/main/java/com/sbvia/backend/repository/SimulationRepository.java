@@ -48,7 +48,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * @return el promedio calculado por el procedimiento almacenado
      */
     @Query(value = "SELECT sp_calcular_promedio_usuario(:userId)", nativeQuery = true)
-    BigDecimal calcularPromedioUsuario(@Param("userId") Integer userId);
+    BigDecimal calculateUserAverage(@Param("userId") Integer userId);
 
     /**
      * Invoca sp_reporte_simulacion (RF-03): recupera el detalle multi-tabla
@@ -58,7 +58,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * @return lista de filas del reporte [{simulacion_id, usuario_nombre, escenario_nombre, puntaje_final, estado, tiempo_reaccion}]
      */
     @Query(value = "SELECT * FROM sp_reporte_simulacion(:simulationId)", nativeQuery = true)
-    List<Object[]> reporteSimulacion(@Param("simulationId") Integer simulationId);
+    List<Object[]> simulationReport(@Param("simulationId") Integer simulationId);
 
     /**
      * Invoca sp_reporte_actividad_diaria (RF-05): resume la actividad del sistema
@@ -68,7 +68,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * @return lista con [total_simulaciones, promedio_puntaje]
      */
     @Query(value = "SELECT * FROM sp_reporte_actividad_diaria(CAST(:fecha AS date))", nativeQuery = true)
-    List<Object[]> reporteActividadDiaria(@Param("fecha") String fecha);
+    List<Object[]> dailyActivityReport(@Param("fecha") String fecha);
 
     /**
      * Invoca sp_generar_codigo_certificado (RF-08): genera un codigo secuencial
@@ -78,7 +78,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * @return el codigo de certificado generado
      */
     @Query(value = "SELECT sp_generar_codigo_certificado(:simulationId)", nativeQuery = true)
-    String generarCodigoCertificado(@Param("simulationId") Integer simulationId);
+    String generateCertificateCode(@Param("simulationId") Integer simulationId);
 
     /**
      * Invoca sp_calcular_puntaje_simulacion (RF-11): recalcula el puntaje
@@ -88,5 +88,5 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * @return el puntaje final calculado
      */
     @org.springframework.data.jpa.repository.query.Procedure(procedureName = "sp_calcular_puntaje_simulacion")
-    BigDecimal calcularPuntajeSimulacion(@Param("p_id_simulacion") Integer simulationId);
+    BigDecimal calculateSimulationScore(@Param("p_id_simulacion") Integer simulationId);
 }

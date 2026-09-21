@@ -39,11 +39,11 @@ export class ScenarioFormComponent implements OnInit {
     if (idParam) {
       this.isEditMode = true;
       this.escenarioId = +idParam;
-      this.loadEscenarioData(this.escenarioId);
+      this.loadScenarioData(this.escenarioId);
     }
   }
 
-  loadEscenarioData(id: number): void {
+  loadScenarioData(id: number): void {
     this.loading = true;
     this.scenarioService.findById(id).subscribe({
       next: (scenario) => {

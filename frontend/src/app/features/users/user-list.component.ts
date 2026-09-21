@@ -54,19 +54,19 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  cambiarPagina(newPage: number): void {
+  changePage(newPage: number): void {
     this.page = newPage;
     this.loadUsers();
   }
 
-  cambiarRol(user: User, nuevoRol: string): void {
+  changeRole(user: User, nuevoRol: string): void {
     if (user.role === nuevoRol) return;
     
-    this.abrirConfirmacion(
+    this.openConfirmation(
       `¿Estás seguro de cambiar el role de ${user.firstName} a ${nuevoRol}?`,
       () => {
         if (user.id !== undefined) {
-          this.userService.cambiarRol(user.id, nuevoRol).subscribe({
+          this.userService.changeRole(user.id, nuevoRol).subscribe({
             next: () => {
               this.toastService.showSuccess('Role actualizado exitosamente');
               this.loadUsers();
@@ -86,9 +86,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  desactivarUsuario(id: number | undefined, nombre: string): void {
+  deactivateUser(id: number | undefined, nombre: string): void {
     if (id !== undefined) {
-      this.abrirConfirmacion(
+      this.openConfirmation(
         `¿Estás seguro de desactivar la cuenta de ${nombre}?`,
         () => {
           this.userService.delete(id).subscribe({
@@ -108,12 +108,12 @@ export class UserListComponent implements OnInit {
   }
 
   // Lógica del Modal
-  abrirModalEditar(user: User): void {
+  openEditModal(user: User): void {
     this.editingUser = { ...user };
     this.showModal = true;
   }
 
-  cerrarModal(): void {
+  closeModal(): void {
     this.showModal = false;
     this.editingUser = {};
   }
@@ -126,7 +126,7 @@ export class UserListComponent implements OnInit {
       next: () => {
         this.toastService.showSuccess('User actualizado exitosamente');
         this.isSaving = false;
-        this.cerrarModal();
+        this.closeModal();
         this.loadUsers();
       },
       error: (err: any) => {
@@ -139,11 +139,11 @@ export class UserListComponent implements OnInit {
   }
 
   // Lógica de Confirmación
-  abrirConfirmacion(mensaje: string, accion: () => void, accionCancelar: () => void = () => {}): void {
+  openConfirmation(mensaje: string, accion: () => void, accionCancelar: () => void = () => {}): void {
     this.mensajeConfirmacion = mensaje;
     this.accionConfirmacion = () => {
       accion();
-      this.cerrarConfirmacion();
+      this.closeConfirmation();
     };
     this.showConfirmation = true;
     
@@ -154,7 +154,7 @@ export class UserListComponent implements OnInit {
 
   cancelarCallback: () => void = () => {};
 
-  cerrarConfirmacion(): void {
+  closeConfirmation(): void {
     this.showConfirmation = false;
     this.mensajeConfirmacion = '';
     this.accionConfirmacion = () => {};

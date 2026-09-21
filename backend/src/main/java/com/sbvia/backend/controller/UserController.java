@@ -52,7 +52,7 @@ public class UserController {
      * @param authentication the current authentication object holding the authenticated user's identity
      * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the user's profile data
      */
-    public ResponseEntity<UserDTO> getPerfilActual(Authentication authentication) {
+    public ResponseEntity<UserDTO> getCurrentProfile(Authentication authentication) {
         String email = authentication.getName();
         UserDTO user = authService.getCurrentUser(email);
         return ResponseEntity.ok(user);

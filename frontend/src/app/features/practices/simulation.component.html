@@ -15,14 +15,14 @@
     <p>{{ 'sim.instructions' | t }}</p>
 
     <div class="infractions">
-      <button *ngFor="let infraction of infractions" type="button" (click)="registrar(infraction)">
+      <button *ngFor="let infraction of infractions" type="button" (click)="recordInfraction(infraction)">
         <span>{{ infraction.nombre | t }}</span>
         <small>-{{ infraction.penalizacion }} {{ 'sim.points' | t }}</small>
         <strong>{{ infraction.cantidad }}</strong>
       </button>
     </div>
 
-    <button class="btn-finalizar" type="button" (click)="finalizar()" [disabled]="finalizando">
+    <button class="btn-finalizar" type="button" (click)="finish()" [disabled]="finalizando">
       {{ (finalizando ? 'sim.savingResult' : 'sim.finish') | t }}
     </button>
   </section>

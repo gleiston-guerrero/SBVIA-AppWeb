@@ -47,7 +47,7 @@ export class AuthService {
     );
   }
 
-  registro(data: any): Observable<any> {
+  register(data: any): Observable<any> {
     return this.http.post(`${this.API_URL}/registro`, data, { withCredentials: true }).pipe(
       tap((response: any) => {
         this.accessToken.set(response.accessToken);

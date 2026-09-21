@@ -69,16 +69,23 @@ Automation plan warnings:
 
 ## P5 — Instrumento y consentimientos del SUS
 
-- **Estado:** **Sin avance (0%).** El punto no se resuelve. El estudio SUS se retira de todo el expediente en lugar de sostenerse con documentación añadida.
-- **Motivo de la retirada:** La fecha declarada de aplicación del instrumento (2026-07-28/29, en `sus-analysis.md` y en `registro-aceptacion.md`, sin alteración desde el commit `bd17051` del 8-ago-2026) es **anterior a la incorporación al repositorio de la funcionalidad de simulación que el instrumento dice haber evaluado**. No se propone ninguna explicación alternativa para esa inconsistencia: los datos crudos se conservan como material de registro, sin garantía de validez metodológica.
-- **Orden exacta:** `git log --no-walk --date=short --pretty=format:"%h %ad" 55201f5 5e852c6`
+- **Estado:** **Parcial, con la limitación declarada.** El estudio de julio de 2026 sigue **retirado** y su retirada no se revierte. En su lugar se ejecutó una **reevaluación nueva** en septiembre de 2026, que es la que sostiene el requisito: `RNF-06` figura como `VERIFIED` en el SRS v1.3.0 con media **69,00**.
+- **Retirada del estudio de julio (no revertida):** la fecha declarada de aplicación del instrumento (2026-07-28/29) es **anterior a la incorporación al repositorio de la funcionalidad de simulación que el instrumento dice haber evaluado**. Sus datos crudos se conservan como material de registro, sin garantía de validez metodológica.
+- **Orden exacta para el estudio de julio:** `git log --no-walk --date=short --pretty=format:"%h %ad" 55201f5 5e852c6`
 - **Salida:**
 ```
 5e852c6 2026-09-04
 55201f5 2026-09-03
 ```
-- **Además:** la custodia de los 15 consentimientos informados permanece **NO verificada** (`ETHICS.md` §iii) y no se reporta puntuación SUS agregada en ningún documento del repositorio.
-- **Ruta del archivo que la respalda:** `docs/etica/consentimientos/registro-aceptacion.md`, `docs/mediciones/sus/sus-analysis.md` y `docs/etica/ETHICS.md`.
+- **Estudio vigente — septiembre de 2026.** 15 participantes en 15 sesiones presenciales el 19 y el 20 de septiembre, sobre el sistema desplegado. Media **69,00** (DE 9,90; IC 95 % [63,52; 74,48]; mediana 70,0): el criterio de ≥ 68 se cumple con un margen de **+1,00**. El instrumento y el consentimiento están versionados y son compilables; el análisis declara nueve limitaciones y la trazabilidad del estudio en ocho eslabones.
+- **Orden exacta (recalcula y verifica el propio detector):** `python docs/mediciones/sus/calcular_sus.py --ronda 2026-09`
+- **Salida:**
+```
+RESULTADO DEL CRITERIO: CUMPLE
+```
+  El script recalcula cada puntuación desde las respuestas crudas con la fórmula de Brooke y **falla si el CSV no la reproduce**, de modo que falsear una respuesta o una puntuación hace fallar el verificador del expediente.
+- **Limitaciones que se declaran, no se esconden:** no se alcanzaron los 16 participantes previstos y, con la media observada, **un participante más habría dejado la puntuación por debajo del umbral**. La redacción del instrumento se revisó el **2026-09-20 a las 18:05**, de modo que las sesiones del 19 usaron la redacción anterior (véase `R-12`). El consentimiento se declara generado el 19 y su PDF lleva fecha interna del **2026-09-20 a las 13:03:26**, posterior al inicio de las sesiones del 19. Las quince fechas de firma siguen **por verificar**.
+- **Ruta del archivo que la respalda:** `docs/mediciones/sus/sus-analysis-2026-09.md`, `docs/mediciones/sus/sus-raw-data-2026-09.csv`, `docs/etica/consentimientos/` y `docs/etica/ETHICS.md`.
 
 ## P7 — Lighthouse sin ninguna corrida
 
@@ -177,7 +184,7 @@ DOIS OK: 2 resueltos con 200
 
 - **Descripción:** El verificador anterior comprobaba la **existencia** de la evidencia con `git ls-files`, que lee el **índice** y no el **árbol de trabajo** —de modo que un archivo borrado del disco seguía contando— y ninguna orden inspeccionaba el **contenido** de las mediciones. Esta comprobación cubre ambas cosas: las seis corridas de Lighthouse apuntan al despliegue público (ninguna a `localhost`), su accesibilidad es 1,00 y no tienen auditorías binarias fallidas; los manifiestos coinciden con sus informes; las cifras de cobertura que cita el informe reproducen el resumen de JaCoCo (y el CSV coincide con el XML); no hay `@CrossOrigin("*")`; `application-prod.yml` fija `secure: true`; el PDF del informe no es un archivo de prueba; y los contratos Backup (11 campos) y AuditLog (8 campos) coinciden campo por campo entre backend y frontend.
 - **Orden exacta:** `python scripts/verify_integridad_mediciones.py`
-- **Salida:** `INTEGRIDAD OK: 36 comprobaciones superadas`
+- **Salida:** `INTEGRIDAD OK: 52 comprobaciones superadas`
 - **Ruta del archivo que la respalda:** `docs/mediciones/`, `docs/informe-final.pdf`, `backend/src/main/java/`, `frontend/src/app/features/`.
 
 ## Resistencia a mutaciones del verificador de integridad (EV-2)

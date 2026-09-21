@@ -43,7 +43,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       return;
     }
-    this.simulationService.iniciar(scenarioId).subscribe({
+    this.simulationService.start(scenarioId).subscribe({
       next: (practica: any) => {
         this.practica = practica;
         this.isLoading = false;
@@ -60,7 +60,7 @@ export class SimulationComponent implements OnInit, OnDestroy {
     if (this.temporizador) clearInterval(this.temporizador);
   }
 
-  registrar(infraction: Infraction): void {
+  recordInfraction(infraction: Infraction): void {
     infraction.cantidad++;
   }
 
@@ -76,10 +76,10 @@ export class SimulationComponent implements OnInit, OnDestroy {
     return `${minutos}:${segundos}`;
   }
 
-  finalizar(): void {
+  finish(): void {
     if (!this.practica || this.finalizando) return;
     this.finalizando = true;
-    this.simulationService.finalizar(this.practica.simulationId, this.puntaje).subscribe({
+    this.simulationService.finish(this.practica.simulationId, this.puntaje).subscribe({
       next: resultado => {
         this.resultado = resultado;
         this.finalizando = false;

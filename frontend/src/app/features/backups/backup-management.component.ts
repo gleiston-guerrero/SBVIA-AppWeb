@@ -62,12 +62,12 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     }
   }
 
-  abrirModal(): void {
+  openModal(): void {
     this.respaldoForm.reset({ modalidad: 'COMPLETO' });
     this.modalAbierto = true;
   }
 
-  cerrarModal(): void {
+  closeModal(): void {
     this.modalAbierto = false;
   }
 
@@ -81,11 +81,11 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
       next: (nuevoRespaldo) => {
         this.backups.unshift(nuevoRespaldo);
         this.generando = false;
-        this.cerrarModal();
+        this.closeModal();
       },
       error: () => {
         this.generando = false;
-        this.cerrarModal();
+        this.closeModal();
       }
     });
   }
@@ -94,11 +94,11 @@ export class BackupManagementComponent implements OnInit, OnDestroy {
     this.backupService.download(id);
   }
 
-  solicitarEliminacion(id: number): void {
+  requestDeletion(id: number): void {
     this.backupToDelete = id;
   }
 
-  cancelarEliminacion(): void {
+  cancelDeletion(): void {
     this.backupToDelete = null;
   }
 

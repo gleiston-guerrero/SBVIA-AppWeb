@@ -27,13 +27,13 @@
         <span *ngIf="u.phone">📞 {{ u.phone }}</span>
       </div>
       <div class="card-role">
-        <select [ngModel]="u.role" (ngModelChange)="cambiarRol(u, $event)" class="role-select" [disabled]="u.accountLocked">
+        <select [ngModel]="u.role" (ngModelChange)="changeRole(u, $event)" class="role-select" [disabled]="u.accountLocked">
           <option *ngFor="let role of rolesDisponibles" [value]="role">{{ role }}</option>
         </select>
       </div>
       <div class="card-actions">
-        <button class="btn-edit" title="Editar" (click)="abrirModalEditar(u)" [disabled]="u.accountLocked">✏️ Editar</button>
-        <button class="btn-delete" title="Desactivar" (click)="desactivarUsuario(u.id, u.firstName)" [disabled]="u.accountLocked">🚫 Desactivar</button>
+        <button class="btn-edit" title="Editar" (click)="openEditModal(u)" [disabled]="u.accountLocked">✏️ Editar</button>
+        <button class="btn-delete" title="Desactivar" (click)="deactivateUser(u.id, u.firstName)" [disabled]="u.accountLocked">🚫 Desactivar</button>
       </div>
     </article>
 
@@ -44,18 +44,18 @@
   </div>
 
   <div class="pagination" *ngIf="totalPages > 1">
-    <button [disabled]="page === 0" (click)="cambiarPagina(page - 1)">← Anterior</button>
+    <button [disabled]="page === 0" (click)="changePage(page - 1)">← Anterior</button>
     <span>Página {{ page + 1 }} de {{ totalPages }}</span>
-    <button [disabled]="page === totalPages - 1" (click)="cambiarPagina(page + 1)">Siguiente →</button>
+    <button [disabled]="page === totalPages - 1" (click)="changePage(page + 1)">Siguiente →</button>
   </div>
 </div>
 
 <!-- Modal de Edición de User -->
-<div class="modal-backdrop" *ngIf="showModal" (click)="cerrarModal()">
+<div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h3>Editar User</h3>
-      <button class="btn-close" (click)="cerrarModal()">&times;</button>
+      <button class="btn-close" (click)="closeModal()">&times;</button>
     </div>
     <div class="modal-body">
       <form (ngSubmit)="saveUserChanges()" #editForm="ngForm">
@@ -78,7 +78,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+          <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
           <button type="submit" class="btn-save" [disabled]="!editForm.form.valid || isSaving">
             {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
           </button>
@@ -89,17 +89,17 @@
 </div>
 
 <!-- Modal de Confirmación -->
-<div class="modal-backdrop" *ngIf="showConfirmation" (click)="cerrarConfirmacion()">
+<div class="modal-backdrop" *ngIf="showConfirmation" (click)="closeConfirmation()">
   <div class="modal-content modal-small" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h3>Confirmar Acción</h3>
-      <button class="btn-close" (click)="cerrarConfirmacion()">&times;</button>
+      <button class="btn-close" (click)="closeConfirmation()">&times;</button>
     </div>
     <div class="modal-body text-center">
       <p>{{ mensajeConfirmacion }}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn-cancel" (click)="cerrarConfirmacion()">Cancelar</button>
+      <button type="button" class="btn-cancel" (click)="closeConfirmation()">Cancelar</button>
       <button type="button" class="btn-save btn-danger" (click)="accionConfirmacion()">Confirmar</button>
     </div>
   </div>

@@ -42,7 +42,7 @@ export class PracticesListComponent implements OnInit {
   }
 
   loadPractices(): void {
-    this.simulationService.getMisPracticas().subscribe({
+    this.simulationService.getMyPractices().subscribe({
       next: (data: any) => {
         this.practicas = data;
         this.loading = false;
@@ -83,10 +83,10 @@ export class PracticesListComponent implements OnInit {
     return this.practicas.length - this.finalizadas.length;
   }
 
-  verInforme(practica: Simulation): void {
+  viewReport(practica: Simulation): void {
     if (!practica.completed && !practica.endDate) return;
     if (this.practicaSeleccionada?.simulationId === practica.simulationId) {
-      this.cerrarInforme();
+      this.closeReport();
       return;
     }
     this.practicaSeleccionada = practica;
@@ -105,7 +105,7 @@ export class PracticesListComponent implements OnInit {
     });
   }
 
-  cerrarInforme(): void {
+  closeReport(): void {
     this.practicaSeleccionada = null;
     this.informeSeleccionado = null;
     this.errorInforme = '';

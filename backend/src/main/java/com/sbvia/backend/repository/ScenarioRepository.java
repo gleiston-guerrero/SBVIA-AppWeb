@@ -32,5 +32,5 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Integer> {
      * @return true si el escenario tiene las reglas minimas requeridas
      */
     @Query(value = "SELECT sp_validar_escenario(:scenarioId)", nativeQuery = true)
-    Boolean validarEscenario(@Param("scenarioId") Integer scenarioId);
+    Boolean validateScenario(@Param("scenarioId") Integer scenarioId);
 }

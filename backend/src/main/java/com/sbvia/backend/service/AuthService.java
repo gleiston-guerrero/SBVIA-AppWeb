@@ -53,7 +53,7 @@ public class AuthService {
      * @return the authentication response with the generated tokens and the created user
      */
     @Transactional
-    public AuthResponse registro(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException(
                     "Ya existe un user registrado con el email: " + request.getEmail());
@@ -71,7 +71,7 @@ public class AuthService {
 
         // Generación de nombre_usuario automático estilo SGA UTEQ
         String base = usernameGeneratorService.generateBase(request.getFirstName(), request.getLastName());
-        List<String> existentes = new ArrayList<>(usuarioRepository.findNombresUsuarioSimilares(base));
+        List<String> existentes = new ArrayList<>(usuarioRepository.findSimilarUsernames(base));
         String nombreUsuarioGenerado = usernameGeneratorService.generateNextAvailable(base, existentes);
 
         User user = User.builder()

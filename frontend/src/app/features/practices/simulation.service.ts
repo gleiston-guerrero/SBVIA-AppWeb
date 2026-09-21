@@ -40,11 +40,11 @@ export class SimulationService {
 
   constructor(private http: HttpClient) {}
 
-  getMisPracticas(): Observable<Simulation[]> {
+  getMyPractices(): Observable<Simulation[]> {
     return this.http.get<Simulation[]>(`${this.apiUrl}/mis-practicas`);
   }
 
-  getEstadisticasGlobales(): Observable<any> {
+  getGlobalStatistics(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/estadisticas`);
   }
 
@@ -52,11 +52,11 @@ export class SimulationService {
     return this.http.get<Simulation[]>(this.apiUrl);
   }
 
-  iniciar(scenarioId: number): Observable<Simulation> {
+  start(scenarioId: number): Observable<Simulation> {
     return this.http.post<Simulation>(`${this.apiUrl}/iniciar/${scenarioId}`, {});
   }
 
-  finalizar(simulationId: number, finalScore: number): Observable<Simulation> {
+  finish(simulationId: number, finalScore: number): Observable<Simulation> {
     return this.http.post<Simulation>(`${this.apiUrl}/${simulationId}/finalizar`, { finalScore });
   }
 

@@ -68,12 +68,12 @@ public class AuthController {
      * @param request the validated registration data (email, names, password and profile fields)
      * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.AuthResponse} with the access token and the created user
      */
-    public ResponseEntity<AuthResponse> registro(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         AuthResponse response = null;
         int maxIntentos = 3;
         for (int intento = 1; intento <= maxIntentos; intento++) {
             try {
-                response = authService.registro(request);
+                response = authService.register(request);
                 break;
             } catch (org.springframework.dao.DataIntegrityViolationException ex) {
                 log.warn("Colisión de unicidad al generar nombre_usuario (intento {}/{}). Reintentando...",

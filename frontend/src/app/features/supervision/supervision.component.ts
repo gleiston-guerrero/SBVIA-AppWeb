@@ -40,11 +40,11 @@ export class SupervisionComponent implements OnInit {
     return this.practicas.filter(practica => {
       const coincideTexto = !texto || [practica.username, practica.userEmail, practica.scenarioName]
         .some(value => value?.toLowerCase().includes(texto));
-      return coincideTexto && this.coincideEstado(practica);
+      return coincideTexto && this.matchesState(practica);
     });
   }
 
-  private coincideEstado(practica: Simulation): boolean {
+  private matchesState(practica: Simulation): boolean {
     if (!this.estado) return true;
     const finalizada = practica.completed || !!practica.endDate;
     if (this.estado === 'EN_PROGRESO') return !finalizada;

@@ -130,7 +130,7 @@ a datos personales de los participantes. Se facilita al docente por el canal pri
 
 ### Nota sobre la cronología del instrumento
 
-Los diez ítems del SUS aplicados están versionados en el repositorio desde el commit `786e042`
+Los diez ítems del SUS aplicados son los del cuestionario estándar de Brooke. El archivo se incorporó en el commit `786e042` (2026-09-18), pero su redacción en español se revisó el 2026-09-20 a las 18:05 (`b9cac65`), de modo que las sesiones del 19 de septiembre usaron la redacción anterior
 (2026-09-18), **anterior a la primera sesión** (2026-09-19). El formulario imprimible
 [`Cuestionario-SUS-Participante.tex`](../../mediciones/sus/Cuestionario-SUS-Participante.tex)
 reproduce esos mismos ítems. La fecha de compilación del PDF corresponde al artefacto, no a la

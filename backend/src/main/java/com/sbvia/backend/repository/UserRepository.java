@@ -57,5 +57,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return a {@link java.util.List} object
      */
     @Query("SELECT u.username FROM User u WHERE LOWER(u.username) = LOWER(:base) OR LOWER(u.username) LIKE LOWER(CONCAT(:base, '%'))")
-    List<String> findNombresUsuarioSimilares(@Param("base") String base);
+    List<String> findSimilarUsernames(@Param("base") String base);
 }

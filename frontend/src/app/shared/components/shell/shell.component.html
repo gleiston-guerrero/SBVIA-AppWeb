@@ -50,7 +50,7 @@
 
         <!-- Menú desplegable -->
         <div class="account-dropdown" *ngIf="menuAbierto">
-          <button class="dropdown-item" (click)="abrirModalPerfil()">
+          <button class="dropdown-item" (click)="openProfileModal()">
             <span>✎</span> {{ 'shell.editProfile' | t }}
           </button>
           <button class="dropdown-item logout" (click)="logout()">
@@ -70,7 +70,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <h2>{{ 'shell.profileTitle' | t }}</h2>
-      <button class="close-btn" (click)="cerrarModalPerfil()">×</button>
+      <button class="close-btn" (click)="closeProfileModal()">×</button>
     </div>
     <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
       <div class="modal-body">
@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-cancel" (click)="cerrarModalPerfil()" [disabled]="guardandoPerfil">{{ 'common.cancel' | t }}</button>
+        <button type="button" class="btn-cancel" (click)="closeProfileModal()" [disabled]="guardandoPerfil">{{ 'common.cancel' | t }}</button>
         <button type="submit" class="btn-save" [disabled]="profileForm.invalid || guardandoPerfil">
           {{ (guardandoPerfil ? 'common.saving' : 'shell.saveChanges') | t }}
         </button>

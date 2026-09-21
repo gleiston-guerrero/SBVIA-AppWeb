@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     });
     
     if (this.user?.role === 'ADMINISTRADOR') {
-      this.simulationService.getEstadisticasGlobales().subscribe({
+      this.simulationService.getGlobalStatistics().subscribe({
         next: (stats: any) => {
           this.totalPracticas = stats.totalPracticas;
           this.promedio = stats.promedioGlobal;
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
         next: pagina => this.totalUsuarios = pagina.totalElements ?? pagina.content?.length ?? 0
       });
     } else {
-      this.simulationService.getMisPracticas().subscribe({
+      this.simulationService.getMyPractices().subscribe({
         next: (practicas: any) => {
           this.totalPracticas = practicas.length;
           const finalizadas = practicas.filter((p: any) => p.completed || p.endDate);

@@ -81,7 +81,7 @@
               <span class="op-badge" [ngClass]="reg.operation.toLowerCase()">{{ reg.operation }}</span>
             </td>
             <td class="actions">
-              <button class="btn btn-sm" (click)="verDetalle(reg)">Ver Detalles</button>
+              <button class="btn btn-sm" (click)="viewDetail(reg)">Ver Detalles</button>
             </td>
           </tr>
           <tr *ngIf="registros.length === 0">
@@ -94,11 +94,11 @@
 </div>
 
 <!-- Modal Detalles -->
-<div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+<div class="modal-overlay" *ngIf="modalAbierto" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <header>
       <h2>Detalle de Operación</h2>
-      <button class="close-btn" (click)="cerrarModal()">×</button>
+      <button class="close-btn" (click)="closeModal()">×</button>
     </header>
     <div class="modal-body">
       <div class="info-grid">

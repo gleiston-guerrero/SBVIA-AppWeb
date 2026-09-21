@@ -59,7 +59,7 @@
           <td><span class="estado" [class.aprobada]="(practica.completed || practica.endDate) && practica.finalScore >= 70" [class.reprobada]="(practica.completed || practica.endDate) && practica.finalScore < 70">{{ (practica.completed || practica.endDate) ? (practica.finalScore >= 70 ? 'practices.statusApproved' : 'practices.statusFailed') : 'practices.statusInProgress' | t }}</span></td>
           <td><strong>{{ (practica.completed || practica.endDate) ? (practica.finalScore + '/100') : '—' }}</strong></td>
           <td class="acciones">
-            <button type="button" class="btn-informe" *ngIf="practica.completed || practica.endDate" (click)="verInforme(practica)">{{ (practicaSeleccionada?.simulationId === practica.simulationId ? 'practices.closeReport' : 'practices.viewReport') | t }}</button>
+            <button type="button" class="btn-informe" *ngIf="practica.completed || practica.endDate" (click)="viewReport(practica)">{{ (practicaSeleccionada?.simulationId === practica.simulationId ? 'practices.closeReport' : 'practices.viewReport') | t }}</button>
             <a *ngIf="practica.scenarioId" [routerLink]="['/simulation', practica.scenarioId]">{{ 'practices.repeatScenario' | t }}</a>
           </td>
         </tr>
@@ -73,9 +73,9 @@
     </ng-template>
   </div>
 
-  <div class="modal-overlay" *ngIf="practicaSeleccionada" (click)="cerrarInforme()">
+  <div class="modal-overlay" *ngIf="practicaSeleccionada" (click)="closeReport()">
     <section class="informe-panel modal-content" (click)="$event.stopPropagation()">
-      <header><div><span class="eyebrow">{{ 'practices.reportSaved' | t }}</span><h3>{{ 'practices.aiReport' | t }} · {{ practicaSeleccionada.scenarioName }}</h3></div><button type="button" class="btn-close-modal" (click)="cerrarInforme()" [attr.aria-label]="'practices.closeReport' | t">×</button></header>
+      <header><div><span class="eyebrow">{{ 'practices.reportSaved' | t }}</span><h3>{{ 'practices.aiReport' | t }} · {{ practicaSeleccionada.scenarioName }}</h3></div><button type="button" class="btn-close-modal" (click)="closeReport()" [attr.aria-label]="'practices.closeReport' | t">×</button></header>
       <p *ngIf="cargandoInforme" class="loading-informe">{{ 'practices.loadingReport' | t }}</p>
       <p *ngIf="errorInforme" class="error-msg">{{ errorInforme }}</p>
       <ng-container *ngIf="informeSeleccionado as informe">

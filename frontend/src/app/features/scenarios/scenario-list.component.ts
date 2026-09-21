@@ -43,18 +43,18 @@ export class ScenarioListComponent implements OnInit {
     });
   }
 
-  cambiarPagina(nuevaPagina: number): void {
+  changePage(nuevaPagina: number): void {
     if (nuevaPagina >= 0 && nuevaPagina < this.totalPages) {
       this.page = nuevaPagina;
       this.loadScenarios();
     }
   }
 
-  solicitarEliminacion(scenario: Scenario): void {
+  requestDeletion(scenario: Scenario): void {
     this.scenarioToDelete = scenario;
   }
 
-  cancelarEliminacion(): void {
+  cancelDeletion(): void {
     if (!this.isDeleting) this.scenarioToDelete = undefined;
   }
 

@@ -37,7 +37,7 @@ public class UserControllerTest {
         when(auth.getName()).thenReturn("test@test.com");
         when(authService.getCurrentUser("test@test.com")).thenReturn(new UserDTO());
 
-        ResponseEntity<UserDTO> res = controller.getPerfilActual(auth);
+        ResponseEntity<UserDTO> res = controller.getCurrentProfile(auth);
         assertEquals(200, res.getStatusCode().value());
     }
 

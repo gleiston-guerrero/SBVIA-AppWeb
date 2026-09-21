@@ -127,7 +127,7 @@ y no una afirmación:
 
 | # | Eslabón | Evidencia | Cómo se comprueba |
 | :---: | :--- | :--- | :--- |
-| 1 | Instrumento | Los diez ítems del SUS, versionados desde el commit `786e042` (2026-09-18), anterior a toda sesión | `git log -- docs/mediciones/sus/instrumento-sus.md` |
+| 1 | Instrumento | Los diez ítems del SUS, cuestionario estándar de Brooke. El archivo se incorporó el 2026-09-18 (`786e042`) y **su redacción en español se revisó el 2026-09-20 a las 18:05** (`b9cac65`), reescribiendo siete de los diez ítems: las sesiones del 19 de septiembre usaron la redacción anterior. **No se sostiene que el instrumento sea anterior a toda sesión.** | `git log -- docs/mediciones/sus/instrumento-sus.md` |
 | 2 | Formulario imprimible | `Cuestionario-SUS-Participante.tex` → `.pdf`, incorporado con este estudio | Compilable con `pdflatex` |
 | 3 | Consentimiento | Formulario generado el 2026-09-19, firmado **antes** de cada sesión | Originales en custodia externa |
 | 4 | Sesiones | 19 y 20 de septiembre de 2026, sobre el sistema desplegado | Fechas en `sus-raw-data-2026-09.csv` |

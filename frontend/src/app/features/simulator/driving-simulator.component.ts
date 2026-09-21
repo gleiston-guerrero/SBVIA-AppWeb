@@ -140,10 +140,10 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   // ─── Controles de la simulación ───
-  iniciar(): void {
-    if (this.estado === 'finalizado') this.reiniciar();
+  start(): void {
+    if (this.estado === 'finalizado') this.restart();
     if (this.idSimulacionBackend === null && this.scenarioId !== null && !this.modoLocal) {
-      this.simulationService.iniciar(this.scenarioId).subscribe({
+      this.simulationService.start(this.scenarioId).subscribe({
         next: (s: any) => { this.idSimulacionBackend = s.simulationId; },
         error: () => {
           this.modoLocal = true;
@@ -167,7 +167,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     }
   }
 
-  reiniciar(): void {
+  restart(): void {
     this.estado = 'listo';
     this.velocidadKmh = 0;
     this.velocidadMax = 0;
@@ -200,13 +200,13 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.teclas.clear();
   }
 
-  finalizar(): void {
+  finish(): void {
     if (this.estado !== 'corriendo' && this.estado !== 'pausado') return;
     this.estado = 'finalizado';
     this.velocidadKmh = 0;
     if (this.idSimulacionBackend !== null && !this.modoLocal) {
       this.isSaving = true;
-      this.simulationService.endDriving(this.idSimulacionBackend, this.metricas()).subscribe({
+      this.simulationService.endDriving(this.idSimulacionBackend, this.metrics()).subscribe({
         next: (r: any) => {
           this.puntajeServidor = Number(r.simulation.finalScore);
           this.informe = r.feedback;
@@ -244,7 +244,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     return this.tailTimer > 0.3;
   }
 
-  private metricas(): MetricasConduccion {
+  private metrics(): MetricasConduccion {
     return {
       durationSeconds: Math.max(1, Math.floor(this.segundos)),
       velocidadPromedio: Math.round(this.velocidadPromedio * 100) / 100,

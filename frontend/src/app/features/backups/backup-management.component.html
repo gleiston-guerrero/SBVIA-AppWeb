@@ -4,7 +4,7 @@
       <h1>Gestión de Respaldos</h1>
       <p class="subtitle">Administre las copias de seguridad de la base de datos SBVIA.</p>
     </div>
-    <button class="btn-primary" (click)="abrirModal()" [disabled]="generando">
+    <button class="btn-primary" (click)="openModal()" [disabled]="generando">
       <span class="icon">💾</span> 
       {{ generando ? 'Procesando...' : 'Nuevo Respaldo' }}
     </button>
@@ -75,7 +75,7 @@
               ⬇️
             </button>
             <button class="btn-icon btn-delete" 
-                    (click)="solicitarEliminacion(res.id)" 
+                    (click)="requestDeletion(res.id)" 
                     title="Eliminar">
               🗑️
             </button>
@@ -91,7 +91,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <h2>Opciones de Respaldo</h2>
-      <button class="close-btn" (click)="cerrarModal()">×</button>
+      <button class="close-btn" (click)="closeModal()">×</button>
     </div>
     <form [formGroup]="respaldoForm" (ngSubmit)="generateBackup()">
       <div class="modal-body">
@@ -118,7 +118,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn-cancel" (click)="cerrarModal()" [disabled]="generando">Cancelar</button>
+        <button type="button" class="btn-cancel" (click)="closeModal()" [disabled]="generando">Cancelar</button>
         <button type="submit" class="btn-primary" [disabled]="respaldoForm.invalid || generando">
           {{ generando ? 'Procesando...' : 'Confirmar' }}
         </button>
@@ -132,13 +132,13 @@
   <div class="modal-content">
     <div class="modal-header">
       <h2>Eliminar respaldo</h2>
-      <button class="close-btn" (click)="cancelarEliminacion()">×</button>
+      <button class="close-btn" (click)="cancelDeletion()">×</button>
     </div>
     <div class="modal-body">
       <p>¿Está seguro de delete este respaldo permanentemente?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn-cancel" (click)="cancelarEliminacion()">Cancelar</button>
+      <button type="button" class="btn-cancel" (click)="cancelDeletion()">Cancelar</button>
       <button type="button" class="btn-delete solid" style="background-color: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;" (click)="delete()">Eliminar</button>
     </div>
   </div>

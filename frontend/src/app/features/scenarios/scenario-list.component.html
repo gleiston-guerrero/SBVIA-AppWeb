@@ -8,7 +8,7 @@
     <a *ngIf="isAdmin" routerLink="/scenarios/nuevo" class="btn-create">+ {{ 'scenarios.new' | t }}</a>
   </div>
   <div class="filters" *ngIf="scenarios.length > 0">
-    <button class="filter-chip active" (click)="cambiarPagina(0)">{{ 'scenarios.all' | t }}</button>
+    <button class="filter-chip active" (click)="changePage(0)">{{ 'scenarios.all' | t }}</button>
   </div>
   <div class="card-grid">
     <article class="scenario-card" *ngFor="let esc of scenarios">
@@ -25,7 +25,7 @@
         <a class="btn-practicar" [routerLink]="['/simulation', esc.id]">{{ 'scenarios.start' | t }} →</a>
         <div class="admin-actions" *ngIf="isAdmin">
           <a class="btn-icon" [attr.title]="'scenarios.edit' | t" [routerLink]="['/scenarios/editar', esc.id]">✏️</a>
-          <button class="btn-icon" [attr.title]="'scenarios.delete' | t" (click)="solicitarEliminacion(esc)">🗑️</button>
+          <button class="btn-icon" [attr.title]="'scenarios.delete' | t" (click)="requestDeletion(esc)">🗑️</button>
         </div>
       </div>
     </article>
@@ -36,18 +36,18 @@
     </div>
   </div>
   <div class="pagination" *ngIf="totalPages > 1">
-    <button [disabled]="page === 0" (click)="cambiarPagina(page - 1)">← {{ 'scenarios.prev' | t }}</button>
+    <button [disabled]="page === 0" (click)="changePage(page - 1)">← {{ 'scenarios.prev' | t }}</button>
     <span>{{ 'scenarios.page' | t }} {{ page + 1 }} {{ 'scenarios.of' | t }} {{ totalPages }}</span>
-    <button [disabled]="page === totalPages - 1" (click)="cambiarPagina(page + 1)">{{ 'scenarios.next' | t }} →</button>
+    <button [disabled]="page === totalPages - 1" (click)="changePage(page + 1)">{{ 'scenarios.next' | t }} →</button>
   </div>
 
-  <div class="modal-backdrop" *ngIf="scenarioToDelete" (click)="cancelarEliminacion()">
+  <div class="modal-backdrop" *ngIf="scenarioToDelete" (click)="cancelDeletion()">
     <section class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="titulo-confirmacion" (click)="$event.stopPropagation()">
       <div class="warning-icon">!</div>
       <h2 id="titulo-confirmacion">{{ 'scenarios.deleteTitle' | t }}</h2>
       <p>{{ 'scenarios.deleteQuestion' | t }} <strong>{{ scenarioToDelete.name }}</strong>? {{ 'scenarios.deleteWarning' | t }}</p>
       <div class="dialog-actions">
-        <button type="button" class="btn-cancel" (click)="cancelarEliminacion()" [disabled]="isDeleting">{{ 'common.cancel' | t }}</button>
+        <button type="button" class="btn-cancel" (click)="cancelDeletion()" [disabled]="isDeleting">{{ 'common.cancel' | t }}</button>
         <button type="button" class="btn-delete" (click)="confirmDeletion()" [disabled]="isDeleting">{{ (isDeleting ? 'scenarios.deleting' : 'scenarios.confirmDelete') | t }}</button>
       </div>
     </section>

@@ -177,6 +177,95 @@ check(f"contrato AuditLog: {len(a_back)} campos identicos en backend y frontend"
       a_back == a_front and len(a_back) > 0,
       f"backend={sorted(a_back - a_front)} frontend={sorted(a_front - a_back)}")
 
+print("\n[8] Metadatos de citacion")
+import re as _re
+
+cit = ruta("CITATION.cff").read_text(encoding="utf-8")
+
+
+def _campo(nombre: str) -> str:
+    m = _re.search(r"(?m)^" + nombre + r":\s*[\"']?([^\"'\s]+)", cit)
+    return m.group(1).strip() if m else ""
+
+
+cff_schema = _campo("cff-version")
+cff_prog = _campo("version")
+check("CITATION.cff declara un cff-version de esquema valido",
+      cff_schema in ("1.1.0", "1.2.0"), f"cff-version={cff_schema or 'ausente'}")
+check("CITATION.cff declara la version del software, distinta del esquema",
+      cff_prog not in ("", cff_schema), f"version={cff_prog or 'ausente'}")
+
+srs = ruta("docs", "requisitos", "SRS-v1.3.0.tex")
+if srs.exists():
+    stxt = srs.read_text(encoding="utf-8")
+    check("la version del SRS coincide con la declarada en CITATION.cff",
+          f"Versión {cff_prog}" in stxt, f"version={cff_prog}")
+
+print("\n[9] Documentos compilados y capturas")
+for rel, minimo, etiqueta in (
+    ("docs/informe-final.pdf", 1_000_000, "informe final"),
+    ("docs/requisitos/SRS-v1.3.0.pdf", 100_000, "SRS v1.3.0"),
+):
+    f = ruta(*rel.split("/"))
+    tam = f.stat().st_size if f.exists() else 0
+    cab = f.read_bytes()[:5] if f.exists() else b""
+    check(f"el PDF de {etiqueta} no es un archivo de prueba",
+          tam > minimo and cab.startswith(b"%PDF-"), f"{tam} bytes")
+
+for pat in ("pantalla-1*", "pantalla-2*", "pantalla-3*", "pantalla-4*"):
+    for f in (ruta("docs", "diagramas")).glob(pat + ".png"):
+        check(f"{f.name}: captura real y no un archivo de prueba",
+              f.stat().st_size > 20_000, f"{f.stat().st_size} bytes")
+
+print("\n[10] Analisis de usabilidad")
+csv_sus = ruta("docs", "mediciones", "sus", "sus-raw-data-2026-09.csv")
+if csv_sus.exists():
+    import csv as _csv
+
+    filas = list(_csv.DictReader(csv_sus.open(encoding="utf-8-sig")))
+    puntajes = []
+    for f in filas:
+        r = [int(f[f"Q{i}"]) for i in range(1, 11)]
+        pares = sum((v - 1) for v in r[0::2])
+        impares = sum((5 - v) for v in r[1::2])
+        puntajes.append((pares + impares) * 2.5)
+    media = round(sum(puntajes) / len(puntajes), 2) if puntajes else 0
+    check("el CSV reproduce la formula SUS de Brooke en las 15 filas",
+          len(filas) == 15 and all(0 <= p <= 100 for p in puntajes),
+          f"{len(filas)} filas")
+    check("la media recalculada es 69,00 y cumple RNF-06",
+          media == 69.00 and media >= 68, f"media={media}")
+
+    for rel in ("docs/requisitos/SRS-v1.3.0.tex",
+                "docs/mediciones/sus/sus-analysis-2026-09.md"):
+        f = ruta(*rel.split("/"))
+        if not f.exists():
+            continue
+        txt = f.read_text(encoding="utf-8")
+        check(f"{f.name} declara la media recalculada y no otra",
+              "69,00" in txt or "69.00" in txt, "no aparece 69,00")
+
+    fechas = sorted({f.get("fecha", "") for f in filas})
+    check("las sesiones del CSV caen en las fechas declaradas",
+          all(d.startswith("2026-09-19") or d.startswith("2026-09-20") for d in fechas if d),
+          ", ".join(fechas))
+
+    ins = ruta("docs", "mediciones", "sus", "instrumento-sus.md")
+    if ins.exists():
+        itxt = ins.read_text(encoding="utf-8")
+        marcadores = _re.findall(r"(?m)^\|\s*(\d+)\s*\|", itxt)
+        check("el instrumento conserva los diez items del cuestionario SUS",
+              [int(x) for x in marcadores[:10]] == list(range(1, 11)),
+              f"items encontrados: {len(marcadores)}")
+
+print("\n[11] Javadoc sin marcadores plantilla")
+plantilla = 0
+for f in (ruta("backend", "src", "main", "java")).rglob("*.java"):
+    plantilla += len(_re.findall(r"<p>\w+ (?:class|interface|enum|record)\.</p>",
+                                 f.read_text(encoding="utf-8")))
+check("no queda ningun javadoc plantilla en el backend", plantilla == 0,
+      f"{plantilla} encontrados")
+
 print("\n" + "=" * 62)
 if fallos:
     print(f"INTEGRIDAD FALLIDA: {len(fallos)} de {total} comprobaciones")

@@ -3,7 +3,7 @@
 **Proyecto:** SBVIA — Sistema de Simulación de Comportamiento Vial con Inteligencia Artificial
 **Repositorio:** https://github.com/gleiston-guerrero/SBVIA-AppWeb
 **Etiqueta de referencia:** `v1.2.0`
-**Última actualización:** 19-09-2026
+**Última actualización:** 21-09-2026
 
 ---
 
@@ -121,6 +121,42 @@ Todos los hashes de esta tabla son verificables con `git show <hash>`.
 | **Qué se hizo** | Se incorpora `docs/requisitos/Revision_SRS_SBVIA_v1.2.0.pdf` al repositorio, junto a los informes de las otras dos versiones, de modo que las cuatro citas pasan a ser verdaderas y verificables. Dos de ellas se completan con la ruta `docs/requisitos/`. |
 | **Por qué** | Citar como prueba un archivo inexistente es del mismo tipo que pegar una salida que la orden no produce: la afirmación no resiste su propia comprobación. El origen del error fue dar por versionado un documento que solo se había recibido como adjunto, sin comprobarlo con `git log` antes de citarlo. |
 
+### R-11 — Autorización del docente fechada el 19-09 en dos archivos
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | La autorización para seguir moviendo la etiqueta `v1.1.0` estaba fechada el **19-09-2026** en dos archivos: `docs/observaciones/OBSERVACIONES.md` (*"el docente-director autorizó expresamente el 19-09-2026"*, *"confirmación directa del docente del 19-09-2026"*) y `docs/requisitos/SRS-v1.1.0.tex` (*"por autorización expresa del docente-director del 19-09-2026"*). La autorización consta **por escrito en la evaluación del 2026-09-20, apartado 2** —*"Cómo dejar la etiqueta donde ustedes quieran"*, con las órdenes concretas—, como ya recogía `docs/VERSIONING.md`. |
+| **Commit de corrección** | El de esta ronda — 21-09-2026 — *docs(integrity): ...* |
+| **Qué se hizo** | Las dos citas se corrigen a la fecha y la forma reales: autorización **escrita** del **2026-09-20**. El `SRS-v1.1.0.tex` se recompila. |
+| **Por qué** | Es una atribución al docente con una fecha que los propios metadatos del repositorio contradicen. Se señaló en la evaluación del 19-09 y otra vez en la del 20-09, y en esta tercera revisión seguía viva en dos archivos. En la jornada del 20-09 se abrieron R-09 y R-10 por defectos menores y no se abrió entrada para esta, de mayor gravedad. |
+
+### R-12 — Anterioridad del instrumento SUS afirmada en cuatro archivos
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | Cuatro archivos afirmaban que los diez ítems del SUS aplicados están versionados "desde el commit `786e042` (2026-09-18), **anterior a la primera sesión**" o "anterior a toda sesión": `docs/etica/ETHICS.md`, `docs/requisitos/SRS-v1.3.0.tex`, `docs/mediciones/sus/sus-analysis-2026-09.md` y `docs/etica/consentimientos/registro-aceptacion.md`. El historial real del instrumento (`git log -- docs/mediciones/sus/instrumento-sus.md`) muestra que su último cambio es `b9cac65`, del **2026-09-20 a las 18:05**, y que esa revisión **reescribe siete de los diez ítems**. Las sesiones del 19 de septiembre son anteriores a esa revisión. |
+| **Commit de corrección** | El de esta ronda — 21-09-2026 — *docs(integrity): ...* |
+| **Qué se hizo** | Se sustituye la afirmación por la cronología comprobable y se declara como limitación: las sesiones del 19 de septiembre usaron la redacción anterior a la revisión del 20. Los diez ítems son, en ambos casos, los del cuestionario SUS estándar de Brooke; cambió la redacción en español, no el instrumento. |
+| **Por qué** | La afirmación se presentaba apoyada en una orden —`git log -- docs/mediciones/sus/instrumento-sus.md`— que en realidad la refuta. Y en esta ronda, lejos de corregirse, se copió a dos documentos más. |
+
+### R-13 — Cifra falsa en el mensaje del commit de renombrado
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | El mensaje del commit `cd30632` afirma: *"0 of 172 methods in main and 0 of 25 in test carry a Spanish name"*. Un recuento independiente encuentra **15 métodos en `src/main` y 26 en `src/test`**, once de ellos inequívocamente en español y no impuestos por el esquema, además de alrededor de **80 declaraciones en español en el frontend**, que ese renombrado no tocó. |
+| **Commit de corrección** | El de esta ronda — 21-09-2026 — *docs(integrity): ...* |
+| **Qué se hizo** | Se mide de nuevo con un patrón que sí cubre los métodos sin modificador de acceso y los anidados, se renombran los que quedan en el backend y se declara la cifra real. El mensaje de `cd30632` no se reescribe: queda en el historial y esta entrada es su corrección. |
+| **Por qué** | Es una cifra en el historial del repositorio que su propia comprobación no respalda. El recuento original usó un patrón que exigía `public`, `private` o `protected` al comienzo de la línea, de modo que omitía los métodos de paquete, los anidados y los repartidos en varias líneas. |
+
+### R-14 — `cff-version` roto por un reemplazo global de texto
+
+| Campo | Detalle |
+|:---|:---|
+| **Qué se retractó** | Al actualizar el DOI del software se hizo un reemplazo de `10.5281/zenodo.22840356` por el nuevo identificador en ocho archivos, y el patrón alcanzó también la primera línea de `CITATION.cff`: `cff-version: 1.2.0` pasó a `cff-version: 1.3.0`. `cff-version` es la versión del **esquema** Citation File Format, no la del software, y la 1.3.0 no existe: el archivo quedó inválido, y es precisamente el archivo que evalúa el punto P4. |
+| **Commit de corrección** | El de esta ronda — 21-09-2026 |
+| **Qué se hizo** | Se restaura `cff-version: 1.2.0` y se conserva `version: 1.3.0`, que es la del software. Se añade a `scripts/verify_integridad_mediciones.py` una comprobación de que `cff-version` es una versión de esquema válida y de que `version` coincide con la del SRS: si el archivo vuelve a romperse, el verificador del expediente falla. |
+| **Por qué** | Es el mismo patrón que R-13: un resultado que la propia comprobación no respalda, aquí por aplicar un reemplazo de texto sin acotarlo. Lo que lo habría detectado no es una lectura más cuidadosa, sino una comprobación automática del propio archivo de metadatos, que es lo que ahora existe. |
+
 ---
 
 ## 3. Resumen
@@ -137,6 +173,10 @@ Todos los hashes de esta tabla son verificables con `git show <hash>`.
 | R-08 | Migración V14 ya aplicada reescrita (N4) | `deda187` | 18-09-2026 |
 | R-09 | Atribución al docente sin texto que la respalde ("MD5 confirmado por el docente") | `5c02c22` | 20-09-2026 |
 | R-10 | Cuatro citas a un informe de revisión que no existía en el repositorio | `5c02c22` | 20-09-2026 |
+| R-11 | Autorización del docente fechada el 19-09 en dos archivos | esta ronda | 21-09-2026 |
+| R-12 | Anterioridad del instrumento SUS afirmada en cuatro archivos | esta ronda | 21-09-2026 |
+| R-13 | Cifra falsa en el mensaje del commit de renombrado | esta ronda | 21-09-2026 |
+| R-14 | `cff-version` roto por un reemplazo global de texto | esta ronda | 21-09-2026 |
 
 ---
 
@@ -146,10 +186,10 @@ Las retractaciones anteriores corrigen evidencia del expediente; **no corrigen p
 puntaje de los puntos afectados**. Varios de esos puntos siguen sin cumplir su criterio por
 otras razones, que se declaran en sus propios requisitos y en el informe de evaluación:
 
-- **RNF-06 (SUS)** sigue siendo `NOT VERIFIED` en el SRS: la retirada de R-07 no se revierte. Se
-  ejecutó una **nueva** evaluación de usabilidad en septiembre de 2026 (15 participantes, media
-  69,00; véase [`sus-analysis-2026-09.md`](mediciones/sus/sus-analysis-2026-09.md)), que es evidencia
-  nueva y trazable. Su incorporación al SRS se resolverá en la próxima versión del documento.
+- **RNF-06 (SUS)** figura ya como `VERIFIED` en el SRS v1.3.0: la retirada de R-07 no se revierte, y
+  la evaluación de usabilidad de septiembre de 2026 (15 participantes, media 69,00) es evidencia
+  **nueva** que sustituye a la retirada. La reescritura de la redacción del instrumento el 20-09
+  queda declarada en R-12 y como limitación del propio estudio.
 - **RNF-02 (latencia en frío)** declara su umbral incumplido con la medición real.
 - **RF-16 a RF-20** pasan a `NOT VERIFIED` porque los procedimientos no se invocan desde la
   aplicación, aunque su definición exista y esté versionada.

@@ -29,7 +29,7 @@ export class UsuarioService {
     return this.http.get(this.API_URL, { params });
   }
 
-  cambiarRol(id: number, nombreRol: string): Observable<User> {
+  changeRole(id: number, nombreRol: string): Observable<User> {
     return this.http.put<User>(`${this.API_URL}/${id}/role`, { nombreRol });
   }
 

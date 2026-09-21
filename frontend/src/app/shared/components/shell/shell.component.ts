@@ -52,7 +52,7 @@ export class ShellComponent implements OnInit {
     this.menuAbierto = !this.menuAbierto;
   }
 
-  abrirModalPerfil(): void {
+  openProfileModal(): void {
     this.menuAbierto = false; // Cerrar el menú
     if (this.user) {
       this.profileForm.patchValue({
@@ -65,7 +65,7 @@ export class ShellComponent implements OnInit {
     this.modalPerfilAbierto = true;
   }
 
-  cerrarModalPerfil(): void {
+  closeProfileModal(): void {
     this.modalPerfilAbierto = false;
   }
 
@@ -76,7 +76,7 @@ export class ShellComponent implements OnInit {
     this.authService.updateProfile(this.profileForm.value).subscribe({
       next: () => {
         this.guardandoPerfil = false;
-        this.cerrarModalPerfil();
+        this.closeProfileModal();
       },
       error: (err: any) => {
         console.error('Error al update perfil', err);
