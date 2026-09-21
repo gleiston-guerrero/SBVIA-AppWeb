@@ -95,7 +95,7 @@ class DrivingSimulationIntegrationTest {
 
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 120, new BigDecimal("45.50"), new BigDecimal("72.00"), 2, 1, 1, 1, 1, 0);
-        DrivingResultDTO resultado = simulationService.finalizarConduccion(
+        DrivingResultDTO resultado = simulationService.finishDriving(
                 "conductor.it@sbvia.test", simulation.getSimulationId(), metricas);
 
         // 100 - (2*15 + 1*20 + 1*20 + 1*10 + 1*8) = 12

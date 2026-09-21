@@ -53,11 +53,11 @@ public class UserControllerTest {
 
     @Test
     void testCambiarRol() {
-        when(authService.cambiarRol(eq(1), any())).thenReturn(new UserDTO());
+        when(authService.changeRole(eq(1), any())).thenReturn(new UserDTO());
         ChangeRoleRequest request = new ChangeRoleRequest();
         request.setNombreRol("ADMINISTRADOR");
 
-        ResponseEntity<UserDTO> res = controller.cambiarRol(1, request);
+        ResponseEntity<UserDTO> res = controller.changeRole(1, request);
         assertEquals(200, res.getStatusCode().value());
     }
 

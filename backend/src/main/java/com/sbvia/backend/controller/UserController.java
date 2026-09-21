@@ -135,10 +135,10 @@ public class UserController {
      * @param request the validated request containing the name of the new role to assign
      * @return a {@link org.springframework.http.ResponseEntity} carrying the {@link com.sbvia.backend.dto.UserDTO} with the updated role
      */
-    public ResponseEntity<UserDTO> cambiarRol(
+    public ResponseEntity<UserDTO> changeRole(
             @PathVariable Integer id,
             @Valid @RequestBody ChangeRoleRequest request) {
-        UserDTO actualizado = authService.cambiarRol(id, request.getNombreRol());
+        UserDTO actualizado = authService.changeRole(id, request.getNombreRol());
         return ResponseEntity.ok(actualizado);
     }
 

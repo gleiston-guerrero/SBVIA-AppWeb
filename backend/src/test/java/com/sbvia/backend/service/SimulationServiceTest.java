@@ -103,7 +103,7 @@ class SimulationServiceTest {
             return guardada;
         });
 
-        SimulationDTO resultado = simulationService.iniciarSimulacion(user.getEmail(), 3);
+        SimulationDTO resultado = simulationService.startSimulation(user.getEmail(), 3);
 
         assertThat(resultado.getSimulationId()).isEqualTo(21);
         assertThat(resultado.getFinalScore()).isEqualByComparingTo(BigDecimal.ZERO);
@@ -120,7 +120,7 @@ class SimulationServiceTest {
         when(usuarioRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
         when(escenarioRepository.findById(3)).thenReturn(Optional.of(escenario));
 
-        assertThatThrownBy(() -> simulationService.iniciarSimulacion(user.getEmail(), 3))
+        assertThatThrownBy(() -> simulationService.startSimulation(user.getEmail(), 3))
                 .isInstanceOf(com.sbvia.backend.exception.ResourceNotFoundException.class)
                 .hasMessage("Scenario activo no encontrado");
     }
@@ -134,7 +134,7 @@ class SimulationServiceTest {
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
         when(simulacionRepository.save(simulation)).thenReturn(simulation);
 
-        SimulationDTO resultado = simulationService.finalizarSimulacion(
+        SimulationDTO resultado = simulationService.finishSimulation(
                 user.getEmail(), 21, new BigDecimal("70"));
 
         assertThat(resultado.getFinalScore()).isEqualByComparingTo("70");
@@ -148,7 +148,7 @@ class SimulationServiceTest {
                 .simulationId(21).user(propietario).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
 
-        assertThatThrownBy(() -> simulationService.finalizarSimulacion(
+        assertThatThrownBy(() -> simulationService.finishSimulation(
                 "otro@sbvia.test", 21, new BigDecimal("80")))
                 .isInstanceOf(org.springframework.security.access.AccessDeniedException.class);
     }
@@ -160,7 +160,7 @@ class SimulationServiceTest {
                 .simulationId(21).user(user).completed(true).build();
         when(simulacionRepository.findById(21)).thenReturn(Optional.of(simulation));
 
-        assertThatThrownBy(() -> simulationService.finalizarSimulacion(
+        assertThatThrownBy(() -> simulationService.finishSimulation(
                 user.getEmail(), 21, new BigDecimal("90")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("La simulación ya fue finalizada");
@@ -230,7 +230,7 @@ class SimulationServiceTest {
                 120, new BigDecimal("45.50"), new BigDecimal("72.00"), 2, 1, 1, 1, 1, 0);
         when(feedbackService.generateAndSave(user.getEmail(), 21)).thenReturn(
                 FeedbackIaResponse.builder().puntaje(new BigDecimal("12.00")).origen("IA_LOCAL").build());
-        DrivingResultDTO resultado = simulationService.finalizarConduccion(user.getEmail(), 21, metricas);
+        DrivingResultDTO resultado = simulationService.finishDriving(user.getEmail(), 21, metricas);
 
         // 100 - (2*15 + 1*20 + 1*20 + 1*10 + 1*8) = 100 - 88 = 12
         assertThat(resultado.getSimulation().getFinalScore()).isEqualByComparingTo("12.00");
@@ -254,7 +254,7 @@ class SimulationServiceTest {
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("40.00"), new BigDecimal("55.00"), 0, 0, 0, 0, 0, 0);
 
-        assertThatThrownBy(() -> simulationService.finalizarConduccion("otro@sbvia.test", 21, metricas))
+        assertThatThrownBy(() -> simulationService.finishDriving("otro@sbvia.test", 21, metricas))
                 .isInstanceOf(org.springframework.security.access.AccessDeniedException.class);
     }
 
@@ -268,7 +268,7 @@ class SimulationServiceTest {
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("40.00"), new BigDecimal("55.00"), 0, 0, 0, 0, 0, 0);
 
-        assertThatThrownBy(() -> simulationService.finalizarConduccion(user.getEmail(), 21, metricas))
+        assertThatThrownBy(() -> simulationService.finishDriving(user.getEmail(), 21, metricas))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("La simulación ya fue finalizada");
     }
@@ -283,7 +283,7 @@ class SimulationServiceTest {
         DrivingMetricsRequest metricas = new DrivingMetricsRequest(
                 60, new BigDecimal("50.00"), new BigDecimal("40.00"), 0, 0, 0, 0, 0, 0);
 
-        assertThatThrownBy(() -> simulationService.finalizarConduccion(user.getEmail(), 21, metricas))
+        assertThatThrownBy(() -> simulationService.finishDriving(user.getEmail(), 21, metricas))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("La velocidad máxima no puede ser menor que la promedio");
     }

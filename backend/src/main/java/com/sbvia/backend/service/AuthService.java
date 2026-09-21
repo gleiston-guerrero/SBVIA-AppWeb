@@ -213,7 +213,7 @@ public class AuthService {
      * @return the DTO with the updated user
      */
     @Transactional
-    public UserDTO cambiarRol(Integer id, String nombreRol) {
+    public UserDTO changeRole(Integer id, String nombreRol) {
         User user = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User no encontrado con ID: " + id));
 
@@ -325,7 +325,7 @@ public class AuthService {
      * @return numero de usuarios desactivados
      */
     @Transactional
-    public int inactivarUsuariosInactivos(LocalDate fechaLimite) {
+    public int deactivateInactiveUsers(LocalDate fechaLimite) {
         StoredProcedureQuery query = entityManager
                 .createStoredProcedureQuery("sp_actualizar_usuarios_inactivos")
                 .registerStoredProcedureParameter("p_fecha_limite", java.sql.Date.class, ParameterMode.IN)

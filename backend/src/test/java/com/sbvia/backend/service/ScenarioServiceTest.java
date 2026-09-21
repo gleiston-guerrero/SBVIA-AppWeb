@@ -82,7 +82,7 @@ class ScenarioServiceTest {
 
         when(escenarioRepository.findByActivoTrue(pageable)).thenReturn(pageResult);
 
-        Page<ScenarioDTO> result = scenarioService.listarActivos(pageable);
+        Page<ScenarioDTO> result = scenarioService.listActive(pageable);
 
         assertThat(result.getTotalElements()).isEqualTo(2);
         assertThat(result.getContent().get(0).getName()).isEqualTo("Autopista Norte");

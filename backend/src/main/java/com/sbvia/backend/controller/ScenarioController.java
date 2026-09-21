@@ -47,7 +47,7 @@ public class ScenarioController {
         @ApiResponse(responseCode = "200", description = "Lista devuelta exitosamente"),
         @ApiResponse(responseCode = "401", description = "No autorizado")
     })
-    public ResponseEntity<Page<ScenarioDTO>> listar(
+    public ResponseEntity<Page<ScenarioDTO>> list(
             @RequestParam(required = false) String roadType,
             @RequestParam(required = false) Integer difficultyLevel,
             @RequestParam(required = false) String clima,

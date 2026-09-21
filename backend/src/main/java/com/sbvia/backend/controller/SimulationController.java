@@ -48,10 +48,10 @@ public class SimulationController {
      */
     @PostMapping("/iniciar/{scenarioId}")
     @Operation(summary = "Iniciar simulación", description = "Crea una práctica en progreso para el user autenticado")
-    public ResponseEntity<SimulationDTO> iniciar(
+    public ResponseEntity<SimulationDTO> start(
             @PathVariable Integer scenarioId,
             Authentication authentication) {
-        return ResponseEntity.ok(simulationService.iniciarSimulacion(authentication.getName(), scenarioId));
+        return ResponseEntity.ok(simulationService.startSimulation(authentication.getName(), scenarioId));
     }
 
     /**
@@ -65,11 +65,11 @@ public class SimulationController {
      */
     @PostMapping("/{simulationId}/finalizar")
     @Operation(summary = "Finalizar simulación", description = "Registra el puntaje y genera el resultado de la práctica")
-    public ResponseEntity<SimulationDTO> finalizar(
+    public ResponseEntity<SimulationDTO> finish(
             @PathVariable Integer simulationId,
             @Valid @RequestBody EndSimulationRequest request,
             Authentication authentication) {
-        return ResponseEntity.ok(simulationService.finalizarSimulacion(
+        return ResponseEntity.ok(simulationService.finishSimulation(
                 authentication.getName(), simulationId, request.finalScore()));
     }
 
@@ -84,11 +84,11 @@ public class SimulationController {
      */
     @PostMapping("/{simulationId}/conduccion/finalizar")
     @Operation(summary = "Finalizar conducción 2D", description = "Registra las métricas del simulador, calcula el puntaje en el servidor y persiste los resultados")
-    public ResponseEntity<DrivingResultDTO> finalizarConduccion(
+    public ResponseEntity<DrivingResultDTO> finishDriving(
             @PathVariable Integer simulationId,
             @Valid @RequestBody DrivingMetricsRequest request,
             Authentication authentication) {
-        return ResponseEntity.ok(simulationService.finalizarConduccion(
+        return ResponseEntity.ok(simulationService.finishDriving(
                 authentication.getName(), simulationId, request));
     }
 

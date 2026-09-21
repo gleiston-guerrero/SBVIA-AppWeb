@@ -40,7 +40,7 @@ public class ScenarioService {
      */
     @Cacheable(value = "scenarios", key = "#pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort")
     @Transactional(readOnly = true)
-    public Page<ScenarioDTO> listarActivos(Pageable pageable) {
+    public Page<ScenarioDTO> listActive(Pageable pageable) {
         Page<ScenarioDTO> page = escenarioRepository.findByActivoTrue(pageable)
                 .map(this::mapToDTO);
         return new CacheablePage<>(page);

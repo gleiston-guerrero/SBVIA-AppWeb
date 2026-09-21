@@ -157,7 +157,7 @@ class AuthServiceTest {
         when(rolRepository.findByName("ROLE_ADMIN")).thenReturn(Optional.of(administrador));
         when(usuarioRepository.save(user)).thenReturn(user);
 
-        assertThat(authService.cambiarRol(9, "ROLE_ADMIN").getRole()).isEqualTo("ROLE_ADMIN");
+        assertThat(authService.changeRole(9, "ROLE_ADMIN").getRole()).isEqualTo("ROLE_ADMIN");
     }
 
     @Test

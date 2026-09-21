@@ -86,7 +86,7 @@ public class SimulationService {
      * @param scenarioId the id of the active scenario to practice
      * @return the DTO of the created simulation in progress
      */
-    public SimulationDTO iniciarSimulacion(String email, Integer scenarioId) {
+    public SimulationDTO startSimulation(String email, Integer scenarioId) {
         User user = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User no encontrado"));
         Scenario scenario = escenarioRepository.findById(scenarioId)
@@ -126,7 +126,7 @@ public class SimulationService {
      * @param finalScore the final score to record for the simulation
      * @return the DTO of the finalized simulation
      */
-    public SimulationDTO finalizarSimulacion(String email, Integer simulationId, BigDecimal finalScore) {
+    public SimulationDTO finishSimulation(String email, Integer simulationId, BigDecimal finalScore) {
         Simulation simulation = simulacionRepository.findById(simulationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Simulación no encontrada"));
         if (!simulation.getUser().getEmail().equalsIgnoreCase(email)) {
@@ -152,7 +152,7 @@ public class SimulationService {
      * @param metricas a {@link com.sbvia.backend.dto.DrivingMetricsRequest} object
      * @return a {@link com.sbvia.backend.dto.DrivingResultDTO} object
      */
-    public DrivingResultDTO finalizarConduccion(String email, Integer simulationId, DrivingMetricsRequest metricas) {
+    public DrivingResultDTO finishDriving(String email, Integer simulationId, DrivingMetricsRequest metricas) {
         Simulation simulation = simulacionRepository.findById(simulationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Simulación no encontrada"));
         if (!simulation.getUser().getEmail().equalsIgnoreCase(email)) {
@@ -188,18 +188,18 @@ public class SimulationService {
                 .setScale(2, RoundingMode.HALF_UP);
         BigDecimal cumplimiento = BigDecimal.valueOf(100 - Math.min(100, totalInfracciones * 10));
 
-        guardarMetrica(simulation, "VELOCIDAD_PROMEDIO", metricas.velocidadPromedio(), "Promedio del simulador 2D");
-        guardarMetrica(simulation, "TOTAL_INFRACCIONES", BigDecimal.valueOf(totalInfracciones), "Conteo del simulador 2D");
-        guardarMetrica(simulation, "PUNTAJE_SEGURIDAD", puntaje, "Calculado en el servidor");
-        guardarMetrica(simulation, "PORCENTAJE_CUMPLIMIENTO", cumplimiento, "Calculado en el servidor");
+        saveMetric(simulation, "VELOCIDAD_PROMEDIO", metricas.velocidadPromedio(), "Promedio del simulador 2D");
+        saveMetric(simulation, "TOTAL_INFRACCIONES", BigDecimal.valueOf(totalInfracciones), "Conteo del simulador 2D");
+        saveMetric(simulation, "PUNTAJE_SEGURIDAD", puntaje, "Calculado en el servidor");
+        saveMetric(simulation, "PORCENTAJE_CUMPLIMIENTO", cumplimiento, "Calculado en el servidor");
 
         if (metricas.excesosVelocidad() > 0) {
-            guardarInfraccion(simulation, null, reglaExceso, moderada,
+            saveInfraction(simulation, null, reglaExceso, moderada,
                     metricas.excesosVelocidad() + " exceso(s) de velocidad en el simulador 2D",
                     reglaExceso.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.excesosVelocidad())));
         }
         if (metricas.semaforosIgnorados() > 0) {
-            guardarInfraccion(simulation, null, reglaSemaforo, grave,
+            saveInfraction(simulation, null, reglaSemaforo, grave,
                     metricas.semaforosIgnorados() + " semáforo(s) en rojo ignorado(s) en el simulador 2D",
                     reglaSemaforo.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.semaforosIgnorados())));
         }
@@ -285,7 +285,7 @@ public class SimulationService {
                 .build();
     }
 
-    private void guardarMetrica(Simulation simulation, String tipo, BigDecimal value, String observacion) {
+    private void saveMetric(Simulation simulation, String tipo, BigDecimal value, String observacion) {
         MetricType metricType = tipoMetricaRepository.findByName(tipo)
                 .orElseThrow(() -> new IllegalStateException("Catálogo incompleto: falta el tipo " + tipo));
         metricaDesempenoRepository.save(PerformanceMetric.builder()
@@ -296,7 +296,7 @@ public class SimulationService {
                 .build());
     }
 
-    private void guardarInfraccion(Simulation simulation, com.sbvia.backend.entity.Decision decision,
+    private void saveInfraction(Simulation simulation, com.sbvia.backend.entity.Decision decision,
             TrafficRule regla, SeverityLevel gravedad, String description, BigDecimal penalizacion) {
         infraccionRepository.save(Infraction.builder()
                 .description(description)

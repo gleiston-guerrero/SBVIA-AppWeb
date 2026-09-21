@@ -41,9 +41,9 @@ public class SimulationControllerTest {
     void testIniciar() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulationService.iniciarSimulacion("user", 1)).thenReturn(new SimulationDTO());
+        when(simulationService.startSimulation("user", 1)).thenReturn(new SimulationDTO());
 
-        ResponseEntity<SimulationDTO> res = controller.iniciar(1, auth);
+        ResponseEntity<SimulationDTO> res = controller.start(1, auth);
         assertEquals(200, res.getStatusCode().value());
     }
 
@@ -51,9 +51,9 @@ public class SimulationControllerTest {
     void testFinalizar() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulationService.finalizarSimulacion(eq("user"), eq(1), any(BigDecimal.class))).thenReturn(new SimulationDTO());
+        when(simulationService.finishSimulation(eq("user"), eq(1), any(BigDecimal.class))).thenReturn(new SimulationDTO());
 
-        ResponseEntity<SimulationDTO> res = controller.finalizar(1, new EndSimulationRequest(BigDecimal.valueOf(100)), auth);
+        ResponseEntity<SimulationDTO> res = controller.finish(1, new EndSimulationRequest(BigDecimal.valueOf(100)), auth);
         assertEquals(200, res.getStatusCode().value());
     }
 
@@ -61,13 +61,13 @@ public class SimulationControllerTest {
     void testFinalizarConduccion() {
         Authentication auth = mock(Authentication.class);
         when(auth.getName()).thenReturn("user");
-        when(simulationService.finalizarConduccion(eq("user"), eq(1), any(DrivingMetricsRequest.class))).thenReturn(new DrivingResultDTO());
+        when(simulationService.finishDriving(eq("user"), eq(1), any(DrivingMetricsRequest.class))).thenReturn(new DrivingResultDTO());
 
         DrivingMetricsRequest request = new DrivingMetricsRequest(
             0, BigDecimal.ZERO, BigDecimal.ZERO, 0, 0, 0, 0, 0, 0
         );
         
-        ResponseEntity<DrivingResultDTO> res = controller.finalizarConduccion(1, request, auth);
+        ResponseEntity<DrivingResultDTO> res = controller.finishDriving(1, request, auth);
         assertEquals(200, res.getStatusCode().value());
     }
 
