@@ -10,12 +10,12 @@ authors:
     given-names: "Jefferson M."
     orcid: "https://orcid.org/0009-0005-9831-0801"
     affiliation: "Universidad Técnica Estatal de Quevedo"
-version: 1.3.0
+version: 1.3.1
 date-released: "2026-09-21"
-doi: "10.5281/zenodo.22866363"
+doi: "10.5281/zenodo.22883012"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.22866363"
+    value: "10.5281/zenodo.22883012"
 license: MIT
 repository-code: "https://github.com/gleiston-guerrero/SBVIA-AppWeb"
 keywords:

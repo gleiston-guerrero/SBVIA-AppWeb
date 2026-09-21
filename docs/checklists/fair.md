@@ -12,7 +12,7 @@ Evaluación del paquete de datos, software y metadatos de SBVIA según las direc
 - [x] **F2. Los datos se describen con metadatos enriquecidos:**
   - Definidos en `CITATION.cff` (v1.2.0), `CONTRIBUTORS.md` (CRediT) y `DATA-DICTIONARY.md`.
 - [ ] **F3. Los metadatos incluyen explícitamente el identificador de los datos que describen:**
-  - DOI del Software: `10.5281/zenodo.22866363`
+  - DOI del Software: `10.5281/zenodo.22883012`
   - DOI del Dataset: `10.5281/zenodo.22785358`
 - [ ] **F4. Los metadatos y datos son indexables y buscables:**
   - Publicados e indexados en Zenodo.
