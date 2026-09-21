@@ -19,8 +19,11 @@ Hay **dos etiquetas con papeles distintos**, y conviene no confundirlas:
 | :--- | :--- | :--- |
 | `v1.1.0` | **Línea base del examen suspenso.** Se mueve con cada ronda de correcciones, por la excepción documentada más abajo. | Al commit evaluado (el último de `main`) |
 | `v1.2.0` | **Etiqueta de la especificación SRS v1.2.0.** No se mueve: identifica el documento revisado por el docente-director. | Al commit de la especificación v1.2.0 (`0302db6`) |
+| `v1.3.0` | **Etiqueta del SRS v1.3.0 y del depósito de software.** Se movió después de crear el depósito, contra la política de esta página; la consecuencia se declara abajo. | Al commit final |
 
 El chequeo de *"etiqueta anotada sobre HEAD"* lo satisface `v1.1.0`, que es la etiqueta de entrega del examen. `v1.2.0` **no se reescribe**: hacerlo dejaría la etiqueta sin correspondencia con el contenido del documento `SRS-v1.2.0`, que es exactamente el problema que el docente-director señaló en X2. La próxima versión de la especificación recibirá su propia etiqueta nueva.
+
+**Etiqueta `v1.3.0` — incumplimiento declarado.** Se creó sobre `5561569` para publicar el *release* que Zenodo convierte en depósito, y después se movió hasta el commit final. El depósito `10.5281/zenodo.22866363`, creado el 2026-09-21 a las 01:51, archivó el estado del repositorio **en ese momento**, no el evaluado: su `isSupplementTo` apunta a `/tree/v1.3.0`, que es una referencia móvil. Esto incumple la política de esta misma página, que se escribió precisamente para evitarlo. La discrepancia se resuelve con un **depósito nuevo desde el commit final**, cuyo DOI sustituye al anterior en `CITATION.cff`.
 
 **Política de etiquetas:** con carácter general, una etiqueta publicada es inmutable. Cada ronda de correcciones se publica sobre una etiqueta **nueva** (`v1.3.0`, `v1.4.0`, ...), nunca moviendo ni forzando una etiqueta existente. Esta política atiende la indicación escrita del docente-director en la revisión de la v1.2.0 (observaciones X1 y X2): una etiqueta de versión que se reescribe deja de ser una línea base.
 
