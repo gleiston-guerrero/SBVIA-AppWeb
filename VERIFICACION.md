@@ -136,18 +136,18 @@ Paso 1: Rendimiento (Frio > Caliente)
 
 ## P4 — Zenodo (Depósito y DOI)
 
-- **Descripción:** El software (licencia MIT) y el dataset de validación (CC BY 4.0) están depositados en Zenodo y sus DOIs resuelven correctamente.
-- **Orden exacta:** `python -c "import urllib.request as u; print(u.urlopen('https://doi.org/api/handles/10.5281/zenodo.22740480').status); print(u.urlopen('https://doi.org/api/handles/10.5281/zenodo.22785358').status)"`
+- **Descripción:** El software (licencia MIT) y el dataset de validación (CC BY 4.0) están depositados en Zenodo, y **los DOI que declara `CITATION.cff` resuelven correctamente**. La comprobación lee los identificadores del propio archivo de metadatos: si alguien cambia el DOI por uno que no resuelve, falla.
+- **Orden exacta:** `python scripts/verify_dois.py`
 - **Salida:**
 ```
-200
-200
+DOIS OK: 2 resueltos con 200
 ```
-- **Nota de obtención y corrección (EV-2).** La orden anterior de este expediente era `curl -s -o /dev/null -w "%{http_code}\n" URL1 URL2` y **no podía producir la salida de arriba**: en `curl`, `-o` se aplica a la URL siguiente, de modo que la primera iba a `/dev/null` pero **la segunda imprimía su cuerpo JSON**. Comprobado en local contra un servidor propio: esa orden devuelve 45 líneas empezando por `200` y siguiendo con el HTML. El verificador del expediente fallaba por esta causa en dos corridas limpias, porque su salida real jamás contenía `200 200`.
-  - Encadenar dos invocaciones con `&&` **tampoco sirve en Windows**: `curl.exe` no acepta `/dev/null` de forma portable y la segunda invocación termina con código **23** (`Failed writing body`). Por eso la orden usa ahora la biblioteca estándar de **Python**, que ya es dependencia del propio verificador: negocia TLS sin depender del cliente del sistema, imprime un `200` por DOI y **falla con excepción si alguno no resuelve**, lo que hace que el verificador devuelva un código distinto de cero.
-  - Salida verificada con esta misma orden desde un entorno con Python: `200` y `200`. El integrante del equipo la había obtenido el **2026-09-19** invocando cada URL por separado con `curl.exe` en PowerShell; ambas devolvieron `200`.
-  - Comprobación independiente con otro cliente TLS (Python `urllib`) contra el mismo endpoint: `HTTP 200` en ambos handles.
-- **Ruta del archivo que la respalda:** `CITATION.cff` y `docs/informe-final.tex` (DOI del software y del dataset).
+- **DOI del software corregido (P4).** `CITATION.cff` declaraba la versión 1.2.0 con el DOI `10.5281/zenodo.22740480`, que **resuelve a la v1.0.1** (14-sep), un depósito anterior que además lista al tercer integrante entre los creadores. Quien siguiera ese identificador descargaba código que no era el evaluado. Se sustituye por el DOI del depósito de la **v1.2.0**, `10.5281/zenodo.22840356`, verificado contra DataCite: título correcto, `version: v1.2.0`, tipo Software, y `IsSupplementTo` apuntando a `github.com/gleiston-guerrero/SBVIA-AppWeb/tree/v1.2.0` — el repositorio de entrega, no un fork.
+  - El **DOI de concepto** del software es `10.5281/zenodo.22740479` y resuelve siempre a la última versión. Se documenta aquí porque es la alternativa que no queda obsoleta al publicar versiones nuevas.
+  - El **dataset se deja como está**: su depósito (`10.5281/zenodo.22785358`, versión 1.0.0) contiene datos crudos, diccionarios, análisis estático, escaneo de vulnerabilidades y mediciones de rendimiento k6, y **no incluye el estudio de usabilidad**, de modo que no queda afectado ni por la retirada del SUS de julio ni por el estudio de septiembre.
+- **Nota de obtención y corrección (EV-2).** La orden anterior era `curl -s -o /dev/null -w "%{http_code}\n" URL1 URL2` y **no podía producir su propia salida**: en `curl`, `-o` se aplica a la URL siguiente, así que la primera iba a `/dev/null` y **la segunda imprimía su cuerpo JSON**. Comprobado en local contra un servidor propio: devuelve 45 líneas empezando por `200` y siguiendo con el HTML. El verificador del expediente fallaba por esta causa en dos corridas limpias.
+  - Encadenar dos invocaciones con `&&` **tampoco sirve en Windows**: `curl.exe` no acepta `/dev/null` de forma portable y termina con código **23** (`Failed writing body`). La comprobación usa ahora `scripts/verify_dois.py`, que **reintenta ante errores de red transitorios** —se observó un `SSL: UNEXPECTED_EOF_WHILE_READING` intermitente, y cuatro reintentos posteriores devolvieron `200 200`— y falla con código distinto de cero si algún DOI no resuelve.
+- **Ruta del archivo que la respalda:** `CITATION.cff`, `scripts/verify_dois.py` y `docs/informe-final.tex`.
 
 ## P8 — GQM y preguntas de investigación
 
