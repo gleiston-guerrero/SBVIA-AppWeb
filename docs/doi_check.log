@@ -1,5 +1,5 @@
 SBVIA — Auditoria de referencias de docs/refs.bib
-Fecha: 2026-09-22 18:15:30
+Fecha: 2026-09-22 18:17:26
 Entradas: 46 | con DOI resuelto: 30 | sin DOI pero con ISBN/URL: 16 | sin identificador: 0
 Metodo: cada DOI se resuelve en api.crossref.org (y api.datacite.org como respaldo) y el titulo
         resuelto se compara con el citado. Los ISBN se validan en OpenLibrary y las URL por HTTP.
@@ -18,11 +18,11 @@ sandve2013ten                CORRECTO                     10.1371/journal.pcbi.1
 runeson2009guidelines        CORRECTO                     10.1007/s10664-008-9102-8                          1.0   Crossref HTTP 200
 wohlin2012experimentation    CORRECTO                     10.1007/978-3-642-29044-2                          1.0   Crossref HTTP 200
 pohl2010requirements         CORRECTO                     10.1007/978-3-642-12578-2                          0.568  Crossref HTTP 200 — titulo abreviado en la fuente; autor coincide
-wiegers2013software          SIN DOI (con identificador)  ISBN 9780735679665                                       ISBN FALLO (OpenLibrary HTTP None)
+wiegers2013software          SIN DOI (con identificador)  ISBN 9780735679665                                       ISBN OK (Software Requirements (3rd Edition) (Developer Best Practices) (Aug 25, 2013))
 bass2021software             SIN DOI (con identificador)  ISBN 9780136886099                                       ISBN OK (Software Architecture in Practice (2021))
 fowler2002patterns           SIN DOI (con identificador)  ISBN 9780321127426                                       ISBN OK (Patterns of Enterprise Application Architecture (2007-10-?))
 kleppmann2017designing       SIN DOI (con identificador)  ISBN 9781449373320                                       ISBN OK (Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems (Apr 02, 2017))
-richards2020fundamentals     SIN DOI (con identificador)  ISBN 9781492043454                                       ISBN FALLO (OpenLibrary HTTP None)
+richards2020fundamentals     SIN DOI (con identificador)  ISBN 9781492043454                                       ISBN OK (Fundamentals of Software Architecture (Feb 11, 2020))
 brown2023c4                  SIN DOI (con identificador)  https://c4model.com/                                     URL OK (HTTP 200)
 cockburn2001writing          SIN DOI (con identificador)  ISBN 9780201702255                                       ISBN OK (Writing Effective Use Cases (January 15, 2000))
 cohn2004user                 SIN DOI (con identificador)  ISBN 9780321205681                                       ISBN OK (User Stories Applied (March 1, 2004))
@@ -127,7 +127,7 @@ DETALLE POR ENTRADA
 [wiegers2013software]
   Citado   : Software Requirements
   Sin DOI registrado. Identificador: ISBN 9780735679665
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Software Requirements (3rd Edition) (Developer Best Practices) (Aug 25, 2013))
 
 [bass2021software]
   Citado   : Software Architecture in Practice
@@ -147,7 +147,7 @@ DETALLE POR ENTRADA
 [richards2020fundamentals]
   Citado   : Fundamentals of Software Architecture: An Engineering Approach
   Sin DOI registrado. Identificador: ISBN 9781492043454
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Fundamentals of Software Architecture (Feb 11, 2020))
 
 [brown2023c4]
   Citado   : The C4 Model for Visualising Software Architecture
