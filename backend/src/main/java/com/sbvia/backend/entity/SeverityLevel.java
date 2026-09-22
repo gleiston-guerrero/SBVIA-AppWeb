@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "nivel_gravedad")
+@Table(name = "severity_level")
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,19 +17,19 @@ import lombok.*;
 public class SeverityLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_nivel_gravedad")
+    @Column(name = "id")
     private Integer idNivelGravedad;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "valor", nullable = false)
+    @Column(name = "severity_value", nullable = false)
     private Integer value;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "multiplicador_penalizacion", nullable = false, precision = 3, scale = 2)
+    @Column(name = "penalty_multiplier", nullable = false, precision = 3, scale = 2)
     @Builder.Default
     private java.math.BigDecimal multiplicadorPenalizacion = java.math.BigDecimal.ONE;
 }

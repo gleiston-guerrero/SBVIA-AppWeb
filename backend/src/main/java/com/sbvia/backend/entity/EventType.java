@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "tipo_evento")
+@Table(name = "event_type")
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,15 +17,15 @@ import lombok.*;
 public class EventType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_evento")
+    @Column(name = "id")
     private Integer idTipoEvento;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "categoria", length = 100)
+    @Column(name = "category", length = 100)
     private String categoria;
 }

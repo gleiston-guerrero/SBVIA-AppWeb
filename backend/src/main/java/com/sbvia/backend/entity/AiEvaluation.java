@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "evaluacion_ia")
+@Table(name = "ai_evaluation")
 @Data
 @AllArgsConstructor
 @Builder
@@ -19,33 +19,33 @@ import java.time.Instant;
 public class AiEvaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_evaluacion_ia")
+    @Column(name = "id")
     private Integer idEvaluacionIa;
 
-    @Column(name = "resultado", nullable = false, length = 500)
+    @Column(name = "result", nullable = false, length = 500)
     private String resultado;
 
-    @Column(name = "clasificacion_predicha", length = 100)
+    @Column(name = "predicted_class", length = 100)
     private String clasificacionPredicha;
 
-    @Column(name = "nivel_confianza", precision = 5, scale = 2)
+    @Column(name = "confidence_level", precision = 5, scale = 2)
     private BigDecimal nivelConfianza;
 
-    @Column(name = "recomendacion", length = 500)
+    @Column(name = "recommendation", length = 500)
     private String recomendacion;
 
-    @Column(name = "datos_entrada")
+    @Column(name = "input_data")
     private String datosEntrada;
 
-    @Column(name = "fecha_evaluacion", nullable = false)
+    @Column(name = "evaluated_at", nullable = false)
     @Builder.Default
     private Instant fechaEvaluacion = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_modelo_ia", nullable = false)
+    @JoinColumn(name = "ai_model_id", nullable = false)
     private AiModel aiModel;
 }

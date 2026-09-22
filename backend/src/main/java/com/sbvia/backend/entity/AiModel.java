@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "modelo_ia")
+@Table(name = "ai_model")
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,31 +17,31 @@ import lombok.*;
 public class AiModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_modelo_ia")
+    @Column(name = "id")
     private Integer idModeloIa;
 
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     @Column(name = "version", nullable = false, length = 50)
     private String version;
 
-    @Column(name = "tipo_modelo", nullable = false, length = 100)
+    @Column(name = "model_type", nullable = false, length = 100)
     private String tipoModelo;
 
-    @Column(name = "descripcion", length = 500)
+    @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "fecha_entrenamiento")
+    @Column(name = "trained_at")
     private java.time.Instant fechaEntrenamiento;
 
-    @Column(name = "precision_modelo", precision = 5, scale = 2)
+    @Column(name = "model_accuracy", precision = 5, scale = 2)
     private java.math.BigDecimal precisionModelo;
 
-    @Column(name = "parametros")
+    @Column(name = "parameters")
     private String parametros;
 
-    @Column(name = "activo", nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
     private boolean activo = true;
 }

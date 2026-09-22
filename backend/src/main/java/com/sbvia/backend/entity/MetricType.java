@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @author Keitho_
  */
 @Entity
-@Table(name = "tipo_metrica")
+@Table(name = "metric_type")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,21 +18,21 @@ import java.math.BigDecimal;
 public class MetricType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_metrica")
+    @Column(name = "id")
     private Integer idTipoMetrica;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "unidad_medida", length = 50)
+    @Column(name = "unit", length = 50)
     private String unidadMedida;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "valor_minimo")
+    @Column(name = "min_value")
     private BigDecimal valorMinimo;
 
-    @Column(name = "valor_maximo")
+    @Column(name = "max_value")
     private BigDecimal valorMaximo;
 }

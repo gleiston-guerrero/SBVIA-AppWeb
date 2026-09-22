@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "evento_vial")
+@Table(name = "road_event")
 @Data
 @AllArgsConstructor
 @Builder
@@ -19,36 +19,36 @@ import java.time.Instant;
 public class RoadEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_evento_vial")
+    @Column(name = "id")
     private Integer idEventoVial;
 
-    @Column(name = "nombre", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "descripcion", length = 500)
+    @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "nivel_riesgo", nullable = false)
+    @Column(name = "risk_level", nullable = false)
     private Integer nivelRiesgo;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
-    @Column(name = "posicion_x")
+    @Column(name = "position_x")
     private BigDecimal posicionX;
 
-    @Column(name = "posicion_y")
+    @Column(name = "position_y")
     private BigDecimal posicionY;
 
-    @Column(name = "velocidad_vehiculo_kmh")
+    @Column(name = "vehicle_speed_kmh")
     private BigDecimal velocidadVehiculoKmh;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo_evento", nullable = false)
+    @JoinColumn(name = "event_type_id", nullable = false)
     private EventType eventType;
 }

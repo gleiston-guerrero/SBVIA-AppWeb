@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * @author Keitho_
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,52 +22,52 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "id")
     private Integer userId;
 
-    @Column(name = "nombres", nullable = false, length = 255)
+    @Column(name = "first_name", nullable = false, length = 255)
     private String firstName;
 
-    @Column(name = "apellidos", nullable = false, length = 255)
+    @Column(name = "last_name", nullable = false, length = 255)
     private String lastName;
 
-    @Column(name = "nombre_usuario", unique = true, length = 100)
+    @Column(name = "username", unique = true, length = 100)
     private String username;
 
-    @Column(name = "correo", nullable = false, unique = true, length = 255)
+    @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
     @JsonIgnore
-    @Column(name = "contrasena_hash", nullable = false, length = 255)
+    @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
 
-    @Column(name = "telefono", length = 20)
+    @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "fecha_nacimiento")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "fecha_registro", nullable = false)
+    @Column(name = "registered_at", nullable = false)
     @Builder.Default
     private LocalDate registrationDate = LocalDate.now();
 
-    @Column(name = "ultimo_acceso")
+    @Column(name = "last_access_at")
     private Instant lastAccess;
 
-    @Column(name = "intentos_fallidos", nullable = false)
+    @Column(name = "failed_attempts", nullable = false)
     @Builder.Default
     private Integer failedAttempts = 0;
 
-    @Column(name = "cuenta_bloqueada", nullable = false)
+    @Column(name = "account_locked", nullable = false)
     @Builder.Default
     private boolean accountLocked = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_rol", nullable = false)
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_estado_usuario", nullable = false)
+    @JoinColumn(name = "user_status_id", nullable = false)
     @Builder.Default
     private UserState userState = new UserState();
 }

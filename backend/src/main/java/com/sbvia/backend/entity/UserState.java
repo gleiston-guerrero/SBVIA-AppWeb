@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "estado_usuario")
+@Table(name = "user_status")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,16 +18,16 @@ public class UserState {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estado_usuario")
+    @Column(name = "id")
     private Integer idEstadoUsuario;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "permite_acceso", nullable = false)
+    @Column(name = "allows_access", nullable = false)
     @Builder.Default
     private boolean permiteAcceso = true;
 }

@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "tipo_via")
+@Table(name = "road_type")
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,15 +17,15 @@ import lombok.*;
 public class RoadType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_via")
+    @Column(name = "id")
     private Integer idTipoVia;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "velocidad_referencial_kmh")
+    @Column(name = "reference_speed_kmh")
     private Integer velocidadReferencialKmh;
 }

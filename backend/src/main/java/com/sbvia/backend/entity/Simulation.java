@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @author Keitho_
  */
 @Entity
-@Table(name = "simulacion")
+@Table(name = "simulation")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,53 +18,53 @@ import java.math.BigDecimal;
 public class Simulation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_simulacion")
+    @Column(name = "id")
     private Integer simulationId;
 
-    @Column(name = "fecha_inicio")
+    @Column(name = "started_at")
     private java.time.LocalDate startDate;
 
-    @Column(name = "fecha_fin")
+    @Column(name = "ended_at")
     private java.time.LocalDate endDate;
 
-    @Column(name = "puntaje_final", precision = 5, scale = 2)
+    @Column(name = "final_score", precision = 5, scale = 2)
     private BigDecimal finalScore;
 
-    @Column(name = "numero_intento")
+    @Column(name = "attempt_number")
     @Builder.Default
     private Integer numeroIntento = 1;
 
-    @Column(name = "porcentaje_progreso", precision = 5, scale = 2)
+    @Column(name = "progress_percentage", precision = 5, scale = 2)
     @Builder.Default
     private BigDecimal porcentajeProgreso = BigDecimal.ZERO;
 
-    @Column(name = "duracion_segundos")
+    @Column(name = "duration_seconds")
     private Integer durationSeconds;
 
-    @Column(name = "completada", nullable = false)
+    @Column(name = "completed", nullable = false)
     @Builder.Default
     private boolean completed = false;
 
-    @Column(name = "observaciones", length = 1000)
+    @Column(name = "notes", length = 1000)
     private String observations;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_escenario", nullable = false)
+    @JoinColumn(name = "scenario_id", nullable = false)
     private Scenario scenario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_vehiculo", nullable = false)
+    @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estado_simulacion")
+    @JoinColumn(name = "simulation_status_id")
     private SimulationState simulationState;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_sesion")
+    @JoinColumn(name = "training_session_id")
     private TrainingSession trainingSession;
 }

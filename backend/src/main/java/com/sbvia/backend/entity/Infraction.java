@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "infraccion")
+@Table(name = "infraction")
 @Data
 @AllArgsConstructor
 @Builder
@@ -19,32 +19,32 @@ import java.time.Instant;
 public class Infraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_infraccion")
+    @Column(name = "id")
     private Integer idInfraccion;
 
-    @Column(name = "descripcion", length = 500)
+    @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "penalizacion_aplicada", nullable = false, precision = 5, scale = 2)
+    @Column(name = "applied_penalty", nullable = false, precision = 5, scale = 2)
     private BigDecimal penalizacionAplicada;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_decision")
+    @JoinColumn(name = "decision_id")
     private Decision decision;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_regla_transito", nullable = false)
+    @JoinColumn(name = "traffic_rule_id", nullable = false)
     private TrafficRule trafficRule;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_nivel_gravedad", nullable = false)
+    @JoinColumn(name = "severity_level_id", nullable = false)
     private SeverityLevel severityLevel;
 }

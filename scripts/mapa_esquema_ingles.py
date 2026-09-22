@@ -158,6 +158,15 @@ def main() -> int:
         cols = {}
         for c in columnas:
             nc = traduce_columna(c, tabla)
+            # `value` es palabra reservada en H2 v2 y alli no se crea la tabla.
+            # En PostgreSQL se admite, pero un nombre tan generico no aporta y
+            # rompe las pruebas, asi que se cualifica por tabla.
+            if nc == "value":
+                nc = {"difficulty_level": "level_value", "severity_level": "severity_value",
+                      "performance_metric": "metric_value"}.get(nueva_tabla, nc)
+            # YEAR tambien es reservada en H2 v2 y hace fallar la creacion de la tabla.
+            if nc == "year":
+                nc = "model_year"
             cols[c] = nc
         mapa[tabla] = {"nueva": nueva_tabla, "columnas": cols}
 

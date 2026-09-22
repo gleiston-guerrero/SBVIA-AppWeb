@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "sesion_entrenamiento")
+@Table(name = "training_session")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,27 +19,27 @@ public class TrainingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_sesion")
+    @Column(name = "id")
     private Integer idSesion;
 
-    @Column(name = "fecha_inicio", nullable = false)
+    @Column(name = "started_at", nullable = false)
     @Builder.Default
     private Instant fechaInicio = Instant.now();
 
-    @Column(name = "fecha_fin")
+    @Column(name = "ended_at")
     private Instant endDate;
 
-    @Column(name = "estado", nullable = false, length = 50)
+    @Column(name = "status", nullable = false, length = 50)
     @Builder.Default
     private String estado = "ABIERTA";
 
-    @Column(name = "objetivo", length = 500)
+    @Column(name = "objective", length = 500)
     private String objetivo;
 
-    @Column(name = "observaciones", length = 500)
+    @Column(name = "notes", length = 500)
     private String observations;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

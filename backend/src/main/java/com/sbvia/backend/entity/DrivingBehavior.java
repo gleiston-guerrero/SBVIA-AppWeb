@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "comportamiento_vial")
+@Table(name = "road_behavior")
 @Data
 @AllArgsConstructor
 @Builder
@@ -19,32 +19,32 @@ import java.time.Instant;
 public class DrivingBehavior {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_comportamiento")
+    @Column(name = "id")
     private Integer idComportamiento;
 
-    @Column(name = "clasificacion", nullable = false, length = 100)
+    @Column(name = "classification", nullable = false, length = 100)
     private String clasificacion;
 
-    @Column(name = "nivel_riesgo", nullable = false)
+    @Column(name = "risk_level", nullable = false)
     private Integer nivelRiesgo;
 
-    @Column(name = "puntaje_seguridad")
+    @Column(name = "safety_score")
     private BigDecimal puntajeSeguridad;
 
-    @Column(name = "puntaje_responsabilidad")
+    @Column(name = "responsibility_score")
     private BigDecimal puntajeResponsabilidad;
 
-    @Column(name = "puntaje_cumplimiento")
+    @Column(name = "compliance_score")
     private BigDecimal puntajeCumplimiento;
 
-    @Column(name = "observaciones", length = 500)
+    @Column(name = "notes", length = 500)
     private String observations;
 
-    @Column(name = "fecha_evaluacion", nullable = false)
+    @Column(name = "evaluated_at", nullable = false)
     @Builder.Default
     private Instant fechaEvaluacion = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 }

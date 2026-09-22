@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @author Keitho_
  */
 @Entity
-@Table(name = "vehiculo")
+@Table(name = "vehicle")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,35 +19,35 @@ public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_vehiculo")
+    @Column(name = "id")
     private Integer idVehiculo;
 
-    @Column(name = "nombre", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "marca", length = 100)
+    @Column(name = "brand", length = 100)
     private String marca;
 
-    @Column(name = "modelo", length = 100)
+    @Column(name = "model", length = 100)
     private String modelo;
 
-    @Column(name = "anio")
+    @Column(name = "model_year")
     private Integer anio;
 
-    @Column(name = "transmision", nullable = false, length = 50)
+    @Column(name = "transmission", nullable = false, length = 50)
     private String transmision;
 
-    @Column(name = "velocidad_maxima_kmh")
+    @Column(name = "max_speed_kmh")
     private BigDecimal velocidadMaximaKmh;
 
-    @Column(name = "potencia_hp")
+    @Column(name = "horsepower")
     private BigDecimal potenciaHp;
 
-    @Column(name = "activo", nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
     private boolean activo = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_tipo_vehiculo", nullable = false)
+    @JoinColumn(name = "vehicle_type_id", nullable = false)
     private VehicleType vehicleType;
 }

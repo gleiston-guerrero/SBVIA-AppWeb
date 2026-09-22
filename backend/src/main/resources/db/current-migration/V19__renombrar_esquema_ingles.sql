@@ -108,7 +108,7 @@ ALTER TABLE "metrica_desempeno" RENAME TO "performance_metric";
 ALTER TABLE "performance_metric" RENAME COLUMN "id_metrica" TO "id";
 ALTER TABLE "performance_metric" RENAME COLUMN "id_simulacion" TO "simulation_id";
 ALTER TABLE "performance_metric" RENAME COLUMN "id_tipo_metrica" TO "metric_type_id";
-ALTER TABLE "performance_metric" RENAME COLUMN "valor" TO "value";
+ALTER TABLE "performance_metric" RENAME COLUMN "valor" TO "metric_value";
 ALTER TABLE "performance_metric" RENAME COLUMN "fecha_hora" TO "occurred_at";
 ALTER TABLE "performance_metric" RENAME COLUMN "observacion" TO "note";
 
@@ -127,14 +127,14 @@ ALTER TABLE "ai_model" RENAME COLUMN "activo" TO "active";
 ALTER TABLE "nivel_dificultad" RENAME TO "difficulty_level";
 ALTER TABLE "difficulty_level" RENAME COLUMN "id_nivel_dificultad" TO "id";
 ALTER TABLE "difficulty_level" RENAME COLUMN "nombre" TO "name";
-ALTER TABLE "difficulty_level" RENAME COLUMN "valor" TO "value";
+ALTER TABLE "difficulty_level" RENAME COLUMN "valor" TO "level_value";
 ALTER TABLE "difficulty_level" RENAME COLUMN "descripcion" TO "description";
 
 -- nivel_gravedad -> severity_level
 ALTER TABLE "nivel_gravedad" RENAME TO "severity_level";
 ALTER TABLE "severity_level" RENAME COLUMN "id_nivel_gravedad" TO "id";
 ALTER TABLE "severity_level" RENAME COLUMN "nombre" TO "name";
-ALTER TABLE "severity_level" RENAME COLUMN "valor" TO "value";
+ALTER TABLE "severity_level" RENAME COLUMN "valor" TO "severity_value";
 ALTER TABLE "severity_level" RENAME COLUMN "descripcion" TO "description";
 ALTER TABLE "severity_level" RENAME COLUMN "multiplicador_penalizacion" TO "penalty_multiplier";
 
@@ -265,7 +265,7 @@ ALTER TABLE "vehicle" RENAME COLUMN "id_vehiculo" TO "id";
 ALTER TABLE "vehicle" RENAME COLUMN "nombre" TO "name";
 ALTER TABLE "vehicle" RENAME COLUMN "marca" TO "brand";
 ALTER TABLE "vehicle" RENAME COLUMN "modelo" TO "model";
-ALTER TABLE "vehicle" RENAME COLUMN "anio" TO "year";
+ALTER TABLE "vehicle" RENAME COLUMN "anio" TO "model_year";
 ALTER TABLE "vehicle" RENAME COLUMN "transmision" TO "transmission";
 ALTER TABLE "vehicle" RENAME COLUMN "velocidad_maxima_kmh" TO "max_speed_kmh";
 ALTER TABLE "vehicle" RENAME COLUMN "potencia_hp" TO "horsepower";

@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "escenario")
+@Table(name = "scenario")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,42 +18,42 @@ import java.time.Instant;
 public class Scenario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_escenario")
+    @Column(name = "id")
     private Integer scenarioId;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 255)
+    @Column(name = "name", nullable = false, unique = true, length = 255)
     private String name;
 
-    @Column(name = "descripcion", length = 500)
+    @Column(name = "description", length = 500)
     private String description;
 
-    @Column(name = "longitud_km", precision = 5, scale = 2)
+    @Column(name = "length_km", precision = 5, scale = 2)
     private java.math.BigDecimal lengthKm;
 
-    @Column(name = "tiempo_estimado_minutos")
+    @Column(name = "estimated_minutes")
     private Integer estimatedTimeMinutes;
 
-    @Column(name = "densidad_trafico", nullable = false, length = 20)
+    @Column(name = "traffic_density", nullable = false, length = 20)
     @Builder.Default
     private String trafficDensity = "MEDIA";
 
-    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @Builder.Default
     private Instant createdAt = Instant.now();
 
-    @Column(name = "activo", nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
     private boolean activo = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_tipo_via", nullable = false)
+    @JoinColumn(name = "road_type_id", nullable = false)
     private RoadType roadType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_nivel_dificultad", nullable = false)
+    @JoinColumn(name = "difficulty_level_id", nullable = false)
     private DifficultyLevel difficultyLevel;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_tipo_clima", nullable = false)
+    @JoinColumn(name = "weather_type_id", nullable = false)
     private WeatherType weatherType;
 }

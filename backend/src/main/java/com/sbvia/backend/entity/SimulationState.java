@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "estado_simulacion")
+@Table(name = "simulation_status")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,16 +18,16 @@ public class SimulationState {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estado_simulacion")
+    @Column(name = "id")
     private Integer idEstadoSimulacion;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "es_estado_final", nullable = false)
+    @Column(name = "is_final_state", nullable = false)
     @Builder.Default
     private boolean esEstadoFinal = false;
 }

@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "regla_transito")
+@Table(name = "traffic_rule")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,25 +18,25 @@ public class TrafficRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_regla_transito")
+    @Column(name = "id")
     private Integer idReglaTransito;
 
-    @Column(name = "codigo", nullable = false, length = 50)
+    @Column(name = "code", nullable = false, length = 50)
     private String codigo;
 
-    @Column(name = "nombre", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String nombre;
 
-    @Column(name = "descripcion", length = 500)
+    @Column(name = "description", length = 500)
     private String descripcion;
 
-    @Column(name = "categoria", nullable = false, length = 100)
+    @Column(name = "category", nullable = false, length = 100)
     private String categoria;
 
-    @Column(name = "penalizacion_base", nullable = false, precision = 5, scale = 2)
+    @Column(name = "base_penalty", nullable = false, precision = 5, scale = 2)
     private java.math.BigDecimal penalizacionBase;
 
-    @Column(name = "activa", nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
     private boolean activa = true;
 }

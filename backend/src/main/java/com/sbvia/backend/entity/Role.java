@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "rol")
+@Table(name = "role")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,20 +18,20 @@ import java.time.Instant;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
+    @Column(name = "id")
     private Integer roleId;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 
-    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @Builder.Default
     private Instant createdAt = Instant.now();
 
-    @Column(name = "activo", nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
     private boolean activo = true;
 }

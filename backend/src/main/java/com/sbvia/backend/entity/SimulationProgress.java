@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "progreso_simulacion")
+@Table(name = "simulation_progress")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,29 +20,29 @@ public class SimulationProgress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_progreso")
+    @Column(name = "id")
     private Integer idProgreso;
 
-    @Column(name = "porcentaje", nullable = false, precision = 5, scale = 2)
+    @Column(name = "percentage", nullable = false, precision = 5, scale = 2)
     private BigDecimal porcentaje;
 
-    @Column(name = "etapa", length = 100)
+    @Column(name = "stage", length = 100)
     private String etapa;
 
-    @Column(name = "posicion_x")
+    @Column(name = "position_x")
     private BigDecimal posicionX;
 
-    @Column(name = "posicion_y")
+    @Column(name = "position_y")
     private BigDecimal posicionY;
 
-    @Column(name = "velocidad_actual_kmh")
+    @Column(name = "current_speed_kmh")
     private BigDecimal velocidadActualKmh;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 }

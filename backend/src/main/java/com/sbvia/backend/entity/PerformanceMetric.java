@@ -11,7 +11,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "metrica_desempeno")
+@Table(name = "performance_metric")
 @Data
 @AllArgsConstructor
 @Builder
@@ -19,24 +19,24 @@ import java.time.Instant;
 public class PerformanceMetric {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_metrica")
+    @Column(name = "id")
     private Integer idMetrica;
 
-    @Column(name = "valor", nullable = false, precision = 10, scale = 2)
+    @Column(name = "metric_value", nullable = false, precision = 10, scale = 2)
     private BigDecimal value;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
-    @Column(name = "observacion", length = 255)
+    @Column(name = "note", length = 255)
     private String observacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo_metrica", nullable = false)
+    @JoinColumn(name = "metric_type_id", nullable = false)
     private MetricType metricType;
 }

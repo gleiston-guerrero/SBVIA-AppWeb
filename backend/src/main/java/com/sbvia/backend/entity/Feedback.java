@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "retroalimentacion")
+@Table(name = "feedback")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,28 +18,28 @@ import java.time.Instant;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_retroalimentacion")
+    @Column(name = "id")
     private Integer idRetroalimentacion;
 
-    @Column(name = "comentario", nullable = false, length = 1000)
+    @Column(name = "comment", nullable = false, length = 1000)
     private String comentario;
 
-    @Column(name = "recomendacion", length = 1000)
+    @Column(name = "recommendation", length = 1000)
     private String recomendacion;
 
-    @Column(name = "origen", nullable = false, length = 50)
+    @Column(name = "source", nullable = false, length = 50)
     @Builder.Default
     private String origen = "SISTEMA";
 
-    @Column(name = "fecha_generacion", nullable = false)
+    @Column(name = "generated_at", nullable = false)
     @Builder.Default
     private Instant fechaGeneracion = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_comportamiento")
+    @JoinColumn(name = "road_behavior_id")
     private DrivingBehavior drivingBehavior;
 }

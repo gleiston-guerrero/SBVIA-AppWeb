@@ -19,36 +19,36 @@ import java.time.Instant;
 public class Decision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_decision")
+    @Column(name = "id")
     private Integer idDecision;
 
-    @Column(name = "accion_realizada", nullable = false, length = 255)
+    @Column(name = "action_taken", nullable = false, length = 255)
     private String accionRealizada;
 
-    @Column(name = "resultado", nullable = false, length = 255)
+    @Column(name = "result", nullable = false, length = 255)
     private String resultado;
 
-    @Column(name = "tiempo_reaccion_ms")
+    @Column(name = "reaction_time_ms")
     private Integer tiempoReaccionMs;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
-    @Column(name = "posicion_x")
+    @Column(name = "position_x")
     private BigDecimal posicionX;
 
-    @Column(name = "posicion_y")
+    @Column(name = "position_y")
     private BigDecimal posicionY;
 
-    @Column(name = "observacion", length = 500)
+    @Column(name = "note", length = 500)
     private String observacion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_simulacion", nullable = false)
+    @JoinColumn(name = "simulation_id", nullable = false)
     private Simulation simulation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_evento_vial")
+    @JoinColumn(name = "road_event_id")
     private RoadEvent roadEvent;
 }

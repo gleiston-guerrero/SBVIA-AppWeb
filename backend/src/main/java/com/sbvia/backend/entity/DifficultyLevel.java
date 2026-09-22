@@ -9,7 +9,7 @@ import lombok.*;
  * @author Keitho_
  */
 @Entity
-@Table(name = "nivel_dificultad")
+@Table(name = "difficulty_level")
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,15 +17,15 @@ import lombok.*;
 public class DifficultyLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_nivel_dificultad")
+    @Column(name = "id")
     private Integer idNivelDificultad;
 
-    @Column(name = "nombre", nullable = false, unique = true, length = 100)
+    @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "valor", nullable = false)
+    @Column(name = "level_value", nullable = false)
     private Integer value;
 
-    @Column(name = "descripcion", length = 255)
+    @Column(name = "description", length = 255)
     private String description;
 }

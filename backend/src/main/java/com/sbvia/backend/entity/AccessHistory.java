@@ -10,7 +10,7 @@ import java.time.Instant;
  * @author Keitho_
  */
 @Entity
-@Table(name = "historial_acceso")
+@Table(name = "access_history")
 @Data
 @AllArgsConstructor
 @Builder
@@ -18,29 +18,29 @@ import java.time.Instant;
 public class AccessHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_historial_acceso")
+    @Column(name = "id")
     private Integer idHistorialAcceso;
 
-    @Column(name = "fecha_hora", nullable = false)
+    @Column(name = "occurred_at", nullable = false)
     @Builder.Default
     private Instant fechaHora = Instant.now();
 
-    @Column(name = "direccion_ip")
+    @Column(name = "ip_address")
     private String direccionIp;
 
-    @Column(name = "dispositivo", length = 255)
+    @Column(name = "device", length = 255)
     private String dispositivo;
 
-    @Column(name = "navegador", length = 255)
+    @Column(name = "browser", length = 255)
     private String navegador;
 
-    @Column(name = "acceso_exitoso", nullable = false)
+    @Column(name = "successful_login", nullable = false)
     private boolean accesoExitoso;
 
-    @Column(name = "detalle", length = 255)
+    @Column(name = "detail", length = 255)
     private String detalle;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

@@ -123,7 +123,7 @@
    "id_metrica": "id",
    "id_simulacion": "simulation_id",
    "id_tipo_metrica": "metric_type_id",
-   "valor": "value",
+   "valor": "metric_value",
    "fecha_hora": "occurred_at",
    "observacion": "note"
   }
@@ -147,7 +147,7 @@
   "columnas": {
    "id_nivel_dificultad": "id",
    "nombre": "name",
-   "valor": "value",
+   "valor": "level_value",
    "descripcion": "description"
   }
  },
@@ -156,7 +156,7 @@
   "columnas": {
    "id_nivel_gravedad": "id",
    "nombre": "name",
-   "valor": "value",
+   "valor": "severity_value",
    "descripcion": "description",
    "multiplicador_penalizacion": "penalty_multiplier"
   }
@@ -313,7 +313,7 @@
    "nombre": "name",
    "marca": "brand",
    "modelo": "model",
-   "anio": "year",
+   "anio": "model_year",
    "transmision": "transmission",
    "velocidad_maxima_kmh": "max_speed_kmh",
    "potencia_hp": "horsepower",
