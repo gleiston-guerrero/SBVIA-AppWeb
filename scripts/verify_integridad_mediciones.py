@@ -219,7 +219,7 @@ for rel, minimo, etiqueta in (
     check(f"el PDF de {etiqueta} no es un archivo de prueba",
           tam > minimo and cab.startswith(b"%PDF-"), f"{tam} bytes")
 
-for pat in ("pantalla-1*", "pantalla-2*", "pantalla-3*", "pantalla-4*"):
+for pat in ("screen-1*", "screen-2*", "screen-3*", "screen-4*"):
     for f in (ruta("docs", "diagramas")).glob(pat + ".png"):
         check(f"{f.name}: captura real y no un archivo de prueba",
               f.stat().st_size > 20_000, f"{f.stat().st_size} bytes")
