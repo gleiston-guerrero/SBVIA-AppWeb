@@ -25,14 +25,14 @@ public class AuditController {
     private final AuditService auditService;
 
     /**
-     * GET /api/auditoria — Listar registros de auditoría.
-     * Permite consultar la bitácora con filtros opcionales (Solo Admin).
+     * GET /api/auditoria - List audit records.
+     * Allows querying the audit log with optional filters (Admin only).
      *
-     * @param tabla name de la tabla afectada a filtrar
-     * @param operation tipo de operación realizada (INSERT, UPDATE, DELETE)
-     * @param user name o identificador del user que realizó la acción
-     * @param endDate fecha y hora de fin para el rango de búsqueda
-     * @return una respuesta HTTP con la lista de objetos AuditLog
+     * @param tabla name of the affected table to filter by
+     * @param operation type of operation performed (INSERT, UPDATE, DELETE)
+     * @param user name or identifier of the user who performed the action
+     * @param endDate end date and time of the search range
+     * @return an HTTP response with the list of AuditLog objects
      * @param startDate a {@link java.time.LocalDateTime} object
      */
     @GetMapping
@@ -49,14 +49,14 @@ public class AuditController {
     }
 
     /**
-     * GET /api/auditoria/reporte/pdf — Descargar reporte PDF de auditoría.
-     * Genera un archivo PDF con los registros de la bitácora según los filtros dados (Solo Admin).
+     * GET /api/auditoria/reporte/pdf - Download the audit PDF report.
+     * Generates a PDF file with the audit log records matching the given filters (Admin only).
      *
-     * @param tabla name de la tabla afectada a filtrar
-     * @param operation tipo de operación realizada
-     * @param user name o identificador del user
+     * @param tabla name of the affected table to filter by
+     * @param operation type of operation performed
+     * @param user name or identifier of the user
      * @param endDate fecha y hora final
-     * @return una respuesta HTTP que contiene el archivo PDF como array de bytes para su descarga
+     * @return an HTTP response containing the PDF file as a byte array for download
      * @param startDate a {@link java.time.LocalDateTime} object
      */
     @GetMapping("/reporte/pdf")

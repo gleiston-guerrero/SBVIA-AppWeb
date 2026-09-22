@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * Controlador REST para autenticación: registro, login, logout y refresh token.
+ * REST controller for authentication: registration, login, logout and token refresh.
  * Endpoints públicos: /api/auth/registro, /api/auth/login
  * Endpoints protegidos: /api/auth/logout, /api/auth/refresh, /api/users/me
  *
@@ -39,17 +39,17 @@ public class AuthController {
     private final AuthService authService;
     private final LoginRateLimiter loginRateLimiter;
 
-    /** Controla el flag Secure de la cookie. false en dev (HTTP), true en prod (HTTPS). */
+    /** Controls the cookie Secure flag. false in dev (HTTP), true in prod (HTTPS). */
     @Value("${security.cookie.secure:false}")
     private boolean cookieSecure;
 
     /**
      * POST /api/auth/registro — Registrar nuevo user.
-     * Devuelve el user creado (sin hash) y el access token.
-     * El refresh token se entrega exclusivamente en una cookie HttpOnly.
+     * Returns the created user, without its hash, and the access token.
+     * The refresh token is delivered only in an HttpOnly cookie.
      *
-     * @param request los datos del user a registrar (email, firstName, lastName, etc.)
-     * @return una respuesta de autenticación (AuthResponse) que contiene el access token y la información del user creado
+     * @param request the data of the user to register (email, first name, last name, and so on)
+     * @return an authentication response (AuthResponse) holding the access token and the created user
      */
     @PostMapping("/registro")
     @Operation(summary = "Registrar nuevo user", description = "Crea una cuenta y devuelve tokens JWT")
@@ -95,11 +95,11 @@ public class AuthController {
 
     /**
      * POST /api/auth/login — Autenticar user.
-     * Devuelve el access token; el refresh token permanece en cookie HttpOnly.
+     * Returns the access token; the refresh token stays in an HttpOnly cookie.
      *
-     * @param request los datos de inicio de sesión, que incluyen el identificador (email/user) y contraseña
-     * @param httpRequest la petición HTTP actual, utilizada para obtener la IP del cliente y limitar intentos fallidos
-     * @return una respuesta de autenticación con el access token y los detalles del user, estableciendo el refresh token en una cookie
+     * @param request the login data, including the identifier (email or username) and password
+     * @param httpRequest the current HTTP request, used to get the client IP and to rate-limit failed attempts
+     * @return an authentication response with the access token and the user details, setting the refresh token in a cookie
      */
     @PostMapping("/login")
     @Operation(summary = "Iniciar sesión", description = "Autentica, devuelve el access token y establece el refresh token en cookie HttpOnly")
@@ -123,7 +123,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         String ip = clientIp(httpRequest);
 
-        // OWASP A07: limitar intentos fallidos de autenticación por IP (429).
+        // OWASP A07: rate-limit failed authentication attempts per IP (429).
         try {
             loginRateLimiter.check(ip);
         } catch (com.sbvia.backend.exception.RateLimitExceededException ex) {
@@ -156,11 +156,11 @@ public class AuthController {
 
     /**
      * POST /api/auth/logout — Cerrar sesión.
-     * Agrega el JTI del token a la blacklist de Redis.
+     * Adds the token JTI to the Redis blacklist.
      *
-     * @param authHeader el encabezado de autorización que contiene el access token actual en formato Bearer (opcional)
-     * @param cookieToken el access token almacenado en la cookie (opcional)
-     * @return una respuesta HTTP sin contenido (204) e instrucciones para borrar las cookies de los tokens
+     * @param authHeader the authorization header holding the current access token in Bearer form (optional)
+     * @param cookieToken the access token stored in the cookie (optional)
+     * @return an HTTP response with no content (204) and instructions to clear the token cookies
      */
     @PostMapping("/logout")
     @Operation(summary = "Cerrar sesión", description = "Revoca el token JWT agregando su JTI a Redis")
@@ -191,11 +191,11 @@ public class AuthController {
 
     /**
      * POST /api/auth/refresh — Emitir nuevo accessToken.
-     * Usa el refreshToken sin re-autenticar.
+     * Uses the refresh token without re-authenticating.
      *
-     * @param cookieRefreshToken el refresh token obtenido desde la cookie HttpOnly (opcional)
-     * @param request un objeto que contiene el refresh token si se envía en el cuerpo de la petición (opcional)
-     * @return una respuesta con el nuevo access token y detalles de sesión, actualizando el refresh token en cookie
+     * @param cookieRefreshToken the refresh token taken from the HttpOnly cookie (optional)
+     * @param request an object holding the refresh token when it is sent in the request body (optional)
+     * @return a response with the new access token and the session details, refreshing the refresh token cookie
      */
     @PostMapping("/refresh")
     @Operation(summary = "Refresh token", description = "Emite un nuevo accessToken usando el refreshToken")
@@ -235,8 +235,8 @@ public class AuthController {
     }
 
     /**
-     * Obtiene la dirección IP del cliente, respetando el encabezado X-Forwarded-For
-     * cuando la petición llega a través de un proxy (frontend nginx).
+     * Gets the client IP address, honouring the X-Forwarded-For header
+     * when the request arrives through a proxy (the nginx frontend).
      */
     private String clientIp(HttpServletRequest request) {
         String forwarded = request.getHeader("X-Forwarded-For");

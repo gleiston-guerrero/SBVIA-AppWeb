@@ -13,13 +13,13 @@ import java.time.Duration;
 import java.util.Map;
 
 /**
- * Configuración de caché con Redis.
+ * Redis cache configuration.
  *
- * Decisión de diseño (ADR-004):
- * - Se usa RedisCacheManager para que @Cacheable/@CacheEvict usen Redis como backend.
- * - Serialización JSON (GenericJackson2JsonRedisSerializer) en lugar de Java nativa
- *   para evitar ClassCastException entre versiones y poder inspeccionar claves en redis-cli.
- * - TTL global: 10 minutos. TTL específico para "scenarios": 5 minutos (datos semi-estáticos).
+ * Design decision (ADR-004):
+ * - RedisCacheManager is used so that @Cacheable/@CacheEvict take Redis as their backend.
+ * - JSON serialisation (GenericJackson2JsonRedisSerializer) instead of Java native serialisation
+ *   to avoid ClassCastException across versions and to allow inspecting keys in redis-cli.
+ * - Global TTL: 10 minutes. Specific TTL for "scenarios": 5 minutes (semi-static data).
  *
  * @author Keitho_
  */
@@ -42,7 +42,7 @@ public class CacheConfig {
      */
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-        // Configuración por defecto: JSON + TTL 10 min + no cache null values
+        // Default configuration: JSON + 10-minute TTL + no null-value caching
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(DEFAULT_TTL)
                 .disableCachingNullValues()
@@ -52,7 +52,7 @@ public class CacheConfig {
                         )
                 );
 
-        // Configuración específica para la caché de scenarios: TTL 5 min
+        // Specific configuration for the scenarios cache: 5-minute TTL
         RedisCacheConfiguration escenariosConfig = defaultConfig
                 .entryTtl(ESCENARIOS_TTL);
 

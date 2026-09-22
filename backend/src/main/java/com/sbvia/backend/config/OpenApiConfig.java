@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuración de Swagger UI / OpenAPI 3.
+ * Swagger UI / OpenAPI 3 configuration.
  *
  * @author Keitho_
  */

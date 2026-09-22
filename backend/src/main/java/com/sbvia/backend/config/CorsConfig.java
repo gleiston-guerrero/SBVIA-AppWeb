@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Configuración de CORS explícita requerida por OWASP.
+ * Explicit CORS configuration required by OWASP.
  *
  * @author Keitho_
  */
@@ -40,7 +40,7 @@ public class CorsConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Cabeceras permitidas
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
-        // Exponer cabeceras al cliente
+        // Expose headers to the client
         configuration.setExposedHeaders(List.of("Authorization"));
         // Permitir credenciales
         configuration.setAllowCredentials(true);
