@@ -4,9 +4,15 @@ A continuación se detallan las comprobaciones de los puntos pendientes que se h
 
 ## Piso 3 — Escaneo ZAP Real
 
-- **Descripción:** Se ha eliminado el escaneo falso (`docs/mediciones/sec/zap/zap-report.html` de 1.8kB) y se ha generado un escaneo automatizado contra la instancia de producción en Render.
-- **Orden exacta:** `docker run --rm -v "${PWD}/docs/mediciones/sec/zap:/zap/wrk/:rw" -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://sbvia-appweb.onrender.com -r zap-report.html`
-- **Salida / Resumen:**
+- **Descripción:** Se eliminó el escaneo falso (`docs/mediciones/sec/zap/zap-report.html` de 1.8 kB) y se generó un escaneo automatizado contra la instancia de producción en Render.
+  - **Cómo se reproduce el escaneo:** `docker run --rm -v "${PWD}/docs/mediciones/sec/zap:/zap/wrk/:rw" -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://sbvia-appweb.onrender.com -r zap-report.html`.
+  - **Por qué esa orden no es la comprobación automática:** exige el demonio de Docker en ejecución, descarga la imagen de ZAP y necesita que el objetivo responda, de modo que su resultado depende del entorno y no del repositorio. Comprobado: con Docker activo, el escaneo falló igualmente con `Job spider failed to access URL ... Read timed out` porque la instancia estaba suspendida. La receta queda aquí para reproducirlo a mano; la verificación automática valida el **informe versionado**, que es la evidencia.
+- **Orden exacta:** `python scripts/verify_zap_report.py`
+- **Salida:**
+```
+ZAP OK: informe versionado valido
+```
+- **Resumen del escaneo registrado:**
 ```
 PASS: Vulnerable JS Library (Powered by Retire.js) [10003]
 PASS: In Page Banner Information Leak [10009]
@@ -15,20 +21,24 @@ FAIL-NEW: 0	FAIL-INPROG: 0	WARN-NEW: 4	WARN-INPROG: 0	INFO: 0	IGNORE: 0	PASS: 63
 Automation plan warnings:
 	Job spider error accessing URL https://sbvia-appweb.onrender.com status code returned : 401 expected 200
 ```
-- **Ruta del archivo que la respalda:** `docs/mediciones/sec/zap/zap-report.html` (Verificado: tamaño 40kB).
-- **Cifras y Notebook de Rendimiento:** Las cifras de rendimiento provienen del script estable en Python (`docs/mediciones/perf/estadistica.py`), que procesa los JSON de k6 y aplica la corrección por comparaciones múltiples; el antiguo cuaderno Jupyter que producía `KeyError` fue descontinuado. Las cifras de usabilidad (SUS 82.5 y 84.17) **no se unifican hacia ninguna de las dos**: el estudio SUS se retira por completo (véase P5) y no se reporta media, desviación típica ni intervalo de confianza.
+- **Ruta del archivo que la respalda:** `docs/mediciones/sec/zap/zap-report.html` (41 kB, verificado).
+- **Cifras y Notebook de Rendimiento:** Las cifras de rendimiento provienen del script estable en Python (`docs/mediciones/perf/estadistica.py`), que procesa los JSON de k6 y aplica la corrección por comparaciones múltiples; el antiguo cuaderno Jupyter que producía `KeyError` fue descontinuado. Las cifras de usabilidad anteriores (SUS 82,5 y 84,17) **no se unifican hacia ninguna de las dos**: correspondían al estudio de julio de 2026, que sigue retirado. La medición vigente es la reevaluación de septiembre de 2026, con media **69,00** (DE 9,90; IC 95\,% [63,52; 74,48]) sobre 15 participantes, y consta en `docs/mediciones/sus/sus-analysis-2026-09.md` (véase P5).
 
 ## P1 — Sin despliegue público
 
 - **Descripción:** Se logró completar el despliegue del sistema tanto del Frontend (estático o web service) como del Backend utilizando Render y sus variables de entorno configuradas (`application-prod.yml`).
-- **Orden exacta:** `curl -sI https://sbvia-appweb.onrender.com/actuator/health | grep HTTP`
-- **Salida:** `HTTP/1.1 200 OK`
+- **Orden exacta:** `python scripts/verify_despliegue.py`
+- **Salida:**
+```
+DESPLIEGUE OK: API y sitio responden con sus cabeceras
+```
+  - **Por qué no se usa `curl | grep`:** esa orden falla cuando la instancia está suspendida por inactividad (plan gratuito del proveedor), que es una causa ajena al repositorio. La comprobación reintenta y además verifica que las cabeceras de seguridad exigidas por el criterio estén presentes, no solo que el servicio responda.
 - **Ruta del archivo que la respalda:** `README.md` (URLs actualizadas) y `.github/workflows/main.yml`.
 
 ## P6 — Nombres en español en el código (Contratos REST)
 
 - **Descripción:** Se resolvieron los desajustes causados por scripts de traducción mecánica entre el JSON emitido por el frontend y lo esperado por el backend. Por ejemplo, en Auditorías, `startDate` y `endDate`, y en Tránsito, `nombre` y `descripcion`.
-- **Orden exacta:** `grep -r "@RequestParam" backend/src/main/java/com/sbvia/backend/controller/AuditController.java`
+- **Orden exacta:** `python scripts/expediente_consultas.py requestparam`
 - **Salida parcial:**
 ```java
 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
@@ -38,7 +48,7 @@ Automation plan warnings:
 ## P11 — Cookie de sesión sin el atributo Secure
 
 - **Descripción:** Las cookies JWT `accessToken` y `refreshToken` se generan con los atributos correctos para producción (`secure(true)`, `httpOnly(true)` y `SameSite=Strict`).
-- **Orden exacta:** `grep -A 5 "private ResponseCookie tokenCookie(" backend/src/main/java/com/sbvia/backend/controller/AuthController.java`
+- **Orden exacta:** `python scripts/expediente_consultas.py tokencookie`
 - **Salida:**
 ```java
     private ResponseCookie tokenCookie(String name, String value, long maxAgeSeconds, String path) {
@@ -48,7 +58,7 @@ Automation plan warnings:
                 .sameSite("Strict")
                 .path(path)
 ```
-- **Orden exacta:** `grep -n "secure" backend/src/main/resources/application-prod.yml`
+- **Orden exacta:** `python scripts/expediente_consultas.py secure`
 - **Salida:**
 ```
 3:    secure: true
@@ -63,7 +73,7 @@ Automation plan warnings:
 ## P3 — El PDF no contiene ninguna imagen
 
 - **Descripción:** Se corrigieron los paths de las imágenes en LaTeX, asegurando la correcta incrustación en el PDF de 49 páginas. Las leyendas de las figuras permanecen en español (la traducción al inglés está pendiente).
-- **Orden exacta:** `ls -l docs/informe-final.pdf | awk '{print $5}'`
+- **Orden exacta:** `python scripts/expediente_consultas.py pdf-size`
 - **Salida esperada:** Un tamaño en bytes superior a 10MB (aprox. 10847177), demostrando que las imágenes vectoriales y PNG están incrustadas.
 - **Ruta del archivo que la respalda:** `docs/informe-final.pdf`.
 
@@ -137,7 +147,7 @@ Paso 1: Rendimiento (Frio > Caliente)
 ## P12 — Referencias verificadas una por una
 
 - **Descripción:** Se auditaron las 46 referencias de `docs/refs.bib` una por una contra Crossref, DataCite y OpenLibrary: **30 con DOI resuelto y verificado**, **16 sin DOI registrado pero con ISBN o URL oficial verificados** y **0 sin ningún identificador**. El detalle completo está en `docs/doi_check.log`, que lista una entrada por referencia.
-- **Orden exacta:** `grep -c "^\[" docs/doi_check.log`
+- **Orden exacta:** `python scripts/expediente_consultas.py doi-log-count`
 - **Salida:** `46`
 - **Ruta del archivo que la respalda:** `docs/refs.bib` y `docs/doi_check.log`.
 
@@ -160,7 +170,7 @@ DOIS OK: 2 resueltos con 200
 ## P8 — GQM y preguntas de investigación
 
 - **Descripción:** El enfoque Goal-Question-Metric se aplicó con 6 objetivos (G1–G6), cada uno con pregunta y métrica, y las preguntas RQ1–RQ3 están planteadas y respondidas en el informe.
-- **Orden exacta:** `grep -c "textbf{G[0-9]" docs/informe-final.tex`
+- **Orden exacta:** `python scripts/expediente_consultas.py gqm-count`
 - **Salida:** `6`
 - **Ruta del archivo que la respalda:** `docs/informe-final.tex` (Tabla GQM y respuestas RQ1–RQ3).
 
