@@ -86,5 +86,5 @@ El texto reproducido arriba es **literal**: no se resumió ni se reescribió. Cu
 | 1–3. Registro de la convalidación | **Hecho** en este documento y en `ETHICS.md` §iii |
 | 4. Corregir `ETHICS.md` (secuencia real, sin "aprobación previa") | **Hecho** — `ETHICS.md` §iii y §v |
 | 5. Compartir la carpeta de Drive en solo lectura con `gguerrero@uteq.edu.ec` | **Hecho** — carpeta compartida y credenciales enviadas por correo el 2026-09-20 a las 16:14 |
-| 6. Consistencia de las 15 entradas (código, fecha de sesión, fecha de firma) | **Pendiente** — requiere las fechas de firma de los originales |
+| 6. Consistencia de las 15 entradas (código, fecha de sesión, fecha de firma) | **Hecho** — cotejadas contra los quince formularios originales de la carpeta compartida; las quince coinciden. Se corrigió además un archivo que estaba mal nombrado |
 | 7. Regla de atribución | **Hecho** — `ETHICS.md` §v, sección "Regla de atribución" |

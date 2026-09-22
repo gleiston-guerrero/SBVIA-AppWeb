@@ -89,21 +89,21 @@ de firma** provienen de cada formulario de consentimiento firmado.
 
 | Código | Fecha de sesión | Duración | Dispositivo | Fecha de firma | Consentimiento | Custodia |
 | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| P01 | 2026-09-19 | 67 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P02 | 2026-09-20 | 15 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P03 | 2026-09-19 | 13 min | Escritorio | por verificar | Sí | Custodia externa de los investigadores |
-| P04 | 2026-09-19 | 15 min | Escritorio | por verificar | Sí | Custodia externa de los investigadores |
-| P05 | 2026-09-20 | 12 min | Escritorio | por verificar | Sí | Custodia externa de los investigadores |
-| P06 | 2026-09-19 | 15 min | Escritorio | por verificar | Sí | Custodia externa de los investigadores |
-| P07 | 2026-09-20 | 15 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P08 | 2026-09-19 | 17 min | Escritorio | por verificar | Sí | Custodia externa de los investigadores |
-| P09 | 2026-09-20 | 10 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P10 | 2026-09-20 | 14 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P11 | 2026-09-20 | 15 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P12 | 2026-09-20 | 18 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P13 | 2026-09-20 | 17 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P14 | 2026-09-20 | 13 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
-| P15 | 2026-09-20 | 15 min | Laptop | por verificar | Sí | Custodia externa de los investigadores |
+| P01 | 2026-09-19 | 67 min | Laptop | 2026-09-19 | Sí | Custodia externa de los investigadores |
+| P02 | 2026-09-20 | 15 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P03 | 2026-09-19 | 13 min | Escritorio | 2026-09-19 | Sí | Custodia externa de los investigadores |
+| P04 | 2026-09-19 | 15 min | Escritorio | 2026-09-19 | Sí | Custodia externa de los investigadores |
+| P05 | 2026-09-20 | 12 min | Escritorio | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P06 | 2026-09-19 | 15 min | Escritorio | 2026-09-19 | Sí | Custodia externa de los investigadores |
+| P07 | 2026-09-20 | 15 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P08 | 2026-09-19 | 17 min | Escritorio | 2026-09-19 | Sí | Custodia externa de los investigadores |
+| P09 | 2026-09-20 | 10 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P10 | 2026-09-20 | 14 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P11 | 2026-09-20 | 15 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P12 | 2026-09-20 | 18 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P13 | 2026-09-20 | 17 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P14 | 2026-09-20 | 13 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
+| P15 | 2026-09-20 | 15 min | Laptop | 2026-09-20 | Sí | Custodia externa de los investigadores |
 
 **Resumen:** 15 participantes — 5 sesiones el 2026-09-19 y 10 sesiones el 2026-09-20.
 
@@ -112,11 +112,23 @@ de firma** provienen de cada formulario de consentimiento firmado.
 > sean consistentes entre el registro, los cuestionarios y los **originales firmados**. La fecha de
 > firma debe leerse de los originales en papel (custodia externa), no suponerse igual a la de sesión.
 >
-> **Inconsistencia conocida en los archivos digitalizados de consentimiento.** Los PDF de
-> consentimiento recibidos no están nombrados de forma fiable por código: el archivo nombrado `P08`
-> contiene el consentimiento del código **P03** (fecha 2026-09-19). Antes de dar por buena cualquier
-> correspondencia archivo ↔ código, debe leerse el código **dentro** de cada formulario. Se deja
-> constancia aquí en lugar de corregirlo en silencio.
+**Inconsistencia de nombres, resuelta.** Los PDF de consentimiento no estaban nombrados de forma
+fiable por código: el archivo nombrado `P08` contenía el consentimiento del código **P03**. Se
+detectó al cotejar los formularios para esta reconciliación, se corrigió el nombre en la carpeta
+compartida y se volvió a comprobar la correspondencia leyendo el código **dentro** de cada
+formulario, no su nombre de archivo. Se deja constancia de ello en lugar de corregirlo en silencio,
+que es lo que pidió el docente-director.
+**Fechas de firma cotejadas con los originales.** Las quince fechas de la columna anterior se
+leyeron de los formularios firmados depositados en la carpeta compartida con el docente-director.
+**Las quince coinciden** con la fecha de sesión registrada y con el cuestionario: cinco sesiones el
+2026-09-19 (P01, P03, P04, P06 y P08) y diez el 2026-09-20 (P02, P05, P07 y P09 a P15). Ninguna
+entrada estaba mal fechada, de modo que no hubo nada que corregir en las fechas; lo que sí había era
+un archivo mal nombrado, ya resuelto.
+
+Las fechas no siguen el orden de los códigos porque **los códigos se asignaron antes de las
+sesiones**, para poder llevar un registro estable sin depender de quién terminara primero, y no se
+reasignaron después. Es una decisión de método, no un desorden, y se declara aquí porque un lector
+que vea P01 el 19 y P02 el 20 podría suponer lo contrario.
 
 ### Custodia y acceso
 
