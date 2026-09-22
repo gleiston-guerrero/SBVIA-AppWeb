@@ -2,7 +2,7 @@
 
 [![CI Pipeline](https://github.com/gleiston-guerrero/SBVIA-AppWeb/actions/workflows/main.yml/badge.svg)](https://github.com/gleiston-guerrero/SBVIA-AppWeb/actions/workflows/main.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI Software](https://zenodo.org/badge/DOI/10.5281/zenodo.22883012.svg)](https://doi.org/10.5281/zenodo.22883012)
+[![DOI Software](https://zenodo.org/badge/DOI/10.5281/zenodo.22906357.svg)](https://doi.org/10.5281/zenodo.22906357)
 [![DOI Dataset](https://zenodo.org/badge/DOI/10.5281/zenodo.22785358.svg)](https://doi.org/10.5281/zenodo.22785358)
 
 ## 📌 Descripción del Proyecto
@@ -31,7 +31,7 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 
 ## Publicación y preservación
 
-El **DOI del Software** ya se encuentra registrado y disponible a través de Zenodo en `10.5281/zenodo.22883012`. 
+El **DOI del Software** ya se encuentra registrado y disponible a través de Zenodo en `10.5281/zenodo.22906357`. 
 
 El **DOI del Dataset** de validación empírica se encuentra publicado independientemente en Zenodo bajo el DOI `10.5281/zenodo.22785358`. El sistema SBVIA es accesible públicamente a través de HTTPS según los requisitos del tribunal.
 
