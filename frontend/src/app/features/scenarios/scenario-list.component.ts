@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EscenarioService, Scenario } from './scenario.service';
+import { ScenarioService, Scenario } from './scenario.service';
 import { AuthService } from '../../auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../shared/components/toast/toast.service';
@@ -22,7 +22,7 @@ export class ScenarioListComponent implements OnInit {
   isDeleting = false;
 
   constructor(
-    private scenarioService: EscenarioService,
+    private scenarioService: ScenarioService,
     private authService: AuthService,
     private toastService: ToastService
   ) {}

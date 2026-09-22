@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InformeIA, SimulationService } from './simulation.service';
+import { AiReport, SimulationService } from './simulation.service';
 import { Simulation } from './simulation.model';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Scenario, EscenarioService } from '../scenarios/scenario.service';
+import { Scenario, ScenarioService } from '../scenarios/scenario.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
@@ -23,11 +23,11 @@ export class PracticesListComponent implements OnInit {
   cargandoEscenarios = true;
   filtro: 'todas' | 'finalizadas' | 'pendientes' = 'todas';
   practicaSeleccionada: Simulation | null = null;
-  informeSeleccionado: InformeIA | null = null;
+  informeSeleccionado: AiReport | null = null;
   cargandoInforme = false;
   errorInforme = '';
 
-  constructor(private simulationService: SimulationService, private scenarioService: EscenarioService) {}
+  constructor(private simulationService: SimulationService, private scenarioService: ScenarioService) {}
 
   ngOnInit(): void {
     this.loadPractices();

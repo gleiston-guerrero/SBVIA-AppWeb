@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Simulation } from './simulation.model';
 
-export interface MetricasConduccion {
+export interface DrivingMetrics {
   durationSeconds: number;
   velocidadPromedio: number;
   velocidadMaxima: number;
@@ -15,7 +15,7 @@ export interface MetricasConduccion {
   semaforosRespetados: number;
 }
 
-export interface InformeIA {
+export interface AiReport {
   resumen: string;
   aciertos: string[];
   errores: string[];
@@ -27,9 +27,9 @@ export interface InformeIA {
   origen: string;
 }
 
-export interface ResultadoConduccion {
+export interface DrivingResult {
   simulation: Simulation;
-  feedback: InformeIA;
+  feedback: AiReport;
 }
 
 @Injectable({
@@ -60,11 +60,11 @@ export class SimulationService {
     return this.http.post<Simulation>(`${this.apiUrl}/${simulationId}/finalizar`, { finalScore });
   }
 
-  endDriving(simulationId: number, metricas: MetricasConduccion): Observable<ResultadoConduccion> {
-    return this.http.post<ResultadoConduccion>(`${this.apiUrl}/${simulationId}/conduccion/finalizar`, metricas);
+  endDriving(simulationId: number, metricas: DrivingMetrics): Observable<DrivingResult> {
+    return this.http.post<DrivingResult>(`${this.apiUrl}/${simulationId}/conduccion/finalizar`, metricas);
   }
 
-  getFeedback(simulationId: number): Observable<InformeIA> {
-    return this.http.get<InformeIA>(`${this.apiUrl}/${simulationId}/feedback`);
+  getFeedback(simulationId: number): Observable<AiReport> {
+    return this.http.get<AiReport>(`${this.apiUrl}/${simulationId}/feedback`);
   }
 }

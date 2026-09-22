@@ -1,4 +1,4 @@
-export interface Respaldo {
+export interface BackupRecord {
   id: number;
   fileName: string;
   type: string;

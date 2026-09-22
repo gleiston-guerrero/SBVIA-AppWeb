@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UsuarioService, User } from './user.service';
+import { UserService, User } from './user.service';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../../shared/components/toast/toast.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
@@ -36,7 +36,7 @@ export class UserListComponent implements OnInit {
   accionConfirmacion: () => void = () => {};
 
   constructor(
-    private userService: UsuarioService,
+    private userService: UserService,
     private toastService: ToastService,
     private i18n: LanguageService
   ) { }

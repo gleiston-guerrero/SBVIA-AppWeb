@@ -18,7 +18,7 @@ export interface Scenario {
 @Injectable({
   providedIn: 'root'
 })
-export class EscenarioService {
+export class ScenarioService {
   private readonly API_URL = '/api/scenarios';
 
   constructor(private http: HttpClient) { }

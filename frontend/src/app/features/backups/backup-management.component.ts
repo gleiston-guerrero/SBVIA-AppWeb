@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BackupService } from './backup.service';
-import { Respaldo } from './backup.model';
+import { BackupRecord } from './backup.model';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
@@ -13,7 +13,7 @@ import { TranslatePipe } from '../../i18n/translate.pipe';
   styleUrls: ['./backup-management.component.css']
 })
 export class BackupManagementComponent implements OnInit, OnDestroy {
-  backups: Respaldo[] = [];
+  backups: BackupRecord[] = [];
   isLoading = true;
   modalAbierto = false;
   generando = false;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { EscenarioService, Scenario } from './scenario.service';
+import { ScenarioService, Scenario } from './scenario.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 import { LanguageService } from '../../i18n/language.service';
 
@@ -22,7 +22,7 @@ export class ScenarioFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private scenarioService: EscenarioService,
+    private scenarioService: ScenarioService,
     private route: ActivatedRoute,
     private router: Router,
     private i18n: LanguageService

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
-import { EscenarioService } from '../scenarios/scenario.service';
+import { ScenarioService } from '../scenarios/scenario.service';
 import { SimulationService } from '../practices/simulation.service';
-import { UsuarioService } from '../users/user.service';
+import { UserService } from '../users/user.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
@@ -26,9 +26,9 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private scenarioService: EscenarioService,
+    private scenarioService: ScenarioService,
     private simulationService: SimulationService,
-    private userService: UsuarioService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {

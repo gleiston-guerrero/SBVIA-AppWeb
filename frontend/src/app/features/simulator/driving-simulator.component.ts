@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { EscenarioService } from '../scenarios/scenario.service';
-import { InformeIA, MetricasConduccion, SimulationService } from '../practices/simulation.service';
+import { ScenarioService } from '../scenarios/scenario.service';
+import { AiReport, DrivingMetrics, SimulationService } from '../practices/simulation.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 
-type EstadoJuego = 'listo' | 'corriendo' | 'pausado' | 'finalizado';
+type GameState = 'listo' | 'corriendo' | 'pausado' | 'finalizado';
 
-interface VehiculoNpc {
+interface NpcVehicle {
   carril: number;
   y: number;
   velocidad: number;
   color: string;
 }
 
-interface SemaforoEvento {
+interface TrafficLightEvent {
   y: number;
   fase: 'verde' | 'rojo';
   timer: number;
@@ -44,7 +44,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   readonly PENAL_DISTANCIA = 8;
   readonly PENAL_EXCESO = 5;
 
-  estado: EstadoJuego = 'listo';
+  estado: GameState = 'listo';
   velocidadKmh = 0;
   velocidadMax = 0;
   segundos = 0;
@@ -66,7 +66,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   aviso = '';
   isSaving = false;
   puntajeServidor: number | null = null;
-  informe: InformeIA | null = null;
+  informe: AiReport | null = null;
 
   private ctx!: CanvasRenderingContext2D;
   private raf = 0;
@@ -74,8 +74,8 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   private teclas = new Set<string>();
   private xAuto = 0;
   private desplazamiento = 0;
-  private npcs: VehiculoNpc[] = [];
-  private semaforos: SemaforoEvento[] = [];
+  private npcs: NpcVehicle[] = [];
+  private semaforos: TrafficLightEvent[] = [];
   private tiempoSpawn = 0;
   private tiempoSpawnSemaforo = 8;
   private enExceso = false;
@@ -93,7 +93,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
 
   constructor(
     private route: ActivatedRoute,
-    private scenarioService: EscenarioService,
+    private scenarioService: ScenarioService,
     private simulationService: SimulationService
   ) {}
 
@@ -245,7 +245,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     return this.tailTimer > 0.3;
   }
 
-  private metrics(): MetricasConduccion {
+  private metrics(): DrivingMetrics {
     return {
       durationSeconds: Math.max(1, Math.floor(this.segundos)),
       velocidadPromedio: Math.round(this.velocidadPromedio * 100) / 100,
