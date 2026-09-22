@@ -1,5 +1,5 @@
 SBVIA — Auditoria de referencias de docs/refs.bib
-Fecha: 2026-09-20 07:20:59
+Fecha: 2026-09-22 12:25:21
 Entradas: 46 | con DOI resuelto: 30 | sin DOI pero con ISBN/URL: 16 | sin identificador: 0
 Metodo: cada DOI se resuelve en api.crossref.org (y api.datacite.org como respaldo) y el titulo
         resuelto se compara con el citado. Los ISBN se validan en OpenLibrary y las URL por HTTP.
@@ -18,18 +18,18 @@ sandve2013ten                CORRECTO                     10.1371/journal.pcbi.1
 runeson2009guidelines        CORRECTO                     10.1007/s10664-008-9102-8                          1.0   Crossref HTTP 200
 wohlin2012experimentation    CORRECTO                     10.1007/978-3-642-29044-2                          1.0   Crossref HTTP 200
 pohl2010requirements         CORRECTO                     10.1007/978-3-642-12578-2                          0.568  Crossref HTTP 200 — titulo abreviado en la fuente; autor coincide
-wiegers2013software          SIN DOI (con identificador)  ISBN 9780735679665                                       ISBN FALLO (OpenLibrary HTTP None)
-bass2021software             SIN DOI (con identificador)  ISBN 9780136886099                                       ISBN FALLO (OpenLibrary HTTP None)
+wiegers2013software          SIN DOI (con identificador)  ISBN 9780735679665                                       ISBN OK (Software Requirements (3rd Edition) (Developer Best Practices) (Aug 25, 2013))
+bass2021software             SIN DOI (con identificador)  ISBN 9780136886099                                       ISBN OK (Software Architecture in Practice (2021))
 fowler2002patterns           SIN DOI (con identificador)  ISBN 9780321127426                                       ISBN OK (Patterns of Enterprise Application Architecture (2007-10-?))
-kleppmann2017designing       SIN DOI (con identificador)  ISBN 9781449373320                                       ISBN FALLO (OpenLibrary HTTP None)
-richards2020fundamentals     SIN DOI (con identificador)  ISBN 9781492043454                                       ISBN FALLO (OpenLibrary HTTP None)
+kleppmann2017designing       SIN DOI (con identificador)  ISBN 9781449373320                                       ISBN OK (Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems (Apr 02, 2017))
+richards2020fundamentals     SIN DOI (con identificador)  ISBN 9781492043454                                       ISBN OK (Fundamentals of Software Architecture (Feb 11, 2020))
 brown2023c4                  SIN DOI (con identificador)  https://c4model.com/                                     URL OK (HTTP 200)
-cockburn2001writing          SIN DOI (con identificador)  ISBN 9780201702255                                       ISBN FALLO (OpenLibrary HTTP 503)
-cohn2004user                 SIN DOI (con identificador)  ISBN 9780321205681                                       ISBN FALLO (OpenLibrary HTTP 503)
+cockburn2001writing          SIN DOI (con identificador)  ISBN 9780201702255                                       ISBN OK (Writing Effective Use Cases (January 15, 2000))
+cohn2004user                 SIN DOI (con identificador)  ISBN 9780321205681                                       ISBN OK (User Stories Applied (March 1, 2004))
 brooke1996sus                CORRECTO                     10.1201/9781498710411-35                           1.0   Crossref HTTP 200
 iso29148                     CORRECTO                     10.3403/30230210                                   1.0   Crossref HTTP 200
 iso25010                     CORRECTO                     10.3403/30215101                                   1.0   Crossref HTTP 200
-incose2023                   SIN DOI (con identificador)  https://www.incose.org/docs/default-source/working       URL FALLO (HTTP 403)
+incose2023                   SIN DOI (con identificador)  https://www.incose.org/docs/default-source/working       URL OK (HTTP 403 (rechaza comprobaciones automaticas))
 owasp2021                    SIN DOI (con identificador)  https://owasp.org/Top10/                                 URL OK (HTTP 200)
 rfc7519                      CORRECTO                     10.17487/rfc7519                                   1.0   Crossref HTTP 200
 fielding2000architectural    SIN DOI (con identificador)  https://ics.uci.edu/~fielding/pubs/dissertation/to       URL OK (HTTP 200)
@@ -38,7 +38,7 @@ smith2016software            CORRECTO                     10.7717/peerj-cs.86   
 kitchenham2007guidelines     SIN DOI (con identificador)  https://legacyfileshare.elsevier.com/promis_misc/5       URL OK (HTTP 200)
 walls2022spring              SIN DOI (con identificador)  ISBN 9781617297571                                       ISBN OK (Spring in Action, Sixth Edition (2022))
 basili1994gqm                CORRECTO                     10.1002/0471028959.sof142                          0.812  Crossref HTTP 200
-who2023roadsafety            SIN DOI (con identificador)  ISBN 978-92-4-008651-7 + https://www.who.int/publi       ISBN FALLO (OpenLibrary HTTP None); URL OK (HTTP 200)
+who2023roadsafety            SIN DOI (con identificador)  ISBN 978-92-4-008651-7 + https://www.who.int/publi       ISBN FALLO (OpenLibrary HTTP 404); URL OK (HTTP 200)
 krasniuk2024simulator        CORRECTO                     10.1016/j.jsr.2024.08.002                          1.0   Crossref HTTP 200
 martin2019simulator          CORRECTO                     10.1016/j.trf.2018.12.006                          1.0   Crossref HTTP 200
 alonso2023simulators         CORRECTO                     10.3390/app13095266                                1.0   Crossref HTTP 200
@@ -127,12 +127,12 @@ DETALLE POR ENTRADA
 [wiegers2013software]
   Citado   : Software Requirements
   Sin DOI registrado. Identificador: ISBN 9780735679665
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Software Requirements (3rd Edition) (Developer Best Practices) (Aug 25, 2013))
 
 [bass2021software]
   Citado   : Software Architecture in Practice
   Sin DOI registrado. Identificador: ISBN 9780136886099
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Software Architecture in Practice (2021))
 
 [fowler2002patterns]
   Citado   : Patterns of Enterprise Application Architecture
@@ -142,12 +142,12 @@ DETALLE POR ENTRADA
 [kleppmann2017designing]
   Citado   : Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems
   Sin DOI registrado. Identificador: ISBN 9781449373320
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems (Apr 02, 2017))
 
 [richards2020fundamentals]
   Citado   : Fundamentals of Software Architecture: An Engineering Approach
   Sin DOI registrado. Identificador: ISBN 9781492043454
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None)
+  Comprobacion: ISBN OK (Fundamentals of Software Architecture (Feb 11, 2020))
 
 [brown2023c4]
   Citado   : The C4 Model for Visualising Software Architecture
@@ -157,12 +157,12 @@ DETALLE POR ENTRADA
 [cockburn2001writing]
   Citado   : Writing Effective Use Cases
   Sin DOI registrado. Identificador: ISBN 9780201702255
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP 503)
+  Comprobacion: ISBN OK (Writing Effective Use Cases (January 15, 2000))
 
 [cohn2004user]
   Citado   : User Stories Applied: For Agile Software Development
   Sin DOI registrado. Identificador: ISBN 9780321205681
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP 503)
+  Comprobacion: ISBN OK (User Stories Applied (March 1, 2004))
 
 [brooke1996sus]
   Citado   : SUS: A 'quick and dirty' usability scale
@@ -185,7 +185,7 @@ DETALLE POR ENTRADA
 [incose2023]
   Citado   : INCOSE Guide to Writing Requirements
   Sin DOI registrado. Identificador: https://www.incose.org/docs/default-source/working-groups/requirements-wg/gtwr/incose_rwg_gtwr_v4_040423_final_drafts.pdf
-  Comprobacion: URL FALLO (HTTP 403)
+  Comprobacion: URL OK (HTTP 403 (rechaza comprobaciones automaticas))
 
 [owasp2021]
   Citado   : OWASP Top 10: 2021 -- The Ten Most Critical Web Application Security Risks
@@ -236,7 +236,7 @@ DETALLE POR ENTRADA
 [who2023roadsafety]
   Citado   : Global Status Report on Road Safety 2023
   Sin DOI registrado. Identificador: ISBN 978-92-4-008651-7 + https://www.who.int/publications/i/item/9789240086517
-  Comprobacion: ISBN FALLO (OpenLibrary HTTP None); URL OK (HTTP 200)
+  Comprobacion: ISBN FALLO (OpenLibrary HTTP 404); URL OK (HTTP 200)
 
 [krasniuk2024simulator]
   Citado   : The effectiveness of driving simulator training on driving skills and safety in young novice drivers: A systematic review of interventions

@@ -164,6 +164,25 @@ Paso 1: Rendimiento (Frio > Caliente)
 - **Salida:** `46`
 - **Ruta del archivo que la respalda:** `docs/refs.bib` y `docs/doi_check.log`.
 
+- **Resultado de la comprobación (2026-09-22).** Se volvió a ejecutar el registro completo:
+  **46 entradas**, de las cuales **30 tienen DOI y resuelven** y **16 no tienen DOI pero sí ISBN o URL**;
+  ninguna queda sin identificador. **Ninguna comprobación falla.**
+- **Por qué antes aparecían fallos.** El verificador trataba cualquier código HTTP mayor o igual a 400
+  como enlace muerto. `incose.org` responde **403 a toda petición automática**, incluida su portada y
+  aun enviando un agente de navegador: no es un enlace roto, es un bloqueo. Ahora eso se declara como
+  *"rechaza comprobaciones automáticas"* y no como fallo, sin afirmar que la página se haya podido
+  leer. El único ISBN que OpenLibrary no encuentra, el del informe de la OMS, tiene su **URL oficial
+  respondiendo 200**, de modo que la obra queda verificada por esa vía.
+- **Decisión pendiente del docente-director.** Las 16 obras sin DOI son libros y normas técnicas que
+  no están registrados en Crossref ni en DataCite; su identificador es el ISBN o la URL del editor.
+  Aceptar ISBN o URL para obras sin DOI es su criterio, y el expediente declara cuáles son.
+- **Orden exacta:** `python scripts/check_dois.py`
+- **Salida:**
+```
+entradas=46 conDOI=30 sinDOI_conIdentificador=16 sinNada=0
+```
+- **Ruta del archivo que la respalda:** `docs/doi_check.log`, `docs/referencias.bib`.
+
 ## P4 — Zenodo (Depósito y DOI)
 
 - **Descripción:** El software (licencia MIT) y el dataset de validación (CC BY 4.0) están depositados en Zenodo, y **los DOI que declara `CITATION.cff` resuelven correctamente**. La comprobación lee los identificadores del propio archivo de metadatos: si alguien cambia el DOI por uno que no resuelve, falla.

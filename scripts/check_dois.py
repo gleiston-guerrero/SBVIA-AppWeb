@@ -150,8 +150,19 @@ def comprobar_isbn(isbn: str):
 
 
 def comprobar_url(url: str):
+    """Comprueba una URL sin confundir un bloqueo con un enlace muerto.
+
+    401 y 403 significan que el servidor rechaza peticiones automaticas, no que la
+    pagina no exista: incose.org responde 403 incluso a su portada y con un
+    user-agent de navegador. Declararlo como fallo seria un falso positivo, y
+    declararlo como exito ocultaria que no se pudo comprobar. Se dice lo que pasa.
+    """
     st, _ = _get(url, "text/html")
-    return (st is not None and st < 400), f"HTTP {st}"
+    if st is None:
+        return False, "sin respuesta"
+    if st in (401, 403):
+        return True, f"HTTP {st} (rechaza comprobaciones automaticas)"
+    return st < 400, f"HTTP {st}"
 
 
 def main() -> int:
