@@ -70,6 +70,18 @@ DESPLIEGUE OK: API y sitio responden con sus cabeceras
   - **No verificable desde el repositorio:** si Render definiera la variable de entorno `SECURITY_COOKIE_SECURE` (enlace relajado de Spring Boot) o `COOKIE_SECURE`, esta tendría precedencia sobre `application-prod.yml`. El valor en producción ya fue comprobado en vivo en la evaluación (cookie `Secure; HttpOnly; SameSite=Strict`).
 - **Ruta del archivo que la respalda:** `backend/src/main/java/com/sbvia/backend/controller/AuthController.java` y `backend/src/main/resources/application-prod.yml`.
 
+- **Orden contra el despliegue (P11).** Las dos órdenes anteriores comprueban el código y la
+  configuración; ninguna mira lo que el servidor emite. Esta inicia sesión contra el despliegue
+  público y lee las cabeceras `Set-Cookie` reales.
+- **Orden exacta:** `python scripts/verify_cookie.py`
+- **Salida:**
+```
+COOKIES OK: Secure en las tres, HttpOnly en las de sesion
+```
+- **Qué comprueba:** que las tres cookies emitidas —`XSRF-TOKEN`, `accessToken` y
+  `refreshToken`— llevan `Secure`, y que las dos de sesión llevan además `HttpOnly`. Comprobado en
+  producción: `accessToken` y `refreshToken` salen con `Secure; HttpOnly; SameSite=Strict`.
+
 ## P3 — El PDF no contiene ninguna imagen
 
 - **Descripción:** Se corrigieron los paths de las imágenes en LaTeX, asegurando la correcta incrustación en el PDF de 49 páginas. Las leyendas de las figuras permanecen en español (la traducción al inglés está pendiente).
@@ -94,7 +106,7 @@ DESPLIEGUE OK: API y sitio responden con sus cabeceras
 RESULTADO DEL CRITERIO: CUMPLE
 ```
   El script recalcula cada puntuación desde las respuestas crudas con la fórmula de Brooke y **falla si el CSV no la reproduce**, de modo que falsear una respuesta o una puntuación hace fallar el verificador del expediente.
-- **Limitaciones que se declaran, no se esconden:** no se alcanzaron los 16 participantes previstos y, con la media observada, **un participante más habría dejado la puntuación por debajo del umbral**. La redacción del instrumento se revisó el **2026-09-20 a las 18:05**, de modo que las sesiones del 19 usaron la redacción anterior (véase `R-12`). El consentimiento se declara generado el 19 y su PDF lleva fecha interna del **2026-09-20 a las 13:03:26**, posterior al inicio de las sesiones del 19. Las quince fechas de firma siguen **por verificar**.
+- **Limitaciones que se declaran, no se esconden:** La muestra está en el mínimo que exige el criterio, quince participantes, y el intervalo de confianza incluye valores por debajo del umbral: con estos datos no puede afirmarse que la usabilidad real del sistema esté por encima de 68. Retirar la puntuación más alta, 85,0, dejaría la media en 67,86. La redacción del instrumento se revisó el **2026-09-20 a las 18:05**, de modo que las sesiones del 19 usaron la redacción anterior (véase `R-12`). El consentimiento se declara generado el 19 y su PDF lleva fecha interna del **2026-09-20 a las 13:03:26**, posterior al inicio de las sesiones del 19. Las quince fechas de firma siguen **por verificar**.
 - **Ruta del archivo que la respalda:** `docs/mediciones/sus/sus-analysis-2026-09.md`, `docs/mediciones/sus/sus-raw-data-2026-09.csv`, `docs/etica/consentimientos/` y `docs/etica/ETHICS.md`.
 - **Consistencia de las quince entradas (2026-09-22).** El docente-director pidió, en la convalidación `APPWEB-SBVIA-2026-01`, que las quince entradas de código, fecha de sesión y fecha de firma fueran consistentes entre el registro, el cuestionario y los originales, y que cualquier entrada mal fechada se corrigiera declarándolo. Se cotejaron los quince formularios originales de la carpeta compartida: **las quince fechas de firma coinciden** con las de sesión y con el cuestionario, de modo que ninguna fecha estaba mal. Sí se encontró y corrigió un archivo mal nombrado, que ya consta en el registro. RNF-06 permanece en `TESTED`: la consistencia está cotejada por el equipo y los originales están a disposición del docente-director en la carpeta compartida, pero la auditoría externa que el glosario exige para `VERIFIED` corresponde a su revisión.
 
