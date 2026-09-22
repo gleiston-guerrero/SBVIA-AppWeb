@@ -140,22 +140,39 @@ docs/mediciones/lighthouse/mobile/sbvia_frontend_onrender_com_login-20260919_153
 
 ## P10 — Sin corrección por comparaciones múltiples
 
-- **Descripción:** Se implementó el procedimiento Holm-Bonferroni en el cálculo estadístico para corregir la tasa de error (FWER) cuando se evalúan múltiples hipótesis. La familia declarada originalmente incluía rendimiento (frío > caliente) y usabilidad (SUS > 68); al retirarse el estudio SUS, la única hipótesis efectivamente evaluada es la de rendimiento. El script conserva el procedimiento para el caso en que se añadan nuevas pruebas.
+- **Descripción:** El cálculo estadístico aplica el procedimiento **Holm-Bonferroni** sobre la familia
+  de pruebas declarada en el informe. La corrección solo tiene efecto si la familia tiene más de una
+  prueba: con una sola, `alpha / (m - k)` es `alpha / 1` y no corrige nada. La familia comprende las
+  **dos** pruebas que el informe declara sobre el mismo experimento —rendimiento frío frente a
+  caliente, y usabilidad SUS frente al umbral de 68—, de modo que el ajuste es `alpha / 2` en el
+  primer paso.
+- **Contraste de usabilidad.** Se añadió una **t de una muestra** sobre las quince respuestas del
+  estudio de septiembre: `H0: media <= 68` frente a `H1: media > 68`. La media supera el umbral
+  (69,00) pero el contraste **no rechaza** la hipótesis nula, lo que coincide con lo que declara el
+  informe: el intervalo de confianza incluye el umbral y con esta muestra no puede afirmarse que la
+  usabilidad real esté por encima de 68.
 - **Orden exacta:** `python docs/mediciones/perf/estadistica.py`
 - **Salida:**
 ```
 === Resultados de Evaluación Estadística ===
-Estudio SUS: RETIRADO. Respuestas crudas conservadas: N=15, sin análisis estadístico.
+Usabilidad SUS (septiembre 2026, N=15): media = 69.00, DE = 9.90
+  t = 0.3912, p-valor (una cola, df=14) = 3.508e-01  [H0: media <= 68]
 Muestra Rendimiento (N=10): Media Diferencia = 9.00ms
   t = 4.5708, p-valor (una cola, df=9) = 6.727e-04
 
 === Aplicación de Holm-Bonferroni (alpha = 0.05) ===
 Paso 1: Rendimiento (Frio > Caliente)
   P-valor crudo = 6.727e-04
-  Alpha ajustado (0.05 / 1) = 0.0500
+  Alpha ajustado (0.05 / 2) = 0.0250
   Rechazar H0? SI
+Paso 2: Usabilidad SUS (media > 68)
+  P-valor crudo = 3.508e-01
+  Alpha ajustado (0.05 / 1) = 0.0500
+  Rechazar H0? NO
+  -> El procedimiento se detiene aquí.
 ```
-- **Ruta del archivo que la respalda:** `docs/mediciones/perf/estadistica.py`.
+- **Ruta del archivo que la respalda:** `docs/mediciones/perf/estadistica.py`,
+  `docs/mediciones/sus/sus-raw-data-2026-09.csv`.
 
 ## P12 — Referencias verificadas una por una
 

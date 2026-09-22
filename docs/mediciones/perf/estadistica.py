@@ -65,19 +65,24 @@ def t_survival(t, df):
     return 0.5 * _regularized_beta(x, df / 2.0, 0.5)
 
 
-# --- 1. Estudio SUS: RETIRADO (no se evalúa hipótesis de usabilidad) ---
-# Motivo: la fecha declarada de aplicación del instrumento (2026-07-28/29) es
-# anterior a la incorporación al repositorio de la funcionalidad de simulación
-# que el instrumento dice haber evaluado (commit 55201f5, 2026-09-03,
-# "práctica vial interactiva"; commit 5e852c6, 2026-09-04, "simulador de
-# conducción 2D"). Las respuestas crudas se conservan únicamente como material
-# de registro, sin garantía de validez metodológica, y no se reporta media,
-# desviación típica, intervalo de confianza ni valor p.
-sus_file = os.path.join(os.path.dirname(__file__), '..', 'sus', 'sus-raw-data.csv')
-sus_rows = 0
+# --- 1. Estudio SUS vigente: septiembre de 2026 ---
+# El estudio de julio de 2026 sigue retirado (su fecha declarada de aplicacion es
+# anterior a la funcionalidad de simulacion que dice haber evaluado). La medicion
+# vigente es la reevaluacion de septiembre, cuyas respuestas estan en su propio
+# CSV. Se contrasta su media contra el umbral de 68 con una t de una muestra:
+# H0: media <= 68  frente a  H1: media > 68.
+sus_file = os.path.join(os.path.dirname(__file__), '..', 'sus', 'sus-raw-data-2026-09.csv')
+sus = []
 with open(sus_file, 'r', encoding='utf-8') as f:
-    for _ in csv.DictReader(f):
-        sus_rows += 1
+    for fila in csv.DictReader(f):
+        sus.append(float(fila['sus_score']))
+
+n_sus = len(sus)
+mean_sus = sum(sus) / n_sus
+var_sus = sum((x - mean_sus) ** 2 for x in sus) / (n_sus - 1)
+sd_sus = math.sqrt(var_sus)
+t_sus = (mean_sus - 68.0) / (sd_sus / math.sqrt(n_sus))
+p_sus = t_survival(t_sus, n_sus - 1)
 
 # --- 2. Leer y calcular Rendimiento (Speedup) ---
 speedup_file = os.path.join(os.path.dirname(__file__), 'speedup-realtime.txt')
@@ -107,15 +112,19 @@ p_perf = t_survival(t_stat_perf, n_diff - 1)
 
 # --- 3. Corrección Holm-Bonferroni ---
 alpha = 0.05
+# La familia son las DOS pruebas declaradas en el informe sobre el mismo
+# experimento. Con una sola, Holm no corrige nada: alpha/(m-k) seria alpha/1.
 p_values = [
-    ('Rendimiento (Frio > Caliente)', p_perf)
+    ('Rendimiento (Frio > Caliente)', p_perf),
+    ('Usabilidad SUS (media > 68)', p_sus),
 ]
 
 # Ordenar de menor a mayor p-valor
 p_values_sorted = sorted(p_values, key=lambda x: x[1])
 
 print("=== Resultados de Evaluación Estadística ===")
-print(f"Estudio SUS: RETIRADO. Respuestas crudas conservadas: N={sus_rows}, sin análisis estadístico.")
+print(f"Usabilidad SUS (septiembre 2026, N={n_sus}): media = {mean_sus:.2f}, DE = {sd_sus:.2f}")
+print(f"  t = {t_sus:.4f}, p-valor (una cola, df={n_sus - 1}) = {p_sus:.3e}  [H0: media <= 68]")
 print(f"Muestra Rendimiento (N={n_diff}): Media Diferencia = {mean_diff:.2f}ms")
 print(f"  t = {t_stat_perf:.4f}, p-valor (una cola, df={n_diff - 1}) = {p_perf:.3e}")
 print("\n=== Aplicación de Holm-Bonferroni (alpha = 0.05) ===")
