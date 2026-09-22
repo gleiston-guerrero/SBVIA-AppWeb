@@ -75,3 +75,6 @@ frontend/node_modules/
 # Temporales de trabajo
 .m.tmp
 *.tmp
+
+# Respaldos generados por la aplicacion en tiempo de ejecucion
+backups/

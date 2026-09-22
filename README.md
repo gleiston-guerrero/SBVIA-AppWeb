@@ -23,8 +23,8 @@ El sistema **Simulador de Comportamiento Vial con Inteligencia Artificial (SBVIA
 ---
 
 ## 🐳 Artefactos Docker
-- **Imagen Docker Backend:** `ghcr.io/keithdrox/sbvia-backend:v1.2.0`
-- **Imagen Docker Frontend:** `ghcr.io/keithdrox/sbvia-frontend:v1.2.0`
+- **Imagen Docker Backend:** `ghcr.io/keithdrox/sbvia-backend:v1.3.1`
+- **Imagen Docker Frontend:** `ghcr.io/keithdrox/sbvia-frontend:v1.3.1`
 
 > Los digests SHA-256 exactos se obtienen al publicar las imágenes con `docker buildx build --push`.
 > Consultar el registro: [GitHub Container Registry](https://github.com/gleiston-guerrero/SBVIA-AppWeb/pkgs/container/sbvia-backend)

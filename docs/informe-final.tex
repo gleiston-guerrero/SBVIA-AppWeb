@@ -351,7 +351,7 @@ Las preguntas y métricas se relacionaron mediante Goal--Question--Metric \cite{
 \midrule
 \textbf{G1. Rendimiento:} Evaluar la capacidad de respuesta bajo carga concurrente & ¿El sistema responde de manera oportuna a 50 usuarios simultáneos? & Latencia percentil 95 ($p95 \le 200$ ms) y tasa de error & k6 \\
 \midrule
-\textbf{G2. Usabilidad:} Medir la facilidad de uso percibida del prototipo & ¿Es el sistema considerado usable por los conductores novatos? & Puntuación individual y media SUS (umbral $> 68$). \textbf{No se reporta: estudio retirado} & Cuestionario SUS (no aplicado) \\
+\textbf{G2. Usabilidad:} Medir la facilidad de uso percibida del prototipo & ¿Es el sistema considerado usable por los conductores novatos? & Puntuación individual y media SUS (umbral $\geq$ 68). \textbf{Media 69,00; DE 9,90; IC 95\,\% [63,52; 74,48]} & Cuestionario SUS de Brooke, aplicado ($N = 15$) \\
 \midrule
 \textbf{G3. Seguridad:} Comprobar la resiliencia contra ataques comunes & ¿El backend implementa cabeceras seguras y carece de defectos críticos? & Número de hallazgos por severidad; controles de cabeceras & OWASP ZAP, SpotBugs, \texttt{curl} \\
 \midrule
