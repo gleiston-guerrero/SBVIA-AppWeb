@@ -1,7 +1,7 @@
 package com.sbvia.backend.exception;
 
 /**
- * Excepción lanzada al intentar registrar un email que ya existe en la BD.
+ * Raised when registering an email that already exists in the database.
  *
  * @author Keitho_
  */

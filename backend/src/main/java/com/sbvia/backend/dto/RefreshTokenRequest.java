@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * DTO para la solicitud de refresh token.
+ * Refresh token request DTO.
  *
  * @author Keitho_
  */

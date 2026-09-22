@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Controlador global para el manejo de excepciones y formato de respuestas de error.
+ * Global handler for exceptions and for formatting error responses.
  * Implementa RFC 7807 (ProblemDetails).
  *
  * @author Keitho_

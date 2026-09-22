@@ -25,11 +25,11 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Integer> {
     Page<Scenario> findByActivoTrue(Pageable pageable);
 
     /**
-     * Invoca sp_validar_escenario (RF-07): valida que el escenario tiene al menos
-     * 2 reglas de transito configuradas, devolviendo true si es valido.
+     * Calls sp_validar_escenario (RF-07): checks that the scenario has at least
+     * two traffic rules configured, returning true when it is valid.
      *
-     * @param scenarioId el identificador del escenario a validar
-     * @return true si el escenario tiene las reglas minimas requeridas
+     * @param scenarioId the identifier of the scenario to validate
+     * @return true when the scenario has the minimum required rules
      */
     @Query(value = "SELECT sp_validar_escenario(:scenarioId)", nativeQuery = true)
     Boolean validateScenario(@Param("scenarioId") Integer scenarioId);

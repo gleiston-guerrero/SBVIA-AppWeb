@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * DTO para la petición de inicio de sesión.
- * Permite autenticarse mediante 'identificador' (que puede ser el name de user o el email electrónico).
- * Mantiene compatibilidad total con peticiones existentes que envían 'email'.
+ * Login request DTO.
+ * Allows authenticating with 'identificador', which may be the username or the email address.
+ * Fully compatible with existing requests that send 'email'.
  *
  * @author Keitho_
  */

@@ -12,10 +12,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 /**
- * Emite la cookie XSRF-TOKEN cuando el cliente aún no tiene una. Angular la
- * replica en el encabezado X-XSRF-TOKEN (double-submit cookie) para las
- * operaciones mutables. Se ejecuta antes de la cadena para que la respuesta
- * aún no esté comprometida. Ver ADR-009.
+ * Issues the XSRF-TOKEN cookie when the client does not have one yet. Angular
+ * mirrors it in the X-XSRF-TOKEN header (double-submit cookie) for
+ * mutating operations. It runs before the chain so that the response
+ * is not committed yet. See ADR-009.
  */
 @Component
 @RequiredArgsConstructor

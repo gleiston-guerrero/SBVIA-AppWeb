@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO de respuesta de autenticación.
- * El campo refreshToken se usa internamente entre servicio y controlador, pero el
- * controlador lo elimina antes de serializar la respuesta HTTP.
- * No tiene anotaciones @Entity.
+ * Authentication response DTO.
+ * The refreshToken field is used internally between service and controller, but the
+ * controller removes it before serialising the HTTP response.
+ * It carries no @Entity annotations.
  *
  * @author Keitho_
  */

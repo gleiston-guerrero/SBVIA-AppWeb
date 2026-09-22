@@ -1,7 +1,7 @@
 package com.sbvia.backend.exception;
 
 /**
- * Excepción lanzada cuando un recurso (ej. user, scenario) no es encontrado en la BD.
+ * Raised when a resource, such as a user or a scenario, is not found in the database.
  *
  * @author Keitho_
  */

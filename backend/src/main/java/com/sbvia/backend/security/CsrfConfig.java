@@ -6,10 +6,10 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 /**
- * Repositorio CSRF compartido entre la configuración de seguridad y el filtro
- * de emisión, para que el token emitido sea el mismo que se valida.
- * Vive en su propia clase para evitar una referencia circular con
- * SecurityConfig. Envuelto para ignorar el borrado por rotación (ver
+ * CSRF repository shared between the security configuration and the issuing
+ * filter, so that the token issued is the same one that is validated.
+ * It lives in its own class to avoid a circular reference with
+ * SecurityConfig. Wrapped to ignore deletion on rotation (see
  * StatelessCsrfTokenRepository y ADR-009).
  *
  * @author Keitho_

@@ -41,51 +41,51 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
     Object[] getGlobalStats();
 
     /**
-     * Invoca sp_calcular_promedio_usuario (RF-04): calcula el promedio de todas
-     * las simulaciones completadas de un conductor mediante la funcion PostgreSQL.
+     * Calls sp_calcular_promedio_usuario (RF-04): computes the average of every
+     * completed simulation of a driver, through the PostgreSQL function.
      *
-     * @param userId el identificador del conductor
-     * @return el promedio calculado por el procedimiento almacenado
+     * @param userId the identifier of the driver
+     * @return the average computed by the stored procedure
      */
     @Query(value = "SELECT sp_calcular_promedio_usuario(:userId)", nativeQuery = true)
     BigDecimal calculateUserAverage(@Param("userId") Integer userId);
 
     /**
-     * Invoca sp_reporte_simulacion (RF-03): recupera el detalle multi-tabla
-     * de una simulacion mediante la funcion PostgreSQL.
+     * Calls sp_reporte_simulacion (RF-03): retrieves the multi-table detail
+     * of a simulation through the PostgreSQL function.
      *
-     * @param simulationId el identificador de la simulacion
+     * @param simulationId the identifier of the simulation
      * @return lista de filas del reporte [{simulacion_id, usuario_nombre, escenario_nombre, puntaje_final, estado, tiempo_reaccion}]
      */
     @Query(value = "SELECT * FROM sp_reporte_simulacion(:simulationId)", nativeQuery = true)
     List<Object[]> simulationReport(@Param("simulationId") Integer simulationId);
 
     /**
-     * Invoca sp_reporte_actividad_diaria (RF-05): resume la actividad del sistema
-     * para la fecha especificada.
+     * Calls sp_reporte_actividad_diaria (RF-05): summarises system activity
+     * for the given date.
      *
-     * @param fecha la fecha a consultar en formato ISO (yyyy-MM-dd)
+     * @param fecha the date to query, in ISO format (yyyy-MM-dd)
      * @return lista con [total_simulaciones, promedio_puntaje]
      */
     @Query(value = "SELECT * FROM sp_reporte_actividad_diaria(CAST(:fecha AS date))", nativeQuery = true)
     List<Object[]> dailyActivityReport(@Param("fecha") String fecha);
 
     /**
-     * Invoca sp_generar_codigo_certificado (RF-08): genera un codigo secuencial
-     * unico para el certificado de la simulacion indicada.
+     * Calls sp_generar_codigo_certificado (RF-08): generates a sequential code
+     * unique to the certificate of the given simulation.
      *
-     * @param simulationId el identificador de la simulacion aprobada
-     * @return el codigo de certificado generado
+     * @param simulationId the identifier of the simulation aprobada
+     * @return the generated certificate code
      */
     @Query(value = "SELECT sp_generar_codigo_certificado(:simulationId)", nativeQuery = true)
     String generateCertificateCode(@Param("simulationId") Integer simulationId);
 
     /**
-     * Invoca sp_calcular_puntaje_simulacion (RF-11): recalcula el puntaje
-     * de una simulacion restando las penalizaciones de infracciones al puntaje base (100).
+     * Calls sp_calcular_puntaje_simulacion (RF-11): recomputes the score
+     * of a simulation, subtracting infraction penalties from the base score of 100.
      *
-     * @param simulationId el identificador de la simulacion
-     * @return el puntaje final calculado
+     * @param simulationId the identifier of the simulation
+     * @return the computed final score
      */
     @org.springframework.data.jpa.repository.query.Procedure(procedureName = "sp_calcular_puntaje_simulacion")
     BigDecimal calculateSimulationScore(@Param("p_id_simulacion") Integer simulationId);

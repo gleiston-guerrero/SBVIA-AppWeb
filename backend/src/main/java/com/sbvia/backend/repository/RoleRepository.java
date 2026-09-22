@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * Repositorio JPA para la entidad Role.
+ * JPA repository for the Role entity.
  *
  * @author Keitho_
  */
@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
     /**
-     * Busca un role por name.
+     * Looks up a role by name.
      *
      * @param name a {@link java.lang.String} object
      * @return a {@link java.util.Optional} object
