@@ -19,7 +19,7 @@ RNF-02,PERF,Latencia de lectura en frío p95 <= 500ms,API,scripts/k6/load-test.j
 RNF-03,SEC,Contraseñas hasheadas con BCrypt y factor de costo >= 10,Backend,AuthServiceTest.java,VERIFIED,,
 RNF-04,SEC,Cookie de token con HttpOnly y SameSite=Strict,Backend,AuthControllerTest.java,VERIFIED,,
 RNF-05,SEC,Ausencia total de SQL dinámico en procedimientos,Database,scripts/audit-sql-dynamic.sh,VERIFIED,,
-RNF-06,USAB,Escala de Usabilidad del Sistema SUS >= 68 puntos,Frontend,docs/mediciones/sus/sus-analysis.md,VERIFIED,,
+RNF-06,USAB,Escala de Usabilidad del Sistema SUS >= 68 puntos,Frontend,docs/mediciones/sus/sus-analysis-2026-09.md,TESTED,,
 RNF-07,SEC,Degradación controlada (Fallback) del proveedor de IA,Backend,FeedbackServiceTest.java,VERIFIED,,
 RNF-08,SEC,Privacidad de Datos y Minimización,Backend,service/feedback/ExternalAiFeedbackServiceTest.java,TESTED,,
 RNF-09,USAB,Accesibilidad y Compatibilidad (WCAG 2.2),Frontend,Lighthouse prod,VERIFIED,,
@@ -30,11 +30,11 @@ US-03,USER,Exploración interactiva de escenarios viales,Frontend,app.component.
 US-04,USER,Ejecución de simulación y captura de decisiones,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_reporte_simulacion.sql
 US-05,USER,Visualización de métricas y feedback en dashboard,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_calcular_promedio_usuario.sql
 US-06,USER,Descarga de certificado con código secuencial,Frontend,app.component.spec.ts,TESTED,SP,db/procs/sp_generar_codigo_certificado.sql
-RF-16,FUNC,Cierre de simulaciones vencidas (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_cerrar_simulaciones_vencidas.sql
-RF-17,FUNC,Generacion de codigo de reporte (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_generar_codigo_reporte.sql
-RF-18,FUNC,Generacion de reporte de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_generar_reporte_simulacion.sql
-RF-19,FUNC,Resumen de usuario (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_resumen_usuario.sql
-RF-20,FUNC,Validacion general de simulacion (SP),Database,SimulationRepositoryTest.java,IMPLEMENTED,SP,db/procs/sp_validar_simulacion.sql
+RF-16,FUNC,Cierre de simulaciones vencidas (SP),Database,sin prueba automatica,NOT VERIFIED,SP,db/procs/sp_cerrar_simulaciones_vencidas.sql
+RF-17,FUNC,Generacion de codigo de reporte (SP),Database,sin prueba automatica,NOT VERIFIED,SP,db/procs/sp_generar_codigo_reporte.sql
+RF-18,FUNC,Generacion de reporte de simulacion (SP),Database,sin prueba automatica,NOT VERIFIED,SP,db/procs/sp_generar_reporte_simulacion.sql
+RF-19,FUNC,Resumen de usuario (SP),Database,sin prueba automatica,NOT VERIFIED,SP,db/procs/sp_resumen_usuario.sql
+RF-20,FUNC,Validacion general de simulacion (SP),Database,sin prueba automatica,NOT VERIFIED,SP,db/procs/sp_validar_simulacion.sql
 
 --- ENLACES BIDIRECCIONALES (INVERSOS) ---
 TestFile/Artifact,Validates_ReqIDs
@@ -52,4 +52,4 @@ scripts/audit-sql-dynamic.sh,RNF-05
 docs/mediciones/sus/sus-analysis.md,RNF-06
 Lighthouse prod,RNF-09
 app.component.spec.ts,US-01 | US-02 | US-03 | US-04 | US-05 | US-06
-SimulationRepositoryTest.java,RF-16 | RF-17 | RF-18 | RF-19 | RF-20
+NOT VERIFIED (sin prueba automatica),RF-16 | RF-17 | RF-18 | RF-19 | RF-20

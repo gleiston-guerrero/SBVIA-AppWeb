@@ -87,7 +87,7 @@ DESPLIEGUE OK: API y sitio responden con sus cabeceras
 5e852c6 2026-09-04
 55201f5 2026-09-03
 ```
-- **Estudio vigente — septiembre de 2026.** 15 participantes en 15 sesiones presenciales el 19 y el 20 de septiembre, sobre el sistema desplegado. Media **69,00** (DE 9,90; IC 95 % [63,52; 74,48]; mediana 70,0): el criterio de ≥ 68 se cumple con un margen de **+1,00**. El instrumento y el consentimiento están versionados y son compilables; el análisis declara nueve limitaciones y la trazabilidad del estudio en ocho eslabones.
+- **Estudio vigente — septiembre de 2026.** 15 participantes en 15 sesiones el 19 y el 20 de septiembre, sobre el sistema desplegado: catorce se acompañaron presencialmente en Quevedo y una se completó de forma remota (P01, que se encontraba fuera de la ciudad por un asunto personal y recibió el enlace), con el consentimiento firmado en papel con anterioridad. Media **69,00** (DE 9,90; IC 95 % [63,52; 74,48]; mediana 70,0): el criterio de ≥ 68 se cumple con un margen de **+1,00**. El instrumento y el consentimiento están versionados y son compilables; el análisis declara diez limitaciones y la trazabilidad del estudio en ocho eslabones.
 - **Orden exacta (recalcula y verifica el propio detector):** `python docs/mediciones/sus/calcular_sus.py --ronda 2026-09`
 - **Salida:**
 ```

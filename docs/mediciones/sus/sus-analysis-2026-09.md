@@ -14,7 +14,7 @@
 
 ## 1. Diseño y procedimiento
 
-Sesiones **presenciales individuales** sobre el sistema desplegado en
+Quince sesiones individuales sobre el sistema desplegado; catorce se acompañaron presencialmente en Quevedo y una se completó de forma remota (P01, que se encontraba fuera de la ciudad por un asunto personal y recibió el enlace), con el consentimiento firmado en papel con anterioridad. El sistema es el mismo en los dos casos:
 `https://sbvia-frontend.onrender.com`. Cada participante usó el simulador y, **inmediatamente
 después**, completó el cuestionario SUS.
 
@@ -117,6 +117,8 @@ Se declaran explícitamente, en lugar de omitirlas:
    consentimiento. Se conserva y se declara (véase §2.4).
 9. **Procedencia heterogénea de los formularios.** Catorce cuestionarios provienen de la plantilla
    LaTeX; el de P14 se generó en Microsoft Word. El contenido de los 10 ítems es el mismo.
+
+10. **Modalidad de una sesión.** Catorce de las quince sesiones se acompañaron presencialmente en Quevedo. Una, la de P01, se completó de forma remota: el participante reside en Guayaquil, no se lo encontró en la casa donde se aloja y avisó que saldría, de modo que se le envió el enlace y respondió el cuestionario a distancia. El consentimiento estaba firmado en papel con anterioridad. La modalidad no altera el instrumento ni el procedimiento de cálculo, pero se declara porque una sesión no acompañada es una condición distinta de las otras catorce.
 
 ## 4. Trazabilidad del estudio
 

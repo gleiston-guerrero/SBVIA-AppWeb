@@ -46,7 +46,7 @@ Los códigos P01–P15 de esta tabla corresponden a las 15 filas de
 
 ## 2. Estudio de septiembre de 2026 — **VIGENTE**
 
-**Diseño:** sesiones presenciales individuales, realizadas en persona, sobre el sistema desplegado
+**Diseño:** quince sesiones individuales sobre el sistema desplegado; catorce se acompañaron presencialmente en Quevedo y una se completó de forma remota (P01, que se encontraba fuera de la ciudad por un asunto personal y recibió el enlace), con el consentimiento firmado en papel con anterioridad
 en `https://sbvia-frontend.onrender.com`.
 **Periodo de aplicación:** sábado 19 y domingo 20 de septiembre de 2026.
 **Instrumento:** cuestionario SUS de 10 ítems (Brooke, 1996) —

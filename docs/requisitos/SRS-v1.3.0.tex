@@ -316,7 +316,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
 \begin{requisito}{RF-11 - Reglas de Negocio: Certificación y Puntaje}
     \textbf{Tipo:} FUNC \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
     \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP + CRUD-ORM \\[0.2cm]
-    \textbf{Descripción:} El sistema deberá emitir un certificado si y solo si el puntaje calculado en la simulación es mayor o igual a \textbf{70 puntos}. El cálculo de puntaje (100 menos penalizaciones acumuladas) lo realiza el procedimiento \texttt{sp\_calcular\_puntaje\_simulacion}; la decisión de certificar con $\geq 70$ es aplicada por \texttt{SimulationRepository} en Java (consulta JPQL, línea 37). \\[0.2cm]
+    \textbf{Descripción:} El sistema deberá emitir un certificado si y solo si el puntaje calculado en la simulación es mayor o igual a \textbf{70 puntos}. El cálculo de puntaje (100 menos penalizaciones acumuladas) lo realiza el procedimiento \texttt{sp\_calcular\_puntaje\_simulacion}; la decisión de certificar con $\geq 70$ es aplicada por \texttt{SimulationRepository} en Java (consulta JPQL, línea 40). \\[0.2cm]
     \textbf{Criterio de aceptación:} Las simulaciones con puntaje $\geq$ 70 disparan la generación de certificado; las simulaciones con puntaje $<$ 70 se marcan como fallidas. La prueba \texttt{finalizaLaSimulacionYApruebaConSetentaPuntos()} en SimulationServiceTest.java confirma el umbral de 70. \\[0.2cm]
     \textbf{Verificación:} Prueba Unitaria (SimulationServiceTest.java) \quad \textbf{SQL:} db/procs/sp\_calcular\_puntaje\_simulacion.sql
 \end{requisito}
@@ -450,7 +450,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Tipo:} USAB \quad \textbf{Prioridad:} Must \quad \textbf{Estado:} VERIFIED \\[0.2cm]
     \textbf{Módulo:} Frontend \quad \textbf{Acceso a datos:} No aplica \\[0.2cm]
     \textbf{Descripción:} El sistema deberá ofrecer una interfaz altamente usable, alcanzando un puntaje SUS sobre la media estándar de la industria. \\[0.2cm]
-    \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \textbf{Resultado:} la reevaluación se ejecutó el 19 y 20 de septiembre de 2026 con \textbf{15 participantes} en 15 sesiones presenciales sobre el sistema desplegado, con los diez ítems del cuestionario SUS estándar de Brooke, cuya redacción en español se revisó el 2026-09-20 a las 18:05 (commit \texttt{b9cac65}), de modo que las sesiones del 19 de septiembre usaron la redacción anterior a esa revisión, lo que se declara como limitación. La media es \textbf{69,00} (DE 9,90; IC 95\,% [63,52; 74,48]; mediana 70,0), de modo que \textbf{el criterio se cumple con un margen de +1,00}. El estudio de julio de 2026 permanece retirado y no se emplea como evidencia. Análisis, limitaciones declaradas y trazabilidad en \texttt{docs/mediciones/sus/sus-analysis-2026-09.md}. \\[0.2cm]
+    \textbf{Criterio de aceptación:} La evaluación empírica SUS con al menos 15 participantes alcanza una puntuación media calculada igual o superior a 68. \textbf{Resultado:} la reevaluación se ejecutó el 19 y 20 de septiembre de 2026 con \textbf{15 participantes} en 15 sesiones presenciales sobre el sistema desplegado, con los diez ítems del cuestionario SUS estándar de Brooke, cuya redacción en español se revisó el 2026-09-20 a las 18:05 (commit \texttt{b9cac65}), de modo que las sesiones del 19 de septiembre usaron la redacción anterior a esa revisión, lo que se declara como limitación. La media es \textbf{69,00} (DE 9,90; IC 95\,\% [63,52; 74,48]; mediana 70,0), de modo que \textbf{el criterio se cumple con un margen de +1,00}. El estudio de julio de 2026 permanece retirado y no se emplea como evidencia. Análisis, limitaciones declaradas y trazabilidad en \texttt{docs/mediciones/sus/sus-analysis-2026-09.md}. \\[0.2cm]
     \textbf{Cierre del plan de reevaluación (X12):} el plan queda \textbf{cumplido}. El requisito se mantiene vigente y con prioridad \textit{Must}. Se declaran sus limitaciones, entre ellas que la media se sitúa a 1,00 punto del umbral y que no se alcanzaron los 16 participantes previstos, de modo que un participante adicional con la media observada habría dejado la puntuación por debajo del criterio. \\[0.2cm]
     \textbf{Verificación:} Prueba de Usabilidad (docs/mediciones/sus/sus-analysis-2026-09.md) \quad \textbf{SQL:} No aplica
 \end{requisito}
@@ -637,7 +637,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     RNF-03 & BCrypt factor$\geq$10 & AuthServiceTest & VERIFIED & — \\ \hline
     RNF-04 & Cookie Secure & AuthControllerTest & VERIFIED & — \\ \hline
     RNF-05 & Sin SQL dinámico & audit-sql-dynamic.sh & VERIFIED & — \\ \hline
-    RNF-06 & SUS $\ge$68 & sus-analysis-2026-09.md & VERIFIED & — \\ \hline
+    RNF-06 & SUS $\ge$68 & sus-analysis-2026-09.md & TESTED & — \\ \hline
     RNF-07 & Fallback IA & FeedbackServiceTest & VERIFIED & — \\ \hline
     RNF-08 & No PII a IA & ExternalAiFeedbackServiceTest & TESTED & — \\ \hline
     RNF-09 & WCAG / Lighthouse & Lighthouse prod & VERIFIED & — \\ \hline
