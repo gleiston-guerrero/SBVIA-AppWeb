@@ -40,11 +40,11 @@ public class SimulationController {
 
     /**
      * POST /api/simulations/iniciar/{scenarioId} — Iniciar simulación.
-     * Crea una nueva práctica de conducción basada en el scenario especificado.
+     * Creates a new driving practice based on the given scenario.
      *
-     * @param scenarioId el identificador del scenario a utilizar en la simulación
-     * @param authentication el contexto de seguridad con los datos del user actual
-     * @return una respuesta HTTP con el objeto SimulationDTO que representa la práctica iniciada
+     * @param scenarioId the identifier of the scenario to use in the simulation
+     * @param authentication the security context with the current user data
+     * @return an HTTP response with the SimulationDTO representing the started practice
      */
     @PostMapping("/iniciar/{scenarioId}")
     @Operation(summary = "Iniciar simulación", description = "Crea una práctica en progreso para el user autenticado")
@@ -56,12 +56,12 @@ public class SimulationController {
 
     /**
      * POST /api/simulations/{simulationId}/finalizar — Finalizar simulación.
-     * Concluye una práctica en progreso registrando el puntaje final obtenido.
+     * Closes a practice in progress, recording the final score obtained.
      *
-     * @param simulationId el identificador único de la simulación a finalizar
-     * @param request el objeto con los datos de finalización, como el puntaje final
-     * @param authentication el contexto de seguridad del user autenticado
-     * @return una respuesta HTTP con el objeto SimulationDTO actualizado a estado completado
+     * @param simulationId the unique identifier of the simulation to finish
+     * @param request the object with the closing data, such as the final score
+     * @param authentication the security context of the authenticated user
+     * @return an HTTP response with the SimulationDTO updated to the completed state
      */
     @PostMapping("/{simulationId}/finalizar")
     @Operation(summary = "Finalizar simulación", description = "Registra el puntaje y genera el resultado de la práctica")
@@ -75,12 +75,12 @@ public class SimulationController {
 
     /**
      * POST /api/simulations/{simulationId}/conduccion/finalizar — Finalizar conducción 2D.
-     * Recibe las métricas de la conducción en el simulador y calcula los resultados finales.
+     * Receives the driving metrics from the simulator and computes the final results.
      *
-     * @param simulationId el identificador de la simulación correspondiente
-     * @param request las métricas obtenidas durante la conducción (colisiones, tiempo, etc.)
-     * @param authentication el contexto de seguridad del user
-     * @return una respuesta HTTP con el DrivingResultDTO que incluye puntajes y penalizaciones
+     * @param simulationId the identifier of the matching simulation
+     * @param request the metrics gathered while driving (collisions, time, and so on)
+     * @param authentication the security context of the user
+     * @return an HTTP response with the DrivingResultDTO, including scores and penalties
      */
     @PostMapping("/{simulationId}/conduccion/finalizar")
     @Operation(summary = "Finalizar conducción 2D", description = "Registra las métricas del simulador, calcula el puntaje en el servidor y persiste los resultados")
@@ -94,11 +94,11 @@ public class SimulationController {
 
     /**
      * GET /api/simulations/{simulationId}/feedback — Obtener retroalimentación.
-     * Genera o recupera un informe de desempeño sobre la simulación (usando motor local o IA).
+     * Generates or retrieves a performance report for the simulation, using the local engine or the AI.
      *
-     * @param simulationId el identificador de la simulación consultada
-     * @param authentication el contexto de seguridad del user autenticado
-     * @return una respuesta HTTP con el objeto FeedbackIaResponse que contiene las recomendaciones
+     * @param simulationId the identifier of the simulation being queried
+     * @param authentication the security context of the authenticated user
+     * @return an HTTP response with the FeedbackIaResponse holding the recommendations
      */
     @GetMapping("/{simulationId}/feedback")
     @Operation(summary = "Obtener retroalimentación", description = "Devuelve el informe de desempeño de una simulación propia (motor local o IA externa)")
@@ -110,11 +110,11 @@ public class SimulationController {
     }
 
     /**
-     * GET /api/simulations/mis-practicas — Historial de simulations.
-     * Retorna todas las prácticas realizadas por el user actual.
+     * GET /api/simulations/mis-practicas - Practice history.
+     * Returns every practice carried out by the current user.
      *
-     * @param authentication el contexto de seguridad con la identidad del user
-     * @return una respuesta HTTP con una lista de objetos SimulationDTO pertenecientes al user
+     * @param authentication the security context with the user identity
+     * @return an HTTP response with a list of SimulationDTO objects belonging to the user
      */
     @GetMapping("/mis-practicas")
     @Operation(summary = "Obtener mis prácticas", description = "Devuelve el historial de simulations del user autenticado")
@@ -125,10 +125,10 @@ public class SimulationController {
     }
 
     /**
-     * GET /api/simulations — Listar todas las simulations.
-     * Permite a los administradores o instructores revisar todas las prácticas del sistema.
+     * GET /api/simulations - List every simulation.
+     * Allows administrators and instructors to review every practice in the system.
      *
-     * @return una respuesta HTTP con la lista completa de objetos SimulationDTO
+     * @return an HTTP response with the full list of SimulationDTO objects
      */
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR', 'INSTRUCTOR')")
@@ -140,9 +140,9 @@ public class SimulationController {
 
     /**
      * GET /api/simulations/estadisticas — Obtener estadísticas globales.
-     * Calcula métricas agregadas del uso del simulador a nivel de todo el sistema.
+     * Computes aggregated metrics of simulator usage across the whole system.
      *
-     * @return una respuesta HTTP con el objeto StatisticsDTO que contiene los promedios y totales
+     * @return an HTTP response with the StatisticsDTO holding the averages and totals
      */
     @GetMapping("/estadisticas")
     @PreAuthorize("hasAnyAuthority('ADMINISTRADOR')")

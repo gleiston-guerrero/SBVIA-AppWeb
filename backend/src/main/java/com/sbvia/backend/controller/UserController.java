@@ -20,7 +20,7 @@ import com.sbvia.backend.dto.ChangeRoleRequest;
 import jakarta.validation.Valid;
 
 /**
- * Controlador REST para operaciones de user autenticado.
+ * REST controller for authenticated-user operations.
  *
  * @author Keitho_
  */
@@ -34,10 +34,10 @@ public class UserController {
     private final AuthService authService;
 
     /**
-     * GET /api/users/me — Devuelve el perfil del user autenticado.
+     * GET /api/users/me - Return the authenticated user profile.
      *
-     * @param authentication el objeto de autenticación actual que contiene las credenciales del user
-     * @return una respuesta HTTP que contiene el objeto UserDTO con la información del perfil del user
+     * @param authentication the current authentication object holding the user credentials
+     * @return an HTTP response containing the UserDTO with the user profile information
      */
     @GetMapping("/me")
     @Operation(summary = "Perfil del user", description = "Devuelve los datos del user autenticado")
@@ -59,11 +59,11 @@ public class UserController {
     }
 
     /**
-     * PUT /api/users/me — Actualiza el perfil del user autenticado.
+     * PUT /api/users/me - Update the authenticated user profile.
      *
-     * @param authentication el objeto de autenticación actual
-     * @param request los datos a actualizar en el perfil del user
-     * @return una respuesta HTTP con el objeto UserDTO actualizado
+     * @param authentication the current authentication object
+     * @param request the data to update in the user profile
+     * @return an HTTP response with the updated UserDTO
      */
     @PutMapping("/me")
     @Operation(summary = "Actualizar perfil", description = "Actualiza los datos del user autenticado")
@@ -89,10 +89,10 @@ public class UserController {
     }
 
     /**
-     * GET /api/users — Lista todos los users con paginación (Solo Admin).
+     * GET /api/users - List every user with pagination (Admin only).
      *
-     * @param pageable objeto que contiene la información de paginación solicitada (página, tamaño)
-     * @return una página (Page) de objetos UserDTO que representan a los users en el sistema
+     * @param pageable object holding the requested pagination (page, size)
+     * @return a Page of UserDTO objects representing the users of the system
      */
     @GetMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -113,11 +113,11 @@ public class UserController {
     }
 
     /**
-     * PUT /api/users/{id}/role — Cambia el role de un user (Solo Admin).
+     * PUT /api/users/{id}/role - Change a user role (Admin only).
      *
-     * @param id el identificador único del user al que se le cambiará el role
-     * @param request el objeto que contiene el name del nuevo role a asignar
-     * @return una respuesta HTTP con el objeto UserDTO reflejando el role actualizado
+     * @param id the unique identifier of the user whose role changes
+     * @param request the object holding the name of the new role to assign
+     * @return an HTTP response with the UserDTO reflecting the updated role
      */
     @PutMapping("/{id}/role")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -143,11 +143,11 @@ public class UserController {
     }
 
     /**
-     * PUT /api/users/{id} — Actualiza los datos de un user (Solo Admin).
+     * PUT /api/users/{id} - Update a user's data (Admin only).
      *
-     * @param id el identificador único del user a modificar
-     * @param request el objeto con los nuevos datos a actualizar (firstName, lastName, estado)
-     * @return una respuesta HTTP con el objeto UserDTO actualizado
+     * @param id the unique identifier of the user to update
+     * @param request the object with the new data to update (first name, last name, state)
+     * @return an HTTP response with the updated UserDTO
      */
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -174,10 +174,10 @@ public class UserController {
     }
 
     /**
-     * DELETE /api/users/{id} — Desactiva un user (Solo Admin).
+     * DELETE /api/users/{id} - Deactivate a user (Admin only).
      *
-     * @param id el identificador único del user a desactivar
-     * @return una respuesta HTTP 204 sin contenido si la operación fue exitosa
+     * @param id the unique identifier of the user to deactivate
+     * @return an HTTP 204 response with no content if the operation succeeded
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")

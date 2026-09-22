@@ -29,21 +29,21 @@ public class TrafficRuleController {
     private final TrafficRuleService trafficRuleService;
 
     /**
-     * GET /api/reglas-transito — Listar reglas de tránsito.
-     * Devuelve todas las reglas de evaluación configuradas en el sistema.
+     * GET /api/reglas-transito - List traffic rules.
+     * Returns every assessment rule configured in the system.
      *
-     * @return lista completa de objetos TrafficRuleDTO
+     * @return the full list of TrafficRuleDTO objects
      */
     @GetMapping
     @Operation(summary = "Listar reglas de tránsito")
     public List<TrafficRuleDTO> list() { return trafficRuleService.list(); }
 
     /**
-     * POST /api/reglas-transito — Crear nueva regla.
-     * Registra una nueva regla de tránsito en el sistema.
+     * POST /api/reglas-transito - Create a new rule.
+     * Registers a new traffic rule in the system.
      *
-     * @param dto el objeto que contiene los datos de la nueva regla
-     * @return una respuesta HTTP con el TrafficRuleDTO recién creado
+     * @param dto the object holding the data of the new rule
+     * @return an HTTP response with the newly created TrafficRuleDTO
      */
     @PostMapping
     @Operation(summary = "Registrar una regla de tránsito")
@@ -52,12 +52,12 @@ public class TrafficRuleController {
     }
 
     /**
-     * PUT /api/reglas-transito/{id} — Actualizar regla.
-     * Modifica los parámetros de una regla de tránsito existente.
+     * PUT /api/reglas-transito/{id} - Update a rule.
+     * Updates the parameters of an existing traffic rule.
      *
-     * @param id el identificador de la regla a actualizar
-     * @param dto los nuevos datos de la regla
-     * @return el objeto TrafficRuleDTO con los datos actualizados
+     * @param id the identifier of the rule to update
+     * @param dto the new rule data
+     * @return the TrafficRuleDTO with the updated data
      */
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar una regla de tránsito")
@@ -66,11 +66,11 @@ public class TrafficRuleController {
     }
 
     /**
-     * DELETE /api/reglas-transito/{id} — Eliminar regla.
-     * Elimina físicamente o lógicamente una regla de tránsito del sistema.
+     * DELETE /api/reglas-transito/{id} - Delete a rule.
+     * Deletes a traffic rule from the system, physically or logically.
      *
-     * @param id el identificador de la regla a eliminar
-     * @return una respuesta HTTP sin contenido
+     * @param id the identifier of the rule to delete
+     * @return an HTTP response with no content
      */
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una regla de tránsito")

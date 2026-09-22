@@ -17,8 +17,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Controlador REST para el CRUD de Scenarios.
- * Demuestra el uso de Spring Data JPA con paginación y seguridad basada en roles.
+ * REST controller for scenario CRUD.
+ * Shows Spring Data JPA with pagination and role-based security.
  *
  * @author Keitho_
  */
@@ -31,15 +31,15 @@ public class ScenarioController {
     private final ScenarioService scenarioService;
 
     /**
-     * GET /api/scenarios — Listar scenarios con paginación y filtros opcionales.
-     * Accesible por cualquier user autenticado (ROLE_USER, ROLE_ADMIN, ROLE_INSTRUCTOR).
+     * GET /api/scenarios - List scenarios with pagination and optional filters.
+     * Accessible to any authenticated user (ROLE_USER, ROLE_ADMIN, ROLE_INSTRUCTOR).
      * Filtros: roadType, difficultyLevel, clima (todos opcionales).
      *
-     * @param roadType filtro opcional para buscar por el tipo de vía (urbana, rural, etc.)
-     * @param difficultyLevel filtro opcional para buscar por nivel de dificultad (1, 2, 3...)
-     * @param clima filtro opcional para buscar por condiciones climáticas (despejado, lluvia, etc.)
-     * @param pageable objeto que contiene la configuración de paginación (tamaño, página, ordenamiento)
-     * @return una página de objetos ScenarioDTO que coinciden con los criterios de búsqueda
+     * @param roadType optional filter by road type (urban, rural, and so on)
+     * @param difficultyLevel optional filter by difficulty level (1, 2, 3...)
+     * @param clima optional filter by weather conditions (clear, rain, and so on)
+     * @param pageable object holding the pagination settings (size, page, sorting)
+     * @return a page of ScenarioDTO objects matching the search criteria
      */
     @GetMapping
     @Operation(summary = "Listar scenarios", description = "Lista scenarios activos con paginación y filtros opcionales (roadType, difficultyLevel, clima)")
@@ -57,11 +57,11 @@ public class ScenarioController {
     }
 
     /**
-     * GET /api/scenarios/{id} — Obtener un scenario específico.
-     * Accesible por cualquier user autenticado.
+     * GET /api/scenarios/{id} - Get one specific scenario.
+     * Accessible to any authenticated user.
      *
-     * @param id el identificador único del scenario solicitado
-     * @return una respuesta HTTP con el objeto ScenarioDTO correspondiente al ID
+     * @param id the unique identifier of the requested scenario
+     * @return an HTTP response with the ScenarioDTO for that ID
      */
     @GetMapping("/{id}")
     @Operation(summary = "Obtener scenario por ID", description = "Devuelve los detalles de un scenario específico")
@@ -83,11 +83,11 @@ public class ScenarioController {
     }
 
     /**
-     * POST /api/scenarios — Crear un nuevo scenario.
-     * Solo accesible por administradores.
+     * POST /api/scenarios - Create a new scenario.
+     * Accessible to administrators only.
      *
-     * @param dto los datos del nuevo scenario a registrar
-     * @return una respuesta HTTP con el objeto ScenarioDTO del scenario recién creado, incluyendo su ID generado
+     * @param dto the data of the new scenario to register
+     * @return an HTTP response with the ScenarioDTO of the newly created scenario, including its generated ID
      */
     @PostMapping
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -111,12 +111,12 @@ public class ScenarioController {
     }
 
     /**
-     * PUT /api/scenarios/{id} — Actualizar un scenario.
-     * Solo accesible por administradores.
+     * PUT /api/scenarios/{id} - Update a scenario.
+     * Accessible to administrators only.
      *
-     * @param id el identificador único del scenario a modificar
-     * @param dto un objeto con los datos actualizados del scenario
-     * @return una respuesta HTTP con el objeto ScenarioDTO reflejando los cambios
+     * @param id the unique identifier of the scenario to update
+     * @param dto an object with the updated scenario data
+     * @return an HTTP response with the ScenarioDTO reflecting the changes
      */
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")
@@ -134,11 +134,11 @@ public class ScenarioController {
     }
 
     /**
-     * DELETE /api/scenarios/{id} — Eliminar (soft delete) un scenario.
-     * Solo accesible por administradores.
+     * DELETE /api/scenarios/{id} - Delete a scenario (soft delete).
+     * Accessible to administrators only.
      *
-     * @param id el identificador único del scenario a desactivar/eliminar
-     * @return una respuesta HTTP 204 (Sin contenido) confirmando la eliminación
+     * @param id the unique identifier of the scenario to deactivate or delete
+     * @return an HTTP 204 (No Content) response confirming the deletion
      */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMINISTRADOR')")

@@ -38,9 +38,9 @@ public class BackupController {
 
     /**
      * GET /api/respaldos — Listar respaldos.
-     * Retorna un listado de todos los respaldos generados en el sistema (Solo Admin).
+     * Returns a list of every backup created in the system (Admin only).
      *
-     * @return una lista de entidades Backup
+     * @return a list of Backup entities
      */
     @GetMapping
     public List<Backup> list() {
@@ -48,11 +48,11 @@ public class BackupController {
     }
 
     /**
-     * POST /api/respaldos/generar — Generar respaldo manual.
-     * Dispara la creación de un nuevo backup de la base de datos bajo demanda (Solo Admin).
+     * POST /api/respaldos/generar - Create a manual backup.
+     * Triggers the creation of a new database backup on demand (Admin only).
      *
-     * @param request el objeto con opciones de configuración para el respaldo
-     * @return el registro del Backup generado
+     * @param request the object with the configuration options for the backup
+     * @return the record of the created backup
      */
     @PostMapping("/generar")
     public Backup generate(@RequestBody com.sbvia.backend.dto.BackupRequestDTO request) {
@@ -60,11 +60,11 @@ public class BackupController {
     }
 
     /**
-     * GET /api/respaldos/descargar/{id} — Descargar archivo de respaldo.
-     * Permite obtener el archivo físico (.sql, .dump) de un backup existente (Solo Admin).
+     * GET /api/respaldos/descargar/{id} - Download a backup file.
+     * Retrieves the physical file (.sql, .dump) of an existing backup (Admin only).
      *
-     * @param id el identificador del respaldo a descargar
-     * @return una respuesta HTTP con el archivo como recurso descargable, o 404 si no existe
+     * @param id the identifier of the backup to download
+     * @return an HTTP response with the file as a downloadable resource, or 404 if it does not exist
      */
     @GetMapping("/descargar/{id}")
     public ResponseEntity<Resource> download(@PathVariable Long id) {
@@ -87,11 +87,11 @@ public class BackupController {
     }
 
     /**
-     * DELETE /api/respaldos/{id} — Eliminar respaldo.
-     * Borra el registro de la base de datos y su archivo físico correspondiente (Solo Admin).
+     * DELETE /api/respaldos/{id} - Delete a backup.
+     * Deletes the database record and its physical file (Admin only).
      *
-     * @param id el identificador del respaldo a eliminar
-     * @return una respuesta HTTP sin contenido
+     * @param id the identifier of the backup to delete
+     * @return an HTTP response with no content
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
