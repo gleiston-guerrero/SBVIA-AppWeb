@@ -1,0 +1,324 @@
+{
+ "comportamiento_vial": {
+  "nueva": "road_behavior",
+  "columnas": {
+   "id_comportamiento": "id",
+   "id_simulacion": "simulation_id",
+   "clasificacion": "classification",
+   "nivel_riesgo": "risk_level",
+   "puntaje_seguridad": "safety_score",
+   "puntaje_responsabilidad": "responsibility_score",
+   "puntaje_cumplimiento": "compliance_score",
+   "observaciones": "notes",
+   "fecha_evaluacion": "evaluated_at"
+  }
+ },
+ "decision": {
+  "nueva": "decision",
+  "columnas": {
+   "id_decision": "id",
+   "id_simulacion": "simulation_id",
+   "id_evento_vial": "road_event_id",
+   "accion_realizada": "action_taken",
+   "resultado": "result",
+   "tiempo_reaccion_ms": "reaction_time_ms",
+   "fecha_hora": "occurred_at",
+   "posicion_x": "position_x",
+   "posicion_y": "position_y",
+   "observacion": "note"
+  }
+ },
+ "escenario": {
+  "nueva": "scenario",
+  "columnas": {
+   "id_escenario": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "longitud_km": "length_km",
+   "tiempo_estimado_minutos": "estimated_minutes",
+   "densidad_trafico": "traffic_density",
+   "fecha_creacion": "created_at",
+   "activo": "active",
+   "id_tipo_via": "road_type_id",
+   "id_nivel_dificultad": "difficulty_level_id",
+   "id_tipo_clima": "weather_type_id"
+  }
+ },
+ "estado_simulacion": {
+  "nueva": "simulation_status",
+  "columnas": {
+   "id_estado_simulacion": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "es_estado_final": "is_final_state"
+  }
+ },
+ "estado_usuario": {
+  "nueva": "user_status",
+  "columnas": {
+   "id_estado_usuario": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "permite_acceso": "allows_access"
+  }
+ },
+ "evaluacion_ia": {
+  "nueva": "ai_evaluation",
+  "columnas": {
+   "id_evaluacion_ia": "id",
+   "id_simulacion": "simulation_id",
+   "id_modelo_ia": "ai_model_id",
+   "resultado": "result",
+   "clasificacion_predicha": "predicted_class",
+   "nivel_confianza": "confidence_level",
+   "recomendacion": "recommendation",
+   "datos_entrada": "input_data",
+   "fecha_evaluacion": "evaluated_at"
+  }
+ },
+ "evento_vial": {
+  "nueva": "road_event",
+  "columnas": {
+   "id_evento_vial": "id",
+   "id_simulacion": "simulation_id",
+   "id_tipo_evento": "event_type_id",
+   "nombre": "name",
+   "descripcion": "description",
+   "nivel_riesgo": "risk_level",
+   "fecha_hora": "occurred_at",
+   "posicion_x": "position_x",
+   "posicion_y": "position_y",
+   "velocidad_vehiculo_kmh": "vehicle_speed_kmh"
+  }
+ },
+ "historial_acceso": {
+  "nueva": "access_history",
+  "columnas": {
+   "id_historial_acceso": "id",
+   "id_usuario": "user_id",
+   "fecha_hora": "occurred_at",
+   "direccion_ip": "ip_address",
+   "dispositivo": "device",
+   "navegador": "browser",
+   "acceso_exitoso": "successful_login",
+   "detalle": "detail"
+  }
+ },
+ "infraccion": {
+  "nueva": "infraction",
+  "columnas": {
+   "id_infraccion": "id",
+   "id_simulacion": "simulation_id",
+   "id_decision": "decision_id",
+   "id_regla_transito": "traffic_rule_id",
+   "id_nivel_gravedad": "severity_level_id",
+   "descripcion": "description",
+   "penalizacion_aplicada": "applied_penalty",
+   "fecha_hora": "occurred_at"
+  }
+ },
+ "metrica_desempeno": {
+  "nueva": "performance_metric",
+  "columnas": {
+   "id_metrica": "id",
+   "id_simulacion": "simulation_id",
+   "id_tipo_metrica": "metric_type_id",
+   "valor": "value",
+   "fecha_hora": "occurred_at",
+   "observacion": "note"
+  }
+ },
+ "modelo_ia": {
+  "nueva": "ai_model",
+  "columnas": {
+   "id_modelo_ia": "id",
+   "nombre": "name",
+   "version": "version",
+   "tipo_modelo": "model_type",
+   "descripcion": "description",
+   "fecha_entrenamiento": "trained_at",
+   "precision_modelo": "model_accuracy",
+   "parametros": "parameters",
+   "activo": "active"
+  }
+ },
+ "nivel_dificultad": {
+  "nueva": "difficulty_level",
+  "columnas": {
+   "id_nivel_dificultad": "id",
+   "nombre": "name",
+   "valor": "value",
+   "descripcion": "description"
+  }
+ },
+ "nivel_gravedad": {
+  "nueva": "severity_level",
+  "columnas": {
+   "id_nivel_gravedad": "id",
+   "nombre": "name",
+   "valor": "value",
+   "descripcion": "description",
+   "multiplicador_penalizacion": "penalty_multiplier"
+  }
+ },
+ "progreso_simulacion": {
+  "nueva": "simulation_progress",
+  "columnas": {
+   "id_progreso": "id",
+   "id_simulacion": "simulation_id",
+   "porcentaje": "percentage",
+   "etapa": "stage",
+   "posicion_x": "position_x",
+   "posicion_y": "position_y",
+   "velocidad_actual_kmh": "current_speed_kmh",
+   "fecha_hora": "occurred_at"
+  }
+ },
+ "regla_transito": {
+  "nueva": "traffic_rule",
+  "columnas": {
+   "id_regla_transito": "id",
+   "codigo": "code",
+   "nombre": "name",
+   "descripcion": "description",
+   "categoria": "category",
+   "penalizacion_base": "base_penalty",
+   "activa": "active"
+  }
+ },
+ "retroalimentacion": {
+  "nueva": "feedback",
+  "columnas": {
+   "id_retroalimentacion": "id",
+   "id_simulacion": "simulation_id",
+   "id_comportamiento": "road_behavior_id",
+   "comentario": "comment",
+   "recomendacion": "recommendation",
+   "origen": "source",
+   "fecha_generacion": "generated_at"
+  }
+ },
+ "rol": {
+  "nueva": "role",
+  "columnas": {
+   "id_rol": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "fecha_creacion": "created_at",
+   "activo": "active"
+  }
+ },
+ "sesion_entrenamiento": {
+  "nueva": "training_session",
+  "columnas": {
+   "id_sesion": "id",
+   "id_usuario": "user_id",
+   "fecha_inicio": "started_at",
+   "fecha_fin": "ended_at",
+   "estado": "status",
+   "objetivo": "objective",
+   "observaciones": "notes"
+  }
+ },
+ "simulacion": {
+  "nueva": "simulation",
+  "columnas": {
+   "id_simulacion": "id",
+   "id_sesion": "training_session_id",
+   "id_usuario": "user_id",
+   "id_escenario": "scenario_id",
+   "id_vehiculo": "vehicle_id",
+   "id_estado_simulacion": "simulation_status_id",
+   "numero_intento": "attempt_number",
+   "fecha_inicio": "started_at",
+   "fecha_fin": "ended_at",
+   "porcentaje_progreso": "progress_percentage",
+   "puntaje_final": "final_score",
+   "duracion_segundos": "duration_seconds",
+   "completada": "completed",
+   "observaciones": "notes"
+  }
+ },
+ "tipo_clima": {
+  "nueva": "weather_type",
+  "columnas": {
+   "id_tipo_clima": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "factor_visibilidad": "visibility_factor",
+   "factor_adherencia": "grip_factor"
+  }
+ },
+ "tipo_evento": {
+  "nueva": "event_type",
+  "columnas": {
+   "id_tipo_evento": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "categoria": "category"
+  }
+ },
+ "tipo_metrica": {
+  "nueva": "metric_type",
+  "columnas": {
+   "id_tipo_metrica": "id",
+   "nombre": "name",
+   "unidad_medida": "unit",
+   "descripcion": "description",
+   "valor_minimo": "min_value",
+   "valor_maximo": "max_value"
+  }
+ },
+ "tipo_vehiculo": {
+  "nueva": "vehicle_type",
+  "columnas": {
+   "id_tipo_vehiculo": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "requiere_licencia": "requires_license"
+  }
+ },
+ "tipo_via": {
+  "nueva": "road_type",
+  "columnas": {
+   "id_tipo_via": "id",
+   "nombre": "name",
+   "descripcion": "description",
+   "velocidad_referencial_kmh": "reference_speed_kmh"
+  }
+ },
+ "usuario": {
+  "nueva": "users",
+  "columnas": {
+   "id_usuario": "id",
+   "nombres": "first_name",
+   "apellidos": "last_name",
+   "correo": "email",
+   "nombre_usuario": "username",
+   "contrasena_hash": "password_hash",
+   "telefono": "phone",
+   "fecha_nacimiento": "birth_date",
+   "fecha_registro": "registered_at",
+   "ultimo_acceso": "last_access_at",
+   "intentos_fallidos": "failed_attempts",
+   "cuenta_bloqueada": "account_locked",
+   "id_rol": "role_id",
+   "id_estado_usuario": "user_status_id"
+  }
+ },
+ "vehiculo": {
+  "nueva": "vehicle",
+  "columnas": {
+   "id_vehiculo": "id",
+   "nombre": "name",
+   "marca": "brand",
+   "modelo": "model",
+   "anio": "year",
+   "transmision": "transmission",
+   "velocidad_maxima_kmh": "max_speed_kmh",
+   "potencia_hp": "horsepower",
+   "activo": "active",
+   "id_tipo_vehiculo": "vehicle_type_id"
+  }
+ }
+}
