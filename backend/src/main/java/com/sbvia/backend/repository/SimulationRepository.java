@@ -55,7 +55,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * of a simulation through the PostgreSQL function.
      *
      * @param simulationId the identifier of the simulation
-     * @return lista de filas del reporte [{simulacion_id, usuario_nombre, escenario_nombre, puntaje_final, estado, tiempo_reaccion}]
+     * @return list of report rows [{simulacion_id, usuario_nombre, escenario_nombre, puntaje_final, estado, tiempo_reaccion}]
      */
     @Query(value = "SELECT * FROM sp_reporte_simulacion(:simulationId)", nativeQuery = true)
     List<Object[]> simulationReport(@Param("simulationId") Integer simulationId);
@@ -65,7 +65,7 @@ public interface SimulationRepository extends JpaRepository<Simulation, Integer>
      * for the given date.
      *
      * @param fecha the date to query, in ISO format (yyyy-MM-dd)
-     * @return lista con [total_simulaciones, promedio_puntaje]
+     * @return a list with [total_simulaciones, promedio_puntaje]
      */
     @Query(value = "SELECT * FROM sp_reporte_actividad_diaria(CAST(:fecha AS date))", nativeQuery = true)
     List<Object[]> dailyActivityReport(@Param("fecha") String fecha);

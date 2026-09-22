@@ -22,13 +22,13 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 /**
- * Configuración principal de Spring Security 6.
- * Define la cadena de filtros SecurityFilterChain con:
+ * Main Spring Security 6 configuration.
+ * It defines the SecurityFilterChain with:
  * - Autenticación stateless (JWT, sin sesiones)
- * - BCrypt encoder con costo 12 (OWASP)
- * - Cabeceras HTTP de seguridad (X-Content-Type-Options, X-Frame-Options, CSP)
+ * - BCrypt encoder with cost 12 (OWASP)
+ * - Security HTTP headers (X-Content-Type-Options, X-Frame-Options, CSP)
  * - CORS configurado explícitamente
- * - Roles con @PreAuthorize habilitado
+ * - Roles with @PreAuthorize enabled
  *
  * @author Keitho_
  */
@@ -67,14 +67,14 @@ public class SecurityConfig {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         
         http
-                // La autenticación viaja en cookies, por lo que las operaciones mutables
-                // requieren el patrón double-submit cookie compatible con Angular.
+                // Authentication travels in cookies, so mutating operations
+                // require the double-submit cookie pattern that Angular supports.
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(csrfTokenRepository)
                         .csrfTokenRequestHandler(requestHandler)
                         .ignoringRequestMatchers("/api/auth/login", "/api/auth/registro", "/api/auth/refresh"))
 
-                // Cabeceras HTTP de seguridad (OWASP A05)
+                // Security HTTP headers (OWASP A05)
                 .headers(headers -> headers
                         .contentTypeOptions(contentType -> {})  // X-Content-Type-Options: nosniff
                         .frameOptions(frame -> frame.deny())     // X-Frame-Options: DENY
@@ -94,33 +94,33 @@ public class SecurityConfig {
                         .authenticationEntryPoint(authenticationEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler))
 
-                // Sesiones stateless (JWT). La rotación del token CSRF por
-                // autenticación se neutraliza en StatelessCsrfTokenRepository.
+                // Stateless sessions (JWT). The CSRF token rotation on
+                // authentication is neutralised in StatelessCsrfTokenRepository.
                 // Ver ADR-009.
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // Reglas de autorización
+                // Authorization rules
                 .authorizeHttpRequests(auth -> auth
                         // Endpoints públicos (sin autenticación)
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/docs/**", "/api/swagger-ui/**",
                                 "/api/swagger-ui.html", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
-                        // CRUD de scenarios: GET es público para users autenticados,
+                        // Scenario CRUD: GET is public for authenticated users,
                         // POST/PUT/DELETE requiere ADMIN
                         .requestMatchers(HttpMethod.GET, "/api/scenarios/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.PUT, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/scenarios/**").hasAuthority("ADMINISTRADOR")
-                        // Todo lo demás requiere autenticación
+                        // Everything else requires authentication
                         .anyRequest().authenticated()
                 )
 
-                // Proveedor de autenticación
+                // Authentication provider
                 .authenticationProvider(authenticationProvider())
 
-                // Agregar filtro JWT antes del filtro de autenticación estándar
+                // Add the JWT filter before the standard authentication filter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(csrfTokenIssuerFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -128,7 +128,7 @@ public class SecurityConfig {
     }
 
     /**
-     * PasswordEncoder con BCrypt costo 12 (OWASP A02: Fallas criptográficas).
+     * PasswordEncoder with BCrypt cost 12 (OWASP A02: cryptographic failures).
      *
      * @return a {@link org.springframework.security.crypto.password.PasswordEncoder} object
      */

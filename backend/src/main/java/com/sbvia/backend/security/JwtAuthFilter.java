@@ -20,14 +20,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 /**
- * Filtro JWT que se ejecuta una vez por cada request HTTP.
- * Extiende OncePerRequestFilter de Spring Security.
+ * JWT filter that runs once per HTTP request.
+ * It extends Spring Security's OncePerRequestFilter.
  *
  * Flujo:
- * 1. Extrae el token del encabezado Authorization: Bearer [token]
- * 2. Valida la firma y la expiración con JwtService.validateToken()
- * 3. Consulta Redis para verificar que el JTI no está en la blacklist
- * 4. Establece el UsernamePasswordAuthenticationToken en el SecurityContextHolder
+ * 1. It takes the token from the Authorization: Bearer [token] header
+ * 2. It validates the signature and the expiry with JwtService.validateToken()
+ * 3. It queries Redis to check that the JTI is not in the blacklist
+ * 4. It sets the UsernamePasswordAuthenticationToken in the SecurityContextHolder
  *
  * @author Keitho_
  */
@@ -48,13 +48,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String jwt = null;
         
-        // 1. Intentar extraer el token de la Cookie (HttpOnly)
+        // 1. Try to take the token from the HttpOnly cookie
         Cookie cookie = WebUtils.getCookie(request, "accessToken");
         if (cookie != null) {
             jwt = cookie.getValue();
         } 
         
-        // 2. Si no hay cookie, hacer fallback al header Authorization (Para Postman/Swagger)
+        // 2. With no cookie, fall back to the Authorization header (for Postman and Swagger)
         if (jwt == null) {
             final String authHeader = request.getHeader("Authorization");
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -68,24 +68,24 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         try {
-            // 2. Extraer el email del token
+            // 2. Take the email from the token
             final String email = jwtService.extractEmail(jwt);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                // 3. Consultar Redis: verificar que el JTI no está en la blacklist
+                // 3. Query Redis: check that the JTI is not in the blacklist
                 String jti = jwtService.extractJti(jwt);
                 if (tokenBlacklistService.isTokenBlacklisted(jti)) {
                     filterChain.doFilter(request, response);
                     return;
                 }
 
-                // 4. Cargar UserDetails desde la BD
+                // 4. Load the UserDetails from the database
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
                 // 5. Validar firma y expiración
                 if (jwtService.validateToken(jwt, userDetails)) {
-                    // 6. Establecer el SecurityContext
+                    // 6. Set the SecurityContext
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
@@ -99,7 +99,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            // Token inválido: no se establece autenticación, se continúa la cadena
+            // Invalid token: no authentication is set and the chain continues
             logger.debug("Token JWT inválido: " + e.getMessage());
         }
 

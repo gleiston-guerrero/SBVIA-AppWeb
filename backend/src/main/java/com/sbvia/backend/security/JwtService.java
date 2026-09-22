@@ -14,9 +14,9 @@ import java.util.UUID;
 import java.util.function.Function;
 
 /**
- * Servicio para generar y validar tokens JWT usando jjwt 0.12.x.
- * Firma tokens con HS256 y una clave secreta de al menos 256 bits.
- * Cada token incluye un JTI (JWT ID) único para soporte de blacklist en Redis.
+ * Service that generates and validates JWT tokens with jjwt 0.12.x.
+ * It signs tokens with HS256 and a secret key of at least 256 bits.
+ * Every token carries a unique JTI (JWT ID) to support the Redis blacklist.
  *
  * @author Keitho_
  */
@@ -38,7 +38,7 @@ public class JwtService {
     private String jwtAudience;
 
     /**
-     * Genera un access token JWT con claims personalizados.
+     * Generates an access JWT with custom claims.
      *
      * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
      * @param userId a {@link java.lang.Long} object
@@ -58,7 +58,7 @@ public class JwtService {
     }
 
     /**
-     * Genera un refresh token JWT.
+     * Generates a refresh JWT.
      *
      * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
      * @param userId a {@link java.lang.Long} object
@@ -73,7 +73,7 @@ public class JwtService {
     }
 
     /**
-     * Construye un token JWT firmado con HS256.
+     * Builds a JWT signed with HS256.
      */
     private String buildToken(Map<String, Object> extraClaims, String subject, long expirationMs) {
         Date now = new Date();
@@ -93,7 +93,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae el subject (ID del user) del token.
+     * Extracts the subject (the user ID) from the token.
      *
      * @param token a {@link java.lang.String} object
      * @return a {@link java.lang.String} object
@@ -103,7 +103,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae el email del token.
+     * Extracts the email from the token.
      *
      * @param token a {@link java.lang.String} object
      * @return a {@link java.lang.String} object
@@ -113,7 +113,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae el JTI (JWT ID) del token — usado para blacklist en Redis.
+     * Extracts the JTI (JWT ID) from the token, used for the Redis blacklist.
      *
      * @param token a {@link java.lang.String} object
      * @return a {@link java.lang.String} object
@@ -123,7 +123,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae la fecha de expiración del token.
+     * Extracts the token expiry date.
      *
      * @param token a {@link java.lang.String} object
      * @return a {@link java.util.Date} object
@@ -163,7 +163,7 @@ public class JwtService {
     }
 
     /**
-     * Extrae el tipo de token (access o refresh).
+     * Extracts the token type (access or refresh).
      *
      * @param token a {@link java.lang.String} object
      * @return a {@link java.lang.String} object
@@ -173,8 +173,8 @@ public class JwtService {
     }
 
     /**
-     * Valida que el token sea válido: firma correcta, no expirado,
-     * y que el username coincida con el UserDetails.
+     * Validates the token: correct signature, not expired,
+     * and the username matching the UserDetails.
      *
      * @param token a {@link java.lang.String} object
      * @param userDetails a {@link org.springframework.security.core.userdetails.UserDetails} object
@@ -190,8 +190,8 @@ public class JwtService {
     }
 
     /**
-     * Obtiene el tiempo restante de expiración en milisegundos.
-     * Usado para configurar el TTL en Redis al revocar el token.
+     * Gets the remaining time to expiry in milliseconds.
+     * Used to set the Redis TTL when the token is revoked.
      *
      * @param token a {@link java.lang.String} object
      * @return a long

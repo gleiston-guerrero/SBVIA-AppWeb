@@ -31,8 +31,8 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Verifica que finalizarConduccion persiste simulación, métricas e infracciones
- * en una base real (H2) dentro de una sola transacción.
+ * Checks that finishDriving persists the simulation, its metrics and its infractions
+ * in a real database (H2) within a single transaction.
  */
 @SpringBootTest
 @ActiveProfiles("test")

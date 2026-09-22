@@ -74,7 +74,7 @@ class ExternalAiFeedbackServiceTest {
         assertThat(informe.getResumen()).isEqualTo("Buen manejo");
         assertThat(informe.getNivelRiesgo()).isEqualTo("BAJO");
         assertThat(informe.getRecomendaciones()).containsExactly("Uno", "Dos", "Tres");
-        // El puntaje siempre lo impone el servidor, nunca el modelo externo.
+        // The score is always imposed by the server, never by the external model.
         assertThat(informe.getPuntaje()).isEqualByComparingTo("95.00");
     }
 

@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Pruebas unitarias del limitador de intentos de inicio de sesión (OWASP A07).
- * Con umbral por defecto de 5 intentos fallidos, el sexto debe lanzar
+ * Unit tests for the login attempt rate limiter (OWASP A07).
+ * With the default threshold of 5 failed attempts, the sixth must throw
  * HTTP 429 (RateLimitExceededException).
  */
 class LoginRateLimiterTest {

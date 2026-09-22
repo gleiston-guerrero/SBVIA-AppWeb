@@ -98,7 +98,7 @@ public class AuditServiceTest {
         assertNotNull(pdfBytes);
         assertTrue(pdfBytes.length > 0);
 
-        // Opcional: verificar que es un PDF válido
+        // Optional: check that it is a valid PDF
         PdfReader reader = new PdfReader(pdfBytes);
         assertTrue(reader.getNumberOfPages() > 0);
         reader.close();

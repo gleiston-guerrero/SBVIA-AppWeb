@@ -244,7 +244,7 @@ class AuthControllerTest {
         String rawPassword = "password123";
         String encoded = passwordEncoder.encode(rawPassword);
         
-        // Verifica el prefijo de BCrypt y el factor de costo 12
+        // Checks the BCrypt prefix and the cost factor of 12
         assertThat(encoded).startsWith("$2a$12$");
     }
 

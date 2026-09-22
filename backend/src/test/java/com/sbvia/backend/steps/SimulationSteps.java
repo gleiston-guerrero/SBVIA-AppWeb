@@ -14,12 +14,12 @@ public class SimulationSteps {
 
     @Given("que el conductor está autenticado")
     public void driverIsAuthenticated() {
-        // Lógica de mock de autenticación
+        // Authentication mocking logic
     }
 
     @And("selecciona el escenario {string}")
     public void selectScenario(String scenario) {
-        // Lógica para seleccionar escenario
+        // Logic to select a scenario
     }
 
     @When("el conductor inicia la simulación")

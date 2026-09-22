@@ -7,11 +7,11 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.DeferredCsrfToken;
 
 /**
- * {@link CsrfTokenRepository} para backend JWT stateless. Delega todo en el
- * repositorio de cookie salvo el borrado del token, que se ignora.
+ * {@link CsrfTokenRepository} for a stateless JWT backend. It delegates everything to the
+ * cookie repository except for token deletion, which is ignored.
  *
- * <p>Spring Security borra la cookie XSRF-TOKEN en cada request autenticado
- * ({@code CsrfAuthenticationStrategy}, rotación pensada para login con sesión)
+ * <p>Spring Security deletes the XSRF-TOKEN cookie on every authenticated request
+ * ({@code CsrfAuthenticationStrategy}, a rotation designed for session login)
  * and nothing issues it again, so the double-submit never stabilises and
  * every POST/PUT/DELETE answers 403. Without sessions there is no session
  * fixation to mitigate with that rotation; the header == cookie validation
