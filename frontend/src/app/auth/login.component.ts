@@ -16,7 +16,7 @@ import { LanguageService } from '../i18n/language.service';
 })
 export class LoginComponent {
   credentials = { identificador: '', password: '' };
-  /** Se guarda la CLAVE del error, no el texto, para que se retraduzca al cambiar de idioma. */
+  /** The error KEY is stored, not its text, so it is re-translated when the language changes. */
   errorKey = '';
   loading = false;
 

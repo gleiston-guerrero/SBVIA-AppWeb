@@ -25,12 +25,12 @@ export class UserListComponent implements OnInit {
     return this.users.filter(user => !user.accountLocked).length;
   }
 
-  // Modal de edición
+  // Edit dialogue
   showModal = false;
   editingUser: Partial<User> = {};
   isSaving = false;
 
-  // Modal de Confirmación
+  // Confirmation dialogue
   showConfirmation = false;
   mensajeConfirmacion = '';
   accionConfirmacion: () => void = () => {};
@@ -41,7 +41,7 @@ export class UserListComponent implements OnInit {
     private i18n: LanguageService
   ) { }
 
-  /** Traduce una clave y sustituye marcadores {nombre}. */
+  /** Translates a key and replaces {name} placeholders. */
   private tr(clave: string, valores: Record<string, string> = {}): string {
     let texto = this.i18n.t(clave);
     for (const [k, v] of Object.entries(valores)) {
@@ -119,7 +119,7 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  // Lógica del Modal
+  // Dialogue logic
   openEditModal(user: User): void {
     this.editingUser = { ...user };
     this.showModal = true;
@@ -150,7 +150,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  // Lógica de Confirmación
+  // Confirmation logic
   openConfirmation(mensaje: string, accion: () => void, accionCancelar: () => void = () => {}): void {
     this.mensajeConfirmacion = mensaje;
     this.accionConfirmacion = () => {
@@ -159,8 +159,8 @@ export class UserListComponent implements OnInit {
     };
     this.showConfirmation = true;
     
-    // Si queremos ejecutar algo al cancel, lo guardamos o lo ejecutamos directo.
-    // Por simplicidad, ejecutaremos accionCancelar() si el user cierra el modal.
+    // Anything to run on cancel is stored, or run straight away.
+    // For simplicity, cancelCallback() runs when the user closes the dialogue.
     this.cancelarCallback = accionCancelar;
   }
 

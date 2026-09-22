@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  /** Devuelve la CLAVE de la recomendación; el texto se traduce en la plantilla. */
+  /** Returns the recommendation KEY; the text is translated in the template. */
   get recomendacionKey(): string {
     if (this.totalPracticas === 0) return 'dashboard.tipStart';
     if (this.promedio < 70) return 'dashboard.tipLow';

@@ -21,11 +21,11 @@ export class RegisterComponent {
     password: '',
     phone: ''
   };
-  /** Se guarda la CLAVE del error, no el texto, para que se retraduzca al cambiar de idioma. */
+  /** The error KEY is stored, not its text, so it is re-translated when the language changes. */
   errorKey = '';
   loading = false;
 
-  // Estado para show confirmación de registro exitoso con el nombre de usuario generado
+  // State for the successful-registration card showing the generated username
   registered = false;
   registeredUsername = '';
   registeredEmail = '';

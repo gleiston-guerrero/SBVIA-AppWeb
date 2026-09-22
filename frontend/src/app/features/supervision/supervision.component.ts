@@ -27,7 +27,7 @@ export class SupervisionComponent implements OnInit {
 
   ngOnInit(): void {
     const role = this.auth.currentUser()?.role;
-    // El catálogo actual no tiene role AUDITOR: nadie recibe la vista de solo lectura.
+    // The current catalogue has no AUDITOR role, so nobody gets the read-only view.
     this.esAuditor = false;
     this.esAdmin = role === 'ADMINISTRADOR';
     this.simulationService.getAll().subscribe({

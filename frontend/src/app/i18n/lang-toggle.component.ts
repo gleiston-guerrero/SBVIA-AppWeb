@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { LanguageService } from './language.service';
 
 /**
- * Selector de idioma ES | EN. El espanol es el idioma por defecto de la
- * aplicacion; el ingles existe para que el sistema pueda mostrarse y
- * documentarse en ese idioma sin alterar la experiencia de sus usuarios.
+ * ES | EN language selector. Spanish is the default language of the
+ * application; English exists so that the system can be shown and
+ * documented in that language without changing its users' experience.
  */
 @Component({
   selector: 'app-lang-toggle',

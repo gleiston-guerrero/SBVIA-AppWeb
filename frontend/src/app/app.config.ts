@@ -6,10 +6,10 @@ import { jwtInterceptor } from './auth/jwt.interceptor';
 import { AuthService } from './auth/auth.service';
 
 /**
- * Factory para APP_INITIALIZER.
- * Devuelve una función que retorna el observable de refreshSession().
- * Angular espera a que el observable complete antes de montar el router
- * y ejecutar los guards — isDeleting la race condition en F5.
+ * Factory for APP_INITIALIZER.
+ * It returns a function yielding the refreshSession() observable.
+ * Angular waits for the observable to complete before mounting the router
+ * and running the guards, which removes the race on refresh.
  */
 function initializeApp(authService: AuthService) {
   return () => authService.initializeSession();

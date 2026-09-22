@@ -31,7 +31,7 @@ interface SemaforoEvento {
 export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('lienzo', { static: true }) lienzo!: ElementRef<HTMLCanvasElement>;
 
-  // Configuración de la pista (unidades lógicas) y puntajes (Etapa 3)
+  // Track configuration (logical units) and scores (stage 3)
   readonly ANCHO = 480;
   readonly ALTO = 640;
   readonly MARGEN = 40;
@@ -58,7 +58,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
   distanciaInsegura = 0;
   semaforosRespetados = 0;
 
-  // Integración con el backend (Etapa 3)
+  // Backend integration (stage 3)
   scenarioId: number | null = null;
   nombreEscenario = 'Conducción libre';
   idSimulacionBackend: number | null = null;
@@ -140,7 +140,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     window.removeEventListener('resize', this.onResize);
   }
 
-  // ─── Controles de la simulación ───
+  // --- Simulation controls ---
   start(): void {
     if (this.estado === 'finalizado') this.restart();
     if (this.idSimulacionBackend === null && this.scenarioId !== null && !this.modoLocal) {
@@ -259,7 +259,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     };
   }
 
-  // ─── Entrada por teclado ───
+  // --- Keyboard input ---
   private manejarTecla(e: KeyboardEvent, presionada: boolean): void {
     const tecla = e.key.toLowerCase();
     const juego = ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd', ' '];
@@ -308,7 +308,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     if (this.colisionCooldown > 0) this.colisionCooldown -= dt;
     if (this.destello > 0) this.destello -= dt;
 
-    // Exceso de velocidad (episodio con histéresis)
+    // Speeding (an episode with hysteresis)
     if (!this.enExceso && this.velocidadKmh > this.LIMITE_KMH) {
       this.enExceso = true;
       this.excesosVelocidad++;
@@ -316,7 +316,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
       this.enExceso = false;
     }
 
-    // Salida del carril / calzada
+    // Lane or road departure
     if (!this.fueraVia && sobreCesped && this.velocidadKmh > 5) {
       this.fueraVia = true;
       this.salidasCarril++;
@@ -343,7 +343,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
     this.npcs.forEach((n) => { n.y += (this.velocidadKmh - n.velocidad) * factor * dt; });
     this.npcs = this.npcs.filter((n) => n.y < this.ALTO + 120 && n.y > -220);
 
-    // Colisiones (AABB) con 2s de invulnerabilidad
+    // Collisions (AABB) with 2 s of invulnerability
     if (this.colisionCooldown <= 0) {
       const golpe = this.npcs.find((n) =>
         Math.abs(this.centerLane(n.carril) - this.xAuto) < 44 && Math.abs(n.y - this.Y_AUTO) < 76);
@@ -356,7 +356,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
       }
     }
 
-    // Distancia segura: mismo carril, vehículo delante a menos de 110px y más lento
+    // Safe distance: same lane, a vehicle ahead within 110 px and slower
     const miCarril = this.nearestLane(this.xAuto);
     const delante = this.npcs
       .filter((n) => n.carril === miCarril && n.y < this.Y_AUTO)
@@ -376,7 +376,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
       this.tailTimer = 0;
     }
 
-    // Semáforos como eventos que descienden con el mundo
+    // Traffic lights as events that descend with the world
     this.tiempoSpawnSemaforo -= dt;
     if (this.tiempoSpawnSemaforo <= 0 && !this.semaforos.some((s) => s.resuelto === 'pendiente')) {
       this.tiempoSpawnSemaforo = 20 + Math.random() * 8;
@@ -516,7 +516,7 @@ export class DrivingSimulatorComponent implements OnInit, AfterViewInit, OnDestr
 
   private drawTrafficLightIn(c: CanvasRenderingContext2D, y: number, fase: 'verde' | 'rojo'): void {
     const x = this.ANCHO - 20;
-    // Línea de pare sobre la calzada
+    // Stop line on the road
     c.fillStyle = 'rgba(255,255,255,0.85)';
     c.fillRect(this.MARGEN + 6, y - 3, this.ANCHO - this.MARGEN * 2 - 12, 6);
     c.fillStyle = '#5f6368';

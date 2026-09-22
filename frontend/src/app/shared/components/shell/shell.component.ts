@@ -34,14 +34,14 @@ export class ShellComponent implements OnInit {
       phone: ['', [Validators.maxLength(20)]]
     });
 
-    // Actualizar user reactivamente si cambia en el AuthService
+    // Update the user reactively when it changes in AuthService
     effect(() => {
       this.user = this.authService.currentUser();
     });
   }
 
   ngOnInit(): void {
-    // Inicialización si es necesaria
+    // Initialisation, when needed
   }
 
   toggleSidebar(): void {

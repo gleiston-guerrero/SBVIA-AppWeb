@@ -10,16 +10,16 @@ export class AuthService {
   private readonly API_URL = '/api/auth';
   private readonly SESSION_MARKER = 'sbvia_session_active';
 
-  // El token de acceso se almacena en memoria, no en localStorage (Regla de seguridad Entrega 1B)
+  // The access token is kept in memory, not in localStorage (security rule for Delivery 1B)
   private accessToken = signal<string | null>(null);
 
-  // Perfil del user autenticado
+  // Profile of the authenticated user
   public currentUser = signal<any>(null);
 
   /**
-   * Indica si el intento de restauración de sesión al iniciar la app ya terminó
-   * (tanto si tuvo éxito como si no). El guard espera a que esto sea `true`
-   * antes de evaluar isAuthenticated(), evitando la condición de carrera con F5.
+   * Tells whether the session restore attempt at start-up has finished
+   * (whether it succeeded or not). The guard waits for this to be `true`
+   * before evaluating isAuthenticated(), avoiding the race on refresh.
    */
   private sessionReadySubject = new BehaviorSubject<boolean>(false);
   public sessionReady$ = this.sessionReadySubject.asObservable();
@@ -32,7 +32,7 @@ export class AuthService {
         this.accessToken.set(response.accessToken);
         this.currentUser.set(response.user);
         localStorage.setItem(this.SESSION_MARKER, 'true');
-        // Tras un login manual también marcamos la sesión como lista
+        // After a manual login the session is also marked as ready
         this.sessionReadySubject.next(true);
       })
     );
@@ -41,7 +41,7 @@ export class AuthService {
   updateProfile(data: any): Observable<any> {
     return this.http.put(`/api/users/me`, data, { withCredentials: true }).pipe(
       tap((response: any) => {
-        // Actualizar la señal del user actual
+        // Update the current user signal
         this.currentUser.set(response);
       })
     );
@@ -59,8 +59,8 @@ export class AuthService {
   }
 
   /**
-   * Restaura la sesión únicamente cuando el navegador registra un inicio previo.
-   * La marca no contiene credenciales; el refresh token permanece en su cookie HttpOnly.
+   * Restores the session only when the browser records a previous sign-in.
+   * The marker holds no credentials; the refresh token stays in its HttpOnly cookie.
    */
   initializeSession(): Observable<boolean> {
     if (localStorage.getItem(this.SESSION_MARKER) !== 'true') {
@@ -72,9 +72,9 @@ export class AuthService {
   }
 
   /**
-   * Intenta restaurar la sesión usando la cookie HttpOnly de refresh token.
-   * Llamado por APP_INITIALIZER al arrancar la aplicación.
-   * Al terminar (con éxito o error) emite en sessionReady$ para desbloquear el authGuard.
+   * Tries to restore the session using the HttpOnly refresh-token cookie.
+   * Called by APP_INITIALIZER when the application starts.
+   * On completion, success or failure, it emits on sessionReady$ to unblock authGuard.
    */
   refreshSession(): Observable<boolean> {
     return this.http.post(`${this.API_URL}/refresh`, {}, { withCredentials: true }).pipe(
@@ -84,15 +84,15 @@ export class AuthService {
       }),
       map(() => true),
       catchError(() => {
-        // No hay cookie válida: el user no estaba logueado. Es normal.
+        // No valid cookie: the user was not signed in. That is normal.
         this.accessToken.set(null);
         this.currentUser.set(null);
         localStorage.removeItem(this.SESSION_MARKER);
         return of(false);
       }),
       tap(() => {
-        // Siempre marcamos la sesión como resuelta al terminar,
-        // sin importar si el refresh tuvo éxito o no.
+        // The session is always marked as resolved when it finishes,
+        // whether the refresh succeeded or not.
         this.sessionReadySubject.next(true);
       })
     );
@@ -100,7 +100,7 @@ export class AuthService {
 
   logout(callApi = true): void {
     if (callApi && this.accessToken()) {
-      // Hacemos el llamado a la API para enviar el token a la blacklist de Redis
+      // Call the API to send the token to the Redis blacklist
       this.http.post(`${this.API_URL}/logout`, {}, {
         headers: { Authorization: `Bearer ${this.accessToken()}` },
         withCredentials: true
@@ -117,7 +117,7 @@ export class AuthService {
     this.accessToken.set(null);
     this.currentUser.set(null);
     localStorage.removeItem(this.SESSION_MARKER);
-    // Al cerrar sesión, reseteamos la señal de ready para el próximo ciclo
+    // On sign-out the ready signal is reset for the next cycle
     this.sessionReadySubject.next(false);
     if (navigate) {
       this.router.navigate(['/login']);
@@ -133,8 +133,8 @@ export class AuthService {
   }
 
   /**
-   * Espera a que la sesión esté resuelta y luego devuelve si el user
-   * está autenticado. Usado por el authGuard para evitar race conditions.
+   * Waits for the session to be resolved and then returns whether the user
+   * is authenticated. Used by authGuard to avoid race conditions.
    */
   waitForSessionAndCheck(): Observable<boolean> {
     return this.sessionReady$.pipe(

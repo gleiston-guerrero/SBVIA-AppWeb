@@ -5,9 +5,9 @@ export type Lang = 'es' | 'en';
 const STORAGE_KEY = 'sbvia.lang';
 
 /**
- * Diccionario de traducciones. `es` es el idioma por defecto y tambien el
- * respaldo: si una clave falta en `en`, se devuelve la version en espanol en
- * lugar de la clave cruda, de modo que un olvido degrada a espanol y nunca
+ * Translation dictionary. `es` is both the default language and the
+ * fallback: when a key is missing in `en`, the Spanish version is returned
+ * instead of the raw key, so a mistake degrades to Spanish and never
  * deja texto roto en pantalla.
  */
 export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
@@ -237,7 +237,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'practices.noErrors': 'Sin errores registrados.',
     'practices.nextSteps': 'Próximos pasos',
 
-    // ------------------------------------------------------- Reglas de tránsito
+    // ------------------------------------------------------------ Traffic rules
     'rules.eyebrow': 'Configuración administrativa',
     'rules.title': 'Reglas de tránsito',
     'rules.subtitle': 'Gestiona las normativas utilizadas por cada escenario de conducción.',
@@ -422,7 +422,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'driver.driveAgain': 'Conducir de nuevo',
     'driver.viewPractices': 'Ver mis prácticas',
 
-    // ------------------------------------------------ Formulario de escenario
+    // --------------------------------------------------------- Scenario form
     'scenarioForm.editTitle': 'Editar escenario',
     'scenarioForm.newTitle': 'Nuevo escenario',
     'scenarioForm.name': 'Nombre del Escenario',
@@ -899,9 +899,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
 };
 
 /**
- * Servicio de idioma. El espanol es el idioma por defecto y el de respaldo.
- * La eleccion se conserva en localStorage, de modo que la captura de pantalla
- * en ingles no depende de tocar el codigo.
+ * Language service. Spanish is the default and the fallback.
+ * The choice is kept in localStorage, so capturing the screenshot
+ * in English does not require touching the code.
  */
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
@@ -916,7 +916,7 @@ export class LanguageService {
         return guardado;
       }
     } catch {
-      /* almacenamiento no disponible: se usa el idioma por defecto */
+      /* storage unavailable: the default language is used */
     }
     return 'es';
   }
@@ -926,7 +926,7 @@ export class LanguageService {
     try {
       localStorage.setItem(STORAGE_KEY, lang);
     } catch {
-      /* sin persistencia: el cambio sigue aplicandose en memoria */
+      /* no persistence: the change still applies in memory */
     }
     document.documentElement.setAttribute('lang', lang);
   }
@@ -935,7 +935,7 @@ export class LanguageService {
     this.setLang(this._lang() === 'es' ? 'en' : 'es');
   }
 
-  /** Traduce una clave; si falta, devuelve el espanol y, en ultimo caso, la clave. */
+  /** Translates a key; when missing it returns Spanish and, as a last resort, the key. */
   t(key: string): string {
     const lang = this._lang();
     return TRANSLATIONS[lang][key] ?? TRANSLATIONS.es[key] ?? key;
