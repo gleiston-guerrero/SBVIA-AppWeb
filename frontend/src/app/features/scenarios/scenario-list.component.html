@@ -13,13 +13,13 @@
   <div class="card-grid">
     <article class="scenario-card" *ngFor="let esc of scenarios">
       <div class="card-header">
-        <span class="card-badge">{{ esc.roadType }}</span>
-        <div class="card-dificultad">{{ esc.difficultyLevel }}</div>
+        <span class="card-badge">{{ 'rt.' + esc.roadType | t }}</span>
+        <div class="card-dificultad">{{ 'dl.' + esc.difficultyLevel | t }}</div>
       </div>
       <h3>{{ esc.name }}</h3>
       <div class="card-meta">
-        <span>{{ esc.weatherType }}</span>
-        <span>{{ esc.trafficDensity }}</span>
+        <span>{{ 'wt.' + esc.weatherType | t }}</span>
+        <span>{{ 'td.' + esc.trafficDensity | t }}</span>
       </div>
       <div class="card-actions">
         <a class="btn-practicar" [routerLink]="['/simulation', esc.id]">{{ 'scenarios.start' | t }} →</a>

@@ -83,7 +83,7 @@
       <div class="informe-head">
         <h3>{{ 'driver.reportTitle' | t }}</h3>
         <span class="origen">{{ (informe.origen === 'IA_EXTERNA' ? 'driver.externalAi' : 'driver.localAi') | t }}</span>
-        <span class="riesgo" [ngClass]="informe.nivelRiesgo.toLowerCase()">{{ 'driver.risk' | t }} {{ informe.nivelRiesgo }}</span>
+        <span class="riesgo" [ngClass]="informe.nivelRiesgo.toLowerCase()">{{ 'driver.risk' | t }} {{ 'rk.' + informe.nivelRiesgo | t }}</span>
       </div>
       <p class="resumen-ia">{{ informe.resumen }}</p>
       <div class="columnas">

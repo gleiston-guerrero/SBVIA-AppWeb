@@ -12,7 +12,7 @@
     </div>
     <div class="selector-practica">
       <label>{{ 'practices.availableScenario' | t }}<select [(ngModel)]="idEscenarioSeleccionado" [disabled]="cargandoEscenarios"><option [ngValue]="null">{{ 'practices.selectScenario' | t }}</option><option *ngFor="let scenario of scenarios" [ngValue]="scenario.id">{{ scenario.name }}</option></select></label>
-      <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ scenario.roadType }}</span><span>{{ 'practices.level' | t }} {{ scenario.difficultyLevel }}</span><span>{{ scenario.weatherType }}</span><span>{{ 'practices.traffic' | t }} {{ scenario.trafficDensity }}</span><p>{{ scenario.description }}</p></div>
+      <div class="detalle" *ngIf="escenarioSeleccionado as scenario"><span>{{ 'rt.' + scenario.roadType | t }}</span><span>{{ 'practices.level' | t }} {{ 'dl.' + scenario.difficultyLevel | t }}</span><span>{{ 'wt.' + scenario.weatherType | t }}</span><span>{{ 'practices.traffic' | t }} {{ 'td.' + scenario.trafficDensity | t }}</span><p>{{ scenario.description }}</p></div>
       <a class="btn-iniciar" [class.disabled]="!idEscenarioSeleccionado" [attr.aria-disabled]="!idEscenarioSeleccionado" [routerLink]="idEscenarioSeleccionado ? ['/simulation', idEscenarioSeleccionado] : null"><span>▶</span> {{ 'practices.startNow' | t }}</a>
     </div>
     <p class="sin-scenarios" *ngIf="!cargandoEscenarios && scenarios.length === 0">{{ 'practices.noActive' | t }}</p>
@@ -79,7 +79,7 @@
       <p *ngIf="cargandoInforme" class="loading-informe">{{ 'practices.loadingReport' | t }}</p>
       <p *ngIf="errorInforme" class="error-msg">{{ errorInforme }}</p>
       <ng-container *ngIf="informeSeleccionado as informe">
-        <div class="informe-resumen"><strong>{{ informe.puntaje }}/100</strong><span>{{ 'practices.risk' | t }} {{ informe.nivelRiesgo }}</span><small>{{ (informe.origen === 'IA_LOCAL' ? 'practices.aiLocal' : informe.origen) | t }}</small></div>
+        <div class="informe-resumen"><strong>{{ informe.puntaje }}/100</strong><span>{{ 'practices.risk' | t }} {{ 'rk.' + informe.nivelRiesgo | t }}</span><small>{{ (informe.origen === 'IA_LOCAL' ? 'practices.aiLocal' : informe.origen) | t }}</small></div>
         <p>{{ informe.resumen }}</p>
         <div class="informe-columnas">
           <div><h4>{{ 'practices.strengths' | t }}</h4><ul><li *ngFor="let acierto of informe.aciertos">{{ acierto }}</li></ul></div>
