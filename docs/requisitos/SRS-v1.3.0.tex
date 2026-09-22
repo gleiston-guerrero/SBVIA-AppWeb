@@ -48,7 +48,8 @@
         \begin{tabularx}{\textwidth}{|l|X|}
             \hline
             \textbf{Repositorio de entrega} & \url{https://github.com/gleiston-guerrero/SBVIA-AppWeb} \\ \hline
-            \textbf{Punto del historial} & etiqueta v1.3.0 \\ \hline
+            \textbf{Punto del historial} & etiqueta \texttt{v1.1.0}, anotada sobre este commit \\ \hline
+            \textbf{Esquema de la base} & 28 tablas, 192 columnas y 14 rutinas, todos con nombre en inglés desde \texttt{V19} y \texttt{V20} \\ \hline
             \textbf{DOI del software (Zenodo)} & \texttt{10.5281/zenodo.22883012} \\ \hline
             \textbf{Fecha de emisión} & 21 de septiembre de 2026 \\ \hline
             \textbf{Última revisión} & 22 de septiembre de 2026 \\ \hline
@@ -277,7 +278,7 @@ Cobertura de pruebas automatizadas: $\geq$ 70\% de líneas (JaCoCo). Puntuación
     \textbf{Módulo:} Backend \quad \textbf{Acceso a datos:} SP \\[0.2cm]
     \textbf{Descripción:} El sistema deberá actualizar periódicamente el estado de las cuentas de conductor inactivos mediante una operación masiva y dejar traza de auditoría. La inactividad se mide por el campo \texttt{ultimo\_acceso} en la entidad \texttt{User} (no por fecha de registro). \\[0.2cm]
     \textbf{Criterio de aceptación:} La operación masiva cambia únicamente usuarios cuyo último acceso supera los 6 meses, conserva los demás registros y guarda un registro en la tabla de auditoría (AuditLog). \\[0.2cm]
-    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA que mapea la tabla física de auditoría; no son dos almacenes distintos. Esa tabla se creó como \texttt{bitacora\_auditoria} en la migración \texttt{V3\_\_auditoria\_operaciones.sql} y la migración \texttt{V17\_\_renombrar\_tablas\_ingles.sql} la renombró a \texttt{audit\_log}, que es el nombre declarado en \texttt{@Table(name = "audit\_log")} dentro de \texttt{AuditLog.java}. El procedimiento \texttt{sp\_actualizar\_usuarios\_inactivos} redefinido en \texttt{V18\_\_conectar\_procedimientos\_sp.sql} sigue insertando en el nombre anterior al renombrado (\texttt{bitacora\_auditoria}); esa incoherencia se declara aquí como punto abierto pendiente de verificar contra la base desplegada, y no se corrige en esta versión para no alterar el \textit{checksum} de una migración ya aplicada. \\[0.2cm]
+    \textbf{Nota (X8):} \texttt{AuditLog} es la entidad JPA que mapea la tabla física de auditoría; no son dos almacenes distintos. Esa tabla se creó como \texttt{bitacora\_auditoria} en la migración \texttt{V3\_\_auditoria\_operaciones.sql} y la migración \texttt{V17\_\_renombrar\_tablas\_ingles.sql} la renombró a \texttt{audit\_log}, que es el nombre declarado en \texttt{@Table(name = "audit\_log")} dentro de \texttt{AuditLog.java}. El procedimiento \texttt{sp\_actualizar\_usuarios\_inactivos} redefinido en \texttt{V18\_\_conectar\_procedimientos\_sp.sql} insertaba en el nombre anterior al renombrado (\texttt{bitacora\_auditoria}); \textbf{esa incoherencia está corregida}. La migración \texttt{V19\_\_renombrar\_esquema\_ingles.sql} vuelve a crear los procedimientos escribiendo en \texttt{audit\_log} con las columnas en inglés, y \texttt{V20\_\_reparar\_funciones\_trigger.sql} repara las cinco funciones de disparador que el patrón de V19 no reconoció, porque V1 es un volcado y las declara con otra forma. Ninguna migración ya aplicada se modificó —Flyway valida su \textit{checksum}—: la corrección se hizo con migraciones nuevas, que es la forma correcta de hacerlo. \\[0.2cm]
     \textbf{Verificación:} Prueba de Integración (AuthControllerTest.java) \quad \textbf{SQL:} db/procs/sp\_actualizar\_usuarios\_inactivos.sql
 \end{requisito}
 
