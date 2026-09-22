@@ -27,8 +27,12 @@ TS_MODEL = RAIZ / "frontend/src/app/features/backups/backup.model.ts"
 
 
 def corre() -> int:
+    # UTF-8 explicito, por la misma razon que en el verificador del expediente:
+    # en Windows text=True usa la codificacion del sistema y la salida con
+    # acentos vuelve rota.
     r = subprocess.run([sys.executable, str(VERIFICADOR)],
-                       capture_output=True, text=True, cwd=str(RAIZ))
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", cwd=str(RAIZ))
     return r.returncode
 
 

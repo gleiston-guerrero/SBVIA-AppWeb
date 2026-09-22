@@ -1,4 +1,5 @@
 import re
+import os
 import subprocess
 import sys
 
@@ -53,14 +54,24 @@ if not entries:
     sys.exit(1)
 
 fail_count = 0
+# Los comandos se capturan SIEMPRE en UTF-8, y los hijos de Python se fuerzan a
+# escribir en UTF-8 con PYTHONIOENCODING. Sin esto, en Windows `text=True` usa la
+# codificacion del sistema (cp1252) y la salida con acentos vuelve rota, de modo
+# que una orden cuyo texto lleva tildes nunca coincidia: "Evaluación" llegaba
+# como "EvaluaciÃ³n" y el expediente fallaba aunque el comando estuviera bien.
+# Se descubrio ejecutando `make all`, que no hereda el PYTHONIOENCODING del shell.
+entorno = {**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"}
+
 for i, (cmd, section) in enumerate(entries):
     expected = expected_output(section)
     print(f"\n[{i+1}/{len(entries)}] Ejecutando: {cmd}")
     try:
         if sys.platform == 'win32':
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True,
+                                    encoding="utf-8", errors="replace", timeout=120, env=entorno)
         else:
-            result = subprocess.run(["bash", "-c", cmd], capture_output=True, text=True, timeout=120)
+            result = subprocess.run(["bash", "-c", cmd], capture_output=True, text=True,
+                                    encoding="utf-8", errors="replace", timeout=120, env=entorno)
     except Exception as e:
         print(f"ERROR: No se pudo ejecutar el comando. Exception: {e}")
         fail_count += 1

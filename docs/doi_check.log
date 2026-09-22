@@ -1,5 +1,5 @@
 SBVIA — Auditoria de referencias de docs/refs.bib
-Fecha: 2026-09-22 12:29:47
+Fecha: 2026-09-22 13:50:28
 Entradas: 46 | con DOI resuelto: 30 | sin DOI pero con ISBN/URL: 16 | sin identificador: 0
 Metodo: cada DOI se resuelve en api.crossref.org (y api.datacite.org como respaldo) y el titulo
         resuelto se compara con el citado. Los ISBN se validan en OpenLibrary y las URL por HTTP.
