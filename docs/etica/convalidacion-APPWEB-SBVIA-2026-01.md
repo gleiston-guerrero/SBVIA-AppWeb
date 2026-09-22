@@ -65,12 +65,26 @@ tal.
 >
 > Saludos.
 
+## Verificabilidad del mensaje
+
+La revisión del 22 de septiembre observa que este mensaje no puede verificarse desde el repositorio. Es correcto: el original está en la conversación del grupo de la asignatura, no en Git, y no se versiona aquí porque contiene datos de contacto de terceros.
+
+Lo que el equipo conserva y puede aportar si se solicita:
+
+| Elemento | Dónde |
+| :--- | :--- |
+| Consulta del equipo y respuesta del docente | Conversación del grupo de la asignatura, 2026-09-20, 13:14 y 16:10 |
+| Envío de las autorizaciones y del enlace | Correo del equipo al docente, 2026-09-20, 16:14, con quince archivos adjuntos |
+| Invitación a la carpeta en solo lectura | Registro de uso compartido del Drive del equipo |
+
+El texto reproducido arriba es **literal**: no se resumió ni se reescribió. Cualquier diferencia con el original sería un error y debe corregirse.
+
 ## Estado de los puntos encomendados
 
 | Punto | Estado |
 | :--- | :--- |
 | 1–3. Registro de la convalidación | **Hecho** en este documento y en `ETHICS.md` §iii |
 | 4. Corregir `ETHICS.md` (secuencia real, sin "aprobación previa") | **Hecho** — `ETHICS.md` §iii y §v |
-| 5. Compartir la carpeta de Drive en solo lectura con `gguerrero@uteq.edu.ec` | **Pendiente de acción del equipo** |
+| 5. Compartir la carpeta de Drive en solo lectura con `gguerrero@uteq.edu.ec` | **Hecho** — carpeta compartida y credenciales enviadas por correo el 2026-09-20 a las 16:14 |
 | 6. Consistencia de las 15 entradas (código, fecha de sesión, fecha de firma) | **Pendiente** — requiere las fechas de firma de los originales |
 | 7. Regla de atribución | **Hecho** — `ETHICS.md` §v, sección "Regla de atribución" |
