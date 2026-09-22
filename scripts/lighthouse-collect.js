@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 /**
- * Recorre N corridas reales de Lighthouse contra una URL y guarda TODAS las
- * corridas (JSON + HTML) mas un manifest.json agregado.
+ * Runs N real Lighthouse passes against a URL and stores EVERY
+ * run (JSON and HTML) plus an aggregated manifest.json.
  *
- * Por que no se invoca `lhci autorun`: en este entorno Windows el proceso no
- * puede terminar los hijos de Chrome (taskkill denegado por el sandbox), de modo
- * que chrome-launcher falla al borrar su perfil temporal (rmSync EPERM) DESPUES
- * de generar el informe, y lhci descarta la corrida aunque el LHR ya exista.
- * Este script arranca su propio Chrome con puerto de depuracion remota y conecta
- * Lighthouse a esa instancia, de modo que Lighthouse no lanza ni mata procesos.
+ * Why `lhci autorun` is not used: on Windows this process cannot
+ * terminate Chrome's children (taskkill is denied by the sandbox), so
+ * chrome-launcher fails to delete its temporary profile (rmSync EPERM) AFTER
+ * producing the report, and lhci discards the run even though the LHR exists.
+ * This script starts its own Chrome with a remote debugging port and connects
+ * Lighthouse to that instance, so Lighthouse neither launches nor kills processes.
  *
  * Uso:
  *   node scripts/lighthouse-collect.js <url> <mobile|desktop> <corridas> <dirSalida>
  *
- * Requiere que el paquete `lighthouse` sea resoluble. Si no esta instalado en el
- * proyecto, exportar NODE_PATH apuntando al node_modules que lo contiene.
+ * It requires the `lighthouse` package to be resolvable. When it is not installed in the
+ * project, export NODE_PATH pointing at the node_modules that holds it.
  * Variables opcionales: CHROME_PATH, LH_CHROME_PORT.
  */
 
@@ -40,8 +40,8 @@ const chromePath = process.env.CHROME_PATH ||
 const userDataDir = path.resolve(`.lighthouseci/chrome-profile-${port}`);
 fs.mkdirSync(userDataDir, { recursive: true });
 
-// Lighthouse 12 publica el modulo como ESM: `require()` devuelve el namespace,
-// por lo que la funcion esta en `.default` (con fallback por si cambia).
+// Lighthouse 12 publishes the module as ESM: `require()` returns the namespace,
+// so the function lives in `.default`, with a fallback in case that changes.
 const lighthouseModule = require('lighthouse');
 const lighthouse = lighthouseModule.default || lighthouseModule;
 const desktopConfigModule = require('lighthouse/core/config/desktop-config.js');
@@ -129,8 +129,8 @@ function waitForDebugPort(timeoutMs) {
   fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
   console.log('manifest:', manifestPath);
 
-  // Cierre best-effort: si el entorno no permite terminar Chrome, el proceso
-  // queda vivo pero los informes ya estan escritos y el script no falla.
+  // Best-effort shutdown: when the environment cannot terminate Chrome, the process
+  // stays alive but the reports are already written and the script does not fail.
   try {
     chrome.kill();
   } catch (err) {

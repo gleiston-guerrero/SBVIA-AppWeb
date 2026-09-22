@@ -6,19 +6,19 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 /**
- * Smoke tests de integración de rutas — SBVIA Frontend
+ * Route integration smoke tests - SBVIA frontend
  *
- * Cubre las Historias de User US-01 a US-06 referenciadas
- * en la matriz de trazabilidad (docs/trazabilidad/matriz.csv).
+ * Covers user stories US-01 to US-06 referenced
+ * in the traceability matrix (docs/trazabilidad/matriz.csv).
  *
- * US-01: Registro autónomo de conductor         → ruta /registro
- * US-02: Inicio de sesión seguro                → ruta /login
- * US-03: Exploración de scenarios viales       → ruta /scenarios (authGuard)
- * US-04: Ejecución de simulación                → ruta /scenarios (lazy) + SP sp_reporte_simulacion
- * US-05: Visualización de métricas en dashboard → ruta /dashboard (authGuard)
- * US-06: Descarga de certificado                → ruta /practicas (lazy)
+ * US-01: self-service driver registration       -> route /registro
+ * US-02: secure sign-in                         -> route /login
+ * US-03: browsing road scenarios                -> route /scenarios (authGuard)
+ * US-04: running a simulation                   -> route /scenarios (lazy) plus the sp_reporte_simulacion procedure
+ * US-05: viewing metrics on the dashboard       -> route /dashboard (authGuard)
+ * US-06: certificate download                   -> route /practicas (lazy)
  */
-describe('AppComponent — Smoke Tests de Rutas (US-01 a US-06)', () => {
+describe('AppComponent - route smoke tests (US-01 to US-06)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],

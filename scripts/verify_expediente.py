@@ -18,7 +18,7 @@ def expected_output(section):
     if m:
         return m.group(1).strip()
     # Formato en bloque: **Salida:** / **Salida / Resumen:** / **Salida parcial:**
-    # seguido de un bloque de codigo con triple backtick.
+    # followed by a fenced code block.
     m = re.search(
         r'\*\*Salida(?:\s*/\s*Resumen)?(?:\s+parcial)?:\*\*\s*\n?```[^\n]*\n(.*?)```',
         section,
@@ -33,18 +33,18 @@ print("=== Iniciando Verificacion de Expediente ===")
 with open('VERIFICACION.md', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Cada punto del expediente es una seccion "## ". Se recorren una a una para que
-# el cuerpo de una orden NUNCA alcance a la seccion siguiente: antes se dividia
-# solo por "Orden exacta", de modo que una orden cuya salida esperada no se
-# reconocia dejaba pasar el bloque "**Salida:**" del punto siguiente y se
-# comparaba contra el. Es lo que ocurria entre P3 y P5.
+# Each point of the record is a "## " section. They are walked one by one so
+# that a command body NEVER reaches the next section: it used to be split
+# on "Orden exacta" alone, so a command whose expected output was not
+# recognised let the "**Salida:**" block of the next point through and was
+# compared against it. That is what happened between P3 and P5.
 entries = []
 for seccion in re.split(r'(?m)^##\s+', content)[1:]:
     partes = re.split(r'-\s*\*\*Orden exacta[^:]*:\*\*\s*`([^`]+)`', seccion)
     for idx in range(1, len(partes), 2):
         cmd = partes[idx].strip()
-        # El cuerpo de esta orden llega hasta la orden siguiente de la MISMA
-        # seccion, nunca hasta otra seccion.
+        # This command's body runs up to the next command of the SAME
+        # section, never into another section.
         section = partes[idx + 1] if idx + 1 < len(partes) else ''
         entries.append((cmd, section))
 
@@ -66,7 +66,7 @@ for i, (cmd, section) in enumerate(entries):
         fail_count += 1
         continue
 
-    # CUALQUIER codigo de salida distinto de cero hace fallar el verificador.
+    # ANY non-zero exit code makes the verifier fail.
     if result.returncode != 0:
         print(f"FAILED (Exit code {result.returncode})")
         if result.stdout.strip():
@@ -76,7 +76,7 @@ for i, (cmd, section) in enumerate(entries):
         fail_count += 1
         continue
 
-    # Comparar la salida real contra la esperada cuando hay salida literal.
+    # Compare the real output against the expected one when it is literal.
     if expected is not None and normalize(expected):
         if normalize(expected) in normalize(result.stdout):
             print("SUCCESS (salida coincide con la esperada)")

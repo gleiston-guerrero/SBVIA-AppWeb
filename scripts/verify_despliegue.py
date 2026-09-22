@@ -24,7 +24,7 @@ INTENTOS = 5
 ESPERA = 20
 TIMEOUT = 90
 
-# Cabeceras exigidas por el criterio en la API.
+# Headers the criterion requires from the API.
 CABECERAS_API = (
     "Content-Security-Policy",
     "X-Frame-Options",

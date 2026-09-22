@@ -3,10 +3,10 @@
 
 Verifica cada entrada contra fuentes reales y escribe docs/doi_check.log:
 
-  * Con DOI      -> se resuelve en Crossref y, si falla, en DataCite. Se compara
+  * With a DOI      -> resolved in Crossref and, failing that, in DataCite. The cited
                     el titulo resuelto con el citado (similitud) y se registra el
                     resultado de la API.
-  * Sin DOI      -> se comprueba el ISBN en OpenLibrary y/o la URL por HTTP.
+  * Without a DOI   -> the ISBN is checked in OpenLibrary and the URL over HTTP.
                     Si el recurso no tiene DOI registrado, se declara como tal
                     en lugar de proponer uno inventado.
 
@@ -170,10 +170,10 @@ def main() -> int:
                     f"  DOI      : {e['doi']}\n  Veredicto: NO RESUELVE — {como}\n")
                 continue
             s = similitud(e["titulo"], reg["titulo"])
-            # Muchos libros se registran en Crossref con el titulo abreviado
-            # (p. ej. "Requirements Engineering" en vez del titulo completo).
-            # Si el titulo no coincide pero el primer apellido si, la entrada
-            # apunta a la obra correcta y se hace constar el motivo.
+            # Many books are registered in Crossref with an abbreviated title
+            # (for example "Requirements Engineering" instead of the full title).
+            # When the title does not match but the first surname does, the entry
+            # points to the right work and the reason is recorded.
             motivo = ""
             if s < 0.75:
                 ap_bib = primer_apellido_bib(e.get("autores", ""))

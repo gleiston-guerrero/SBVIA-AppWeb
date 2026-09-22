@@ -46,7 +46,7 @@ def main():
     fig.savefig(OUT, dpi=120)
     print(f"Boxplot real generado: {OUT}")
 
-    # Resumen por corrida (p50, p90, p95) en ms
+    # Per-run summary (p50, p90, p95) in ms
     for i, r in enumerate(labels):
         print(f"{r}: p50={np.percentile(runs[i],50):.1f}ms p90={np.percentile(runs[i],90):.1f}ms "
               f"p95={np.percentile(runs[i],95):.1f}ms n={len(runs[i])}")

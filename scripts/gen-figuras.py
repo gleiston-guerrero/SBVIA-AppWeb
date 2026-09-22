@@ -8,7 +8,7 @@ Semilla fija: SEED = 42
 import os
 import numpy as np
 
-# Configuración de directorio de salida
+# Output directory configuration
 OUT_DIR = "docs/diagramas"
 os.makedirs(OUT_DIR, exist_ok=True)
 

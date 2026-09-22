@@ -1,10 +1,10 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 
-// API_URL se puede sobreescribir con: k6 run -e API_URL=http://host.docker.internal:8080
+// API_URL can be overridden with: k6 run -e API_URL=http://host.docker.internal:8080
 const API_URL = __ENV.API_URL || 'http://localhost:8080';
 
-// Credenciales inyectadas por variables de entorno
+// Credentials injected through environment variables
 const EMAIL = __ENV.K6_USERNAME;
 const PASSWORD = __ENV.K6_PASSWORD;
 
@@ -23,9 +23,9 @@ export let options = {
 };
 
 /**
- * El login (BCrypt costo 12) se realiza UNA sola vez en setup() como costo de
- * autenticación, fuera del flujo medido. La métrica http_req_duration mide
- * exclusivamente el endpoint RNF-01: GET /api/escenarios.
+ * The login (BCrypt cost 12) runs ONCE in setup() as an
+ * authentication cost, outside the measured flow. The http_req_duration metric measures
+ * only the RNF-01 endpoint: GET /api/escenarios.
  */
 export function setup() {
     const loginRes = http.post(`${API_URL}/api/auth/login`,

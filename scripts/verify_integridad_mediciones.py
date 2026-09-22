@@ -120,7 +120,7 @@ check("el informe cita esas mismas cifras",
       f"{pct_l:.2f}" in tex and f"{pct_r:.2f}" in tex,
       f"buscadas {pct_l:.2f} y {pct_r:.2f}")
 
-# Contadores globales del XML, como control cruzado del CSV.
+# Global XML counters, as a cross-check of the CSV.
 xml = ruta("docs", "mediciones", "jacoco", "jacoco.xml").read_text(encoding="utf-8")
 m = re.findall(r'<counter type="LINE" missed="(\d+)" covered="(\d+)"/>', xml)
 if m:
@@ -195,9 +195,9 @@ check("CITATION.cff declara un cff-version de esquema valido",
 check("CITATION.cff declara la version del software, distinta del esquema",
       cff_prog not in ("", cff_schema), f"version={cff_prog or 'ausente'}")
 
-# La version del SRS y la del software son lineas distintas: el SRS numera el
-# documento y CITATION.cff la entrega de codigo. Lo que se comprueba es que ambas
-# esten declaradas y bien formadas, no que coincidan.
+# The SRS version and the software version are separate lines: the SRS numbers the
+# document and CITATION.cff the code release. The check is that both are
+# declared and well formed, not that they match.
 srs = ruta("docs", "requisitos", "SRS-v1.3.0.tex")
 if srs.exists():
     stxt = srs.read_text(encoding="utf-8")
@@ -274,8 +274,8 @@ check("no queda ningun javadoc plantilla en el backend", plantilla == 0,
       f"{plantilla} encontrados")
 
 print("\n[12] Nombres en espanol (P6)")
-# Palabras inequivocamente espanolas del dominio. El escaneo cubre tipos y
-# metodos, que es lo que mide el criterio.
+# Unambiguously Spanish domain words. The scan covers types and
+# methods, which is what the criterion measures.
 _PAL = set("""
 servicio simulacion propia propio usuario usuarios correo correos activo activos inactivo
 regla reglas escenario escenarios practica practicas metrica metricas conduccion puntaje puntajes
@@ -295,9 +295,9 @@ registro registros bitacora mensaje mensajes aviso correcto incorrecto valido in
 disponible disponible habilitado cantidad numero porcentaje promedio
 """.split())
 
-# Nombres legitimos: impuestos por el esquema (derived queries sobre campos de
-# entidad), por el contrato JSON, o porque el nombre de la prueba refleja a
-# proposito el metodo de repositorio que verifica.
+# Legitimate names: imposed by the schema (derived queries over entity
+# fields), by the JSON contract, or because the test name deliberately reflects
+# the repository method it verifies.
 _PERMITIDOS = {
     "getFechaProgramada", "setFechaProgramada", "semaforosRespetados",
     "findByActivoTrue", "findByCodigo", "findFirstByActivoTrueOrderByIdVehiculoAsc",
