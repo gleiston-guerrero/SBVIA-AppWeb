@@ -166,7 +166,7 @@ def campos_ts(ruta_rel: str, interfaz: str) -> set[str]:
 
 
 b_back = campos_java("backend/src/main/java/com/sbvia/backend/model/Backup.java")
-b_front = campos_ts("frontend/src/app/features/backups/backup.model.ts", "Respaldo")
+b_front = campos_ts("frontend/src/app/features/backups/backup.model.ts", "BackupRecord")
 check(f"contrato Backup: {len(b_back)} campos identicos en backend y frontend",
       b_back == b_front and len(b_back) > 0,
       f"backend={sorted(b_back - b_front)} frontend={sorted(b_front - b_back)}")
@@ -318,6 +318,7 @@ _DECL_METODO = _re.compile(
     r"(?:[\w$]+(?:\s*<[^;{}()]*>)?(?:\[\])?(?:\s*\.\s*[\w$]+)*)\s+(\w+)\s*\("
 )
 _DECL_TS = _re.compile(r"(?m)^\s*(?:public\s+|private\s+|protected\s+)?(\w+)\s*\(")
+_DECL_TS_TIPO = _re.compile(r"(?m)^\s*(?:export\s+)?(?:declare\s+)?(?:abstract\s+)?(?:class|interface|enum|type)\s+(\w+)")
 
 
 def _es_espanol(nombre: str) -> bool:
@@ -346,7 +347,7 @@ _todos = set()
 _todos |= _recoge((ruta("backend", "src", "main").rglob("*.java")), (_DECL_TIPO, _DECL_METODO))
 _todos |= _recoge((ruta("backend", "src", "test").rglob("*.java")), (_DECL_TIPO, _DECL_METODO))
 _todos |= _recoge([p for p in (ruta("frontend", "src")).rglob("*.ts")
-                   if not p.name.endswith(".spec.ts")], (_DECL_TS,))
+                   if not p.name.endswith(".spec.ts")], (_DECL_TS, _DECL_TS_TIPO))
 
 _no_permitidos = sorted(_todos - _PERMITIDOS)
 check("no quedan nombres en espanol fuera de la lista blanca",
