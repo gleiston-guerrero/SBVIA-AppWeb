@@ -49,16 +49,16 @@ import java.util.stream.Collectors;
 public class SimulationService {
 
     /**
-     * Códigos de reglas del catálogo con correspondencia exacta en el simulador 2D.
-     * Las penalizaciones de estos dos tipos se leen de `regla_transito.penalizacion_base`
-     * (fuente única); colisión, salida y distancia usan constantes porque el catálogo
-     * aún no tiene reglas equivalentes (propuesta: RT-006 a RT-008 en una migración futura).
+     * Rule codes from the catalogue that map exactly to the 2D simulator.
+     * The penalties for these two types are read from `regla_transito.penalizacion_base`
+     * (single source); collision, lane departure and distance use constants because the catalogue
+     * has no equivalent rules yet (proposal: RT-006 to RT-008 in a future migration).
      */
     public static final String REGLA_EXCESO = "RT-002";
     /** Constant <code>REGLA_SEMAFORO="RT-001"</code> */
     public static final String REGLA_SEMAFORO = "RT-001";
 
-    /** Descuentos fijos por episodio para tipos sin regla de catálogo. */
+    /** Fixed per-episode deductions for types with no catalogue rule. */
     public static final BigDecimal PENAL_COLISION = new BigDecimal("20");
     /** Constant <code>PENAL_SALIDA</code> */
     public static final BigDecimal PENAL_SALIDA = new BigDecimal("10");
@@ -97,8 +97,8 @@ public class SimulationService {
         Vehicle vehicle = vehiculoRepository.findFirstByActivoTrueOrderByIdVehiculoAsc()
                 .orElseThrow(() -> new IllegalStateException("No existe un vehículo activo para iniciar la simulación"));
 
-        // El trigger trg_validar_usuario_sesion exige una sesión válida cuyo
-        // user coincida con el de la simulación.
+        // The trg_validar_usuario_sesion trigger requires a valid session whose
+        // user matches the one of the simulation.
         TrainingSession sesion = sesionEntrenamientoRepository.save(TrainingSession.builder()
                 .user(user)
                 .estado("ABIERTA")
@@ -143,9 +143,9 @@ public class SimulationService {
     }
 
     /**
-     * Finaliza una conducción del simulador 2D con las métricas reportadas por el frontend.
-     * El puntaje se calcula en el servidor (el cliente nunca lo impone) y las métricas
-     * se persisten en `metrica_desempeno` e `infraction` dentro de la misma transacción.
+     * Finishes a 2D simulator run with the metrics reported by the frontend.
+     * The score is computed on the server (the client never imposes it) and the metrics
+     * are persisted in `metrica_desempeno` and `infraction` within the same transaction.
      *
      * @param email a {@link java.lang.String} object
      * @param simulationId a {@link java.lang.Integer} object
@@ -204,12 +204,12 @@ public class SimulationService {
                     reglaSemaforo.getPenalizacionBase().multiply(BigDecimal.valueOf(metricas.semaforosIgnorados())));
         }
 
-        // Este guardado va DESPUÉS de las infractions a propósito: el trigger
-        // trg_recalcular_puntaje_infraccion recalcula puntaje_final con una fórmula
-        // parcial (solo suma penalizacion_aplicada de las filas persistidas, y el
-        // catálogo aún no tiene reglas para colisión/salida/distancia). El value
-        // calculado por el servidor (5 tipos) es la fuente de verdad y debe quedar
-        // último. Propuesta: reglas RT-006 a RT-008 + persistir los 5 tipos.
+        // This save happens AFTER the infractions on purpose: the
+        // trg_recalcular_puntaje_infraccion recomputes puntaje_final with a formula
+        // that is partial (it only adds penalizacion_aplicada over the persisted rows, and the
+        // catalogue has no rules for collision, departure or distance yet). The value
+        // computed by the server (5 types) is the source of truth and must be written
+        // last. Proposal: rules RT-006 to RT-008, plus persisting all 5 types.
         simulation.setEndDate(LocalDate.now());
         simulation.setFinalScore(puntaje);
         simulation.setDurationSeconds(metricas.durationSeconds());

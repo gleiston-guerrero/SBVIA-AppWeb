@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Servicio encargado de generar firstName de user deterministas, normalizados y únicos,
- * inspirados en el estándar SGA (Sistema de Gestión Académica) de la UTEQ:
- * inicial del primer name + primer apellido + inicial del segundo apellido (ej: jcruzp).
+ * Service that generates deterministic, normalised and unique usernames,
+ * inspired by the UTEQ SGA standard (Sistema de Gestión Académica):
+ * first-name initial + first surname + second-surname initial (e.g. jcruzp).
  *
- * Cumple con las restricciones de la base de datos:
+ * It meets the database constraints:
  * - longitud mínima >= 4 (chk_usuario_nombre_usuario)
  * - longitud máxima &lt;= 60 (VARCHAR(60) en user.nombre_usuario)
- * - caracteres alfanuméricos seguros para login
+ * - alphanumeric characters safe for login
  *
  * @author Keitho_
  */
@@ -27,7 +27,7 @@ public class UsernameGeneratorService {
     );
 
     /**
-     * Normaliza un texto eliminando tildes, diacríticos (ej: ñ -> n),
+     * Normalises a text by removing accents and diacritics (e.g. ñ -> n),
      * caracteres especiales, espacios extras y convirtiendo a minúsculas.
      *
      * @param texto a {@link java.lang.String} object
@@ -37,22 +37,22 @@ public class UsernameGeneratorService {
         if (texto == null) {
             return "";
         }
-        // Descomposición canónica Unicode (NFD) para separar letras base de acentos/tildes
+        // Unicode canonical decomposition (NFD) to separate base letters from accents
         String descompuesto = Normalizer.normalize(texto.trim(), Normalizer.Form.NFD);
         // Eliminar marcas diacríticas
         String sinDiacriticos = descompuesto.replaceAll("\\p{M}", "");
-        // Conservar solo caracteres alfanuméricos y espacios
+        // Keep only alphanumeric characters and spaces
         String soloAlfanumerico = sinDiacriticos.replaceAll("[^a-zA-Z0-9\\s]", " ");
         // Reducir espacios múltiples y pasar a minúsculas
         return soloAlfanumerico.trim().replaceAll("\\s+", " ").toLowerCase(Locale.ROOT);
     }
 
     /**
-     * Genera la base del name de user a partir de firstName y lastName.
+     * Builds the username base from the first and last names.
      * Formato UTEQ/SGA:
-     * - Letra inicial del primer name
-     * - Primer apellido (ignorando partículas como 'de', 'la', etc. o integrándolas si es necesario)
-     * - Letra inicial del segundo apellido (si existe)
+     * - Initial letter of the first name
+     * - First surname, ignoring particles such as 'de' or 'la', or merging them when needed
+     * - Initial letter of the second surname, when present
      *
      * Ejemplo:
      * "Justyn Keith", "Cruz Perez" -> "jcruzp"
@@ -71,7 +71,7 @@ public class UsernameGeneratorService {
         String[] tokensApellidos = normApellidos.isEmpty() ? new String[0] : normApellidos.split(" ");
 
         String primerNombre = tokensNombres.length > 0 ? tokensNombres[0] : "user";
-        // Si ambos campos estan vacíos, devolver el user por defecto del estándar UTEQ
+        // When both fields are empty, return the UTEQ default username
         if (normNombres.isEmpty() && normApellidos.isEmpty()) {
             return "user0";
         }
@@ -82,8 +82,8 @@ public class UsernameGeneratorService {
         for (int i = 0; i < tokensApellidos.length; i++) {
             String token = tokensApellidos[i];
             if (PARTICULAS_APELLIDO.contains(token) && (i + 1 < tokensApellidos.length)) {
-                // Si viene 'de la cruz', une la partícula con el apellido para formar 'delacruz'
-                // o conserva la raíz según los tokens restantes
+                // When it reads 'de la cruz', it joins the particle to the surname, giving 'delacruz'
+                // or keeps the stem according to the remaining tokens
                 StringBuilder compuesto = new StringBuilder(token);
                 while (i + 1 < tokensApellidos.length && PARTICULAS_APELLIDO.contains(tokensApellidos[i + 1])) {
                     i++;
@@ -92,8 +92,8 @@ public class UsernameGeneratorService {
                 if (i + 1 < tokensApellidos.length) {
                     i++;
                     String apellidoToken = tokensApellidos[i];
-                    // Evitar letra doble en el límite partícula-apellido
-                    // Ej: "delos"+"santos" → "delosantos" (no "delossantos")
+                    // Avoid a doubled letter at the particle-surname boundary
+                    // E.g. "delos" plus "santos" gives "delosantos", not "delossantos"
                     if (compuesto.length() > 0 && !apellidoToken.isEmpty()
                             && compuesto.charAt(compuesto.length() - 1) == apellidoToken.charAt(0)) {
                         compuesto.append(apellidoToken.substring(1));
@@ -111,8 +111,8 @@ public class UsernameGeneratorService {
         String inicialSegundoApellido = "";
 
         if (apellidosLimpios.isEmpty()) {
-            // Sin apellido: la base es directamente los primeros 4 caracteres del name
-            // Ej: "Justyn" → "just". No se usa la inicial separada porque daría "j" + "justyn" = "jjustyn"
+            // With no surname, the base is the first 4 characters of the name
+            // E.g. "Justyn" gives "just". The initial is not used on its own, because that would give "j" + "justyn" = "jjustyn"
             String baseNombre = primerNombre.substring(0, Math.min(primerNombre.length(), 4));
             while (baseNombre.length() < 4) {
                 baseNombre = baseNombre + "0";
@@ -133,23 +133,23 @@ public class UsernameGeneratorService {
 
         String base = inicialNombre + primerApellido + inicialSegundoApellido;
 
-        // Garantizar restricción de base de datos: longitud mínima >= 4 caracteres
+        // Enforce the database constraint: minimum length of 4 characters
         if (base.length() < 4) {
-            // Intentar tomar más caracteres del primer name
+            // Try to take more characters from the first name
             if (primerNombre.length() > 1) {
                 int letrasFaltantes = 4 - base.length();
                 int endIndex = Math.min(primerNombre.length(), 1 + letrasFaltantes);
                 String prefijoExtendido = primerNombre.substring(0, endIndex);
                 base = prefijoExtendido + primerApellido + inicialSegundoApellido;
             }
-            // Si aún es menor a 4 (ej. name "A", apellido "Li"), rellenar de forma segura
+            // When still under 4 (e.g. name "A", surname "Li"), pad it safely
             while (base.length() < 4) {
                 base = base + "0";
             }
         }
 
-        // Limitar la longitud de la base a 50 caracteres para reservar espacio a sufijos numéricos
-        // (PostgreSQL tiene VARCHAR(60))
+        // Cap the base length at 50 characters to leave room for numeric suffixes
+        // (PostgreSQL has VARCHAR(60))
         if (base.length() > 50) {
             base = base.substring(0, 50);
         }
@@ -158,9 +158,9 @@ public class UsernameGeneratorService {
     }
 
     /**
-     * Determina el siguiente name de user disponible dada una lista de existentes.
-     * Si 'base' no existe, retorna 'base'.
-     * Si ya existe 'base', genera 'base1', 'base2', etc.
+     * Works out the next available username from a list of existing ones.
+     * If 'base' does not exist, it returns 'base'.
+     * If 'base' already exists, it generates 'base1', 'base2', and so on.
      *
      * @param base a {@link java.lang.String} object
      * @param existentes a {@link java.util.Collection} object
@@ -183,7 +183,7 @@ public class UsernameGeneratorService {
             return baseLower;
         }
 
-        // Buscar el sufijo numérico más alto disponible
+        // Find the highest available numeric suffix
         Pattern pattern = Pattern.compile("^" + Pattern.quote(baseLower) + "(\\d*)$");
         int maxNumero = 0;
         boolean baseSolaExiste = false;

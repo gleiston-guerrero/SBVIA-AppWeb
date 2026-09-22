@@ -65,11 +65,11 @@ public class AuthService {
                         .findFirst()
                         .orElseThrow(() -> new IllegalStateException("No se encontró el role PARTICIPANTE")));
 
-        // id_estado_usuario es NOT NULL: toda cuenta nueva nace en estado ACTIVO.
+        // id_estado_usuario is NOT NULL: every new account starts in the ACTIVO state.
         UserState estadoActivo = estadoUsuarioRepository.findByName("ACTIVO")
                 .orElseThrow(() -> new IllegalStateException("No se encontró el estado ACTIVO"));
 
-        // Generación de nombre_usuario automático estilo SGA UTEQ
+        // Automatic nombre_usuario generation, UTEQ SGA style
         String base = usernameGeneratorService.generateBase(request.getFirstName(), request.getLastName());
         List<String> existentes = new ArrayList<>(usuarioRepository.findSimilarUsernames(base));
         String nombreUsuarioGenerado = usernameGeneratorService.generateNextAvailable(base, existentes);
@@ -318,11 +318,11 @@ public class AuthService {
     }
 
     /**
-     * Invoca sp_actualizar_usuarios_inactivos (RF-06): desactiva en masa las cuentas
-     * cuyo ultimo_acceso es anterior a la fecha limite indicada y deja traza en bitacora_auditoria.
+     * Calls sp_actualizar_usuarios_inactivos (RF-06): deactivates in bulk the accounts
+     * whose ultimo_acceso is earlier than the given cutoff date, leaving a trace in bitacora_auditoria.
      *
-     * @param fechaLimite fecha de corte; usuarios con ultimo_acceso anterior a esta fecha seran desactivados
-     * @return numero de usuarios desactivados
+     * @param fechaLimite cutoff date; users whose ultimo_acceso is earlier are deactivated
+     * @return the number of deactivated users
      */
     @Transactional
     public int deactivateInactiveUsers(LocalDate fechaLimite) {

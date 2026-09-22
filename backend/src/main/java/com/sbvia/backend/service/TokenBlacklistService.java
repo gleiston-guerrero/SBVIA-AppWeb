@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Servicio para gestionar la blacklist de tokens JWT en Redis.
- * Almacena los JTI (JWT ID) de tokens revocados con TTL igual
- * a la expiración del token, para que se auto-eliminen de Redis.
+ * Service that manages the JWT token blacklist in Redis.
+ * It stores the JTI (JWT ID) of revoked tokens with a TTL equal
+ * to the token expiry, so that they remove themselves from Redis.
  *
  * Decisión documentada en ADR-003: jwt-redis.
  *
@@ -23,8 +23,8 @@ public class TokenBlacklistService {
     private static final String BLACKLIST_PREFIX = "jwt:blacklist:";
 
     /**
-     * Agrega un JTI a la blacklist de Redis con TTL en milisegundos.
-     * Cuando el TTL expira, Redis elimina la entrada automáticamente.
+     * Adds a JTI to the Redis blacklist with a TTL in milliseconds.
+     * When the TTL expires, Redis removes the entry automatically.
      *
      * @param jti a {@link java.lang.String} object
      * @param expirationMs a long
@@ -35,8 +35,8 @@ public class TokenBlacklistService {
     }
 
     /**
-     * Verifica si un JTI está en la blacklist.
-     * Consultado por JwtAuthFilter en cada solicitud antes de autorizar.
+     * Checks whether a JTI is in the blacklist.
+     * Queried by JwtAuthFilter on every request before authorising.
      *
      * @param jti a {@link java.lang.String} object
      * @return a boolean

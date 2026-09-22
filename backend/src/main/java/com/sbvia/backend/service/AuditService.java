@@ -90,7 +90,7 @@ public class AuditService {
             titulo.setSpacingAfter(20f);
             document.add(titulo);
             
-            // Subtítulo con filtros
+            // Subtitle with the filters
             Font fontSub = FontFactory.getFont(FontFactory.HELVETICA, 10);
             document.add(new Paragraph("Filtros aplicados:", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10)));
             document.add(new Paragraph("Tabla: " + (table != null ? table : "Todas") + 
@@ -125,7 +125,7 @@ public class AuditService {
                 
                 String ant = log.getPreviousData() != null ? log.getPreviousData() : "-";
                 String nue = log.getNewData() != null ? log.getNewData() : "-";
-                // Truncar si es muy largo para el PDF
+                // Truncate when too long for the PDF
                 if(ant.length() > 200) ant = ant.substring(0, 197) + "...";
                 if(nue.length() > 200) nue = nue.substring(0, 197) + "...";
 

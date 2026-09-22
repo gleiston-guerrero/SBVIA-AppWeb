@@ -12,9 +12,9 @@ import org.springframework.security.web.csrf.DeferredCsrfToken;
  *
  * <p>Spring Security borra la cookie XSRF-TOKEN en cada request autenticado
  * ({@code CsrfAuthenticationStrategy}, rotación pensada para login con sesión)
- * y nada la vuelve a emitir, así que el double-submit nunca se estabiliza y
- * todos los POST/PUT/DELETE responden 403. Sin sesiones no hay fijación de
- * sesión que mitigar con esa rotación; la validación encabezado == cookie
+ * and nothing issues it again, so the double-submit never stabilises and
+ * every POST/PUT/DELETE answers 403. Without sessions there is no session
+ * fixation to mitigate with that rotation; the header == cookie validation
  * sigue activa. Ver ADR-009.
  */
 final class StatelessCsrfTokenRepository implements CsrfTokenRepository {

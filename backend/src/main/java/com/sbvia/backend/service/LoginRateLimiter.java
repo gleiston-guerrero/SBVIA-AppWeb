@@ -8,14 +8,14 @@ import java.time.Instant;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Limitador de intentos de inicio de sesión (OWASP A07: Fallas de identificación
- * y autenticación). Cuenta los intentos fallidos por dirección IP dentro de una
- * ventana deslizante y, al superar el umbral, bloquea temporalmente nuevos intentos
- * con HTTP 429 (Too Many Requests).
+ * Login attempt rate limiter (OWASP A07: identification and authentication
+ * failures). It counts failed attempts per IP address within a
+ * sliding window and, once the threshold is exceeded, temporarily blocks new attempts
+ * with HTTP 429 (Too Many Requests).
  *
- * <p>Los umbrales se inyectan desde configuración externa con valores por defecto:
- * {@code security.login.max-attempts} (por defecto 5) y
- * {@code security.login.lock-duration-seconds} (por defecto 60 s).</p>
+ * <p>The thresholds are injected from external configuration, with defaults:
+ * {@code security.login.max-attempts} (5 by default) and
+ * {@code security.login.lock-duration-seconds} (60 s by default).</p>
  *
  * @author Keitho_
  */
@@ -43,8 +43,8 @@ public class LoginRateLimiter {
     }
 
     /**
-     * Verifica si la IP ya superó el número de intentos fallidos permitidos.
-     * Lanza {@link com.sbvia.backend.exception.RateLimitExceededException} (HTTP 429) cuando está bloqueada.
+     * Checks whether the IP has already exceeded the allowed number of failed attempts.
+     * Throws {@link com.sbvia.backend.exception.RateLimitExceededException} (HTTP 429) when it is blocked.
      *
      * @param ip a {@link java.lang.String} object
      */
@@ -64,9 +64,9 @@ public class LoginRateLimiter {
     }
 
     /**
-     * Registra un intento fallido para la IP. Implementa una ventana deslizante:
-     * si el último fallo fue hace más de {@link #lockSeconds} segundos, se reinicia
-     * el contador.
+     * Records a failed attempt for the IP. It implements a sliding window:
+     * when the last failure was more than {@link #lockSeconds} seconds ago, the counter
+     * is reset.
      *
      * @param ip a {@link java.lang.String} object
      */
@@ -85,7 +85,7 @@ public class LoginRateLimiter {
     }
 
     /**
-     * Limpia el contador de la IP después de un inicio de sesión exitoso.
+     * Clears the IP counter after a successful login.
      *
      * @param ip a {@link java.lang.String} object
      */
