@@ -107,7 +107,9 @@ def main() -> int:
         print("=" * 62)
         print("FLUJO FALLIDO: la practica no se pudo iniciar")
         return 1
-    print(f"4. Inicio de la practica       -> {codigo} (simulationId={simulacion})")
+    # Tampoco se imprime el identificador de la simulacion: cambia en cada
+    # corrida y la salida del expediente se compara literalmente.
+    print(f"4. Inicio de la practica       -> {codigo} (practica creada)")
 
     # 5. Cerrarla registrando la puntuacion
     codigo, cuerpo = pide(f"/api/simulations/{simulacion}/finalizar", "POST",
@@ -126,8 +128,10 @@ def main() -> int:
 
     # 7. El historial debe reflejar la practica recien cerrada
     codigo, cuerpo = pide("/api/simulations/mis-practicas", token=token)
-    total = len(cuerpo) if isinstance(cuerpo, list) else None
-    print(f"7. Historial de practicas      -> {codigo} ({total} practicas)")
+    # No se imprime el numero de practicas: cada ejecucion del flujo crea una, de
+    # modo que la cifra cambia y el expediente, que compara la salida literal,
+    # fallaria en la siguiente corrida sin que nada este mal.
+    print(f"7. Historial de practicas      -> {codigo} (lista devuelta)")
     if codigo != 200:
         fallos.append("no se pudo leer el historial")
 

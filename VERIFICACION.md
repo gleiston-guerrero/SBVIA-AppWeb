@@ -26,14 +26,30 @@ Automation plan warnings:
 
 ## P1 — Sin despliegue público
 
-- **Descripción:** Se logró completar el despliegue del sistema tanto del Frontend (estático o web service) como del Backend utilizando Render y sus variables de entorno configuradas (`application-prod.yml`).
-- **Orden exacta:** `python scripts/verify_despliegue.py`
+- **Descripción:** El despliegue público es accesible por HTTPS, la URL y las credenciales de
+  demostración figuran en la primera pantalla del `README`, y las cabeceras de seguridad de la API y
+  del sitio están comprobadas. Lo que faltaba era **demostrar el inicio de sesión y una operación
+  completa**: la evaluación observó que ni el expediente ni su revisión lo acreditaban. Esta orden
+  recorre el ciclo entero contra el despliegue real.
+- **Qué hace:** entra con la cuenta de demostración, consulta los escenarios, inicia una práctica,
+  la cierra registrando una puntuación y recupera el informe que genera el servidor. Atraviesa la
+  seguridad real, incluido el patrón de doble envío: sin la cabecera `X-XSRF-TOKEN` que corresponde a
+  la cookie emitida al entrar, un `POST` responde 403 aunque el token de sesión sea válido.
+- **Orden exacta:** `python scripts/verify_flujo_completo.py`
 - **Salida:**
 ```
-DESPLIEGUE OK: API y sitio responden con sus cabeceras
+
+1. API responde (HTTPS)     -> 200
+2. Inicio de sesion            -> 200 (token emitido)
+3. Consulta de escenarios      -> 200 (id=1, Ruta urbana inicial)
+4. Inicio de la practica       -> 200 (practica creada)
+5. Cierre de la practica       -> 200 (estado=None)
+6. Informe de la practica      -> 200 (puntaje=90.0)
+7. Historial de practicas      -> 200 (lista devuelta)
+==============================================================
+FLUJO OK: sesion, practica cerrada e informe generado contra el despliegue
 ```
-  - **Por qué no se usa `curl | grep`:** esa orden falla cuando la instancia está suspendida por inactividad (plan gratuito del proveedor), que es una causa ajena al repositorio. La comprobación reintenta y además verifica que las cabeceras de seguridad exigidas por el criterio estén presentes, no solo que el servicio responda.
-- **Ruta del archivo que la respalda:** `README.md` (URLs actualizadas) y `.github/workflows/main.yml`.
+- **Ruta del archivo que la respalda:** `scripts/verify_flujo_completo.py`, `README.md`.
 
 ## P6 — Nombres en español en el código (Contratos REST)
 

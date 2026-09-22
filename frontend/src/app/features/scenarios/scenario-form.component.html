@@ -58,9 +58,9 @@
           <label for="weatherType">{{ 'scenarioForm.weather' | t }}</label>
           <select id="weatherType" formControlName="weatherType" [class.invalid]="escenarioForm.get('weatherType')?.invalid && escenarioForm.get('weatherType')?.touched">
             <option value="" disabled selected>{{ 'scenarioForm.select' | t }}</option>
-            <option value="DESPEJADO">{{ 'wt.DESPEJADO' | t }}</option>
-            <option value="LLUVIA">{{ 'wt.LLUVIA' | t }}</option>
-            <option value="NIEBLA">{{ 'wt.NIEBLA' | t }}</option>
+            <option value="SOLEADO">{{ 'wt.SOLEADO' | t }}</option>
+            <option value="LLUVIOSO">{{ 'wt.LLUVIOSO' | t }}</option>
+            <option value="NUBLADO">{{ 'wt.NUBLADO' | t }}</option>
             <option value="TORMENTA">{{ 'wt.TORMENTA' | t }}</option>
           </select>
         </div>
